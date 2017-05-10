@@ -25,9 +25,9 @@ class Login extends MX_Controller {
 			$this->load->model("general_model");
 			//busco datos del usuario
 			$arrParam = array(
-				"table" => "user",
-				"order" => "id_user",
-				"column" => "personal_number",
+				"table" => "usuario",
+				"order" => "id_usuario",
+				"column" => "log_user",
 				"id" => $login
 			);
 			$userExist = $this->general_model->get_basic_search($arrParam);
@@ -49,14 +49,13 @@ class Login extends MX_Controller {
 							"name" => $user["firstname"] . ' ' . $user["lastname"],
 							"logUser" => $user["logUser"],
 							"state" => $user["state"],
-							"rol" => $user["rol"],
-							"photo" => $user["photo"]
+							"rol" => $user["rol"]
 						);
 						$this->session->set_userdata($sessionData);
 						
 						$this->login_model->redireccionarUsuario();
 					}else{					
-						$data["msj"] = "<strong>" . $userExist[0]["first_name"] . "</strong> error con la contraseña.";
+						$data["msj"] = "<strong>" . $userExist[0]["nombres_usuario"] . "</strong> error con la contraseña.";
 						$this->session->sess_destroy();
 						$this->load->view('login', $data);
 					}

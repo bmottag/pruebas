@@ -57,7 +57,7 @@
 						<form  name="form" id="form" role="form" method="post" action="<?php echo base_url("login/validateUser"); ?>" >
                             <fieldset>
                                 <div class="form-group">
-									<input type="text" id="inputLogin" name="inputLogin" class="form-control" placeholder="Número de Identificación" value="" required autofocus >
+									<input type="text" id="inputLogin" name="inputLogin" class="form-control" placeholder="Número de documento" value="" required autofocus >
                                 </div>
                                 <div class="form-group">
 									<input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="Contraseña" value="" >

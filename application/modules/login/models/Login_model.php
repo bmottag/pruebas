@@ -21,21 +21,20 @@
 	    	$passwd = str_replace(array("<",">","[","]","*","^","-","'","="),"",$arrData["passwd"]); 
 			$passwd = md5($passwd);
 			
-	    	$sql = "SELECT * FROM user WHERE personal_number = '$login' and password = '$passwd'";
+	    	$sql = "SELECT * FROM usuario WHERE log_user = '$login' and password = '$passwd'";
 	    	$query = $this->db->query($sql);
 
 	    	if ($query->num_rows() > 0){	    		
 	    		foreach($query->result() as $row)
 				{
 	    				$user["valid"] = true;
-	    				$user["id"] = $row->id_user;
-	    				$user["firstname"] = $row->first_name;
-	    				$user["lastname"] = $row->last_name;
-						$user["logUser"] = $row->personal_number;
-	    				$user["movil"] = $row->movil;
-						$user["state"] = $row->state;
-						$user["rol"] = $row->perfil;
-						$user["photo"] = $row->photo;
+	    				$user["id"] = $row->id_usuario;
+	    				$user["firstname"] = $row->nombres_usuario;
+	    				$user["lastname"] = $row->apellidos_usuario;
+						$user["logUser"] = $row->log_user;
+	    				$user["movil"] = $row->celular;
+						$user["state"] = $row->estado;
+						$user["rol"] = $row->fk_id_rol;
 	    		}
 	    	}
 			
