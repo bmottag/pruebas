@@ -50,10 +50,16 @@
 				</li>
 								
 				<li class="divider"></li>
+
+				<li>
+					<a href="<?php echo base_url("admin/alertas"); ?>"><i class="fa fa-calendar fa-fw"></i> Alertas</a>
+				</li>
 				
 				<li>
 					<a href="<?php echo base_url("admin/tipo_alertas"); ?>"><i class="fa fa-ticket fa-fw"></i> Tipo de Alertas</a>
 				</li>
+				
+				<li class="divider"></li>
 				
 				<li>
 					<a href="<?php echo base_url("admin/pruebas"); ?>"><i class="fa fa-star fa-fw"></i> Pruebas</a>

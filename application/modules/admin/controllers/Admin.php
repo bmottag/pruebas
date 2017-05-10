@@ -255,7 +255,7 @@ class Admin extends MX_Controller {
 	
 		
 	/**
-	 * Tipo de PRUEBAS
+	 * Lista de PRUEBAS
      * @since 10/5/2017
 	 */
 	public function pruebas()
@@ -328,7 +328,99 @@ class Admin extends MX_Controller {
 			echo json_encode($data);
     }
 	
+	/**
+	 * INICIO ALERTAS
+	 */	
 	
+		
+	/**
+	 * Lista de ALERTAS
+     * @since 10/5/2017
+	 */
+	public function alertas()
+	{
+			$this->load->model("general_model");
+			$arrParam = array(
+				"table" => "alertas",
+				"order" => "id_alerta",
+				"id" => "x"
+			);
+			$data['info'] = $this->general_model->get_basic_search($arrParam);
+			
+			$data["view"] = 'alerta';
+			$this->load->view("layout", $data);
+	}
+	
+    /**
+     * Cargo modal - formulario ALERTAS
+     * @since 10/5/2017
+     */
+    public function cargarModalAlerta() 
+	{
+			header("Content-Type: text/plain; charset=utf-8"); //Para evitar problemas de acentos
+			
+			$data['information'] = FALSE;
+			$data["identificador"] = $this->input->post("identificador");
+			
+			$this->load->model("general_model");
+			$arrParam = array(
+				"table" => "param_tipo_alerta",
+				"order" => "nombre_tipo_alerta",
+				"id" => "x"
+			);
+			$data['tipoAlerta'] = $this->general_model->get_basic_search($arrParam);
+			
+			$arrParam = array(
+				"table" => "param_roles",
+				"order" => "nombre_rol",
+				"id" => "x"
+			);
+			$data['roles'] = $this->general_model->get_basic_search($arrParam);
+			
+			if ($data["identificador"] != 'x') {
+				$this->load->model("general_model");
+				$arrParam = array(
+					"table" => "alertas",
+					"order" => "id_alerta",
+					"column" => "id_alerta",
+					"id" => $data["identificador"]
+				);
+				$data['information'] = $this->general_model->get_basic_search($arrParam);
+			}
+			
+			$this->load->view("alerta_modal", $data);
+    }
+	
+	/**
+	 * Update Alertas
+     * @since 10/5/2017
+	 */
+	public function save_alerta()
+	{			
+			header('Content-Type: application/json');
+			$data = array();
+			
+			$idAlerta = $this->input->post('hddId');
+			
+			$msj = "Se adiciono la Prueba con exito.";
+			if ($idAlerta != '') {
+				$msj = "Se actualizo la Prueba con exito.";
+			}
+
+			if ($idAlerta = $this->admin_model->savePrueba()) {
+				$data["result"] = true;
+				$data["idRecord"] = $idAlerta;
+				
+				$this->session->set_flashdata('retornoExito', $msj);
+			} else {
+				$data["result"] = "error";
+				$data["idRecord"] = "";
+				
+				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador.');
+			}
+
+			echo json_encode($data);
+    }
 
 
 	
