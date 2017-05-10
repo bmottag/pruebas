@@ -23,7 +23,7 @@
  * @since  18/11/2016
  */
 	$userRol = $this->session->rol;
-	if($userRol){ //If it is an ADMIN user, show an special menu
+	if($userRol==1){ //If it is an ADMIN user, show an special menu
 ?>				
 
 		<li class="dropdown">
@@ -45,7 +45,6 @@
 				<i class="fa fa-gear fa-fw"></i>Configuraciones <i class="fa fa-caret-down"></i>
 			</a>
 			<ul class="dropdown-menu dropdown-messages">
-			<?php if($userRol==1){ ?>
 				<li>
 					<a href="<?php echo base_url("admin/users"); ?>"><i class="fa fa-users fa-fw"></i> Usuarios</a>
 				</li>
@@ -55,8 +54,10 @@
 				<li>
 					<a href="<?php echo base_url("admin/tipo_alertas"); ?>"><i class="fa fa-ticket fa-fw"></i> Tipo de Alertas</a>
 				</li>
-			<?php } ?>
-
+				
+				<li>
+					<a href="<?php echo base_url("admin/pruebas"); ?>"><i class="fa fa-star fa-fw"></i> Pruebas</a>
+				</li>
 			</ul>
 		</li>
 <?php

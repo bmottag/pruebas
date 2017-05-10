@@ -249,6 +249,85 @@ class Admin extends MX_Controller {
 			echo json_encode($data);
     }
 	
+	/**
+	 * INICIO PRUENAS
+	 */	
+	
+		
+	/**
+	 * Tipo de PRUEBAS
+     * @since 10/5/2017
+	 */
+	public function pruebas()
+	{
+			$this->load->model("general_model");
+			$arrParam = array(
+				"table" => "param_pruebas",
+				"order" => "nombre_prueba",
+				"id" => "x"
+			);
+			$data['info'] = $this->general_model->get_basic_search($arrParam);
+			
+			$data["view"] = 'prueba';
+			$this->load->view("layout", $data);
+	}
+	
+    /**
+     * Cargo modal - formulario PRUEBAS
+     * @since 10/5/2017
+     */
+    public function cargarModalPrueba() 
+	{
+			header("Content-Type: text/plain; charset=utf-8"); //Para evitar problemas de acentos
+			
+			$data['information'] = FALSE;
+			$data["idPrueba"] = $this->input->post("idPrueba");
+			
+			if ($data["idPrueba"] != 'x') {
+				$this->load->model("general_model");
+				$arrParam = array(
+					"table" => "param_pruebas",
+					"order" => "id_prueba",
+					"column" => "id_prueba",
+					"id" => $data["idPrueba"]
+				);
+				$data['information'] = $this->general_model->get_basic_search($arrParam);
+			}
+			
+			$this->load->view("prueba_modal", $data);
+    }
+	
+	/**
+	 * Update Pruebas
+     * @since 10/5/2017
+	 */
+	public function save_prueba()
+	{			
+			header('Content-Type: application/json');
+			$data = array();
+			
+			$idPrueba = $this->input->post('hddId');
+			
+			$msj = "Se adiciono la Prueba con exito.";
+			if ($idPrueba != '') {
+				$msj = "Se actualizo la Prueba con exito.";
+			}
+
+			if ($idPrueba = $this->admin_model->savePrueba()) {
+				$data["result"] = true;
+				$data["idRecord"] = $idPrueba;
+				
+				$this->session->set_flashdata('retornoExito', $msj);
+			} else {
+				$data["result"] = "error";
+				$data["idRecord"] = "";
+				
+				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador.');
+			}
+
+			echo json_encode($data);
+    }
+	
 	
 
 
