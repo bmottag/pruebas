@@ -32,14 +32,11 @@
 			</a>
 			<ul class="dropdown-menu dropdown-messages">
 				<li>
-					<a href="<?php echo base_url("report/searchByDateRange/payrollByAdmin"); ?>"><i class="fa fa-book fa-fw"></i> Payroll Report</a>
+					<a href="<?php echo base_url("report/searchByDateRange/payrollByAdmin"); ?>"><i class="fa fa-book fa-fw"></i> Auditoria</a>
 				</li>
 				<li>
-					<a href="<?php echo base_url("report/searchByDateRange/safety"); ?>"><i class="fa fa-life-saver fa-fw"></i> Safety Report</a>
+					<a href="<?php echo base_url("report/searchByDateRange/safety"); ?>"><i class="fa fa-life-saver fa-fw"></i> Alertas</a>
 				</li>
-				<li>
-					<a href="<?php echo base_url("report/searchByDateRange/hauling"); ?>"><i class="fa fa-truck fa-fw"></i> Hauling Report</a>
-				</li>						
 			</ul>
 		</li>
 
@@ -48,9 +45,9 @@
 				<i class="fa fa-gear fa-fw"></i>Configuraciones <i class="fa fa-caret-down"></i>
 			</a>
 			<ul class="dropdown-menu dropdown-messages">
-			<?php if($userRol==99){ ?>
+			<?php if($userRol==1){ ?>
 				<li>
-					<a href="<?php echo base_url("admin/employee"); ?>"><i class="fa fa-users fa-fw"></i> Usuarios</a>
+					<a href="<?php echo base_url("admin/users"); ?>"><i class="fa fa-users fa-fw"></i> Usuarios</a>
 				</li>
 								
 				<li class="divider"></li>
