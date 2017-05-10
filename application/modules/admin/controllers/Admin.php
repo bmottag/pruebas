@@ -175,6 +175,80 @@ class Admin extends MX_Controller {
 			$this->load->view("layout", $data);
 	}
 	
+	/**
+	 * Tipo de alertas
+     * @since 10/5/2017
+	 */
+	public function tipo_alertas()
+	{
+			$this->load->model("general_model");
+			$arrParam = array(
+				"table" => "param_tipo_alerta",
+				"order" => "nombre_tipo_alerta",
+				"id" => "x"
+			);
+			$data['info'] = $this->general_model->get_basic_search($arrParam);
+			
+			$data["view"] = 'tipo_alerta';
+			$this->load->view("layout", $data);
+	}
+	
+    /**
+     * Cargo modal - formulario tipo de alerta
+     * @since 10/5/2017
+     */
+    public function cargarModalTipoAlerta() 
+	{
+			header("Content-Type: text/plain; charset=utf-8"); //Para evitar problemas de acentos
+			
+			$data['information'] = FALSE;
+			$data["idTipoAlerta"] = $this->input->post("idTipoAlerta");	
+			
+			if ($data["idTipoAlerta"] != 'x') {
+				$this->load->model("general_model");
+				$arrParam = array(
+					"table" => "param_tipo_alerta",
+					"order" => "id_tipo_alerta",
+					"column" => "id_tipo_alerta",
+					"id" => $data["idTipoAlerta"]
+				);
+				$data['information'] = $this->general_model->get_basic_search($arrParam);
+			}
+			
+			$this->load->view("tipo_alerta_modal", $data);
+    }
+	
+	/**
+	 * Update tipo alerta
+     * @since 10/5/2017
+	 */
+	public function save_tipo_alerta()
+	{			
+			header('Content-Type: application/json');
+			$data = array();
+			
+			$idTipoAlerta = $this->input->post('hddId');
+			
+			$msj = "Se adiciono el Tipo de Alerta con exito.";
+			if ($idTipoAlerta != '') {
+				$msj = "Se actualizo el tipo de alerta con exito.";
+			}
+
+			if ($idTipoAlerta = $this->admin_model->saveTipoAlerta()) {
+				$data["result"] = true;
+				$data["idRecord"] = $idTipoAlerta;
+				
+				$this->session->set_flashdata('retornoExito', $msj);
+			} else {
+				$data["result"] = "error";
+				$data["idRecord"] = "";
+				
+				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador.');
+			}
+
+			echo json_encode($data);
+    }
+	
 	
 
 

@@ -125,7 +125,35 @@
 				}
 	    }
 		
-		
+		/**
+		 * Add/Edit TIPO ALERTA
+		 * @since 10/5/2017
+		 */
+		public function saveTipoAlerta() 
+		{
+				$idTipoAlerta = $this->input->post('hddId');
+				
+				$data = array(
+					'nombre_tipo_alerta' => $this->input->post('nombreTipoAlerta'),
+					'descripcion_alerta' => $this->input->post('descripcion'),
+					'observacion_alerta' => $this->input->post('observacion')
+				);
+				
+				//revisar si es para adicionar o editar
+				if ($idTipoAlerta == '') {
+					$data['fecha_creacion'] = date("Y-m-d");
+					$query = $this->db->insert('param_tipo_alerta', $data);
+					$idTipoAlerta = $this->db->insert_id();				
+				} else {
+					$this->db->where('id_tipo_alerta', $idTipoAlerta);
+					$query = $this->db->update('param_tipo_alerta', $data);
+				}
+				if ($query) {
+					return $idTipoAlerta;
+				} else {
+					return false;
+				}
+		}
 	
 		
 		
