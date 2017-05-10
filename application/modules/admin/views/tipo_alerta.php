@@ -4,7 +4,7 @@ $(function(){
 			var oID = $(this).attr("id");
             $.ajax ({
                 type: 'POST',
-				url: base_url + '/admin/cargarModalTipoAlerta',
+				url: base_url + 'admin/cargarModalTipoAlerta',
                 data: {'idTipoAlerta': oID},
                 cache: false,
                 success: function (data) {
@@ -75,7 +75,7 @@ if ($retornoError) {
 								<th class="text-center">Tipo de alerta</th>
 								<th class="text-center">Descripción</th>
 								<th class="text-center">Observación</th>
-								<th class="text-center">Edit</th>
+								<th class="text-center">Editar</th>
 							</tr>
 						</thead>
 						<tbody>							

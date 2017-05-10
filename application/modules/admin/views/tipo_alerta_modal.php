@@ -3,7 +3,7 @@
 <div class="modal-header">
 	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	<h4 class="modal-title" id="exampleModalLabel">Tipo de Alerta 
-	<br><small>Adicionar/Editar Tipo de Alertas.</small>
+	<br><small>Adicionar/Editar Tipo de Alertas</small>
 	</h4>
 </div>
 
@@ -16,19 +16,19 @@
 		</div>
 		
 		<div class="form-group text-left">
-			<label class="control-label" for="descripcion">Descripción</label>
+			<label class="control-label" for="descripcion">Descripción : *</label>
 			<textarea id="descripcion" name="descripcion" class="form-control" rows="3"><?php echo $information?$information[0]["descripcion_alerta"]:""; ?></textarea>
 		</div>
 		
 		<div class="form-group text-left">
-			<label class="control-label" for="observacion">Observación</label>
+			<label class="control-label" for="observacion">Observación : *</label>
 			<textarea id="observacion" name="observacion" class="form-control" rows="3"><?php echo $information?$information[0]["observacion_alerta"]:""; ?></textarea>
 		</div>		
 		
 		<div class="form-group">
 			<div class="row" align="center">
 				<div style="width:50%;" align="center">
-					<input type="button" id="btnSubmit" name="btnSubmit" value="Save" class="btn btn-primary"/>
+					<input type="button" id="btnSubmit" name="btnSubmit" value="Guardar" class="btn btn-primary"/>
 				</div>
 			</div>
 		</div>
