@@ -21,28 +21,28 @@
 		</div>
 		
 		<div class="form-group text-left">
-				<label for="type" class="control-label">Año : *</label>
-				<select name="anio" id="anio" class="form-control" required>
-					<option value='' >Select...</option>
-					<?php
-					for ($i = 2017; $i < 2030; $i++) {
-						?>
-						<option value='<?php echo $i; ?>' <?php
-						if ($information && $i == $information[0]["anio_prueba"]) {
-							echo 'selected="selected"';
-						}
-						?>><?php echo $i; ?></option>
-							<?php } ?>									
-				</select>
+			<label for="type" class="control-label">Año : *</label>
+			<select name="anio" id="anio" class="form-control" required>
+				<option value='' >Select...</option>
+				<?php
+				for ($i = 2017; $i < 2030; $i++) {
+					?>
+					<option value='<?php echo $i; ?>' <?php
+					if ($information && $i == $information[0]["anio_prueba"]) {
+						echo 'selected="selected"';
+					}
+					?>><?php echo $i; ?></option>
+						<?php } ?>									
+			</select>
 		</div>
 
 		<div class="form-group text-left">
-				<label for="type" class="control-label">Semestre : *</label>
-				<select name="semestre" id="semestre" class="form-control" required>
-					<option value="">Select...</option>
-					<option value=1 <?php if($information[0]["semestre_prueba"] == 1) { echo "selected"; }  ?>>I</option>
-					<option value=2 <?php if($information[0]["semestre_prueba"] == 2) { echo "selected"; }  ?>>II</option>
-				</select>
+			<label for="type" class="control-label">Semestre : *</label>
+			<select name="semestre" id="semestre" class="form-control" required>
+				<option value="">Select...</option>
+				<option value=1 <?php if($information[0]["semestre_prueba"] == 1) { echo "selected"; }  ?>>I</option>
+				<option value=2 <?php if($information[0]["semestre_prueba"] == 2) { echo "selected"; }  ?>>II</option>
+			</select>
 		</div>
 
 <script>
