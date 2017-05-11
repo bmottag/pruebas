@@ -46,7 +46,7 @@
 		</div>
 		
 		<div class="form-group text-left">
-			<label for="type" class="control-label">Hora : *</label>
+			
 			<?php 
 				if($information){
 					$time = explode(":",$information["hora_alerta"]);
@@ -54,7 +54,8 @@
 					$min = $time[1];
 				}
 			?>
-			<div class="col-sm-2">
+			<div class="col-sm-6">
+				<label for="type" class="control-label">Hora : *</label>
 				<select name="hour" id="hour" class="form-control" required>
 					<option value='' >Select...</option>
 					<?php
@@ -69,7 +70,8 @@
 				</select>
 			</div>
 			
-			<div class="col-sm-2">
+			<div class="col-sm-6">
+				<label for="type" class="control-label">Min : *</label>
 				<select name="min" id="min" class="form-control" required>
 					<option value="00" <?php if($information && $min == "00") { echo "selected"; }  ?>>00</option>
 					<option value="15" <?php if($information && $min == "15") { echo "selected"; }  ?>>15</option>
@@ -77,6 +79,16 @@
 					<option value="45" <?php if($information && $min == "45") { echo "selected"; }  ?>>45</option>
 				</select>
 			</div>
+		</div>
+		
+		<div class="form-group text-left">
+			<label for="type" class="control-label">Duración : *</label>
+				<select name="duracion" id="duracion" class="form-control" required>
+					<option value="00" <?php if($information && $min == "00") { echo "selected"; }  ?>>00</option>
+					<option value="15" <?php if($information && $min == "15") { echo "selected"; }  ?>>15</option>
+					<option value="30" <?php if($information && $min == "30") { echo "selected"; }  ?>>30</option>
+					<option value="45" <?php if($information && $min == "45") { echo "selected"; }  ?>>45</option>
+				</select>
 		</div>
 
 		<div class="form-group text-left">

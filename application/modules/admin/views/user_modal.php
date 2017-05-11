@@ -61,8 +61,8 @@
 			<label class="control-label" for="estado">Estado</label>
 			<select name="estado" id="estado" class="form-control" required>
 				<option value=''>Select...</option>
-				<option value=1 <?php if($information[0]["estado"] == 1) { echo "selected"; }  ?>>Active</option>
-				<option value=2 <?php if($information[0]["estado"] == 2) { echo "selected"; }  ?>>Inactive</option>
+				<option value=1 <?php if($information[0]["estado"] == 1) { echo "selected"; }  ?>>Activo</option>
+				<option value=2 <?php if($information[0]["estado"] == 2) { echo "selected"; }  ?>>Inactivo</option>
 			</select>
 		</div>
 <?php } ?>
