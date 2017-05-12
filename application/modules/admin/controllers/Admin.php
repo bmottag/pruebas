@@ -250,7 +250,7 @@ class Admin extends MX_Controller {
     }
 	
 	/**
-	 * INICIO PRUENAS
+	 * INICIO PRUEBAS
 	 */	
 	
 		
@@ -422,6 +422,121 @@ class Admin extends MX_Controller {
 			echo json_encode($data);
     }
 
+	/**
+	 * INICIO SITIOS
+	 */	
+	
+		
+	/**
+	 * Lista de SITIOS
+     * @since 11/5/2017
+	 */
+	public function sitios()
+	{
+			$arrParam = array();
+			$data['info'] = $this->admin_model->get_sitios($arrParam);
+			
+			$data["view"] = 'sitio';
+			$this->load->view("layout", $data);
+	}
+	
+    /**
+     * Cargo modal - formulario SITIOS
+     * @since 11/5/2017
+     */
+    public function cargarModalSitio() 
+	{
+			header("Content-Type: text/plain; charset=utf-8"); //Para evitar problemas de acentos
+			
+			$data['information'] = FALSE;
+			$data["identificador"] = $this->input->post("identificador");
+			
+			$this->load->model("general_model");
+			$arrParam = array(
+				"table" => "param_organizaciones",
+				"order" => "id_organizacion",
+				"id" => "x"
+			);
+			$data['organizaciones'] = $this->general_model->get_basic_search($arrParam);//listado organizaciones
+			
+			$arrParam = array(
+				"table" => "param_regiones",
+				"order" => "nombre_region",
+				"id" => "x"
+			);
+			$data['regiones'] = $this->general_model->get_basic_search($arrParam);//listado regiones
+			
+			$arrParam = array(
+				"table" => "param_zonas",
+				"order" => "nombre_zona",
+				"id" => "x"
+			);
+			$data['zonas'] = $this->general_model->get_basic_search($arrParam);//listado zonas
+			
+			$data['departamentos'] = $this->admin_model->get_dpto_divipola();//listado de departamentos
+			
+			if ($data["identificador"] != 'x') {
+				$arrParam = array(
+					"idSitio" => $data["identificador"]
+				);
+				$data['information'] = $this->admin_model->get_sitios($arrParam);//info sitio
+			}
+			
+			$this->load->view("sitio_modal", $data);
+    }
+	
+	/**
+	 * Update Sitios
+     * @since 11/5/2017
+	 */
+	public function save_sitio()
+	{			
+			header('Content-Type: application/json');
+			$data = array();
 
+			$idSitio = $this->input->post('hddId');
+			
+			$msj = "Se adiciono el Sitio con exito.";
+			if ($idSitio != '') {
+				$msj = "Se actualizo el Sitio con exito.";
+			}
+
+			if ($idSitio = $this->admin_model->saveSitio()) {
+				$data["result"] = true;
+				$data["idRecord"] = $idSitio;
+				
+				$this->session->set_flashdata('retornoExito', $msj);
+			} else {
+				$data["result"] = "error";
+				$data["idRecord"] = "";
+				
+				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador.');
+			}
+
+			echo json_encode($data);
+    }
+	
+	/**
+	 * Lista de municipios por departamentos
+     * @since 12/5/2017
+	 */
+    public function mcpioList()
+	{
+			header("Content-Type: text/plain; charset=utf-8"); //Para evitar problemas de acentos
+
+			$arrParam['idDepto'] = $this->input->post('identificador');
+
+			$lista = $this->admin_model->get_municipios_by($arrParam);
+		
+			echo "<option value=''>Select...</option>";
+			if ($lista) {
+				foreach ($lista as $fila) {
+					echo "<option value='" . $fila["idMcpio"] . "' >" . $fila["municipio"] . "</option>";
+				}
+			}
+    }
+
+	
+	
 	
 }

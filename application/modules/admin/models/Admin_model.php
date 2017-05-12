@@ -185,8 +185,116 @@
 				} else {
 					return false;
 				}
-		}		
+		}
 		
+		/**
+		 * Add/Edit SITIO
+		 * @since 11/5/2017
+		 */
+		public function saveSitio() 
+		{
+				$idSitio = $this->input->post('hddId');
+				
+				$data = array(
+					'nombre_sitio' => $this->input->post('nombreSitio'),
+					'direccion_sitio' => $this->input->post('direccion'),
+					'codigo_postal_sitio' => $this->input->post('codigoPostal'),
+					'barrio_sitio' => $this->input->post('barrioSitio'),
+					'telefono_sitio' => $this->input->post('telefono'),
+					'fax_sitio' => $this->input->post('fax'),
+					'celular_sitio' => $this->input->post('celular'),
+					'email_sitio' => $this->input->post('email'),
+					'fk_id_organizacion' => $this->input->post('organizacion'),
+					'fk_id_region' => $this->input->post('region'),
+					'fk_dpto_divipola' => $this->input->post('depto'),
+					'fk_mpio_divipola' => $this->input->post('mcpio'),
+					'fk_id_zona' => $this->input->post('zona'),
+					'estado_sitio' => $this->input->post('estado')
+				);
+				
+				//revisar si es para adicionar o editar
+				if ($idSitio == '') {
+					$data['fecha_creacion'] = date("Y-m-d");
+					$query = $this->db->insert('sitios', $data);
+					$idSitio = $this->db->insert_id();				
+				} else {
+					$this->db->where('id_sitio', $idSitio);
+					$query = $this->db->update('sitios', $data);
+				}
+				if ($query) {
+					return $idSitio;
+				} else {
+					return false;
+				}
+		}
+		
+		/**
+		 * Lista de sitios
+		 * @since 12/5/2017
+		 */
+		public function get_sitios($arrDatos) 
+		{
+				$this->db->select();
+				$this->db->join('param_organizaciones O', 'O.id_organizacion = S.fk_id_organizacion', 'INNER');
+				$this->db->join('param_regiones R', 'R.id_region = S.fk_id_region', 'INNER');
+				$this->db->join('param_divipola D', 'D.mpio_divipola = S.fk_mpio_divipola', 'INNER');
+				$this->db->join('param_zonas Z', 'Z.id_zona = S.fk_id_zona', 'INNER');
+				if (array_key_exists("idSitio", $arrDatos)) {
+					$this->db->where('S.id_sitio', $arrDatos["idSitio"]);
+				}
+				$this->db->order_by('S.nombre_sitio', 'asc');
+				$query = $this->db->get('sitios S');
+
+				if ($query->num_rows() > 0) {
+					return $query->result_array();
+				} else {
+					return false;
+				}
+		}
+		
+		/**
+		 * Lista de sitios
+		 * @since 12/5/2017
+		 */
+		public function get_dpto_divipola() 
+		{
+				$this->db->select('DISTINCT(dpto_divipola), dpto_divipola_nombre');
+
+				$this->db->order_by('dpto_divipola_nombre', 'asc');
+				$query = $this->db->get('param_divipola D');
+
+				if ($query->num_rows() > 0) {
+					return $query->result_array();
+				} else {
+					return false;
+				}
+		}
+		
+		/**
+		 * Municipios por departamento
+		 * @since 12/5/2016
+		 */
+		public function get_municipios_by($arrDatos)
+		{
+				$municipios = array();
+				$this->db->select();
+				if (array_key_exists("idDepto", $arrDatos)) {
+					$this->db->where('dpto_divipola', $arrDatos["idDepto"]);
+				}
+				$this->db->order_by('mpio_divipola_nombre', 'asc');
+				$query = $this->db->get('param_divipola');
+					
+				if ($query->num_rows() > 0) {
+					$i = 0;
+					foreach ($query->result() as $row) {
+						$municipios[$i]["idMcpio"] = $row->mpio_divipola;
+						$municipios[$i]["municipio"] = $row->mpio_divipola_nombre;
+						$i++;
+					}
+				}
+				$this->db->close();
+				return $municipios;
+		}
 		
 		
 		

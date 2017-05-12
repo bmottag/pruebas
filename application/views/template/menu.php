@@ -60,6 +60,12 @@
 				</li>
 				
 				<li class="divider"></li>
+
+				<li>
+					<a href="<?php echo base_url("admin/sitios"); ?>"><i class="fa fa-building-o fa-fw"></i> Sitios</a>
+				</li>
+				
+				<li class="divider"></li>
 				
 				<li>
 					<a href="<?php echo base_url("admin/pruebas"); ?>"><i class="fa fa-star fa-fw"></i> Pruebas</a>
