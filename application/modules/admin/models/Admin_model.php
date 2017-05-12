@@ -296,6 +296,34 @@
 				return $municipios;
 		}
 		
+		/**
+		 * Add/Edit GRUPO INSTRUMENTOS
+		 * @since 12/5/2017
+		 */
+		public function saveGrupoInstrumentos() 
+		{
+				$identificador = $this->input->post('hddId');
+				
+				$data = array(
+					'nombre_grupo_instrumentos' => $this->input->post('nombreGrupoInstrumentos')
+				);
+				
+				//revisar si es para adicionar o editar
+				if ($identificador == '') {
+					$data['fecha_creacion'] = date("Y-m-d");
+					$query = $this->db->insert('param_grupo_instrumentos', $data);
+					$identificador = $this->db->insert_id();				
+				} else {
+					$this->db->where('id_grupo_instrumentos', $identificador);
+					$query = $this->db->update('param_grupo_instrumentos', $data);
+				}
+				if ($query) {
+					return $identificador;
+				} else {
+					return false;
+				}
+		}
+		
 		
 		
 		

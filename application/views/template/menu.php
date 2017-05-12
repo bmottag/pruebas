@@ -70,6 +70,10 @@
 				<li>
 					<a href="<?php echo base_url("admin/pruebas"); ?>"><i class="fa fa-star fa-fw"></i> Pruebas</a>
 				</li>
+
+				<li>
+					<a href="<?php echo base_url("admin/grupo_instrumentos"); ?>"><i class="fa fa-bullseye fa-fw"></i> Grupo Instrumentos</a>
+				</li>
 			</ul>
 		</li>
 <?php

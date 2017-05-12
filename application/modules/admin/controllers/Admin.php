@@ -536,6 +536,85 @@ class Admin extends MX_Controller {
 			}
     }
 
+	/**
+	 * INICIO GRUPO INSTRUMENTOS
+	 */	
+	
+		
+	/**
+	 * Lista de GRUPO INSTRUMENTOS
+     * @since 12/5/2017
+	 */
+	public function grupo_instrumentos()
+	{
+			$this->load->model("general_model");
+			$arrParam = array(
+				"table" => "param_grupo_instrumentos",
+				"order" => "nombre_grupo_instrumentos",
+				"id" => "x"
+			);
+			$data['info'] = $this->general_model->get_basic_search($arrParam);
+			
+			$data["view"] = 'grupo_instrumentos';
+			$this->load->view("layout", $data);
+	}
+	
+    /**
+     * Cargo modal - formulario tipo de alerta
+     * @since 12/5/2017
+     */
+    public function cargarModalGrupoInstrumentos() 
+	{
+			header("Content-Type: text/plain; charset=utf-8"); //Para evitar problemas de acentos
+			
+			$data['information'] = FALSE;
+			$data["identificador"] = $this->input->post("identificador");	
+			
+			if ($data["identificador"] != 'x') {
+				$this->load->model("general_model");
+				$arrParam = array(
+					"table" => "param_grupo_instrumentos",
+					"order" => "id_grupo_instrumentos",
+					"column" => "id_grupo_instrumentos",
+					"id" => $data["identificador"]
+				);
+				$data['information'] = $this->general_model->get_basic_search($arrParam);
+			}
+			
+			$this->load->view("grupo_instrumentos_modal", $data);
+    }
+	
+	/**
+	 * Update GRUPO INSTRUMENTOS
+     * @since 12/5/2017
+	 */
+	public function save_grupo_instrumentos()
+	{			
+			header('Content-Type: application/json');
+			$data = array();
+			
+			$identificador = $this->input->post('hddId');
+			
+			$msj = "Se adiciono el Grupo de Instrumentos con exito.";
+			if ($identificador != '') {
+				$msj = "Se actualizo el Grupo de Instrumentos con exito.";
+			}
+
+			if ($identificador = $this->admin_model->saveGrupoInstrumentos()) {
+				$data["result"] = true;
+				$data["idRecord"] = $identificador;
+				
+				$this->session->set_flashdata('retornoExito', $msj);
+			} else {
+				$data["result"] = "error";
+				$data["idRecord"] = "";
+				
+				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador.');
+			}
+
+			echo json_encode($data);
+    }
+
 	
 	
 	
