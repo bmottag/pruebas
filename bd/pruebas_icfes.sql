@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-05-2017 a las 21:49:10
+-- Tiempo de generación: 12-05-2017 a las 22:56:42
 -- Versión del servidor: 10.1.16-MariaDB
 -- Versión de PHP: 5.6.24
 
@@ -1180,6 +1180,27 @@ INSERT INTO `param_divipola` (`dpto_divipola`, `mpio_divipola`, `dpto_divipola_n
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `param_grupo_instrumentos`
+--
+
+CREATE TABLE `param_grupo_instrumentos` (
+  `id_grupo_instrumentos` int(1) NOT NULL,
+  `nombre_grupo_instrumentos` varchar(50) NOT NULL,
+  `fecha_creacion` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `param_grupo_instrumentos`
+--
+
+INSERT INTO `param_grupo_instrumentos` (`id_grupo_instrumentos`, `nombre_grupo_instrumentos`, `fecha_creacion`) VALUES
+(1, 'GSA TyT', '2017-05-12'),
+(2, 'EK TyT', '2017-05-12'),
+(3, 'Recluso TyT', '2017-05-12');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `param_organizaciones`
 --
 
@@ -1414,6 +1435,12 @@ ALTER TABLE `param_divipola`
   ADD KEY `dpto_divipola` (`dpto_divipola`);
 
 --
+-- Indices de la tabla `param_grupo_instrumentos`
+--
+ALTER TABLE `param_grupo_instrumentos`
+  ADD PRIMARY KEY (`id_grupo_instrumentos`);
+
+--
 -- Indices de la tabla `param_organizaciones`
 --
 ALTER TABLE `param_organizaciones`
@@ -1479,6 +1506,11 @@ ALTER TABLE `usuario`
 --
 ALTER TABLE `alertas`
   MODIFY `id_alerta` int(10) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `param_grupo_instrumentos`
+--
+ALTER TABLE `param_grupo_instrumentos`
+  MODIFY `id_grupo_instrumentos` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `param_organizaciones`
 --
