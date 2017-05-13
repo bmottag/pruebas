@@ -45,16 +45,15 @@
 			<input type="text" class="form-control" id="fechaAlerta" name="fechaAlerta" value="<?php echo $information?$information[0]["fecha_alerta"]:""; ?>" placeholder="Fecha Alerta" required />
 		</div>
 		
-		<div class="form-group text-left">
-			
-			<?php 
-				if($information){
-					$time = explode(":",$information["hora_alerta"]);
-					$hour = $time[0];
-					$min = $time[1];
-				}
-			?>
-			<div class="col-sm-6">
+		<?php 
+			if($information){
+				$time = explode(":",$information["hora_alerta"]);
+				$hour = $time[0];
+				$min = $time[1];
+			}
+		?>
+		<div class="col-sm-6">
+			<div class="form-group text-left">
 				<label for="type" class="control-label">Hora : *</label>
 				<select name="hour" id="hour" class="form-control" required>
 					<option value='' >Select...</option>
@@ -69,8 +68,10 @@
 					<?php } ?>									
 				</select>
 			</div>
+		</div>
 			
-			<div class="col-sm-6">
+		<div class="col-sm-6">
+			<div class="form-group text-left">
 				<label for="type" class="control-label">Min : *</label>
 				<select name="min" id="min" class="form-control" required>
 					<option value="00" <?php if($information && $min == "00") { echo "selected"; }  ?>>00</option>

@@ -92,7 +92,7 @@ if ($retornoError) {
 									echo "<td class='text-center'>";
 
 						?>
-									<a href="<?php echo base_url("admin/sesiones/" . $lista['id_grupo_instrumentos']); ?>" class="btn btn-primary btn-xs">Asignar Sesiones <span class="fa fa-chain fa-fw" aria-hidden="true"></a>
+									<a href="<?php echo base_url("admin/sesiones/" . $lista['id_grupo_instrumentos']); ?>" class="btn btn-primary btn-xs">Asignar Sesiones <span class="fa fa-gears fa-fw" aria-hidden="true"></a>
 						<?php
 									echo "</td>";
 							endforeach;

@@ -262,7 +262,7 @@ class Admin extends MX_Controller {
 	{
 			$this->load->model("general_model");
 			$arrParam = array(
-				"table" => "param_pruebas",
+				"table" => "pruebas",
 				"order" => "nombre_prueba",
 				"id" => "x"
 			);
@@ -286,7 +286,7 @@ class Admin extends MX_Controller {
 			if ($data["idPrueba"] != 'x') {
 				$this->load->model("general_model");
 				$arrParam = array(
-					"table" => "param_pruebas",
+					"table" => "pruebas",
 					"order" => "id_prueba",
 					"column" => "id_prueba",
 					"id" => $data["idPrueba"]
@@ -603,6 +603,96 @@ class Admin extends MX_Controller {
 			if ($identificador = $this->admin_model->saveGrupoInstrumentos()) {
 				$data["result"] = true;
 				$data["idRecord"] = $identificador;
+				
+				$this->session->set_flashdata('retornoExito', $msj);
+			} else {
+				$data["result"] = "error";
+				$data["idRecord"] = "";
+				
+				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador.');
+			}
+
+			echo json_encode($data);
+    }
+	
+	/**
+	 * INICIO ASIGNAR SESISONES
+	 */	
+	
+		
+	/**
+	 * Lista de SESIONES POR GRUPO
+     * @since 12/5/2017
+	 */
+	public function sesiones($idGrupo)
+	{
+			$arrParam = array("idGrupo" => $idGrupo);
+			$data['info'] = $this->admin_model->get_sesiones($arrParam);
+			
+			$this->load->model("general_model");
+			$arrParam = array(
+				"table" => "param_grupo_instrumentos",
+				"order" => "id_grupo_instrumentos",
+				"column" => "id_grupo_instrumentos",
+				"id" => $idGrupo
+			);
+			$data['infoGrupo'] = $this->general_model->get_basic_search($arrParam);
+
+			$data["view"] = 'sesiones';
+			$this->load->view("layout", $data);
+	}
+	
+    /**
+     * Cargo modal - formulario SESIONES
+     * @since 12/5/2017
+     */
+    public function cargarModalSesiones() 
+	{
+			header("Content-Type: text/plain; charset=utf-8"); //Para evitar problemas de acentos
+			
+			$data['information'] = FALSE;
+			$data["idGrupo"] = $this->input->post("idGrupo");
+			$data["idSesion"] = $this->input->post("idSesion");
+			
+			$this->load->model("general_model");
+			$arrParam = array(
+				"table" => "pruebas",
+				"order" => "id_prueba",
+				"id" => "x"
+			);
+			$data['pruebas'] = $this->general_model->get_basic_search($arrParam);//listado pruebas
+			
+			if ($data["idSesion"] != 'x') {
+				$arrParam = array(
+					"idSitio" => $data["idSesion"]
+				);
+				$data['information'] = $this->admin_model->get_sesiones($arrParam);//info sesiones
+			$data["idGrupo"] = $data['information'][0]['fk_id_grupo_instrumentos'];
+			}
+			
+			$this->load->view("sesiones_modal", $data);
+    }
+	
+	/**
+	 * Update SESIONES
+     * @since 12/5/2017
+	 */
+	public function save_sesiones()
+	{			
+			header('Content-Type: application/json');
+			$data = array();
+			
+			$idGrupo = $this->input->post('hddIdGrupo');
+			$idSesion = $this->input->post('hddId');
+			
+			$msj = "Se adiciono la Sesion con exito.";
+			if ($idSesion != '') {
+				$msj = "Se actualizo la sesion con exito.";
+			}
+
+			if ($idSesion = $this->admin_model->saveSesiones()) {
+				$data["result"] = true;
+				$data["idRecord"] = $idGrupo;
 				
 				$this->session->set_flashdata('retornoExito', $msj);
 			} else {

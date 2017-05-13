@@ -174,11 +174,11 @@
 				//revisar si es para adicionar o editar
 				if ($idPrueba == '') {
 					$data['fecha_creacion'] = date("Y-m-d");
-					$query = $this->db->insert('param_pruebas', $data);
+					$query = $this->db->insert('pruebas', $data);
 					$idPrueba = $this->db->insert_id();				
 				} else {
 					$this->db->where('id_prueba', $idPrueba);
-					$query = $this->db->update('param_pruebas', $data);
+					$query = $this->db->update('pruebas', $data);
 				}
 				if ($query) {
 					return $idPrueba;
@@ -319,6 +319,69 @@
 				}
 				if ($query) {
 					return $identificador;
+				} else {
+					return false;
+				}
+		}
+		
+		/**
+		 * Lista de sesiones
+		 * @since 12/5/2017
+		 */
+		public function get_sesiones($arrDatos) 
+		{
+				$this->db->select();
+				$this->db->join('pruebas P', 'P.id_prueba = S.fk_id_prueba', 'INNER');
+				if (array_key_exists("idGrupo", $arrDatos)) {
+					$this->db->where('S.fk_id_grupo_instrumentos', $arrDatos["idGrupo"]);
+				}
+				$this->db->order_by('S.id_sesion', 'asc');
+				$query = $this->db->get('sesiones S');
+
+				if ($query->num_rows() > 0) {
+					return $query->result_array();
+				} else {
+					return false;
+				}
+		}
+		
+		/**
+		 * Add/Edit SESIONES
+		 * @since 11/5/2017
+		 */
+		public function saveSesiones() 
+		{
+				$idGrupo = $this->input->post('hddIdGrupo');
+				$idSesion = $this->input->post('hddId');
+				
+				$hourIn = $this->input->post('hourIni');
+				$hourOut = $this->input->post('hourFin');
+				
+				$hourIn = $hourIn<10?"0".$hourIn:$hourIn;
+				$hourOut = $hourOut<10?"0".$hourOut:$hourOut;
+				
+				$timeIn = $hourIn . ":" . $this->input->post('minIni');
+				$timeOut = $hourOut . ":" . $this->input->post('minFin');
+				
+				$data = array(
+					'fk_id_grupo_instrumentos' => $idGrupo,
+					'fk_id_prueba' => $this->input->post('prueba'),
+					'sesion_prueba' => $this->input->post('sesion'),
+					'hora_inicio_prueba' => $timeIn ,
+					'hora_fin_prueba' => $timeOut
+				);
+				
+				//revisar si es para adicionar o editar
+				if ($idSesion == '') {
+					$data['fecha_creacion'] = date("Y-m-d");
+					$query = $this->db->insert('sesiones', $data);
+					$idSesion = $this->db->insert_id();				
+				} else {
+					$this->db->where('id_sesion', $idSesion);
+					$query = $this->db->update('sitios', $data);
+				}
+				if ($query) {
+					return $idSesion;
 				} else {
 					return false;
 				}
