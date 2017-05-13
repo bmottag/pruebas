@@ -387,6 +387,29 @@
 				}
 		}
 		
+	    /**
+	     * Actualiar SITIO Y PRUEBA USUARIO
+	     * @since  13/5/2017
+	     */
+	    public function updateSitio()
+		{
+				$idUser = $this->input->post("hddId");
+
+				$data = array(
+					'fk_id_sitio' => $this->input->post("sitio"),
+					'fk_id_prueba' => $this->input->post("prueba")
+				);
+
+				$this->db->where('id_usuario', $idUser);
+				$query = $this->db->update('usuario', $data);
+
+				if ($query) {
+					return true;
+				} else {
+					return false;
+				}
+	    }
+		
 		
 		
 		

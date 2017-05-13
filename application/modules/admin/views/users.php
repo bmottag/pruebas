@@ -76,12 +76,13 @@ if ($retornoError) {
 								<th class="text-center">Nombres</th>
 								<th class="text-center">Apellidos</th>
 								<th class="text-center">Número de documento</th>
-								<th class="text-center">Teléfono</th>
-								<th class="text-center">Celular</th>
 								<th class="text-center">Rol</th>
 								<th class="text-center">Estado</th>
+								<th class="text-center">Asignar Sitio y Prueba</th>
 								<th class="text-center">Editar</th>
 								<th class="text-center">Contraseña</th>								
+								<th class="text-center">Teléfono</th>
+								<th class="text-center">Celular</th>
 								<th class="text-center">Email</th>
 								<th class="text-center">Dirección</th>
 							</tr>
@@ -93,24 +94,7 @@ if ($retornoError) {
 									echo "<td>" . $lista['nombres_usuario'] . "</td>";
 									echo "<td>" . $lista['apellidos_usuario'] . "</td>";
 									echo "<td class='text-center'>" . $lista['numero_documento'] . "</td>";
-									echo "<td class='text-center'>" . $lista['telefono_fijo'] . "</td>";
-$movil = $lista["celular"];
-// Separa en grupos de tres 
-$count = strlen($movil); 
-	
-$num_tlf1 = substr($movil, 0, 3); 
-$num_tlf2 = substr($movil, 3, 3); 
-$num_tlf3 = substr($movil, 6, 2); 
-$num_tlf4 = substr($movil, -2); 
 
-if($count == 10){
-	$resultado = "$num_tlf1 $num_tlf2 $num_tlf3 $num_tlf4";  
-}else{
-	
-	$resultado = chunk_split($movil,3," "); 
-}
-								
-									echo "<td class='text-center'>" . $resultado . "</td>";
 									echo "<td class='text-center'>";
 									echo '<p class="text-primary"><strong>' . $lista['nombre_rol'] . '</strong></p>';
 									echo "</td>";
@@ -133,6 +117,12 @@ if($count == 10){
 									echo '<p class="' . $clase . '"><strong>' . $valor . '</strong></p>';
 									echo "</td>";
 									echo "<td class='text-center'>";
+
+						?>
+									<a href="<?php echo base_url("admin/asignar/" . $lista['id_usuario']); ?>" class="btn btn-primary btn-xs">Asignar <span class="fa fa-gears fa-fw" aria-hidden="true"></a>
+						<?php
+									echo "</td>";
+									echo "<td class='text-center'>";
 						?>
 									<button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#modal" id="<?php echo $lista['id_usuario']; ?>" >
 										Editar <span class="glyphicon glyphicon-edit" aria-hidden="true">
@@ -149,6 +139,24 @@ if($count == 10){
 									
 							<?php
 									echo "</td>";
+									echo "<td class='text-center'>" . $lista['telefono_fijo'] . "</td>";
+$movil = $lista["celular"];
+// Separa en grupos de tres 
+$count = strlen($movil); 
+	
+$num_tlf1 = substr($movil, 0, 3); 
+$num_tlf2 = substr($movil, 3, 3); 
+$num_tlf3 = substr($movil, 6, 2); 
+$num_tlf4 = substr($movil, -2); 
+
+if($count == 10){
+	$resultado = "$num_tlf1 $num_tlf2 $num_tlf3 $num_tlf4";  
+}else{
+	
+	$resultado = chunk_split($movil,3," "); 
+}
+								
+									echo "<td class='text-center'>" . $resultado . "</td>";
 									echo "<td>" . $lista['email'] . "</td>";
 									echo "<td>" . $lista['direccion_usuario'] . "</td>";
 									echo "</tr>";

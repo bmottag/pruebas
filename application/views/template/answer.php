@@ -19,7 +19,7 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<?php if($linkBack){ ?>
-					<a class="btn btn-success" href=" <?php echo base_url($linkBack); ?> "><span class="glyphicon glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Go back </a> 
+					<a class="btn btn-success" href=" <?php echo base_url($linkBack); ?> "><span class="glyphicon glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Regresar </a> 
 					<?php } ?>
 					<?php echo $titulo; ?>
 				</div>

@@ -616,7 +616,7 @@ class Admin extends MX_Controller {
     }
 	
 	/**
-	 * INICIO ASIGNAR SESISONES
+	 * INICIO ASIGNAR SESISONES Y PRUEBA AL GRUPO INSTRUMENTO
 	 */	
 	
 		
@@ -705,6 +705,76 @@ class Admin extends MX_Controller {
 			echo json_encode($data);
     }
 
+	/**
+	 * INICIO ASIGNAR SITIOS Y PRUEBA AL USUARIO
+	 */	
+	
+		
+	/**
+	 * Lista de SESIONES POR GRUPO
+     * @since 13/5/2017
+	 */
+	public function asignar($idUser)
+	{
+			$arrParam = array("idUsuario" => $idUser);
+			$data['infoUsuario'] = $this->admin_model->get_users($arrParam);//listado de USUARIOS
+			
+			$arrParam = array();
+			$data['infoSitios'] = $this->admin_model->get_sitios($arrParam);//listado de SITIOS
+			
+			$this->load->model("general_model");
+			$arrParam = array(
+				"table" => "pruebas",
+				"order" => "nombre_prueba",
+				"id" => "x"
+			);
+			$data['infoPruebas'] = $this->general_model->get_basic_search($arrParam);//listado de pruebas
+
+			$data["view"] = 'asignar_sitio_prueba';
+			$this->load->view("layout", $data);
+	}
+	
+	/**
+	 * Guardar sitio y prueba del usuario
+	 * @since 13/5/2017
+	 */
+	public function guardar_sitio_prueba()
+	{
+			$data = array();			
+				
+			$data['linkBack'] = "admin/users/";
+			$data['titulo'] = "<i class='fa fa-gear fa-fw'></i>ASIGNAR SITIO Y PRUEBA";
+	
+			if ($this->admin_model->updateSitio()) {
+				
+				$arrParam = array(
+					"idSitio" => $this->input->post("sitio")
+				);
+				$infoSitio = $this->admin_model->get_sitios($arrParam);//info sitio
+				
+				$this->load->model("general_model");
+				$arrParam = array(
+					"table" => "pruebas",
+					"order" => "id_prueba",
+					"column" => "id_prueba",
+					"id" => $this->input->post("prueba")
+				);
+				$infoPrueba = $this->general_model->get_basic_search($arrParam);
+				
+				
+				$data["msj"] = "Se ingresaron los datos con exito.";
+				$data["msj"] .= "<br><strong>Número de documento: </strong>" . $this->input->post("hddUser");
+				$data["msj"] .= "<br><strong>Sitio: </strong>" . $infoSitio[0]['nombre_sitio'];
+				$data["msj"] .= "<br><strong>Prueba: </strong>" . $infoPrueba[0]['nombre_prueba'];;
+				$data["clase"] = "alert-success";
+			}else{
+				$data["msj"] = "<strong>Error!!!</strong> Contactarse con el administrador.";
+				$data["clase"] = "alert-danger";
+			}
+						
+			$data["view"] = "template/answer";
+			$this->load->view("layout", $data);
+	}
 	
 	
 	

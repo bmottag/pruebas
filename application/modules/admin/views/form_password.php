@@ -8,7 +8,7 @@
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<h4 class="list-group-item-heading">
-						<i class="fa fa-child fa-fw"></i> CAMBIAR CONTRASEÑA
+						<i class="fa fa-gear fa-fw"></i> CONFIGURACIONES - CAMBIAR CONTRASEÑA
 					</h4>
 				</div>
 			</div>

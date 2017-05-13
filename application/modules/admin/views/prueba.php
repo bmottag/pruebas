@@ -80,7 +80,6 @@ if ($retornoError) {
 								<th class="text-center">Año</th>
 								<th class="text-center">Semestre</th>
 								<th class="text-center">Fecha Prueba</th>
-								<th class="text-center">Grupo Instrumentos</th>
 								<th class="text-center">Editar</th>
 							</tr>
 						</thead>
@@ -93,12 +92,7 @@ if ($retornoError) {
 									echo "<td class='text-center'>" . $lista['anio_prueba'] . "</td>";
 									echo "<td class='text-center'>" . $lista['semestre_prueba'] . "</td>";
 									echo "<td class='text-center'>" . $lista['fecha_prueba'] . "</td>";
-									echo "<td class='text-center'>";
 
-						?>
-									<a href="<?php echo base_url("admin/grupo/" . $lista['id_prueba']); ?>" class="btn btn-primary btn-xs">Asignar Grupo</a>
-						<?php
-									echo "</td>";
 									echo "<td class='text-center'>";
 						?>
 									<button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#modal" id="<?php echo $lista['id_prueba']; ?>" >
