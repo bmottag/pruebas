@@ -101,48 +101,32 @@ if ($retornoError) {
 					<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
 						<thead>
 							<tr>
-								<th class="text-center">Nombre Sitio</th>
-								<th class="text-center">Dirección</th>
-								<th class="text-center">Barrio</th>
+								<th class="text-center">Sesion</th>
+								<th class="text-center">Prueba</th>
+								<th class="text-center">Descripcion Prueba</th>
+								<th class="text-center">Fecha Prueba</th>
+								<th class="text-center">Hora Inicio</th>
+								<th class="text-center">Hora Fin</th>
 								<th class="text-center">Editar</th>
-								<th class="text-center">Teléfono</th>
-								<th class="text-center">Fax</th>
-								<th class="text-center">Celuar</th>
-								<th class="text-center">Email</th>
-								<th class="text-center">Codigo Postal</th>
-								<th class="text-center">Nombre Organización</th>
-								<th class="text-center">Region</th>
-								<th class="text-center">Dpto DIVIPOLA</th>
-								<th class="text-center">Mpio DIVIPOLA</th>
-								<th class="text-center">Zona</th>
-								<th class="text-center">Nombre Contacto</th>
 							</tr>
 						</thead>
 						<tbody>							
 						<?php
 							foreach ($info as $lista):
 									echo "<tr>";
-									echo "<td>" . $lista['nombre_sitio'] . "</td>";
-									echo "<td>" . $lista['direccion_sitio'] . "</td>";
-									echo "<td>" . $lista['barrio_sitio'] . "</td>";
+									echo "<td>" . $lista['sesion_prueba'] . "</td>";
+									echo "<td>" . $lista['nombre_prueba'] . "</td>";
+									echo "<td>" . $lista['descripcion_prueba'] . "</td>";
+									echo "<td class='text-center'>" . $lista['fecha_prueba'] . "</td>";
+									echo "<td class='text-center'>" . $lista['hora_inicio_prueba'] . "</td>";
+									echo "<td class='text-center'>" . $lista['hora_fin_prueba'] . "</td>";
 									echo "<td class='text-center'>";
 						?>
-									<button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#modal" id="<?php echo $lista['id_sitio']; ?>" >
+									<button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#modal" id="<?php echo $lista['id_sesion']; ?>" >
 										Editar <span class="glyphicon glyphicon-edit" aria-hidden="true">
 									</button>
 						<?php
 									echo "</td>";
-									echo "<td class='text-center'>" . $lista['telefono_sitio'] . "</td>";
-									echo "<td class='text-center'>" . $lista['fax_sitio'] . "</td>";
-									echo "<td class='text-center'>" . $lista['celular_sitio'] . "</td>";
-									echo "<td>" . $lista['email_sitio'] . "</td>";
-									echo "<td class='text-center'>" . $lista['codigo_postal_sitio'] . "</td>";
-									echo "<td>" . $lista['nombre_organizacion'] . "</td>";
-									echo "<td>" . $lista['nombre_region'] . "</td>";
-									echo "<td>" . $lista['dpto_divipola_nombre'] . "</td>";
-									echo "<td>" . $lista['mpio_divipola_nombre'] . "</td>";
-									echo "<td>" . $lista['nombre_zona'] . "</td>";
-									echo "<td>" . $lista['cotacto_nombres'] . " " . $lista['cotacto_apellidos'] . "</td>";
 							endforeach;
 						?>
 						</tbody>

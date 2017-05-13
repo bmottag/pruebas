@@ -378,7 +378,7 @@
 					$idSesion = $this->db->insert_id();				
 				} else {
 					$this->db->where('id_sesion', $idSesion);
-					$query = $this->db->update('sitios', $data);
+					$query = $this->db->update('sesiones', $data);
 				}
 				if ($query) {
 					return $idSesion;

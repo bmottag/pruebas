@@ -33,7 +33,7 @@
 		
 		<?php 
 			if($information){
-				$timeIni = explode(":",$information["hora_inicio_prueba"]);
+				$timeIni = explode(":",$information[0]["hora_inicio_prueba"]);
 				$hourIni = $timeIni[0];
 				$minIni = $timeIni[1];
 			}
@@ -70,7 +70,7 @@
 		
 		<?php 
 			if($information){
-				$timeFin = explode(":",$information["hora_fin_prueba"]);
+				$timeFin = explode(":",$information[0]["hora_fin_prueba"]);
 				$hourFin = $timeFin[0];
 				$minFin = $timeFin[1];
 			}
