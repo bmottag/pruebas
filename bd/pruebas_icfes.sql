@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-05-2017 a las 22:56:42
+-- Tiempo de generación: 15-05-2017 a las 06:47:24
 -- Versión del servidor: 10.1.16-MariaDB
 -- Versión de PHP: 5.6.24
 
@@ -33,8 +33,18 @@ CREATE TABLE `alertas` (
   `mensaje_alerta` text NOT NULL,
   `fecha_alerta` date DEFAULT NULL,
   `hora_alerta` varchar(10) NOT NULL,
-  `fk_id_rol` int(1) NOT NULL
+  `fk_id_rol` int(1) NOT NULL,
+  `tiempo_duracion_alerta` varchar(10) NOT NULL,
+  `fk_id_sesion` int(10) NOT NULL,
+  `fecha_creacion` date NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `alertas`
+--
+
+INSERT INTO `alertas` (`id_alerta`, `descripcion_alerta`, `fk_id_tipo_alerta`, `mensaje_alerta`, `fecha_alerta`, `hora_alerta`, `fk_id_rol`, `tiempo_duracion_alerta`, `fk_id_sesion`, `fecha_creacion`) VALUES
+(1, 'Pruebas de la primera alerta que se va a mostrar', 3, 'El mensaje que se va a mostrar al usuario toca empezar a clasificar los mensajes por el tipo de alerta', '2017-05-17', '12:15', 4, '30', 1, '2017-05-15');
 
 -- --------------------------------------------------------
 
@@ -1184,7 +1194,7 @@ INSERT INTO `param_divipola` (`dpto_divipola`, `mpio_divipola`, `dpto_divipola_n
 --
 
 CREATE TABLE `param_grupo_instrumentos` (
-  `id_grupo_instrumentos` int(1) NOT NULL,
+  `id_grupo_instrumentos` int(10) NOT NULL,
   `nombre_grupo_instrumentos` varchar(50) NOT NULL,
   `fecha_creacion` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -1222,29 +1232,6 @@ INSERT INTO `param_organizaciones` (`id_organizacion`, `nombre_organizacion`) VA
 (6, 'Institución de educación básica'),
 (7, 'IES'),
 (8, 'Otro');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `param_pruebas`
---
-
-CREATE TABLE `param_pruebas` (
-  `id_prueba` int(10) NOT NULL,
-  `nombre_prueba` varchar(100) NOT NULL,
-  `descripcion_prueba` text NOT NULL,
-  `anio_prueba` int(1) NOT NULL,
-  `semestre_prueba` int(1) NOT NULL,
-  `fecha_prueba` date NOT NULL,
-  `fecha_creacion` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `param_pruebas`
---
-
-INSERT INTO `param_pruebas` (`id_prueba`, `nombre_prueba`, `descripcion_prueba`, `anio_prueba`, `semestre_prueba`, `fecha_prueba`, `fecha_creacion`) VALUES
-(1, 'EK TyT', 'Exámenes de competencias especificas, pruebas saber Técnico y Tecnólogo TyT', 2017, 2, '2017-05-30', '2017-05-10');
 
 -- --------------------------------------------------------
 
@@ -1309,7 +1296,7 @@ INSERT INTO `param_roles` (`id_rol`, `nombre_rol`, `descripcion`) VALUES
 CREATE TABLE `param_tipo_alerta` (
   `id_tipo_alerta` int(1) NOT NULL,
   `nombre_tipo_alerta` varchar(50) NOT NULL,
-  `descripcion_alerta` text NOT NULL,
+  `descripcion_tipo_alerta` text NOT NULL,
   `observacion_alerta` text NOT NULL,
   `fecha_creacion` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -1318,7 +1305,7 @@ CREATE TABLE `param_tipo_alerta` (
 -- Volcado de datos para la tabla `param_tipo_alerta`
 --
 
-INSERT INTO `param_tipo_alerta` (`id_tipo_alerta`, `nombre_tipo_alerta`, `descripcion_alerta`, `observacion_alerta`, `fecha_creacion`) VALUES
+INSERT INTO `param_tipo_alerta` (`id_tipo_alerta`, `nombre_tipo_alerta`, `descripcion_tipo_alerta`, `observacion_alerta`, `fecha_creacion`) VALUES
 (1, 'Informativa', 'Botón (Aceptar o Cerrar). No tiene registro, solo se muestra para informar sobre algún tema de interés. Pasados cinco (5) minutos se debe dejar de mostrar.', '- Debe incluir botón Aceptar o Cerrar, con el objeto que el usuario pueda dejar de visualizar o cerrar el mensaje.\r\n- Después de cinco (5) minutos debe dejar de mostrarse.', '2017-05-10'),
 (2, 'Notificación', 'Botones (Si - No). Se espera respuesta del usuario y lleva registro. En caso de respuesta afirmativa (Si), se debe hacer registro y no es obligatorio diligenciar observación o motivo. En caso de respuesta negativa (No), se debe hacer registro y es obligatorio consignar la observación o motivo. En caso de no respuesta, se debe hacer registro automático o asistido por el sistema con observación o motivo (No respuesta) y notificar a usuario de nivel jerárquico superior.', '- Debe incluir botones Si - No.\r\n- Debe incluir una caja de texto en donde se pueden registrar observaciones o motivos, que solo es obligatorio en su registro cuando se selecciona opción "No" o cuando no hay respuesta por parte del usuario, caso en el cual el sistema hace registro automático o asistido.\r\n- Después de quince (15) minutos sin haber recibido respuesta "No respuesta", se debe hacer registro automático o asistido por el sistema con observación o motivo (No respuesta) y se envía notificación a usuario de nivel jerárquico superior. Una vez se hace registro y notifica al nivel jerárquico superior, el mensaje debe dejar de mostrase.', '2017-05-10'),
 (3, 'Consolidación', 'Botón (Enviar). Tiene registro obligatorio de una cifra o valor, opcional se puede registrar algún motivo u observación. En caso de no respuesta, se debe hacer registro automático o asistido por el sistema con motivo (No respuesta) y notificar a usuario de nivel jerárquico superior.', '- Debe incluir botón Enviar.\r\n- Debe incluir una caja de texto en donde se pueden registrar observaciones o motivos; que no tiene obligatoriedad en su registro, excepto cuando no hay respuesta por parte del usuario, caso en el cual el sistema hace registro automático.\r\n- Después de quince (15) minutos sin haber recibido respuesta "No respuesta", se debe hacer registro automático o asistido por el sistema con observación o motivo (No respuesta) y se envía notificación a usuario de nivel jerárquico superior. Una vez se hace registro y notifica al nivel jerárquico superior, el mensaje debe dejar de mostrase.', '2017-05-10');
@@ -1348,6 +1335,52 @@ INSERT INTO `param_zonas` (`id_zona`, `nombre_zona`) VALUES
 (7, 'Noroccidente'),
 (8, 'Suroriente'),
 (9, 'Suroccidente');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pruebas`
+--
+
+CREATE TABLE `pruebas` (
+  `id_prueba` int(10) NOT NULL,
+  `nombre_prueba` varchar(100) NOT NULL,
+  `descripcion_prueba` text NOT NULL,
+  `anio_prueba` int(1) NOT NULL,
+  `semestre_prueba` int(1) NOT NULL,
+  `fecha_prueba` date NOT NULL,
+  `fecha_creacion` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `pruebas`
+--
+
+INSERT INTO `pruebas` (`id_prueba`, `nombre_prueba`, `descripcion_prueba`, `anio_prueba`, `semestre_prueba`, `fecha_prueba`, `fecha_creacion`) VALUES
+(1, 'Saber TyT', 'Exámenes de competencias genéricas, pruebas saber Técnico y Tecnólogo TyT', 2017, 1, '2017-05-30', '2017-05-13');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `sesiones`
+--
+
+CREATE TABLE `sesiones` (
+  `id_sesion` int(10) NOT NULL,
+  `fk_id_grupo_instrumentos` int(10) NOT NULL,
+  `fk_id_prueba` int(10) NOT NULL,
+  `sesion_prueba` varchar(10) NOT NULL,
+  `hora_inicio_prueba` varchar(10) DEFAULT NULL,
+  `hora_fin_prueba` varchar(10) DEFAULT NULL,
+  `fecha_creacion` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `sesiones`
+--
+
+INSERT INTO `sesiones` (`id_sesion`, `fk_id_grupo_instrumentos`, `fk_id_prueba`, `sesion_prueba`, `hora_inicio_prueba`, `hora_fin_prueba`, `fecha_creacion`) VALUES
+(1, 2, 1, '4', '06:45', '15:00', '2017-05-13');
 
 -- --------------------------------------------------------
 
@@ -1405,15 +1438,17 @@ CREATE TABLE `usuario` (
   `fecha_creacion` date DEFAULT NULL,
   `password` varchar(50) NOT NULL,
   `fk_id_rol` int(1) NOT NULL,
-  `estado` int(1) NOT NULL DEFAULT '1' COMMENT '1:active; 2:inactive'
+  `estado` int(1) NOT NULL DEFAULT '1' COMMENT '1:active; 2:inactive',
+  `fk_id_sitio` int(10) DEFAULT NULL,
+  `fk_id_prueba` int(10) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`id_usuario`, `numero_documento`, `nombres_usuario`, `apellidos_usuario`, `direccion_usuario`, `telefono_fijo`, `celular`, `email`, `log_user`, `fecha_creacion`, `password`, `fk_id_rol`, `estado`) VALUES
-(1, 12645615, 'Benjamin', 'Motta', 'Cra. 2 No. 16a-38', '3347766', '3015505382', 'benmotta@gmail.com', 12645615, '2017-05-01', 'e10adc3949ba59abbe56e057f20f883e', 1, 1);
+INSERT INTO `usuario` (`id_usuario`, `numero_documento`, `nombres_usuario`, `apellidos_usuario`, `direccion_usuario`, `telefono_fijo`, `celular`, `email`, `log_user`, `fecha_creacion`, `password`, `fk_id_rol`, `estado`, `fk_id_sitio`, `fk_id_prueba`) VALUES
+(1, 12645615, 'Benjamin', 'Motta', 'Cra. 2 No. 16a-38', '3347766', '3015505382', 'benmotta@gmail.com', 12645615, '2017-05-01', 'e10adc3949ba59abbe56e057f20f883e', 1, 1, 1, 1);
 
 --
 -- Índices para tablas volcadas
@@ -1425,7 +1460,8 @@ INSERT INTO `usuario` (`id_usuario`, `numero_documento`, `nombres_usuario`, `ape
 ALTER TABLE `alertas`
   ADD PRIMARY KEY (`id_alerta`),
   ADD KEY `fk_id_tipo_alerta` (`fk_id_tipo_alerta`),
-  ADD KEY `fk_id_rol` (`fk_id_rol`);
+  ADD KEY `fk_id_rol` (`fk_id_rol`),
+  ADD KEY `fk_id_prueba` (`fk_id_sesion`);
 
 --
 -- Indices de la tabla `param_divipola`
@@ -1445,13 +1481,6 @@ ALTER TABLE `param_grupo_instrumentos`
 --
 ALTER TABLE `param_organizaciones`
   ADD PRIMARY KEY (`id_organizacion`);
-
---
--- Indices de la tabla `param_pruebas`
---
-ALTER TABLE `param_pruebas`
-  ADD PRIMARY KEY (`id_prueba`),
-  ADD KEY `anio_prueba` (`anio_prueba`);
 
 --
 -- Indices de la tabla `param_regiones`
@@ -1478,6 +1507,21 @@ ALTER TABLE `param_zonas`
   ADD PRIMARY KEY (`id_zona`);
 
 --
+-- Indices de la tabla `pruebas`
+--
+ALTER TABLE `pruebas`
+  ADD PRIMARY KEY (`id_prueba`),
+  ADD KEY `anio_prueba` (`anio_prueba`);
+
+--
+-- Indices de la tabla `sesiones`
+--
+ALTER TABLE `sesiones`
+  ADD PRIMARY KEY (`id_sesion`),
+  ADD KEY `fk_id_grupo_instrumentos` (`fk_id_grupo_instrumentos`),
+  ADD KEY `fk_id_prueba` (`fk_id_prueba`);
+
+--
 -- Indices de la tabla `sitios`
 --
 ALTER TABLE `sitios`
@@ -1495,7 +1539,9 @@ ALTER TABLE `usuario`
   ADD PRIMARY KEY (`id_usuario`),
   ADD UNIQUE KEY `numero_documento` (`numero_documento`),
   ADD UNIQUE KEY `log_user` (`log_user`),
-  ADD KEY `fk_id_rol` (`fk_id_rol`);
+  ADD KEY `fk_id_rol` (`fk_id_rol`),
+  ADD KEY `fk_id_sitio` (`fk_id_sitio`),
+  ADD KEY `fk_id_prueba` (`fk_id_prueba`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -1505,22 +1551,17 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `alertas`
 --
 ALTER TABLE `alertas`
-  MODIFY `id_alerta` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_alerta` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `param_grupo_instrumentos`
 --
 ALTER TABLE `param_grupo_instrumentos`
-  MODIFY `id_grupo_instrumentos` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_grupo_instrumentos` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `param_organizaciones`
 --
 ALTER TABLE `param_organizaciones`
   MODIFY `id_organizacion` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
---
--- AUTO_INCREMENT de la tabla `param_pruebas`
---
-ALTER TABLE `param_pruebas`
-  MODIFY `id_prueba` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `param_regiones`
 --
@@ -1542,6 +1583,16 @@ ALTER TABLE `param_tipo_alerta`
 ALTER TABLE `param_zonas`
   MODIFY `id_zona` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
+-- AUTO_INCREMENT de la tabla `pruebas`
+--
+ALTER TABLE `pruebas`
+  MODIFY `id_prueba` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT de la tabla `sesiones`
+--
+ALTER TABLE `sesiones`
+  MODIFY `id_sesion` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
 -- AUTO_INCREMENT de la tabla `sitios`
 --
 ALTER TABLE `sitios`
@@ -1554,6 +1605,13 @@ ALTER TABLE `usuario`
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `sesiones`
+--
+ALTER TABLE `sesiones`
+  ADD CONSTRAINT `sesiones_ibfk_1` FOREIGN KEY (`fk_id_prueba`) REFERENCES `pruebas` (`id_prueba`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `sesiones_ibfk_2` FOREIGN KEY (`fk_id_grupo_instrumentos`) REFERENCES `param_grupo_instrumentos` (`id_grupo_instrumentos`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `sitios`
