@@ -83,7 +83,7 @@ if ($retornoError) {
 							foreach ($info as $lista):
 									echo "<tr>";
 									echo "<td>" . $lista['nombre_tipo_alerta'] . "</td>";
-									echo "<td>" . $lista['descripcion_alerta'] . "</td>";
+									echo "<td>" . $lista['descripcion_tipo_alerta'] . "</td>";
 									echo "<td>" . $lista['observacion_alerta'] . "</td>";
 									echo "<td class='text-center'>";
 						?>

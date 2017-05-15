@@ -17,7 +17,7 @@
 		
 		<div class="form-group text-left">
 			<label class="control-label" for="descripcion">Descripción : *</label>
-			<textarea id="descripcion" name="descripcion" class="form-control" rows="3"><?php echo $information?$information[0]["descripcion_alerta"]:""; ?></textarea>
+			<textarea id="descripcion" name="descripcion" class="form-control" rows="3"><?php echo $information?$information[0]["descripcion_tipo_alerta"]:""; ?></textarea>
 		</div>
 		
 		<div class="form-group text-left">
