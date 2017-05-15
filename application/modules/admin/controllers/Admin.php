@@ -339,13 +339,8 @@ class Admin extends MX_Controller {
 	 */
 	public function alertas()
 	{
-			$this->load->model("general_model");
-			$arrParam = array(
-				"table" => "alertas",
-				"order" => "id_alerta",
-				"id" => "x"
-			);
-			$data['info'] = $this->general_model->get_basic_search($arrParam);
+			$arrParam = array();
+			$data['info'] = $this->admin_model->get_alertas($arrParam);
 			
 			$data["view"] = 'alerta';
 			$this->load->view("layout", $data);
@@ -368,14 +363,18 @@ class Admin extends MX_Controller {
 				"order" => "nombre_tipo_alerta",
 				"id" => "x"
 			);
-			$data['tipoAlerta'] = $this->general_model->get_basic_search($arrParam);
+			$data['tipoAlerta'] = $this->general_model->get_basic_search($arrParam);//tipo de alerta
 			
 			$arrParam = array(
 				"table" => "param_roles",
 				"order" => "nombre_rol",
 				"id" => "x"
 			);
-			$data['roles'] = $this->general_model->get_basic_search($arrParam);
+			$data['roles'] = $this->general_model->get_basic_search($arrParam);//lista de roles
+			
+			$arrParam = array();
+			$data['infoPruebas'] = $this->admin_model->get_sesiones($arrParam);//lista sesiones
+			
 			
 			if ($data["identificador"] != 'x') {
 				$this->load->model("general_model");
@@ -402,12 +401,12 @@ class Admin extends MX_Controller {
 			
 			$idAlerta = $this->input->post('hddId');
 			
-			$msj = "Se adiciono la Prueba con exito.";
+			$msj = "Se adiciono la Alerta con exito.";
 			if ($idAlerta != '') {
-				$msj = "Se actualizo la Prueba con exito.";
+				$msj = "Se actualizo la Alerta con exito.";
 			}
 
-			if ($idAlerta = $this->admin_model->savePrueba()) {
+			if ($idAlerta = $this->admin_model->saveAlerta()) {
 				$data["result"] = true;
 				$data["idRecord"] = $idAlerta;
 				
