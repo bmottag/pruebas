@@ -43,6 +43,38 @@ if ($retornoError) {
     <?php
 }
 ?> 
+
+
+<!--INICIO ALERTA -->
+	<div class="row">
+
+		
+		<div class="col-lg-12">				
+			<div class="panel panel-danger">
+				<div class="panel-heading">
+					<i class="fa fa-calendar fa-fw"></i> ALERTAS
+				</div>
+				<div class="panel-body">
+
+					<div class="col-lg-12">	
+						<div class="alert alert-danger ">
+						
+							<strong>Descripción Alerta: </strong><?php echo $info[0]['descripcion_alerta']; ?><br>
+							<strong>Tipo de Alerta: </strong><?php echo $info[0]['nombre_tipo_alerta']; ?><br>
+							<strong>Mensaje Alerta: </strong><?php echo $info[0]['mensaje_alerta']; ?><br>
+							<strong>Nombre de Prueba: </strong><?php echo $info[0]['nombre_prueba']; ?><br>
+							<strong>Grupo Instrumentos: </strong><?php echo $info[0]['nombre_grupo_instrumentos']; ?><br>
+							<strong>Sesio Prueba: </strong><?php echo $info[0]['sesion_prueba']; ?><br>
+						</div>
+					</div>
+				
+
+				</div>
+			</div>
+		</div>
+	</div>
+<!--FIN ALERTA -->
+
 						
 	<!-- /.row -->
 	<div class="row">

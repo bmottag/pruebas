@@ -20,6 +20,10 @@ class Dashboard extends MX_Controller {
 				$arrParam["idEmployee"] = $this->session->userdata("id");
 			}
 			$arrParam["limit"] = 15;//Limite de registros para la consulta
+			
+			$arrParam = array();
+			$data['info'] = $this->dashboard_model->get_alertas_by($arrParam);
+			
 		
 			$data["view"] = "dashboard";
 			$this->load->view("layout", $data);
