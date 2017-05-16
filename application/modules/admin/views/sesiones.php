@@ -58,7 +58,7 @@ $(function(){
 							<div class="row" align="center">
 								<div style="width:50%;" align="center">
 									<div class="alert alert-success"> <span class="glyphicon glyphicon-pushpin">&nbsp;</span>
-										<strong>GRUPO DE TRABAJO: </strong>
+										<strong>GRUPO INSTRUMENTOS: </strong>
 										<?php echo $infoGrupo[0]['nombre_grupo_instrumentos']; ?>
 									</div>
 								</div>
