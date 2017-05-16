@@ -73,7 +73,7 @@
 					<select name="hour" id="hour" class="form-control" required>
 						<option value='' >Select...</option>
 						<?php
-						for ($i = 0; $i < 24; $i++) {
+						for ($i = 0; $i < 20; $i++) {
 							?>
 							<option value='<?php echo $i; ?>' <?php
 							if ($information && $i == $hour) {
@@ -103,7 +103,6 @@
 				<div class="form-group text-left">
 					<label for="type" class="control-label">Duración (en minutos): *</label>
 					<select name="duracion" id="duracion" class="form-control" required>
-						<option value="00" <?php if($information && $information[0]["tiempo_duracion_alerta"] == "00") { echo "selected"; }  ?>>00</option>
 						<option value="15" <?php if($information && $information[0]["tiempo_duracion_alerta"] == "15") { echo "selected"; }  ?>>15</option>
 						<option value="30" <?php if($information && $information[0]["tiempo_duracion_alerta"] == "30") { echo "selected"; }  ?>>30</option>
 						<option value="45" <?php if($information && $information[0]["tiempo_duracion_alerta"] == "45") { echo "selected"; }  ?>>45</option>

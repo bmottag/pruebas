@@ -418,21 +418,30 @@
 		public function saveAlerta() 
 		{
 				$idAlerta = $this->input->post('hddId');
+				$fechaAlerta = $this->input->post('fechaAlerta');
+				$duracion = $this->input->post('duracion');
 				
 				$hour = $this->input->post('hour');
 				$hour = $hour<10?"0".$hour:$hour;
 				
 				$time = $hour . ":" . $this->input->post('min');
 				
+				$fechaInicio = $fechaAlerta . " " . $time . ":00";
+				
+				$fechaFin = strtotime ( '+' . $duracion . ' minute' , strtotime ( $fechaInicio ) ) ;
+				$fechaFin = date ( 'Y-m-d G:i:s' , $fechaFin );
+
 				$data = array(
 					'descripcion_alerta' => $this->input->post('descripcion'),
 					'fk_id_tipo_alerta' => $this->input->post('tipoAlerta'),
-					'fecha_alerta' => $this->input->post('fechaAlerta'),
+					'fecha_alerta' => $fechaAlerta,
 					'mensaje_alerta' => $this->input->post('mensaje'),
 					'hora_alerta' => $time,
-					'tiempo_duracion_alerta' => $this->input->post('duracion'),
+					'tiempo_duracion_alerta' => $duracion,
 					'fk_id_rol' => $this->input->post('rol'),
-					'fk_id_sesion' => $this->input->post('sesion')
+					'fk_id_sesion' => $this->input->post('sesion'),
+					'fecha_inicio' => $fechaInicio,
+					'fecha_fin' => $fechaFin
 				);
 				
 				//revisar si es para adicionar o editar
