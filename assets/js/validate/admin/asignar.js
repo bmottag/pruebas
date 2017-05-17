@@ -2,8 +2,7 @@
 
 			$( "#form" ).validate( {
 				rules: {
-					sitio: 			{ required: true },
-					prueba: 		{ required: true }
+					sitio: 			{ required: true }
 				},
 				errorElement: "em",
 				errorPlacement: function ( error, element ) {

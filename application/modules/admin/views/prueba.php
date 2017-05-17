@@ -1,6 +1,3 @@
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
 <script>
 $(function(){ 
 	$(".btn-success").click(function () {	
@@ -79,7 +76,6 @@ if ($retornoError) {
 								<th class="text-center">Descripción</th>
 								<th class="text-center">Año</th>
 								<th class="text-center">Semestre</th>
-								<th class="text-center">Fecha Prueba</th>
 								<th class="text-center">Editar</th>
 							</tr>
 						</thead>
@@ -91,7 +87,6 @@ if ($retornoError) {
 									echo "<td>" . $lista['descripcion_prueba'] . "</td>";
 									echo "<td class='text-center'>" . $lista['anio_prueba'] . "</td>";
 									echo "<td class='text-center'>" . $lista['semestre_prueba'] . "</td>";
-									echo "<td class='text-center'>" . $lista['fecha_prueba'] . "</td>";
 
 									echo "<td class='text-center'>";
 						?>

@@ -78,7 +78,7 @@ if ($retornoError) {
 								<th class="text-center">Número de documento</th>
 								<th class="text-center">Rol</th>
 								<th class="text-center">Estado</th>
-								<th class="text-center">Asignar Sitio y Prueba</th>
+								<th class="text-center">Asignar Sitio</th>
 								<th class="text-center">Editar</th>
 								<th class="text-center">Contraseña</th>								
 								<th class="text-center">Teléfono</th>

@@ -5,8 +5,7 @@ $( document ).ready( function () {
 			nombrePrueba:		{ required: true, minlength: 3, maxlength:30 },
 			descripcion:		{ required: true },
 			anio:				{ required: true },
-			semestre:			{ required: true },
-			fechaPrueba:		{ required: true }
+			semestre:			{ required: true }
 		},
 		errorElement: "em",
 		errorPlacement: function ( error, element ) {

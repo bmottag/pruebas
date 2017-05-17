@@ -93,19 +93,7 @@
 								</select>
 							</div>
 						</div>
-						
-						<div class="form-group">
-							<label class="col-sm-4 control-label" for="inputConfirm">Prueba</label>
-							<div class="col-sm-5">
-								<select name="prueba" id="prueba" class="form-control" >
-									<option value=''>Select...</option>
-									<?php for ($i = 0; $i < count($infoPruebas); $i++) { ?>
-										<option value="<?php echo $infoPruebas[$i]["id_prueba"]; ?>" <?php if($infoUsuario[0]["fk_id_prueba"] == $infoPruebas[$i]["id_prueba"]) { echo "selected"; }  ?>><?php echo $infoPruebas[$i]["nombre_prueba"]; ?></option>	
-									<?php } ?>
-								</select>
-							</div>
-						</div>
-						
+												
 						<div class="row" align="center">
 							<div style="width:50%;" align="center">
 								 <button type="submit" class="btn btn-primary" id='btnSubmit' name='btnSubmit'>Guardar </button>

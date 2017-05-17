@@ -126,11 +126,11 @@
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="form-group text-left">
-					<label for="type" class="control-label">Prueba / Grupo Instrumentos / Sesion : *</label>
+					<label for="type" class="control-label">Prueba / Grupo de Instrumentos / Fecha / Sesión : *</label>
 					<select name="sesion" id="sesion" class="form-control" >
 						<option value=''>Select...</option>
 						<?php for ($i = 0; $i < count($infoPruebas); $i++) { ?>
-							<option value="<?php echo $infoPruebas[$i]["id_sesion"]; ?>" <?php if($information[0]["fk_id_sesion"] == $infoPruebas[$i]["id_sesion"]) { echo "selected"; }  ?>><?php echo $infoPruebas[$i]["nombre_prueba"] . " / " . $infoPruebas[$i]["nombre_grupo_instrumentos"] . " / " . $infoPruebas[$i]["sesion_prueba"]; ?></option>	
+							<option value="<?php echo $infoPruebas[$i]["id_sesion"]; ?>" <?php if($information[0]["fk_id_sesion"] == $infoPruebas[$i]["id_sesion"]) { echo "selected"; }  ?>><?php echo $infoPruebas[$i]["nombre_prueba"] . " / " . $infoPruebas[$i]["nombre_grupo_instrumentos"] . " / " . $infoPruebas[$i]["fecha"] . " / " . $infoPruebas[$i]["sesion_prueba"]; ?></option>	
 						<?php } ?>
 					</select>
 				</div>
