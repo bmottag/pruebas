@@ -3,7 +3,6 @@ $( document ).ready( function () {
 	$( "#form" ).validate( {
 		rules: {
 			sesion:				{ required: true, maxlength:3 },
-			prueba:				{ required: true },
 			hourIni:			{ required: true },
 			minIni:				{ required: true },
 			hourFin:			{ required: true },

@@ -19,18 +19,6 @@
 			</div>
 		</div>
 		
-		<div class="col-sm-12">
-			<div class="form-group text-left">
-				<label for="type" class="control-label">Prueba : *</label>
-				<select name="prueba" id="prueba" class="form-control" >
-					<option value=''>Select...</option>
-					<?php for ($i = 0; $i < count($pruebas); $i++) { ?>
-						<option value="<?php echo $pruebas[$i]["id_prueba"]; ?>" <?php if($information[0]["fk_id_prueba"] == $pruebas[$i]["id_prueba"]) { echo "selected"; }  ?>><?php echo $pruebas[$i]["nombre_prueba"]; ?></option>	
-					<?php } ?>
-				</select>
-			</div>
-		</div>
-		
 		<?php 
 			if($information){
 				$timeIni = explode(":",$information[0]["hora_inicio_prueba"]);

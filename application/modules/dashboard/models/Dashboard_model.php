@@ -13,8 +13,8 @@
 				$this->db->join('param_tipo_alerta T', 'T.id_tipo_alerta = A.fk_id_tipo_alerta', 'INNER');
 				$this->db->join('param_roles R', 'R.id_rol = A.fk_id_rol', 'INNER');
 				$this->db->join('sesiones S', 'S.id_sesion = A.fk_id_sesion', 'INNER');
-				$this->db->join('pruebas P', 'P.id_prueba = S.fk_id_prueba', 'INNER');
 				$this->db->join('param_grupo_instrumentos G', 'G.id_grupo_instrumentos = S.fk_id_grupo_instrumentos', 'INNER');
+				$this->db->join('pruebas P', 'P.id_prueba = G.fk_id_prueba', 'INNER');
 				if (array_key_exists("idGrupo", $arrDatos)) {
 					$this->db->where('S.fk_id_grupo_instrumentos', $arrDatos["idGrupo"]);
 				}

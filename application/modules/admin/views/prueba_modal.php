@@ -44,20 +44,6 @@
 				<option value=2 <?php if($information[0]["semestre_prueba"] == 2) { echo "selected"; }  ?>>II</option>
 			</select>
 		</div>
-
-<script>
-	$( function() {
-		$( "#fechaPrueba" ).datepicker({
-			changeMonth: true,
-			changeYear: true,
-			dateFormat: 'yy-mm-dd'
-		});
-	});
-</script>
-		<div class="form-group text-left">
-			<label class="control-label" for="fechaPrueba">Fecha Prueba : *</label>
-			<input type="text" class="form-control" id="fechaPrueba" name="fechaPrueba" value="<?php echo $information?$information[0]["fecha_prueba"]:""; ?>" placeholder="Fecha Prueba" required />
-		</div>		
 		
 		<div class="form-group">
 			<div class="row" align="center">

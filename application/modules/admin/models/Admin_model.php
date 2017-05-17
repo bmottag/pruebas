@@ -306,7 +306,9 @@
 				$identificador = $this->input->post('hddId');
 				
 				$data = array(
-					'nombre_grupo_instrumentos' => $this->input->post('nombreGrupoInstrumentos')
+					'nombre_grupo_instrumentos' => $this->input->post('nombreGrupoInstrumentos'),
+					'fk_id_prueba' => $this->input->post('prueba'),
+					'fecha' => $this->input->post('fecha')
 				);
 				
 				//revisar si es para adicionar o editar
@@ -332,7 +334,6 @@
 		public function get_sesiones($arrDatos) 
 		{
 				$this->db->select();
-				$this->db->join('pruebas P', 'P.id_prueba = S.fk_id_prueba', 'INNER');
 				$this->db->join('param_grupo_instrumentos G', 'G.id_grupo_instrumentos = S.fk_id_grupo_instrumentos', 'INNER');
 				if (array_key_exists("idGrupo", $arrDatos)) {
 					$this->db->where('S.fk_id_grupo_instrumentos', $arrDatos["idGrupo"]);
@@ -367,7 +368,6 @@
 				
 				$data = array(
 					'fk_id_grupo_instrumentos' => $idGrupo,
-					'fk_id_prueba' => $this->input->post('prueba'),
 					'sesion_prueba' => $this->input->post('sesion'),
 					'hora_inicio_prueba' => $timeIn ,
 					'hora_fin_prueba' => $timeOut
@@ -486,8 +486,27 @@
 				}
 		}
 		
-		
-		
+		/**
+		 * Lista grupo_instrumentos
+		 * @since 16/5/2017
+		 */
+		public function get_grupo_instrumentos($arrDatos) 
+		{
+				$this->db->select();
+				$this->db->join('pruebas P', 'P.id_prueba = G.fk_id_prueba', 'INNER');
+				if (array_key_exists("idGrupo", $arrDatos)) {
+					$this->db->where('G.id_grupo_instrumentos', $arrDatos["idGrupo"]);
+				}
+				$this->db->order_by('P.nombre_prueba', 'asc');
+				$query = $this->db->get('param_grupo_instrumentos G');
+
+				if ($query->num_rows() > 0) {
+					return $query->result_array();
+				} else {
+					return false;
+				}
+		}		
+
 		
 		
 	    

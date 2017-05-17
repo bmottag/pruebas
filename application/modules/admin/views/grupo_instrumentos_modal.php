@@ -2,18 +2,43 @@
 
 <div class="modal-header">
 	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	<h4 class="modal-title" id="exampleModalLabel">Grupo Instrumentos
-	<br><small>Adicionar/Editar Grupo Instrumentos</small>
+	<h4 class="modal-title" id="exampleModalLabel">Grupo de Instrumentos
+	<br><small>Adicionar/Editar Grupo de Instrumentos</small>
 	</h4>
 </div>
 
 <div class="modal-body">
 	<form name="form" id="form" role="form" method="post" >
 		<input type="hidden" id="hddId" name="hddId" value="<?php echo $information?$information[0]["id_grupo_instrumentos"]:""; ?>"/>
+				
 		<div class="form-group text-left">
-				<label for="type" class="control-label">Nombre Grupo Instrumentos : *</label>
+			<label for="type" class="control-label">Prueba : *</label>
+			<select name="prueba" id="prueba" class="form-control" >
+				<option value=''>Select...</option>
+				<?php for ($i = 0; $i < count($pruebas); $i++) { ?>
+					<option value="<?php echo $pruebas[$i]["id_prueba"]; ?>" <?php if($information[0]["fk_id_prueba"] == $pruebas[$i]["id_prueba"]) { echo "selected"; }  ?>><?php echo $pruebas[$i]["nombre_prueba"]; ?></option>	
+				<?php } ?>
+			</select>
+		</div>
+		
+		<div class="form-group text-left">
+				<label for="type" class="control-label">Nombre Grupo de Instrumentos : *</label>
 				<input type="text" id="nombreGrupoInstrumentos" name="nombreGrupoInstrumentos" class="form-control" value="<?php echo $information?$information[0]["nombre_grupo_instrumentos"]:""; ?>" placeholder="Nombre Grupo Instrumentos" required >
 		</div>
+		
+<script>
+	$( function() {
+		$( "#fecha" ).datepicker({
+			changeMonth: true,
+			changeYear: true,
+			dateFormat: 'yy-mm-dd'
+		});
+	});
+</script>
+		<div class="form-group text-left">
+			<label class="control-label" for="fecha">Fecha : *</label>
+			<input type="text" class="form-control" id="fecha" name="fecha" value="<?php echo $information?$information[0]["fecha"]:""; ?>" placeholder="Fecha" required />
+		</div>		
 		
 		<div class="form-group">
 			<div class="row" align="center">

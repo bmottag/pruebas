@@ -57,9 +57,13 @@ $(function(){
 						
 							<div class="row" align="center">
 								<div style="width:50%;" align="center">
-									<div class="alert alert-success"> <span class="glyphicon glyphicon-pushpin">&nbsp;</span>
-										<strong>GRUPO INSTRUMENTOS: </strong>
+									<div class="alert alert-success">
+										<strong>GRUPO DE INSTRUMENTOS: </strong>
 										<?php echo $infoGrupo[0]['nombre_grupo_instrumentos']; ?>
+										<br><strong>PRUEBA: </strong>
+										<?php echo $infoGrupo[0]['nombre_prueba']; ?>
+										<br><strong>FECHASS: </strong>
+										<?php echo $infoGrupo[0]['nombre_prueba']; ?>
 									</div>
 								</div>
 							</div>	
@@ -101,10 +105,7 @@ if ($retornoError) {
 					<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
 						<thead>
 							<tr>
-								<th class="text-center">Sesion</th>
-								<th class="text-center">Prueba</th>
-								<th class="text-center">Descripcion Prueba</th>
-								<th class="text-center">Fecha Prueba</th>
+								<th class="text-center">Sesión</th>
 								<th class="text-center">Hora Inicio</th>
 								<th class="text-center">Hora Fin</th>
 								<th class="text-center">Editar</th>
@@ -115,9 +116,6 @@ if ($retornoError) {
 							foreach ($info as $lista):
 									echo "<tr>";
 									echo "<td>" . $lista['sesion_prueba'] . "</td>";
-									echo "<td>" . $lista['nombre_prueba'] . "</td>";
-									echo "<td>" . $lista['descripcion_prueba'] . "</td>";
-									echo "<td class='text-center'>" . $lista['fecha_prueba'] . "</td>";
 									echo "<td class='text-center'>" . $lista['hora_inicio_prueba'] . "</td>";
 									echo "<td class='text-center'>" . $lista['hora_fin_prueba'] . "</td>";
 									echo "<td class='text-center'>";

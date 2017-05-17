@@ -2,7 +2,9 @@ $( document ).ready( function () {
 	
 	$( "#form" ).validate( {
 		rules: {
-			nombreGrupoInstrumentos:		{ required: true, minlength: 3, maxlength:30 }
+			prueba:		{ required: true },
+			nombreGrupoInstrumentos:		{ required: true, minlength: 3, maxlength:30 },
+			fecha:		{ required: true }
 		},
 		errorElement: "em",
 		errorPlacement: function ( error, element ) {

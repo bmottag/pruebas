@@ -1,3 +1,6 @@
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 <script>
 $(function(){ 
 	$(".btn-success").click(function () {	
@@ -72,16 +75,20 @@ if ($retornoError) {
 					<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
 						<thead>
 							<tr>
+								<th class="text-center">Prueba</th>
 								<th class="text-center">Grupo de Instrumentos</th>
+								<th class="text-center">Fecha</th>
 								<th class="text-center">Editar</th>
-								<th class="text-center">Asiginar Prueba y Sesion</th>
+								<th class="text-center">Asiginar Sesión</th>
 							</tr>
 						</thead>
 						<tbody>							
 						<?php
 							foreach ($info as $lista):
 									echo "<tr>";
+									echo "<td>" . $lista['nombre_prueba'] . "</td>";
 									echo "<td>" . $lista['nombre_grupo_instrumentos'] . "</td>";
+									echo "<td class='text-center'>" . $lista['fecha'] . "</td>";
 									echo "<td class='text-center'>";
 						?>
 									<button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#modal" id="<?php echo $lista['id_grupo_instrumentos']; ?>" >
@@ -92,7 +99,7 @@ if ($retornoError) {
 									echo "<td class='text-center'>";
 
 						?>
-									<a href="<?php echo base_url("admin/sesiones/" . $lista['id_grupo_instrumentos']); ?>" class="btn btn-primary btn-xs">Asignar Prueba y Sesion <span class="fa fa-gears fa-fw" aria-hidden="true"></a>
+									<a href="<?php echo base_url("admin/sesiones/" . $lista['id_grupo_instrumentos']); ?>" class="btn btn-primary btn-xs">Asignar Sesión <span class="fa fa-gears fa-fw" aria-hidden="true"></a>
 						<?php
 									echo "</td>";
 							endforeach;

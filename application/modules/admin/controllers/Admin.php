@@ -546,13 +546,8 @@ class Admin extends MX_Controller {
 	 */
 	public function grupo_instrumentos()
 	{
-			$this->load->model("general_model");
-			$arrParam = array(
-				"table" => "param_grupo_instrumentos",
-				"order" => "nombre_grupo_instrumentos",
-				"id" => "x"
-			);
-			$data['info'] = $this->general_model->get_basic_search($arrParam);
+			$arrParam = array();
+			$data['info'] = $this->admin_model->get_grupo_instrumentos($arrParam);
 			
 			$data["view"] = 'grupo_instrumentos';
 			$this->load->view("layout", $data);
@@ -568,6 +563,14 @@ class Admin extends MX_Controller {
 			
 			$data['information'] = FALSE;
 			$data["identificador"] = $this->input->post("identificador");	
+			
+			$this->load->model("general_model");
+			$arrParam = array(
+				"table" => "pruebas",
+				"order" => "id_prueba",
+				"id" => "x"
+			);
+			$data['pruebas'] = $this->general_model->get_basic_search($arrParam);//listado pruebas
 			
 			if ($data["identificador"] != 'x') {
 				$this->load->model("general_model");
@@ -629,13 +632,8 @@ class Admin extends MX_Controller {
 			$data['info'] = $this->admin_model->get_sesiones($arrParam);
 			
 			$this->load->model("general_model");
-			$arrParam = array(
-				"table" => "param_grupo_instrumentos",
-				"order" => "id_grupo_instrumentos",
-				"column" => "id_grupo_instrumentos",
-				"id" => $idGrupo
-			);
-			$data['infoGrupo'] = $this->general_model->get_basic_search($arrParam);
+			$arrParam = array("idGrupo" => $idGrupo);
+			$data['infoGrupo'] = $this->admin_model->get_grupo_instrumentos($arrParam);
 
 			$data["view"] = 'sesiones';
 			$this->load->view("layout", $data);
@@ -652,14 +650,6 @@ class Admin extends MX_Controller {
 			$data['information'] = FALSE;
 			$data["idGrupo"] = $this->input->post("idGrupo");
 			$data["idSesion"] = $this->input->post("idSesion");
-			
-			$this->load->model("general_model");
-			$arrParam = array(
-				"table" => "pruebas",
-				"order" => "id_prueba",
-				"id" => "x"
-			);
-			$data['pruebas'] = $this->general_model->get_basic_search($arrParam);//listado pruebas
 			
 			if ($data["idSesion"] != 'x') {
 				$arrParam = array(
@@ -684,9 +674,9 @@ class Admin extends MX_Controller {
 			$idGrupo = $this->input->post('hddIdGrupo');
 			$idSesion = $this->input->post('hddId');
 			
-			$msj = "Se adiciono la Sesion con exito.";
+			$msj = "Se adiciono la Sesión con exito.";
 			if ($idSesion != '') {
-				$msj = "Se actualizo la sesion con exito.";
+				$msj = "Se actualizo la Sesión con exito.";
 			}
 
 			if ($idSesion = $this->admin_model->saveSesiones()) {
