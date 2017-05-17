@@ -10,7 +10,7 @@ $( document ).ready( function () {
 			lastName: 			{ required: true, minlength: 3, maxlength:25 },
 			documento: 			{ required: true, number: true, minlength: 4, maxlength:12 },
 			address: 			{ minlength: 4, maxlength:200},
-			telefono:	 		{ required: true, minlength: 4, maxlength:15  },
+			telefono:	 		{ minlength: 4, maxlength:15  },
 			movilNumber: 		{ required: true, minlength: 4, maxlength:15 },
 			email: 				{ required: true, email: true },
 			rol:	 			{ required: true }

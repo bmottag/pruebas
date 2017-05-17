@@ -94,7 +94,7 @@
 		
 		<div class="col-sm-6">
 			<div class="form-group text-left">
-				<label for="type" class="control-label">Dpto Divipola : *</label>
+				<label for="type" class="control-label">Departamento : *</label>
 				<select name="depto" id="depto" class="form-control" >
 					<option value=''>Select...</option>
 					<?php for ($i = 0; $i < count($departamentos); $i++) { ?>
@@ -106,7 +106,7 @@
 		
 		<div class="col-sm-6">
 			<div class="form-group text-left">
-				<label for="type" class="control-label">Mcpio Divipola : *</label>
+				<label for="type" class="control-label">Municipio : *</label>
 				
 
 				<select name="mcpio" id="mcpio" class="form-control" required>

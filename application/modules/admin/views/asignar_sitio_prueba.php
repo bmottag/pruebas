@@ -1,4 +1,5 @@
 <script type="text/javascript" src="<?php echo base_url("assets/js/validate/admin/asignar.js"); ?>"></script>
+<script type="text/javascript" src="<?php echo base_url("assets/js/validate/admin/ajaxSitio.js"); ?>"></script>
 
 <div id="page-wrapper">
 
@@ -46,6 +47,40 @@
 						</div>
 					</div>
 
+					
+						<div class="form-group">
+							<label class="col-sm-4 control-label" for="inputPassword">Region</label>
+							<div class="col-sm-5">
+								<select name="region" id="region" class="form-control" >
+									<option value=''>Select...</option>
+									<?php for ($i = 0; $i < count($regiones); $i++) { ?>
+										<option value="<?php echo $regiones[$i]["id_region"]; ?>" <?php if($infoUsuario[0]["fk_id_region"] == $regiones[$i]["id_region"]) { echo "selected"; }  ?>><?php echo $regiones[$i]["nombre_region"]; ?></option>	
+									<?php } ?>
+								</select>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="col-sm-4 control-label" for="inputPassword">Dpto Divipola</label>
+							<div class="col-sm-5">
+								<select name="depto" id="depto" class="form-control" >
+									<option value=''>Select...</option>
+									<?php for ($i = 0; $i < count($departamentos); $i++) { ?>
+										<option value="<?php echo $departamentos[$i]["dpto_divipola"]; ?>" <?php if($infoUsuario[0]["fk_dpto_divipola"] == $departamentos[$i]["dpto_divipola"]) { echo "selected"; }  ?>><?php echo $departamentos[$i]["dpto_divipola_nombre"]; ?></option>	
+									<?php } ?>
+								</select>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="col-sm-4 control-label" for="inputPassword">Mcpio Divipola</label>
+							<div class="col-sm-5">
+								<select name="mcpio" id="mcpio" class="form-control">
+								
+
+								</select>
+							</div>
+						</div>
 						
 						<div class="form-group">
 							<label class="col-sm-4 control-label" for="inputPassword">Sitio</label>

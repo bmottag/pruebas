@@ -717,6 +717,17 @@ class Admin extends MX_Controller {
 	{
 			$arrParam = array("idUsuario" => $idUser);
 			$data['infoUsuario'] = $this->admin_model->get_users($arrParam);//listado de USUARIOS
+
+			$arrParam = array(
+				"table" => "param_regiones",
+				"order" => "nombre_region",
+				"id" => "x"
+			);
+			$this->load->model("general_model");
+			$data['regiones'] = $this->general_model->get_basic_search($arrParam);//listado regiones
+			
+			$data['departamentos'] = $this->admin_model->get_dpto_divipola();//listado de departamentos
+
 			
 			$arrParam = array();
 			$data['infoSitios'] = $this->admin_model->get_sitios($arrParam);//listado de SITIOS

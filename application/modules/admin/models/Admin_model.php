@@ -25,6 +25,7 @@
 		{
 				$this->db->select();
 				$this->db->join('param_roles R', 'R.id_rol = U.fk_id_rol', 'INNER');
+				$this->db->join('sitios S', 'S.id_sitio = U.fk_id_sitio', 'LEFT');
 				if (array_key_exists("idUsuario", $arrDatos)) {
 					$this->db->where('id_usuario', $arrDatos["idUsuario"]);
 				}

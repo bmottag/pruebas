@@ -22,7 +22,7 @@ $(function(){
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<h4 class="list-group-item-heading">
-					<i class="fa fa-gear fa-fw"></i> CONFIGURACIONES - GRUPO INSTRUMENTOS
+					<i class="fa fa-gear fa-fw"></i> CONFIGURACIONES - GRUPO DE INSTRUMENTOS
 					</h4>
 				</div>
 			</div>
@@ -35,11 +35,11 @@ $(function(){
 		<div class="col-lg-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<i class="fa fa-bullseye"></i> LISTA DE GRUPO INSTRUMENTOS
+					<i class="fa fa-bullseye"></i> LISTA GRUPO DE INSTRUMENTOS
 				</div>
 				<div class="panel-body">
 					<button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#modal" id="x">
-							<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Adicionar Grupo Instrumentos
+							<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Adicionar Grupo de Instrumentos
 					</button><br>
 <?php
 $retornoExito = $this->session->flashdata('retornoExito');
@@ -72,9 +72,9 @@ if ($retornoError) {
 					<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
 						<thead>
 							<tr>
-								<th class="text-center">Grupo Instrumentos</th>
+								<th class="text-center">Grupo de Instrumentos</th>
 								<th class="text-center">Editar</th>
-								<th class="text-center">Asiginar Sesiones</th>
+								<th class="text-center">Asiginar Prueba y Sesion</th>
 							</tr>
 						</thead>
 						<tbody>							
@@ -92,7 +92,7 @@ if ($retornoError) {
 									echo "<td class='text-center'>";
 
 						?>
-									<a href="<?php echo base_url("admin/sesiones/" . $lista['id_grupo_instrumentos']); ?>" class="btn btn-primary btn-xs">Asignar Sesiones <span class="fa fa-gears fa-fw" aria-hidden="true"></a>
+									<a href="<?php echo base_url("admin/sesiones/" . $lista['id_grupo_instrumentos']); ?>" class="btn btn-primary btn-xs">Asignar Prueba y Sesion <span class="fa fa-gears fa-fw" aria-hidden="true"></a>
 						<?php
 									echo "</td>";
 							endforeach;
