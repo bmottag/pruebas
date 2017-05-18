@@ -14,7 +14,7 @@
 		
 		<div class="col-sm-12">
 			<div class="form-group text-left">
-				<label for="type" class="control-label">Sesion : *</label>
+				<label for="type" class="control-label">Sesión : *</label>
 				<input type="text" id="sesion" name="sesion" class="form-control" value="<?php echo $information?$information[0]["sesion_prueba"]:""; ?>" placeholder="Sesion" required >
 			</div>
 		</div>

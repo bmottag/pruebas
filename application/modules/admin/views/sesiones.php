@@ -62,7 +62,7 @@ $(function(){
 										<?php echo $infoGrupo[0]['nombre_grupo_instrumentos']; ?>
 										<br><strong>PRUEBA: </strong>
 										<?php echo $infoGrupo[0]['nombre_prueba']; ?>
-										<br><strong>FECHASS: </strong>
+										<br><strong>FECHAS: </strong>
 										<?php echo $infoGrupo[0]['nombre_prueba']; ?>
 									</div>
 								</div>
