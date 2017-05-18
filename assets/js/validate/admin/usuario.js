@@ -3,6 +3,7 @@ $( document ).ready( function () {
 	$("#firstName").bloquearNumeros().maxlength(25);
 	$("#lastName").bloquearNumeros().maxlength(25);		
 	$("#documento").bloquearTexto().maxlength(12);
+	$("#movilNumber").bloquearTexto().maxlength(15);
 	
 	$( "#form" ).validate( {
 		rules: {
