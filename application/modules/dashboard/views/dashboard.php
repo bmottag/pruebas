@@ -58,13 +58,13 @@ if ($retornoError) {
 
 					<div class="col-lg-12">	
 						<div class="alert alert-danger ">
-						
 							<strong>Descripción Alerta: </strong><?php echo $info[0]['descripcion_alerta']; ?><br>
 							<strong>Tipo de Alerta: </strong><?php echo $info[0]['nombre_tipo_alerta']; ?><br>
 							<strong>Mensaje Alerta: </strong><?php echo $info[0]['mensaje_alerta']; ?><br>
 							<strong>Nombre de Prueba: </strong><?php echo $info[0]['nombre_prueba']; ?><br>
 							<strong>Grupo Instrumentos: </strong><?php echo $info[0]['nombre_grupo_instrumentos']; ?><br>
-							<strong>Sesio Prueba: </strong><?php echo $info[0]['sesion_prueba']; ?><br>
+							<strong>Fecha: </strong><?php echo $info[0]['fecha']; ?><br>
+							<strong>Sesión Prueba: </strong><?php echo $info[0]['sesion_prueba']; ?><br>
 						</div>
 					</div>
 				
