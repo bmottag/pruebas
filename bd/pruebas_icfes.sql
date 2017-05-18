@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-05-2017 a las 06:47:24
+-- Tiempo de generación: 18-05-2017 a las 05:36:47
 -- Versión del servidor: 10.1.16-MariaDB
 -- Versión de PHP: 5.6.24
 
@@ -36,15 +36,18 @@ CREATE TABLE `alertas` (
   `fk_id_rol` int(1) NOT NULL,
   `tiempo_duracion_alerta` varchar(10) NOT NULL,
   `fk_id_sesion` int(10) NOT NULL,
-  `fecha_creacion` date NOT NULL
+  `fecha_creacion` date NOT NULL,
+  `fecha_inicio` datetime NOT NULL,
+  `fecha_fin` datetime NOT NULL,
+  `estado_alerta` int(1) NOT NULL COMMENT '1: Activa; 2: Inactiva'
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `alertas`
 --
 
-INSERT INTO `alertas` (`id_alerta`, `descripcion_alerta`, `fk_id_tipo_alerta`, `mensaje_alerta`, `fecha_alerta`, `hora_alerta`, `fk_id_rol`, `tiempo_duracion_alerta`, `fk_id_sesion`, `fecha_creacion`) VALUES
-(1, 'Pruebas de la primera alerta que se va a mostrar', 3, 'El mensaje que se va a mostrar al usuario toca empezar a clasificar los mensajes por el tipo de alerta', '2017-05-17', '12:15', 4, '30', 1, '2017-05-15');
+INSERT INTO `alertas` (`id_alerta`, `descripcion_alerta`, `fk_id_tipo_alerta`, `mensaje_alerta`, `fecha_alerta`, `hora_alerta`, `fk_id_rol`, `tiempo_duracion_alerta`, `fk_id_sesion`, `fecha_creacion`, `fecha_inicio`, `fecha_fin`, `estado_alerta`) VALUES
+(1, 'Pruebas de la primera alerta que se va a mostrar', 3, 'El mensaje que se va a mostrar al usuario toca empezar a clasificar los mensajes por el tipo de alerta', '2017-05-08', '10:30', 4, '45', 1, '2017-05-15', '2017-05-08 10:30:00', '2017-05-08 11:15:00', 0);
 
 -- --------------------------------------------------------
 
@@ -1195,7 +1198,9 @@ INSERT INTO `param_divipola` (`dpto_divipola`, `mpio_divipola`, `dpto_divipola_n
 
 CREATE TABLE `param_grupo_instrumentos` (
   `id_grupo_instrumentos` int(10) NOT NULL,
+  `fk_id_prueba` int(10) NOT NULL,
   `nombre_grupo_instrumentos` varchar(50) NOT NULL,
+  `fecha` date NOT NULL,
   `fecha_creacion` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -1203,10 +1208,10 @@ CREATE TABLE `param_grupo_instrumentos` (
 -- Volcado de datos para la tabla `param_grupo_instrumentos`
 --
 
-INSERT INTO `param_grupo_instrumentos` (`id_grupo_instrumentos`, `nombre_grupo_instrumentos`, `fecha_creacion`) VALUES
-(1, 'GSA TyT', '2017-05-12'),
-(2, 'EK TyT', '2017-05-12'),
-(3, 'Recluso TyT', '2017-05-12');
+INSERT INTO `param_grupo_instrumentos` (`id_grupo_instrumentos`, `fk_id_prueba`, `nombre_grupo_instrumentos`, `fecha`, `fecha_creacion`) VALUES
+(1, 1, 'GSA TyT.', '2017-05-09', '2017-05-12'),
+(2, 1, 'EK TyT', '0000-00-00', '2017-05-12'),
+(3, 1, 'Recluso TyT', '0000-00-00', '2017-05-12');
 
 -- --------------------------------------------------------
 
@@ -1348,7 +1353,6 @@ CREATE TABLE `pruebas` (
   `descripcion_prueba` text NOT NULL,
   `anio_prueba` int(1) NOT NULL,
   `semestre_prueba` int(1) NOT NULL,
-  `fecha_prueba` date NOT NULL,
   `fecha_creacion` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -1356,8 +1360,8 @@ CREATE TABLE `pruebas` (
 -- Volcado de datos para la tabla `pruebas`
 --
 
-INSERT INTO `pruebas` (`id_prueba`, `nombre_prueba`, `descripcion_prueba`, `anio_prueba`, `semestre_prueba`, `fecha_prueba`, `fecha_creacion`) VALUES
-(1, 'Saber TyT', 'Exámenes de competencias genéricas, pruebas saber Técnico y Tecnólogo TyT', 2017, 1, '2017-05-30', '2017-05-13');
+INSERT INTO `pruebas` (`id_prueba`, `nombre_prueba`, `descripcion_prueba`, `anio_prueba`, `semestre_prueba`, `fecha_creacion`) VALUES
+(1, 'Saber TyT', 'Exámenes de competencias genéricas, pruebas saber Técnico y Tecnólogo TyT', 2017, 2, '2017-05-13');
 
 -- --------------------------------------------------------
 
@@ -1368,7 +1372,6 @@ INSERT INTO `pruebas` (`id_prueba`, `nombre_prueba`, `descripcion_prueba`, `anio
 CREATE TABLE `sesiones` (
   `id_sesion` int(10) NOT NULL,
   `fk_id_grupo_instrumentos` int(10) NOT NULL,
-  `fk_id_prueba` int(10) NOT NULL,
   `sesion_prueba` varchar(10) NOT NULL,
   `hora_inicio_prueba` varchar(10) DEFAULT NULL,
   `hora_fin_prueba` varchar(10) DEFAULT NULL,
@@ -1379,8 +1382,8 @@ CREATE TABLE `sesiones` (
 -- Volcado de datos para la tabla `sesiones`
 --
 
-INSERT INTO `sesiones` (`id_sesion`, `fk_id_grupo_instrumentos`, `fk_id_prueba`, `sesion_prueba`, `hora_inicio_prueba`, `hora_fin_prueba`, `fecha_creacion`) VALUES
-(1, 2, 1, '4', '06:45', '15:00', '2017-05-13');
+INSERT INTO `sesiones` (`id_sesion`, `fk_id_grupo_instrumentos`, `sesion_prueba`, `hora_inicio_prueba`, `hora_fin_prueba`, `fecha_creacion`) VALUES
+(1, 1, '1', '04:30', '10:00', '2017-05-16');
 
 -- --------------------------------------------------------
 
@@ -1393,8 +1396,8 @@ CREATE TABLE `sitios` (
   `nombre_sitio` varchar(100) NOT NULL,
   `direccion_sitio` varchar(100) NOT NULL,
   `barrio_sitio` varchar(100) NOT NULL,
-  `telefono_sitio` varchar(10) NOT NULL,
-  `fax_sitio` varchar(10) NOT NULL,
+  `telefono_sitio` varchar(20) NOT NULL,
+  `fax_sitio` varchar(10) DEFAULT NULL,
   `celular_sitio` varchar(10) NOT NULL,
   `email_sitio` varchar(50) NOT NULL,
   `codigo_postal_sitio` varchar(10) NOT NULL,
@@ -1431,7 +1434,7 @@ CREATE TABLE `usuario` (
   `nombres_usuario` varchar(50) NOT NULL,
   `apellidos_usuario` varchar(50) NOT NULL,
   `direccion_usuario` varchar(250) NOT NULL,
-  `telefono_fijo` varchar(12) NOT NULL,
+  `telefono_fijo` varchar(12) DEFAULT NULL,
   `celular` varchar(12) NOT NULL,
   `email` varchar(70) DEFAULT NULL,
   `log_user` int(10) NOT NULL,
@@ -1474,7 +1477,8 @@ ALTER TABLE `param_divipola`
 -- Indices de la tabla `param_grupo_instrumentos`
 --
 ALTER TABLE `param_grupo_instrumentos`
-  ADD PRIMARY KEY (`id_grupo_instrumentos`);
+  ADD PRIMARY KEY (`id_grupo_instrumentos`),
+  ADD KEY `fk_id_prueba` (`fk_id_prueba`);
 
 --
 -- Indices de la tabla `param_organizaciones`
@@ -1518,8 +1522,7 @@ ALTER TABLE `pruebas`
 --
 ALTER TABLE `sesiones`
   ADD PRIMARY KEY (`id_sesion`),
-  ADD KEY `fk_id_grupo_instrumentos` (`fk_id_grupo_instrumentos`),
-  ADD KEY `fk_id_prueba` (`fk_id_prueba`);
+  ADD KEY `fk_id_grupo_instrumentos` (`fk_id_grupo_instrumentos`);
 
 --
 -- Indices de la tabla `sitios`
@@ -1607,10 +1610,15 @@ ALTER TABLE `usuario`
 --
 
 --
+-- Filtros para la tabla `param_grupo_instrumentos`
+--
+ALTER TABLE `param_grupo_instrumentos`
+  ADD CONSTRAINT `param_grupo_instrumentos_ibfk_1` FOREIGN KEY (`fk_id_prueba`) REFERENCES `pruebas` (`id_prueba`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
 -- Filtros para la tabla `sesiones`
 --
 ALTER TABLE `sesiones`
-  ADD CONSTRAINT `sesiones_ibfk_1` FOREIGN KEY (`fk_id_prueba`) REFERENCES `pruebas` (`id_prueba`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `sesiones_ibfk_2` FOREIGN KEY (`fk_id_grupo_instrumentos`) REFERENCES `param_grupo_instrumentos` (`id_grupo_instrumentos`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
