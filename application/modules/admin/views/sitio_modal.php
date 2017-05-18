@@ -40,17 +40,19 @@
 			</div>
 		</div>
 		
-		<div class="col-sm-6">
-			<div class="form-group text-left">
-				<label for="type" class="control-label">Teléfono Sitio : *</label>
-				<input type="text" id="telefono" name="telefono" class="form-control" value="<?php echo $information?$information[0]["telefono_sitio"]:""; ?>" placeholder="Teléfono Sitio" required >
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="form-group text-left">
+					<label for="type" class="control-label">Teléfono Sitio : *</label>
+					<input type="text" id="telefono" name="telefono" class="form-control" value="<?php echo $information?$information[0]["telefono_sitio"]:""; ?>" placeholder="Teléfono Sitio" required >
+				</div>
 			</div>
-		</div>
-		
-		<div class="col-sm-6">
-			<div class="form-group text-left">
-				<label for="type" class="control-label">Fax : *</label>
-				<input type="text" id="fax" name="fax" class="form-control" value="<?php echo $information?$information[0]["fax_sitio"]:""; ?>" placeholder="Fax Sitio" required >
+			
+			<div class="col-sm-6">
+				<div class="form-group text-left">
+					<label for="type" class="control-label">Fax : *</label>
+					<input type="text" id="fax" name="fax" class="form-control" value="<?php echo $information?$information[0]["fax_sitio"]:""; ?>" placeholder="Fax Sitio" >
+				</div>
 			</div>
 		</div>
 		
