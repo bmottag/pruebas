@@ -77,13 +77,14 @@ if ($retornoError) {
 							<tr>
 								<th class="text-center">Descripción</th>
 								<th class="text-center">Tipo de Alerta</th>
+								<th class="text-center">Editar</th>
 								<th class="text-center">Mensaje</th>
 								<th class="text-center">Fecha Alerta</th>
 								<th class="text-center">Hora</th>
 								<th class="text-center">Tiempo de Duración</th>
 								<th class="text-center">Rol</th>
 								<th class="text-center">Prueba / Grupo Instrumentos / Sesión</th>
-								<th class="text-center">Editar</th>
+								
 							</tr>
 						</thead>
 						<tbody>							
@@ -92,12 +93,6 @@ if ($retornoError) {
 									echo "<tr>";
 									echo "<td>" . $lista['descripcion_alerta'] . "</td>";
 									echo "<td class='text-center'>" . $lista['nombre_tipo_alerta'] . "</td>";
-									echo "<td>" . $lista['mensaje_alerta'] . "</td>";
-									echo "<td class='text-center'>" . $lista['fecha_alerta'] . "</td>";
-									echo "<td class='text-center'>" . $lista['hora_alerta'] . "</td>";
-									echo "<td class='text-center'>" . $lista['tiempo_duracion_alerta'] . "</td>";
-									echo "<td class='text-center'>" . $lista['nombre_rol'] . "</td>";
-									echo "<td class='text-center'>" . $lista["nombre_prueba"] . " / " . $lista["nombre_grupo_instrumentos"] . " / " . $lista["sesion_prueba"] . "</td>";
 									echo "<td class='text-center'>";
 						?>
 									<button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#modal" id="<?php echo $lista['id_alerta']; ?>" >
@@ -105,6 +100,12 @@ if ($retornoError) {
 									</button>
 						<?php
 									echo "</td>";
+									echo "<td>" . $lista['mensaje_alerta'] . "</td>";
+									echo "<td class='text-center'>" . $lista['fecha_alerta'] . "</td>";
+									echo "<td class='text-center'>" . $lista['hora_alerta'] . "</td>";
+									echo "<td class='text-center'>" . $lista['tiempo_duracion_alerta'] . "</td>";
+									echo "<td class='text-center'>" . $lista['nombre_rol'] . "</td>";
+									echo "<td class='text-center'>" . $lista["nombre_prueba"] . " / " . $lista["nombre_grupo_instrumentos"] . " / " . $lista["sesion_prueba"] . "</td>";
 							endforeach;
 						?>
 						</tbody>

@@ -74,8 +74,9 @@ if ($retornoError) {
 							<tr>
 								<th class="text-center">Nombre Sitio</th>
 								<th class="text-center">Dirección</th>
-								<th class="text-center">Barrio</th>
 								<th class="text-center">Editar</th>
+								<th class="text-center">Barrio</th>
+								<th class="text-center">Asociar con Prueba / Grupo de Instrumento / Sesión </th>
 								<th class="text-center">Teléfono</th>
 								<th class="text-center">Fax</th>
 								<th class="text-center">Celuar</th>
@@ -95,7 +96,6 @@ if ($retornoError) {
 									echo "<tr>";
 									echo "<td>" . $lista['nombre_sitio'] . "</td>";
 									echo "<td>" . $lista['direccion_sitio'] . "</td>";
-									echo "<td>" . $lista['barrio_sitio'] . "</td>";
 									echo "<td class='text-center'>";
 						?>
 									<button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#modal" id="<?php echo $lista['id_sitio']; ?>" >
@@ -103,6 +103,12 @@ if ($retornoError) {
 									</button>
 						<?php
 									echo "</td>";
+									echo "<td>" . $lista['barrio_sitio'] . "</td>";
+						?>
+									<td class='text-center'>
+									<a href="<?php echo base_url("admin/asignar_sesion/" . $lista['id_sitio']); ?>" class="btn btn-primary btn-xs">Asociar <span class="fa fa-gears fa-fw" aria-hidden="true"></a>
+									</td>
+						<?php
 									echo "<td class='text-center'>" . $lista['telefono_sitio'] . "</td>";
 									echo "<td class='text-center'>" . $lista['fax_sitio'] . "</td>";
 									echo "<td class='text-center'>" . $lista['celular_sitio'] . "</td>";

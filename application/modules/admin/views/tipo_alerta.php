@@ -73,9 +73,9 @@ if ($retornoError) {
 						<thead>
 							<tr>
 								<th class="text-center">Tipo de alerta</th>
+								<th class="text-center">Editar</th>
 								<th class="text-center">Descripción</th>
 								<th class="text-center">Observación</th>
-								<th class="text-center">Editar</th>
 							</tr>
 						</thead>
 						<tbody>							
@@ -83,8 +83,6 @@ if ($retornoError) {
 							foreach ($info as $lista):
 									echo "<tr>";
 									echo "<td>" . $lista['nombre_tipo_alerta'] . "</td>";
-									echo "<td>" . $lista['descripcion_tipo_alerta'] . "</td>";
-									echo "<td>" . $lista['observacion_alerta'] . "</td>";
 									echo "<td class='text-center'>";
 						?>
 									<button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#modal" id="<?php echo $lista['id_tipo_alerta']; ?>" >
@@ -92,6 +90,8 @@ if ($retornoError) {
 									</button>
 						<?php
 									echo "</td>";
+									echo "<td>" . $lista['descripcion_tipo_alerta'] . "</td>";
+									echo "<td>" . $lista['observacion_alerta'] . "</td>";
 							endforeach;
 						?>
 						</tbody>

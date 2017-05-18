@@ -74,9 +74,9 @@ if ($retornoError) {
 							<tr>
 								<th class="text-center">Nombre Prueba</th>
 								<th class="text-center">Descripción</th>
+								<th class="text-center">Editar</th>
 								<th class="text-center">Año</th>
 								<th class="text-center">Semestre</th>
-								<th class="text-center">Editar</th>
 							</tr>
 						</thead>
 						<tbody>							
@@ -85,9 +85,6 @@ if ($retornoError) {
 									echo "<tr>";
 									echo "<td>" . $lista['nombre_prueba'] . "</td>";
 									echo "<td>" . $lista['descripcion_prueba'] . "</td>";
-									echo "<td class='text-center'>" . $lista['anio_prueba'] . "</td>";
-									echo "<td class='text-center'>" . $lista['semestre_prueba'] . "</td>";
-
 									echo "<td class='text-center'>";
 						?>
 									<button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#modal" id="<?php echo $lista['id_prueba']; ?>" >
@@ -95,6 +92,8 @@ if ($retornoError) {
 									</button>
 						<?php
 									echo "</td>";
+									echo "<td class='text-center'>" . $lista['anio_prueba'] . "</td>";
+									echo "<td class='text-center'>" . $lista['semestre_prueba'] . "</td>";
 							endforeach;
 						?>
 						</tbody>
