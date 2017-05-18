@@ -137,6 +137,19 @@
 			</div>
 		</div>
 
+		<div class="row">
+			<div class="col-sm-12">		
+				<div class="form-group text-left">
+					<label class="control-label" for="estado">Activar / Desactivar Alarma</label>
+					<select name="estado" id="estado" class="form-control" required>
+						<option value=''>Select...</option>
+						<option value=1 <?php if($information[0]["estado_alerta"] == 1) { echo "selected"; }  ?>>Activar</option>
+						<option value=2 <?php if($information[0]["estado_alerta"] == 2) { echo "selected"; }  ?>>Desactivar</option>
+					</select>
+				</div>
+			</div>
+		</div>
+
 		<div class="form-group">
 			<div class="row" align="center">
 				<div style="width:50%;" align="center">

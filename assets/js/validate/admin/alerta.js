@@ -10,7 +10,8 @@ $( document ).ready( function () {
 			min:			{ required: true },
 			duracion:		{ required: true },
 			rol:			{ required: true },
-			sesion:			{ required: true }
+			sesion:			{ required: true },
+			estado:			{ required: true }
 		},
 		errorElement: "em",
 		errorPlacement: function ( error, element ) {

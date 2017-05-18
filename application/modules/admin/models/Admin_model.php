@@ -442,7 +442,8 @@
 					'fk_id_rol' => $this->input->post('rol'),
 					'fk_id_sesion' => $this->input->post('sesion'),
 					'fecha_inicio' => $fechaInicio,
-					'fecha_fin' => $fechaFin
+					'fecha_fin' => $fechaFin,
+					'estado_alerta' => $this->input->post('estado')
 				);
 				
 				//revisar si es para adicionar o editar
@@ -476,7 +477,7 @@
 				if (array_key_exists("idGrupo", $arrDatos)) {
 					$this->db->where('S.fk_id_grupo_instrumentos', $arrDatos["idGrupo"]);
 				}
-				$this->db->order_by('S.id_sesion', 'asc');
+				$this->db->order_by('P.nombre_prueba, G.nombre_grupo_instrumentos, S.sesion_prueba', 'asc');
 				$query = $this->db->get('alertas A');
 
 				if ($query->num_rows() > 0) {

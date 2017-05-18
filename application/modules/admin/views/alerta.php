@@ -82,7 +82,7 @@ if ($retornoError) {
 								<th class="text-center">Hora</th>
 								<th class="text-center">Tiempo de Duración</th>
 								<th class="text-center">Rol</th>
-								<th class="text-center">Prueba / Grupo Instrumentos / Sesion</th>
+								<th class="text-center">Prueba / Grupo Instrumentos / Sesión</th>
 								<th class="text-center">Editar</th>
 							</tr>
 						</thead>
@@ -137,6 +137,7 @@ if ($retornoError) {
 $(document).ready(function() {
 	$('#dataTables').DataTable({
 		responsive: true,
+		"order": [[ 7, "asc" ]],
 		"pageLength": 25
 	});
 });
