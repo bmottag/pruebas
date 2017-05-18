@@ -82,9 +82,9 @@ if ($retornoError) {
 								<th class="text-center">Email</th>
 								<th class="text-center">Codigo Postal</th>
 								<th class="text-center">Nombre Organización</th>
-								<th class="text-center">Region</th>
-								<th class="text-center">Dpto DIVIPOLA</th>
-								<th class="text-center">Mpio DIVIPOLA</th>
+								<th class="text-center">Región</th>
+								<th class="text-center">Departamento</th>
+								<th class="text-center">Municipio</th>
 								<th class="text-center">Zona</th>
 								<th class="text-center">Nombre Contacto</th>
 							</tr>

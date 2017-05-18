@@ -84,7 +84,7 @@
 		
 		<div class="col-sm-6">
 			<div class="form-group text-left">
-				<label for="type" class="control-label">Region : *</label>
+				<label for="type" class="control-label">Región : *</label>
 				<select name="region" id="region" class="form-control" >
 					<option value=''>Select...</option>
 					<?php for ($i = 0; $i < count($regiones); $i++) { ?>
