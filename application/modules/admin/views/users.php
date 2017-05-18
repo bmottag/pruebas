@@ -73,13 +73,12 @@ if ($retornoError) {
 					<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
 						<thead>
 							<tr>
-								<th class="text-center">Nombres</th>
-								<th class="text-center">Apellidos</th>
+								<th class="text-center">Nombres Completo</th>
+								<th class="text-center">Editar</th>
 								<th class="text-center">Número de documento</th>
 								<th class="text-center">Rol</th>
 								<th class="text-center">Estado</th>
 								<th class="text-center">Asignar Sitio</th>
-								<th class="text-center">Editar</th>
 								<th class="text-center">Contraseña</th>								
 								<th class="text-center">Teléfono</th>
 								<th class="text-center">Celular</th>
@@ -91,8 +90,14 @@ if ($retornoError) {
 						<?php
 							foreach ($info as $lista):
 									echo "<tr>";
-									echo "<td>" . $lista['nombres_usuario'] . "</td>";
-									echo "<td>" . $lista['apellidos_usuario'] . "</td>";
+									echo "<td>" . $lista['nombres_usuario'] . " " . $lista['apellidos_usuario']  . "</td>";
+									echo "<td class='text-center'>";
+						?>
+									<button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#modal" id="<?php echo $lista['id_usuario']; ?>" >
+										Editar <span class="glyphicon glyphicon-edit" aria-hidden="true">
+									</button>
+						<?php
+									echo "</td>";
 									echo "<td class='text-center'>" . $lista['numero_documento'] . "</td>";
 
 									echo "<td class='text-center'>";
@@ -122,13 +127,7 @@ if ($retornoError) {
 									<a href="<?php echo base_url("admin/asignar/" . $lista['id_usuario']); ?>" class="btn btn-primary btn-xs">Asignar <span class="fa fa-gears fa-fw" aria-hidden="true"></a>
 						<?php
 									echo "</td>";
-									echo "<td class='text-center'>";
-						?>
-									<button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#modal" id="<?php echo $lista['id_usuario']; ?>" >
-										Editar <span class="glyphicon glyphicon-edit" aria-hidden="true">
-									</button>
-						<?php
-									echo "</td>";
+
 									echo "<td class='text-center'>";
 							?>
 									<!-- 

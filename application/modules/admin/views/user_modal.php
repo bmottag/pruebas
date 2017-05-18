@@ -33,7 +33,7 @@
 
 		<div class="form-group text-left">
 			<label class="control-label" for="telefono">Teléfono fijo</label>
-			<input type="text" id="telefono" name="telefono" class="form-control" value="<?php echo $information?$information[0]["telefono_fijo"]:""; ?>" placeholder="Teléfono fijo" required >
+			<input type="text" id="telefono" name="telefono" class="form-control" value="<?php echo $information?$information[0]["telefono_fijo"]:""; ?>" placeholder="Teléfono fijo" >
 		</div>
 		
 		<div class="form-group text-left">
