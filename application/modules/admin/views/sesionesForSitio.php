@@ -4,8 +4,21 @@ $(function(){
 			var oID = $(this).attr("id");
             $.ajax ({
                 type: 'POST',
-				url: base_url + 'admin/cargarModalSitio',
-                data: {'identificador': oID},
+				url: base_url + 'admin/cargarModalSesionesSitio',
+                data: {'idSitio': oID, 'idSesionSitio': 'x'},
+                cache: false,
+                success: function (data) {
+                    $('#tablaDatos').html(data);
+                }
+            });
+	});	
+	
+	$(".btn-danger").click(function () {	
+			var oID = $(this).attr("id");
+            $.ajax ({
+                type: 'POST',
+				url: base_url + 'admin/cargarModalSesionesSitio',
+                data: {'idSitio': '', 'idSesionSitio': oID},
                 cache: false,
                 success: function (data) {
                     $('#tablaDatos').html(data);
@@ -22,7 +35,7 @@ $(function(){
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<h4 class="list-group-item-heading">
-					<i class="fa fa-gear fa-fw"></i> CONFIGURACIONES - SITIOS
+					<i class="fa fa-gear fa-fw"></i> CONFIGURACIONES - Asociar Sitio con Prueba / Grupo de Instrumento / Sesión
 					</h4>
 				</div>
 			</div>
@@ -35,11 +48,35 @@ $(function(){
 		<div class="col-lg-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<i class="fa fa-building-o"></i> LISTA DE SITIOS
+					<i class="fa fa-gears "></i> LISTA
 				</div>
 				<div class="panel-body">
-					<button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#modal" id="x">
-							<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Adicionar Sitios
+				
+					<div class="row">
+						<div class="col-lg-12">
+						
+							<div class="row" align="center">
+								<div style="width:50%;" align="center">
+									<div class="alert alert-success">
+										<strong>NOMBRE SITIO: </strong>
+										<?php echo $infoSitio[0]['nombre_sitio']; ?>
+										<br><strong>DIRECCIÓN: </strong>
+										<?php echo $infoSitio[0]['direccion_sitio']; ?>
+										<br><strong>REGIÓN: </strong>
+										<?php echo $infoSitio[0]['nombre_region']; ?>
+										<br><strong>DEPARTAMENTO: </strong>
+										<?php echo $infoSitio[0]['dpto_divipola_nombre']; ?>
+										<br><strong>MUNICIPIO: </strong>
+										<?php echo $infoSitio[0]['mpio_divipola_nombre']; ?>
+									</div>
+								</div>
+							</div>	
+						
+						</div>
+					</div>
+				
+					<button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#modal" id="<?php echo $infoSitio[0]['id_sitio']; ?>">
+							<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Asociar con Prueba / Grupo de Instrumento / Sesión
 					</button><br>
 <?php
 $retornoExito = $this->session->flashdata('retornoExito');
@@ -72,54 +109,24 @@ if ($retornoError) {
 					<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
 						<thead>
 							<tr>
-								<th class="text-center">Nombre Sitio</th>
-								<th class="text-center">Dirección</th>
+								<th class="text-center">Prueba / Grupo de Instrumento / Sesión</th>
+								<th class="text-center">Citados</th>
 								<th class="text-center">Editar</th>
-								<th class="text-center">Barrio</th>
-								<th class="text-center">Asociar con Prueba / Grupo de Instrumento / Sesión </th>
-								<th class="text-center">Teléfono</th>
-								<th class="text-center">Fax</th>
-								<th class="text-center">Celuar</th>
-								<th class="text-center">Email</th>
-								<th class="text-center">Codigo Postal</th>
-								<th class="text-center">Nombre Organización</th>
-								<th class="text-center">Región</th>
-								<th class="text-center">Departamento</th>
-								<th class="text-center">Municipio</th>
-								<th class="text-center">Zona</th>
-								<th class="text-center">Nombre Contacto</th>
 							</tr>
 						</thead>
 						<tbody>							
 						<?php
 							foreach ($info as $lista):
 									echo "<tr>";
-									echo "<td>" . $lista['nombre_sitio'] . "</td>";
-									echo "<td>" . $lista['direccion_sitio'] . "</td>";
+									echo "<td>" . $lista["nombre_prueba"] . "/" . $lista["nombre_grupo_instrumentos"] . "/" . $lista["sesion_prueba"] . "</td>";
+									echo "<td class='text-center'>" . $lista['numero_citados'] . "</td>";
 									echo "<td class='text-center'>";
 						?>
-									<button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#modal" id="<?php echo $lista['id_sitio']; ?>" >
+									<button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#modal" id="<?php echo $lista['id_sesion']; ?>" >
 										Editar <span class="glyphicon glyphicon-edit" aria-hidden="true">
 									</button>
 						<?php
 									echo "</td>";
-									echo "<td>" . $lista['barrio_sitio'] . "</td>";
-						?>
-									<td class='text-center'>
-									<a href="<?php echo base_url("admin/asociar_sesion/" . $lista['id_sitio']); ?>" class="btn btn-primary btn-xs">Asociar <span class="fa fa-gears fa-fw" aria-hidden="true"></a>
-									</td>
-						<?php
-									echo "<td class='text-center'>" . $lista['telefono_sitio'] . "</td>";
-									echo "<td class='text-center'>" . $lista['fax_sitio'] . "</td>";
-									echo "<td class='text-center'>" . $lista['celular_sitio'] . "</td>";
-									echo "<td>" . $lista['email_sitio'] . "</td>";
-									echo "<td class='text-center'>" . $lista['codigo_postal_sitio'] . "</td>";
-									echo "<td>" . $lista['nombre_organizacion'] . "</td>";
-									echo "<td>" . $lista['nombre_region'] . "</td>";
-									echo "<td>" . $lista['dpto_divipola_nombre'] . "</td>";
-									echo "<td>" . $lista['mpio_divipola_nombre'] . "</td>";
-									echo "<td>" . $lista['nombre_zona'] . "</td>";
-									echo "<td>" . $lista['cotacto_nombres'] . " " . $lista['cotacto_apellidos'] . "</td>";
 							endforeach;
 						?>
 						</tbody>

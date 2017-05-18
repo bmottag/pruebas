@@ -631,7 +631,6 @@ class Admin extends MX_Controller {
 			$arrParam = array("idGrupo" => $idGrupo);
 			$data['info'] = $this->admin_model->get_sesiones($arrParam);
 			
-			$this->load->model("general_model");
 			$arrParam = array("idGrupo" => $idGrupo);
 			$data['infoGrupo'] = $this->admin_model->get_grupo_instrumentos($arrParam);
 
@@ -695,12 +694,12 @@ class Admin extends MX_Controller {
     }
 
 	/**
-	 * INICIO ASIGNAR SITIOS Y PRUEBA AL USUARIO
+	 * INICIO ASIGNAR SITIOS AL USUARIO
 	 */	
 	
 		
 	/**
-	 * Lista de SESIONES POR GRUPO
+	 * Formulario para asignar sitio al usuario
      * @since 13/5/2017
 	 */
 	public function asignar($idUser)
@@ -721,21 +720,13 @@ class Admin extends MX_Controller {
 			
 			$arrParam = array();
 			$data['infoSitios'] = $this->admin_model->get_sitios($arrParam);//listado de SITIOS
-			
-			$this->load->model("general_model");
-			$arrParam = array(
-				"table" => "pruebas",
-				"order" => "nombre_prueba",
-				"id" => "x"
-			);
-			$data['infoPruebas'] = $this->general_model->get_basic_search($arrParam);//listado de pruebas
 
 			$data["view"] = 'asignar_sitio_prueba';
 			$this->load->view("layout", $data);
 	}
 	
 	/**
-	 * Guardar sitio y prueba del usuario
+	 * Guardar sitio del usuario
 	 * @since 13/5/2017
 	 */
 	public function guardar_sitio_prueba()
@@ -743,7 +734,7 @@ class Admin extends MX_Controller {
 			$data = array();			
 				
 			$data['linkBack'] = "admin/users/";
-			$data['titulo'] = "<i class='fa fa-gear fa-fw'></i>ASIGNAR SITIO Y PRUEBA";
+			$data['titulo'] = "<i class='fa fa-gear fa-fw'></i>ASIGNAR SITIO";
 	
 			if ($this->admin_model->updateSitio()) {
 				
@@ -775,6 +766,85 @@ class Admin extends MX_Controller {
 			$data["view"] = "template/answer";
 			$this->load->view("layout", $data);
 	}
+	
+	/**
+	 * INICIO ASOCIAR SESISONES Y PRUEBA AL SITIO
+	 */	
+	
+		
+	/**
+	 * Lista de SESIONES POR SITIO
+     * @since 17/5/2017
+	 */
+	public function asociar_sesion($idSitio)
+	{
+			$arrParam = array("idSitio" => $idSitio);
+			$data['info'] = $this->admin_model->get_sesiones_sitio($arrParam);
+
+			$arrParam = array("idSitio" => $idSitio);
+			$data['infoSitio'] = $this->admin_model->get_sitios($arrParam);
+			
+			$data["view"] = 'sesionesForSitio';
+			$this->load->view("layout", $data);
+	}
+	
+    /**
+     * Cargo modal - formulario SESIONES para sitio
+     * @since 17/5/2017
+     */
+    public function cargarModalSesionesSitio() 
+	{
+			header("Content-Type: text/plain; charset=utf-8"); //Para evitar problemas de acentos
+			
+			$data['information'] = FALSE;
+			$data["idSitio"] = $this->input->post("idSitio");
+			$data["idSesionSitio"] = $this->input->post("idSesionSitio");
+			
+			$arrParam = array();
+			$data['infoPruebas'] = $this->admin_model->get_sesiones($arrParam);//lista sesiones
+			
+			if ($data["idSesionSitio"] != 'x') {
+				$arrParam = array(
+					"idSesionSitio" => $data["idSesionSitio"]
+				);
+				$data['information'] = $this->admin_model->get_sesiones_sitio($arrParam);//info sesiones por sitio
+				$data["idSitio"] = $data['information'][0]['fk_id_sitio'];
+			}
+			
+			$this->load->view("sesionesForSitio_modal", $data);
+    }
+	
+	/**
+	 * Update SESIONES para sitio
+     * @since 17/5/2017
+	 */
+	public function saveSitiosSesion()
+	{			
+			header('Content-Type: application/json');
+			$data = array();
+			
+			$idGrupo = $this->input->post('hddIdSitio');
+			$idSesion = $this->input->post('hddId');
+			
+			$msj = "Se adiciono la Sesión con exito.";
+			if ($idSesion != '') {
+				$msj = "Se actualizo la Sesión con exito.";
+			}
+
+			if ($idSesion = $this->admin_model->saveSitiosSesion()) {
+				$data["result"] = true;
+				$data["idRecord"] = $idGrupo;
+			
+				$this->session->set_flashdata('retornoExito', $msj);
+			} else {
+				$data["result"] = "error";
+				$data["idRecord"] = "";
+				
+				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador.');
+			}
+
+			echo json_encode($data);
+    }
 	
 	
 	
