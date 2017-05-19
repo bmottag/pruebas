@@ -44,36 +44,59 @@ if ($retornoError) {
 }
 ?> 
 
-
+	<div class="row">
 <!--INICIO ALERTA INFORMATIVA -->
 <?php if($infoAlertaInformativa){ ?>
-	<div class="row">
+	
 		<div class="col-lg-6">				
 			<div class="panel panel-danger">
 				<div class="panel-heading">
 					<i class="fa fa-calendar fa-fw"></i> ALERTA - <?php echo $infoAlertaInformativa[0]['nombre_tipo_alerta']; ?>
 				</div>
 				<div class="panel-body">
-
+					
+				<?php
+					foreach ($infoAlertaInformativa as $lista):
+					
+					//consultar si ya el usuario dio respuesta a esta alerta
+					$ci = &get_instance();
+					$ci->load->model("dashboard_model");
+					
+					$arrParam = array("idAlerta" => $lista["id_alerta"]);
+					$existeRegistro = $this->dashboard_model->get_registro_by($arrParam);
+					
+					if(!$existeRegistro){
+				?>
+						
 					<div class="col-lg-12">	
 						<div class="alert alert-danger ">
-							<strong>Descripción Alerta: </strong><?php echo $infoAlertaInformativa[0]['descripcion_alerta']; ?><br>
-							<strong>Mensaje Alerta: </strong><?php echo $infoAlertaInformativa[0]['mensaje_alerta']; ?><br>
-							<strong>Nombre de Prueba: </strong><?php echo $infoAlertaInformativa[0]['nombre_prueba']; ?><br>
-							<strong>Grupo Instrumentos: </strong><?php echo $infoAlertaInformativa[0]['nombre_grupo_instrumentos']; ?><br>
-							<strong>Fecha: </strong><?php echo $infoAlertaInformativa[0]['fecha']; ?><br>
-							<strong>Sesión Prueba: </strong><?php echo $infoAlertaInformativa[0]['sesion_prueba']; ?><br>
+							<strong>Descripción Alerta: </strong><?php echo $lista['descripcion_alerta']; ?><br>
+							<strong>Mensaje Alerta: </strong><?php echo $lista['mensaje_alerta']; ?><br>
+							<strong>Nombre de Prueba: </strong><?php echo $lista['nombre_prueba']; ?><br>
+							<strong>Grupo Instrumentos: </strong><?php echo $lista['nombre_grupo_instrumentos']; ?><br>
+							<strong>Fecha: </strong><?php echo $lista['fecha']; ?><br>
+							<strong>Sesión Prueba: </strong><?php echo $lista['sesion_prueba']; ?><br>
+							
+					<br>
+					<form  name="form" id="<?php echo "form_" . $lista["id_alerta"]; ?>" class="form-horizontal" method="post" action="<?php echo base_url("dashboard/registro_informativo"); ?>" >
+						<input type="hidden" id="hddId" name="hddId" value="<?php echo $lista["id_alerta"]; ?>"/>
+					
+						<div class="form-group">
+							<div class="row" align="center">
+								<div style="width:50%;" align="center">
+									<input type="submit" id="btnSubmit" name="btnSubmit" value="Aceptar" class="btn btn-danger"/>
+								</div>
+							</div>
+						</div>
+					</form>	
+							
 						</div>
 					</div>
-					
-		<div class="form-group">
-			<div class="row" align="center">
-				<div style="width:50%;" align="center">
-					<input type="button" id="btnSubmit" name="btnSubmit" value="Aceptar" class="btn btn-danger"/>
-				</div>
-			</div>
-		</div>
-				
+
+				<?php
+					}
+					endforeach;
+				?>
 
 				</div>
 			</div>
@@ -93,24 +116,66 @@ if ($retornoError) {
 				</div>
 				<div class="panel-body">
 
+				<?php
+					foreach ($infoAlertaNotificacion as $lista):
+					
+					//consultar si ya el usuario dio respuesta a esta alerta
+					$ci = &get_instance();
+					$ci->load->model("dashboard_model");
+					
+					$arrParam = array("idAlerta" => $lista["id_alerta"]);
+					$existeRegistro = $this->dashboard_model->get_registro_by($arrParam);
+					
+					if(!$existeRegistro){
+				?>
+						
 					<div class="col-lg-12">	
-						<div class="alert alert-warning">
-							<strong>Descripción Alerta: </strong><?php echo $infoAlertaNotificacion[0]['descripcion_alerta']; ?><br>
-							<strong>Mensaje Alerta: </strong><?php echo $infoAlertaNotificacion[0]['mensaje_alerta']; ?><br>
-							<strong>Nombre de Prueba: </strong><?php echo $infoAlertaNotificacion[0]['nombre_prueba']; ?><br>
-							<strong>Grupo Instrumentos: </strong><?php echo $infoAlertaNotificacion[0]['nombre_grupo_instrumentos']; ?><br>
-							<strong>Fecha: </strong><?php echo $infoAlertaNotificacion[0]['fecha']; ?><br>
-							<strong>Sesión Prueba: </strong><?php echo $infoAlertaNotificacion[0]['sesion_prueba']; ?><br>
+						<div class="alert alert-warning ">
+							<strong>Descripción Alerta: </strong><?php echo $lista['descripcion_alerta']; ?><br>
+							<strong>Mensaje Alerta: </strong><?php echo $lista['mensaje_alerta']; ?><br>
+							<strong>Nombre de Prueba: </strong><?php echo $lista['nombre_prueba']; ?><br>
+							<strong>Grupo Instrumentos: </strong><?php echo $lista['nombre_grupo_instrumentos']; ?><br>
+							<strong>Fecha: </strong><?php echo $lista['fecha']; ?><br>
+							<strong>Sesión Prueba: </strong><?php echo $lista['sesion_prueba']; ?><br>
+							
+					<br>
+					<form  name="form" id="<?php echo "form_" . $lista["id_alerta"]; ?>" class="form-horizontal" method="post" action="<?php echo base_url("dashboard/registro_notificacion"); ?>" >
+						<input type="hidden" id="hddId" name="hddId" value="<?php echo $lista["id_alerta"]; ?>"/>
+						
+						<div class="form-group">
+							<label class="col-sm-12 control-label" for="firstName">Si/No</label>
+							<div class="col-sm-12">
+								<select name="acepta" id="acepta" class="form-control" required>
+									<option value=''>Select...</option>
+									<option value=1 >Si</option>
+									<option value=2 >No</option>
+								</select>								
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="col-sm-12 control-label" for="observacion">Observación</label>
+							<div class="col-sm-12">
+								<textarea id="observacion" name="observacion" placeholder="Observación"  class="form-control" rows="2"></textarea>
+							</div>
+						</div>
+					
+						<div class="form-group">
+							<div class="row" align="center">
+								<div style="width:50%;" align="center">
+									<input type="submit" id="btnSubmit" name="btnSubmit" value="Aceptar" class="btn btn-warning"/>
+								</div>
+							</div>
+						</div>
+					</form>	
+							
 						</div>
 					</div>
-					
-		<div class="form-group">
-			<div class="row" align="center">
-				<div style="width:50%;" align="center">
-					<input type="button" id="btnSubmit" name="btnSubmit" value="Aceptar" class="btn btn-warning"/>
-				</div>
-			</div>
-		</div>
+
+				<?php
+					}
+					endforeach;
+				?>
 				
 				</div>
 			</div>
@@ -130,33 +195,70 @@ if ($retornoError) {
 				</div>
 				<div class="panel-body">
 
+				<?php
+					foreach ($infoAlertaConsolidacion as $lista):
+					
+					//consultar si ya el usuario dio respuesta a esta alerta
+					$ci = &get_instance();
+					$ci->load->model("dashboard_model");
+					
+					$arrParam = array("idAlerta" => $lista["id_alerta"]);
+					$existeRegistro = $this->dashboard_model->get_registro_by($arrParam);
+					
+					if(!$existeRegistro){
+				?>
+						
 					<div class="col-lg-12">	
 						<div class="alert alert-success">
-							<strong>Descripción Alerta: </strong><?php echo $infoAlertaConsolidacion[0]['descripcion_alerta']; ?><br>
-							<strong>Mensaje Alerta: </strong><?php echo $infoAlertaConsolidacion[0]['mensaje_alerta']; ?><br>
-							<strong>Nombre de Prueba: </strong><?php echo $infoAlertaConsolidacion[0]['nombre_prueba']; ?><br>
-							<strong>Grupo Instrumentos: </strong><?php echo $infoAlertaConsolidacion[0]['nombre_grupo_instrumentos']; ?><br>
-							<strong>Fecha: </strong><?php echo $infoAlertaConsolidacion[0]['fecha']; ?><br>
-							<strong>Sesión Prueba: </strong><?php echo $infoAlertaConsolidacion[0]['sesion_prueba']; ?><br>
+							<strong>Descripción Alerta: </strong><?php echo $lista['descripcion_alerta']; ?><br>
+							<strong>Mensaje Alerta: </strong><?php echo $lista['mensaje_alerta']; ?><br>
+							<strong>Nombre de Prueba: </strong><?php echo $lista['nombre_prueba']; ?><br>
+							<strong>Grupo Instrumentos: </strong><?php echo $lista['nombre_grupo_instrumentos']; ?><br>
+							<strong>Fecha: </strong><?php echo $lista['fecha']; ?><br>
+							<strong>Sesión Prueba: </strong><?php echo $lista['sesion_prueba']; ?><br>
+							
+					<br>
+					<form  name="form" id="<?php echo "form_" . $lista["id_alerta"]; ?>" class="form-horizontal" method="post" action="<?php echo base_url("dashboard/registro_consolidacion"); ?>" >
+						<input type="hidden" id="hddId" name="hddId" value="<?php echo $lista["id_alerta"]; ?>"/>
+						
+						<div class="form-group">
+							<label class="col-sm-12 control-label" for="firstName">Cifra</label>
+							<div class="col-sm-12">
+								<input type="text" id="cifra" name="cifra" class="form-control" required/>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="col-sm-12 control-label" for="observacion">Observación</label>
+							<div class="col-sm-12">
+								<textarea id="observacion" name="observacion" placeholder="Observación"  class="form-control" rows="2"></textarea>
+							</div>
+						</div>
+					
+						<div class="form-group">
+							<div class="row" align="center">
+								<div style="width:50%;" align="center">
+									<input type="submit" id="btnSubmit" name="btnSubmit" value="Enviar" class="btn btn-success"/>
+								</div>
+							</div>
+						</div>
+					</form>	
+							
 						</div>
 					</div>
-					
-		<div class="form-group">
-			<div class="row" align="center">
-				<div style="width:50%;" align="center">
-					<input type="button" id="btnSubmit" name="btnSubmit" value="Aceptar" class="btn btn-success"/>
-				</div>
-			</div>
-		</div>
-				
+
+				<?php
+					}
+					endforeach;
+				?>
 
 				</div>
 			</div>
 		</div>
-	</div>
+	
 <?php } ?>
 <!--FIN ALERTA -->
-
+	</div>
 					
 
 <?php

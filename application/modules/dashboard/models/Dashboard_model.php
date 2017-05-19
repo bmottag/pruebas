@@ -66,6 +66,95 @@
 				} else {
 					return false;
 				}
+		}		
+		
+		/**
+		 * Guardar respuesta del usuario
+		 * @since 19/5/2017
+		 */
+		public function saveRegistroInformativo() 
+		{
+				$data = array(
+					'fk_id_alerta' => $this->input->post('hddId'),
+					'fk_id_usuario' => $this->session->id,
+					'acepta' => 1,
+					'fecha_registro' => date("Y-m-d G:i:s")
+				);	
+
+				$query = $this->db->insert('registro', $data);
+
+				if ($query) {
+					return true;
+				} else {
+					return false;
+				}
+		}
+		
+		/**
+		 * Consultar si el usuario ya dio respuesta a la alerta
+		 * @since 19/5/2017
+		 */
+		public function get_registro_by($arrDatos) 
+		{
+				$this->db->select();
+				if (array_key_exists("idAlerta", $arrDatos)) {
+					$this->db->where('fk_id_alerta', $arrDatos["idAlerta"]);
+				}
+				$this->db->where('fk_id_usuario', $this->session->id);
+				$query = $this->db->get('registro');
+
+				if ($query->num_rows() > 0) {
+					return $query->result_array();
+				} else {
+					return false;
+				}
+		}
+		
+		/**
+		 * Guardar respuesta del usuario
+		 * @since 19/5/2017
+		 */
+		public function saveRegistroNotificacion() 
+		{
+				$data = array(
+					'fk_id_alerta' => $this->input->post('hddId'),
+					'fk_id_usuario' => $this->session->id,
+					'acepta' => $this->input->post('acepta'),
+					'observacion' => $this->input->post('observacion'),
+					'fecha_registro' => date("Y-m-d G:i:s")
+				);	
+
+				$query = $this->db->insert('registro', $data);
+
+				if ($query) {
+					return true;
+				} else {
+					return false;
+				}
+		}
+		
+		/**
+		 * Guardar respuesta del usuario
+		 * @since 19/5/2017
+		 */
+		public function saveRegistroConsolidacion() 
+		{
+				$data = array(
+					'fk_id_alerta' => $this->input->post('hddId'),
+					'fk_id_usuario' => $this->session->id,
+					'acepta' => 1,
+					'cifra' => $this->input->post('cifra'),
+					'observacion' => $this->input->post('observacion'),
+					'fecha_registro' => date("Y-m-d G:i:s")
+				);	
+
+				$query = $this->db->insert('registro', $data);
+
+				if ($query) {
+					return true;
+				} else {
+					return false;
+				}
 		}
 		
 		
