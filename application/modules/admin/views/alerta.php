@@ -79,7 +79,7 @@ if ($retornoError) {
 								<th class="text-center">Tipo de Alerta</th>
 								<th class="text-center">Editar</th>
 								<th class="text-center">Mensaje</th>
-								<th class="text-center">Fecha Alerta</th>
+								<th class="text-center">Fecha</th>
 								<th class="text-center">Hora</th>
 								<th class="text-center">Tiempo de Duración</th>
 								<th class="text-center">Rol</th>

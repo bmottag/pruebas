@@ -44,7 +44,7 @@
 </script>
 			<div class="col-sm-6">
 				<div class="form-group text-left">
-					<label class="control-label" for="fechaAlerta">Fecha Alerta : *</label>
+					<label class="control-label" for="fechaAlerta">Fecha : *</label>
 					<input type="text" class="form-control" id="fechaAlerta" name="fechaAlerta" value="<?php echo $information?$information[0]["fecha_alerta"]:""; ?>" placeholder="Fecha Alerta" required />
 				</div>
 			</div>
