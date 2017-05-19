@@ -31,12 +31,24 @@
 				<i class="fa fa-list-alt"></i> Reportes <i class="fa fa-caret-down"></i>
 			</a>
 			<ul class="dropdown-menu dropdown-messages">
+			
+			<!--
 				<li>
 					<a href="<?php echo base_url("report/searchByDateRange/payrollByAdmin"); ?>"><i class="fa fa-book fa-fw"></i> Auditoria</a>
 				</li>
+			-->
 				<li>
-					<a href="<?php echo base_url("report/searchByDateRange/safety"); ?>"><i class="fa fa-life-saver fa-fw"></i> Alertas</a>
+					<a href="<?php echo base_url("report/searchByDateRange/1"); ?>"><i class="fa fa-life-saver fa-fw"></i> Información Alerta Informativa</a>
 				</li>
+				
+				<li>
+					<a href="<?php echo base_url("report/searchByDateRange/2"); ?>"><i class="fa fa-life-saver fa-fw"></i> Información Alerta Notificación </a>
+				</li>
+				
+				<li>
+					<a href="<?php echo base_url("report/searchByDateRange/3"); ?>"><i class="fa fa-life-saver fa-fw"></i> Información Alerta Consolidación</a>
+				</li>
+				
 			</ul>
 		</li>
 
