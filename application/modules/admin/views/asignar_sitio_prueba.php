@@ -9,7 +9,7 @@
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<h4 class="list-group-item-heading">
-						<i class="fa fa-gear fa-fw"></i> CONFIGURACIONES - ASIGNAR SITIO Y PRUEBA
+						<i class="fa fa-gear fa-fw"></i> CONFIGURACIONES - SITIO
 					</h4>
 				</div>
 			</div>
@@ -22,7 +22,7 @@
 		<div class="col-lg-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<i class="fa fa-gears"></i> ASIGNAR SITIO Y PRUEBA
+					<i class="fa fa-gears"></i> SITIO
 				</div>
 				<div class="panel-body">
 
@@ -61,7 +61,7 @@
 						</div>
 						
 						<div class="form-group">
-							<label class="col-sm-4 control-label" for="inputPassword">Dpto Divipola</label>
+							<label class="col-sm-4 control-label" for="inputPassword">Departamento</label>
 							<div class="col-sm-5">
 								<select name="depto" id="depto" class="form-control" >
 									<option value=''>Select...</option>
@@ -73,7 +73,7 @@
 						</div>
 						
 						<div class="form-group">
-							<label class="col-sm-4 control-label" for="inputPassword">Mcpio Divipola</label>
+							<label class="col-sm-4 control-label" for="inputPassword">Municipio</label>
 							<div class="col-sm-5">
 								<select name="mcpio" id="mcpio" class="form-control">
 								

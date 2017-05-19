@@ -124,7 +124,7 @@ if ($retornoError) {
 									echo "<td class='text-center'>";
 
 						?>
-									<a href="<?php echo base_url("admin/asignar/" . $lista['id_usuario']); ?>" class="btn btn-primary btn-xs">Asignar Sitio <span class="fa fa-gears fa-fw" aria-hidden="true"></a>
+									<a href="<?php echo base_url("admin/asignar/" . $lista['id_usuario']); ?>" class="btn btn-primary btn-xs">Asignar <span class="fa fa-gears fa-fw" aria-hidden="true"></a>
 						<?php
 									echo "</td>";
 

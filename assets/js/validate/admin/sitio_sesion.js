@@ -5,7 +5,7 @@ $( document ).ready( function () {
 	$( "#form" ).validate( {
 		rules: {
 			prueba:		{ required: true },
-			citados:		{ required: true, minlength: 3, maxlength:30 }
+			citados:	{ required: true, minlength: 1, maxlength:5 }
 		},
 		errorElement: "em",
 		errorPlacement: function ( error, element ) {
