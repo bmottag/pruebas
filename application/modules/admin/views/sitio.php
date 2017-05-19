@@ -75,8 +75,9 @@ if ($retornoError) {
 								<th class="text-center">Nombre Sitio</th>
 								<th class="text-center">Dirección</th>
 								<th class="text-center">Editar</th>
-								<th class="text-center">Barrio</th>
+								<th class="text-center">Contacto</th>
 								<th class="text-center">Asociar con Prueba / Grupo de Instrumento / Sesión </th>
+								<th class="text-center">Barrio</th>
 								<th class="text-center">Teléfono</th>
 								<th class="text-center">Fax</th>
 								<th class="text-center">Celuar</th>
@@ -103,12 +104,17 @@ if ($retornoError) {
 									</button>
 						<?php
 									echo "</td>";
-									echo "<td>" . $lista['barrio_sitio'] . "</td>";
+									
 						?>
+									<td class='text-center'>
+									<a href="<?php echo base_url("admin/contacto_sitio/" . $lista['id_sitio']); ?>" class="btn btn-warning btn-xs">Contacto <span class="fa fa-gears fa-fw" aria-hidden="true"></a>
+									</td>
+									
 									<td class='text-center'>
 									<a href="<?php echo base_url("admin/asociar_sesion/" . $lista['id_sitio']); ?>" class="btn btn-primary btn-xs">Asociar <span class="fa fa-gears fa-fw" aria-hidden="true"></a>
 									</td>
 						<?php
+									echo "<td>" . $lista['barrio_sitio'] . "</td>";
 									echo "<td class='text-center'>" . $lista['telefono_sitio'] . "</td>";
 									echo "<td class='text-center'>" . $lista['fax_sitio'] . "</td>";
 									echo "<td class='text-center'>" . $lista['celular_sitio'] . "</td>";

@@ -398,8 +398,7 @@
 				$idUser = $this->input->post("hddId");
 
 				$data = array(
-					'fk_id_sitio' => $this->input->post("sitio"),
-					'fk_id_prueba' => $this->input->post("prueba")
+					'fk_id_sitio' => $this->input->post("sitio")
 				);
 
 				$this->db->where('id_usuario', $idUser);
