@@ -21,12 +21,14 @@ class Dashboard extends MX_Controller {
 			}
 			$arrParam["limit"] = 15;//Limite de registros para la consulta
 			
-			$arrParam = array();
-			$data['infoAlertaInformativa'] = $this->dashboard_model->get_alerta_informativa_by($arrParam);
+			$arrParam = array("tipoAlerta" => 1);
+			$data['infoAlertaInformativa'] = $this->dashboard_model->get_alerta_by($arrParam);
 			
-			$data['infoAlertaConsolidacion'] = $this->dashboard_model->get_consolidacion_by($arrParam);
-			$data['infoAlertaNotificacion'] = $this->dashboard_model->get_alerta_informativa_by($arrParam);
+			$arrParam = array("tipoAlerta" => 2);
+			$data['infoAlertaNotificacion'] = $this->dashboard_model->get_alerta_by($arrParam);
 			
+			$arrParam = array("tipoAlerta" => 3);
+			$data['infoAlertaConsolidacion'] = $this->dashboard_model->get_alerta_by($arrParam);
 		
 			$data["view"] = "dashboard";
 			$this->load->view("layout", $data);

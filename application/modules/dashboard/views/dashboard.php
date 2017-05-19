@@ -45,9 +45,10 @@ if ($retornoError) {
 ?> 
 
 
-<!--INICIO ALERTA -->
+<!--INICIO ALERTA INFORMATIVA -->
+<?php if($infoAlertaInformativa){ ?>
 	<div class="row">
-		<div class="col-lg-12">				
+		<div class="col-lg-6">				
 			<div class="panel panel-danger">
 				<div class="panel-heading">
 					<i class="fa fa-calendar fa-fw"></i> ALERTA - <?php echo $infoAlertaInformativa[0]['nombre_tipo_alerta']; ?>
@@ -68,7 +69,82 @@ if ($retornoError) {
 		<div class="form-group">
 			<div class="row" align="center">
 				<div style="width:50%;" align="center">
-					<input type="button" id="btnSubmit" name="btnSubmit" value="Aceptar" class="btn btn-primary"/>
+					<input type="button" id="btnSubmit" name="btnSubmit" value="Aceptar" class="btn btn-danger"/>
+				</div>
+			</div>
+		</div>
+				
+
+				</div>
+			</div>
+		</div>
+	
+<?php } ?>
+<!--FIN ALERTA -->
+
+
+<!--INICIO ALERTA NOTIFICACION -->
+<?php if($infoAlertaNotificacion){ ?>
+	
+		<div class="col-lg-6">				
+			<div class="panel panel-yellow">
+				<div class="panel-heading">
+					<i class="fa fa-calendar fa-fw"></i> ALERTA - <?php echo $infoAlertaNotificacion[0]['nombre_tipo_alerta']; ?>
+				</div>
+				<div class="panel-body">
+
+					<div class="col-lg-12">	
+						<div class="alert alert-warning">
+							<strong>Descripción Alerta: </strong><?php echo $infoAlertaNotificacion[0]['descripcion_alerta']; ?><br>
+							<strong>Mensaje Alerta: </strong><?php echo $infoAlertaNotificacion[0]['mensaje_alerta']; ?><br>
+							<strong>Nombre de Prueba: </strong><?php echo $infoAlertaNotificacion[0]['nombre_prueba']; ?><br>
+							<strong>Grupo Instrumentos: </strong><?php echo $infoAlertaNotificacion[0]['nombre_grupo_instrumentos']; ?><br>
+							<strong>Fecha: </strong><?php echo $infoAlertaNotificacion[0]['fecha']; ?><br>
+							<strong>Sesión Prueba: </strong><?php echo $infoAlertaNotificacion[0]['sesion_prueba']; ?><br>
+						</div>
+					</div>
+					
+		<div class="form-group">
+			<div class="row" align="center">
+				<div style="width:50%;" align="center">
+					<input type="button" id="btnSubmit" name="btnSubmit" value="Aceptar" class="btn btn-warning"/>
+				</div>
+			</div>
+		</div>
+				
+				</div>
+			</div>
+		</div>
+	
+<?php } ?>
+<!--FIN ALERTA -->
+
+
+<!--INICIO ALERTA CONSOLIDACION -->
+<?php if($infoAlertaConsolidacion){ ?>
+	
+		<div class="col-lg-6">				
+			<div class="panel panel-green">
+				<div class="panel-heading">
+					<i class="fa fa-calendar fa-fw"></i> ALERTA - <?php echo $infoAlertaConsolidacion[0]['nombre_tipo_alerta']; ?>
+				</div>
+				<div class="panel-body">
+
+					<div class="col-lg-12">	
+						<div class="alert alert-success">
+							<strong>Descripción Alerta: </strong><?php echo $infoAlertaConsolidacion[0]['descripcion_alerta']; ?><br>
+							<strong>Mensaje Alerta: </strong><?php echo $infoAlertaConsolidacion[0]['mensaje_alerta']; ?><br>
+							<strong>Nombre de Prueba: </strong><?php echo $infoAlertaConsolidacion[0]['nombre_prueba']; ?><br>
+							<strong>Grupo Instrumentos: </strong><?php echo $infoAlertaConsolidacion[0]['nombre_grupo_instrumentos']; ?><br>
+							<strong>Fecha: </strong><?php echo $infoAlertaConsolidacion[0]['fecha']; ?><br>
+							<strong>Sesión Prueba: </strong><?php echo $infoAlertaConsolidacion[0]['sesion_prueba']; ?><br>
+						</div>
+					</div>
+					
+		<div class="form-group">
+			<div class="row" align="center">
+				<div style="width:50%;" align="center">
+					<input type="button" id="btnSubmit" name="btnSubmit" value="Aceptar" class="btn btn-success"/>
 				</div>
 			</div>
 		</div>
@@ -78,9 +154,21 @@ if ($retornoError) {
 			</div>
 		</div>
 	</div>
+<?php } ?>
 <!--FIN ALERTA -->
 
-						
+					
+
+<?php
+/**
+ * Special MENU for ADMIN
+ * @author BMOTTAG
+ * @since  18/11/2016
+ */
+	$userRol = $this->session->rol;
+	if($userRol==1){ //If it is an ADMIN user, show an special menu
+?>
+					
 	<!-- /.row -->
 	<div class="row">
 		<div class="col-lg-3 col-md-6">
@@ -205,6 +293,7 @@ if ($retornoError) {
 		</div>		
 	</div>
 
+<?php } ?>
 	
 		
 

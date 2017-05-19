@@ -7,23 +7,31 @@
 		 * Muestra la ultima alerta-INFORMATIVA para el USUAIOR
 		 * @since 14/5/2017
 		 */
-		public function get_alerta_informativa_by($arrDatos) 
+		public function get_alerta_by($arrDatos) 
 		{
 				$fecha = date("Y-m-d G:i:s");
+				$userRol = $this->session->rol;
+				$userSitio = $this->session->sitio;
+
 			
 				$this->db->select();
-				$this->db->join('param_tipo_alerta T', 'T.id_tipo_alerta = A.fk_id_tipo_alerta', 'INNER');
-				$this->db->join('param_roles R', 'R.id_rol = A.fk_id_rol', 'INNER');
-				$this->db->join('sesiones S', 'S.id_sesion = A.fk_id_sesion', 'INNER');
-				$this->db->join('param_grupo_instrumentos G', 'G.id_grupo_instrumentos = S.fk_id_grupo_instrumentos', 'INNER');
-				$this->db->join('pruebas P', 'P.id_prueba = G.fk_id_prueba', 'INNER');
-				$this->db->join('sitio_sesion X', 'X.fk_id_sesion = S.id_sesion', 'INNER');
+				$this->db->join('param_tipo_alerta T', 'T.id_tipo_alerta = A.fk_id_tipo_alerta', 'INNER');//tipo alerta
+				$this->db->join('param_roles R', 'R.id_rol = A.fk_id_rol', 'INNER');//ROLES - ALERTA
+				$this->db->join('sesiones S', 'S.id_sesion = A.fk_id_sesion', 'INNER');//SESIONES - ALERTA
+				$this->db->join('param_grupo_instrumentos G', 'G.id_grupo_instrumentos = S.fk_id_grupo_instrumentos', 'INNER'); //GRUPO INSTRUMENTO - SESIONES
+				$this->db->join('pruebas P', 'P.id_prueba = G.fk_id_prueba', 'INNER');//PRUEBA - GRUPO INSTRUMENTO
+				$this->db->join('sitio_sesion X', 'X.fk_id_sesion = S.id_sesion', 'INNER');//SITIO - SESION
 
-				
 				$this->db->where('A.estado_alerta', 1); //ALERTA ACTIVA
 				$this->db->where('A.fecha_inicio <=', $fecha); //FECHA INICIAL MAYOR A LA ACTUAL
 				$this->db->where('A.fecha_fin >=', $fecha); //FECHA INICIAL MAYOR A LA ACTUAL
-				$this->db->where('A.fk_id_tipo_alerta', 1); //TIPO ALERTA = INFORMATIVA
+				
+				if (array_key_exists("tipoAlerta", $arrDatos)) {
+					$this->db->where('A.fk_id_tipo_alerta', $arrDatos["tipoAlerta"]); //TIPO ALERTA = INFORMATIVA
+				}
+				
+				$this->db->where('A.fk_id_rol', $userRol); //filtro por ROL DEL USUARIO
+				$this->db->where('X.fk_id_sitio', $userSitio); //filtro por SITIO DEL USUARIO
 				
 				$this->db->order_by('A.id_alerta', 'desc');
 				$query = $this->db->get('alertas A' , 1);
