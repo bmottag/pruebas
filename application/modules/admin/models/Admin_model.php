@@ -390,19 +390,20 @@
 		}
 		
 	    /**
-	     * Actualiar SITIO Y PRUEBA USUARIO
+	     * Actualiar SITIO con el coordinador y el delegado
 	     * @since  13/5/2017
 	     */
 	    public function updateSitio()
 		{
-				$idUser = $this->input->post("hddId");
+				$idSitio = $this->input->post("hddId");
+				$rol = $this->input->post("hddRol");
 
 				$data = array(
-					'fk_id_sitio' => $this->input->post("sitio")
+					'fk_id_user_' . $rol => $this->input->post("usuario")
 				);
 
-				$this->db->where('id_usuario', $idUser);
-				$query = $this->db->update('usuario', $data);
+				$this->db->where('id_sitio', $idSitio);
+				$query = $this->db->update('sitios', $data);
 
 				if ($query) {
 					return true;

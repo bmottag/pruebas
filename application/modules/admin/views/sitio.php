@@ -77,10 +77,12 @@ if ($retornoError) {
 								<th class="text-center">Editar</th>
 								<th class="text-center">Contacto</th>
 								<th class="text-center">Asociar con Prueba / Grupo de Instrumento / Sesión </th>
+								<th class="text-center">Delegado</th>
+								<th class="text-center">Coordinador</th>
 								<th class="text-center">Barrio</th>
 								<th class="text-center">Teléfono</th>
 								<th class="text-center">Fax</th>
-								<th class="text-center">Celuar</th>
+								<th class="text-center">Celular</th>
 								<th class="text-center">Email</th>
 								<th class="text-center">Codigo Postal</th>
 								<th class="text-center">Nombre Organización</th>
@@ -112,6 +114,14 @@ if ($retornoError) {
 									
 									<td class='text-center'>
 									<a href="<?php echo base_url("admin/asociar_sesion/" . $lista['id_sitio']); ?>" class="btn btn-primary btn-xs">Asociar <span class="fa fa-gears fa-fw" aria-hidden="true"></a>
+									</td>
+									
+									<td class='text-center'>
+									<a href="<?php echo base_url("admin/asignar_delegado/" . $lista['id_sitio'] . "/delegado"); ?>" class="btn btn-danger btn-xs">Delegado <span class="fa fa-gears fa-fw" aria-hidden="true"></a>
+									</td>
+									
+									<td class='text-center'>
+									<a href="<?php echo base_url("admin/asignar_delegado/" . $lista['id_sitio'] . "/coordinador"); ?>" class="btn btn-danger btn-xs">Coordinador <span class="fa fa-gears fa-fw" aria-hidden="true"></a>
 									</td>
 						<?php
 									echo "<td>" . $lista['barrio_sitio'] . "</td>";

@@ -78,7 +78,6 @@ if ($retornoError) {
 								<th class="text-center">Número de documento</th>
 								<th class="text-center">Rol</th>
 								<th class="text-center">Estado</th>
-								<th class="text-center">Asignar Sitio</th>
 								<th class="text-center">Contraseña</th>								
 								<th class="text-center">Teléfono</th>
 								<th class="text-center">Celular</th>
@@ -121,13 +120,6 @@ if ($retornoError) {
 									}
 									echo '<p class="' . $clase . '"><strong>' . $valor . '</strong></p>';
 									echo "</td>";
-									echo "<td class='text-center'>";
-
-						?>
-									<a href="<?php echo base_url("admin/asignar/" . $lista['id_usuario']); ?>" class="btn btn-primary btn-xs">Asignar <span class="fa fa-gears fa-fw" aria-hidden="true"></a>
-						<?php
-									echo "</td>";
-
 									echo "<td class='text-center'>";
 							?>
 									<!-- 

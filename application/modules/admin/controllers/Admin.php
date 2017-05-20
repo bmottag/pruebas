@@ -694,68 +694,48 @@ class Admin extends MX_Controller {
     }
 
 	/**
-	 * INICIO ASIGNAR SITIOS AL USUARIO
+	 * INICIO ASIGNAR USUARIO delegado al sitio
 	 */	
 	
 		
 	/**
-	 * Formulario para asignar sitio al usuario
+	 * Formulario para asignar delegado al sitio
      * @since 13/5/2017
 	 */
-	public function asignar($idUser)
+	public function asignar_delegado($idSitio, $rol)
 	{
-			$arrParam = array("idUsuario" => $idUser);
-			$data['infoUsuario'] = $this->admin_model->get_users($arrParam);//listado de USUARIOS
+			$arrParam = array("idSitio" => $idSitio);
+			$data['infoSitio'] = $this->admin_model->get_sitios($arrParam);//informacion sitio
+			$data['rol'] = $rol;
 
 			$arrParam = array(
-				"table" => "param_regiones",
-				"order" => "nombre_region",
+				"table" => "usuario",
+				"order" => "nombres_usuario, apellidos_usuario",
 				"id" => "x"
 			);
 			$this->load->model("general_model");
-			$data['regiones'] = $this->general_model->get_basic_search($arrParam);//listado regiones
+			$data['usuarios'] = $this->general_model->get_basic_search($arrParam);//listado usuarios
 			
-			$data['departamentos'] = $this->admin_model->get_dpto_divipola();//listado de departamentos
-
-			
-			$arrParam = array();
-			$data['infoSitios'] = $this->admin_model->get_sitios($arrParam);//listado de SITIOS
-
-			$data["view"] = 'asignar_sitio_prueba';
+			$data["view"] = 'asignar_delegado';
 			$this->load->view("layout", $data);
 	}
 	
 	/**
-	 * Guardar sitio del usuario
+	 * Guardar delegado o coordinador para el sitio
 	 * @since 13/5/2017
 	 */
-	public function guardar_sitio_prueba()
+	public function guardar_delegado()
 	{
 			$data = array();			
 				
-			$data['linkBack'] = "admin/users/";
-			$data['titulo'] = "<i class='fa fa-gear fa-fw'></i>ASIGNAR SITIO";
+			$data['linkBack'] = "admin/sitios/";
+			$data['titulo'] = "<i class='fa fa-gear fa-fw'></i>ASIGNAR";
 	
 			if ($this->admin_model->updateSitio()) {
 				
-				$arrParam = array(
-					"idSitio" => $this->input->post("sitio")
-				);
-				$infoSitio = $this->admin_model->get_sitios($arrParam);//info sitio
+				$rol = $this->input->post("hddRol");
 				
-				$this->load->model("general_model");
-				$arrParam = array(
-					"table" => "pruebas",
-					"order" => "id_prueba",
-					"column" => "id_prueba",
-					"id" => $this->input->post("prueba")
-				);
-				$infoPrueba = $this->general_model->get_basic_search($arrParam);
-				
-				
-				$data["msj"] = "Se asigno el sitio con exito.";
-				$data["msj"] .= "<br><strong>Número de documento: </strong>" . $this->input->post("hddUser");
-				$data["msj"] .= "<br><strong>Sitio: </strong>" . $infoSitio[0]['nombre_sitio'];
+				$data["msj"] = "Se asigno el <strong>" . $rol . "</strong> con exito.";
 				$data["clase"] = "alert-success";
 			}else{
 				$data["msj"] = "<strong>Error!!!</strong> Contactarse con el administrador.";
