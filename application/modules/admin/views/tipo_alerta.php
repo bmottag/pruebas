@@ -35,12 +35,14 @@ $(function(){
 		<div class="col-lg-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<i class="fa fa-ticket"></i> LISTA DE TIPO DE ALERTAS
+					<i class="fa fa-ticket"></i> LISTA TIPO DE ALERTAS
 				</div>
 				<div class="panel-body">
+				<!--
 					<button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#modal" id="x">
 							<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Adicionar Tipo de Alerta
 					</button><br>
+				-->
 <?php
 $retornoExito = $this->session->flashdata('retornoExito');
 if ($retornoExito) {
@@ -73,7 +75,7 @@ if ($retornoError) {
 						<thead>
 							<tr>
 								<th class="text-center">Tipo de alerta</th>
-								<th class="text-center">Editar</th>
+								<!-- <th class="text-center">Editar</th> -->
 								<th class="text-center">Descripción</th>
 								<th class="text-center">Observación</th>
 							</tr>
@@ -83,13 +85,13 @@ if ($retornoError) {
 							foreach ($info as $lista):
 									echo "<tr>";
 									echo "<td>" . $lista['nombre_tipo_alerta'] . "</td>";
-									echo "<td class='text-center'>";
+									//echo "<td class='text-center'>";
 						?>
-									<button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#modal" id="<?php echo $lista['id_tipo_alerta']; ?>" >
+							<!--		<button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#modal" id="<?php echo $lista['id_tipo_alerta']; ?>" >
 										Editar <span class="glyphicon glyphicon-edit" aria-hidden="true">
-									</button>
+									</button> -->
 						<?php
-									echo "</td>";
+									//echo "</td>"; 
 									echo "<td>" . $lista['descripcion_tipo_alerta'] . "</td>";
 									echo "<td>" . $lista['observacion_alerta'] . "</td>";
 							endforeach;
