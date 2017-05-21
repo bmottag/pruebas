@@ -143,7 +143,7 @@
 					'fk_id_alerta' => $this->input->post('hddId'),
 					'fk_id_usuario' => $this->session->id,
 					'acepta' => 1,
-					'cifra' => $this->input->post('cifra'),
+					'ausentes' => $this->input->post('ausentes'),
 					'observacion' => $this->input->post('observacion'),
 					'fecha_registro' => date("Y-m-d G:i:s")
 				);	

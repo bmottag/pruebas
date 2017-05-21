@@ -222,9 +222,9 @@ if ($retornoError) {
 						<input type="hidden" id="hddId" name="hddId" value="<?php echo $lista["id_alerta"]; ?>"/>
 						
 						<div class="form-group">
-							<label class="col-sm-12 control-label" for="firstName">Cifra</label>
+							<label class="col-sm-12 control-label" for="ausentes">Número de ausentes</label>
 							<div class="col-sm-12">
-								<input type="text" id="cifra" name="cifra" class="form-control" required/>
+								<input type="text" id="ausentes" name="ausentes" class="form-control" required/>
 							</div>
 						</div>
 						
