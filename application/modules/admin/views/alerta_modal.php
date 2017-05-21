@@ -110,10 +110,19 @@
 			<div class="col-sm-6">
 				<div class="form-group text-left">
 					<label for="type" class="control-label">Duración (en minutos): *</label>
-					<select name="duracion" id="duracion" class="form-control" required>
+					<select name="duracion" id="duracion" class="form-control" required>						
+						<option value="00" <?php if($information && $information[0]["tiempo_duracion_alerta"] == "00") { echo "selected"; }  ?>>00</option>
+						<option value="05" <?php if($information && $information[0]["tiempo_duracion_alerta"] == "05") { echo "selected"; }  ?>>05</option>
+						<option value="10" <?php if($information && $information[0]["tiempo_duracion_alerta"] == "10") { echo "selected"; }  ?>>10</option>
 						<option value="15" <?php if($information && $information[0]["tiempo_duracion_alerta"] == "15") { echo "selected"; }  ?>>15</option>
+						<option value="20" <?php if($information && $information[0]["tiempo_duracion_alerta"] == "20") { echo "selected"; }  ?>>20</option>
+						<option value="25" <?php if($information && $information[0]["tiempo_duracion_alerta"] == "25") { echo "selected"; }  ?>>25</option>
 						<option value="30" <?php if($information && $information[0]["tiempo_duracion_alerta"] == "30") { echo "selected"; }  ?>>30</option>
+						<option value="35" <?php if($information && $information[0]["tiempo_duracion_alerta"] == "35") { echo "selected"; }  ?>>35</option>
+						<option value="40" <?php if($information && $information[0]["tiempo_duracion_alerta"] == "40") { echo "selected"; }  ?>>40</option>
 						<option value="45" <?php if($information && $information[0]["tiempo_duracion_alerta"] == "45") { echo "selected"; }  ?>>45</option>
+						<option value="50" <?php if($information && $information[0]["tiempo_duracion_alerta"] == "50") { echo "selected"; }  ?>>50</option>
+						<option value="55" <?php if($information && $information[0]["tiempo_duracion_alerta"] == "55") { echo "selected"; }  ?>>55</option>
 					</select>
 				</div>
 			</div>
