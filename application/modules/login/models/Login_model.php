@@ -35,7 +35,6 @@
 	    				$user["movil"] = $row->celular;
 						$user["state"] = $row->estado;
 						$user["rol"] = $row->fk_id_rol;
-						$user["sitio"] = $row->fk_id_sitio;
 	    		}
 	    	}
 			
