@@ -652,10 +652,11 @@ class Admin extends MX_Controller {
 			
 			if ($data["idSesion"] != 'x') {
 				$arrParam = array(
-					"idSitio" => $data["idSesion"]
+					"idSesion" => $data["idSesion"]
 				);
 				$data['information'] = $this->admin_model->get_sesiones($arrParam);//info sesiones
-			$data["idGrupo"] = $data['information'][0]['fk_id_grupo_instrumentos'];
+				
+				$data["idGrupo"] = $data['information'][0]['fk_id_grupo_instrumentos'];
 			}
 			
 			$this->load->view("sesiones_modal", $data);

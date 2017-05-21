@@ -338,6 +338,10 @@
 				if (array_key_exists("idGrupo", $arrDatos)) {
 					$this->db->where('S.fk_id_grupo_instrumentos', $arrDatos["idGrupo"]);
 				}
+				
+				if (array_key_exists("idSesion", $arrDatos)) {
+					$this->db->where('S.id_sesion', $arrDatos["idSesion"]);
+				}
 				$this->db->order_by('S.id_sesion', 'asc');
 				$query = $this->db->get('sesiones S');
 
