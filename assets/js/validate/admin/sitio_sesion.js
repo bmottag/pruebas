@@ -47,6 +47,7 @@ $( document ).ready( function () {
 						if( data.result == "error" )
 						{
 							$("#div_load").css("display", "none");
+							$("#div_error").css("display", "inline");
 							$('#btnSubmit').removeAttr('disabled');							
 							return false;
 						} 
@@ -56,7 +57,7 @@ $( document ).ready( function () {
 							$("#div_load").css("display", "none");
 							$('#btnSubmit').removeAttr('disabled');
 
-							var url = base_url + "admin/sitios";
+							var url = base_url + "admin/asociar_sesion/" + data.idRecord;
 							$(location).attr("href", url);
 						}
 						else

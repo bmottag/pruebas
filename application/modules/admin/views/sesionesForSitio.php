@@ -122,7 +122,7 @@ if ($retornoError) {
 									echo "<td class='text-center'>" . $lista['numero_citados'] . "</td>";
 									echo "<td class='text-center'>";
 						?>
-									<button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#modal" id="<?php echo $lista['id_sesion']; ?>" >
+									<button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#modal" id="<?php echo $lista['id_sitio_sesion']; ?>" >
 										Editar <span class="glyphicon glyphicon-edit" aria-hidden="true">
 									</button>
 						<?php

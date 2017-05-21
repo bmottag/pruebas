@@ -11,6 +11,7 @@
 	<form name="form" id="form" role="form" method="post" >
 		<input type="hidden" id="hddIdSitio" name="hddIdSitio" value="<?php echo $idSitio; ?>"/>
 		<input type="hidden" id="hddId" name="hddId" value="<?php echo $information?$information[0]["id_sitio_sesion"]:""; ?>"/>
+		<input type="hidden" id="hddIdSesion" name="hddIdSesion" value="<?php echo $information?$information[0]["fk_id_sesion"]:""; ?>"/>
 		
 		<div class="form-group text-left">
 			<label for="type" class="control-label">Prueba / Grupo de Instrumento / Sesión : *</label>
@@ -45,7 +46,7 @@
 				</div>
 			</div>
 			<div id="div_error" style="display:none">			
-				<div class="alert alert-danger"><span class="glyphicon glyphicon-remove" id="span_msj">&nbsp;</span></div>
+				<div class="alert alert-danger"><span class="glyphicon glyphicon-remove" id="span_msj">&nbsp;</span>Ya se encuentra relacionado el SITIO con esa SESIÓN.</div>
 			</div>	
 		</div>
 			

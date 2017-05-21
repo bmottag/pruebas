@@ -804,25 +804,40 @@ class Admin extends MX_Controller {
 	{			
 			header('Content-Type: application/json');
 			$data = array();
+			$error = FALSE;
 			
-			$idGrupo = $this->input->post('hddIdSitio');
-			$idSesion = $this->input->post('hddId');
+			$idSitio = $this->input->post('hddIdSitio');		
+			$idSitioSesion = $this->input->post('hddId');
+			$idSesion = $this->input->post('prueba');
+			
+			$data["idRecord"] = $idSitio;
+			
+			$arrParam = array("idSitio" => $idSitio,
+								"idSesion" => $idSesion);
 			
 			$msj = "Se adiciono la Sesión con exito.";
-			if ($idSesion != '') {
+			if ($idSitioSesion != '') {
 				$msj = "Se actualizo la Sesión con exito.";
+				$arrParam["idSitioSesionDistinta"] = $idSitioSesion;
+			}
+			//verificar que la relacion SITIO con SESION no existe en la base de datos
+			$verificar = $this->admin_model->get_sesiones_sitio($arrParam);
+
+			if($verificar){
+				$error = TRUE;
 			}
 
-			if ($idSesion = $this->admin_model->saveSitiosSesion()) {
-				$data["result"] = true;
-				$data["idRecord"] = $idGrupo;
-			
-				$this->session->set_flashdata('retornoExito', $msj);
-			} else {
-				$data["result"] = "error";
-				$data["idRecord"] = "";
-				
-				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador.');
+			if($error){
+					$data["result"] = "error";
+					$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Ya se encuentra relacionado el SITIO con esa SESIÓN.');
+			}else{
+				if ($idSesion = $this->admin_model->saveSitiosSesion()) {
+					$data["result"] = true;
+					$this->session->set_flashdata('retornoExito', $msj);
+				} else {
+					$data["result"] = "error";
+					$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador.');
+				}
 			}
 
 			echo json_encode($data);

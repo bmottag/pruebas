@@ -335,6 +335,9 @@
 		 */
 		public function get_sesiones($arrDatos) 
 		{
+				$year = date('Y');
+				$firstDay = date('Y-m-d', mktime(0,0,0, 1, 1, $year));
+			
 				$this->db->select();
 				$this->db->join('param_grupo_instrumentos G', 'G.id_grupo_instrumentos = S.fk_id_grupo_instrumentos', 'INNER');
 				$this->db->join('pruebas P', 'P.id_prueba = G.fk_id_prueba', 'INNER');
@@ -345,6 +348,9 @@
 				if (array_key_exists("idSesion", $arrDatos)) {
 					$this->db->where('S.id_sesion', $arrDatos["idSesion"]);
 				}
+				
+				$this->db->where('G.fecha >=', $firstDay); //se filtran por registros mayores al primer dia del año
+				
 				$this->db->order_by('S.id_sesion', 'asc');
 				$query = $this->db->get('sesiones S');
 
@@ -562,6 +568,21 @@
 				if (array_key_exists("idSitio", $arrDatos)) {
 					$this->db->where('X.fk_id_sitio', $arrDatos["idSitio"]);
 				}
+				
+				if (array_key_exists("idSesion", $arrDatos)) {
+					$this->db->where('X.fk_id_sesion', $arrDatos["idSesion"]);
+				}
+				
+				if (array_key_exists("idSesionSitio", $arrDatos)) {
+					$this->db->where('X.id_sitio_sesion', $arrDatos["idSesionSitio"]);
+				}
+				
+				//filtro para cuando se edita el SITIO - SESION se verifique que no se repite la relacion
+				if (array_key_exists("idSitioSesionDistinta", $arrDatos)) {
+					$this->db->where('X.id_sitio_sesion !=', $arrDatos["idSitioSesionDistinta"]);
+				}				
+
+				
 				$this->db->order_by('X.id_sitio_sesion', 'asc');	
 				$query = $this->db->get('sitio_sesion X');
 
