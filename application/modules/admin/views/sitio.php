@@ -91,6 +91,9 @@ if ($retornoError) {
 								<th class="text-center">Municipio</th>
 								<th class="text-center">Zona</th>
 								<th class="text-center">Nombre Contacto</th>
+								<th class="text-center">Teléfono Contacto</th>
+								<th class="text-center">Celular Contacto</th>
+								<th class="text-center">Email Contacto</th>
 							</tr>
 						</thead>
 						<tbody>							
@@ -137,7 +140,10 @@ if ($retornoError) {
 									echo "<td>" . $lista['dpto_divipola_nombre'] . "</td>";
 									echo "<td>" . $lista['mpio_divipola_nombre'] . "</td>";
 									echo "<td>" . $lista['nombre_zona'] . "</td>";
-									echo "<td>" . $lista['cotacto_nombres'] . " " . $lista['cotacto_apellidos'] . "</td>";
+									echo "<td>" . $lista['contacto_nombres'] . " " . $lista['contacto_apellidos'] . "</td>";
+									echo "<td>" . $lista['contacto_telefono'] . "</td>";
+									echo "<td>" . $lista['contacto_celular'] . "</td>";
+									echo "<td>" . $lista['contacto_email'] . "</td>";
 							endforeach;
 						?>
 						</tbody>

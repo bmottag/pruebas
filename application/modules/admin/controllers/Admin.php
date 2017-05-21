@@ -839,10 +839,10 @@ class Admin extends MX_Controller {
 	 */
 	public function contacto_sitio($idSitio)
 	{
-			$arrParam = array("idUsuario" => $idSitio);
-			$data['infoSitio'] = $this->admin_model->get_sitio($arrParam);//listado FLHA
+			$arrParam = array("idSitio" => $idSitio);
+			$data['infoSitio'] = $this->admin_model->get_sitios($arrParam);//info Sitio
 
-			$data["view"] = 'asignar_sitio_prueba';
+			$data["view"] = 'contacto_sitio';
 			$this->load->view("layout", $data);
 	}
 	
@@ -854,30 +854,21 @@ class Admin extends MX_Controller {
 	{
 			$data = array();			
 				
-			$data['linkBack'] = "admin/users/";
-			$data['titulo'] = "<i class='fa fa-gear fa-fw'></i>ASIGNAR SITIO";
+			$data['linkBack'] = "admin/sitios/";
+			$data['titulo'] = "<i class='fa fa-gear fa-fw'></i>Contacto del Sitio ";
 	
-			if ($this->admin_model->updateSitio()) {
+			if ($this->admin_model->updateSitioContacto()) {
 				
 				$arrParam = array(
-					"idSitio" => $this->input->post("sitio")
+					"idSitio" => $this->input->post("hddId")
 				);
-				$infoSitio = $this->admin_model->get_sitios($arrParam);//info sitio
+				$infoSitio = $this->admin_model->get_sitios($arrParam);//info sitio			
 				
-				$this->load->model("general_model");
-				$arrParam = array(
-					"table" => "pruebas",
-					"order" => "id_prueba",
-					"column" => "id_prueba",
-					"id" => $this->input->post("prueba")
-				);
-				$infoPrueba = $this->general_model->get_basic_search($arrParam);
-				
-				
-				$data["msj"] = "Se ingresaron los datos con exito.";
-				$data["msj"] .= "<br><strong>Número de documento: </strong>" . $this->input->post("hddUser");
-				$data["msj"] .= "<br><strong>Sitio: </strong>" . $infoSitio[0]['nombre_sitio'];
-				$data["msj"] .= "<br><strong>Prueba: </strong>" . $infoPrueba[0]['nombre_prueba'];;
+				$data["msj"] = "Se ingresaron los datos de <strong>CONTACTO</strong> del sitio con exito.";
+				$data["msj"] .= "<br><br><strong>Nombre: </strong>" . $infoSitio[0]['contacto_nombres'] . " " . $infoSitio[0]['contacto_apellidos'];
+				$data["msj"] .= "<br><strong>Teléfono: </strong>" . $infoSitio[0]['contacto_telefono'];
+				$data["msj"] .= "<br><strong>Celular: </strong>" . $infoSitio[0]['contacto_celular'];
+				$data["msj"] .= "<br><strong>Email: </strong>" . $infoSitio[0]['contacto_email'];;
 				$data["clase"] = "alert-success";
 			}else{
 				$data["msj"] = "<strong>Error!!!</strong> Contactarse con el administrador.";

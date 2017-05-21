@@ -419,6 +419,32 @@
 				}
 	    }
 		
+	    /**
+	     * Actualiar SITIO con el coordinador y el delegado
+	     * @since  20/5/2017
+	     */
+	    public function updateSitioContacto()
+		{
+				$idSitio = $this->input->post("hddId");
+
+				$data = array(
+					'contacto_nombres' => $this->input->post("nombres"),
+					'contacto_apellidos' => $this->input->post("apellidos"),
+					'contacto_telefono' => $this->input->post("telefono"),
+					'contacto_celular' => $this->input->post("movilNumber"),
+					'contacto_email' => $this->input->post("email")
+				);
+
+				$this->db->where('id_sitio', $idSitio);
+				$query = $this->db->update('sitios', $data);
+
+				if ($query) {
+					return true;
+				} else {
+					return false;
+				}
+	    }
+		
 		/**
 		 * Add/Edit ALERTA
 		 * @since 14/5/2017
