@@ -500,11 +500,16 @@
 		 */
 		public function get_grupo_instrumentos($arrDatos) 
 		{
+				$year = date('Y');
+				$firstDay = date('Y-m-d', mktime(0,0,0, 1, 1, $year));
+			
 				$this->db->select();
 				$this->db->join('pruebas P', 'P.id_prueba = G.fk_id_prueba', 'INNER');
 				if (array_key_exists("idGrupo", $arrDatos)) {
 					$this->db->where('G.id_grupo_instrumentos', $arrDatos["idGrupo"]);
 				}
+				$this->db->where('G.fecha >=', $firstDay); //se filtran por registros mayores al primer dia del año
+				
 				$this->db->order_by('P.nombre_prueba', 'asc');
 				$query = $this->db->get('param_grupo_instrumentos G');
 

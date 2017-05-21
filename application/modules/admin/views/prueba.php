@@ -35,7 +35,7 @@ $(function(){
 		<div class="col-lg-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<i class="fa fa-star"></i> LISTA DE PRUEBAS
+					<i class="fa fa-star"></i> LISTA DE PRUEBAS - AÑO <?php echo date('Y'); ?> 
 				</div>
 				<div class="panel-body">
 					<button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#modal" id="x">

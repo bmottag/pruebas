@@ -261,12 +261,14 @@ class Admin extends MX_Controller {
 	public function pruebas()
 	{
 			$this->load->model("general_model");
+			$year = date('Y');
 			$arrParam = array(
 				"table" => "pruebas",
 				"order" => "nombre_prueba",
-				"id" => "x"
+				"column" => "anio_prueba",
+				"id" => $year
 			);
-			$data['info'] = $this->general_model->get_basic_search($arrParam);
+			$data['info'] = $this->general_model->get_basic_search($arrParam);//lista pruebas; se filtra por año actual
 			
 			$data["view"] = 'prueba';
 			$this->load->view("layout", $data);
