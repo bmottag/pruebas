@@ -11,7 +11,7 @@
 		{
 				$fecha = date("Y-m-d G:i:s");
 				$userRol = $this->session->rol;
-				$userSitio = $this->session->sitio;
+				$userID = $this->session->id;
 
 			
 				$this->db->select();
@@ -21,20 +21,21 @@
 				$this->db->join('param_grupo_instrumentos G', 'G.id_grupo_instrumentos = S.fk_id_grupo_instrumentos', 'INNER'); //GRUPO INSTRUMENTO - SESIONES
 				$this->db->join('pruebas P', 'P.id_prueba = G.fk_id_prueba', 'INNER');//PRUEBA - GRUPO INSTRUMENTO
 				$this->db->join('sitio_sesion X', 'X.fk_id_sesion = S.id_sesion', 'INNER');//SITIO - SESION
+				$this->db->join('sitios Y', 'Y.id_sitio = X.fk_id_sitio', 'INNER');//SITIO
 
 				$this->db->where('A.estado_alerta', 1); //ALERTA ACTIVA
 				$this->db->where('A.fecha_inicio <=', $fecha); //FECHA INICIAL MAYOR A LA ACTUAL
-				$this->db->where('A.fecha_fin >=', $fecha); //FECHA INICIAL MAYOR A LA ACTUAL
+				$this->db->where('A.fecha_fin >=', $fecha); //FECHA FINAL MAYOR A LA ACTUAL
 				
 				if (array_key_exists("tipoAlerta", $arrDatos)) {
-					$this->db->where('A.fk_id_tipo_alerta', $arrDatos["tipoAlerta"]); //TIPO ALERTA = INFORMATIVA
+					$this->db->where('A.fk_id_tipo_alerta', $arrDatos["tipoAlerta"]); //FILTRO POR TIPO ALERTA
 				}
 				
 				$this->db->where('A.fk_id_rol', $userRol); //filtro por ROL DEL USUARIO
-				$this->db->where('X.fk_id_sitio', $userSitio); //filtro por SITIO DEL USUARIO
+				$this->db->where('Y.fk_id_user_delegado', $userID); //filtro por ID DEL USUARIO
 				
 				$this->db->order_by('A.id_alerta', 'desc');
-				$query = $this->db->get('alertas A' , 1);
+				$query = $this->db->get('alertas A');
 
 				if ($query->num_rows() > 0) {
 					return $query->result_array();
