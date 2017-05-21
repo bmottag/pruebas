@@ -474,7 +474,7 @@ class Admin extends MX_Controller {
 			);
 			$data['zonas'] = $this->general_model->get_basic_search($arrParam);//listado zonas
 			
-			$data['departamentos'] = $this->admin_model->get_dpto_divipola();//listado de departamentos
+			$data['departamentos'] = $this->general_model->get_dpto_divipola();//listado de departamentos
 			
 			if ($data["identificador"] != 'x') {
 				$arrParam = array(
@@ -526,8 +526,8 @@ class Admin extends MX_Controller {
 			header("Content-Type: text/plain; charset=utf-8"); //Para evitar problemas de acentos
 
 			$arrParam['idDepto'] = $this->input->post('identificador');
-
-			$lista = $this->admin_model->get_municipios_by($arrParam);
+			$this->load->model("general_model");
+			$lista = $this->general_model->get_municipios_by($arrParam);
 		
 			echo "<option value=''>Select...</option>";
 			if ($lista) {
