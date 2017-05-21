@@ -78,6 +78,7 @@
 				$data = array(
 					'fk_id_alerta' => $this->input->post('hddId'),
 					'fk_id_usuario' => $this->session->id,
+					'fk_id_sitio_sesion' => $this->input->post('hddIdSitioSesion'),
 					'acepta' => 1,
 					'fecha_registro' => date("Y-m-d G:i:s")
 				);	
@@ -120,6 +121,7 @@
 				$data = array(
 					'fk_id_alerta' => $this->input->post('hddId'),
 					'fk_id_usuario' => $this->session->id,
+					'fk_id_sitio_sesion' => $this->input->post('hddIdSitioSesion'),
 					'acepta' => $this->input->post('acepta'),
 					'observacion' => $this->input->post('observacion'),
 					'fecha_registro' => date("Y-m-d G:i:s")
@@ -138,20 +140,53 @@
 		 * Guardar respuesta del usuario
 		 * @since 19/5/2017
 		 */
-		public function saveRegistroConsolidacion() 
+		public function saveRegistroConsolidacion($infoSitioSesion) 
 		{
+				$ausentes = $this->input->post('ausentes');
+				$idSitioSesion = $this->input->post('hddIdSitioSesion');
+		
 				$data = array(
 					'fk_id_alerta' => $this->input->post('hddId'),
 					'fk_id_usuario' => $this->session->id,
+					'fk_id_sitio_sesion' => $idSitioSesion,
 					'acepta' => 1,
-					'ausentes' => $this->input->post('ausentes'),
+					'ausentes' => $ausentes,
 					'fecha_registro' => date("Y-m-d G:i:s")
 				);	
 
 				$query = $this->db->insert('registro', $data);
 
 				if ($query) {
+					
+					//actualizo tabla sitio_sesion con la cantidad de ausentes
+					$presentes = $infoSitioSesion[0]['numero_citados'] - $ausentes;
+					
+					$data = array(
+						'numero_ausentes' => $ausentes,
+						'numero_presentes_efectivos' => $presentes
+					);
+
+					$this->db->where('id_sitio_sesion', $idSitioSesion);
+					$query = $this->db->update('sitio_sesion', $data);
+
 					return true;
+				} else {
+					return false;
+				}
+		}
+		
+		/**
+		 * Consultar informacion del sitio-sesion
+		 * @since 19/5/2017
+		 */
+		public function get_info_sitio_sesion($arrDatos) 
+		{
+				$this->db->select();
+				$this->db->where('id_sitio_sesion', $this->input->post('hddIdSitioSesion'));
+				$query = $this->db->get('sitio_sesion SS');
+
+				if ($query->num_rows() > 0) {
+					return $query->result_array();
 				} else {
 					return false;
 				}

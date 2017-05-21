@@ -25,11 +25,11 @@ class Dashboard extends MX_Controller {
 			
 			$arrParam = array("tipoAlerta" => 2);
 			$data['infoAlertaNotificacion'] = $this->dashboard_model->get_alerta_by($arrParam);
-//echo $this->db->last_query();			
-//pr($data['infoAlertaNotificacion']); exit;
+
 			$arrParam = array("tipoAlerta" => 3);
 			$data['infoAlertaConsolidacion'] = $this->dashboard_model->get_alerta_by($arrParam);
-		
+//echo $this->db->last_query();			
+//pr($data['infoAlertaConsolidacion']); exit;		
 			$data["view"] = "dashboard";
 			$this->load->view("layout", $data);
 	}
@@ -86,13 +86,21 @@ class Dashboard extends MX_Controller {
 	public function registro_consolidacion()
 	{
 			$data = array();
+			$ausentes = $this->input->post('ausentes');
+			
+			//buscar datos de la tabla sitio_sesion		
+			$infoSitioSesion = $this->dashboard_model->get_info_sitio_sesion();
 
 			$msj = "Gracias por su respuesta.";
 
-			if ($this->dashboard_model->saveRegistroConsolidacion()) {
-				$this->session->set_flashdata('retornoExito', $msj);
-			} else {
-				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador.');
+			if($ausentes == ""){
+				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Debe indicar los ausentes.');
+			}else{
+				if ($this->dashboard_model->saveRegistroConsolidacion($infoSitioSesion)) {
+					$this->session->set_flashdata('retornoExito', $msj);
+				} else {
+					$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador.');
+				}
 			}
 
 
