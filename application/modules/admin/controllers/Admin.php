@@ -703,22 +703,18 @@ class Admin extends MX_Controller {
 		
 	/**
 	 * Formulario para asignar delegado al sitio
-     * @since 13/5/2017
+     * @since 21/5/2017
 	 */
 	public function asignar_delegado($idSitio, $rol)
 	{
 			$arrParam = array("idSitio" => $idSitio);
 			$data['infoSitio'] = $this->admin_model->get_sitios($arrParam);//informacion sitio
 			$data['rol'] = $rol;
+			$lista = "lista_" . $rol;
 
-			$arrParam = array(
-				"table" => "usuario",
-				"order" => "nombres_usuario, apellidos_usuario",
-				"id" => "x"
-			);
 			$this->load->model("general_model");
-			$data['usuarios'] = $this->general_model->get_basic_search($arrParam);//listado usuarios
-			
+			$data['usuarios'] = $this->general_model->$lista($arrParam);//listado usuarios
+
 			$data["view"] = 'asignar_delegado';
 			$this->load->view("layout", $data);
 	}

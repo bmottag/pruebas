@@ -45,6 +45,17 @@
 										<?php echo $infoSitio[0]['dpto_divipola_nombre']; ?>
 										<br><strong>MUNICIPIO: </strong>
 										<?php echo $infoSitio[0]['mpio_divipola_nombre']; ?>
+										
+<?php if($infoSitio[0]['fk_id_user_delegado']){  ?>
+										<br><strong>DELEGADO C.C.: </strong>
+										<?php echo $infoSitio[0]['delegado']; ?>
+<?php } ?>
+										
+<?php if($infoSitio[0]['fk_id_user_delegado']){  ?>
+										<br><strong>COORDINADOR C.C.: </strong>
+										<?php echo $infoSitio[0]['coordinador']; ?>
+<?php } ?>
+										
 									</div>
 								</div>
 							</div>		
@@ -55,12 +66,21 @@
 						<div class="form-group">
 							<label class="col-sm-4 control-label" for="usuario">Usuario</label>
 							<div class="col-sm-5">
-								<select name="usuario" id="usuario" class="form-control" >
-									<option value=''>Select...</option>
-									<?php for ($i = 0; $i < count($usuarios); $i++) { ?>
-										<option value="<?php echo $usuarios[$i]["id_usuario"]; ?>" <?php if($usuarios[0]["id_usuario"] == $infoSitio[$i]["fk_id_user_" . $rol]) { echo "selected"; }  ?>><?php echo $usuarios[$i]["apellidos_usuario"]; ?></option>	
-									<?php } ?>
-								</select>
+
+							<?php if($usuarios){ ?>
+								
+							<select name="usuario" id="usuario" class="form-control" >
+								<option value=''>Select...</option>
+								<?php for ($i = 0; $i < count($usuarios); $i++) { ?>
+									<option value="<?php echo $usuarios[$i]["id_usuario"]; ?>" <?php if($infoSitio[0]["fk_id_user_". $rol] == $usuarios[$i]["id_usuario"]) { echo "selected"; }  ?>><?php echo $usuarios[$i]["nombres_usuario"] . " " . $usuarios[$i]["apellidos_usuario"] . " C.C." . $usuarios[$i]["numero_documento"]; ?></option>
+								<?php } ?>
+							</select>
+							
+							<?php }else{ 
+									echo "No hay " .  $rol . " disponible."; 
+							} ?>
+							
+							
 							</div>
 						</div>
 												
