@@ -118,10 +118,12 @@ if ($retornoError) {
 									
 									<td class='text-center'>
 									<a href="<?php echo base_url("admin/asignar_delegado/" . $lista['id_sitio'] . "/delegado"); ?>" class="btn btn-danger btn-xs">Delegado <span class="fa fa-gears fa-fw" aria-hidden="true"></a>
+									<br><?php if($lista['fk_id_user_delegado']){ echo $lista['delegado'];} ?>
 									</td>
 									
 									<td class='text-center'>
 									<a href="<?php echo base_url("admin/asignar_delegado/" . $lista['id_sitio'] . "/coordinador"); ?>" class="btn btn-danger btn-xs">Coordinador <span class="fa fa-gears fa-fw" aria-hidden="true"></a>
+									<br><?php if($lista['fk_id_user_delegado']){ echo $lista['coordinador'];} ?>
 									</td>
 						<?php
 									echo "<td>" . $lista['barrio_sitio'] . "</td>";

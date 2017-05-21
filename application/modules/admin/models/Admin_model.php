@@ -234,11 +234,14 @@
 		 */
 		public function get_sitios($arrDatos) 
 		{
-				$this->db->select();
+				$this->db->select('S.*, O.nombre_organizacion, R.nombre_region, D.*, Z.nombre_zona, U.numero_documento as delegado, Y.numero_documento as coordinador');
 				$this->db->join('param_organizaciones O', 'O.id_organizacion = S.fk_id_organizacion', 'INNER');
 				$this->db->join('param_regiones R', 'R.id_region = S.fk_id_region', 'INNER');
 				$this->db->join('param_divipola D', 'D.mpio_divipola = S.fk_mpio_divipola', 'INNER');
 				$this->db->join('param_zonas Z', 'Z.id_zona = S.fk_id_zona', 'INNER');
+				$this->db->join('usuario U', 'U.id_usuario = S.fk_id_user_delegado', 'LEFT');
+				$this->db->join('usuario Y', 'Y.id_usuario = S.fk_id_user_coordinador', 'LEFT');
+				
 				if (array_key_exists("idSitio", $arrDatos)) {
 					$this->db->where('S.id_sitio', $arrDatos["idSitio"]);
 				}
