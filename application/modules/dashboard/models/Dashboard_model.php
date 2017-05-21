@@ -145,7 +145,6 @@
 					'fk_id_usuario' => $this->session->id,
 					'acepta' => 1,
 					'ausentes' => $this->input->post('ausentes'),
-					'observacion' => $this->input->post('observacion'),
 					'fecha_registro' => date("Y-m-d G:i:s")
 				);	
 

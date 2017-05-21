@@ -227,14 +227,7 @@ if ($retornoError) {
 								<input type="text" id="ausentes" name="ausentes" class="form-control" required/>
 							</div>
 						</div>
-						
-						<div class="form-group">
-							<label class="col-sm-12 control-label" for="observacion">Observación</label>
-							<div class="col-sm-12">
-								<textarea id="observacion" name="observacion" placeholder="Observación"  class="form-control" rows="2"></textarea>
-							</div>
-						</div>
-					
+											
 						<div class="form-group">
 							<div class="row" align="center">
 								<div style="width:50%;" align="center">
