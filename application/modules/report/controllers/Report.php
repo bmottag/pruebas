@@ -8,23 +8,12 @@ class Report extends CI_Controller {
 		$this->load->model("report_model");
 		//$this->load->library('PHPExcel.php');
     }
-	
+		
 	/**
-	 * Search
-     * @since 24/11/2016
-     * @author BMOTTAG
+	 * Informacion de los registros
+     * @since 21/05/2017
 	 */
-    public function payrollSearch() 
-	{
-			$this->load->view("layout", $data);
-    }
-	
-	/**
-	 * Search by daterange safety reports
-     * @since 6/01/2017
-     * @author BMOTTAG
-	 */
-    public function searchByDateRange($tipoAlerta) 
+    public function registros($tipoAlerta) 
 	{
 
 			$data["titulo"] = "<i class='fa fa-book fa-fw'></i> PAYROLL REPORT";
@@ -49,7 +38,80 @@ class Report extends CI_Controller {
 			$this->load->view("layout", $data);
     }
 	
+	/**
+	 * Buscar por regiones
+     * @since 21/05/2017
+	 */
+    public function searchByRegiones() 
+	{
+			$data["titulo"] = "<i class='fa fa-book fa-fw'></i> Buscar Sitios por Regiones";
+			$data["subTitulo"] = "Región";
+			$data["botonRegreso"] = "report/searchByRegiones";
+			$data['listaDepartamentos'] = FALSE;//lista para filtrar por departamentos
+			
+			//Lista Regiones
+			$this->load->model("general_model");
+			$arrParam = array(
+				"table" => "param_regiones",
+				"order" => "nombre_region",
+				"id" => "x"
+			);
+			$data['listaRegiones'] = $this->general_model->get_basic_search($arrParam);//Lista Regiones
+			
+			$data["view"] = "form_search_by";
+
+			if($idRegion = $this->input->post('region')){
+				
+				$arrParam = array(
+					"table" => "param_regiones",
+					"order" => "nombre_region",
+					"column" => "id_region",
+					"id" => $idRegion
+				);
+				$data['infoRegion'] = $this->general_model->get_basic_search($arrParam);//Info Regiones
+				
+				$arrParam = array("idRegion" => $idRegion);
+				$data['info'] = $this->report_model->get_sitios_by($arrParam);
+				$data["view"] = "lista_sitios_by";
+			}
+			
+			$this->load->view("layout", $data);
+    }
 	
+	/**
+	 * Buscar por Departamento
+     * @since 21/05/2017
+	 */
+    public function searchByDepartamento() 
+	{
+			$data["titulo"] = "<i class='fa fa-book fa-fw'></i> Buscar Sitios por Departamento - Municipio";
+			$data["subTitulo"] = "Departamento";
+			$data["botonRegreso"] = "report/searchByDepartamento";
+			$data['listaRegiones'] = FALSE;//lista para filtrar por regiones
+			
+			//Lista Departamentos
+			$this->load->model("general_model");
+			$data['listaDepartamentos'] = $this->general_model->get_dpto_divipola();//listado de departamentos
+			
+			$data["view"] = "form_search_by";
+
+			if($idDepto = $this->input->post('depto')){
+				
+				$arrParam = array(
+					"table" => "param_divipola",
+					"order" => "dpto_divipola",
+					"column" => "dpto_divipola",
+					"id" => $idDepto
+				);
+				$data['infoDepartamento'] = $this->general_model->get_basic_search($arrParam);//Info Depto
+				
+				$arrParam = array("idDepto" => $idDepto);
+				$data['info'] = $this->report_model->get_sitios_by($arrParam);
+				$data["view"] = "lista_sitios_by";
+			}
+			
+			$this->load->view("layout", $data);
+    }
 	
 	
 	

@@ -23,7 +23,7 @@
  * @since  18/11/2016
  */
 	$userRol = $this->session->rol;
-	if($userRol==1){ //If it is an ADMIN user, show an special menu
+	if($userRol==1 || $userRol==2){ //ADMIN Y DIRECTIVO
 ?>				
 
 		<li class="dropdown">
@@ -32,26 +32,33 @@
 			</a>
 			<ul class="dropdown-menu dropdown-messages">
 			
-			<!--
 				<li>
-					<a href="<?php echo base_url("report/searchByDateRange/payrollByAdmin"); ?>"><i class="fa fa-book fa-fw"></i> Auditoria</a>
-				</li>
-			-->
-				<li>
-					<a href="<?php echo base_url("report/searchByDateRange/1"); ?>"><i class="fa fa-life-saver fa-fw"></i> Información Alerta Informativa</a>
+					<a href="<?php echo base_url("report/registros/1"); ?>"><i class="fa fa-life-saver fa-fw"></i> Información Alerta Informativa</a>
 				</li>
 				
 				<li>
-					<a href="<?php echo base_url("report/searchByDateRange/2"); ?>"><i class="fa fa-life-saver fa-fw"></i> Información Alerta Notificación </a>
+					<a href="<?php echo base_url("report/registros/2"); ?>"><i class="fa fa-life-saver fa-fw"></i> Información Alerta Notificación </a>
 				</li>
 				
 				<li>
-					<a href="<?php echo base_url("report/searchByDateRange/3"); ?>"><i class="fa fa-life-saver fa-fw"></i> Información Alerta Consolidación</a>
+					<a href="<?php echo base_url("report/registros/3"); ?>"><i class="fa fa-life-saver fa-fw"></i> Información Alerta Consolidación</a>
+				</li>
+				
+				<li class="divider"></li>
+								
+				<li>
+					<a href="<?php echo base_url("report/searchByRegiones/3"); ?>"><i class="fa fa-life-saver fa-fw"></i> Buscar por Regiones</a>
+				</li>
+				
+				<li>
+					<a href="<?php echo base_url("report/searchByDepartamento/3"); ?>"><i class="fa fa-life-saver fa-fw"></i> Buscar por Departamento - Municipios</a>
 				</li>
 				
 			</ul>
 		</li>
-
+<?php 
+if($userRol==1){ //If it is an ADMIN user, show an special menu
+?>
 		<li class="dropdown">
 			<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 				<i class="fa fa-gear fa-fw"></i>Configuraciones <i class="fa fa-caret-down"></i>
@@ -89,7 +96,8 @@
 			</ul>
 		</li>
 <?php
-	}
+}
+}
 ?>				
 
 		<li>
