@@ -126,6 +126,7 @@ class Dashboard extends MX_Controller {
 	{
 			$data = array();
 			$ausentes = $this->input->post('ausentes');
+			$citados = $this->input->post('citados');
 			
 			//buscar datos de la tabla sitio_sesion		
 			$infoSitioSesion = $this->dashboard_model->get_info_sitio_sesion();
@@ -133,12 +134,16 @@ class Dashboard extends MX_Controller {
 			$msj = "Gracias por su respuesta.";
 
 			if($ausentes == ""){
-				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Debe indicar los ausentes.');
+				$this->session->set_flashdata('retornoErrorConsolidacion', '<strong>Error!!!</strong> Debe indicar los ausentes.');
 			}else{
-				if ($this->dashboard_model->saveRegistroConsolidacion($infoSitioSesion)) {
-					$this->session->set_flashdata('retornoExito', $msj);
-				} else {
-					$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador.');
+				if($ausentes > $citados){
+					$this->session->set_flashdata('retornoErrorConsolidacion', '<strong>Error!!!</strong> La cantidad de ausentes no puede ser mayor a la cantidad de citados.');
+				}else{
+					if ($this->dashboard_model->saveRegistroConsolidacion($infoSitioSesion)) {
+						$this->session->set_flashdata('retornoExito', $msj);
+					} else {
+						$this->session->set_flashdata('retornoErrorConsolidacion', '<strong>Error!!!</strong> Contactarse con el Administrador.');
+					}
 				}
 			}
 
