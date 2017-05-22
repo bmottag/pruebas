@@ -8,64 +8,110 @@
 </div>
 
 <div class="modal-body">
+
+	<p class="text-danger text-left">Los campos con * son obligatorios.</p>
+
 	<form name="form" id="form" role="form" method="post" >
 		<input type="hidden" id="hddId" name="hddId" value="<?php echo $information?$information[0]["id_usuario"]:""; ?>"/>
 		
-		<div class="form-group text-left">
-			<label class="control-label" for="firstName">Nombres</label>
-			<input type="text" id="firstName" name="firstName" class="form-control" value="<?php echo $information?$information[0]["nombres_usuario"]:""; ?>" placeholder="Nombres" required >
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="form-group text-left">
+					<label class="control-label" for="firstName">Nombres : *</label>
+					<input type="text" id="firstName" name="firstName" class="form-control" value="<?php echo $information?$information[0]["nombres_usuario"]:""; ?>" placeholder="Nombres" required >
+				</div>
+			</div>
+
+			<div class="col-sm-6">
+				<div class="form-group text-left">
+					<label class="control-label" for="lastName">Apellidos : *</label>
+					<input type="text" id="lastName" name="lastName" class="form-control" value="<?php echo $information?$information[0]["apellidos_usuario"]:""; ?>" placeholder="Apellidos" required >
+				</div>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="form-group text-left">
+					<label class="control-label" for="tipoDocumento">Tipo de documento : *</label>
+					<select name="tipoDocumento" id="tipoDocumento" class="form-control" required>
+						<option value=''>Select...</option>
+						<option value=1 >Cédula de Ciudadanía</option>
+						<option value=2 >Cédula de Extranjería</option>
+					</select>
+				</div>
+			</div>
+		
+			<div class="col-sm-6">
+				<div class="form-group text-left">
+					<label class="control-label" for="documento">Número de documento : *</label>
+					<input type="text" id="documento" name="documento" class="form-control" value="<?php echo $information?$information[0]["numero_documento"]:""; ?>" placeholder="Número de documento" required >
+				</div>
+			</div>
+			
 		</div>
 
-		<div class="form-group text-left">
-			<label class="control-label" for="lastName">Apellidos</label>
-			<input type="text" id="lastName" name="lastName" class="form-control" value="<?php echo $information?$information[0]["apellidos_usuario"]:""; ?>" placeholder="Apellidos" required >
-		</div>
-		
-		<div class="form-group text-left">
-			<label class="control-label" for="documento">Número de documento</label>
-			<input type="text" id="documento" name="documento" class="form-control" value="<?php echo $information?$information[0]["numero_documento"]:""; ?>" placeholder="Número de documento" required >
-		</div>
-		
-		<div class="form-group text-left">
-			<label class="control-label" for="address">Dirección</label>
-			<input type="text" id="address" name="address" class="form-control" value="<?php echo $information?$information[0]["direccion_usuario"]:""; ?>" placeholder="Dirección" >
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="form-group text-left">
+					<label class="control-label" for="telefono">Teléfono fijo</label>
+					<input type="text" id="telefono" name="telefono" class="form-control" value="<?php echo $information?$information[0]["telefono_fijo"]:""; ?>" placeholder="Teléfono fijo" >
+				</div>
+			</div>
+			
+			<div class="col-sm-6">
+				<div class="form-group text-left">
+					<label class="control-label" for="movilNumber">Celular : *</label>
+					<input type="text" id="movilNumber" name="movilNumber" class="form-control" value="<?php echo $information?$information[0]["celular"]:""; ?>" placeholder="Celular" required >
+				</div>
+			</div>
 		</div>
 
-		<div class="form-group text-left">
-			<label class="control-label" for="telefono">Teléfono fijo</label>
-			<input type="text" id="telefono" name="telefono" class="form-control" value="<?php echo $information?$information[0]["telefono_fijo"]:""; ?>" placeholder="Teléfono fijo" >
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="form-group text-left">
+					<label class="control-label" for="email">Email : *</label>
+					<input type="text" class="form-control" id="email" name="email" value="<?php echo $information?$information[0]["email"]:""; ?>" placeholder="Email" />
+				</div>
+			</div>
+			
+			<div class="col-sm-6">
+				<div class="form-group text-left">
+					<label class="control-label" for="perfil">Rol : *</label>
+					<select name="rol" id="rol" class="form-control" >
+						<option value=''>Select...</option>
+						<?php for ($i = 0; $i < count($roles); $i++) { ?>
+							<option value="<?php echo $roles[$i]["id_rol"]; ?>" <?php if($information[0]["fk_id_rol"] == $roles[$i]["id_rol"]) { echo "selected"; }  ?>><?php echo $roles[$i]["nombre_rol"]; ?></option>	
+						<?php } ?>
+					</select>
+				</div>
+			</div>
 		</div>
 		
-		<div class="form-group text-left">
-			<label class="control-label" for="movilNumber">Celular</label>
-			<input type="text" id="movilNumber" name="movilNumber" class="form-control" value="<?php echo $information?$information[0]["celular"]:""; ?>" placeholder="Celular" required >
-		</div>
-		
-		<div class="form-group text-left">
-			<label class="control-label" for="email">Email</label>
-			<input type="text" class="form-control" id="email" name="email" value="<?php echo $information?$information[0]["email"]:""; ?>" placeholder="Email" />
-		</div>
-		
-		<div class="form-group text-left">
-			<label class="control-label" for="perfil">Rol</label>
-			<select name="rol" id="rol" class="form-control" >
-				<option value=''>Select...</option>
-				<?php for ($i = 0; $i < count($roles); $i++) { ?>
-					<option value="<?php echo $roles[$i]["id_rol"]; ?>" <?php if($information[0]["fk_id_rol"] == $roles[$i]["id_rol"]) { echo "selected"; }  ?>><?php echo $roles[$i]["nombre_rol"]; ?></option>	
-				<?php } ?>
-			</select>
-		</div>
-		
+		<div class="row">
+			<div class="col-sm-8">
+				<div class="form-group text-left">
+					<label class="control-label" for="address">Dirección :</label>
+					<input type="text" id="address" name="address" class="form-control" value="<?php echo $information?$information[0]["direccion_usuario"]:""; ?>" placeholder="Dirección" >
+				</div>
+			</div>
+			
+			
 <?php if($information){ ?>
-		<div class="form-group text-left">
-			<label class="control-label" for="estado">Estado</label>
-			<select name="estado" id="estado" class="form-control" required>
-				<option value=''>Select...</option>
-				<option value=1 <?php if($information[0]["estado"] == 1) { echo "selected"; }  ?>>Activo</option>
-				<option value=2 <?php if($information[0]["estado"] == 2) { echo "selected"; }  ?>>Inactivo</option>
-			</select>
-		</div>
+			<div class="col-sm-4">
+				<div class="form-group text-left">
+					<label class="control-label" for="estado">Estado : *</label>
+					<select name="estado" id="estado" class="form-control" required>
+						<option value=''>Select...</option>
+						<option value=1 <?php if($information[0]["estado"] == 1) { echo "selected"; }  ?>>Activo</option>
+						<option value=2 <?php if($information[0]["estado"] == 2) { echo "selected"; }  ?>>Inactivo</option>
+					</select>
+				</div>
+			</div>
 <?php } ?>
+		</div>
+		
+
 		
 		<div class="form-group">
 			<div class="row" align="center">
