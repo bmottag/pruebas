@@ -1,6 +1,8 @@
 $( document ).ready( function () {
 	
+	$("#nombreSitio").convertirMayuscula();
 	$("#celular").bloquearTexto().maxlength(12);
+	$("#barrioSitio").convertirMayuscula();
 	
 	$( "#form" ).validate( {
 		rules: {

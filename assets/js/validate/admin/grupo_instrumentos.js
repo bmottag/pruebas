@@ -1,10 +1,12 @@
 $( document ).ready( function () {
 	
+	$("#nombreGrupoInstrumentos").convertirMayuscula();
+	
 	$( "#form" ).validate( {
 		rules: {
-			prueba:		{ required: true },
+			prueba:							{ required: true },
 			nombreGrupoInstrumentos:		{ required: true, minlength: 3, maxlength:30 },
-			fecha:		{ required: true }
+			fecha:							{ required: true }
 		},
 		errorElement: "em",
 		errorPlacement: function ( error, element ) {

@@ -1,5 +1,7 @@
 $( document ).ready( function () {
 	
+	$("#nombrePrueba").convertirMayuscula();
+	
 	$( "#form" ).validate( {
 		rules: {
 			nombrePrueba:		{ required: true, minlength: 3, maxlength:30 },

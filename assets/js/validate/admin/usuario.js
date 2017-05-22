@@ -1,9 +1,12 @@
 $( document ).ready( function () {
 
-	$("#firstName").bloquearNumeros().maxlength(25);
-	$("#lastName").bloquearNumeros().maxlength(25);		
+	$("#firstName").bloquearNumeros().convertirMayuscula().maxlength(25);
+	$("#lastName").bloquearNumeros().convertirMayuscula().maxlength(25);		
 	$("#documento").bloquearTexto().maxlength(12);
 	$("#movilNumber").bloquearTexto().maxlength(15);
+	
+
+	
 	
 	$( "#form" ).validate( {
 		rules: {
