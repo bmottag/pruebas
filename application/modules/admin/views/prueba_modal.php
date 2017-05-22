@@ -8,41 +8,59 @@
 </div>
 
 <div class="modal-body">
+
+	<p class="text-danger text-left">Los campos con * son obligatorios.</p>
+	
 	<form name="form" id="form" role="form" method="post" >
 		<input type="hidden" id="hddId" name="hddId" value="<?php echo $information?$information[0]["id_prueba"]:""; ?>"/>
-		<div class="form-group text-left">
-				<label for="type" class="control-label">Nombre Prueba : *</label>
-				<input type="text" id="nombrePrueba" name="nombrePrueba" class="form-control" value="<?php echo $information?$information[0]["nombre_prueba"]:""; ?>" placeholder="Nombre Prueba" required >
+		
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="form-group text-left">
+						<label for="type" class="control-label">Nombre Prueba : *</label>
+						<input type="text" id="nombrePrueba" name="nombrePrueba" class="form-control" value="<?php echo $information?$information[0]["nombre_prueba"]:""; ?>" placeholder="Nombre Prueba" required >
+				</div>
+			</div>
 		</div>
 		
-		<div class="form-group text-left">
-			<label class="control-label" for="descripcion">Descripción : *</label>
-			<textarea id="descripcion" name="descripcion" class="form-control" rows="3"><?php echo $information?$information[0]["descripcion_prueba"]:""; ?></textarea>
-		</div>
-		
-		<div class="form-group text-left">
-			<label for="type" class="control-label">Año : *</label>
-			<select name="anio" id="anio" class="form-control" required>
-				<option value='' >Select...</option>
-				<?php
-				for ($i = 2017; $i < 2030; $i++) {
-					?>
-					<option value='<?php echo $i; ?>' <?php
-					if ($information && $i == $information[0]["anio_prueba"]) {
-						echo 'selected="selected"';
-					}
-					?>><?php echo $i; ?></option>
-						<?php } ?>									
-			</select>
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="form-group text-left">
+					<label class="control-label" for="descripcion">Descripción : *</label>
+					<textarea id="descripcion" name="descripcion" class="form-control" rows="3"><?php echo $information?$information[0]["descripcion_prueba"]:""; ?></textarea>
+				</div>
+			</div>
 		</div>
 
-		<div class="form-group text-left">
-			<label for="type" class="control-label">Semestre : *</label>
-			<select name="semestre" id="semestre" class="form-control" required>
-				<option value="">Select...</option>
-				<option value=1 <?php if($information[0]["semestre_prueba"] == 1) { echo "selected"; }  ?>>I</option>
-				<option value=2 <?php if($information[0]["semestre_prueba"] == 2) { echo "selected"; }  ?>>II</option>
-			</select>
+		<div class="row">
+			<div class="col-sm-6">				
+				<div class="form-group text-left">
+					<label for="type" class="control-label">Año : *</label>
+					<select name="anio" id="anio" class="form-control" required>
+						<option value='' >Select...</option>
+						<?php
+						for ($i = 2017; $i < 2030; $i++) {
+							?>
+							<option value='<?php echo $i; ?>' <?php
+							if ($information && $i == $information[0]["anio_prueba"]) {
+								echo 'selected="selected"';
+							}
+							?>><?php echo $i; ?></option>
+								<?php } ?>									
+					</select>
+				</div>
+			</div>
+				
+			<div class="col-sm-6">
+				<div class="form-group text-left">
+					<label for="type" class="control-label">Semestre : *</label>
+					<select name="semestre" id="semestre" class="form-control" required>
+						<option value="">Select...</option>
+						<option value=1 <?php if($information[0]["semestre_prueba"] == 1) { echo "selected"; }  ?>>I</option>
+						<option value=2 <?php if($information[0]["semestre_prueba"] == 2) { echo "selected"; }  ?>>II</option>
+					</select>
+				</div>
+			</div>
 		</div>
 		
 		<div class="form-group">
