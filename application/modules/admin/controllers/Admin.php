@@ -784,8 +784,7 @@ class Admin extends MX_Controller {
 			$data["idSitio"] = $this->input->post("idSitio");
 			$data["idSesionSitio"] = $this->input->post("idSesionSitio");
 			
-			$arrParam = array();
-			$data['infoPruebas'] = $this->admin_model->get_sesiones($arrParam);//lista sesiones
+
 			
 			if ($data["idSesionSitio"] != 'x') {
 				$arrParam = array(
@@ -793,6 +792,16 @@ class Admin extends MX_Controller {
 				);
 				$data['information'] = $this->admin_model->get_sesiones_sitio($arrParam);//info sesiones por sitio
 				$data["idSitio"] = $data['information'][0]['fk_id_sitio'];
+				
+				//si es para editar muestro lista con todas las sesiones vigentes
+				$arrParam = array();
+				$data['infoSesiones'] = $this->admin_model->get_sesiones($arrParam);//lista sesiones
+			}else{
+				
+				//si es para adicionar uno nuevo muestro lista con sesiones que no se han utilizado
+				$arrParam = array("idSitio" => $data["idSitio"]);
+				$data['infoSesiones'] = $this->admin_model->lista_sesiones_for_sitio($arrParam);//lista sesiones
+				
 			}
 			
 			$this->load->view("sesionesForSitio_modal", $data);
@@ -810,7 +819,8 @@ class Admin extends MX_Controller {
 			
 			$idSitio = $this->input->post('hddIdSitio');		
 			$idSitioSesion = $this->input->post('hddId');
-			$idSesion = $this->input->post('prueba');
+			$idSesionBD = $this->input->post('hddIdSesion');
+			$idSesion = $this->input->post('sesion');
 			
 			$data["idRecord"] = $idSitio;
 			
@@ -821,17 +831,21 @@ class Admin extends MX_Controller {
 			if ($idSitioSesion != '') {
 				$msj = "Se actualizó la Sesión con exito.";
 				$arrParam["idSitioSesionDistinta"] = $idSitioSesion;
-			}
-			//verificar que la relacion SITIO con SESION no existe en la base de datos
-			$verificar = $this->admin_model->get_sesiones_sitio($arrParam);
+				
+				//verificar que al editar la relacion SITIO con SESION no existe en la base de datos
+				if($idSesionBD!=$idSesion){ //si la sesion guardada anteriormente es diferente de la nueva seion entonces verifico
+					$verificar = $this->admin_model->get_sesiones_sitio($arrParam);
 
-			if($verificar){
-				$error = TRUE;
+					if($verificar){
+						$error = TRUE;
+					}
+				}
 			}
+
 
 			if($error){
 					$data["result"] = "error";
-					$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Ya se encuentra relacionado el SITIO con esa SESIÓN.');
+					//$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Ya se encuentra relacionado el SITIO con esa SESIÓN.');
 			}else{
 				if ($idSesion = $this->admin_model->saveSitiosSesion()) {
 					$data["result"] = true;

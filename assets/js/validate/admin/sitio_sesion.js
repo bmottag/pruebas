@@ -4,7 +4,7 @@ $( document ).ready( function () {
 	
 	$( "#form" ).validate( {
 		rules: {
-			prueba:		{ required: true },
+			sesion:		{ required: true },
 			citados:	{ required: true, minlength: 1, maxlength:5 }
 		},
 		errorElement: "em",
@@ -64,14 +64,14 @@ $( document ).ready( function () {
 						{
 							alert('Error. Reload the web page.');
 							$("#div_load").css("display", "none");
-							$("#div_error").css("display", "inline");
+							$("#div_error").css("display", "none");
 							$('#btnSubmit').removeAttr('disabled');
 						}	
 					},
 					error: function(result) {
-						alert('Error. Reload the web page.');
+						alert('Error. Contactar con el Administrador.');
 						$("#div_load").css("display", "none");
-						$("#div_error").css("display", "inline");
+						$("#div_error").css("display", "none");
 						$('#btnSubmit').removeAttr('disabled');
 					}
 					

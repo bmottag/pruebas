@@ -2,7 +2,7 @@ $( document ).ready( function () {
 		
 	$( "#form" ).validate( {
 		rules: {
-			sesion:				{ required: true, maxlength:3 },
+			sesion:				{ required: true, maxlength:30 },
 			hourIni:			{ required: true },
 			minIni:				{ required: true },
 			hourFin:			{ required: true },

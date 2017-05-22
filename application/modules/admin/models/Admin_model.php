@@ -522,6 +522,32 @@
 		}
 		
 		/**
+		 * Lista de sesiones que no se han asignado a un sitio
+		 * @since  22/5/2017
+		 */
+		public function lista_sesiones_for_sitio($arrData)
+		{
+				$year = date('Y');
+				$firstDay = date('Y-m-d', mktime(0,0,0, 1, 1, $year));
+		
+				$sql = "SELECT S.*, P.nombre_prueba, G.nombre_grupo_instrumentos";
+				$sql.= " FROM sesiones S";
+				$sql.= " INNER JOIN param_grupo_instrumentos G ON G.id_grupo_instrumentos = S.fk_id_grupo_instrumentos";
+				$sql.= " INNER JOIN pruebas P ON P.id_prueba = G.fk_id_prueba";
+				$sql.= " WHERE S.id_sesion NOT IN ( SELECT fk_id_sesion FROM sitio_sesion S WHERE fk_id_sitio = " . $arrData["idSitio"] . ")";
+				$sql.= " AND G.fecha >= '$firstDay'";
+				$sql.= " ORDER BY P.nombre_prueba, G.nombre_grupo_instrumentos, S.sesion_prueba ASC";
+				
+				$query = $this->db->query($sql);
+				
+				if ($query->num_rows() > 0) {
+					return $query->result_array();
+				} else {
+					return false;
+				}
+		}
+		
+		/**
 		 * Add/Edit SESIONES para SITIO
 		 * @since 18/5/2017
 		 */
@@ -532,7 +558,7 @@
 								
 				$data = array(
 					'fk_id_sitio' => $idSitio,
-					'fk_id_sesion' => $this->input->post('prueba'),
+					'fk_id_sesion' => $this->input->post('sesion'),
 					'numero_citados' => $this->input->post('citados')
 				);
 				

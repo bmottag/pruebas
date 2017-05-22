@@ -8,6 +8,9 @@
 </div>
 
 <div class="modal-body">
+
+	<p class="text-danger text-left">Los campos con * son obligatorios.</p>
+
 	<form name="form" id="form" role="form" method="post" >
 		<input type="hidden" id="hddIdSitio" name="hddIdSitio" value="<?php echo $idSitio; ?>"/>
 		<input type="hidden" id="hddId" name="hddId" value="<?php echo $information?$information[0]["id_sitio_sesion"]:""; ?>"/>
@@ -15,12 +18,20 @@
 		
 		<div class="form-group text-left">
 			<label for="type" class="control-label">Prueba / Grupo de Instrumento / Sesión : *</label>
-			<select name="prueba" id="prueba" class="form-control" >
-				<option value=''>Select...</option>
-				<?php for ($i = 0; $i < count($infoPruebas); $i++) { ?>
-					<option value="<?php echo $infoPruebas[$i]["id_prueba"]; ?>" <?php if($information[0]["fk_id_sesion"] == $infoPruebas[$i]["id_prueba"]) { echo "selected"; }  ?>><?php echo $infoPruebas[$i]["nombre_prueba"] . "/" . $infoPruebas[$i]["nombre_grupo_instrumentos"] . "/" . $infoPruebas[$i]["sesion_prueba"]; ?></option>	
-				<?php } ?>
-			</select>
+			<?php if($infoSesiones){ ?>
+				<select name="sesion" id="sesion" class="form-control" >
+					<option value=''>Select...</option>
+					<?php for ($i = 0; $i < count($infoSesiones); $i++) { ?>
+						<option value="<?php echo $infoSesiones[$i]["id_sesion"]; ?>" <?php if($information[0]["fk_id_sesion"] == $infoSesiones[$i]["id_sesion"]) { echo "selected"; }  ?>><?php echo $infoSesiones[$i]["nombre_prueba"] . "/" . $infoSesiones[$i]["nombre_grupo_instrumentos"] . "/" . $infoSesiones[$i]["sesion_prueba"]; ?></option>	
+					<?php } ?>
+				</select>
+			<?php }else{ ?>
+				
+				<select name="sesion" id="sesion" class="form-control" >
+					<option value=''>Select...</option>
+				</select>
+				<p class="text-danger text-left">No hay sesiones para mostrar.</p>
+			<?php } ?>
 		</div>
 
 		<div class="form-group text-left">

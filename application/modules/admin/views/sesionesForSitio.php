@@ -84,6 +84,7 @@ $(function(){
 		<div class="col-lg-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
+					<a class="btn btn-success" href=" <?php echo base_url(). 'admin/sitios'; ?> "><span class="glyphicon glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Regresar </a> 
 					<i class="fa fa-gears "></i> LISTA
 				</div>
 				<div class="panel-body">
