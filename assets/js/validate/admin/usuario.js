@@ -59,6 +59,7 @@ $( document ).ready( function () {
 						if( data.result == "error" )
 						{
 							$("#div_load").css("display", "none");
+							$("#div_error").css("display", "inline");
 							$('#btnSubmit').removeAttr('disabled');							
 							return false;
 						} 
