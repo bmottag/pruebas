@@ -67,22 +67,6 @@ if($userRol==1){ //If it is an ADMIN user, show an special menu
 				<li>
 					<a href="<?php echo base_url("admin/users"); ?>"><i class="fa fa-users fa-fw"></i> Usuarios</a>
 				</li>
-								
-				<li class="divider"></li>
-
-				<li>
-					<a href="<?php echo base_url("admin/tipo_alertas"); ?>"><i class="fa fa-ticket fa-fw"></i> Tipo de Alertas</a>
-				</li>
-				
-				<li>
-					<a href="<?php echo base_url("admin/alertas"); ?>"><i class="fa fa-calendar fa-fw"></i> Alertas</a>
-				</li>
-				
-				<li class="divider"></li>
-
-				<li>
-					<a href="<?php echo base_url("admin/sitios"); ?>"><i class="fa fa-building-o fa-fw"></i> Sitios</a>
-				</li>
 				
 				<li class="divider"></li>
 				
@@ -93,6 +77,24 @@ if($userRol==1){ //If it is an ADMIN user, show an special menu
 				<li>
 					<a href="<?php echo base_url("admin/grupo_instrumentos"); ?>"><i class="fa fa-bullseye fa-fw"></i> Grupo Instrumentos</a>
 				</li>
+											
+				<li class="divider"></li>
+
+				<li>
+					<a href="<?php echo base_url("admin/sitios"); ?>"><i class="fa fa-building-o fa-fw"></i> Sitios</a>
+				</li>
+				
+				<li class="divider"></li>
+
+				<li>
+					<a href="<?php echo base_url("admin/tipo_alertas"); ?>"><i class="fa fa-ticket fa-fw"></i> Tipo de Alertas</a>
+				</li>
+				
+				<li>
+					<a href="<?php echo base_url("admin/alertas"); ?>"><i class="fa fa-calendar fa-fw"></i> Alertas</a>
+				</li>
+				
+
 			</ul>
 		</li>
 <?php
