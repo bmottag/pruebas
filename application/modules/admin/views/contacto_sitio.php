@@ -15,72 +15,88 @@
 		</div>
 		<!-- /.col-lg-12 -->				
 	</div>
+	
+	<div class="row">
+		<div class="col-md-4">
+			<div class="panel panel-success">
+				<div class="panel-heading">
+					<strong>Nombre Sitio: </strong><?php echo $infoSitio[0]['nombre_sitio']; ?>
+					<br><strong>Dirección: </strong><?php echo $infoSitio[0]['direccion_sitio']; ?>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-md-4">
+			<div class="panel panel-success">
+				<div class="panel-heading">
+					<strong>Región: </strong><?php echo $infoSitio[0]['nombre_region']; ?>
+					<br><strong>Departamento: </strong><?php echo $infoSitio[0]['dpto_divipola_nombre']; ?>
+					<br><strong>Municipio: </strong><?php echo $infoSitio[0]['mpio_divipola_nombre']; ?>
+					<br><strong>Zona: </strong><?php echo $infoSitio[0]['nombre_zona']; ?>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-md-4">
+			<div class="panel panel-success">
+				<div class="panel-heading">
+<?php if($infoSitio[0]['fk_id_user_delegado']){  ?>
+					<strong>Delegado C.C.: </strong><?php echo $infoSitio[0]['delegado']; ?>
+<?php } ?>
+										
+<?php if($infoSitio[0]['fk_id_user_delegado']){  ?>
+					<br><strong>Coordinador C.C.: </strong><?php echo $infoSitio[0]['coordinador']; ?>
+<?php } ?>
+				</div>
+			</div>
+		</div>
+	</div>
 			
 	<!-- /.row -->
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
+					<a class="btn btn-success" href=" <?php echo base_url(). 'admin/sitios'; ?> "><span class="glyphicon glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Regresar </a> 
 					<i class="fa fa-gears"></i> Contacto del Sitio
 				</div>
 				<div class="panel-body">
+				
+					<p class="text-danger text-left">Los campos con * son obligatorios.</p>
 
 					<form  name="form" id="form" class="form-horizontal" method="post" action="<?php echo base_url("admin/guardar_contacto"); ?>" >
 						<input type="hidden" id="hddId" name="hddId" value="<?php echo $infoSitio[0]["id_sitio"]; ?>"/>
-						
-					<div class="row">
-						<div class="col-lg-12">
-						
-							<div class="row" align="center">
-								<div style="width:50%;" align="center">
-									<div class="alert alert-success">
-										<strong>NOMBRE SITIO: </strong>
-										<?php echo $infoSitio[0]['nombre_sitio']; ?>
-										<br><strong>DIRECCIÓN: </strong>
-										<?php echo $infoSitio[0]['direccion_sitio']; ?>
-										<br><strong>REGIÓN: </strong>
-										<?php echo $infoSitio[0]['nombre_region']; ?>
-										<br><strong>DEPARTAMENTO: </strong>
-										<?php echo $infoSitio[0]['dpto_divipola_nombre']; ?>
-										<br><strong>MUNICIPIO: </strong>
-										<?php echo $infoSitio[0]['mpio_divipola_nombre']; ?>
-									</div>
-								</div>
-							</div>		
-						
-						</div>
-					</div>
 
 						<div class="form-group">
-							<label class="col-sm-4 control-label" for="nombres">Nombres</label>
+							<label class="col-sm-4 control-label" for="nombres">Nombres : *</label>
 							<div class="col-sm-5">
 								<input type="text" id="nombres" name="nombres" class="form-control" value="<?php echo $infoSitio?$infoSitio[0]["contacto_nombres"]:""; ?>" placeholder="Nombres" required >
 							</div>
 						</div>
 						
 						<div class="form-group">
-							<label class="col-sm-4 control-label" for="apellidos">Apellidos</label>
+							<label class="col-sm-4 control-label" for="apellidos">Apellidos : *</label>
 							<div class="col-sm-5">
 								<input type="text" id="apellidos" name="apellidos" class="form-control" value="<?php echo $infoSitio?$infoSitio[0]["contacto_apellidos"]:""; ?>" placeholder="Apellidos" required >
 							</div>
 						</div>
 						
 						<div class="form-group">
-							<label class="col-sm-4 control-label" for="telefono">Teléfono fijo</label>
+							<label class="col-sm-4 control-label" for="telefono">Teléfono fijo :</label>
 							<div class="col-sm-5">
 								<input type="text" id="telefono" name="telefono" class="form-control" value="<?php echo $infoSitio?$infoSitio[0]["contacto_telefono"]:""; ?>" placeholder="Teléfono fijo" >
 							</div>
 						</div>
 						
 						<div class="form-group">
-							<label class="col-sm-4 control-label" for="movilNumber">Celular</label>
+							<label class="col-sm-4 control-label" for="movilNumber">Celular : *</label>
 							<div class="col-sm-5">
 								<input type="text" id="movilNumber" name="movilNumber" class="form-control" value="<?php echo $infoSitio?$infoSitio[0]["contacto_celular"]:""; ?>" placeholder="Celular" required >
 							</div>
 						</div>
 						
 						<div class="form-group">
-							<label class="col-sm-4 control-label" for="email">Email</label>
+							<label class="col-sm-4 control-label" for="email">Email : *</label>
 							<div class="col-sm-5">
 								<input type="text" class="form-control" id="email" name="email" value="<?php echo $infoSitio?$infoSitio[0]["contacto_email"]:""; ?>" placeholder="Email" />
 							</div>
