@@ -1,5 +1,13 @@
 <a name="anclaUp"></a>
 
+<script type="text/javascript">
+	function reloadPage() {
+		location.reload(true)
+	}
+
+	setInterval('reloadPage()','30000');//30 segundos
+</script>
+
 <div id="page-wrapper">
 	<div class="row"><br>
 		<div class="col-md-12">
