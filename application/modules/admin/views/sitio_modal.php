@@ -9,34 +9,41 @@
 </div>
 
 <div class="modal-body">
+
+	<p class="text-danger text-left">Los campos con * son obligatorios.</p>
+
 	<form name="form" id="form" role="form" method="post" >
 		<input type="hidden" id="hddId" name="hddId" value="<?php echo $information?$information[0]["id_sitio"]:""; ?>"/>	
 		
-		<div class="col-sm-6">
-			<div class="form-group text-left">
-				<label for="type" class="control-label">Nombre Sitio : *</label>
-				<input type="text" id="nombreSitio" name="nombreSitio" class="form-control" value="<?php echo $information?$information[0]["nombre_sitio"]:""; ?>" placeholder="Nombre Sitio" required >
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="form-group text-left">
+					<label for="type" class="control-label">Nombre Sitio : *</label>
+					<input type="text" id="nombreSitio" name="nombreSitio" class="form-control" value="<?php echo $information?$information[0]["nombre_sitio"]:""; ?>" placeholder="Nombre Sitio" required >
+				</div>
+			</div>
+			
+			<div class="col-sm-6">
+				<div class="form-group text-left">
+					<label for="type" class="control-label">Barrio Sitio : *</label>
+					<input type="text" id="barrioSitio" name="barrioSitio" class="form-control" value="<?php echo $information?$information[0]["barrio_sitio"]:""; ?>" placeholder="Barrio Sitio" required >
+				</div>
 			</div>
 		</div>
-		
-		<div class="col-sm-6">
-			<div class="form-group text-left">
-				<label for="type" class="control-label">Barrio Sitio : *</label>
-				<input type="text" id="barrioSitio" name="barrioSitio" class="form-control" value="<?php echo $information?$information[0]["barrio_sitio"]:""; ?>" placeholder="Barrio Sitio" required >
-			</div>
-		</div>
-		
-		<div class="col-sm-6">
-			<div class="form-group text-left">
+
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="form-group text-left">
 					<label for="type" class="control-label">Dirección Sitio : *</label>
 					<input type="text" id="direccion" name="direccion" class="form-control" value="<?php echo $information?$information[0]["direccion_sitio"]:""; ?>" placeholder="Dirección Sitio" required >
+				</div>
 			</div>
-		</div>
-		
-		<div class="col-sm-6">
-			<div class="form-group text-left">
-				<label for="type" class="control-label">Codigo Postal : *</label>
-				<input type="text" id="codigoPostal" name="codigoPostal" class="form-control" value="<?php echo $information?$information[0]["codigo_postal_sitio"]:""; ?>" placeholder="Codigo Postal" required >
+			
+			<div class="col-sm-6">
+				<div class="form-group text-left">
+					<label for="type" class="control-label">Codigo Postal : *</label>
+					<input type="text" id="codigoPostal" name="codigoPostal" class="form-control" value="<?php echo $information?$information[0]["codigo_postal_sitio"]:""; ?>" placeholder="Codigo Postal" required >
+				</div>
 			</div>
 		</div>
 		
@@ -56,94 +63,98 @@
 			</div>
 		</div>
 		
-		<div class="col-sm-6">
-			<div class="form-group text-left">
-				<label for="type" class="control-label">Celular : *</label>
-				<input type="text" id="celular" name="celular" class="form-control" value="<?php echo $information?$information[0]["celular_sitio"]:""; ?>" placeholder="Celular Sitio" required >
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="form-group text-left">
+					<label for="type" class="control-label">Celular : *</label>
+					<input type="text" id="celular" name="celular" class="form-control" value="<?php echo $information?$information[0]["celular_sitio"]:""; ?>" placeholder="Celular Sitio" required >
+				</div>
 			</div>
-		</div>
-		
-		<div class="col-sm-6">
-			<div class="form-group text-left">
-				<label for="type" class="control-label">Email : *</label>
-				<input type="text" id="email" name="email" class="form-control" value="<?php echo $information?$information[0]["email_sitio"]:""; ?>" placeholder="Email" required >
-			</div>
-		</div>
-		
-		<div class="col-sm-6">
-			<div class="form-group text-left">
-				<label for="type" class="control-label">Organización : *</label>
-				<select name="organizacion" id="organizacion" class="form-control" >
-					<option value=''>Select...</option>
-					<?php for ($i = 0; $i < count($organizaciones); $i++) { ?>
-						<option value="<?php echo $organizaciones[$i]["id_organizacion"]; ?>" <?php if($information[0]["fk_id_organizacion"] == $organizaciones[$i]["id_organizacion"]) { echo "selected"; }  ?>><?php echo $organizaciones[$i]["nombre_organizacion"]; ?></option>	
-					<?php } ?>
-				</select>
-			</div>
-		</div>
-		
-		<div class="col-sm-6">
-			<div class="form-group text-left">
-				<label for="type" class="control-label">Región : *</label>
-				<select name="region" id="region" class="form-control" >
-					<option value=''>Select...</option>
-					<?php for ($i = 0; $i < count($regiones); $i++) { ?>
-						<option value="<?php echo $regiones[$i]["id_region"]; ?>" <?php if($information[0]["fk_id_region"] == $regiones[$i]["id_region"]) { echo "selected"; }  ?>><?php echo $regiones[$i]["nombre_region"]; ?></option>	
-					<?php } ?>
-				</select>
-			</div>
-		</div>
-		
-		<div class="col-sm-6">
-			<div class="form-group text-left">
-				<label for="type" class="control-label">Departamento : *</label>
-				<select name="depto" id="depto" class="form-control" >
-					<option value=''>Select...</option>
-					<?php for ($i = 0; $i < count($departamentos); $i++) { ?>
-						<option value="<?php echo $departamentos[$i]["dpto_divipola"]; ?>" <?php if($information[0]["fk_dpto_divipola"] == $departamentos[$i]["dpto_divipola"]) { echo "selected"; }  ?>><?php echo $departamentos[$i]["dpto_divipola_nombre"]; ?></option>	
-					<?php } ?>
-				</select>
-			</div>
-		</div>
-		
-		<div class="col-sm-6">
-			<div class="form-group text-left">
-				<label for="type" class="control-label">Municipio : *</label>
-				
-
-				<select name="mcpio" id="mcpio" class="form-control" required>
-				
-					<?php if($information){ ?>
-					<option value=''>Select...</option>
-						<option value="<?php echo $information[0]["fk_mpio_divipola"]; ?>" selected><?php echo $information[0]["mpio_divipola_nombre"]; ?></option>
-					<?php } ?>
-
-				</select>
-
 			
+			<div class="col-sm-6">
+				<div class="form-group text-left">
+					<label for="type" class="control-label">Email : *</label>
+					<input type="text" id="email" name="email" class="form-control" value="<?php echo $information?$information[0]["email_sitio"]:""; ?>" placeholder="Email" required >
+				</div>
 			</div>
 		</div>
 			
-		<div class="col-sm-6">
-			<div class="form-group text-left">
-				<label for="type" class="control-label">Zona : *</label>
-				<select name="zona" id="zona" class="form-control" >
-					<option value=''>Select...</option>
-					<?php for ($i = 0; $i < count($zonas); $i++) { ?>
-						<option value="<?php echo $zonas[$i]["id_zona"]; ?>" <?php if($information[0]["fk_id_zona"] == $zonas[$i]["id_zona"]) { echo "selected"; }  ?>><?php echo $zonas[$i]["nombre_zona"]; ?></option>
-					<?php } ?>
-				</select>
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="form-group text-left">
+					<label for="type" class="control-label">Organización : *</label>
+					<select name="organizacion" id="organizacion" class="form-control" >
+						<option value=''>Select...</option>
+						<?php for ($i = 0; $i < count($organizaciones); $i++) { ?>
+							<option value="<?php echo $organizaciones[$i]["id_organizacion"]; ?>" <?php if($information[0]["fk_id_organizacion"] == $organizaciones[$i]["id_organizacion"]) { echo "selected"; }  ?>><?php echo $organizaciones[$i]["nombre_organizacion"]; ?></option>	
+						<?php } ?>
+					</select>
+				</div>
+			</div>
+			
+			<div class="col-sm-6">
+				<div class="form-group text-left">
+					<label for="type" class="control-label">Región : *</label>
+					<select name="region" id="region" class="form-control" >
+						<option value=''>Select...</option>
+						<?php for ($i = 0; $i < count($regiones); $i++) { ?>
+							<option value="<?php echo $regiones[$i]["id_region"]; ?>" <?php if($information[0]["fk_id_region"] == $regiones[$i]["id_region"]) { echo "selected"; }  ?>><?php echo $regiones[$i]["nombre_region"]; ?></option>	
+						<?php } ?>
+					</select>
+				</div>
 			</div>
 		</div>
-		
-		<div class="col-sm-6">	
-			<div class="form-group text-left">
-				<label class="control-label" for="estado">Estado</label>
-				<select name="estado" id="estado" class="form-control" required>
-					<option value=''>Select...</option>
-					<option value=1 <?php if($information[0]["estado_sitio"] == 1) { echo "selected"; }  ?>>Activo</option>
-					<option value=2 <?php if($information[0]["estado_sitio"] == 2) { echo "selected"; }  ?>>Inactivo</option>
-				</select>
+			
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="form-group text-left">
+					<label for="type" class="control-label">Departamento : *</label>
+					<select name="depto" id="depto" class="form-control" >
+						<option value=''>Select...</option>
+						<?php for ($i = 0; $i < count($departamentos); $i++) { ?>
+							<option value="<?php echo $departamentos[$i]["dpto_divipola"]; ?>" <?php if($information[0]["fk_dpto_divipola"] == $departamentos[$i]["dpto_divipola"]) { echo "selected"; }  ?>><?php echo $departamentos[$i]["dpto_divipola_nombre"]; ?></option>	
+						<?php } ?>
+					</select>
+				</div>
+			</div>
+			
+			<div class="col-sm-6">
+				<div class="form-group text-left">
+					<label for="type" class="control-label">Municipio : *</label>
+
+					<select name="mcpio" id="mcpio" class="form-control" required>					
+						<?php if($information){ ?>
+						<option value=''>Select...</option>
+							<option value="<?php echo $information[0]["fk_mpio_divipola"]; ?>" selected><?php echo $information[0]["mpio_divipola_nombre"]; ?></option>
+						<?php } ?>
+					</select>
+				
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="form-group text-left">
+					<label for="type" class="control-label">Zona : *</label>
+					<select name="zona" id="zona" class="form-control" >
+						<option value=''>Select...</option>
+						<?php for ($i = 0; $i < count($zonas); $i++) { ?>
+							<option value="<?php echo $zonas[$i]["id_zona"]; ?>" <?php if($information[0]["fk_id_zona"] == $zonas[$i]["id_zona"]) { echo "selected"; }  ?>><?php echo $zonas[$i]["nombre_zona"]; ?></option>
+						<?php } ?>
+					</select>
+				</div>
+			</div>
+			
+			<div class="col-sm-6">	
+				<div class="form-group text-left">
+					<label class="control-label" for="estado">Estado</label>
+					<select name="estado" id="estado" class="form-control" required>
+						<option value=''>Select...</option>
+						<option value=1 <?php if($information[0]["estado_sitio"] == 1) { echo "selected"; }  ?>>Activo</option>
+						<option value=2 <?php if($information[0]["estado_sitio"] == 2) { echo "selected"; }  ?>>Inactivo</option>
+					</select>
+				</div>
 			</div>
 		</div>
 		
