@@ -43,6 +43,42 @@ $(function(){
 		<!-- /.col-lg-12 -->				
 	</div>
 	
+	<div class="row">
+		<div class="col-md-4">
+			<div class="panel panel-success">
+				<div class="panel-heading">
+					<strong>Nombre Sitio: </strong><?php echo $infoSitio[0]['nombre_sitio']; ?>
+					<br><strong>Dirección: </strong><?php echo $infoSitio[0]['direccion_sitio']; ?>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-md-4">
+			<div class="panel panel-success">
+				<div class="panel-heading">
+					<strong>Nodo o Región: </strong><?php echo $infoSitio[0]['nombre_region']; ?>
+					<br><strong>Departamento: </strong><?php echo $infoSitio[0]['dpto_divipola_nombre']; ?>
+					<br><strong>Municipio: </strong><?php echo $infoSitio[0]['mpio_divipola_nombre']; ?>
+					<br><strong>Zona: </strong><?php echo $infoSitio[0]['nombre_zona']; ?>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-md-4">
+			<div class="panel panel-success">
+				<div class="panel-heading">
+<?php if($infoSitio[0]['fk_id_user_delegado']){  ?>
+					<strong>Delegado C.C.: </strong><?php echo $infoSitio[0]['delegado']; ?>
+<?php } ?>
+										
+<?php if($infoSitio[0]['fk_id_user_delegado']){  ?>
+					<br><strong>Coordinador C.C.: </strong><?php echo $infoSitio[0]['coordinador']; ?>
+<?php } ?>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 	<!-- /.row -->
 	<div class="row">
 		<div class="col-lg-12">
@@ -51,29 +87,6 @@ $(function(){
 					<i class="fa fa-gears "></i> LISTA
 				</div>
 				<div class="panel-body">
-				
-					<div class="row">
-						<div class="col-lg-12">
-						
-							<div class="row" align="center">
-								<div style="width:50%;" align="center">
-									<div class="alert alert-success">
-										<strong>NOMBRE SITIO: </strong>
-										<?php echo $infoSitio[0]['nombre_sitio']; ?>
-										<br><strong>DIRECCIÓN: </strong>
-										<?php echo $infoSitio[0]['direccion_sitio']; ?>
-										<br><strong>REGIÓN: </strong>
-										<?php echo $infoSitio[0]['nombre_region']; ?>
-										<br><strong>DEPARTAMENTO: </strong>
-										<?php echo $infoSitio[0]['dpto_divipola_nombre']; ?>
-										<br><strong>MUNICIPIO: </strong>
-										<?php echo $infoSitio[0]['mpio_divipola_nombre']; ?>
-									</div>
-								</div>
-							</div>	
-						
-						</div>
-					</div>
 				
 					<button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#modal" id="<?php echo $infoSitio[0]['id_sitio']; ?>">
 							<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Asociar con Prueba / Grupo de Instrumento / Sesión

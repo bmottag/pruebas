@@ -127,7 +127,7 @@ class General_model extends CI_Model {
 				if (array_key_exists("idSitio", $arrDatos)) {
 					$this->db->where('S.id_sitio', $arrDatos["idSitio"]);
 				}
-				$this->db->order_by('S.nombre_sitio', 'asc');
+				$this->db->order_by('nombre_region, dpto_divipola_nombre, mpio_divipola_nombre, nombre_zona', 'asc');
 				$query = $this->db->get('sitios S');
 
 				if ($query->num_rows() > 0) {

@@ -6,7 +6,7 @@ $( document ).ready( function () {
 	
 	$( "#form" ).validate( {
 		rules: {
-			nombreSitio:		{ required: true, minlength: 3, maxlength:50 },
+			nombreSitio:		{ required: true, minlength: 3, maxlength:120 },
 			barrioSitio:		{ required: true, minlength: 3, maxlength:50 },
 			direccion:			{ required: true, minlength: 3, maxlength:80 },
 			codigoPostal:		{ required: true, minlength: 3, maxlength:10 },

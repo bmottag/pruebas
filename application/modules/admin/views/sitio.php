@@ -73,23 +73,25 @@ if ($retornoError) {
 						<thead>
 							<tr>
 								<th class="text-center">Nombre Sitio</th>
-								<th class="text-center">Dirección</th>
+								
 								<th class="text-center">Editar</th>
 								<th class="text-center">Contacto</th>
 								<th class="text-center">Asociar con Prueba / Grupo de Instrumento / Sesión </th>
 								<th class="text-center">Delegado</th>
 								<th class="text-center">Coordinador</th>
-								<th class="text-center">Barrio</th>
+								
+								<th class="text-center">Nodo o región</th>
+								<th class="text-center">Departamento</th>
+								<th class="text-center">Municipio</th>
+								<th class="text-center">Zona</th>
+								
+								<th class="text-center">Dirección</th>
 								<th class="text-center">Teléfono</th>
-								<th class="text-center">Fax</th>
 								<th class="text-center">Celular</th>
 								<th class="text-center">Email</th>
 								<th class="text-center">Codigo Postal</th>
 								<th class="text-center">Nombre Organización</th>
-								<th class="text-center">Región</th>
-								<th class="text-center">Departamento</th>
-								<th class="text-center">Municipio</th>
-								<th class="text-center">Zona</th>
+								
 								<th class="text-center">Nombre Contacto</th>
 								<th class="text-center">Teléfono Contacto</th>
 								<th class="text-center">Celular Contacto</th>
@@ -101,7 +103,7 @@ if ($retornoError) {
 							foreach ($info as $lista):
 									echo "<tr>";
 									echo "<td>" . $lista['nombre_sitio'] . "</td>";
-									echo "<td>" . $lista['direccion_sitio'] . "</td>";
+									
 									echo "<td class='text-center'>";
 						?>
 									<button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#modal" id="<?php echo $lista['id_sitio']; ?>" >
@@ -149,17 +151,18 @@ if($lista['fk_id_user_coordinador']){
 						?>
 									</td>
 						<?php
-									echo "<td>" . $lista['barrio_sitio'] . "</td>";
-									echo "<td class='text-center'>" . $lista['telefono_sitio'] . "</td>";
-									echo "<td class='text-center'>" . $lista['fax_sitio'] . "</td>";
-									echo "<td class='text-center'>" . $lista['celular_sitio'] . "</td>";
-									echo "<td>" . $lista['email_sitio'] . "</td>";
-									echo "<td class='text-center'>" . $lista['codigo_postal_sitio'] . "</td>";
-									echo "<td>" . $lista['nombre_organizacion'] . "</td>";
 									echo "<td>" . $lista['nombre_region'] . "</td>";
 									echo "<td>" . $lista['dpto_divipola_nombre'] . "</td>";
 									echo "<td>" . $lista['mpio_divipola_nombre'] . "</td>";
 									echo "<td>" . $lista['nombre_zona'] . "</td>";
+						
+									echo "<td>" . $lista['direccion_sitio'] . "</td>";
+									echo "<td class='text-center'>" . $lista['telefono_sitio'] . "</td>";
+									echo "<td class='text-center'>" . $lista['celular_sitio'] . "</td>";
+									echo "<td>" . $lista['email_sitio'] . "</td>";
+									echo "<td class='text-center'>" . $lista['codigo_postal_sitio'] . "</td>";
+									echo "<td>" . $lista['nombre_organizacion'] . "</td>";
+
 									echo "<td>" . $lista['contacto_nombres'] . " " . $lista['contacto_apellidos'] . "</td>";
 									echo "<td>" . $lista['contacto_telefono'] . "</td>";
 									echo "<td>" . $lista['contacto_celular'] . "</td>";
@@ -196,6 +199,7 @@ if($lista['fk_id_user_coordinador']){
 $(document).ready(function() {
 	$('#dataTables').DataTable({
 		responsive: true,
+		order: false,
 		"pageLength": 25
 	});
 });

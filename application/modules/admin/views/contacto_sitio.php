@@ -29,7 +29,7 @@
 		<div class="col-md-4">
 			<div class="panel panel-success">
 				<div class="panel-heading">
-					<strong>Región: </strong><?php echo $infoSitio[0]['nombre_region']; ?>
+					<strong>Nodo o Región: </strong><?php echo $infoSitio[0]['nombre_region']; ?>
 					<br><strong>Departamento: </strong><?php echo $infoSitio[0]['dpto_divipola_nombre']; ?>
 					<br><strong>Municipio: </strong><?php echo $infoSitio[0]['mpio_divipola_nombre']; ?>
 					<br><strong>Zona: </strong><?php echo $infoSitio[0]['nombre_zona']; ?>

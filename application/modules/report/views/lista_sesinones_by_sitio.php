@@ -13,6 +13,42 @@
 		<!-- /.col-lg-12 -->				
 	</div>
 	
+	<div class="row">
+		<div class="col-md-4">
+			<div class="panel panel-success">
+				<div class="panel-heading">
+					<strong>Nombre Sitio: </strong><?php echo $infoSitio[0]['nombre_sitio']; ?>
+					<br><strong>Dirección: </strong><?php echo $infoSitio[0]['direccion_sitio']; ?>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-md-4">
+			<div class="panel panel-success">
+				<div class="panel-heading">
+					<strong>Nodo o Región: </strong><?php echo $infoSitio[0]['nombre_region']; ?>
+					<br><strong>Departamento: </strong><?php echo $infoSitio[0]['dpto_divipola_nombre']; ?>
+					<br><strong>Municipio: </strong><?php echo $infoSitio[0]['mpio_divipola_nombre']; ?>
+					<br><strong>Zona: </strong><?php echo $infoSitio[0]['nombre_zona']; ?>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-md-4">
+			<div class="panel panel-success">
+				<div class="panel-heading">
+<?php if($infoSitio[0]['fk_id_user_delegado']){  ?>
+					<strong>Delegado C.C.: </strong><?php echo $infoSitio[0]['delegado']; ?>
+<?php } ?>
+										
+<?php if($infoSitio[0]['fk_id_user_delegado']){  ?>
+					<br><strong>Coordinador C.C.: </strong><?php echo $infoSitio[0]['coordinador']; ?>
+<?php } ?>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 	<!-- /.row -->
 	<div class="row">
 		<div class="col-lg-12">
@@ -22,46 +58,7 @@
                     <i class="fa fa-life-saver fa-fw"></i> Lista de Sesiones filtrado por Sitio
 				</div>
 				<div class="panel-body">
-					<div class="alert alert-info">
 
-
-
-
-										<strong>NOMBRE SITIO: </strong>
-										<?php echo $infoSitio[0]['nombre_sitio']; ?>
-										<br><strong>DIRECCIÓN: </strong>
-										<?php echo $infoSitio[0]['direccion_sitio']; ?>
-										<br><strong>REGIÓN: </strong>
-										<?php echo $infoSitio[0]['nombre_region']; ?>
-										<br><strong>DEPARTAMENTO: </strong>
-										<?php echo $infoSitio[0]['dpto_divipola_nombre']; ?>
-										<br><strong>MUNICIPIO: </strong>
-										<?php echo $infoSitio[0]['mpio_divipola_nombre']; ?>
-										
-<?php if($infoSitio[0]['fk_id_user_delegado']){  ?>
-										<br><strong>DELEGADO C.C.: </strong>
-										<?php echo $infoSitio[0]['delegado']; ?>
-<?php } ?>
-										
-<?php if($infoSitio[0]['fk_id_user_delegado']){  ?>
-										<br><strong>COORDINADOR C.C.: </strong>
-										<?php echo $infoSitio[0]['coordinador']; ?>
-<?php } ?>
-										
-
-
-
-
-
-
-
-
-
-
-
-
-						
-					</div>
 					<?php
 						if(!$info){
 					?>

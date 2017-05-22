@@ -24,7 +24,7 @@
 				<div class="panel-body">
 					<div class="alert alert-info">
 						<?php if(isset($infoRegion)){ ?>
-							<strong>Región: </strong><?php echo $infoRegion[0]['nombre_region']; ?> 
+							<strong>Nodo o Región: </strong><?php echo $infoRegion[0]['nombre_region']; ?> 
 						<?php } ?>
 						
 						<?php if(isset($infoDepartamento)){ ?>
