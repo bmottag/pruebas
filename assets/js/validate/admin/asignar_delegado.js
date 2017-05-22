@@ -2,7 +2,7 @@
 
 			$( "#form" ).validate( {
 				rules: {
-					usuario: 			{ required: true }
+					//usuario: 			{ required: true }
 				},
 				errorElement: "em",
 				errorPlacement: function ( error, element ) {
