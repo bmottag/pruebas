@@ -383,10 +383,10 @@
 		 * Add/Edit ALERTA
 		 * @since 14/5/2017
 		 */
-		public function saveAlerta() 
+		public function saveAlerta($fechaGrupoInstrumentos) 
 		{
 				$idAlerta = $this->input->post('hddId');
-				$fechaAlerta = $this->input->post('fechaAlerta');
+				$fechaAlerta = $fechaGrupoInstrumentos;
 				$duracion = $this->input->post('duracion');
 				
 				$hour = $this->input->post('hour');

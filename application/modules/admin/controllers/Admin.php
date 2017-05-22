@@ -71,7 +71,7 @@ class Admin extends MX_Controller {
 
 			$msj = "You have add a new Employee!!";
 			if ($idUser != '') {
-				$msj = "Se actualizo el usuario con exito.";
+				$msj = "Se actualizó el usuario con exito.";
 			}			
 
 			$documento = $this->input->post('documento');
@@ -158,7 +158,7 @@ class Admin extends MX_Controller {
 			if($newPassword == $confirm)
 			{					
 					if ($this->admin_model->updatePassword()) {
-						$data["msj"] = "Se actualizo la contraseña.";
+						$data["msj"] = "Se actualizó la contraseña.";
 						$data["msj"] .= "<br><strong>Número de documento: </strong>" . $this->input->post("hddUser");
 						$data["msj"] .= "<br><strong>Contraseña: </strong>" . $passwd;
 						$data["clase"] = "alert-success";
@@ -231,7 +231,7 @@ class Admin extends MX_Controller {
 			
 			$msj = "Se adiciono el Tipo de Alerta con exito.";
 			if ($idTipoAlerta != '') {
-				$msj = "Se actualizo el tipo de alerta con exito.";
+				$msj = "Se actualizó el tipo de alerta con exito.";
 			}
 
 			if ($idTipoAlerta = $this->admin_model->saveTipoAlerta()) {
@@ -312,7 +312,7 @@ class Admin extends MX_Controller {
 			
 			$msj = "Se adiciono la Prueba con exito.";
 			if ($idPrueba != '') {
-				$msj = "Se actualizo la Prueba con exito.";
+				$msj = "Se actualizó la Prueba con exito.";
 			}
 
 			if ($idPrueba = $this->admin_model->savePrueba()) {
@@ -403,12 +403,16 @@ class Admin extends MX_Controller {
 			
 			$idAlerta = $this->input->post('hddId');
 			
+			//buscar la fecha de la sesion para guardarla en la alerta
+			$arrParam = array("idSesion" => $this->input->post('sesion'));
+			$data['information'] = $this->admin_model->get_sesiones($arrParam);//info sesiones
+			
 			$msj = "Se adiciono la Alerta con exito.";
 			if ($idAlerta != '') {
-				$msj = "Se actualizo la Alerta con exito.";
+				$msj = "Se actualizó la Alerta con exito.";
 			}
 
-			if ($idAlerta = $this->admin_model->saveAlerta()) {
+			if ($idAlerta = $this->admin_model->saveAlerta($data['information'][0]['fecha'])) {
 				$data["result"] = true;
 				$data["idRecord"] = $idAlerta;
 				
@@ -500,7 +504,7 @@ class Admin extends MX_Controller {
 			
 			$msj = "Se adiciono el Sitio con exito.";
 			if ($idSitio != '') {
-				$msj = "Se actualizo el Sitio con exito.";
+				$msj = "Se actualizó el Sitio con exito.";
 			}
 
 			if ($idSitio = $this->admin_model->saveSitio()) {
@@ -602,7 +606,7 @@ class Admin extends MX_Controller {
 			
 			$msj = "Se adiciono el Grupo de Instrumentos con exito.";
 			if ($identificador != '') {
-				$msj = "Se actualizo el Grupo de Instrumentos con exito.";
+				$msj = "Se actualizó el Grupo de Instrumentos con exito.";
 			}
 
 			if ($identificador = $this->admin_model->saveGrupoInstrumentos()) {
@@ -679,7 +683,7 @@ class Admin extends MX_Controller {
 			
 			$msj = "Se adiciono la Sesión con exito.";
 			if ($idSesion != '') {
-				$msj = "Se actualizo la Sesión con exito.";
+				$msj = "Se actualizó la Sesión con exito.";
 			}
 
 			if ($idSesion = $this->admin_model->saveSesiones()) {
@@ -735,7 +739,7 @@ class Admin extends MX_Controller {
 				
 				$rol = $this->input->post("hddRol");
 				
-				$data["msj"] = "Se asigno el <strong>" . $rol . "</strong> con exito.";
+				$data["msj"] = "Se asignó el <strong>" . $rol . "</strong> con exito.";
 				$data["clase"] = "alert-success";
 			}else{
 				$data["msj"] = "<strong>Error!!!</strong> Contactarse con el administrador.";
@@ -815,7 +819,7 @@ class Admin extends MX_Controller {
 			
 			$msj = "Se adiciono la Sesión con exito.";
 			if ($idSitioSesion != '') {
-				$msj = "Se actualizo la Sesión con exito.";
+				$msj = "Se actualizó la Sesión con exito.";
 				$arrParam["idSitioSesionDistinta"] = $idSitioSesion;
 			}
 			//verificar que la relacion SITIO con SESION no existe en la base de datos

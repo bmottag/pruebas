@@ -129,12 +129,24 @@ if($lista['contacto_nombres']){
 									
 									<td class='text-center'>
 									<a href="<?php echo base_url("admin/asignar_delegado/" . $lista['id_sitio'] . "/delegado"); ?>" class="btn btn-info btn-xs">Delegado <span class="fa fa-gears fa-fw" aria-hidden="true"></a>
-									<br><?php if($lista['fk_id_user_delegado']){ echo "C.C. " . $lista['delegado'];} ?>
+						<?php 
+if($lista['fk_id_user_delegado']){
+	echo "<p class='text-primary text-center'>C.C. " . $lista['delegado'] . "</p>";
+}else{
+	echo "<p class='text-danger text-center'>Falta</p>";
+}
+						?>
 									</td>
 									
 									<td class='text-center'>
 									<a href="<?php echo base_url("admin/asignar_delegado/" . $lista['id_sitio'] . "/coordinador"); ?>" class="btn btn-info btn-xs">Coordinador <span class="fa fa-gears fa-fw" aria-hidden="true"></a>
-									<br><?php if($lista['fk_id_user_coordinador']){ echo "C.C. " . $lista['coordinador'];} ?>
+						<?php 
+if($lista['fk_id_user_coordinador']){
+	echo "<p class='text-primary text-center'>C.C. " . $lista['coordinador'] . "</p>";
+}else{
+	echo "<p class='text-danger text-center'>Falta</p>";
+}
+						?>
 									</td>
 						<?php
 									echo "<td>" . $lista['barrio_sitio'] . "</td>";

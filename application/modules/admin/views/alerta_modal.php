@@ -8,6 +8,9 @@
 </div>
 
 <div class="modal-body">
+
+	<p class="text-danger text-left">Los campos con * son obligatorios.</p>
+
 	<form name="form" id="form" role="form" method="post" >
 		<input type="hidden" id="hddId" name="hddId" value="<?php echo $information?$information[0]["id_alerta"]:""; ?>"/>
 		
@@ -33,19 +36,14 @@
 				</div>
 			</div>
 
-<script>
-	$( function() {
-		$( "#fechaAlerta" ).datepicker({
-			changeMonth: true,
-			changeYear: true,
-			dateFormat: 'yy-mm-dd'
-		});
-	});
-</script>
 			<div class="col-sm-6">
 				<div class="form-group text-left">
-					<label class="control-label" for="fechaAlerta">Fecha : *</label>
-					<input type="text" class="form-control" id="fechaAlerta" name="fechaAlerta" value="<?php echo $information?$information[0]["fecha_alerta"]:""; ?>" placeholder="Fecha Alerta" required />
+					<label class="control-label" for="estado">Activar / Desactivar Alarma</label>
+					<select name="estado" id="estado" class="form-control" required>
+						<option value=''>Select...</option>
+						<option value=1 <?php if($information[0]["estado_alerta"] == 1) { echo "selected"; }  ?>>Activar</option>
+						<option value=2 <?php if($information[0]["estado_alerta"] == 2) { echo "selected"; }  ?>>Desactivar</option>
+					</select>
 				</div>
 			</div>
 		</div>
@@ -154,18 +152,6 @@
 			</div>
 		</div>
 
-		<div class="row">
-			<div class="col-sm-12">		
-				<div class="form-group text-left">
-					<label class="control-label" for="estado">Activar / Desactivar Alarma</label>
-					<select name="estado" id="estado" class="form-control" required>
-						<option value=''>Select...</option>
-						<option value=1 <?php if($information[0]["estado_alerta"] == 1) { echo "selected"; }  ?>>Activar</option>
-						<option value=2 <?php if($information[0]["estado_alerta"] == 2) { echo "selected"; }  ?>>Desactivar</option>
-					</select>
-				</div>
-			</div>
-		</div>
 
 		<div class="form-group">
 			<div class="row" align="center">

@@ -34,7 +34,7 @@
 			<div class="col-sm-6">
 				<div class="form-group text-left">
 					<label class="control-label" for="tipoDocumento">Tipo de documento : *</label>
-					<select name="tipoDocumento" id="tipoDocumento" class="form-control" required>
+					<select name="tipoDocumento" id="tipoDocumento" class="form-control" >
 						<option value=''>Select...</option>
 						<option value=1 >Cédula de Ciudadanía</option>
 						<option value=2 >Cédula de Extranjería</option>

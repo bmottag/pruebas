@@ -4,7 +4,6 @@ $( document ).ready( function () {
 		rules: {
 			descripcion:	{ required: true },
 			tipoAlerta:		{ required: true },
-			fechaAlerta:	{ required: true },
 			mensaje:		{ required: true },
 			hour:			{ required: true },
 			min:			{ required: true },
