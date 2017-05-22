@@ -280,22 +280,15 @@ if ($retornoError) {
 							<i class="fa fa-book fa-5x"></i>
 						</div>
 						<div class="col-xs-9 text-right">
-							<div class="huge">52</div>
-							<div>Alertas</div>
+							<div class="huge"><?php echo $noPruebasVigentes; ?></div>
+							<div>Pruebas</div>
 						</div>
 					</div>
 				</div>
-				<a href="<?php echo base_url("payroll/add_payroll"); ?>">
-					<div class="panel-footer">
-						<span class="pull-left">Alertas</span>
-						<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-						<div class="clearfix"></div>
-					</div>
-				</a>
 				
-				<a href="#anclaPayroll">
+				<a href="#anclaPruebas">
 					<div class="panel-footer">
-						<span class="pull-left">Lista de alertas</span>
+						<span class="pull-left">Lista de Pruebas</span>
 						<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
 						<div class="clearfix"></div>
 					</div>
@@ -311,21 +304,14 @@ if ($retornoError) {
 							<i class="fa fa-life-saver fa-5x"></i>
 						</div>
 						<div class="col-xs-9 text-right">
-							<div class="huge">821</div>
-							<div>Notificaciones</div>
+							<div class="huge"><?php echo $noRegistroInformativa; ?></div>
+							<div>Alerta Informativa</div>
 						</div>
 					</div>
 				</div>
-				<a href="<?php echo base_url("safety/add_safety"); ?>">
+				<a href="<?php echo base_url("report/registros/1"); ?>">
 					<div class="panel-footer">
-						<span class="pull-left"> Adicionar notificaciones </span>
-						<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-						<div class="clearfix"></div>
-					</div>
-				</a>
-				<a href="#anclaSafety">
-					<div class="panel-footer">
-						<span class="pull-left"> Lista de notificaciones </span>
+						<span class="pull-left"> Lista Registros <br>Alerta Informativa </span>
 						<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
 						<div class="clearfix"></div>
 					</div>
@@ -341,21 +327,14 @@ if ($retornoError) {
 							<i class="fa fa-truck fa-5x"></i>
 						</div>
 						<div class="col-xs-9 text-right">
-							<div class="huge">23</div>
-							<div>###########</div>
+							<div class="huge"><?php echo $noRegistroNotificacion; ?></div>
+							<div>Alerta Notificación</div>
 						</div>
 					</div>
 				</div>
-				<a href="<?php echo base_url("hauling/add_hauling"); ?>">
+				<a href="<?php echo base_url("report/registros/2"); ?>">
 					<div class="panel-footer">
-						<span class="pull-left">Mas informacion</span>
-						<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-						<div class="clearfix"></div>
-					</div>
-				</a>
-				<a href="#anclaHauling">
-					<div class="panel-footer">
-						<span class="pull-left">Listas </span>
+						<span class="pull-left">Lista Registros <br>Alerta Notificación </span>
 						<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
 						<div class="clearfix"></div>
 					</div>
@@ -371,21 +350,14 @@ if ($retornoError) {
 							<i class="fa fa-search fa-5x"></i>
 						</div>
 						<div class="col-xs-9 text-right">
-							<div class="huge">3</div>
-							<div>####</div>
+							<div class="huge"><?php echo $noRegistroConsolidacion; ?></div>
+							<div>Alerta Consolidación</div>
 						</div>
 					</div>
 				</div>
-				<a href="<?php echo base_url("hauling/add_hauling"); ?>">
+				<a href="<?php echo base_url("report/registros/3"); ?>">
 					<div class="panel-footer">
-						<span class="pull-left">Formulario</span>
-						<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-						<div class="clearfix"></div>
-					</div>
-				</a>
-				<a href="#anclaPickup">
-					<div class="panel-footer">
-						<span class="pull-left">Listas</span>
+						<span class="pull-left">Lista Registros <br>Alerta Consolidación</span>
 						<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
 						<div class="clearfix"></div>
 					</div>
@@ -393,6 +365,80 @@ if ($retornoError) {
 			</div>
 		</div>		
 	</div>
+	
+	
+	
+	
+            <div class="row">
+
+<a name="anclaPruebas" ></a>			
+				<div class="col-lg-6">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <i class="fa fa-book fa-fw"></i> Lista de Pruebas - Año <?php date('Y'); ?>
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+
+
+<a class="btn btn-default btn-circle" href="#anclaUp"><i class="fa fa-arrow-up"></i> </a>
+
+
+<?php
+	if(!$infoPruebas){ 
+		echo "<a href='#' class='btn btn-danger btn-block'>No hay Pruebas para la vigencia actual</a>";
+	}else{
+?>						
+					
+					<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
+						<thead>
+							<tr>
+								<th>Prueba</th>
+								<th>Descripción</th>
+								<th>Año</th>
+								<th>Semestre</th>
+							</tr>
+						</thead>
+						<tbody>							
+						<?php
+							foreach ($infoPruebas as $lista):
+								echo "<tr>";
+								echo "<td >" . $lista['nombre_prueba'] . "</td>";
+								echo "<td >" . $lista['descripcion_prueba'] . "</td>";
+								echo "<td class='text-center'>" . $lista['anio_prueba'] . "</td>";
+								echo "<td class='text-center'>" . $lista['semestre_prueba'] . "</td>";
+								echo "</tr>";
+							endforeach;
+						?>
+						</tbody>
+					</table>
+					
+<?php	} ?>					
+				</div>
+				<!-- /.panel-body -->
+			</div>
+			
+			
+		</div>
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 <?php } ?>
 	

@@ -192,5 +192,44 @@
 				}
 		}
 		
+		/**
+		 * Contar pruebas
+		 * @since  21/5/2017
+		 */
+		public function countPruebas()
+		{
+				$year = date('Y');
+
+				$sql = "SELECT count(id_prueba) CONTEO";
+				$sql.= " FROM pruebas";
+				$sql.= " WHERE anio_prueba = '$year'";
+
+				$query = $this->db->query($sql);
+				$row = $query->row();
+				return $row->CONTEO;
+		}
+		
+		/**
+		 * Contar pruebas
+		 * @since  21/5/2017
+		 */
+		public function countAlertasByTipo($tipoAlerta)
+		{
+				$year = date('Y');
+				$firstDay = date('Y-m-d', mktime(0,0,0, 1, 1, $year));
+
+				$sql = "SELECT count(id_registro) CONTEO";
+				$sql.= " FROM registro R";
+				$sql.= " INNER JOIN alertas A ON A.id_alerta = R.fk_id_alerta";
+				$sql.= " WHERE R.fecha_registro >= '$firstDay'";
+				$sql.= " AND A.fk_id_tipo_alerta = '$tipoAlerta'";
+
+				$query = $this->db->query($sql);
+				$row = $query->row();
+				return $row->CONTEO;
+		}
+		
+		
+		
 		
 	}

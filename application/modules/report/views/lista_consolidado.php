@@ -47,8 +47,7 @@ if(!$infoAlerta){
 										<th>Sesión</th>
 										<th>Alerta</th>
 										<th>Encargado</th>
-										<th>Cifra</th>
-										<th>Observación</th>
+										<th>Cantidad de Ausentes</th>
                                     </tr>
                                 </thead>
                                 <tbody>							
@@ -64,8 +63,7 @@ if(!$infoAlerta){
 											echo "<td >" . $lista['sesion_prueba'] . "</td>";
 											echo "<td >" . $lista['descripcion_alerta'] . "</td>";
 											echo "<td >" . $lista['nombres_usuario'] . " " . $lista['apellidos_usuario'] . "</td>";
-											echo "<td >" . $lista['cifra'] . "</td>";
-											echo "<td >" . $lista['observacion'] . "</td>";
+											echo "<td >" . $lista['ausentes'] . "</td>";
 											echo "</tr>";
 									endforeach;
 								?>

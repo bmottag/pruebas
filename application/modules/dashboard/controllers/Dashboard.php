@@ -29,7 +29,36 @@ class Dashboard extends MX_Controller {
 			$arrParam = array("tipoAlerta" => 3);
 			$data['infoAlertaConsolidacion'] = $this->dashboard_model->get_alerta_by($arrParam);
 //echo $this->db->last_query();			
-//pr($data['infoAlertaConsolidacion']); exit;		
+//pr($data['infoAlertaConsolidacion']); exit;	
+
+
+
+	/**
+	 * Datos para las cajas 
+	 */
+	 
+	 //inicio consulta de pruebas vigentes
+			$data['noPruebasVigentes'] = $this->dashboard_model->countPruebas();//cuenta de pruebas vigentes
+			
+			$year = date('Y');
+			$arrParam = array(
+				"table" => "pruebas",
+				"order" => "nombre_prueba",
+				"column" => "anio_prueba",
+				"id" => $year
+			);
+			$data['infoPruebas'] = $this->general_model->get_basic_search($arrParam);//lista pruebas; se filtra por año actual
+			
+			
+	//inicio consulta de numero de alertas
+			$data['noRegistroInformativa'] = $this->dashboard_model->countAlertasByTipo(1);//cuenta de registro de informativa
+			$data['noRegistroNotificacion'] = $this->dashboard_model->countAlertasByTipo(2);//cuenta de registro de notificaciones
+			$data['noRegistroConsolidacion'] = $this->dashboard_model->countAlertasByTipo(3);//cuenta de registro de notificaciones
+			
+	//inicio consulta de sesiones que estan abiertas en un rango mayor a 7 dias y menor a 7 dias de la fecha actual
+
+
+	
 			$data["view"] = "dashboard";
 			$this->load->view("layout", $data);
 	}
