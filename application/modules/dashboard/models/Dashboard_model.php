@@ -229,6 +229,37 @@
 				return $row->CONTEO;
 		}
 		
+		/**
+		 * Sesiones abiertas para un rango +7 dias y -7dias a la fecha actual
+		 * @since 22/5/2017
+		 */
+		public function get_sesiones_actuales($arrDatos) 
+		{			
+				$this->db->select();
+				$this->db->join('param_grupo_instrumentos G', 'G.id_grupo_instrumentos = S.fk_id_grupo_instrumentos', 'INNER'); //GRUPO INSTRUMENTO - SESIONES
+				$this->db->join('pruebas P', 'P.id_prueba = G.fk_id_prueba', 'INNER');//PRUEBA - GRUPO INSTRUMENTO
+				$this->db->join('sitio_sesion X', 'X.fk_id_sesion = S.id_sesion', 'INNER');//SITIO - SESION
+				$this->db->join('sitios Y', 'Y.id_sitio = X.fk_id_sitio', 'INNER');//SITIO
+				$this->db->join('param_divipola D', 'D.mpio_divipola = Y.fk_mpio_divipola', 'INNER');//DIVIPOLA
+
+				if (array_key_exists("fechaInicio", $arrDatos)) {
+					$this->db->where('G.fecha >=', $arrDatos["fechaInicio"]); //FECHA INICIAL MAYOR A LA ACTUAL
+				}
+
+				if (array_key_exists("fechaFin", $arrDatos)) {
+					$this->db->where('G.fecha <=', $arrDatos["fechaFin"]); //FECHA FINAL MENOR A LA ACTUAL
+				}
+				
+				$this->db->order_by('P.nombre_prueba, G.nombre_grupo_instrumentos, S.sesion_prueba', 'asc');
+				$query = $this->db->get('sesiones S');
+
+				if ($query->num_rows() > 0) {
+					return $query->result_array();
+				} else {
+					return false;
+				}
+		}
+		
 		
 		
 		
