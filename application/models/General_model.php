@@ -98,8 +98,7 @@ class General_model extends CI_Model {
 		{	
 				$sql = "SELECT U.*";
 				$sql.= " FROM usuario U";
-				$sql.= " WHERE U.id_usuario NOT IN ( SELECT fk_id_user_coordinador FROM sitios S WHERE fk_id_user_coordinador IS NOT NULL)";
-				$sql.= " AND U.fk_id_rol = 3";
+				$sql.= " WHERE U.fk_id_rol = 3";
 				$sql.= " AND U.estado = 1";
 				
 				$query = $this->db->query($sql);
