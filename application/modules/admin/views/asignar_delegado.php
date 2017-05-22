@@ -40,13 +40,19 @@
 		<div class="col-md-4">
 			<div class="panel panel-success">
 				<div class="panel-heading">
-<?php if($infoSitio[0]['fk_id_user_delegado']){  ?>
-					<strong>Delegado C.C.: </strong><?php echo $infoSitio[0]['delegado']; ?>
-<?php } ?>
-										
-<?php if($infoSitio[0]['fk_id_user_delegado']){  ?>
-					<br><strong>Coordinador C.C.: </strong><?php echo $infoSitio[0]['coordinador']; ?>
-<?php } ?>
+					<strong>Delegado C.C.: </strong>
+					<?php 
+					if($infoSitio[0]['fk_id_user_delegado']){
+						echo $infoSitio[0]['delegado'];
+					} else { echo "Falta asignar Delegado.";}
+					?>
+
+					<br><strong>Coordinador C.C.: </strong>
+					<?php 
+					if($infoSitio[0]['fk_id_user_coordinador']){
+						echo $infoSitio[0]['coordinador'];
+					} else { echo "Falta asignar Coordinador.";}
+					?>
 				</div>
 			</div>
 		</div>
@@ -61,13 +67,15 @@
 					<i class="fa fa-gears"></i> Asignar <?php echo $rol; ?>
 				</div>
 				<div class="panel-body">
+				
+					<p class="text-danger text-left">Los campos con * son obligatorios.</p>
 
 					<form  name="form" id="form" class="form-horizontal" method="post" action="<?php echo base_url("admin/guardar_delegado"); ?>" >
 						<input type="hidden" id="hddId" name="hddId" value="<?php echo $infoSitio[0]["id_sitio"]; ?>"/>
 						<input type="hidden" id="hddRol" name="hddRol" value="<?php echo $rol; ?>"/>
 
 						<div class="form-group">
-							<label class="col-sm-4 control-label" for="usuario">Usuario :</label>
+							<label class="col-sm-4 control-label" for="usuario">Usuario : *</label>
 							<div class="col-sm-5">
 
 							<?php if($usuarios){ ?>

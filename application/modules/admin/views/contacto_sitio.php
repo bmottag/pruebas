@@ -40,13 +40,19 @@
 		<div class="col-md-4">
 			<div class="panel panel-success">
 				<div class="panel-heading">
-<?php if($infoSitio[0]['fk_id_user_delegado']){  ?>
-					<strong>Delegado C.C.: </strong><?php echo $infoSitio[0]['delegado']; ?>
-<?php } ?>
-										
-<?php if($infoSitio[0]['fk_id_user_delegado']){  ?>
-					<br><strong>Coordinador C.C.: </strong><?php echo $infoSitio[0]['coordinador']; ?>
-<?php } ?>
+					<strong>Delegado C.C.: </strong>
+					<?php 
+					if($infoSitio[0]['fk_id_user_delegado']){
+						echo $infoSitio[0]['delegado'];
+					} else { echo "Falta asignar Delegado.";}
+					?>
+
+					<br><strong>Coordinador C.C.: </strong>
+					<?php 
+					if($infoSitio[0]['fk_id_user_coordinador']){
+						echo $infoSitio[0]['coordinador'];
+					} else { echo "Falta asignar Coordinador.";}
+					?>
 				</div>
 			</div>
 		</div>
