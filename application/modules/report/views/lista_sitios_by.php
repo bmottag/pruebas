@@ -74,6 +74,18 @@
 									echo "<td>" . $lista['nombre_zona'] . "</td>";
 									echo "<td class='text-center'>";
 echo "<button type='button' class='btn btn-info btn-circle'>" .  $conteoSesiones . "</button>";
+
+
+?>
+
+<a href="<?php echo base_url("report/mostrarSesiones/" . $lista['id_sitio']); ?>" class='btn btn-info btn-circle'>Ver </a>
+
+
+<?php
+
+
+
+
 									echo "</td>";
 									echo "<td>" . $lista['contacto_nombres'] . " " . $lista['contacto_apellidos'] . "</td>";
 									echo "<td>" . $lista['contacto_telefono'] . "</td>";
@@ -94,3 +106,13 @@ echo "<button type='button' class='btn btn-info btn-circle'>" .  $conteoSesiones
 	<!-- /.row -->
 </div>
 <!-- /#page-wrapper -->
+
+<!-- Tables -->
+<script>
+$(document).ready(function() {
+	$('#dataTables').DataTable({
+		responsive: true,
+		"pageLength": 25
+	});
+});
+</script>

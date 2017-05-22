@@ -113,6 +113,25 @@ class Report extends CI_Controller {
 			$this->load->view("layout", $data);
     }
 	
+    /**
+     * Cargo modal - lista de sesiones
+     * @since 21/5/2017
+     */
+    public function mostrarSesiones($idSitio) 
+	{
+			$data["botonRegreso"] = "report/searchByRegiones";
+							
+			$this->load->model("general_model");
+			$arrParam = array("idSitio" => $idSitio);
+			$data['info'] = $this->report_model->get_sesiones_by($arrParam);
+
+			$data['infoSitio'] = $this->general_model->get_sitios($arrParam);
+			
+			$data["view"] = "lista_sesinones_by_sitio";
+			$this->load->view("layout", $data);
+
+
+    }
 	
 	
 	

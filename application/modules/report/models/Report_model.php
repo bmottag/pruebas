@@ -90,6 +90,29 @@
 				$row = $query->row();
 				return $row->CONTEO;
 		}
+		
+		/**
+		 * Muestra sesiones para un sitio
+		 * @since 21/5/2017
+		 */
+		public function get_sesiones_by($arrDatos) 
+		{
+				$this->db->select();
+				$this->db->join('sesiones S', 'S.id_sesion = X.fk_id_sesion', 'INNER');//SESIONES - ALERTA
+				
+				if (array_key_exists("tipoAlerta", $arrDatos)) {
+					$this->db->where('A.fk_id_tipo_alerta', $arrDatos["tipoAlerta"]); //TIPO ALERTA = INFORMATIVA
+				}
+				
+				$this->db->order_by('X.fk_id_sitio', 'desc');
+				$query = $this->db->get('sitio_sesion X');
+
+				if ($query->num_rows() > 0) {
+					return $query->result_array();
+				} else {
+					return false;
+				}
+		}
 
 		
 		

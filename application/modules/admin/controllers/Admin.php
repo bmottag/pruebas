@@ -434,8 +434,9 @@ class Admin extends MX_Controller {
 	 */
 	public function sitios()
 	{
+			$this->load->model("general_model");
 			$arrParam = array();
-			$data['info'] = $this->admin_model->get_sitios($arrParam);
+			$data['info'] = $this->general_model->get_sitios($arrParam);
 			
 			$data["view"] = 'sitio';
 			$this->load->view("layout", $data);
@@ -480,7 +481,7 @@ class Admin extends MX_Controller {
 				$arrParam = array(
 					"idSitio" => $data["identificador"]
 				);
-				$data['information'] = $this->admin_model->get_sitios($arrParam);//info sitio
+				$data['information'] = $this->general_model->get_sitios($arrParam);//info sitio
 			}
 			
 			$this->load->view("sitio_modal", $data);
@@ -707,12 +708,12 @@ class Admin extends MX_Controller {
 	 */
 	public function asignar_delegado($idSitio, $rol)
 	{
+			$this->load->model("general_model");
 			$arrParam = array("idSitio" => $idSitio);
-			$data['infoSitio'] = $this->admin_model->get_sitios($arrParam);//informacion sitio
+			$data['infoSitio'] = $this->general_model->get_sitios($arrParam);//informacion sitio
 			$data['rol'] = $rol;
 			$lista = "lista_" . $rol;
 
-			$this->load->model("general_model");
 			$data['usuarios'] = $this->general_model->$lista($arrParam);//listado usuarios
 
 			$data["view"] = 'asignar_delegado';
@@ -758,9 +759,10 @@ class Admin extends MX_Controller {
 	{
 			$arrParam = array("idSitio" => $idSitio);
 			$data['info'] = $this->admin_model->get_sesiones_sitio($arrParam);
-
+			
+			$this->load->model("general_model");
 			$arrParam = array("idSitio" => $idSitio);
-			$data['infoSitio'] = $this->admin_model->get_sitios($arrParam);
+			$data['infoSitio'] = $this->general_model->get_sitios($arrParam);
 			
 			$data["view"] = 'sesionesForSitio';
 			$this->load->view("layout", $data);
@@ -850,8 +852,9 @@ class Admin extends MX_Controller {
 	 */
 	public function contacto_sitio($idSitio)
 	{
+			$this->load->model("general_model");
 			$arrParam = array("idSitio" => $idSitio);
-			$data['infoSitio'] = $this->admin_model->get_sitios($arrParam);//info Sitio
+			$data['infoSitio'] = $this->general_model->get_sitios($arrParam);//info Sitio
 
 			$data["view"] = 'contacto_sitio';
 			$this->load->view("layout", $data);
@@ -870,10 +873,11 @@ class Admin extends MX_Controller {
 	
 			if ($this->admin_model->updateSitioContacto()) {
 				
+				$this->load->model("general_model");
 				$arrParam = array(
 					"idSitio" => $this->input->post("hddId")
 				);
-				$infoSitio = $this->admin_model->get_sitios($arrParam);//info sitio			
+				$infoSitio = $this->general_model->get_sitios($arrParam);//info sitio			
 				
 				$data["msj"] = "Se ingresaron los datos de <strong>CONTACTO</strong> del sitio con exito.";
 				$data["msj"] .= "<br><br><strong>Nombre: </strong>" . $infoSitio[0]['contacto_nombres'] . " " . $infoSitio[0]['contacto_apellidos'];
