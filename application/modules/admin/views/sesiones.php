@@ -48,6 +48,7 @@ $(function(){
 		<div class="col-lg-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
+					<a class="btn btn-success" href=" <?php echo base_url(). 'admin/grupo_instrumentos'; ?> "><span class="glyphicon glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Regresar </a> 
 					<i class="fa fa-gears "></i> LISTA DE SESIONES
 				</div>
 				<div class="panel-body">

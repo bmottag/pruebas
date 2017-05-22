@@ -8,14 +8,19 @@
 </div>
 
 <div class="modal-body">
+
+	<p class="text-danger text-left">Los campos con * son obligatorios.</p>
+
 	<form name="form" id="form" role="form" method="post" >
 		<input type="hidden" id="hddIdGrupo" name="hddIdGrupo" value="<?php echo $idGrupo; ?>"/>
 		<input type="hidden" id="hddId" name="hddId" value="<?php echo $information?$information[0]["id_sesion"]:""; ?>"/>	
 		
-		<div class="col-sm-12">
-			<div class="form-group text-left">
-				<label for="type" class="control-label">Sesión : *</label>
-				<input type="text" id="sesion" name="sesion" class="form-control" value="<?php echo $information?$information[0]["sesion_prueba"]:""; ?>" placeholder="Sesion" required >
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="form-group text-left">
+					<label for="type" class="control-label">Sesión : *</label>
+					<input type="text" id="sesion" name="sesion" class="form-control" value="<?php echo $information?$information[0]["sesion_prueba"]:""; ?>" placeholder="Sesion" required >
+				</div>
 			</div>
 		</div>
 		
@@ -26,33 +31,35 @@
 				$minIni = $timeIni[1];
 			}
 		?>
-		<div class="col-sm-6">
-			<div class="form-group text-left">
-				<label for="type" class="control-label">Hora Inicio : *</label>
-				<select name="hourIni" id="hourIni" class="form-control" required>
-					<option value='' >Select...</option>
-					<?php
-					for ($i = 0; $i < 24; $i++) {
-						?>
-						<option value='<?php echo $i; ?>' <?php
-						if ($information && $i == $hourIni) {
-							echo 'selected="selected"';
-						}
-						?>><?php echo $i; ?></option>
-					<?php } ?>									
-				</select>
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="form-group text-left">
+					<label for="type" class="control-label">Hora Inicio : *</label>
+					<select name="hourIni" id="hourIni" class="form-control" required>
+						<option value='' >Select...</option>
+						<?php
+						for ($i = 0; $i < 24; $i++) {
+							?>
+							<option value='<?php echo $i; ?>' <?php
+							if ($information && $i == $hourIni) {
+								echo 'selected="selected"';
+							}
+							?>><?php echo $i; ?></option>
+						<?php } ?>									
+					</select>
+				</div>
 			</div>
-		</div>
-			
-		<div class="col-sm-6">
-			<div class="form-group text-left">
-				<label for="type" class="control-label">Min Inicio : *</label>
-				<select name="minIni" id="minIni" class="form-control" required>
-					<option value="00" <?php if($information && $minIni == "00") { echo "selected"; }  ?>>00</option>
-					<option value="15" <?php if($information && $minIni == "15") { echo "selected"; }  ?>>15</option>
-					<option value="30" <?php if($information && $minIni == "30") { echo "selected"; }  ?>>30</option>
-					<option value="45" <?php if($information && $minIni == "45") { echo "selected"; }  ?>>45</option>
-				</select>
+				
+			<div class="col-sm-6">
+				<div class="form-group text-left">
+					<label for="type" class="control-label">Min Inicio : *</label>
+					<select name="minIni" id="minIni" class="form-control" required>
+						<option value="00" <?php if($information && $minIni == "00") { echo "selected"; }  ?>>00</option>
+						<option value="15" <?php if($information && $minIni == "15") { echo "selected"; }  ?>>15</option>
+						<option value="30" <?php if($information && $minIni == "30") { echo "selected"; }  ?>>30</option>
+						<option value="45" <?php if($information && $minIni == "45") { echo "selected"; }  ?>>45</option>
+					</select>
+				</div>
 			</div>
 		</div>
 		
@@ -63,33 +70,36 @@
 				$minFin = $timeFin[1];
 			}
 		?>
-		<div class="col-sm-6">
-			<div class="form-group text-left">
-				<label for="type" class="control-label">Hora Fin : *</label>
-				<select name="hourFin" id="hourFin" class="form-control" required>
-					<option value='' >Select...</option>
-					<?php
-					for ($i = 0; $i < 24; $i++) {
-						?>
-						<option value='<?php echo $i; ?>' <?php
-						if ($information && $i == $hourFin) {
-							echo 'selected="selected"';
-						}
-						?>><?php echo $i; ?></option>
-					<?php } ?>									
-				</select>
+		
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="form-group text-left">
+					<label for="type" class="control-label">Hora Fin : *</label>
+					<select name="hourFin" id="hourFin" class="form-control" required>
+						<option value='' >Select...</option>
+						<?php
+						for ($i = 0; $i < 24; $i++) {
+							?>
+							<option value='<?php echo $i; ?>' <?php
+							if ($information && $i == $hourFin) {
+								echo 'selected="selected"';
+							}
+							?>><?php echo $i; ?></option>
+						<?php } ?>									
+					</select>
+				</div>
 			</div>
-		</div>
-			
-		<div class="col-sm-6">
-			<div class="form-group text-left">
-				<label for="type" class="control-label">Min Fin : *</label>
-				<select name="minFin" id="minFin" class="form-control" required>
-					<option value="00" <?php if($information && $minFin == "00") { echo "selected"; }  ?>>00</option>
-					<option value="15" <?php if($information && $minFin == "15") { echo "selected"; }  ?>>15</option>
-					<option value="30" <?php if($information && $minFin == "30") { echo "selected"; }  ?>>30</option>
-					<option value="45" <?php if($information && $minFin == "45") { echo "selected"; }  ?>>45</option>
-				</select>
+				
+			<div class="col-sm-6">
+				<div class="form-group text-left">
+					<label for="type" class="control-label">Min Fin : *</label>
+					<select name="minFin" id="minFin" class="form-control" required>
+						<option value="00" <?php if($information && $minFin == "00") { echo "selected"; }  ?>>00</option>
+						<option value="15" <?php if($information && $minFin == "15") { echo "selected"; }  ?>>15</option>
+						<option value="30" <?php if($information && $minFin == "30") { echo "selected"; }  ?>>30</option>
+						<option value="45" <?php if($information && $minFin == "45") { echo "selected"; }  ?>>45</option>
+					</select>
+				</div>
 			</div>
 		</div>
 			
