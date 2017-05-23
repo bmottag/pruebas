@@ -84,8 +84,8 @@ class Report extends CI_Controller {
 				);
 				$data['infoRegion'] = $this->general_model->get_basic_search($arrParam);//Info Regiones
 				
-				
-				$data['info'] = $this->report_model->get_total_by();
+				$arrParam = array();
+				$data['info'] = $this->report_model->get_total_by($arrParam);
 				
 //echo $this->db->last_query();				
 //pr($data['info']); exit;
@@ -94,6 +94,40 @@ class Report extends CI_Controller {
 			
 			$this->load->view("layout", $data);
     }
+	
+	/**
+	 * Formulario para dar respuesta a la alerta
+     * @since 23/5/2017
+	 */
+	public function responder_alerta($idAlerta, $idDelegado, $idSitioSesion)
+	{
+			$arrParam = array(
+				"idSitioSesion" => $idSitioSesion
+			);
+			$data['info'] = $this->report_model->get_total_by($arrParam);
+
+			$data["view"] = 'form_responder_alerta';
+			$this->load->view("layout", $data);
+	}
+	
+	/**
+	 * Registro de la aceptacion de la alerta informativa
+	 * @since 23/5/2017
+	 */
+	public function registro_informativo_by_coordinador()
+	{
+			$data = array();
+						
+			$msj = "Gracias por su respuesta.";
+			
+			if ($this->report_model->saveRegistroInformativoCoordinador()) {
+				$this->session->set_flashdata('retornoExito', $msj);
+			} else {
+				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador.');
+			}
+
+			redirect("/dashboard","location",301);
+	}
 		
     /**
      * Cargo modal - lista de sesiones

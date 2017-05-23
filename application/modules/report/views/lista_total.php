@@ -83,7 +83,19 @@
 									
 									echo "<td>";
 									if(!$lista['id_registro']){ 
-										echo "Sin respuesta";
+										echo "<p class='text-danger text-left'>Alerta sin respuesta.</p>";
+										
+										//si el usuario logeado es el mismo coordinador de la del sition
+										//entonces puede dar respuesta a la alerta
+										$userID = $this->session->userdata("id");
+										
+										if($lista['fk_id_user_coordinador'] == $userID){
+											
+echo "<a href=" . base_url("report/responder_alerta/" . $lista['id_alerta'] . "/" . $lista['fk_id_user_delegado'] . "/" . $lista['id_sitio_sesion']) . " ><strong>Dar Respuesta</strong> </a>";
+											
+											
+										}
+										
 									}else{
 										echo "<strong>Respuesta: </strong>";
 										echo $acepta = $lista['acepta']==1?"Si":"No";

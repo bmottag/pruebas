@@ -37,7 +37,7 @@
 		 * Muestra inofrmacion sitios filtrado por Region o Departamento
 		 * @since 21/5/2017
 		 */
-		public function get_total_by() 
+		public function get_total_by($arrDatos) 
 		{		
 				//filtro para un perido menos a 20 dias y no mayor a 20 dias de la fecha actual
 				$fecha = date("Y-m-d");
@@ -53,8 +53,8 @@
 				$sesion = $this->input->post('sesion');
 				$alerta = $this->input->post('alerta');
 		
-				$this->db->select('Y.*,A.*, S.*, K.*, P.nombre_prueba, G.nombre_grupo_instrumentos, 
-				O.nombre_organizacion, R.nombre_region, D.*, Z.nombre_zona, T.nombre_tipo_alerta');
+				$this->db->select('Y.*,A.*, S.*, K.id_registro, K.acepta, K.ausentes, K.observacion, K.fecha_registro, P.nombre_prueba, G.nombre_grupo_instrumentos, G.fecha,
+				O.nombre_organizacion, R.nombre_region, D.*, Z.nombre_zona, T.nombre_tipo_alerta, X.*');
 				
 				//SESION
 				$this->db->join('sesiones S', 'S.id_sesion = X.fk_id_sesion', 'INNER');
@@ -100,6 +100,10 @@
 				
 				if ($alerta && $alerta != "") {
 					$this->db->where('A.id_alerta', $alerta); //FILTRO POR ALERTA
+				}
+				
+				if (array_key_exists("idSitioSesion", $arrDatos)) {
+					$this->db->where('X.id_sitio_sesion', $arrDatos["idSitioSesion"]); //SITIO-SESION
 				}
 
 				//$this->db->order_by('R.nombre_region, D.dpto_divipola_nombre, D.mpio_divipola_nombre', 'desc');
@@ -156,6 +160,31 @@
 
 				if ($query->num_rows() > 0) {
 					return $query->result_array();
+				} else {
+					return false;
+				}
+		}
+		
+		/**
+		 * Guardar respuesta del usuario coordinador
+		 * @since 19/5/2017
+		 */
+		public function saveRegistroInformativoCoordinador() 
+		{
+				$data = array(
+					'fk_id_alerta' => $this->input->post('hddIdAlerta'),
+					'fk_id_usuario' => $this->input->post('hddIdUserDelegado'),
+					'fk_id_sitio_sesion' => $this->input->post('hddIdSitioSesion'),
+					'acepta' => 1,
+					'fecha_registro' => date("Y-m-d G:i:s"),
+					'fk_id_user_coordinador' => $this->session->id,
+					'nota' => 'Se realizó el registro por el Coordinador.'
+				);	
+
+				$query = $this->db->insert('registro', $data);
+
+				if ($query) {
+					return true;
 				} else {
 					return false;
 				}
