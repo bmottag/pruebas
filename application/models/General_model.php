@@ -87,7 +87,7 @@ class General_model extends CI_Model {
 					$i = 0;
 					foreach ($query->result() as $row) {
 						$sesiones[$i]["idAlerta"] = $row->id_alerta;
-						$sesiones[$i]["descripcion"] = $row->descripcion_alerta;
+						$sesiones[$i]["descripcion"] = $row->descripcion_alerta . " ----> Inicio: " . $row->fecha_inicio;
 						$i++;
 					}
 				}
