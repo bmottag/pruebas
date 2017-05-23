@@ -88,6 +88,13 @@
 						</div>
 						
 						<div class="form-group">
+							<label class="col-sm-4 control-label" for="cargo">Cargo : *</label>
+							<div class="col-sm-5">
+								<input type="text" id="cargo" name="cargo" class="form-control" value="<?php echo $infoSitio?$infoSitio[0]["contacto_cargo"]:""; ?>" placeholder="Cargo" required >
+							</div>
+						</div>
+						
+						<div class="form-group">
 							<label class="col-sm-4 control-label" for="telefono">Teléfono fijo :</label>
 							<div class="col-sm-5">
 								<input type="text" id="telefono" name="telefono" class="form-control" value="<?php echo $infoSitio?$infoSitio[0]["contacto_telefono"]:""; ?>" placeholder="Teléfono fijo" >

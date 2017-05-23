@@ -94,6 +94,7 @@ if ($retornoError) {
 								<th class="text-center">Nombre Organización</th>
 								
 								<th class="text-center">Nombre Contacto</th>
+								<th class="text-center">Cargo Contacto</th>
 								<th class="text-center">Teléfono Contacto</th>
 								<th class="text-center">Celular Contacto</th>
 								<th class="text-center">Email Contacto</th>
@@ -166,6 +167,7 @@ if($lista['fk_id_user_coordinador']){
 									echo "<td>" . $lista['nombre_organizacion'] . "</td>";
 
 									echo "<td>" . $lista['contacto_nombres'] . " " . $lista['contacto_apellidos'] . "</td>";
+									echo "<td>" . $lista['contacto_cargo'] . "</td>";
 									echo "<td>" . $lista['contacto_telefono'] . "</td>";
 									echo "<td>" . $lista['contacto_celular'] . "</td>";
 									echo "<td>" . $lista['contacto_email'] . "</td>";

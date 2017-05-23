@@ -1,13 +1,15 @@
 		$( document ).ready( function () {
 			
-			$("#nombres").bloquearNumeros().maxlength(25);
-			$("#apellidos").bloquearNumeros().maxlength(25);		
+			$("#nombres").bloquearNumeros().convertirMayuscula().maxlength(50);
+			$("#apellidos").bloquearNumeros().convertirMayuscula().maxlength(50);		
 			$("#movilNumber").bloquearTexto().maxlength(15);
+			$("#cargo").convertirMayuscula();
 
 			$( "#form" ).validate( {
 				rules: {
-					nombres: 			{ required: true, minlength: 3, maxlength:25 },
-					apellidos: 			{ required: true, minlength: 3, maxlength:25 },
+					nombres: 			{ required: true, minlength: 3, maxlength:50 },
+					apellidos: 			{ required: true, minlength: 3, maxlength:50 },
+					cargo: 				{ required: true, minlength: 3, maxlength:50 },
 					telefono:	 		{ minlength: 4, maxlength:15  },
 					movilNumber: 		{ required: true, minlength: 4, maxlength:15 },
 					email: 				{ required: true, email: true }

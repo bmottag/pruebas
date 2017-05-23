@@ -912,6 +912,7 @@ class Admin extends MX_Controller {
 				
 				$data["msj"] = "Se ingresaron los datos de <strong>CONTACTO</strong> del sitio con exito.";
 				$data["msj"] .= "<br><br><strong>Nombre: </strong>" . $infoSitio[0]['contacto_nombres'] . " " . $infoSitio[0]['contacto_apellidos'];
+				$data["msj"] .= "<br><strong>Cargo: </strong>" . $infoSitio[0]['contacto_cargo'];
 				$data["msj"] .= "<br><strong>Teléfono: </strong>" . $infoSitio[0]['contacto_telefono'];
 				$data["msj"] .= "<br><strong>Celular: </strong>" . $infoSitio[0]['contacto_celular'];
 				$data["msj"] .= "<br><strong>Email: </strong>" . $infoSitio[0]['contacto_email'];;

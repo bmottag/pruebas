@@ -357,6 +357,7 @@
 				$data = array(
 					'contacto_nombres' => $this->input->post("nombres"),
 					'contacto_apellidos' => $this->input->post("apellidos"),
+					'contacto_cargo' => $this->input->post("cargo"),
 					'contacto_telefono' => $this->input->post("telefono"),
 					'contacto_celular' => $this->input->post("movilNumber"),
 					'contacto_email' => $this->input->post("email")
