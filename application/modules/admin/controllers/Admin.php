@@ -773,7 +773,7 @@ class Admin extends MX_Controller {
 	{
 			$arrParam = array("idSitio" => $idSitio);
 			$data['info'] = $this->admin_model->get_sesiones_sitio($arrParam);
-			
+
 			$this->load->model("general_model");
 			$arrParam = array("idSitio" => $idSitio);
 			$data['infoSitio'] = $this->general_model->get_sitios($arrParam);
