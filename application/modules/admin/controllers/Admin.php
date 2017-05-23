@@ -229,7 +229,7 @@ class Admin extends MX_Controller {
 			
 			$idTipoAlerta = $this->input->post('hddId');
 			
-			$msj = "Se adiciono el Tipo de Alerta con exito.";
+			$msj = "Se adicionó el Tipo de Alerta con exito.";
 			if ($idTipoAlerta != '') {
 				$msj = "Se actualizó el tipo de alerta con exito.";
 			}
@@ -310,7 +310,7 @@ class Admin extends MX_Controller {
 			
 			$idPrueba = $this->input->post('hddId');
 			
-			$msj = "Se adiciono la Prueba con exito.";
+			$msj = "Se adicionó la Prueba con exito.";
 			if ($idPrueba != '') {
 				$msj = "Se actualizó la Prueba con exito.";
 			}
@@ -408,7 +408,7 @@ class Admin extends MX_Controller {
 			$arrParam = array("idSesion" => $this->input->post('sesion'));
 			$data['information'] = $this->general_model->get_sesiones($arrParam);//info sesiones
 			
-			$msj = "Se adiciono la Alerta con exito.";
+			$msj = "Se adicionó la Alerta con exito.";
 			if ($idAlerta != '') {
 				$msj = "Se actualizó la Alerta con exito.";
 			}
@@ -503,7 +503,7 @@ class Admin extends MX_Controller {
 
 			$idSitio = $this->input->post('hddId');
 			
-			$msj = "Se adiciono el Sitio con exito.";
+			$msj = "Se adicionó el Sitio con exito.";
 			if ($idSitio != '') {
 				$msj = "Se actualizó el Sitio con exito.";
 			}
@@ -605,7 +605,7 @@ class Admin extends MX_Controller {
 			
 			$identificador = $this->input->post('hddId');
 			
-			$msj = "Se adiciono el Grupo de Instrumentos con exito.";
+			$msj = "Se adicionó el Grupo de Instrumentos con exito.";
 			if ($identificador != '') {
 				$msj = "Se actualizó el Grupo de Instrumentos con exito.";
 			}
@@ -684,7 +684,7 @@ class Admin extends MX_Controller {
 			$idGrupo = $this->input->post('hddIdGrupo');
 			$idSesion = $this->input->post('hddId');
 			
-			$msj = "Se adiciono la Sesión con exito.";
+			$msj = "Se adicionó la Sesión con exito.";
 			if ($idSesion != '') {
 				$msj = "Se actualizó la Sesión con exito.";
 			}
@@ -839,7 +839,7 @@ class Admin extends MX_Controller {
 			$arrParam = array("idSitio" => $idSitio,
 								"idSesion" => $idSesion);
 			
-			$msj = "Se adiciono la Sesión con exito.";
+			$msj = "Se adicionó la Sesión con exito.";
 			if ($idSitioSesion != '') {
 				$msj = "Se actualizó la Sesión con exito.";
 				$arrParam["idSitioSesionDistinta"] = $idSitioSesion;
@@ -916,6 +916,50 @@ class Admin extends MX_Controller {
 				$data["msj"] .= "<br><strong>Celular: </strong>" . $infoSitio[0]['contacto_celular'];
 				$data["msj"] .= "<br><strong>Email: </strong>" . $infoSitio[0]['contacto_email'];;
 				$data["clase"] = "alert-success";
+			}else{
+				$data["msj"] = "<strong>Error!!!</strong> Contactarse con el administrador.";
+				$data["clase"] = "alert-danger";
+			}
+						
+			$data["view"] = "template/answer";
+			$this->load->view("layout", $data);
+	}
+	
+	/**
+	 * Eliminar registros de la base de datpos
+	 * @since 23/5/2017
+	 */
+	public function eliminar_db()
+	{
+			$data = array();			
+			$data["titulo"] = "ELIMINAR REGISTROS";
+			$data['linkBack'] = "dashboard/";
+			
+			if ($this->admin_model->eliminarRegistros()) {
+				
+				$data["clase"] = "alert-success";
+				$data["msj"] = "Se eliminaron registros de la tabla Registro.";
+				
+				if ($this->admin_model->eliminarAlertas()) {
+					$data["msj"] .= "<br>Se eliminaron registros de la tabla Alertas.";
+				}
+				
+				if ($this->admin_model->eliminarSitioSesion()) {
+					$data["msj"] .= "<br>Se eliminaron registros de la tabla Sitio Sesión.";
+				}				
+				
+				
+				if ($this->admin_model->eliminarSesiones()) {
+					$data["msj"] .= "<br>Se eliminaron registros de la Sesiones.";
+					
+					if ($this->admin_model->eliminarGrupoInstrumentos()) {
+						$data["msj"] .= "<br>Se eliminaron registros de la tabla Grupo Instrumentos.";
+					}
+				}
+				
+				
+				
+				
 			}else{
 				$data["msj"] = "<strong>Error!!!</strong> Contactarse con el administrador.";
 				$data["clase"] = "alert-danger";

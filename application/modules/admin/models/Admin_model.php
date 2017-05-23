@@ -530,7 +530,86 @@
 					return false;
 				}
 		}
+		
+		/**
+		 * Eliminar registros de la tabla registros
+		 * @since  23/5/2017
+		 */
+		public function eliminarRegistros()
+		{
+				$sql = "TRUNCATE TABLE registro";
+				$query = $this->db->query($sql);
 
+				if ($query) {
+					return true;
+				} else {
+					return false;
+				}
+		}
+		
+		/**
+		 * Eliminar registros de la tabla alertas
+		 * @since  23/5/2017
+		 */
+		public function eliminarAlertas()
+		{
+				$sql = "TRUNCATE TABLE alertas";
+				$query = $this->db->query($sql);
+
+				if ($query) {
+					return true;
+				} else {
+					return false;
+				}
+		}
+		
+		/**
+		 * Eliminar registros de la tabla SESIONES
+		 * @since  23/5/2017
+		 */
+		public function eliminarSesiones()
+		{
+				$sql = "DELETE FROM sesiones";
+				$query = $this->db->query($sql);
+
+				if ($query) {
+					return true;
+				} else {
+					return false;
+				}
+		}
+		
+		/**
+		 * Eliminar registros de la tabla sitio_SESION
+		 * @since  23/5/2017
+		 */
+		public function eliminarSitioSesion()
+		{
+				$sql = "DELETE FROM sitio_sesion";
+				$query = $this->db->query($sql);
+
+				if ($query) {
+					return true;
+				} else {
+					return false;
+				}
+		}
+		
+		/**
+		 * Eliminar registros de la tabla grupo instrumentos
+		 * @since  23/5/2017
+		 */
+		public function eliminarGrupoInstrumentos()
+		{
+				$sql = "DELETE FROM param_grupo_instrumentos";
+				$query = $this->db->query($sql);
+
+				if ($query) {
+					return true;
+				} else {
+					return false;
+				}
+		}
 		
 		
 	    
