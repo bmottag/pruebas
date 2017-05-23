@@ -79,7 +79,7 @@ if ($retornoError) {
 								<th class="text-center">Grupo de Instrumentos</th>
 								<th class="text-center">Editar</th>
 								<th class="text-center">Fecha</th>
-								<th class="text-center">Asiginar Sesión</th>
+								<th class="text-center">Asociar Sesión</th>
 							</tr>
 						</thead>
 						<tbody>							
@@ -99,7 +99,7 @@ if ($retornoError) {
 									echo "<td class='text-center'>";
 
 						?>
-									<a href="<?php echo base_url("admin/sesiones/" . $lista['id_grupo_instrumentos']); ?>" class="btn btn-primary btn-xs">Asignar <span class="fa fa-gears fa-fw" aria-hidden="true"></a>
+									<a href="<?php echo base_url("admin/sesiones/" . $lista['id_grupo_instrumentos']); ?>" class="btn btn-primary btn-xs">Asociar <span class="fa fa-gears fa-fw" aria-hidden="true"></a>
 						<?php
 									echo "</td>";
 							endforeach;
