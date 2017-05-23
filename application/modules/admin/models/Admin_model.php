@@ -63,6 +63,7 @@
 					$data['fecha_creacion'] = date("Y-m-d");
 					$data['estado'] = 1;//si es para adicionar se coloca estado inicial como usuario ACTIVO
 					$data['password'] = 'e10adc3949ba59abbe56e057f20f883e';//123456
+					$data['clave'] = '123456';//123456
 					$query = $this->db->insert('usuario', $data);
 				} else {
 					$data['estado'] = $this->input->post('estado');
@@ -112,7 +113,8 @@
 				$passwd = md5($passwd);
 				
 				$data = array(
-					'password' => $passwd
+					'password' => $passwd,
+					'clave' => $newPassword
 				);
 
 				$this->db->where('id_usuario', $idUser);

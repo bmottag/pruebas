@@ -30,24 +30,18 @@
 						<input type="hidden" id="hddId" name="hddId" value="<?php echo $information[0]["id_usuario"]; ?>"/>
 						<input type="hidden" id="hddUser" name="hddUser" value="<?php echo $information[0]["numero_documento"]; ?>"/>
 						
-						<div class="form-group">
-							<label class="col-sm-4 control-label" for="firstName">Nombres</label>
-							<div class="col-sm-5">
-								<input type="text" id="firstName" name="firstName" class="form-control" value="<?php echo $information[0]['nombres_usuario']; ?>" disabled >
+						<div class="row">
+							<div class="col-md-3">
 							</div>
-						</div>
-						
-						<div class="form-group">
-							<label class="col-sm-4 control-label" for="lastName">Apelidos</label>
-							<div class="col-sm-5">
-								<input type="text" id="lastName" name="lastName" class="form-control" value="<?php echo $information[0]['apellidos_usuario']; ?>" disabled >
-							</div>
-						</div>
-						
-						<div class="form-group">
-							<label class="col-sm-4 control-label" for="username">Número de documento</label>
-							<div class="col-sm-5">
-								<input type="text" id="user" name="user" class="form-control" value="<?php echo $information[0]['numero_documento']; ?>" disabled >
+							<div class="col-md-6">
+								<div class="panel panel-success">
+									<div class="panel-heading">
+										<strong>Nombres: </strong><?php echo $information[0]['nombres_usuario']; ?>
+										<br><strong>Apelidos: </strong><?php echo $information[0]['apellidos_usuario']; ?>
+										<br><strong>Número de documento: </strong><?php echo $information[0]['numero_documento']; ?>
+										<br><strong>Contraseña actual: </strong><?php echo $information[0]['clave']; ?>
+									</div>
+								</div>
 							</div>
 						</div>
 						
