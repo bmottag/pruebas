@@ -53,7 +53,7 @@
 				$sesion = $this->input->post('sesion');
 				$alerta = $this->input->post('alerta');
 		
-				$this->db->select('Y.*,A.*, S.*, N.*, P.nombre_prueba, G.nombre_grupo_instrumentos, 
+				$this->db->select('Y.*,A.*, S.*, K.*, P.nombre_prueba, G.nombre_grupo_instrumentos, 
 				O.nombre_organizacion, R.nombre_region, D.*, Z.nombre_zona, T.nombre_tipo_alerta');
 				
 				//SESION
@@ -73,7 +73,9 @@
 				$this->db->join('param_zonas Z', 'Z.id_zona = Y.fk_id_zona', 'INNER');
 				
 				//REGISTRO
-				$this->db->join('registro N', 'N.fk_id_alerta = A.id_alerta', 'LEFT');
+				//$this->db->join('registro N', 'N.fk_id_alerta = A.id_alerta', 'LEFT');
+				$this->db->join('registro K', 'K.fk_id_sitio_sesion = X.id_sitio_sesion', 'LEFT');
+				
 				
 				
 				$this->db->where('G.fecha >=', $fechaInicio); //FECHA INICIAL MAYOR A LA ACTUAL

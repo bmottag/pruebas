@@ -87,7 +87,7 @@ class Report extends CI_Controller {
 				
 				$data['info'] = $this->report_model->get_total_by();
 				
-				
+//echo $this->db->last_query();				
 //pr($data['info']); exit;
 				$data["view"] = "lista_total";
 			}
