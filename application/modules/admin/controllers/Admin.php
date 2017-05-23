@@ -771,10 +771,11 @@ class Admin extends MX_Controller {
 	 */
 	public function asociar_sesion($idSitio)
 	{
-			$arrParam = array("idSitio" => $idSitio);
-			$data['info'] = $this->admin_model->get_sesiones_sitio($arrParam);
-
 			$this->load->model("general_model");
+			
+			$arrParam = array("idSitio" => $idSitio);
+			$data['info'] = $this->general_model->get_sesiones_sitio($arrParam);
+			
 			$arrParam = array("idSitio" => $idSitio);
 			$data['infoSitio'] = $this->general_model->get_sitios($arrParam);
 			
@@ -801,7 +802,7 @@ class Admin extends MX_Controller {
 				$arrParam = array(
 					"idSesionSitio" => $data["idSesionSitio"]
 				);
-				$data['information'] = $this->admin_model->get_sesiones_sitio($arrParam);//info sesiones por sitio
+				$data['information'] = $this->general_model->get_sesiones_sitio($arrParam);//info sesiones por sitio
 				$data["idSitio"] = $data['information'][0]['fk_id_sitio'];
 				
 				//si es para editar muestro lista con todas las sesiones vigentes
@@ -845,7 +846,8 @@ class Admin extends MX_Controller {
 				
 				//verificar que al editar la relacion SITIO con SESION no existe en la base de datos
 				if($idSesionBD!=$idSesion){ //si la sesion guardada anteriormente es diferente de la nueva seion entonces verifico
-					$verificar = $this->admin_model->get_sesiones_sitio($arrParam);
+					$this->load->model("general_model");
+					$verificar = $this->general_model->get_sesiones_sitio($arrParam);
 
 					if($verificar){
 						$error = TRUE;

@@ -153,6 +153,11 @@ class General_model extends CI_Model {
 				if (array_key_exists("idSitio", $arrDatos)) {
 					$this->db->where('S.id_sitio', $arrDatos["idSitio"]);
 				}
+				
+				if (array_key_exists("idDelegado", $arrDatos)) {
+					$this->db->where('S.fk_id_user_delegado', $arrDatos["idDelegado"]);
+				}
+				
 				$this->db->order_by('nombre_region, dpto_divipola_nombre, mpio_divipola_nombre, nombre_zona', 'asc');
 				$query = $this->db->get('sitios S');
 
@@ -187,6 +192,47 @@ class General_model extends CI_Model {
 				
 				$this->db->order_by('S.id_sesion', 'asc');
 				$query = $this->db->get('sesiones S');
+
+				if ($query->num_rows() > 0) {
+					return $query->result_array();
+				} else {
+					return false;
+				}
+		}
+		
+		/**
+		 * Lista de sesiones por sitio
+		 * @since 17/5/2017
+		 */
+		public function get_sesiones_sitio($arrDatos) 
+		{
+				$this->db->select();
+				$this->db->join('sesiones S', 'S.id_sesion = X.fk_id_sesion', 'INNER');
+				$this->db->join('param_grupo_instrumentos G', 'G.id_grupo_instrumentos = S.fk_id_grupo_instrumentos', 'INNER');
+				$this->db->join('pruebas P', 'P.id_prueba = G.fk_id_prueba', 'INNER');
+				$this->db->join('sitios Y', 'Y.id_sitio = X.fk_id_sitio', 'INNER');
+				$this->db->join('param_regiones R', 'R.id_region = Y.fk_id_region', 'INNER');
+				$this->db->join('param_divipola D', 'D.mpio_divipola = Y.fk_mpio_divipola', 'INNER');
+				if (array_key_exists("idSitio", $arrDatos)) {
+					$this->db->where('X.fk_id_sitio', $arrDatos["idSitio"]);
+				}
+				
+				if (array_key_exists("idSesion", $arrDatos)) {
+					$this->db->where('X.fk_id_sesion', $arrDatos["idSesion"]);
+				}
+				
+				if (array_key_exists("idSesionSitio", $arrDatos)) {
+					$this->db->where('X.id_sitio_sesion', $arrDatos["idSesionSitio"]);
+				}
+				
+				//filtro para cuando se edita el SITIO - SESION se verifique que no se repite la relacion
+				if (array_key_exists("idSitioSesionDistinta", $arrDatos)) {
+					$this->db->where('X.id_sitio_sesion !=', $arrDatos["idSitioSesionDistinta"]);
+				}				
+
+				
+				$this->db->order_by('X.id_sitio_sesion', 'asc');	
+				$query = $this->db->get('sitio_sesion X');
 
 				if ($query->num_rows() > 0) {
 					return $query->result_array();

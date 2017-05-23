@@ -15,11 +15,8 @@ class Dashboard extends MX_Controller {
 	{	
 			$this->load->model("general_model");
 			$userRol = $this->session->userdata("rol");
+			$userID = $this->session->userdata("id");
 	
-			if(!$userRol){ //If it is a normal user, just show the records of the user session
-				$arrParam["idEmployee"] = $this->session->userdata("id");
-			}
-			
 			$arrParam = array("tipoAlerta" => 1);
 			$data['infoAlertaInformativa'] = $this->dashboard_model->get_alerta_by($arrParam);
 			
@@ -30,6 +27,13 @@ class Dashboard extends MX_Controller {
 			$data['infoAlertaConsolidacion'] = $this->dashboard_model->get_alerta_by($arrParam);
 //echo $this->db->last_query();			
 //pr($data['infoAlertaConsolidacion']); exit;	
+	/**
+	 * SI es delegado busco en que sitio esta asignado y que sesiones tiene pendientes
+	 */
+			if($userRol==4){			
+				$arrParam = array("idDelegado" => $userID);
+				$data['infoSitoDelegado'] = $this->general_model->get_sitios($arrParam);
+			}
 
 
 

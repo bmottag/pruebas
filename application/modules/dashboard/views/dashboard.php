@@ -8,6 +8,10 @@
 	setInterval('reloadPage()','30000');//30 segundos
 </script>
 
+<?php
+	$userRol = $this->session->rol;
+?>
+
 <div id="page-wrapper">
 	<div class="row"><br>
 		<div class="col-md-12">
@@ -51,6 +55,66 @@ if ($retornoError) {
     <?php
 }
 ?> 
+
+
+<!-- INFORMACION DEL SITIO PARA EL DELEGADO SI EXISTE INFORMAION -->
+<?php if($userRol==4 && $infoSitoDelegado){ //si es DELEGADO ?>
+
+	<div class="row">
+		<div class="col-md-4">
+			<div class="panel panel-success">
+				<div class="panel-heading">
+					<strong>Nombre Sitio: </strong><?php echo $infoSitoDelegado[0]['nombre_sitio']; ?>
+					<br><strong>Dirección: </strong><?php echo $infoSitoDelegado[0]['direccion_sitio']; ?>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-md-4">
+			<div class="panel panel-success">
+				<div class="panel-heading">
+					<strong>Nodo o Región: </strong><?php echo $infoSitoDelegado[0]['nombre_region']; ?>
+					<br><strong>Departamento: </strong><?php echo $infoSitoDelegado[0]['dpto_divipola_nombre']; ?>
+					<br><strong>Municipio: </strong><?php echo $infoSitoDelegado[0]['mpio_divipola_nombre']; ?>
+					<br><strong>Zona: </strong><?php echo $infoSitoDelegado[0]['nombre_zona']; ?>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-md-4">
+			<div class="panel panel-success">
+				<div class="panel-heading">
+					<strong>Delegado: </strong><br>
+					<?php 
+					if($infoSitoDelegado[0]['fk_id_user_delegado']){
+						echo "C.C. " . $infoSitoDelegado[0]['cedula_delegado'] . " " . $infoSitoDelegado[0]['nom_delegado'] . " "  . $infoSitoDelegado[0]['ape_delegado'];
+					} else { echo "Falta asignar Delegado.";}
+					?>
+
+					<br><strong>Coordinador: </strong><br>
+					<?php 
+					if($infoSitoDelegado[0]['fk_id_user_coordinador']){
+						echo "C.C. " . $infoSitoDelegado[0]['cedula_coordinador'] . " " . $infoSitoDelegado[0]['nom_coordinador'] . " "  . $infoSitoDelegado[0]['ape_coordiandor'];
+					} else { echo "Falta asignar Coordinador.";}
+					?>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<?php } ?>
+<!-- INFORMACION DEL SITIO PARA EL DELEGADO SI EXISTE INFORMAION -->
+
+
+
+
+
+
+
+
+
+
+
 		
 
 	<div class="row">
@@ -296,12 +360,6 @@ $( document ).ready( function () {
 					
 
 <?php
-/**
- * Special MENU for ADMIN
- * @author BMOTTAG
- * @since  18/11/2016
- */
-	$userRol = $this->session->rol;
 	if($userRol==1){ //If it is an ADMIN user, show an special menu
 ?>
 					
