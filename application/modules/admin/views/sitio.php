@@ -133,7 +133,7 @@ if($lista['contacto_nombres']){
 									<a href="<?php echo base_url("admin/asignar_delegado/" . $lista['id_sitio'] . "/delegado"); ?>" class="btn btn-info btn-xs">Delegado <span class="fa fa-gears fa-fw" aria-hidden="true"></a>
 						<?php 
 if($lista['fk_id_user_delegado']){
-	echo "<p class='text-primary text-center'>C.C. " . $lista['delegado'] . "</p>";
+	echo "<p class='text-primary text-center'>C.C. " . $lista['cedula_delegado'] . "</p>";
 }else{
 	echo "<p class='text-danger text-center'>Falta</p>";
 }
@@ -144,7 +144,7 @@ if($lista['fk_id_user_delegado']){
 									<a href="<?php echo base_url("admin/asignar_delegado/" . $lista['id_sitio'] . "/coordinador"); ?>" class="btn btn-info btn-xs">Coordinador <span class="fa fa-gears fa-fw" aria-hidden="true"></a>
 						<?php 
 if($lista['fk_id_user_coordinador']){
-	echo "<p class='text-primary text-center'>C.C. " . $lista['coordinador'] . "</p>";
+	echo "<p class='text-primary text-center'>C.C. " . $lista['cedula_coordinador'] . "</p>";
 }else{
 	echo "<p class='text-danger text-center'>Falta</p>";
 }

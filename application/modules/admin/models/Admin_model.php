@@ -258,38 +258,6 @@
 		}
 		
 		/**
-		 * Lista de sesiones
-		 * @since 12/5/2017
-		 */
-		public function get_sesiones($arrDatos) 
-		{
-				$year = date('Y');
-				$firstDay = date('Y-m-d', mktime(0,0,0, 1, 1, $year));
-			
-				$this->db->select();
-				$this->db->join('param_grupo_instrumentos G', 'G.id_grupo_instrumentos = S.fk_id_grupo_instrumentos', 'INNER');
-				$this->db->join('pruebas P', 'P.id_prueba = G.fk_id_prueba', 'INNER');
-				if (array_key_exists("idGrupo", $arrDatos)) {
-					$this->db->where('S.fk_id_grupo_instrumentos', $arrDatos["idGrupo"]);
-				}
-				
-				if (array_key_exists("idSesion", $arrDatos)) {
-					$this->db->where('S.id_sesion', $arrDatos["idSesion"]);
-				}
-				
-				$this->db->where('G.fecha >=', $firstDay); //se filtran por registros mayores al primer dia del año
-				
-				$this->db->order_by('S.id_sesion', 'asc');
-				$query = $this->db->get('sesiones S');
-
-				if ($query->num_rows() > 0) {
-					return $query->result_array();
-				} else {
-					return false;
-				}
-		}
-		
-		/**
 		 * Add/Edit SESIONES
 		 * @since 11/5/2017
 		 */

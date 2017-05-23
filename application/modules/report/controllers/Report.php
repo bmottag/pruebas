@@ -42,12 +42,9 @@ class Report extends CI_Controller {
 	 * Buscar por regiones
      * @since 21/05/2017
 	 */
-    public function searchByRegiones() 
+    public function searchBy() 
 	{
-			$data["titulo"] = "<i class='fa fa-book fa-fw'></i> Buscar Sitios por Regiones";
-			$data["subTitulo"] = "Región";
-			$data["botonRegreso"] = "report/searchByRegiones";
-			$data['listaDepartamentos'] = FALSE;//lista para filtrar por departamentos
+			$data["botonRegreso"] = "report/searchBy";
 			
 			//Lista Regiones
 			$this->load->model("general_model");
@@ -58,9 +55,19 @@ class Report extends CI_Controller {
 			);
 			$data['listaRegiones'] = $this->general_model->get_basic_search($arrParam);//Lista Regiones
 			
+			//Lista Departamentos
+			$this->load->model("general_model");
+			$data['listaDepartamentos'] = $this->general_model->get_dpto_divipola();//listado de departamentos
+			
+			//lista sesiones
+			$arrParam = array();
+			$data['infoSesiones'] = $this->general_model->get_sesiones($arrParam);//lista sesiones
+			
 			$data["view"] = "form_search_by";
 
-			if($idRegion = $this->input->post('region')){
+			if($_POST){
+				
+				$idRegion = $this->input->post('region');
 				
 				$arrParam = array(
 					"table" => "param_regiones",
@@ -70,49 +77,20 @@ class Report extends CI_Controller {
 				);
 				$data['infoRegion'] = $this->general_model->get_basic_search($arrParam);//Info Regiones
 				
-				$arrParam = array("idRegion" => $idRegion);
-				$data['info'] = $this->report_model->get_sitios_by($arrParam);
-				$data["view"] = "lista_sitios_by";
-			}
-			
-			$this->load->view("layout", $data);
-    }
-	
-	/**
-	 * Buscar por Departamento
-     * @since 21/05/2017
-	 */
-    public function searchByDepartamento() 
-	{
-			$data["titulo"] = "<i class='fa fa-book fa-fw'></i> Buscar Sitios por Departamento - Municipio";
-			$data["subTitulo"] = "Departamento";
-			$data["botonRegreso"] = "report/searchByDepartamento";
-			$data['listaRegiones'] = FALSE;//lista para filtrar por regiones
-			
-			//Lista Departamentos
-			$this->load->model("general_model");
-			$data['listaDepartamentos'] = $this->general_model->get_dpto_divipola();//listado de departamentos
-			
-			$data["view"] = "form_search_by";
-
-			if($idDepto = $this->input->post('depto')){
-				
 				$arrParam = array(
-					"table" => "param_divipola",
-					"order" => "dpto_divipola",
-					"column" => "dpto_divipola",
-					"id" => $idDepto
+					"idRegion" => $idRegion,					
+					"depto" => $this->input->post('depto'),
+					"mcpio" => $this->input->post('mcpio'),
+					"sesion" => $this->input->post('sesion'),
+					"alerta" => $this->input->post('alerta')
 				);
-				$data['infoDepartamento'] = $this->general_model->get_basic_search($arrParam);//Info Depto
-				
-				$arrParam = array("idDepto" => $idDepto);
 				$data['info'] = $this->report_model->get_sitios_by($arrParam);
 				$data["view"] = "lista_sitios_by";
 			}
 			
 			$this->load->view("layout", $data);
     }
-	
+		
     /**
      * Cargo modal - lista de sesiones
      * @since 21/5/2017
@@ -131,6 +109,26 @@ class Report extends CI_Controller {
 			$this->load->view("layout", $data);
 
 
+    }
+	
+	/**
+	 * Lista de alertas por sesiones
+     * @since 22/5/2017
+	 */
+    public function alertaList()
+	{
+			header("Content-Type: text/plain; charset=utf-8"); //Para evitar problemas de acentos
+
+			$arrParam['idSesion'] = $this->input->post('identificador');
+			$this->load->model("general_model");
+			$lista = $this->general_model->get_alertas_by($arrParam);
+		
+			echo "<option value=''>Select...</option>";
+			if ($lista) {
+				foreach ($lista as $fila) {
+					echo "<option value='" . $fila["idAlerta"] . "' >" . $fila["descripcion"] . "</option>";
+				}
+			}
     }
 	
 	

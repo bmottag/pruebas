@@ -19,7 +19,7 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<a class="btn btn-success" href=" <?php echo base_url(). $botonRegreso; ?> "><span class="glyphicon glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Regresar </a> 
-                    <i class="fa fa-life-saver fa-fw"></i> Lista de Sitios filtrado por <?php echo $subTitulo; ?>
+                    <i class="fa fa-life-saver fa-fw"></i> Lista de Sitios
 				</div>
 				<div class="panel-body">
 					<div class="alert alert-info">
@@ -35,7 +35,7 @@
 						if(!$info){
 					?>
 						<div class="alert alert-danger">
-							No hay Sitios para <?php echo $subTitulo; ?> seleccionada. 
+							No hay Sitios 
 						</div>
 					<?php
 						}else{

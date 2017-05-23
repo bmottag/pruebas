@@ -47,14 +47,27 @@
 				$this->db->join('usuario U', 'U.id_usuario = S.fk_id_user_delegado', 'LEFT');
 				$this->db->join('usuario Y', 'Y.id_usuario = S.fk_id_user_coordinador', 'LEFT');
 				
+				
 				if (array_key_exists("idRegion", $arrDatos)) {
 					$this->db->where('S.fk_id_region', $arrDatos["idRegion"]); //FILTRO POR REGION
 				}
 				
-				if (array_key_exists("idDepto", $arrDatos)) {
-					$this->db->where('S.fk_dpto_divipola', $arrDatos["idDepto"]); //FILTRO POR DEPARTAMENTO
+	/*			if (array_key_exists("depto", $arrDatos)) {
+					$this->db->where('S.fk_dpto_divipola', $arrDatos["depto"]); //FILTRO POR DEPARTAMENTO
 				}
-
+				
+				if (array_key_exists("mcpio", $arrDatos)) {
+					$this->db->where('S.fk_mpio_divipola', $arrDatos["mcpio"]); //FILTRO POR DEPARTAMENTO
+				}
+				
+				if (array_key_exists("sesion", $arrDatos)) {
+					$this->db->where('S.fk_dpto_divipola', $arrDatos["sesion"]); //FILTRO POR DEPARTAMENTO
+				}
+				
+				if (array_key_exists("alerta", $arrDatos)) {
+					$this->db->where('S.fk_dpto_divipola', $arrDatos["alerta"]); //FILTRO POR DEPARTAMENTO
+				}
+*/
 				$this->db->order_by('R.nombre_region, D.dpto_divipola_nombre, D.mpio_divipola_nombre', 'desc');
 				$query = $this->db->get('sitios S');
 

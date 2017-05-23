@@ -70,6 +70,32 @@ class General_model extends CI_Model {
 		}
 		
 		/**
+		 * Alertas por sesiones
+		 * @since 22/5/2016
+		 */
+		public function get_alertas_by($arrDatos)
+		{
+				$sesiones = array();
+				$this->db->select();
+				if (array_key_exists("idSesion", $arrDatos)) {
+					$this->db->where('fk_id_sesion', $arrDatos["idSesion"]);
+				}
+				$this->db->order_by('descripcion_alerta', 'asc');
+				$query = $this->db->get('alertas');
+					
+				if ($query->num_rows() > 0) {
+					$i = 0;
+					foreach ($query->result() as $row) {
+						$sesiones[$i]["idAlerta"] = $row->id_alerta;
+						$sesiones[$i]["descripcion"] = $row->descripcion_alerta;
+						$i++;
+					}
+				}
+				$this->db->close();
+				return $sesiones;
+		}
+		
+		/**
 		 * Lista de delegados que no tienen sitio asignado
 		 * @since  21/5/2017
 		 */
@@ -116,7 +142,7 @@ class General_model extends CI_Model {
 		 */
 		public function get_sitios($arrDatos) 
 		{
-				$this->db->select('S.*, O.nombre_organizacion, R.nombre_region, D.*, Z.nombre_zona, U.numero_documento as delegado, Y.numero_documento as coordinador');
+				$this->db->select('S.*, O.nombre_organizacion, R.nombre_region, D.*, Z.nombre_zona, U.numero_documento as cedula_delegado, U.nombres_usuario nom_delegado, U.apellidos_usuario ape_delegado, Y.numero_documento as cedula_coordinador, Y.nombres_usuario nom_coordinador, Y.apellidos_usuario ape_coordiandor');
 				$this->db->join('param_organizaciones O', 'O.id_organizacion = S.fk_id_organizacion', 'INNER');
 				$this->db->join('param_regiones R', 'R.id_region = S.fk_id_region', 'INNER');
 				$this->db->join('param_divipola D', 'D.mpio_divipola = S.fk_mpio_divipola', 'INNER');
@@ -129,6 +155,38 @@ class General_model extends CI_Model {
 				}
 				$this->db->order_by('nombre_region, dpto_divipola_nombre, mpio_divipola_nombre, nombre_zona', 'asc');
 				$query = $this->db->get('sitios S');
+
+				if ($query->num_rows() > 0) {
+					return $query->result_array();
+				} else {
+					return false;
+				}
+		}
+		
+		/**
+		 * Lista de sesiones
+		 * @since 12/5/2017
+		 */
+		public function get_sesiones($arrDatos) 
+		{
+				$year = date('Y');
+				$firstDay = date('Y-m-d', mktime(0,0,0, 1, 1, $year));
+			
+				$this->db->select();
+				$this->db->join('param_grupo_instrumentos G', 'G.id_grupo_instrumentos = S.fk_id_grupo_instrumentos', 'INNER');
+				$this->db->join('pruebas P', 'P.id_prueba = G.fk_id_prueba', 'INNER');
+				if (array_key_exists("idGrupo", $arrDatos)) {
+					$this->db->where('S.fk_id_grupo_instrumentos', $arrDatos["idGrupo"]);
+				}
+				
+				if (array_key_exists("idSesion", $arrDatos)) {
+					$this->db->where('S.id_sesion', $arrDatos["idSesion"]);
+				}
+				
+				$this->db->where('G.fecha >=', $firstDay); //se filtran por registros mayores al primer dia del año
+				
+				$this->db->order_by('S.id_sesion', 'asc');
+				$query = $this->db->get('sesiones S');
 
 				if ($query->num_rows() > 0) {
 					return $query->result_array();

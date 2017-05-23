@@ -179,7 +179,7 @@
 		 * Consultar informacion del sitio-sesion
 		 * @since 19/5/2017
 		 */
-		public function get_info_sitio_sesion($arrDatos) 
+		public function get_info_sitio_sesion() 
 		{
 				$this->db->select();
 				$this->db->where('id_sitio_sesion', $this->input->post('hddIdSitioSesion'));

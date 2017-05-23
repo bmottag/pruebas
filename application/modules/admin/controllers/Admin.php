@@ -375,7 +375,7 @@ class Admin extends MX_Controller {
 			$data['roles'] = $this->general_model->get_basic_search($arrParam);//lista de roles
 			
 			$arrParam = array();
-			$data['infoPruebas'] = $this->admin_model->get_sesiones($arrParam);//lista sesiones
+			$data['infoPruebas'] = $this->general_model->get_sesiones($arrParam);//lista sesiones
 			
 			
 			if ($data["identificador"] != 'x') {
@@ -404,8 +404,9 @@ class Admin extends MX_Controller {
 			$idAlerta = $this->input->post('hddId');
 			
 			//buscar la fecha de la sesion para guardarla en la alerta
+			$this->load->model("general_model");
 			$arrParam = array("idSesion" => $this->input->post('sesion'));
-			$data['information'] = $this->admin_model->get_sesiones($arrParam);//info sesiones
+			$data['information'] = $this->general_model->get_sesiones($arrParam);//info sesiones
 			
 			$msj = "Se adiciono la Alerta con exito.";
 			if ($idAlerta != '') {
@@ -635,8 +636,9 @@ class Admin extends MX_Controller {
 	 */
 	public function sesiones($idGrupo)
 	{
+			$this->load->model("general_model");
 			$arrParam = array("idGrupo" => $idGrupo);
-			$data['info'] = $this->admin_model->get_sesiones($arrParam);
+			$data['info'] = $this->general_model->get_sesiones($arrParam);
 			
 			$arrParam = array("idGrupo" => $idGrupo);
 			$data['infoGrupo'] = $this->admin_model->get_grupo_instrumentos($arrParam);
@@ -658,10 +660,11 @@ class Admin extends MX_Controller {
 			$data["idSesion"] = $this->input->post("idSesion");
 			
 			if ($data["idSesion"] != 'x') {
+				$this->load->model("general_model");
 				$arrParam = array(
 					"idSesion" => $data["idSesion"]
 				);
-				$data['information'] = $this->admin_model->get_sesiones($arrParam);//info sesiones
+				$data['information'] = $this->general_model->get_sesiones($arrParam);//info sesiones
 				
 				$data["idGrupo"] = $data['information'][0]['fk_id_grupo_instrumentos'];
 			}
@@ -787,6 +790,7 @@ class Admin extends MX_Controller {
 
 			
 			if ($data["idSesionSitio"] != 'x') {
+				$this->load->model("general_model");
 				$arrParam = array(
 					"idSesionSitio" => $data["idSesionSitio"]
 				);
@@ -795,7 +799,7 @@ class Admin extends MX_Controller {
 				
 				//si es para editar muestro lista con todas las sesiones vigentes
 				$arrParam = array();
-				$data['infoSesiones'] = $this->admin_model->get_sesiones($arrParam);//lista sesiones
+				$data['infoSesiones'] = $this->general_model->get_sesiones($arrParam);//lista sesiones
 			}else{
 				
 				//si es para adicionar uno nuevo muestro lista con sesiones que no se han utilizado

@@ -71,7 +71,7 @@
 					<select name="hour" id="hour" class="form-control" required>
 						<option value='' >Select...</option>
 						<?php
-						for ($i = 0; $i < 22; $i++) {
+						for ($i = 0; $i < 24; $i++) {
 							?>
 							<option value='<?php echo $i; ?>' <?php
 							if ($information && $i == $hour) {

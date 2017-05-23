@@ -29,13 +29,7 @@ if(!$infoAlerta){
 			
             <!-- /.row -->
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <i class="fa fa-life-saver fa-fw"></i> <?php echo $infoAlerta[0]['nombre_tipo_alerta']; ?>
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
+
 
                             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
                                 <thead>
@@ -46,9 +40,10 @@ if(!$infoAlerta){
 										<th>Prueba</th>
 										<th>Grupo Instrumentos</th>
 										<th>Sesión</th>
-										<th>Alerta</th>
-										<th>Encargado</th>
-										<th>Sala</th>
+										<th>Descripción Alerta</th>
+										<th>Mensaje Alerta</th>
+										<th>Delegado</th>
+										<th>Aceptada</th>
                                     </tr>
                                 </thead>
                                 <tbody>							
@@ -63,8 +58,9 @@ if(!$infoAlerta){
 											echo "<td >" . $lista['nombre_grupo_instrumentos'] . "</td>";
 											echo "<td >" . $lista['sesion_prueba'] . "</td>";
 											echo "<td >" . $lista['descripcion_alerta'] . "</td>";
+											echo "<td >" . $lista['mensaje_alerta'] . "</td>";
 											echo "<td >" . $lista['nombres_usuario'] . " " . $lista['apellidos_usuario'] . "</td>";
-											echo "<td >Sala Abierta</td>";
+											echo "<td class='text-center'>Si</td>";
 											echo "</tr>";
 									endforeach;
 								?>
@@ -73,22 +69,10 @@ if(!$infoAlerta){
 
                         </div>
                         <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
+
 <?php } ?>			
 
         </div>
         <!-- /#page-wrapper -->
 
     <!-- Tables -->
-    <script>
-    $(document).ready(function() {
-        $('#dataTables').DataTable({
-            responsive: true,
-			"ordering": false
-        });
-    });
-    </script>

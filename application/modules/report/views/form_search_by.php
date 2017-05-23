@@ -1,5 +1,5 @@
 <script type="text/javascript" src="<?php echo base_url("assets/js/validate/admin/ajaxMcpio.js"); ?>"></script>
-
+<script type="text/javascript" src="<?php echo base_url("assets/js/validate/ajaxAlerta.js"); ?>"></script>
 
         <div id="page-wrapper">
 
@@ -22,28 +22,31 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <?php echo $titulo; ?>
+                            <i class='fa fa-book fa-fw'></i> Buscar Sitios - Seleccionar uno o varios de las siguientes opciones
                         </div>
                         <div class="panel-body">
-							<div class="alert alert-info">
-								<strong>Nota:</strong> 
-								Seleccionar <?php echo $subTitulo; ?>
-							</div>
+
 									<form  name="form" id="form" role="form" method="post" class="form-horizontal" >
 
 <!-- INICIO FILTRO POR REGION -->
 									<?php if($listaRegiones){ ?>
-										<div class="form-group">
-											<div class="col-sm-5 col-sm-offset-1">
-												<label for="from">Regiones: <small></small></label>
-												<select name="region" id="region" class="form-control" required>
-													<option value=''>Select...</option>
-													<?php for ($i = 0; $i < count($listaRegiones); $i++) { ?>
-														<option value="<?php echo $listaRegiones[$i]["id_region"]; ?>" ><?php echo $listaRegiones[$i]["nombre_region"]; ?></option>	
-													<?php } ?>
-												</select>
+									<div class="row">
+										<div class="col-sm-6">
+										<div class="alert alert-info">
+											<div class="form-group">
+												<div class="col-sm-10 col-sm-offset-1">
+													<label for="from">Regiones: <small></small></label>
+													<select name="region" id="region" class="form-control" required>
+														<option value=''>Select...</option>
+														<?php for ($i = 0; $i < count($listaRegiones); $i++) { ?>
+															<option value="<?php echo $listaRegiones[$i]["id_region"]; ?>" ><?php echo $listaRegiones[$i]["nombre_region"]; ?></option>	
+														<?php } ?>
+													</select>
+												</div>
 											</div>
 										</div>
+										</div>
+									
 									<?php } ?>
 <!-- FIN FILTRO POR REGION -->
 
@@ -51,12 +54,13 @@
 <!-- INICIO FILTRO POR DEPARTAMENTO -->
 									<?php if($listaDepartamentos){ ?>
 									
-									<div class="row">
+								
 										<div class="col-sm-6">
+										<div class="alert alert-info">
 											<div class="form-group">
 												<div class="col-sm-10 col-sm-offset-1">
 													<label for="from">Departamento: <small></small></label>
-													<select name="depto" id="depto" class="form-control" required>
+													<select name="depto" id="depto" class="form-control">
 														<option value=''>Select...</option>
 														<?php for ($i = 0; $i < count($listaDepartamentos); $i++) { ?>
 															<option value="<?php echo $listaDepartamentos[$i]["dpto_divipola"]; ?>" ><?php echo $listaDepartamentos[$i]["dpto_divipola_nombre"]; ?></option>	
@@ -64,9 +68,7 @@
 													</select>
 												</div>
 											</div>
-										</div>
-					
-										<div class="col-sm-6">
+											
 											<div class="form-group">
 												<div class="col-sm-10 col-sm-offset-1">
 													<label for="from">Municipio: <small></small></label>
@@ -76,10 +78,61 @@
 												</div>
 											</div>
 										</div>
+										</div>
 									</div>
+					
+
 
 									<?php } ?>
 <!-- FIN FILTRO POR DEPARTAMENTO -->
+
+
+
+
+<!-- INICIO FILTRO POR SESIONES -->
+									<?php if($infoSesiones){ ?>
+									
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="form-group">
+												<div class="col-sm-10 col-sm-offset-1">
+													<label for="type" >Prueba / Grupo de Instrumentos / Fecha / Sesión : *</label>
+													<select name="sesion" id="sesion" class="form-control" >
+														<option value=''>Select...</option>
+														<?php for ($i = 0; $i < count($infoSesiones); $i++) { ?>
+															<option value="<?php echo $infoSesiones[$i]["id_sesion"]; ?>" ><?php echo $infoSesiones[$i]["nombre_prueba"] . " / " . $infoSesiones[$i]["nombre_grupo_instrumentos"] . " / " . $infoSesiones[$i]["fecha"] . " / " . $infoSesiones[$i]["sesion_prueba"]; ?></option>	
+														<?php } ?>
+													</select>
+												</div>
+											</div>
+										</div>
+					
+										<div class="col-sm-12">
+											<div class="form-group">
+												<div class="col-sm-10 col-sm-offset-1">
+													<label for="from">Alerta: <small></small></label>
+													<select name="alerta" id="alerta" class="form-control">
+													
+													</select>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<?php } ?>
+<!-- FIN FILTRO POR SESIONES -->
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <div class="row"></div><br>
