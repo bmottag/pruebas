@@ -32,6 +32,7 @@
 			</a>
 			<ul class="dropdown-menu dropdown-messages">
 			
+<!--			
 				<li>
 					<a href="<?php echo base_url("report/registros/1"); ?>"><i class="fa fa-life-saver fa-fw"></i> Información Alerta Informativa</a>
 				</li>
@@ -45,7 +46,7 @@
 				</li>
 				
 				<li class="divider"></li>
-								
+-->
 				<li>
 					<a href="<?php echo base_url("report/searchBy"); ?>"><i class="fa fa-life-saver fa-fw"></i> Buscar Información de Sitios</a>
 				</li>
