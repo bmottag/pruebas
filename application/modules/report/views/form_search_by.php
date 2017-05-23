@@ -36,7 +36,7 @@
 											<div class="form-group">
 												<div class="col-sm-8 col-sm-offset-2">
 													<label for="from">Regiones: <small></small></label>
-													<select name="region" id="region" class="form-control" required>
+													<select name="region" id="region" class="form-control">
 														<option value=''>Select...</option>
 														<?php for ($i = 0; $i < count($listaRegiones); $i++) { ?>
 															<option value="<?php echo $listaRegiones[$i]["id_region"]; ?>" ><?php echo $listaRegiones[$i]["nombre_region"]; ?></option>	

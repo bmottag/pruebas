@@ -47,52 +47,59 @@
 				$fechaFin = strtotime ( '+20 day' , strtotime ( $fecha ) ) ;//le resto 20 dias a la fecha actual
 				$fechaFin = date ( 'Y-m-d' , $fechaFin );
 
-
-		
 				$idRegion = $this->input->post('region');				
 				$depto = $this->input->post('depto');
 				$mcpio = $this->input->post('mcpio');
 				$sesion = $this->input->post('sesion');
 				$alerta = $this->input->post('alerta');
 		
-				$this->db->select('A.*, S.*, P.nombre_prueba, G.nombre_grupo_instrumentos, O.nombre_organizacion, R.nombre_region, D.*, Z.nombre_zona');
+				$this->db->select('Y.*,A.*, S.*, N.*, P.nombre_prueba, G.nombre_grupo_instrumentos, 
+				O.nombre_organizacion, R.nombre_region, D.*, Z.nombre_zona, T.nombre_tipo_alerta');
+				
+				//SESION
 				$this->db->join('sesiones S', 'S.id_sesion = X.fk_id_sesion', 'INNER');
 				$this->db->join('param_grupo_instrumentos G', 'G.id_grupo_instrumentos = S.fk_id_grupo_instrumentos', 'INNER');
 				$this->db->join('pruebas P', 'P.id_prueba = G.fk_id_prueba', 'INNER');
 				
+				//ALERTA
 				$this->db->join('alertas A', 'A.fk_id_sesion = S.id_sesion', 'INNER');
+				$this->db->join('param_tipo_alerta T', 'T.id_tipo_alerta = A.fk_id_tipo_alerta', 'INNER');
 				
+				//SITIO
 				$this->db->join('sitios Y', 'Y.id_sitio = X.fk_id_sitio', 'INNER');
 				$this->db->join('param_regiones R', 'R.id_region = Y.fk_id_region', 'INNER');
 				$this->db->join('param_divipola D', 'D.mpio_divipola = Y.fk_mpio_divipola', 'INNER');
 				$this->db->join('param_organizaciones O', 'O.id_organizacion = Y.fk_id_organizacion', 'INNER');
 				$this->db->join('param_zonas Z', 'Z.id_zona = Y.fk_id_zona', 'INNER');
 				
+				//REGISTRO
+				$this->db->join('registro N', 'N.fk_id_alerta = A.id_alerta', 'LEFT');
+				
 				
 				$this->db->where('G.fecha >=', $fechaInicio); //FECHA INICIAL MAYOR A LA ACTUAL
 				$this->db->where('G.fecha <=', $fechaFin); //FECHA FINAL MENOR A LA ACTUAL				
-	/*			
 				
-				if (array_key_exists("idRegion", $arrDatos)) {
-					$this->db->where('S.fk_id_region', $arrDatos["idRegion"]); //FILTRO POR REGION
+				
+				if($idRegion && $idRegion != "") {
+					$this->db->where('Y.fk_id_region', $idRegion); //FILTRO POR REGION
 				}
 				
-				if (array_key_exists("depto", $arrDatos)) {
-					$this->db->where('S.fk_dpto_divipola', $arrDatos["depto"]); //FILTRO POR DEPARTAMENTO
+				if ($depto && $depto != "") {
+					$this->db->where('Y.fk_dpto_divipola', $depto); //FILTRO POR DEPARTAMENTO
+				}
+			
+				if ($mcpio && $mcpio != "") {
+					$this->db->where('Y.fk_mpio_divipola', $mcpio); //FILTRO POR MUNICIPIO
 				}
 				
-				if (array_key_exists("mcpio", $arrDatos)) {
-					$this->db->where('S.fk_mpio_divipola', $arrDatos["mcpio"]); //FILTRO POR DEPARTAMENTO
+				if ($sesion && $sesion != "") {
+					$this->db->where('X.fk_id_sesion', $sesion); //FILTRO POR DEPARTAMENTO
 				}
 				
-				if (array_key_exists("sesion", $arrDatos)) {
-					$this->db->where('S.fk_dpto_divipola', $arrDatos["sesion"]); //FILTRO POR DEPARTAMENTO
+				if ($alerta && $alerta != "") {
+					$this->db->where('A.id_alerta', $alerta); //FILTRO POR ALERTA
 				}
-				
-				if (array_key_exists("alerta", $arrDatos)) {
-					$this->db->where('S.fk_dpto_divipola', $arrDatos["alerta"]); //FILTRO POR DEPARTAMENTO
-				}
-*/
+
 				//$this->db->order_by('R.nombre_region, D.dpto_divipola_nombre, D.mpio_divipola_nombre', 'desc');
 				$query = $this->db->get('sitio_sesion X');
 

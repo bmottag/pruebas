@@ -18,12 +18,12 @@
 		<div class="col-lg-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<a class="btn btn-success" href=" <?php echo base_url(). $botonRegreso; ?> "><span class="glyphicon glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Regresar </a> 
-                    <i class="fa fa-life-saver fa-fw"></i> Lista de Sitios
+					<a class="btn btn-success" href=" <?php echo base_url(). "report/searchBy"; ?> "><span class="glyphicon glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Regresar </a> 
+                    <i class="fa fa-life-saver fa-fw"></i> Lista
 				</div>
 				<div class="panel-body">
 					<div class="alert alert-info">
-						<?php if(isset($infoRegion)){ ?>
+						<?php if(isset($infoRegion) && $infoRegion[0]['nombre_region']){ ?>
 							<strong>Nodo o Región: </strong><?php echo $infoRegion[0]['nombre_region']; ?> 
 						<?php } ?>
 						
@@ -35,7 +35,7 @@
 						if(!$info){
 					?>
 						<div class="alert alert-danger">
-							No hay Sitios 
+							No hay Inofrmación
 						</div>
 					<?php
 						}else{
@@ -43,54 +43,55 @@
 					<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
 						<thead>
 							<tr>
-								<th class="text-center">Nombre Sitio</th>
-								<th class="text-center">Región</th>
-								<th class="text-center">Departamento</th>
-								<th class="text-center">Municipio</th>
-								<th class="text-center">Zona</th>
-								<th class="text-center">Número de Sesiones</th>
-								<th class="text-center">Nombre Contacto</th>
-								<th class="text-center">Teléfono Contacto</th>
-								<th class="text-center">Celular Contacto</th>
-								<th class="text-center">Email Contacto</th>
+								<th class="text-center">Sitio</th>
+								<th class="text-center">Sesión</th>
+								<th class="text-center">Alerta</th>
+								<th class="text-center">Respuesta</th>
 							</tr>
 						</thead>
 						<tbody>							
 						<?php
 							foreach ($info as $lista):
-							
-									//consultar numero de sesiones por sitio
-									$ci = &get_instance();
-									$ci->load->model("report_model");
-									
-									$arrParam = array("idSitio" => $lista["id_sitio"]);
-									$conteoSesiones = $this->report_model->countSesionesbySitio($arrParam);
-									
 									echo "<tr>";
-									echo "<td>" . $lista['nombre_sitio'] . "</td>";
-									echo "<td>" . $lista['nombre_region'] . "</td>";
-									echo "<td>" . $lista['dpto_divipola_nombre'] . "</td>";
-									echo "<td>" . $lista['mpio_divipola_nombre'] . "</td>";
-									echo "<td>" . $lista['nombre_zona'] . "</td>";
-									echo "<td class='text-center'>";
-echo "<button type='button' class='btn btn-info btn-circle'>" .  $conteoSesiones . "</button>";
-
-
-?>
-
-<a href="<?php echo base_url("report/mostrarSesiones/" . $lista['id_sitio']); ?>" class='btn btn-info btn-circle'>Ver </a>
-
-
-<?php
-
-
-
-
+									echo "<td>";
+									echo "<strong>Sitio: </strong>" . $lista['nombre_sitio'];
+									echo "<br><strong>Nodo o Región: </strong>" . $lista['nombre_region'];
+									echo "<br><strong>Departamento: </strong>" . $lista['dpto_divipola_nombre'];
+									echo "<br><strong>Municipio: </strong>" . $lista['mpio_divipola_nombre'];
+									echo "<br><strong>Zona: </strong>" . $lista['nombre_zona'];
 									echo "</td>";
-									echo "<td>" . $lista['contacto_nombres'] . " " . $lista['contacto_apellidos'] . "</td>";
-									echo "<td>" . $lista['contacto_telefono'] . "</td>";
-									echo "<td>" . $lista['contacto_celular'] . "</td>";
-									echo "<td>" . $lista['contacto_email'] . "</td>";
+									
+									
+									echo "<td>";
+									echo "<strong>Prueba: </strong>" . $lista['nombre_prueba'];
+									echo "<br><strong>Grupo de Instrumentos: </strong>" . $lista['nombre_grupo_instrumentos'];
+									echo "<br><strong>Sesión: </strong>" . $lista['sesion_prueba'];
+									echo "<br><strong>Fecha: </strong>" . $lista['mpio_divipola_nombre'];
+									echo "<br><strong>Hora Inicial: </strong>" . $lista['hora_inicio_prueba'];
+									echo "<br><strong>Hora Final: </strong>" . $lista['hora_fin_prueba'];
+									echo "</td>";
+									
+									
+									echo "<td>";
+									echo "<strong>Descripción: </strong>" . $lista['descripcion_alerta'];
+									echo "<br><strong>Mensaje: </strong>" . $lista['mensaje_alerta'];
+									echo "<br><strong>Tipo Alerta: </strong>" . $lista['nombre_tipo_alerta'];
+									echo "<br><strong>Inicio Alerta: </strong>" . $lista['fecha_inicio'];
+									echo "<br><strong>Fin Alerta: </strong>" . $lista['fecha_fin'];
+									echo "</td>";
+									
+									
+									echo "<td>";
+									if(!$lista['id_registro']){ 
+										echo "Sin respuesta";
+									}else{
+										echo "<strong>Respuesta: </strong>";
+										echo $acepta = $lista['acepta']==1?"Si":"No";
+										echo "<br><strong>Ausente: </strong>" . $lista['ausentes'];
+										echo "<br><strong>Observación: </strong>" . $lista['observacion'];
+										echo "<br><strong>Fecha registro: </strong>" . $lista['fecha_registro'];
+									}
+									echo "</td>";
 							endforeach;
 						?>
 						</tbody>
@@ -112,6 +113,7 @@ echo "<button type='button' class='btn btn-info btn-circle'>" .  $conteoSesiones
 $(document).ready(function() {
 	$('#dataTables').DataTable({
 		responsive: true,
+		order: false,
 		"pageLength": 25
 	});
 });

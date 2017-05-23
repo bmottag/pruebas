@@ -44,8 +44,7 @@ class Report extends CI_Controller {
 	 */
     public function searchBy() 
 	{
-			$data["botonRegreso"] = "report/searchBy";
-			
+		
 			//Lista Regiones
 			$this->load->model("general_model");
 			$arrParam = array(
@@ -67,7 +66,15 @@ class Report extends CI_Controller {
 
 			if($_POST){
 				
-				$idRegion = $this->input->post('region');
+				
+
+				$idRegion = $this->input->post('region');	
+				$idRegion = $idRegion==""?FALSE:$idRegion;
+				
+				$depto = $this->input->post('depto');
+				$mcpio = $this->input->post('mcpio');
+				$sesion = $this->input->post('sesion');
+				$alerta = $this->input->post('alerta');
 				
 				$arrParam = array(
 					"table" => "param_regiones",
@@ -77,7 +84,7 @@ class Report extends CI_Controller {
 				);
 				$data['infoRegion'] = $this->general_model->get_basic_search($arrParam);//Info Regiones
 				
-
+				
 				$data['info'] = $this->report_model->get_total_by();
 				
 				
