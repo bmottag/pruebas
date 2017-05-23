@@ -10,6 +10,7 @@ $( document ).ready( function () {
 		rules: {
 			firstName: 			{ required: true, minlength: 3, maxlength:50 },
 			lastName: 			{ required: true, minlength: 3, maxlength:50 },
+			tipoDocumento: 		{ required: true },
 			documento: 			{ required: true, number: true, minlength: 4, maxlength:12 },
 			address: 			{ minlength: 4, maxlength:200},
 			telefono:	 		{ minlength: 4, maxlength:15  },

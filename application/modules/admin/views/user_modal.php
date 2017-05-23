@@ -34,10 +34,10 @@
 			<div class="col-sm-6">
 				<div class="form-group text-left">
 					<label class="control-label" for="tipoDocumento">Tipo de documento : *</label>
-					<select name="tipoDocumento" id="tipoDocumento" class="form-control" >
+					<select name="tipoDocumento" id="tipoDocumento" class="form-control" required>
 						<option value=''>Select...</option>
-						<option value=1 >Cédula de Ciudadanía</option>
-						<option value=2 >Cédula de Extranjería</option>
+						<option value=1 <?php if($information[0]["tipo_documento"] == 1) { echo "selected"; }  ?>>Cédula de Ciudadanía</option>
+						<option value=2 <?php if($information[0]["tipo_documento"] == 2) { echo "selected"; }  ?>>Cédula de Extranjería</option>
 					</select>
 				</div>
 			</div>

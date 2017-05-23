@@ -47,6 +47,7 @@
 				$idUser = $this->input->post('hddId');
 				
 				$data = array(
+					'tipo_documento' => $this->input->post('tipoDocumento'),
 					'numero_documento' => $this->input->post('documento'),
 					'nombres_usuario' => $this->input->post('firstName'),
 					'apellidos_usuario' => $this->input->post('lastName'),
