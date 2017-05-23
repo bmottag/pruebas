@@ -70,7 +70,7 @@ class General_model extends CI_Model {
 		}
 		
 		/**
-		 * Alertas por sesiones
+		 * Alertas ACTIVAS por sesiones
 		 * @since 22/5/2016
 		 */
 		public function get_alertas_by($arrDatos)
@@ -80,6 +80,7 @@ class General_model extends CI_Model {
 				if (array_key_exists("idSesion", $arrDatos)) {
 					$this->db->where('fk_id_sesion', $arrDatos["idSesion"]);
 				}
+				$this->db->where('estado_alerta', 1);
 				$this->db->order_by('descripcion_alerta', 'asc');
 				$query = $this->db->get('alertas');
 					
