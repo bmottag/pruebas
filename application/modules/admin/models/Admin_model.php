@@ -302,16 +302,16 @@
 		}
 		
 	    /**
-	     * Actualiar SITIO con el coordinador y el delegado
+	     * Actualiar delegado del SITIO
+		 * param Id municipio int no se usa es para el modelo de asignar coordinador
 	     * @since  13/5/2017
 	     */
-	    public function updateSitio()
+	    public function updateSitio_delegado($idMunicipio)
 		{
 				$idSitio = $this->input->post("hddId");
-				$rol = $this->input->post("hddRol");
 
 				$data = array(
-					'fk_id_user_' . $rol => $this->input->post("usuario")
+					'fk_id_user_delegado' => $this->input->post("usuario")
 				);
 
 				$this->db->where('id_sitio', $idSitio);
@@ -325,7 +325,28 @@
 	    }
 		
 	    /**
-	     * Actualiar SITIO con el coordinador y el delegado
+	     * Actualiar coordinador del SITIO
+		 * param Id municipio int para asignar coordinador a todos los sitios con ese id
+	     * @since  13/5/2017
+	     */
+	    public function updateSitio_coordinador($idMunicipio)
+		{
+				$data = array(
+					'fk_id_user_coordinador' => $this->input->post("usuario")
+				);
+
+				$this->db->where('fk_mpio_divipola', $idMunicipio);
+				$query = $this->db->update('sitios', $data);
+
+				if ($query) {
+					return true;
+				} else {
+					return false;
+				}
+	    }
+		
+	    /**
+	     * Actualiar contacto del SITIO 
 	     * @since  20/5/2017
 	     */
 	    public function updateSitioContacto()

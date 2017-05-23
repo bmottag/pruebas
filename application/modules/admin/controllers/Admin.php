@@ -737,11 +737,18 @@ class Admin extends MX_Controller {
 				
 			$data['linkBack'] = "admin/sitios/";
 			$data['titulo'] = "<i class='fa fa-gear fa-fw'></i>ASIGNAR";
+			
+			$idSitio = $this->input->post("hddId");
+			//se busca informacion del sitio para asignar el usuario al mismo municipio
+			$this->load->model("general_model");
+			$arrParam = array("idSitio" => $idSitio);
+			$infoSitio = $this->general_model->get_sitios($arrParam);//informacion sitio
+			$idMunicipio = $infoSitio[0]['fk_mpio_divipola']; //envio el id municipio para los coordinadores
+			
+			$rol = $this->input->post("hddRol");
+			$Fmodelo = "updateSitio_" . $rol;
 	
-			if ($this->admin_model->updateSitio()) {
-				
-				$rol = $this->input->post("hddRol");
-				
+			if ($this->admin_model->$Fmodelo($idMunicipio)) {
 				$data["msj"] = "Se asignó el <strong>" . $rol . "</strong> con exito.";
 				$data["clase"] = "alert-success";
 			}else{

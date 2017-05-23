@@ -69,13 +69,20 @@
 				<div class="panel-body">
 				
 					<p class="text-danger text-left">Los campos con * son obligatorios.</p>
+					
+					<?php if($rol == "coordinador"){ ?>
+						<div class="alert alert-info">
+							<strong>Nota:</strong> 
+							El Coordinador se va a asignar a todos los sitios para el <strong>Municipio: <?php echo $infoSitio[0]["mpio_divipola_nombre"]; ?></strong>.
+						</div>
+					<?php } ?>
 
 					<form  name="form" id="form" class="form-horizontal" method="post" action="<?php echo base_url("admin/guardar_delegado"); ?>" >
 						<input type="hidden" id="hddId" name="hddId" value="<?php echo $infoSitio[0]["id_sitio"]; ?>"/>
 						<input type="hidden" id="hddRol" name="hddRol" value="<?php echo $rol; ?>"/>
 
 						<div class="form-group">
-							<label class="col-sm-4 control-label" for="usuario">Usuario : *</label>
+							<label class="col-sm-4 control-label" for="usuario">Usuario <?php echo $rol; ?>: *</label>
 							<div class="col-sm-5">
 
 							<?php if($usuarios){ ?>
