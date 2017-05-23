@@ -79,7 +79,6 @@
 							<div class="col-sm-5">
 
 							<?php if($usuarios){ ?>
-								
 							<select name="usuario" id="usuario" class="form-control" required>
 								<option value=''>Select...</option>
 								<?php for ($i = 0; $i < count($usuarios); $i++) { ?>
@@ -94,13 +93,13 @@
 							
 							</div>
 						</div>
-												
+<?php if($usuarios){ ?>												
 						<div class="row" align="center">
 							<div style="width:50%;" align="center">
 								 <button type="submit" class="btn btn-primary" id='btnSubmit' name='btnSubmit'>Guardar </button>
 							</div>
 						</div>
-
+<?php } ?>
 					</form>
 
 				</div>
