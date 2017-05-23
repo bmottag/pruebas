@@ -436,7 +436,7 @@
 				if (array_key_exists("idGrupo", $arrDatos)) {
 					$this->db->where('S.fk_id_grupo_instrumentos', $arrDatos["idGrupo"]);
 				}
-				$this->db->order_by('P.nombre_prueba, G.nombre_grupo_instrumentos, S.sesion_prueba', 'asc');
+				$this->db->order_by('A.fecha_inicio, P.nombre_prueba, G.nombre_grupo_instrumentos, S.sesion_prueba', 'asc');
 				$query = $this->db->get('alertas A');
 
 				if ($query->num_rows() > 0) {
