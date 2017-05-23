@@ -85,6 +85,7 @@ if ($retornoError) {
 								<th class="text-center">Municipio</th>
 								<th class="text-center">Zona</th>
 								
+								<th class="text-center">Código DANE</th>
 								<th class="text-center">Dirección</th>
 								<th class="text-center">Teléfono</th>
 								<th class="text-center">Celular</th>
@@ -156,6 +157,7 @@ if($lista['fk_id_user_coordinador']){
 									echo "<td>" . $lista['mpio_divipola_nombre'] . "</td>";
 									echo "<td>" . $lista['nombre_zona'] . "</td>";
 						
+									echo "<td>" . $lista['codigo_dane'] . "</td>";
 									echo "<td>" . $lista['direccion_sitio'] . "</td>";
 									echo "<td class='text-center'>" . $lista['telefono_sitio'] . "</td>";
 									echo "<td class='text-center'>" . $lista['celular_sitio'] . "</td>";

@@ -1,6 +1,7 @@
 $( document ).ready( function () {
 	
 	$("#nombrePrueba").convertirMayuscula();
+	$("#descripcion").convertirMayuscula();	
 	
 	$( "#form" ).validate( {
 		rules: {

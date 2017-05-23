@@ -3,6 +3,7 @@ $( document ).ready( function () {
 	$("#nombreSitio").convertirMayuscula();
 	$("#celular").bloquearTexto().maxlength(12);
 	$("#barrioSitio").convertirMayuscula();
+	$("#direccion").convertirMayuscula();
 	
 	$( "#form" ).validate( {
 		rules: {
@@ -19,7 +20,8 @@ $( document ).ready( function () {
 			depto:				{ required: true },
 			mcpio:				{ required: true },
 			zona:				{ required: true },
-			estado:				{ required: true }
+			estado:				{ required: true },
+			codigoDane:			{ required: true, minlength: 2, maxlength:20 },
 		},
 		errorElement: "em",
 		errorPlacement: function ( error, element ) {

@@ -208,7 +208,8 @@
 					'fk_dpto_divipola' => $this->input->post('depto'),
 					'fk_mpio_divipola' => $this->input->post('mcpio'),
 					'fk_id_zona' => $this->input->post('zona'),
-					'estado_sitio' => $this->input->post('estado')
+					'estado_sitio' => $this->input->post('estado'),
+					'codigo_dane' => $this->input->post('codigoDane')
 				);
 				
 				//revisar si es para adicionar o editar

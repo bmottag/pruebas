@@ -1,5 +1,8 @@
 $( document ).ready( function () {
 	
+	$("#descripcion").convertirMayuscula();
+	$("#mensaje").convertirMayuscula();
+	
 	$( "#form" ).validate( {
 		rules: {
 			descripcion:	{ required: true },

@@ -41,8 +41,8 @@
 			
 			<div class="col-sm-6">
 				<div class="form-group text-left">
-					<label for="type" class="control-label">Codigo Postal : *</label>
-					<input type="text" id="codigoPostal" name="codigoPostal" class="form-control" value="<?php echo $information?$information[0]["codigo_postal_sitio"]:""; ?>" placeholder="Codigo Postal" required >
+					<label for="type" class="control-label">Código Postal : *</label>
+					<input type="text" id="codigoPostal" name="codigoPostal" class="form-control" value="<?php echo $information?$information[0]["codigo_postal_sitio"]:""; ?>" placeholder="Código Postal" required >
 				</div>
 			</div>
 		</div>
@@ -157,6 +157,16 @@
 				</div>
 			</div>
 		</div>
+		
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="form-group text-left">
+					<label for="type" class="control-label">Código DANE : *</label>
+					<input type="text" id="codigoDane" name="codigoDane" class="form-control" value="<?php echo $information?$information[0]["codigo_dane"]:""; ?>" placeholder="Código DANE" required >
+				</div>
+			</div>
+		</div>
+
 		
 
 		<div class="form-group">
