@@ -77,15 +77,12 @@ class Report extends CI_Controller {
 				);
 				$data['infoRegion'] = $this->general_model->get_basic_search($arrParam);//Info Regiones
 				
-				$arrParam = array(
-					"idRegion" => $idRegion,					
-					"depto" => $this->input->post('depto'),
-					"mcpio" => $this->input->post('mcpio'),
-					"sesion" => $this->input->post('sesion'),
-					"alerta" => $this->input->post('alerta')
-				);
-				$data['info'] = $this->report_model->get_sitios_by($arrParam);
-				$data["view"] = "lista_sitios_by";
+
+				$data['info'] = $this->report_model->get_total_by();
+				
+				
+//pr($data['info']); exit;
+				$data["view"] = "lista_total";
 			}
 			
 			$this->load->view("layout", $data);

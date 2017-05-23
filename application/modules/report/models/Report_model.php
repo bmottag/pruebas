@@ -37,22 +37,47 @@
 		 * Muestra inofrmacion sitios filtrado por Region o Departamento
 		 * @since 21/5/2017
 		 */
-		public function get_sitios_by($arrDatos) 
-		{			
-				$this->db->select('S.*, O.nombre_organizacion, R.nombre_region, D.*, Z.nombre_zona, U.numero_documento as delegado, Y.numero_documento as coordinador');
-				$this->db->join('param_organizaciones O', 'O.id_organizacion = S.fk_id_organizacion', 'INNER');
-				$this->db->join('param_regiones R', 'R.id_region = S.fk_id_region', 'INNER');
-				$this->db->join('param_divipola D', 'D.mpio_divipola = S.fk_mpio_divipola', 'INNER');
-				$this->db->join('param_zonas Z', 'Z.id_zona = S.fk_id_zona', 'INNER');
-				$this->db->join('usuario U', 'U.id_usuario = S.fk_id_user_delegado', 'LEFT');
-				$this->db->join('usuario Y', 'Y.id_usuario = S.fk_id_user_coordinador', 'LEFT');
+		public function get_total_by() 
+		{		
+				//filtro para un perido menos a 20 dias y no mayor a 20 dias de la fecha actual
+				$fecha = date("Y-m-d");
+				$fechaInicio = strtotime ( '-20 day' , strtotime ( $fecha ) ) ;//le sumo 20 dias a la fecha actual
+				$fechaInicio = date ( 'Y-m-d' , $fechaInicio );
 				
+				$fechaFin = strtotime ( '+20 day' , strtotime ( $fecha ) ) ;//le resto 20 dias a la fecha actual
+				$fechaFin = date ( 'Y-m-d' , $fechaFin );
+
+
+		
+				$idRegion = $this->input->post('region');				
+				$depto = $this->input->post('depto');
+				$mcpio = $this->input->post('mcpio');
+				$sesion = $this->input->post('sesion');
+				$alerta = $this->input->post('alerta');
+		
+				$this->db->select('A.*, S.*, P.nombre_prueba, G.nombre_grupo_instrumentos, O.nombre_organizacion, R.nombre_region, D.*, Z.nombre_zona');
+				$this->db->join('sesiones S', 'S.id_sesion = X.fk_id_sesion', 'INNER');
+				$this->db->join('param_grupo_instrumentos G', 'G.id_grupo_instrumentos = S.fk_id_grupo_instrumentos', 'INNER');
+				$this->db->join('pruebas P', 'P.id_prueba = G.fk_id_prueba', 'INNER');
+				
+				$this->db->join('alertas A', 'A.fk_id_sesion = S.id_sesion', 'INNER');
+				
+				$this->db->join('sitios Y', 'Y.id_sitio = X.fk_id_sitio', 'INNER');
+				$this->db->join('param_regiones R', 'R.id_region = Y.fk_id_region', 'INNER');
+				$this->db->join('param_divipola D', 'D.mpio_divipola = Y.fk_mpio_divipola', 'INNER');
+				$this->db->join('param_organizaciones O', 'O.id_organizacion = Y.fk_id_organizacion', 'INNER');
+				$this->db->join('param_zonas Z', 'Z.id_zona = Y.fk_id_zona', 'INNER');
+				
+				
+				$this->db->where('G.fecha >=', $fechaInicio); //FECHA INICIAL MAYOR A LA ACTUAL
+				$this->db->where('G.fecha <=', $fechaFin); //FECHA FINAL MENOR A LA ACTUAL				
+	/*			
 				
 				if (array_key_exists("idRegion", $arrDatos)) {
 					$this->db->where('S.fk_id_region', $arrDatos["idRegion"]); //FILTRO POR REGION
 				}
 				
-	/*			if (array_key_exists("depto", $arrDatos)) {
+				if (array_key_exists("depto", $arrDatos)) {
 					$this->db->where('S.fk_dpto_divipola', $arrDatos["depto"]); //FILTRO POR DEPARTAMENTO
 				}
 				
@@ -68,8 +93,8 @@
 					$this->db->where('S.fk_dpto_divipola', $arrDatos["alerta"]); //FILTRO POR DEPARTAMENTO
 				}
 */
-				$this->db->order_by('R.nombre_region, D.dpto_divipola_nombre, D.mpio_divipola_nombre', 'desc');
-				$query = $this->db->get('sitios S');
+				//$this->db->order_by('R.nombre_region, D.dpto_divipola_nombre, D.mpio_divipola_nombre', 'desc');
+				$query = $this->db->get('sitio_sesion X');
 
 				if ($query->num_rows() > 0) {
 					return $query->result_array();
