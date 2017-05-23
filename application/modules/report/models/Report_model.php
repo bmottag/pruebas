@@ -79,7 +79,8 @@
 				
 				
 				$this->db->where('G.fecha >=', $fechaInicio); //FECHA INICIAL MAYOR A LA ACTUAL
-				$this->db->where('G.fecha <=', $fechaFin); //FECHA FINAL MENOR A LA ACTUAL				
+				$this->db->where('G.fecha <=', $fechaFin); //FECHA FINAL MENOR A LA ACTUAL		
+				$this->db->where('A.estado_alerta', 1); //ALERTAS ACTIVAS
 				
 				
 				if($idRegion && $idRegion != "") {

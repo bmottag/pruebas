@@ -35,7 +35,7 @@
 						if(!$info){
 					?>
 						<div class="alert alert-danger">
-							No hay Inofrmación
+							No hay Información
 						</div>
 					<?php
 						}else{
