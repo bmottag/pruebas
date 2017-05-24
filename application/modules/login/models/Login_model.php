@@ -60,6 +60,8 @@
 	    		case 1: //ACTIVE USER
 						if($userRol==4){//vista para delegados
 							redirect("/dashboard/delegados","location",301);
+						}elseif($userRol==3){//vista para coordinadores
+							redirect("/dashboard/coordinadores","location",301);
 						}else{
 							redirect("/dashboard","location",301);
 						}
