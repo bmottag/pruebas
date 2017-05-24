@@ -3,7 +3,6 @@
 <div class="modal-header">
 	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	<h4 class="modal-title" id="exampleModalLabel">Alerta
-	<br><small>Adicionar/Editar Alertas</small>
 	</h4>
 </div>
 
@@ -18,7 +17,7 @@
 			<div class="col-sm-12">
 				<div class="form-group text-left">
 					<label class="control-label" for="descripcion">Descripción : *</label>
-					<textarea id="descripcion" name="descripcion" class="form-control" rows="2"><?php echo $information?$information[0]["descripcion_alerta"]:""; ?></textarea>
+					<textarea id="descripcion" name="descripcion" class="form-control" rows="1"><?php echo $information?$information[0]["descripcion_alerta"]:""; ?></textarea>
 				</div>
 			</div>
 		</div>
@@ -52,10 +51,24 @@
 			<div class="col-sm-12">
 				<div class="form-group text-left">
 					<label class="control-label" for="mensaje">Mensaje : *</label>
-					<textarea id="mensaje" name="mensaje" class="form-control" rows="2"><?php echo $information?$information[0]["mensaje_alerta"]:""; ?></textarea>
+					<textarea id="mensaje" name="mensaje" class="form-control" rows="1"><?php echo $information?$information[0]["mensaje_alerta"]:""; ?></textarea>
 				</div>
 			</div>
 		</div>
+		
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="form-group text-left">
+					<label for="type" class="control-label">Tipo de Mensaje : *</label>
+					<select name="tipoMensaje" id="tipoMensaje" class="form-control" required>
+						<option value=''>Select...</option>
+						<option value=1 <?php if($information[0]["tipo_mensaje"] == 1) { echo "selected"; }  ?>>Mostrar solo en la aplicación</option>
+						<option value=2 <?php if($information[0]["tipo_mensaje"] == 2) { echo "selected"; }  ?>>Mostrar en la aplicación y enviar por correo</option>
+					</select>
+				</div>
+			</div>
+
+		</div>		
 
 		<?php 
 			if($information){

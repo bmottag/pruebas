@@ -13,7 +13,8 @@ $( document ).ready( function () {
 			duracion:		{ required: true },
 			rol:			{ required: true },
 			sesion:			{ required: true },
-			estado:			{ required: true }
+			estado:			{ required: true },
+			tipoMensaje:	{ required: true }
 		},
 		errorElement: "em",
 		errorPlacement: function ( error, element ) {
