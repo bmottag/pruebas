@@ -9,6 +9,46 @@ class Admin extends MX_Controller {
     }
 	
 	/**
+	 * Evio de correo al usuario con la contraseña
+     * @since 24/5/2017
+	 */
+	public function email($idUsuario)
+	{
+			$arrParam = array("idUsuario" => $idUsuario);
+			$infoUsuario = $this->admin_model->get_users($arrParam);
+
+			$subjet = "Usuario ICFES";				
+			$user = $infoUsuario[0]["nombres_usuario"] . " " . $infoUsuario[0]["apellidos_usuario"];
+			$to = $infoUsuario[0]["email"];
+		
+			//mensaje del correo
+			$msj = "<p>Los datos para ingresar al apliativo de pruebas es el siguiente:</p>";
+			$msj .= "<br><strong>Usuario: </strong>" . $infoUsuario[0]["numero_documento"];
+			$msj .= "<br><strong>Contraseña: </strong>" . $infoUsuario[0]["clave"];
+			$msj .= "<br><br><strong><a href='" . base_url() . "'>Enlace Aplicación </a></strong><br>";
+				
+			$mensaje = "<html>
+						<head>
+						  <title> $subjet </title>
+						</head>
+						<body>
+							<p>Apreciado(a) $user:</p>
+							<p>$msj</p>
+							<p>Cordialmente,</p>
+							<p><strong>Pruebas ICFES</strong></p>
+						</body>
+						</html>";
+
+			$cabeceras  = 'MIME-Version: 1.0' . "\r\n";
+			$cabeceras .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+			$cabeceras .= 'To: ' . $user . '<' . $to . '>' . "\r\n";
+			$cabeceras .= 'From: VCI APP <jelozanoo@gmail.com>' . "\r\n";
+
+			//enviar correo
+			mail($to, $subjet, $mensaje, $cabeceras);
+	}
+	
+	/**
 	 * users List
      * @since 15/12/2016
      * @author BMOTTAG
@@ -69,7 +109,7 @@ class Admin extends MX_Controller {
 			
 			$idUser = $this->input->post('hddId');
 
-			$msj = "You have add a new Employee!!";
+			$msj = "Se adicionó un nuevo usuario.";
 			if ($idUser != '') {
 				$msj = "Se actualizó el usuario con exito.";
 			}			
@@ -77,6 +117,7 @@ class Admin extends MX_Controller {
 			$documento = $this->input->post('documento');
 
 			$result_user = false;
+			$clave = "";
 			if ($idUser == '') {
 				//Verify if the user already exist by the user name
 				$arrParam = array(
@@ -84,15 +125,21 @@ class Admin extends MX_Controller {
 					"value" => $documento
 				);
 				$result_user = $this->admin_model->verifyUser($arrParam);
+				$clave = $this->generar_clave();
 			}
 
 			if ($result_user) {
 				$data["result"] = "error";
 				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Este número de documetno ya existe en la base de datos.');
 			} else {
-					if ($this->admin_model->saveUser()) {
+					if ($idUsuario = $this->admin_model->saveUser($clave)) {
 						$data["result"] = true;					
 						$this->session->set_flashdata('retornoExito', $msj);
+						
+						//a los usuarios nuevos les envio correo con contraseña
+						if($idUser == '') {
+							$this->email($idUsuario);
+						}
 					} else {
 						$data["result"] = "error";					
 						$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el administrador.');
@@ -101,6 +148,19 @@ class Admin extends MX_Controller {
 
 			echo json_encode($data);
     }
+	
+	public function generar_clave()
+	{
+			$key = "";
+			$caracteres = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+			
+			$length = 10;
+			$max = strlen($caracteres) - 1;
+			for ($i=0;$i<$length;$i++) {
+				$key .= substr($caracteres, rand(0, $max), 1);
+			}
+			return $key;
+	}
 	
 	/**
 	 * Reset employee password

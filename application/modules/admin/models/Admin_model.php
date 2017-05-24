@@ -42,7 +42,7 @@
 		 * Add/Edit USER
 		 * @since 10/5/2017
 		 */
-		public function saveUser() 
+		public function saveUser($clave) 
 		{
 				$idUser = $this->input->post('hddId');
 				
@@ -63,16 +63,17 @@
 				if ($idUser == '') {
 					$data['fecha_creacion'] = date("Y-m-d");
 					$data['estado'] = 1;//si es para adicionar se coloca estado inicial como usuario ACTIVO
-					$data['password'] = 'e10adc3949ba59abbe56e057f20f883e';//123456
-					$data['clave'] = '123456';//123456
+					$data['password'] = md5($clave);
+					$data['clave'] = $clave;
 					$query = $this->db->insert('usuario', $data);
+					$idUser = $this->db->insert_id();
 				} else {
 					$data['estado'] = $this->input->post('estado');
 					$this->db->where('id_usuario', $idUser);
 					$query = $this->db->update('usuario', $data);
 				}
 				if ($query) {
-					return true;
+					return $idUser;
 				} else {
 					return false;
 				}
