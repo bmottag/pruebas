@@ -119,9 +119,7 @@ if ($retornoError) {
 									<a href="<?php echo base_url("admin/contacto_sitio/" . $lista['id_sitio']); ?>" class="btn btn-warning btn-xs">Contacto <span class="fa fa-gears fa-fw" aria-hidden="true"></a>
 						<?php
 
-if($lista['contacto_nombres']){
-	echo "<p class='text-primary text-center'>ok</p>";
-}else{
+if(!$lista['contacto_nombres']){
 	echo "<p class='text-danger text-center'><strong>Falta</strong></p>";
 }
 						?>		
