@@ -122,7 +122,7 @@ if ($retornoError) {
 if($lista['contacto_nombres']){
 	echo "<p class='text-primary text-center'>ok</p>";
 }else{
-	echo "<p class='text-danger text-center'>Falta</p>";
+	echo "<p class='text-danger text-center'><strong>Falta</strong></p>";
 }
 						?>		
 									</td>
@@ -141,7 +141,7 @@ $conteoSesiones = $this->general_model->countSesionesbySitio($arrParam);
 <a href="<?php echo base_url("admin/asociar_sesion/" . $lista['id_sitio']); ?>" class="btn btn-primary btn-xs">
 Asociar  <span class="badge"><?php echo $conteoSesiones; ?></span>
 </a>
-<?php if($conteoSesiones==0){ echo "<p class='text-danger text-center'>Falta</p>"; } ?>
+<?php if($conteoSesiones==0){ echo "<p class='text-danger text-center'><strong>Falta</strong></p>"; } ?>
 
 									</td>
 									
@@ -151,7 +151,7 @@ Asociar  <span class="badge"><?php echo $conteoSesiones; ?></span>
 if($lista['fk_id_user_delegado']){
 	echo "<p class='text-primary text-center'>C.C. " . $lista['cedula_delegado'] . "</p>";
 }else{
-	echo "<p class='text-danger text-center'>Falta</p>";
+	echo "<p class='text-danger text-center'><strong>Falta</strong></p>";
 }
 						?>
 									</td>
@@ -162,7 +162,7 @@ if($lista['fk_id_user_delegado']){
 if($lista['fk_id_user_coordinador']){
 	echo "<p class='text-primary text-center'>C.C. " . $lista['cedula_coordinador'] . "</p>";
 }else{
-	echo "<p class='text-danger text-center'>Falta</p>";
+	echo "<p class='text-danger text-center'><strong>Falta</strong></p>";
 }
 						?>
 									</td>
