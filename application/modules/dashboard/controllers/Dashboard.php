@@ -93,7 +93,11 @@ class Dashboard extends MX_Controller {
 				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador.');
 			}
 
-			redirect("/dashboard","location",301);
+			if($userRol==4){
+				redirect("/dashboard/delegados","location",301);
+			}else{
+				redirect("/dashboard","location",301);	
+			}
 	}
 	
 	/**
@@ -109,8 +113,10 @@ class Dashboard extends MX_Controller {
 			$acepta = $this->input->post('acepta');
 			$observacion = $this->input->post('observacion');
 
-			if($acepta && $acepta==2 && $observacion == ""){
+			if($acepta==2 && $observacion == ""){
 				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Debe indicar la Observación.');
+			}elseif($acepta==""){
+				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Debe indicar su respuesta.');
 			}else{
 				if ($this->dashboard_model->saveRegistroNotificacion()) {
 					$this->session->set_flashdata('retornoExito', $msj);
@@ -119,7 +125,13 @@ class Dashboard extends MX_Controller {
 				}
 			}
 
-			redirect("/dashboard","location",301);
+			$userRol = $this->session->userdata("rol");
+	
+			if($userRol==4){
+				redirect("/dashboard/delegados","location",301);
+			}else{
+				redirect("/dashboard","location",301);	
+			}
 	}
 	
 	/**
@@ -151,8 +163,11 @@ class Dashboard extends MX_Controller {
 				}
 			}
 
-
-			redirect("/dashboard","location",301);
+			if($userRol==4){
+				redirect("/dashboard/delegados","location",301);
+			}else{
+				redirect("/dashboard","location",301);	
+			}
 	}
 	
 	
