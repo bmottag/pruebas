@@ -34,7 +34,7 @@
 		}
 		
 		/**
-		 * Muestra inofrmacion sitios filtrado por Region o Departamento
+		 * Muestra informacion sitios filtrado por Region o Departamento
 		 * @since 21/5/2017
 		 */
 		public function get_total_by($arrDatos) 
