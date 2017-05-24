@@ -54,10 +54,17 @@
 				<div class="form-group text-left">
 					<label for="type" class="control-label">Min Inicio : *</label>
 					<select name="minIni" id="minIni" class="form-control" required>
-						<option value="00" <?php if($information && $minIni == "00") { echo "selected"; }  ?>>00</option>
-						<option value="15" <?php if($information && $minIni == "15") { echo "selected"; }  ?>>15</option>
-						<option value="30" <?php if($information && $minIni == "30") { echo "selected"; }  ?>>30</option>
-						<option value="45" <?php if($information && $minIni == "45") { echo "selected"; }  ?>>45</option>
+						<?php
+						for ($xxx = 0; $xxx < 60; $xxx++) 
+						{
+							$xxx = $xxx<10?"0".$xxx:$xxx;
+						?>
+							<option value='<?php echo $xxx; ?>' <?php
+							if ($information && $xxx == $minIni) {
+								echo 'selected="selected"';
+							}
+							?>><?php echo $xxx; ?></option>
+						<?php } ?>					
 					</select>
 				</div>
 			</div>
@@ -94,10 +101,17 @@
 				<div class="form-group text-left">
 					<label for="type" class="control-label">Min Fin : *</label>
 					<select name="minFin" id="minFin" class="form-control" required>
-						<option value="00" <?php if($information && $minFin == "00") { echo "selected"; }  ?>>00</option>
-						<option value="15" <?php if($information && $minFin == "15") { echo "selected"; }  ?>>15</option>
-						<option value="30" <?php if($information && $minFin == "30") { echo "selected"; }  ?>>30</option>
-						<option value="45" <?php if($information && $minFin == "45") { echo "selected"; }  ?>>45</option>
+						<?php
+						for ($xxx = 0; $xxx < 60; $xxx++) 
+						{
+							$xxx = $xxx<10?"0".$xxx:$xxx;
+						?>
+							<option value='<?php echo $xxx; ?>' <?php
+							if ($information && $xxx == $minFin) {
+								echo 'selected="selected"';
+							}
+							?>><?php echo $xxx; ?></option>
+						<?php } ?>
 					</select>
 				</div>
 			</div>
