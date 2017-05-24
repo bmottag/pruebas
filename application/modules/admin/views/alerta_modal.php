@@ -62,8 +62,9 @@
 					<label for="type" class="control-label">Tipo de Mensaje : *</label>
 					<select name="tipoMensaje" id="tipoMensaje" class="form-control" required>
 						<option value=''>Select...</option>
-						<option value=1 <?php if($information[0]["tipo_mensaje"] == 1) { echo "selected"; }  ?>>Mostrar solo en la aplicación</option>
-						<option value=2 <?php if($information[0]["tipo_mensaje"] == 2) { echo "selected"; }  ?>>Mostrar en la aplicación y enviar por correo</option>
+						<option value=1 <?php if($information[0]["tipo_mensaje"] == 1) { echo "selected"; }  ?>>Notificar por APP</option>
+						<option value=3 <?php if($information[0]["tipo_mensaje"] == 3) { echo "selected"; }  ?>>Notificar por EMAIL</option>
+						<option value=2 <?php if($information[0]["tipo_mensaje"] == 2) { echo "selected"; }  ?>>Notificar por EMAIL y APP</option>
 					</select>
 				</div>
 			</div>
