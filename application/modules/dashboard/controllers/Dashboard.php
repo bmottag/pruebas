@@ -13,10 +13,17 @@ class Dashboard extends MX_Controller {
 	 */
 	public function index()
 	{	
-			$this->load->model("general_model");
 			$userRol = $this->session->userdata("rol");
 			$userID = $this->session->userdata("id");
-	
+			/**
+			 * Esta vista solo es para ADMINISTRADORES Y DIRECTIOVOS
+			 */
+			if($userRol==3 || $userRol==4){			
+				show_error('ERROR!!! - You are in the wrong place.');
+			}
+			
+			$this->load->model("general_model");
+
 			$arrParam = array("tipoAlerta" => 1);
 			$data['infoAlertaInformativa'] = $this->dashboard_model->get_alerta_by($arrParam);
 			
@@ -27,15 +34,6 @@ class Dashboard extends MX_Controller {
 			$data['infoAlertaConsolidacion'] = $this->dashboard_model->get_alerta_by($arrParam);
 //echo $this->db->last_query();			
 //pr($data['infoAlertaConsolidacion']); exit;	
-	/**
-	 * SI es delegado busco en que sitio esta asignado y que sesiones tiene pendientes
-	 */
-			if($userRol==4){			
-				$arrParam = array("idDelegado" => $userID);
-				$data['infoSitoDelegado'] = $this->general_model->get_sitios($arrParam);
-			}
-
-
 
 	/**
 	 * Datos para las cajas 
@@ -170,7 +168,6 @@ class Dashboard extends MX_Controller {
 			}
 	}
 	
-	
 	/**
 	 * Controlador para delegados
 	 */
@@ -203,6 +200,41 @@ class Dashboard extends MX_Controller {
 			$data["view"] = "dashboard_delegado";
 			$this->load->view("layout", $data);
 	}
+	
+	/**
+	 * Controlador para coordinadores
+	 */
+	public function coordinadores()
+	{	
+			$userRol = $this->session->userdata("rol");
+			$userID = $this->session->userdata("id");
+	/**
+	 * SI es coordinador busco los municipios en los que esta asignado
+	 */
+			if($userRol==3){
+				$arrParam = array("idDelegado" => $userID);
+				$data['infoMunicipiosCoordinador'] = $this->dashboard_model->get_municipios_coordinador();
+			}else{
+				show_error('ERROR!!! - You are in the wrong place.');	
+			}
+					
+//se buscan las alertas asignadas al coordinador			
+			$arrParam = array("tipoAlerta" => 1);
+			$data['infoAlertaInformativa'] = $this->dashboard_model->get_alerta_by($arrParam);
+			
+			$arrParam = array("tipoAlerta" => 2);
+			$data['infoAlertaNotificacion'] = $this->dashboard_model->get_alerta_by($arrParam);
+
+			$arrParam = array("tipoAlerta" => 3);
+			$data['infoAlertaConsolidacion'] = $this->dashboard_model->get_alerta_by($arrParam);
+			
+//se buscan las alertas vencidas que tienen el coordinador a cargo
+
+
+			$data["view"] = "dashboard_coordinador";
+			$this->load->view("layout", $data);
+	}
+	
 	
 }
 

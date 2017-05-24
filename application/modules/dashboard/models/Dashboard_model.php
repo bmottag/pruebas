@@ -235,6 +235,28 @@
 				}
 		}
 		
+		/**
+		 * Lista de municipios asignados al coordinador
+		 * @since 24/5/2017
+		 */
+		public function get_municipios_coordinador() 
+		{
+				$userID = $this->session->userdata("id");
+			
+				$this->db->select('distinct(fk_mpio_divipola), dpto_divipola_nombre, mpio_divipola_nombre');
+				$this->db->join('param_divipola D', 'D.mpio_divipola = S.fk_mpio_divipola', 'INNER');
+				$this->db->where('S.fk_id_user_coordinador', $userID);
+				
+				$this->db->order_by('dpto_divipola_nombre, mpio_divipola_nombre', 'asc');
+				$query = $this->db->get('sitios S');
+
+				if ($query->num_rows() > 0) {
+					return $query->result_array();
+				} else {
+					return false;
+				}
+		}
+		
 		
 		
 		
