@@ -108,9 +108,9 @@ if ($retornoError) {
 									
 									echo "<td class='text-center'>";
 									if($lista['estado_alerta'] == 1){
-										echo "<p class='text-success'>Activa</p>";
+										echo "<p class='text-success'><strong>Activa</strong></p>";
 									}else{
-										echo "<p class='text-danger'>Desactiva</p>";
+										echo "<p class='text-danger'><strong>Desactiva</strong></p>";
 									}
 									echo "</td>";
 
