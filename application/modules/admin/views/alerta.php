@@ -75,13 +75,10 @@ if ($retornoError) {
 					<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
 						<thead>
 							<tr>
-								<th class="text-center">Descripción</th>
-								<th class="text-center">Tipo de Alerta</th>
+								<th class="text-center">Alerta</th>
 								<th class="text-center">Editar</th>
-								<th class="text-center">Mensaje</th>
-								<th class="text-center">Fecha</th>
-								<th class="text-center">Hora</th>
-								<th class="text-center">Tiempo de Duración</th>
+								<th class="text-center">Incio / Fin</th>
+								<th class="text-center">Estado</th>
 								<th class="text-center">Rol</th>
 								<th class="text-center">Prueba / Grupo Instrumentos / Sesión</th>
 								
@@ -91,8 +88,11 @@ if ($retornoError) {
 						<?php
 							foreach ($info as $lista):
 									echo "<tr>";
-									echo "<td>" . $lista['descripcion_alerta'] . "</td>";
-									echo "<td class='text-center'>" . $lista['nombre_tipo_alerta'] . "</td>";
+									echo "<td>";
+									echo "<strong>Descripción:</strong><br>". $lista['descripcion_alerta'];
+									echo "<br><strong>Mensaje:</strong><br>". $lista['mensaje_alerta'];
+									echo "<br><strong>Tipo Alerta:</strong><br>". $lista['nombre_tipo_alerta'];
+									echo "</td>";
 									echo "<td class='text-center'>";
 						?>
 									<button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#modal" id="<?php echo $lista['id_alerta']; ?>" >
@@ -100,12 +100,27 @@ if ($retornoError) {
 									</button>
 						<?php
 									echo "</td>";
-									echo "<td>" . $lista['mensaje_alerta'] . "</td>";
-									echo "<td class='text-center'>" . $lista['fecha_alerta'] . "</td>";
-									echo "<td class='text-center'>" . $lista['hora_alerta'] . "</td>";
-									echo "<td class='text-center'>" . $lista['tiempo_duracion_alerta'] . "</td>";
+									
+									echo "<td>";
+									echo "<strong>Inicio:</strong><br>". $lista['fecha_inicio'];
+									echo "<br><strong>Fin:</strong><br>". $lista['fecha_fin'];
+									echo "</td>";
+									
+									echo "<td class='text-center'>";
+									if($lista['estado_alerta'] == 1){
+										echo "<p class='text-success'>Activa</p>";
+									}else{
+										echo "<p class='text-danger'>Desactiva</p>";
+									}
+									echo "</td>";
+
 									echo "<td class='text-center'>" . $lista['nombre_rol'] . "</td>";
-									echo "<td class='text-center'>" . $lista["nombre_prueba"] . " / " . $lista["nombre_grupo_instrumentos"] . " / " . $lista["sesion_prueba"] . "</td>";
+
+									echo "<td>";
+									echo "<strong>Prueba:</strong><br>". $lista['nombre_prueba'];
+									echo "<br><strong>Grupo Instrumentos:</strong><br>". $lista['nombre_grupo_instrumentos'];
+									echo "<br><strong>Sesión:</strong><br>". $lista['sesion_prueba'];
+									echo "</td>";
 							endforeach;
 						?>
 						</tbody>
