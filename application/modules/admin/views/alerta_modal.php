@@ -88,7 +88,7 @@
 					<label for="type" class="control-label">Min. Inicio : *</label>
 					<select name="min" id="min" class="form-control" required>
 						<?php
-						for ($xxx = 0; $xxx < 55; $xxx++) {
+						for ($xxx = 0; $xxx < 60; $xxx++) {
 							
 							$xxx = $xxx<10?"0".$xxx:$xxx;
 						?>
@@ -109,7 +109,7 @@
 					<label for="type" class="control-label">Duración (en minutos): *</label>
 					<select name="duracion" id="duracion" class="form-control" required>	
 						<?php
-						for ($xxx = 1; $xxx < 55; $xxx++) {
+						for ($xxx = 1; $xxx < 60; $xxx++) {
 							
 							$xxx = $xxx<10?"0".$xxx:$xxx;
 						?>
