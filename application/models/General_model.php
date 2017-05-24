@@ -241,6 +241,32 @@ class General_model extends CI_Model {
 					return false;
 				}
 		}
+		
+		/**
+		 * Contar registros de sesiones por sitio
+		 * filtrado por fecha vigente
+		 * @since  21/5/2017
+		 */
+		public function countSesionesbySitio($arrDatos)
+		{
+				$year = date('Y');
+				$firstDay = date('Y-m-d', mktime(0,0,0, 1, 1, $year));
+
+				$sql = "SELECT count(fk_id_sesion) CONTEO";
+				$sql.= " FROM sitio_sesion SS";
+				$sql.= " INNER JOIN sesiones S ON S.id_sesion = SS.fk_id_sesion";
+				$sql.= " INNER JOIN param_grupo_instrumentos G ON G.id_grupo_instrumentos = S.fk_id_grupo_instrumentos";
+				
+				if (array_key_exists("idSitio", $arrDatos)) {
+					$sql.= " WHERE SS.fk_id_sitio = " . $arrDatos["idSitio"];
+				}
+
+				$sql.= " AND G.fecha >= '$firstDay'";
+
+				$query = $this->db->query($sql);
+				$row = $query->row();
+				return $row->CONTEO;
+		}
 	
 	
 

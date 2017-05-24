@@ -128,7 +128,21 @@ if($lista['contacto_nombres']){
 									</td>
 									
 									<td class='text-center'>
-									<a href="<?php echo base_url("admin/asociar_sesion/" . $lista['id_sitio']); ?>" class="btn btn-primary btn-xs">Asociar <span class="fa fa-gears fa-fw" aria-hidden="true"></a>
+									
+<?php 
+//busco si el sitio tiene asiciadas sesiones
+$ci = &get_instance();
+$ci->load->model("general_model");
+
+$arrParam = array("idSitio" => $lista["id_sitio"]);
+$conteoSesiones = $this->general_model->countSesionesbySitio($arrParam);
+?>
+									
+<a href="<?php echo base_url("admin/asociar_sesion/" . $lista['id_sitio']); ?>" class="btn btn-primary btn-xs">
+Asociar  <span class="badge"><?php echo $conteoSesiones; ?></span>
+</a>
+<?php if($conteoSesiones==0){ echo "<p class='text-danger text-center'>Falta</p>"; } ?>
+
 									</td>
 									
 									<td class='text-center'>
