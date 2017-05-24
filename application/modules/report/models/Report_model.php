@@ -83,6 +83,12 @@
 				$this->db->where('A.estado_alerta', 1); //ALERTAS ACTIVAS
 				
 				
+				//FILTRO POR COORDINADOR SI EL USUARIO DE SESION ES COORDINADOR
+				$userRol = $this->session->rol;
+				if($userRol==3) {
+					$this->db->where('Y.fk_id_user_coordinador', $this->session->id); //FILTRO POR ID DEL COORDINADOR
+				}				
+				
 				if($idRegion && $idRegion != "") {
 					$this->db->where('Y.fk_id_region', $idRegion); //FILTRO POR REGION
 				}
@@ -185,6 +191,73 @@
 				$query = $this->db->insert('registro', $data);
 
 				if ($query) {
+					return true;
+				} else {
+					return false;
+				}
+		}
+		
+		/**
+		 * Guardar respuesta del usuario
+		 * @since 19/5/2017
+		 */
+		public function saveRegistroNotificacionCoordinador() 
+		{
+				$data = array(
+					'fk_id_alerta' => $this->input->post('hddIdAlerta'),
+					'fk_id_usuario' => $this->input->post('hddIdUserDelegado'),
+					'fk_id_sitio_sesion' => $this->input->post('hddIdSitioSesion'),
+					'acepta' => $this->input->post('acepta'),
+					'observacion' => $this->input->post('observacion'),
+					'fecha_registro' => date("Y-m-d G:i:s"),
+					'fk_id_user_coordinador' => $this->session->id,
+					'nota' => 'Se realizó el registro por el Coordinador.'
+				);	
+
+				$query = $this->db->insert('registro', $data);
+
+				if ($query) {
+					return true;
+				} else {
+					return false;
+				}
+		}
+		
+		/**
+		 * Guardar respuesta del usuario
+		 * @since 19/5/2017
+		 */
+		public function saveRegistroConsolidacionCoordinador() 
+		{
+				$ausentes = $this->input->post('ausentes');
+				$idSitioSesion = $this->input->post('hddIdSitioSesion');
+		
+				$data = array(
+					'fk_id_alerta' => $this->input->post('hddIdAlerta'),
+					'fk_id_usuario' => $this->input->post('hddIdUserDelegado'),
+					'fk_id_sitio_sesion' => $this->input->post('hddIdSitioSesion'),
+					'acepta' => 1,
+					'ausentes' => $ausentes,
+					'fecha_registro' => date("Y-m-d G:i:s"),
+					'fk_id_user_coordinador' => $this->session->id,
+					'nota' => 'Se realizó el registro por el Coordinador.'
+				);	
+
+				$query = $this->db->insert('registro', $data);
+
+				if ($query) {
+					
+					//actualizo tabla sitio_sesion con la cantidad de ausentes
+					$presentes = $this->input->post('citados') - $ausentes;
+					
+					$data = array(
+						'numero_ausentes' => $ausentes,
+						'numero_presentes_efectivos' => $presentes
+					);
+
+					$this->db->where('id_sitio_sesion', $idSitioSesion);
+					$query = $this->db->update('sitio_sesion', $data);
+
 					return true;
 				} else {
 					return false;

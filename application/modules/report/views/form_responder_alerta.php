@@ -27,15 +27,34 @@
 				</div>
 				<div class="panel-body">
 				
+				
+				
+				
+<?php 
+
+
+if($info[0]['fk_id_tipo_alerta'] == 1){//informativa
+	$class = "danger";
+	$class2 = "danger";
+}elseif($info[0]['fk_id_tipo_alerta'] == 2){//notificacion
+	$class = "yellow";
+	$class2 = "warning";
+}if($info[0]['fk_id_tipo_alerta'] == 3){//consolidacion
+	$class = "green";
+	$class2 = "success";
+}
+
+?>
+				
 		<div class="col-lg-6">				
-			<div class="panel panel-danger">
+			<div class="panel panel-<?php echo $class; ?>">
 				<div class="panel-heading">
-					<i class="fa fa-calendar fa-fw"></i> ALERTA
+					<i class="fa fa-calendar fa-fw"></i> ALERTA - <?php echo $info[0]['nombre_tipo_alerta']; ?>
 				</div>
 				<div class="panel-body">
 					<div class="col-lg-12">	
 						
-						<div class="alert alert-danger ">
+						<div class="alert alert-<?php echo $class2; ?>">
 							<strong>Descripción Alerta: </strong><?php echo $info[0]['descripcion_alerta']; ?><br>
 							<strong>Mensaje Alerta: </strong><?php echo $info[0]['mensaje_alerta']; ?><br>
 							<strong>Nombre de Prueba: </strong><?php echo $info[0]['nombre_prueba']; ?><br>
@@ -44,7 +63,11 @@
 							<strong>Sesión Prueba: </strong><?php echo $info[0]['sesion_prueba']; ?><br>
 							<strong>Número de Citados: </strong><?php echo $info[0]['numero_citados']; ?><br>
 					<br>
-<form  name="form" id="<?php echo "form_" . $info[0]["id_sitio_sesion"]; ?>" class="form-horizontal" method="post" action="<?php echo base_url("report/registro_informativo_by_coordinador"); ?>" >
+<?php 
+if($info[0]['fk_id_tipo_alerta'] == 1){//informativa					
+?>
+					
+<form  name="form" id="form" class="form-horizontal" method="post" action="<?php echo base_url("report/registro_informativo_by_coordinador"); ?>" >
 	<input type="hidden" id="hddIdAlerta" name="hddIdAlerta" value="<?php echo $info[0]["id_alerta"]; ?>"/>
 	<input type="hidden" id="hddIdSitioSesion" name="hddIdSitioSesion" value="<?php echo $info[0]["id_sitio_sesion"]; ?>"/>
 	<input type="hidden" id="hddIdUserDelegado" name="hddIdUserDelegado" value="<?php echo $info[0]["fk_id_user_delegado"]; ?>"/>
@@ -52,11 +75,77 @@
 	<div class="form-group">
 		<div class="row" align="center">
 			<div style="width:50%;" align="center">
-				<input type="submit" id="btnSubmit" name="btnSubmit" value="Aceptar" class="btn btn-danger"/>
+				<input type="submit" id="btnSubmit" name="btnSubmit" value="Aceptar" class="btn btn-<?php echo $class2; ?>"/>
 			</div>
 		</div>
 	</div>
 </form>	
+
+<?php
+}elseif($info[0]['fk_id_tipo_alerta'] == 2){//notificacion
+?>
+
+<form  name="form" id="form" class="form-horizontal" method="post" action="<?php echo base_url("report/registro_notificacion_by_coordinador"); ?>" >
+	<input type="hidden" id="hddIdAlerta" name="hddIdAlerta" value="<?php echo $info[0]["id_alerta"]; ?>"/>
+	<input type="hidden" id="hddIdSitioSesion" name="hddIdSitioSesion" value="<?php echo $info[0]["id_sitio_sesion"]; ?>"/>
+	<input type="hidden" id="hddIdUserDelegado" name="hddIdUserDelegado" value="<?php echo $info[0]["fk_id_user_delegado"]; ?>"/>
+
+	<div class="form-group">							
+		<div class="col-sm-12">
+			<label class="radio-inline">
+				<input type="radio" name="acepta" id="acepta1" value=1>Si
+			</label>
+			<label class="radio-inline">
+				<input type="radio" name="acepta" id="acepta2" value=2>No
+			</label>
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<label class="col-sm-12 control-label" for="observacion">Observación</label>
+		<div class="col-sm-12">
+			<textarea id="observacion" name="observacion" placeholder="Observación"  class="form-control" rows="2"></textarea>
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<div class="row" align="center">
+			<div style="width:50%;" align="center">
+				<input type="submit" id="btnSubmit" name="btnSubmit" value="Aceptar" class="btn btn-<?php echo $class2; ?>"/>
+			</div>
+		</div>
+	</div>
+</form>	
+
+<?php
+}if($info[0]['fk_id_tipo_alerta'] == 3){//consolidacion
+?>
+
+<form  name="form" id="form" class="form-horizontal" method="post" action="<?php echo base_url("report/registro_consolidacion_by_coordinador"); ?>" >
+	<input type="hidden" id="hddIdAlerta" name="hddIdAlerta" value="<?php echo $info[0]["id_alerta"]; ?>"/>
+	<input type="hidden" id="hddIdSitioSesion" name="hddIdSitioSesion" value="<?php echo $info[0]["id_sitio_sesion"]; ?>"/>
+	<input type="hidden" id="hddIdUserDelegado" name="hddIdUserDelegado" value="<?php echo $info[0]["fk_id_user_delegado"]; ?>"/>
+	<input type="hidden" id="citados" name="citados" value="<?php echo $info[0]["numero_citados"]; ?>"/>
+
+	<div class="form-group">
+		<label class="col-sm-12 control-label" for="ausentes">Cantidad de ausentes</label>
+		<div class="col-sm-12">
+			<input type="text" id="ausentes" name="ausentes" class="form-control" required/>
+		</div>
+	</div>
+	
+	
+	<div class="form-group">
+		<div class="row" align="center">
+			<div style="width:50%;" align="center">
+				<input type="submit" id="btnSubmit" name="btnSubmit" value="Aceptar" class="btn btn-<?php echo $class2; ?>"/>
+			</div>
+		</div>
+	</div>
+</form>	
+
+<?php } ?>
+
 							
 						</div>
 					</div>

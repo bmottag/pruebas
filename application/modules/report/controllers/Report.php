@@ -128,6 +128,62 @@ class Report extends CI_Controller {
 
 			redirect("/dashboard","location",301);
 	}
+	
+	/**
+	 * Registro de la aceptacion de la alerta notificacion
+	 * @since 19/5/2017
+	 */
+	public function registro_notificacion_by_coordinador()
+	{
+			$data = array();
+
+			$msj = "Gracias por su respuesta.";
+			
+			$acepta = $this->input->post('acepta');
+			$observacion = $this->input->post('observacion');
+
+			if($acepta && $acepta==2 && $observacion == ""){
+				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Debe indicar la Observación.');
+			}else{
+				if ($this->report_model->saveRegistroNotificacionCoordinador()) {
+					$this->session->set_flashdata('retornoExito', $msj);
+				} else {
+					$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador.');
+				}
+			}
+
+			redirect("/dashboard","location",301);
+	}
+	
+	/**
+	 * Registro de la aceptacion de la alerta notificacion
+	 * @since 19/5/2017
+	 */
+	public function registro_consolidacion_by_coordinador()
+	{
+			$data = array();
+			$ausentes = $this->input->post('ausentes');
+			$citados = $this->input->post('citados');
+
+			$msj = "Gracias por su respuesta.";
+
+			if($ausentes == ""){
+				$this->session->set_flashdata('retornoErrorConsolidacion', '<strong>Error!!!</strong> Debe indicar los ausentes.');
+			}else{
+				if($ausentes > $citados){
+					$this->session->set_flashdata('retornoErrorConsolidacion', '<strong>Error!!!</strong> La cantidad de ausentes no puede ser mayor a la cantidad de citados.');
+				}else{
+					if ($this->report_model->saveRegistroConsolidacionCoordinador()) {
+						$this->session->set_flashdata('retornoExito', $msj);
+					} else {
+						$this->session->set_flashdata('retornoErrorConsolidacion', '<strong>Error!!!</strong> Contactarse con el Administrador.');
+					}
+				}
+			}
+
+
+			redirect("/dashboard","location",301);
+	}
 		
     /**
      * Cargo modal - lista de sesiones

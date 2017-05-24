@@ -23,7 +23,7 @@
  * @since  18/11/2016
  */
 	$userRol = $this->session->rol;
-	if($userRol==1 || $userRol==2){ //ADMIN Y DIRECTIVO
+	if($userRol!=4){ //USUARIOS QUE NO SON DELEGADOS
 ?>				
 
 		<li class="dropdown">
