@@ -130,7 +130,7 @@ if($lista['contacto_nombres']){
 									<td class='text-center'>
 									
 <?php 
-//busco si el sitio tiene asiciadas sesiones
+//busco si el sitio tiene asociadas sesiones
 $ci = &get_instance();
 $ci->load->model("general_model");
 

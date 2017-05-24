@@ -51,13 +51,18 @@
 	    public function redireccionarUsuario()
 		{
 			$state = $this->session->userdata("state");
+			$userRol = $this->session->userdata("rol");
 
 	    	switch($state){
 	    		case 0: //NEW USER, must change the password
 	    				redirect("/employee","location",301);
 	    				break;
 	    		case 1: //ACTIVE USER
-						redirect("/dashboard","location",301);
+						if($userRol==4){//vista para delegados
+							redirect("/dashboard/delegados","location",301);
+						}else{
+							redirect("/dashboard","location",301);
+						}
 	    				break;
 	    		case 2: //INACTIVE USER
 	    				$this->session->sess_destroy();

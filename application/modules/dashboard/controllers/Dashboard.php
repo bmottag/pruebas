@@ -155,5 +155,39 @@ class Dashboard extends MX_Controller {
 			redirect("/dashboard","location",301);
 	}
 	
+	
+	/**
+	 * Controlador para delegados
+	 */
+	public function delegados()
+	{	
+			$userRol = $this->session->userdata("rol");
+			$userID = $this->session->userdata("id");
+	/**
+	 * SI es delegado busco en que sitio esta asignado y que sesiones tiene pendientes
+	 */
+			if($userRol==4){
+				$this->load->model("general_model");
+				$arrParam = array("idDelegado" => $userID);
+				$data['infoSitoDelegado'] = $this->general_model->get_sitios($arrParam);//informacion del sitio asignado al usuario
+		
+			}else{
+				show_error('ERROR!!! - You are in the wrong place.');	
+			}
+			
+			$arrParam = array("tipoAlerta" => 1);
+			$data['infoAlertaInformativa'] = $this->dashboard_model->get_alerta_by($arrParam);
+			
+			$arrParam = array("tipoAlerta" => 2);
+			$data['infoAlertaNotificacion'] = $this->dashboard_model->get_alerta_by($arrParam);
+
+			$arrParam = array("tipoAlerta" => 3);
+			$data['infoAlertaConsolidacion'] = $this->dashboard_model->get_alerta_by($arrParam);
+
+
+			$data["view"] = "dashboard_delegado";
+			$this->load->view("layout", $data);
+	}
+	
 }
 
