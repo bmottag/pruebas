@@ -348,61 +348,32 @@ $( document ).ready( function () {
 	</div>
 
 
-
-
-
 <!-- INICIO NOTIFICACIONES QUE NO SE LE HAN DADO RESPUESTA -->
 <?php
-	if($infoSesiones){ 
-?>
+	if($contadorInformativa!=0)
+	{ 
+		echo "<div class='alert alert-danger'>
+					<strong>Atención</strong>, hay <strong>" . $contadorInformativa .  "</strong> Alertas Informativas sin dar respuesta.
+				</div>";
+	}
+	
 
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-info">
-						
-                        <div class="panel-heading">
-                            <i class="fa fa-life-saver fa-fw"></i> Lista de Sesiones asociadas con el Sitio asignado
-                        </div>
-						
-                        <div class="panel-body">
-						
-<a class="btn btn-default btn-circle" href="#anclaUp"><i class="fa fa-arrow-up"></i> </a>
-						
-							<table width="100%" class="table table-striped table-bordered table-hover" id="dataSafety">
-								<thead>
-									<tr>
-										<th>Sesión</th>
-										<th>Fecha</th>
-										<th>Hora Inicio</th>
-										<th>Hora Fin</th>
-										<th>Número de Citados</th>
-									</tr>
-								</thead>
-								<tbody>							
-								<?php
-									foreach ($infoSesiones as $lista):
-										echo "<tr>";
-										echo "<td>";
-										echo "<strong>Prueba:</strong><br>". $lista['nombre_prueba'];
-										echo "<br><strong>Grupo Instrumentos:</strong><br>". $lista['nombre_grupo_instrumentos'];
-										echo "<br><strong>Sesión:</strong><br>". $lista['sesion_prueba'];
-										echo "</td>";
-										echo "<td class='text-center'>" . $lista['fecha'] . "</td>";
-										echo "<td class='text-center'>" . $lista['hora_inicio_prueba'] . "</td>";
-										echo "<td class='text-center'>" . $lista['hora_fin_prueba'] . "</td>";
-										echo "<td class='text-center'>" . $lista['numero_citados'] . "</td>";
-										echo "</tr>";
-									endforeach;
-								?>
-								</tbody>
-							</table>
-					
-                        </div>
-                    </div>
-                </div>
-            </div>
-      
-<?php	} ?>
+	if($contadorNotificacion!=0)
+	{ 
+		echo "<div class='alert alert-danger'>
+					<strong>Atención</strong>, hay <strong>" . $contadorNotificacion .  "</strong> Alertas Informativas sin dar respuesta.
+				</div>";
+	}
+
+
+	if($contadorConsolidacion!=0)
+	{ 
+		echo "<div class='alert alert-danger'>
+					<strong>Atención</strong>, hay <strong>" . $contadorConsolidacion .  "</strong> Alertas Informativas sin dar respuesta.
+				</div>";
+	}
+	
+?>
 <!-- INICIO NOTIFICACIONES QUE NO SE LE HAN DADO RESPUESTA -->
 
 

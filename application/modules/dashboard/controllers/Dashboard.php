@@ -206,6 +206,7 @@ class Dashboard extends MX_Controller {
 	 */
 	public function coordinadores()
 	{	
+			$this->load->model("general_model");
 			$userRol = $this->session->userdata("rol");
 			$userID = $this->session->userdata("id");
 	/**
@@ -227,10 +228,72 @@ class Dashboard extends MX_Controller {
 
 			$arrParam = array("tipoAlerta" => 3);
 			$data['infoAlertaConsolidacion'] = $this->dashboard_model->get_alerta_by($arrParam);
+
+
 			
-//se buscan las alertas vencidas que tienen el coordinador a cargo
+//se buscan las alertas informativas vencidas que tienen el coordinador a cargo
+			$arrParam = array("tipoAlerta" => 1);
+			$infoAlertaVencidaInformativa = $this->general_model->get_alertas_vencidas_by($arrParam);
+			
+			//recorro las alertas y reviso se se les dio respuesta, si no se le dio respuesta las voy contando
+			$data['contadorInformativa'] = 0;
+			if($infoAlertaVencidaInformativa){
+				foreach ($infoAlertaVencidaInformativa as $lista):
+					$arrParam = array(
+							"idSitioSesion" => $lista['id_sitio_sesion'],
+							"idAlerta" => $lista['id_alerta']
+					);
+					$respuesta = $this->general_model->get_respuestas_alertas_vencidas_by($arrParam);
+					
+					if(!$respuesta){
+						$data['contadorInformativa']++;
+					}
+				endforeach;
+			}
+			
 
+//se buscan las alertas NOTIFICACION vencidas que tienen el coordinador a cargo			
+			$arrParam = array("tipoAlerta" => 2);
+			$infoAlertaVencidaNotificacion = $this->general_model->get_alertas_vencidas_by($arrParam);
 
+			//recorro las alertas y reviso se se les dio respuesta, si no se le dio respuesta las voy contando
+			$data['contadorNotificacion'] = 0;
+			if($infoAlertaVencidaNotificacion){
+				foreach ($infoAlertaVencidaNotificacion as $lista):
+					$arrParam = array(
+							"idSitioSesion" => $lista['id_sitio_sesion'],
+							"idAlerta" => $lista['id_alerta']
+					);
+					$respuesta = $this->general_model->get_respuestas_alertas_vencidas_by($arrParam);
+					
+					if(!$respuesta){
+						$data['contadorNotificacion']++;
+					}
+				endforeach;
+			}
+
+			
+			
+//se buscan las alertas CONSOLIDACION vencidas que tienen el coordinador a cargo
+			$arrParam = array("tipoAlerta" => 3);
+			$infoAlertaVencidaConsolidacion = $this->general_model->get_alertas_vencidas_by($arrParam);
+			
+			//recorro las alertas y reviso se se les dio respuesta, si no se le dio respuesta las voy contando
+			$data['contadorConsolidacion'] = 0;
+			if($infoAlertaVencidaConsolidacion){
+				foreach ($infoAlertaVencidaConsolidacion as $lista):
+					$arrParam = array(
+							"idSitioSesion" => $lista['id_sitio_sesion'],
+							"idAlerta" => $lista['id_alerta']
+					);
+					$respuesta = $this->general_model->get_respuestas_alertas_vencidas_by($arrParam);
+					
+					if(!$respuesta){
+						$data['contadorConsolidacion']++;
+					}
+				endforeach;
+			}
+			
 			$data["view"] = "dashboard_coordinador";
 			$this->load->view("layout", $data);
 	}

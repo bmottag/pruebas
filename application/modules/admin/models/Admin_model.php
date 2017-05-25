@@ -385,9 +385,10 @@
 				$duracion = $this->input->post('duracion');
 				
 				$hour = $this->input->post('hour');
-				$hour = $hour<10?"0".$hour:$hour;
+				$min = $this->input->post('min');
+
 				
-				$time = $hour . ":" . $this->input->post('min');
+				$time = $hour . ":" . $min;
 				
 				$fechaInicio = $fechaAlerta . " " . $time . ":00";
 				

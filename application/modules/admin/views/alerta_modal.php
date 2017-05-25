@@ -86,6 +86,8 @@
 						<option value='' >Select...</option>
 						<?php
 						for ($i = 0; $i < 24; $i++) {
+							
+							$i = $i<10?"0".$i:$i;
 							?>
 							<option value='<?php echo $i; ?>' <?php
 							if ($information && $i == $hour) {

@@ -269,6 +269,78 @@ class General_model extends CI_Model {
 				$row = $query->row();
 				return $row->CONTEO;
 		}
+		
+		/**
+		 * Obtener alertas vencidas y que se le debe dar respuesta por el delegado
+		 * se filtra por alertas para un periodo de 24 horas
+		 * @since 24/5/2017
+		 */
+		public function get_alertas_vencidas_by($arrDatos) 
+		{		
+				//fecha para uscar las que ya se vencieron
+				$fechaActual = date('Y-m-d G:i:s');
+				
+				$fechaMinima = strtotime ( '-1 day' , strtotime ( $fechaActual ) ) ;
+				$fechaMinima = date ( 'Y-m-d G:i:s' , $fechaMinima );//fecha minima para la busqueda
+		
+				$this->db->select('id_sitio_sesion, id_sitio, id_sesion, id_alerta');
+
+				//SITIO-SESION
+				$this->db->join('sitio_sesion X', 'X.fk_id_sitio = Y.id_sitio', 'INNER');
+				
+				//SESION
+				$this->db->join('sesiones S', 'S.id_sesion = X.fk_id_sesion', 'INNER');
+				
+				//ALERTA
+				$this->db->join('alertas A', 'A.fk_id_sesion = S.id_sesion', 'INNER');
+				
+				$this->db->where('Y.fk_id_user_coordinador', $this->session->id); //FILTRO POR ID DEL COORDINADOR
+				$this->db->where('A.estado_alerta', 1); //ALERTAS ACTIVAS
+				$this->db->where('A.fk_id_rol', 4); //ALERTAS QUE SON PARA DELEGADO
+				
+				$tipoMensaje = array(1, 2);//filtrar por alertas que se muestren en el APP
+				$this->db->where_in('A.tipo_mensaje', $tipoMensaje);
+				
+				$this->db->where('A.fecha_fin <=', $fechaActual); //FECHA FINAL SEA MAYOR A LA FECHA ACTUAL
+				$this->db->where('A.fecha_fin >', $fechaMinima); //FECHA FINAL SEA MAYOR A LA FECHA ACTUAL
+				
+				
+				if (array_key_exists("tipoAlerta", $arrDatos)) {
+					$this->db->where('A.fk_id_tipo_alerta', $arrDatos["tipoAlerta"]); //SITIO-SESION
+				}
+			
+				$query = $this->db->get('sitios Y');
+
+				if ($query->num_rows() > 0) {
+					return $query->result_array();
+				} else {
+					return false;
+				}
+		}
+		
+		/**
+		 * Revisar si se dio respuesta a la alerta para un sitio especifico y una sesion
+		 * @since 12/5/2017
+		 */
+		public function get_respuestas_alertas_vencidas_by($arrDatos) 
+		{
+				$this->db->select();
+
+				if (array_key_exists("idSitioSesion", $arrDatos)) {
+					$this->db->where('fk_id_sitio_sesion', $arrDatos["idSitioSesion"]); 
+				}
+				
+				if (array_key_exists("idAlerta", $arrDatos)) {
+					$this->db->where('fk_id_alerta', $arrDatos["idAlerta"]); 
+				}
+				$query = $this->db->get('registro');
+
+				if ($query->num_rows() > 0) {
+					return true;
+				} else {
+					return false;
+				}
+		}
 	
 	
 
