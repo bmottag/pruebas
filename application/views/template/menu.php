@@ -122,7 +122,16 @@ if($userRol==1){ //If it is an ADMIN user, show an special menu
 					<a href="#"><i class="fa fa-user fa-fw"></i> <?php echo $this->session->firstname; ?></a>
 				</li>
 				<li>
-					<a href="<?php echo base_url("dashboard"); ?>"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+<?php
+	if($userRol==4){ //USUARIOS DELEGADOS
+		$enlace = base_url("dashboard/delegados");
+	}elseif($userRol==3){ //USUARIOS DELEGADOS
+		$enlace = base_url("dashboard/coordinadores");
+	}else{
+		$enlace = base_url("dashboard");
+	}
+?>
+					<a href="<?php echo $enlace; ?>"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
 				</li>
 			</ul>
 		</div>
