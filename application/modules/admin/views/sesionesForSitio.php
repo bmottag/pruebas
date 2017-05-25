@@ -13,7 +13,7 @@ $(function(){
             });
 	});	
 	
-	$(".btn-danger").click(function () {	
+	$(".btn-info").click(function () {	
 			var oID = $(this).attr("id");
             $.ajax ({
                 type: 'POST',
@@ -129,29 +129,39 @@ if ($retornoError) {
 					<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
 						<thead>
 							<tr>
-								<th class="text-center">Prueba / Grupo de Instrumento / Sesión</th>
+								<th class="text-center">Prueba / Grupo de Instrumentos / Sesión</th>
 								<th class="text-center">Fecha</th>
 								<th class="text-center">Hora Incio</th>
 								<th class="text-center">Hora Fin</th>
 								<th class="text-center">Citados</th>
 								<th class="text-center">Editar</th>
+								<th class="text-center">Eliminar</th>
 							</tr>
 						</thead>
 						<tbody>							
 						<?php
 							foreach ($info as $lista):
 									echo "<tr>";
-									echo "<td>" . $lista["nombre_prueba"] . "/" . $lista["nombre_grupo_instrumentos"] . "/" . $lista["sesion_prueba"] . "</td>";
+									echo "<td>";
+									echo "<strong>Prueba:</strong><br>". $lista['nombre_prueba'];
+									echo "<br><strong>Grupo Instrumentos:</strong><br>". $lista['nombre_grupo_instrumentos'];
+									echo "<br><strong>Sesión:</strong><br>". $lista['sesion_prueba'];
+									echo "</td>";
 									echo "<td class='text-center'>" . $lista['fecha'] . "</td>";
 									echo "<td class='text-center'>" . $lista['hora_inicio_prueba'] . "</td>";
 									echo "<td class='text-center'>" . $lista['hora_fin_prueba'] . "</td>";
 									echo "<td class='text-center'>" . $lista['numero_citados'] . "</td>";
 									echo "<td class='text-center'>";
 						?>
-									<button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#modal" id="<?php echo $lista['id_sitio_sesion']; ?>" >
+									<button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#modal" id="<?php echo $lista['id_sitio_sesion']; ?>" >
 										Editar <span class="glyphicon glyphicon-edit" aria-hidden="true">
 									</button>
 						<?php
+									echo "</td>";
+									echo "<td class='text-center'>";
+						?>
+									<a href="<?php echo base_url("admin/eliminar_sitio_sesiones/" . $lista['id_sitio_sesion'] . "/" . $lista['id_sitio']); ?>" class="btn btn-danger btn-xs">Eliminar <span class="fa fa-times fa-fw" aria-hidden="true"></a>
+						<?php		
 									echo "</td>";
 							endforeach;
 						?>

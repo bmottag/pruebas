@@ -1031,6 +1031,74 @@ class Admin extends MX_Controller {
 			$this->load->view("layout", $data);
 	}
 	
+    /**
+     * actualizamos el campo delegado o coordinador de ls sitio
+     */
+    public function updateDelegado($idSitio, $rol) 
+	{
+			if (empty($rol) || empty($idSitio) ) {
+				show_error('ERROR!!! - You are in the wrong place.');
+			}
+			
+			//actualizamos el campo delegado o coordinador de ls sitio
+			$arrParam = array(
+				"table" => "sitios",
+				"primaryKey" => "id_sitio",
+				"id" => $idSitio,
+				"column" => "fk_id_user_" . $rol,
+				"value" => ""
+			);
+
+			$this->load->model("general_model");
+
+			if ($this->general_model->updateRecord($arrParam)) {
+				$this->session->set_flashdata('retornoExito', 'Se elimino el <strong>' . $rol . '</strong> del sitio.');
+			} else {
+				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador');
+			}
+			
+			redirect(base_url('admin/sitios'), 'refresh');
+    }
+	
+    /**
+     * Eliminar relacion sitio conn sesion
+     */
+    public function eliminar_sitio_sesiones($idSitioSesion, $idSitio) 
+	{
+			if (empty($idSitioSesion) || empty($idSitio) ) {
+				show_error('ERROR!!! - You are in the wrong place.');
+			}
+			
+			$this->load->model("general_model");
+			//verificar si a este SITIO_SESION ya se le dio alguna respuesta en la tabla de registros
+			$arrParam = array(
+				"table" => "registro",
+				"order" => "id_registro",
+				"column" => "fk_id_sitio_sesion",
+				"id" => $idSitioSesion
+			);
+			$verificar = $this->general_model->get_basic_search($arrParam);	
+			
+			if($verificar){
+				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> A esta relación ya se le asignaron Notificaciones');
+			}else{
+				//eliminaos registr de SITIO_SESION
+				$arrParam = array(
+					"table" => "sitio_sesion",
+					"primaryKey" => "id_sitio_sesion",
+					"id" => $idSitioSesion
+				);
+
+				if ($this->general_model->deleteRecord($arrParam)) {
+					$this->session->set_flashdata('retornoExito', 'Se eliminó la asociación.');
+				} else {
+					$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador');
+				}
+			}
+			
+			redirect(base_url('admin/asociar_sesion/' . $idSitio), 'refresh');
+    }
+	
 	
 	
 }
