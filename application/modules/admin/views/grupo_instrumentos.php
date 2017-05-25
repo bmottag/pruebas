@@ -96,12 +96,35 @@ if ($retornoError) {
 						<?php
 									echo "</td>";
 									echo "<td class='text-center'>" . $lista['fecha'] . "</td>";
-									echo "<td class='text-center'>";
 
 						?>
-									<a href="<?php echo base_url("admin/sesiones/" . $lista['id_grupo_instrumentos']); ?>" class="btn btn-primary btn-xs">Asociar <span class="fa fa-gears fa-fw" aria-hidden="true"></a>
+						
+						
+						
+						
+						
+						
+									<td class='text-center'>
+									
+<?php 
+//busco si el sitio tiene asociadas sesiones
+$ci = &get_instance();
+$ci->load->model("general_model");
+
+$arrParam = array("idGrupoInstrumentos" => $lista["id_grupo_instrumentos"]);
+$conteoSesiones = $this->general_model->countSesionesbyGrupo($arrParam);
+?>
+									
+<a href="<?php echo base_url("admin/sesiones/" . $lista['id_grupo_instrumentos']); ?>" class="btn btn-primary btn-xs">
+Asociar  <span class="badge"><?php echo $conteoSesiones; ?></span>
+</a>
+<?php if($conteoSesiones==0){ echo "<p class='text-danger text-center'><strong>Falta</strong></p>"; } ?>
+
+									</td>
+						
+						
+
 						<?php
-									echo "</td>";
 							endforeach;
 						?>
 						</tbody>

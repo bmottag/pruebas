@@ -271,6 +271,25 @@ class General_model extends CI_Model {
 		}
 		
 		/**
+		 * Contar sesiones para los grupos
+		 * filtrado por grupo
+		 * @since  25/5/2017
+		 */
+		public function countSesionesbyGrupo($arrDatos)
+		{
+				$sql = "SELECT count(id_sesion) CONTEO";
+				$sql.= " FROM sesiones S";
+				
+				if (array_key_exists("idGrupoInstrumentos", $arrDatos)) {
+					$sql.= " WHERE fk_id_grupo_instrumentos = " . $arrDatos["idGrupoInstrumentos"];
+				}
+
+				$query = $this->db->query($sql);
+				$row = $query->row();
+				return $row->CONTEO;
+		}
+		
+		/**
 		 * Obtener alertas vencidas y que se le debe dar respuesta por el delegado
 		 * se filtra por alertas para un periodo de 24 horas
 		 * @since 24/5/2017
