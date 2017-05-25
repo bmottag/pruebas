@@ -22,15 +22,31 @@
                     <i class="fa fa-life-saver fa-fw"></i> Lista
 				</div>
 				<div class="panel-body">
+				<div class="row">
+					<div class="col-lg-4">
 					<div class="alert alert-info">
-						<?php if(isset($infoRegion) && $infoRegion[0]['nombre_region']){ ?>
-							<strong>Nodo o Región: </strong><?php echo $infoRegion[0]['nombre_region']; ?> 
-						<?php } ?>
-						
-						<?php if(isset($infoDepartamento)){ ?>
-							<strong>Departamento: </strong><?php echo $infoDepartamento[0]['dpto_divipola_nombre']; ?> 
-						<?php } ?>						
-					</div>
+						<strong>Alerta Informativa</strong><br>
+						Delegados que contestaron: <?php echo $contadorInformativaSi;?>
+						<br>Delegados que No contestaron: <?php echo $contadorInformativaNo;?>
+					
+					</div></div>
+					
+					<div class="col-lg-4">
+					<div class="alert alert-info">
+						<strong>Alerta de Notificación</strong><br>
+						Delegados que contestaron: <?php echo $contadorNotificacionSi;?>
+						<br>Delegados que No contestaron: <?php echo $contadorNotificacionNo;?>
+					
+					</div></div>
+					
+					<div class="col-lg-4">
+					<div class="alert alert-info">
+						<strong>Alerta de Consolidación</strong><br>
+						Delegados que contestaron: <?php echo $contadorConsolidacionSi;?>
+						<br>Delegados que NO contestaron: <?php echo $contadorConsolidacionNo;?>
+					
+					</div></div>
+				</div>
 					<?php
 						if(!$info){
 					?>

@@ -85,8 +85,73 @@ class Report extends CI_Controller {
 				$arrParam = array();
 				$data['info'] = $this->report_model->get_total_by($arrParam);
 				
-//echo $this->db->last_query();				
-//pr($data['info']); exit;
+//conteo respiestas para alertas informativas				
+				$arrParam = array('tipoAlerta' => 1);
+				$infoInformativa = $this->report_model->get_respuestas_registro($arrParam);
+				//recorro las alertas y reviso se se les dio respuesta, si no se le dio respuesta las voy contando
+				$data['contadorInformativaSi'] = 0;
+				$data['contadorInformativaNo'] = 0;
+				if($infoInformativa){
+					foreach ($infoInformativa as $lista):
+						$arrParam = array(
+								"idSitioSesion" => $lista['id_sitio_sesion'],
+								"idAlerta" => $lista['id_alerta']
+						);
+						$respuesta = $this->general_model->get_respuestas_alertas_vencidas_by($arrParam);
+						
+						if($respuesta){
+							$data['contadorInformativaSi']++;
+						}else{
+							$data['contadorInformativaNo']++;
+						}
+					endforeach;
+				}
+				
+//conteo respiestas para alertas NOTIFICACION		
+				$arrParam = array('tipoAlerta' => 2);
+				$infoInformativa = $this->report_model->get_respuestas_registro($arrParam);
+				//recorro las alertas y reviso se se les dio respuesta, si no se le dio respuesta las voy contando
+				$data['contadorNotificacionSi'] = 0;
+				$data['contadorNotificacionNo'] = 0;
+				if($infoInformativa){
+					foreach ($infoInformativa as $lista):
+						$arrParam = array(
+								"idSitioSesion" => $lista['id_sitio_sesion'],
+								"idAlerta" => $lista['id_alerta']
+						);
+						$respuesta = $this->general_model->get_respuestas_alertas_vencidas_by($arrParam);
+						
+						if($respuesta){
+							$data['contadorNotificacionSi']++;
+						}else{
+							$data['contadorNotificacionNo']++;
+						}
+					endforeach;
+				}
+				
+//conteo respiestas para alertas CONSOLIDACION		
+				$arrParam = array('tipoAlerta' => 3);
+				$infoInformativa = $this->report_model->get_respuestas_registro($arrParam);
+				//recorro las alertas y reviso se se les dio respuesta, si no se le dio respuesta las voy contando
+				$data['contadorConsolidacionSi'] = 0;
+				$data['contadorConsolidacionNo'] = 0;
+				if($infoInformativa){
+					foreach ($infoInformativa as $lista):
+						$arrParam = array(
+								"idSitioSesion" => $lista['id_sitio_sesion'],
+								"idAlerta" => $lista['id_alerta']
+						);
+						$respuesta = $this->general_model->get_respuestas_alertas_vencidas_by($arrParam);
+						
+						if($respuesta){
+							$data['contadorConsolidacionSi']++;
+						}else{
+							$data['contadorConsolidacionNo']++;
+						}
+					endforeach;
+				}
+
+
 				$data["view"] = "lista_total";
 			}
 			

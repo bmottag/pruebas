@@ -241,6 +241,77 @@
 		}
 
 		
+		/**
+		 * Lista de respuestas 
+		 * @since 24/5/2017
+		 */
+		public function get_respuestas_registro($arrDatos) 
+		{		
+				$fecha = date("Y-m-d");
+
+				$idRegion = $this->input->post('region');				
+				$depto = $this->input->post('depto');
+				$mcpio = $this->input->post('mcpio');
+				$sesion = $this->input->post('sesion');
+				$alerta = $this->input->post('alerta');
+		
+				$this->db->select('id_sitio_sesion, id_sitio, id_sesion, id_alerta');
+				
+				//SESION
+				$this->db->join('sesiones S', 'S.id_sesion = X.fk_id_sesion', 'INNER');
+				$this->db->join('param_grupo_instrumentos G', 'G.id_grupo_instrumentos = S.fk_id_grupo_instrumentos', 'INNER');
+				$this->db->join('pruebas P', 'P.id_prueba = G.fk_id_prueba', 'INNER');
+				
+				//ALERTA
+				$this->db->join('alertas A', 'A.fk_id_sesion = S.id_sesion', 'INNER');
+				$this->db->join('param_tipo_alerta T', 'T.id_tipo_alerta = A.fk_id_tipo_alerta', 'INNER');
+				
+				//SITIO
+				$this->db->join('sitios Y', 'Y.id_sitio = X.fk_id_sitio', 'INNER');
+				$this->db->join('param_regiones R', 'R.id_region = Y.fk_id_region', 'INNER');
+				$this->db->join('param_divipola D', 'D.mpio_divipola = Y.fk_mpio_divipola', 'INNER');
+				$this->db->join('param_organizaciones O', 'O.id_organizacion = Y.fk_id_organizacion', 'INNER');
+				$this->db->join('param_zonas Z', 'Z.id_zona = Y.fk_id_zona', 'INNER');
+				
+				$this->db->where('G.fecha =', $fecha); //FECHA ACTUAL
+				$this->db->where('A.estado_alerta', 1); //ALERTAS ACTIVAS
+				$tipoMensaje = array(1, 2);//filtrar por alertas que se muestren en el APP
+				$this->db->where_in('A.tipo_mensaje', $tipoMensaje);			
+				
+				if($idRegion && $idRegion != "") {
+					$this->db->where('Y.fk_id_region', $idRegion); //FILTRO POR REGION
+				}
+				
+				if ($depto && $depto != "") {
+					$this->db->where('Y.fk_dpto_divipola', $depto); //FILTRO POR DEPARTAMENTO
+				}
+			
+				if ($mcpio && $mcpio != "") {
+					$this->db->where('Y.fk_mpio_divipola', $mcpio); //FILTRO POR MUNICIPIO
+				}
+				
+				if ($sesion && $sesion != "") {
+					$this->db->where('X.fk_id_sesion', $sesion); //FILTRO POR DEPARTAMENTO
+				}
+				
+				if ($alerta && $alerta != "") {
+					$this->db->where('A.id_alerta', $alerta); //FILTRO POR ALERTA
+				}
+				
+				if (array_key_exists("tipoAlerta", $arrDatos)) {
+					$this->db->where('A.fk_id_tipo_alerta', $arrDatos["tipoAlerta"]); //SITIO-SESION
+				}
+
+				$query = $this->db->get('sitio_sesion X');
+
+				if ($query->num_rows() > 0) {
+					return $query->result_array();
+				} else {
+					return false;
+				}
+		}
+		
+		
 		
 		
 		
