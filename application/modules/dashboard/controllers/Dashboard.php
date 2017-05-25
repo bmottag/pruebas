@@ -298,6 +298,21 @@ class Dashboard extends MX_Controller {
 			$this->load->view("layout", $data);
 	}
 	
+	/**
+	 * Lista de alertas sin respuesta del delegado
+	 * @since 24/5/2017
+	 */
+	public function respuesta_coordinador($tipoAlerta)
+	{
+			$this->load->model("general_model");
+			$arrParam = array("tipoAlerta" => $tipoAlerta);
+			$data['infoAlertaVencida'] = $this->general_model->get_alertas_vencidas_by($arrParam);
+			
+			$data["view"] = "lista_respuestas_faltantes";
+						
+			$this->load->view("layout", $data);
+	}
+	
 	
 }
 
