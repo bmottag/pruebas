@@ -1099,6 +1099,52 @@ class Admin extends MX_Controller {
 			redirect(base_url('admin/asociar_sesion/' . $idSitio), 'refresh');
     }
 	
+	/**
+	 * Eliminar alerta
+     * @since 25/5/2017
+	 */
+	public function eliminar_alerta()
+	{			
+			header('Content-Type: application/json');
+			$data = array();
+			
+			$idAlerta = $this->input->post('identificador');
+
+			$this->load->model("general_model");
+			//verificar si a esta ALERTA ya se le dio alguna respuesta en la tabla de registros
+			$arrParam = array(
+				"table" => "registro",
+				"order" => "id_registro",
+				"column" => "fk_id_alerta",
+				"id" => $idAlerta
+			);
+			$verificar = $this->general_model->get_basic_search($arrParam);	
+			
+			if($verificar){
+				$data["result"] = "error";
+				$data["mensaje"] = "Error!!!. Esta alerta ya tiene notificaciones.";
+			}else{
+
+				//eliminaos registr de la alerta
+				$arrParam = array(
+					"table" => "alertas",
+					"primaryKey" => "id_alerta",
+					"id" => $idAlerta
+				);
+				
+				if ($this->general_model->deleteRecord($arrParam)) {
+					$data["result"] = true;
+					$data["mensaje"] = "Se eliminó la Alerta.";
+					$this->session->set_flashdata('retornoExito', 'Se eliminó la alerta');
+				} else {
+					$data["result"] = "error";
+					$data["mensaje"] = "Error!!! Contactarse con el Administrador.";
+					$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador');
+				}
+			}
+
+			echo json_encode($data);
+    }
 	
 	
 }

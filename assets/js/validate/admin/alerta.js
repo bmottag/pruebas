@@ -34,6 +34,49 @@ $( document ).ready( function () {
 		}
 	});
 	
+	$(".btn-danger").click(function () {	
+			var oID = $(this).attr("id");
+			
+			//Activa icono guardando
+			$(".btn-danger").attr('disabled','-1');
+			if(window.confirm('Esta seguro de eliminar la Alerta?'))
+			{
+					$.ajax ({
+						type: 'POST',
+						url: base_url + 'admin/eliminar_alerta',
+						data: {'identificador': oID},
+						cache: false,
+						success: function(data){
+												
+							if( data.result == "error" )
+							{
+								alert(data.mensaje);
+								$(".btn-danger").removeAttr('disabled');							
+								return false;
+							} 
+											
+							if( data.result )//true
+							{	                                                        
+								$(".btn-danger").removeAttr('disabled');
+
+								var url = base_url + "admin/alertas";
+								$(location).attr("href", url);
+							}
+							else
+							{
+								alert('Error. Reload the web page.');
+								$(".btn-danger").removeAttr('disabled');
+							}	
+						},
+						error: function(result) {
+							alert('Error. Reload the web page.');
+							$(".btn-danger").removeAttr('disabled');
+						}
+
+					});
+			}
+	});
+	
 	$("#btnSubmit").click(function(){		
 	
 		if ($("#form").valid() == true){
