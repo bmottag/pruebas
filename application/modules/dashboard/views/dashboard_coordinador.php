@@ -354,6 +354,7 @@ $( document ).ready( function () {
 	{ 
 		echo "<div class='alert alert-danger'>
 					<strong>Atención</strong>, hay <strong>" . $contadorInformativa .  "</strong> Alertas Informativas sin dar respuesta.
+					<a href=". base_url("dashboard/respuesta_coordinador/1") ." >RESPONDER </a>
 				</div>";
 	}
 	
@@ -361,7 +362,8 @@ $( document ).ready( function () {
 	if($contadorNotificacion!=0)
 	{ 
 		echo "<div class='alert alert-danger'>
-					<strong>Atención</strong>, hay <strong>" . $contadorNotificacion .  "</strong> Alertas Informativas sin dar respuesta.
+					<strong>Atención</strong>, hay <strong>" . $contadorNotificacion .  "</strong> Alertas de Notificación sin dar respuesta.
+					<a href=". base_url("dashboard/respuesta_coordinador/2") ." >RESPONDER </a>
 				</div>";
 	}
 
@@ -369,7 +371,8 @@ $( document ).ready( function () {
 	if($contadorConsolidacion!=0)
 	{ 
 		echo "<div class='alert alert-danger'>
-					<strong>Atención</strong>, hay <strong>" . $contadorConsolidacion .  "</strong> Alertas Informativas sin dar respuesta.
+					<strong>Atención</strong>, hay <strong>" . $contadorConsolidacion .  "</strong> Alertas de Consolidación sin dar respuesta.
+					<a href=". base_url("dashboard/respuesta_coordinador/3") ." >RESPONDER </a>
 				</div>";
 	}
 	

@@ -65,8 +65,6 @@ class Report extends CI_Controller {
 			$data["view"] = "form_search_by";
 
 			if($_POST){
-				
-				
 
 				$idRegion = $this->input->post('region');	
 				$idRegion = $idRegion==""?FALSE:$idRegion;
@@ -101,10 +99,12 @@ class Report extends CI_Controller {
 	 */
 	public function responder_alerta($idAlerta, $idDelegado, $idSitioSesion)
 	{
+			$this->load->model("general_model");
 			$arrParam = array(
-				"idSitioSesion" => $idSitioSesion
+					"idSitioSesion" => $idSitioSesion,
+					"idAlerta" => $idAlerta
 			);
-			$data['info'] = $this->report_model->get_total_by($arrParam);
+			$data['info'] = $this->general_model->get_informacion_respuestas_alertas_vencidas_by($arrParam);
 
 			$data["view"] = 'form_responder_alerta';
 			$this->load->view("layout", $data);
@@ -126,7 +126,7 @@ class Report extends CI_Controller {
 				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador.');
 			}
 
-			redirect("/dashboard","location",301);
+			redirect("/dashboard/coordinadores","location",301);
 	}
 	
 	/**
@@ -144,6 +144,8 @@ class Report extends CI_Controller {
 
 			if($acepta && $acepta==2 && $observacion == ""){
 				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Debe indicar la Observación.');
+			}elseif($acepta==""){
+				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Debe indicar su respuesta.');
 			}else{
 				if ($this->report_model->saveRegistroNotificacionCoordinador()) {
 					$this->session->set_flashdata('retornoExito', $msj);
@@ -152,7 +154,7 @@ class Report extends CI_Controller {
 				}
 			}
 
-			redirect("/dashboard","location",301);
+			redirect("/dashboard/coordinadores","location",301);
 	}
 	
 	/**
@@ -168,21 +170,21 @@ class Report extends CI_Controller {
 			$msj = "Gracias por su respuesta.";
 
 			if($ausentes == ""){
-				$this->session->set_flashdata('retornoErrorConsolidacion', '<strong>Error!!!</strong> Debe indicar los ausentes.');
+				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Debe indicar los ausentes.');
 			}else{
 				if($ausentes > $citados){
-					$this->session->set_flashdata('retornoErrorConsolidacion', '<strong>Error!!!</strong> La cantidad de ausentes no puede ser mayor a la cantidad de citados.');
+					$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> La cantidad de ausentes no puede ser mayor a la cantidad de citados.');
 				}else{
 					if ($this->report_model->saveRegistroConsolidacionCoordinador()) {
 						$this->session->set_flashdata('retornoExito', $msj);
 					} else {
-						$this->session->set_flashdata('retornoErrorConsolidacion', '<strong>Error!!!</strong> Contactarse con el Administrador.');
+						$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador.');
 					}
 				}
 			}
 
 
-			redirect("/dashboard","location",301);
+			redirect("/dashboard/coordinadores","location",301);
 	}
 		
     /**

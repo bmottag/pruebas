@@ -341,6 +341,49 @@ class General_model extends CI_Model {
 					return false;
 				}
 		}
+		
+		/**
+		 * Muestra informacion de las alertas que no le han dado respueta filtrado por ID_SITIO_SESION - ID_ALERTA
+		 * @since 24/5/2017
+		 */
+		public function get_informacion_respuestas_alertas_vencidas_by($arrDatos) 
+		{				
+				$this->db->select('Y.*,A.*, S.*, P.nombre_prueba, G.nombre_grupo_instrumentos, G.fecha,
+				O.nombre_organizacion, R.nombre_region, D.*, Z.nombre_zona, T.nombre_tipo_alerta, X.*');
+				
+				//SESION
+				$this->db->join('sesiones S', 'S.id_sesion = X.fk_id_sesion', 'INNER');
+				$this->db->join('param_grupo_instrumentos G', 'G.id_grupo_instrumentos = S.fk_id_grupo_instrumentos', 'INNER');
+				$this->db->join('pruebas P', 'P.id_prueba = G.fk_id_prueba', 'INNER');
+				
+				//ALERTA
+				$this->db->join('alertas A', 'A.fk_id_sesion = S.id_sesion', 'INNER');
+				$this->db->join('param_tipo_alerta T', 'T.id_tipo_alerta = A.fk_id_tipo_alerta', 'INNER');
+				
+				//SITIO
+				$this->db->join('sitios Y', 'Y.id_sitio = X.fk_id_sitio', 'INNER');
+				$this->db->join('param_regiones R', 'R.id_region = Y.fk_id_region', 'INNER');
+				$this->db->join('param_divipola D', 'D.mpio_divipola = Y.fk_mpio_divipola', 'INNER');
+				$this->db->join('param_organizaciones O', 'O.id_organizacion = Y.fk_id_organizacion', 'INNER');
+				$this->db->join('param_zonas Z', 'Z.id_zona = Y.fk_id_zona', 'INNER');
+								
+				if (array_key_exists("idAlerta", $arrDatos)) {
+					$this->db->where('A.id_alerta', $arrDatos["idAlerta"]); //FILTRO POR ALERTA
+				}
+				
+				if (array_key_exists("idSitioSesion", $arrDatos)) {
+					$this->db->where('X.id_sitio_sesion', $arrDatos["idSitioSesion"]); //SITIO-SESION
+				}
+
+				//$this->db->order_by('R.nombre_region, D.dpto_divipola_nombre, D.mpio_divipola_nombre', 'desc');
+				$query = $this->db->get('sitio_sesion X');
+
+				if ($query->num_rows() > 0) {
+					return $query->result_array();
+				} else {
+					return false;
+				}
+		}
 	
 	
 
