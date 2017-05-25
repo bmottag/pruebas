@@ -431,7 +431,8 @@ class Admin extends MX_Controller {
 			$arrParam = array(
 				"table" => "param_roles",
 				"order" => "nombre_rol",
-				"id" => "x"
+				"column" => "mostrar_lista",
+				"id" => 1
 			);
 			$data['roles'] = $this->general_model->get_basic_search($arrParam);//lista de roles
 			
