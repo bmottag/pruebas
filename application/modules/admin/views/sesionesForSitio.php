@@ -1,3 +1,5 @@
+<script type="text/javascript" src="<?php echo base_url("assets/js/validate/admin/sitio_sesion.js"); ?>"></script>
+
 <script>
 $(function(){ 
 	$(".btn-success").click(function () {	
@@ -135,7 +137,6 @@ if ($retornoError) {
 								<th class="text-center">Hora Fin</th>
 								<th class="text-center">Citados</th>
 								<th class="text-center">Editar</th>
-								<th class="text-center">Eliminar</th>
 							</tr>
 						</thead>
 						<tbody>							
@@ -156,11 +157,12 @@ if ($retornoError) {
 									<button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#modal" id="<?php echo $lista['id_sitio_sesion']; ?>" >
 										Editar <span class="glyphicon glyphicon-edit" aria-hidden="true">
 									</button>
-						<?php
-									echo "</td>";
-									echo "<td class='text-center'>";
-						?>
-									<a href="<?php echo base_url("admin/eliminar_sitio_sesiones/" . $lista['id_sitio_sesion'] . "/" . $lista['id_sitio']); ?>" class="btn btn-danger btn-xs">Eliminar <span class="fa fa-times fa-fw" aria-hidden="true"></a>
+									<br><br>
+
+<button type="button" class="btn btn-danger btn-xs" id="<?php echo $lista['id_sitio_sesion']; ?>" >
+	Eliminar <span class="fa fa-times fa-fw" aria-hidden="true">
+</button>
+
 						<?php		
 									echo "</td>";
 							endforeach;

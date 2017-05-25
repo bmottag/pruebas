@@ -1052,7 +1052,7 @@ class Admin extends MX_Controller {
 			$this->load->model("general_model");
 
 			if ($this->general_model->updateRecord($arrParam)) {
-				$this->session->set_flashdata('retornoExito', 'Se elimino el <strong>' . $rol . '</strong> del sitio.');
+				$this->session->set_flashdata('retornoExito', 'Se eliminó el <strong>' . $rol . '</strong> del sitio.');
 			} else {
 				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador');
 			}
@@ -1060,14 +1060,16 @@ class Admin extends MX_Controller {
 			redirect(base_url('admin/sitios'), 'refresh');
     }
 	
-    /**
-     * Eliminar relacion sitio conn sesion
-     */
-    public function eliminar_sitio_sesiones($idSitioSesion, $idSitio) 
-	{
-			if (empty($idSitioSesion) || empty($idSitio) ) {
-				show_error('ERROR!!! - You are in the wrong place.');
-			}
+	/**
+	 * Eliminar relacion sitio conn sesion
+     * @since 25/5/2017
+	 */
+	public function eliminar_sitio_sesiones()
+	{			
+			header('Content-Type: application/json');
+			$data = array();
+			
+			$idSitioSesion = $this->input->post('identificador');
 			
 			$this->load->model("general_model");
 			//verificar si a este SITIO_SESION ya se le dio alguna respuesta en la tabla de registros
@@ -1080,23 +1082,39 @@ class Admin extends MX_Controller {
 			$verificar = $this->general_model->get_basic_search($arrParam);	
 			
 			if($verificar){
-				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> A esta relación ya se le asignaron Notificaciones');
+				$data["result"] = "error";
+				$data["mensaje"] = "Error!!!. A esta relación ya se le asignaron Notificaciones.";
 			}else{
-				//eliminaos registr de SITIO_SESION
+				
+				//consultar datos de id_sitio para hacer el direccionamiento de la vista
+				$arrParam = array(
+					"table" => "sitio_sesion",
+					"order" => "id_sitio_sesion",
+					"column" => "id_sitio_sesion",
+					"id" => $idSitioSesion
+				);
+				$infoSitioSesion = $this->general_model->get_basic_search($arrParam);
+				$data["idRecord"] = $infoSitioSesion[0]["fk_id_sitio"];
+				
+				//eliminar registro de SITIO_SESION
 				$arrParam = array(
 					"table" => "sitio_sesion",
 					"primaryKey" => "id_sitio_sesion",
 					"id" => $idSitioSesion
 				);
-
+				
 				if ($this->general_model->deleteRecord($arrParam)) {
-					$this->session->set_flashdata('retornoExito', 'Se eliminó la asociación.');
+					$data["result"] = true;
+					$data["mensaje"] = "Se eliminó la asociación.";
+					$this->session->set_flashdata('retornoExito', 'Se eliminó la asociación');
 				} else {
+					$data["result"] = "error";
+					$data["mensaje"] = "Error!!! Contactarse con el Administrador.";
 					$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador');
-				}
+				}				
 			}
-			
-			redirect(base_url('admin/asociar_sesion/' . $idSitio), 'refresh');
+
+			echo json_encode($data);
     }
 	
 	/**

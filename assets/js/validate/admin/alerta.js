@@ -38,9 +38,9 @@ $( document ).ready( function () {
 			var oID = $(this).attr("id");
 			
 			//Activa icono guardando
-			$(".btn-danger").attr('disabled','-1');
 			if(window.confirm('Esta seguro de eliminar la Alerta?'))
 			{
+					$(".btn-danger").attr('disabled','-1');
 					$.ajax ({
 						type: 'POST',
 						url: base_url + 'admin/eliminar_alerta',
