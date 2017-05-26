@@ -148,7 +148,7 @@ Asociar  <span class="badge"><?php echo $conteoSesiones; ?></span>
 						<?php 
 if($lista['fk_id_user_delegado']){
 	echo "<p class='text-primary text-center'>C.C. " . $lista['cedula_delegado'] . "</br>";
-	echo "<a href='" . base_url("admin/updateDelegado/" . $lista['id_sitio'] . "/delegado") . "' class='text-primary text-center'>Eliminar</p>";
+	echo "<a href='" . base_url("admin/updateDelegado/" . $lista['id_sitio']) . "' class='text-primary text-center'>Eliminar</p>";
 }else{
 	echo "<p class='text-danger text-center'><strong>Falta</strong></p>";
 }
@@ -160,7 +160,7 @@ if($lista['fk_id_user_delegado']){
 						<?php 
 if($lista['fk_id_user_coordinador']){
 	echo "<p class='text-primary text-center'>C.C. " . $lista['cedula_coordinador'] . "</br>";
-echo "<a href='" . base_url("admin/updateDelegado/" . $lista['id_sitio'] . "/coordinador") . "' class='text-primary text-center'>Eliminar</p>";
+echo "<a href='" . base_url("admin/updateCoordinador/" . $lista['fk_mpio_divipola']) . "' class='text-primary text-center'>Eliminar</p>";
 }else{
 	echo "<p class='text-danger text-center'><strong>Falta</strong></p>";
 }

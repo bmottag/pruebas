@@ -1033,11 +1033,11 @@ class Admin extends MX_Controller {
 	}
 	
     /**
-     * actualizamos el campo delegado o coordinador de ls sitio
+     * actualizamos el campo delegado de los sitio
      */
-    public function updateDelegado($idSitio, $rol) 
+    public function updateDelegado($idSitio) 
 	{
-			if (empty($rol) || empty($idSitio) ) {
+			if (empty($idSitio) ) {
 				show_error('ERROR!!! - You are in the wrong place.');
 			}
 			
@@ -1046,14 +1046,43 @@ class Admin extends MX_Controller {
 				"table" => "sitios",
 				"primaryKey" => "id_sitio",
 				"id" => $idSitio,
-				"column" => "fk_id_user_" . $rol,
+				"column" => "fk_id_user_delegado",
 				"value" => ""
 			);
 
 			$this->load->model("general_model");
 
 			if ($this->general_model->updateRecord($arrParam)) {
-				$this->session->set_flashdata('retornoExito', 'Se eliminó el <strong>' . $rol . '</strong> del sitio.');
+				$this->session->set_flashdata('retornoExito', 'Se eliminó el <strong>DELEGADO</strong> del sitio.');
+			} else {
+				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador');
+			}
+			
+			redirect(base_url('admin/sitios'), 'refresh');
+    }
+	
+    /**
+     * actualizamos el campo coordinador de los sitios
+     */
+    public function updateCoordinador($idMunicipio) 
+	{
+			if (empty($idMunicipio) ) {
+				show_error('ERROR!!! - You are in the wrong place.');
+			}
+			
+			//actualizamos el campo delegado o coordinador de ls sitio
+			$arrParam = array(
+				"table" => "sitios",
+				"primaryKey" => "fk_mpio_divipola",
+				"id" => $idMunicipio,
+				"column" => "fk_id_user_coordinador",
+				"value" => ""
+			);
+
+			$this->load->model("general_model");
+
+			if ($this->general_model->updateRecord($arrParam)) {
+				$this->session->set_flashdata('retornoExito', 'Se eliminó el <strong>COORDINADOR</strong> del sitio.');
 			} else {
 				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador');
 			}
