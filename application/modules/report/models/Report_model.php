@@ -39,21 +39,13 @@
 		 */
 		public function get_total_by($arrDatos) 
 		{		
-				//filtro para un perido menos a 20 dias y no mayor a 20 dias de la fecha actual
-				$fecha = date("Y-m-d");
-				$fechaInicio = strtotime ( '-20 day' , strtotime ( $fecha ) ) ;//le sumo 20 dias a la fecha actual
-				$fechaInicio = date ( 'Y-m-d' , $fechaInicio );
-				
-				$fechaFin = strtotime ( '+20 day' , strtotime ( $fecha ) ) ;//le resto 20 dias a la fecha actual
-				$fechaFin = date ( 'Y-m-d' , $fechaFin );
-
 				$idRegion = $this->input->post('region');				
 				$depto = $this->input->post('depto');
 				$mcpio = $this->input->post('mcpio');
 				$sesion = $this->input->post('sesion');
 				$alerta = $this->input->post('alerta');
 		
-				$this->db->select('Y.*,A.*, S.*, K.id_registro, K.acepta, K.ausentes, K.observacion, K.fecha_registro, P.nombre_prueba, G.nombre_grupo_instrumentos, G.fecha,
+				$this->db->select('Y.*,A.*, S.*, P.nombre_prueba, G.nombre_grupo_instrumentos, G.fecha,
 				O.nombre_organizacion, R.nombre_region, D.*, Z.nombre_zona, T.nombre_tipo_alerta, X.*');
 				
 				//SESION
@@ -72,22 +64,22 @@
 				$this->db->join('param_organizaciones O', 'O.id_organizacion = Y.fk_id_organizacion', 'INNER');
 				$this->db->join('param_zonas Z', 'Z.id_zona = Y.fk_id_zona', 'INNER');
 				
-				//REGISTRO
-				//$this->db->join('registro N', 'N.fk_id_alerta = A.id_alerta', 'LEFT');
-				$this->db->join('registro K', 'K.fk_id_sitio_sesion = X.id_sitio_sesion', 'LEFT');
-				
-				
-				
-				$this->db->where('G.fecha >=', $fechaInicio); //FECHA INICIAL MAYOR A LA ACTUAL
-				$this->db->where('G.fecha <=', $fechaFin); //FECHA FINAL MENOR A LA ACTUAL		
+					
 				$this->db->where('A.estado_alerta', 1); //ALERTAS ACTIVAS
+				$tipoMensaje = array(1, 2);//filtrar por alertas que se muestren en el APP
+				$this->db->where_in('A.tipo_mensaje', $tipoMensaje);	
+
+				if (array_key_exists("rolAlerta", $arrDatos)) {
+					$this->db->where('A.fk_id_rol', $arrDatos["rolAlerta"]); //TIPO ALERTA
+				}
 				
+				if ($sesion && $sesion != "") {
+					$this->db->where('X.fk_id_sesion', $sesion); //FILTRO POR SESION
+				}
 				
-				//FILTRO POR COORDINADOR SI EL USUARIO DE SESION ES COORDINADOR
-				$userRol = $this->session->rol;
-				if($userRol==3) {
-					$this->db->where('Y.fk_id_user_coordinador', $this->session->id); //FILTRO POR ID DEL COORDINADOR
-				}				
+				if ($alerta && $alerta != "") {
+					$this->db->where('A.id_alerta', $alerta); //FILTRO POR ALERTA
+				}
 				
 				if($idRegion && $idRegion != "") {
 					$this->db->where('Y.fk_id_region', $idRegion); //FILTRO POR REGION
@@ -101,17 +93,18 @@
 					$this->db->where('Y.fk_mpio_divipola', $mcpio); //FILTRO POR MUNICIPIO
 				}
 				
-				if ($sesion && $sesion != "") {
-					$this->db->where('X.fk_id_sesion', $sesion); //FILTRO POR DEPARTAMENTO
+				if (array_key_exists("tipoAlerta", $arrDatos)) {
+					$this->db->where('A.fk_id_tipo_alerta', $arrDatos["tipoAlerta"]); //TIPO ALEERTA
 				}
 				
-				if ($alerta && $alerta != "") {
-					$this->db->where('A.id_alerta', $alerta); //FILTRO POR ALERTA
-				}
 				
-				if (array_key_exists("idSitioSesion", $arrDatos)) {
-					$this->db->where('X.id_sitio_sesion', $arrDatos["idSitioSesion"]); //SITIO-SESION
-				}
+				//FILTRO POR COORDINADOR SI EL USUARIO DE SESION ES COORDINADOR
+				$userRol = $this->session->rol;
+				if($userRol==3) {
+					$this->db->where('Y.fk_id_user_coordinador', $this->session->id); //FILTRO POR ID DEL COORDINADOR
+				}				
+				
+
 
 				//$this->db->order_by('R.nombre_region, D.dpto_divipola_nombre, D.mpio_divipola_nombre', 'desc');
 				$query = $this->db->get('sitio_sesion X');

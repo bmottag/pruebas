@@ -129,8 +129,15 @@ class Report extends CI_Controller {
 						$data['infoMcpio'] = $this->general_model->get_basic_search($arrParam);//Info Municipio para mostrar la region por la que se filtro
 				}
 				
-				$arrParam = array();
-				$data['info'] = $this->report_model->get_total_by($arrParam);
+				
+				if($this->input->post('tipoAlerta'))
+				{				
+						$arrParam = array(
+									"tipoAlerta" => $this->input->post('tipoAlerta'),
+									"respuestaUsuario" => $this->input->post('respuesta')
+						);
+						$data['info'] = $this->report_model->get_total_by($arrParam);
+				}
 				
 //conteo respuestas para alertas INFORMATIVAS - ROL DELEGADO
 				$arrParam = array(

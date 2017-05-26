@@ -52,8 +52,42 @@
 					<div class="col-lg-4">
 					<div class="alert alert-danger">
 						<strong>Alerta Informativa</strong><br>
-						Delegados que Aceptarón: <?php echo $contadorInformativaSi;?>
-						<br>Delegados que No contestaron: <?php echo $contadorInformativaNo;?>
+						Delegados que Aceptarón: <?php echo $contadorInformativaSi; ?>	
+						<br>Delegados que No contestaron: <?php echo $contadorInformativaNo;?>						
+						
+<form  name="form" id="form_Informativa" role="form" method="post" class="form-horizontal" >
+
+	<input type="hidden" id="sesion" name="sesion" value="<?php echo $infoSesiones[0]['id_sesion']; ?>"/>
+	
+	<?php if(isset($infoAlerta)){ ?>
+	<input type="hidden" id="alerta" name="alerta" value="<?php echo $infoAlerta[0]['id_alerta']; ?>"/>
+	<?php } ?>
+	
+	<?php if(isset($infoRegion)){ ?>
+	<input type="hidden" id="region" name="region" value="<?php echo $infoRegion[0]['id_region']; ?>"/>
+	<?php } ?>
+	
+	<?php if(isset($infoDepto)){ ?>
+	<input type="hidden" id="depto" name="depto" value="<?php echo $infoDepto[0]['dpto_divipola']; ?>"/>
+	<?php } ?>
+	
+	<?php if(isset($infoMcpio)){ ?>
+	<input type="hidden" id="mcpio" name="mcpio" value="<?php echo $infoMcpio[0]['mpio_divipola']; ?>"/>
+	<?php } ?>
+	
+	<input type="hidden" id="tipoAlerta" name="tipoAlerta" value=1/>
+
+<br>
+	<div class="form-group">
+		<div class="row" align="center">
+			<div style="width80%;" align="center">
+				
+			 <button type="submit" class="btn btn-danger btn-xs" id='btnSubmit' name='btnSubmit'><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Ver </button>
+				
+			</div>
+		</div>
+	</div>
+</form>				
 					
 					</div></div>
 					
@@ -65,6 +99,40 @@
 						<br>Delegados que Aceptarón: <?php echo $contadorNotificacionSi;?>
 						<?php $contadorNotificacionNo = $contadorNotificacionContestaron - $contadorNotificacionSi;?>
 						<br>Delegados que No Aceptarón: <?php echo $contadorNotificacionNo;?>
+						
+<form  name="form" id="form_Notificacion" role="form" method="post" class="form-horizontal" >
+
+	<input type="hidden" id="sesion" name="sesion" value="<?php echo $infoSesiones[0]['id_sesion']; ?>"/>
+	
+	<?php if(isset($infoAlerta)){ ?>
+	<input type="hidden" id="alerta" name="alerta" value="<?php echo $infoAlerta[0]['id_alerta']; ?>"/>
+	<?php } ?>
+	
+	<?php if(isset($infoRegion)){ ?>
+	<input type="hidden" id="region" name="region" value="<?php echo $infoRegion[0]['id_region']; ?>"/>
+	<?php } ?>
+	
+	<?php if(isset($infoDepto)){ ?>
+	<input type="hidden" id="depto" name="depto" value="<?php echo $infoDepto[0]['dpto_divipola']; ?>"/>
+	<?php } ?>
+	
+	<?php if(isset($infoMcpio)){ ?>
+	<input type="hidden" id="mcpio" name="mcpio" value="<?php echo $infoMcpio[0]['mpio_divipola']; ?>"/>
+	<?php } ?>
+	
+	<input type="hidden" id="tipoAlerta" name="tipoAlerta" value=2/>
+
+<br>
+	<div class="form-group">
+		<div class="row" align="center">
+			<div style="width80%;" align="center">
+				
+			 <button type="submit" class="btn btn-danger btn-xs" id='btnSubmit' name='btnSubmit'><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Ver </button>
+				
+			</div>
+		</div>
+	</div>
+</form>
 					
 					</div></div>
 					
@@ -73,17 +141,51 @@
 						<strong>Alerta de Consolidación</strong><br>
 						Delegados que contestaron: <?php echo $contadorConsolidacionSi;?>
 						<br>Delegados que NO contestaron: <?php echo $contadorConsolidacionNo;?>
-					
+
+<form  name="form" id="form_Consolidacion" role="form" method="post" class="form-horizontal" >
+
+	<input type="hidden" id="sesion" name="sesion" value="<?php echo $infoSesiones[0]['id_sesion']; ?>"/>
+	
+	<?php if(isset($infoAlerta)){ ?>
+	<input type="hidden" id="alerta" name="alerta" value="<?php echo $infoAlerta[0]['id_alerta']; ?>"/>
+	<?php } ?>
+	
+	<?php if(isset($infoRegion)){ ?>
+	<input type="hidden" id="region" name="region" value="<?php echo $infoRegion[0]['id_region']; ?>"/>
+	<?php } ?>
+	
+	<?php if(isset($infoDepto)){ ?>
+	<input type="hidden" id="depto" name="depto" value="<?php echo $infoDepto[0]['dpto_divipola']; ?>"/>
+	<?php } ?>
+	
+	<?php if(isset($infoMcpio)){ ?>
+	<input type="hidden" id="mcpio" name="mcpio" value="<?php echo $infoMcpio[0]['mpio_divipola']; ?>"/>
+	<?php } ?>
+	
+	<input type="hidden" id="tipoAlerta" name="tipoAlerta" value=3/>
+
+<br>
+	<div class="form-group">
+		<div class="row" align="center">
+			<div style="width80%;" align="center">
+				
+			 <button type="submit" class="btn btn-danger btn-xs" id='btnSubmit' name='btnSubmit'><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Ver </button>
+				
+			</div>
+		</div>
+	</div>
+</form>
+						
 					</div></div>
 				</div>
 					<?php
-						if(!$info){
+						if(isset($info) && !$info){
 					?>
 						<div class="alert alert-danger">
 							No hay Información
 						</div>
 					<?php
-						}else{
+						}elseif(isset($info)){
 					?>	
 					<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
 						<thead>
@@ -127,7 +229,20 @@
 									
 									
 									echo "<td>";
-									if(!$lista['id_registro']){ 
+									
+									//buscar informacion de la respuesta si existe
+$ci = &get_instance();
+$ci->load->model("general_model");
+
+$arrParam = array(
+		"idSitioSesion" => $lista['id_sitio_sesion'],
+		"idAlerta" => $lista['id_alerta']
+);
+$respuestas = $this->general_model->get_respuestas_alertas_vencidas_by($arrParam);
+
+									
+									
+									if(!$respuestas){ 
 										echo "<p class='text-danger text-left'>Alerta sin respuesta.</p>";
 										
 										//si el usuario logeado es el mismo coordinador de la del sition
@@ -142,11 +257,11 @@ echo "<a href=" . base_url("report/responder_alerta/" . $lista['id_alerta'] . "/
 										}
 										
 									}else{
-										echo "<strong>Respuesta: </strong>";
-										echo $acepta = $lista['acepta']==1?"Si":"No";
-										echo "<br><strong>Ausente: </strong>" . $lista['ausentes'];
-										echo "<br><strong>Observación: </strong>" . $lista['observacion'];
-										echo "<br><strong>Fecha registro: </strong>" . $lista['fecha_registro'];
+										echo "<br><strong>Respuesta: </strong>";
+										echo $acepta = $respuestas[0]['acepta']==1?"Si":"No";
+										echo "<br><strong>Ausente: </strong>" . $respuestas[0]['ausentes'];
+										echo "<br><strong>Observación: </strong>" . $respuestas[0]['observacion'];
+										echo "<br><strong>Fecha registro: </strong>" . $respuestas[0]['fecha_registro'];
 									}
 									echo "</td>";
 							endforeach;

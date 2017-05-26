@@ -360,7 +360,7 @@ class General_model extends CI_Model {
 				$query = $this->db->get('registro');
 
 				if ($query->num_rows() > 0) {
-					return true;
+					return $query->result_array();;
 				} else {
 					return false;
 				}
