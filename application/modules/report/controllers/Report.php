@@ -139,8 +139,13 @@ class Report extends CI_Controller {
 						$data['info'] = $this->report_model->get_total_by($arrParam);
 				}
 				
+				//conteo de los sitios segun el filtro
 				$data['conteoSitios'] = $this->report_model->get_numero_sitios_por_filtro($arrParam);
-
+				
+				$data['conteoCitados'] = $this->report_model->get_numero_citados_por_filtro($arrParam);
+//pr($data['conteoCitados']);
+//echo$this->db->last_query();exit;
+				
 //conteo respuestas para alertas INFORMATIVAS - ROL DELEGADO
 				$arrParam = array(
 								'tipoAlerta' => 1, //INFORMATIVA

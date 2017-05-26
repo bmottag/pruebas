@@ -322,18 +322,12 @@
 				$sql = "SELECT COUNT(DISTINCT(id_sitio)) CONTEO";
 				$sql.= " FROM sitio_sesion X ";
 				$sql.= "	INNER JOIN sesiones S ON S.id_sesion = X.fk_id_sesion 
-							INNER JOIN param_grupo_instrumentos G ON G.id_grupo_instrumentos = S.fk_id_grupo_instrumentos 
-							INNER JOIN pruebas P ON P.id_prueba = G.fk_id_prueba 
-							INNER JOIN alertas A ON A.fk_id_sesion = S.id_sesion 
 							INNER JOIN sitios Y ON Y.id_sitio = X.fk_id_sitio 
 							INNER JOIN param_regiones R ON R.id_region = Y.fk_id_region 
 							INNER JOIN param_divipola D ON D.mpio_divipola = Y.fk_mpio_divipola";
-				$sql.= " WHERE A.estado_alerta = 1";
-				$sql.= " AND A.tipo_mensaje IN(1, 2)";
-				$sql.= " AND A.fk_id_rol = 4";
 				
 				if ($sesion && $sesion != "") {
-					$sql.= " AND X.fk_id_sesion = '$sesion'"; //FILTRO POR SESION
+					$sql.= " WHERE X.fk_id_sesion = '$sesion'"; //FILTRO POR SESION
 				}
 				
 				if($idRegion && $idRegion != "") {
@@ -351,6 +345,44 @@
 				$query = $this->db->query($sql);
 				$row = $query->row();
 				return $row->CONTEO;
+		}
+		
+		/**
+		 * Conteo de citados para el reporte general
+		 * @since 26/5/2017
+		 */
+		public function get_numero_citados_por_filtro($arrDatos) 
+		{		
+				$sesion = $this->input->post('sesion');
+				
+				$idRegion = $this->input->post('region');				
+				$depto = $this->input->post('depto');
+				$mcpio = $this->input->post('mcpio');
+
+				$sql = "SELECT SUM(numero_citados) citados, SUM(numero_ausentes) ausentes";
+				$sql.= " FROM sitio_sesion X ";
+				$sql.= "	INNER JOIN sesiones S ON S.id_sesion = X.fk_id_sesion 
+							INNER JOIN sitios Y ON Y.id_sitio = X.fk_id_sitio 
+							INNER JOIN param_regiones R ON R.id_region = Y.fk_id_region 
+							INNER JOIN param_divipola D ON D.mpio_divipola = Y.fk_mpio_divipola";			
+				if ($sesion && $sesion != "") {
+					$sql.= " WHERE X.fk_id_sesion = '$sesion'"; //FILTRO POR SESION
+				}
+				
+				if($idRegion && $idRegion != "") {
+					$sql.= " AND Y.fk_id_region = '$idRegion'"; //FILTRO POR REGION
+				}
+				
+				if ($depto && $depto != "") {
+					$sql.= " AND Y.fk_dpto_divipola = '$depto'"; //FILTRO POR DEPARTAMENTO
+				}
+			
+				if ($mcpio && $mcpio != "") {
+					$sql.= " AND Y.fk_mpio_divipola = '$mcpio'"; //FILTRO POR MUNICIPIO
+				}
+
+				$query = $this->db->query($sql);
+				return $query->row_array();
 		}
 		
 		

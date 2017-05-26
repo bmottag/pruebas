@@ -50,6 +50,8 @@
 					
 					<div class="alert alert-info">
 							Hay <strong><?php echo $conteoSitios; ?> SITIOS</strong> donde se realiza esta prueba
+							<br>Número todal de Citados:<strong><?php echo $conteoCitados['citados']; ?> </strong>
+							<br>Número todal de Ausentes:<strong><?php echo $conteoCitados['ausentes']; ?> </strong>
 					</div>
 				
 				<div class="row">
