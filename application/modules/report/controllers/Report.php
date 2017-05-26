@@ -55,7 +55,6 @@ class Report extends CI_Controller {
 			$data['listaRegiones'] = $this->general_model->get_basic_search($arrParam);//Lista Regiones
 			
 			//Lista Departamentos
-			$this->load->model("general_model");
 			$data['listaDepartamentos'] = $this->general_model->get_dpto_divipola();//listado de departamentos
 			
 			//lista sesiones
@@ -64,30 +63,81 @@ class Report extends CI_Controller {
 			
 			$data["view"] = "form_search_by";
 
-			if($_POST){
-
+			if($this->input->post('sesion'))
+			{
+				$sesion = $this->input->post('sesion');
+				
+				$alerta = $this->input->post('alerta');
+				$alerta = $alerta==""?FALSE:$alerta;
+				
 				$idRegion = $this->input->post('region');	
 				$idRegion = $idRegion==""?FALSE:$idRegion;
 				
 				$depto = $this->input->post('depto');
-				$mcpio = $this->input->post('mcpio');
-				$sesion = $this->input->post('sesion');
-				$alerta = $this->input->post('alerta');
+				$depto = $depto==""?FALSE:$depto;
 				
-				$arrParam = array(
-					"table" => "param_regiones",
-					"order" => "nombre_region",
-					"column" => "id_region",
-					"id" => $idRegion
-				);
-				$data['infoRegion'] = $this->general_model->get_basic_search($arrParam);//Info Regiones
+				$mcpio = $this->input->post('mcpio');
+				$mcpio = $mcpio==""?FALSE:$mcpio;
+	
+				//lista sesiones
+				$arrParam = array("idSesion" => $sesion);
+				$data['infoSesiones'] = $this->general_model->get_sesiones($arrParam);//info de sesion que se filtro
+				
+				//Info Alerta
+				if($alerta){
+
+						
+						$arrParam = array(
+							"table" => "alertas",
+							"order" => "id_alerta",
+							"column" => "id_alerta",
+							"id" => $alerta
+						);
+						$data['infoAlerta'] = $this->general_model->get_basic_search($arrParam);//Info Departamento para mostrar la region por la que se filtro
+				}
+				
+				//Info Regiones
+				if($idRegion){
+						$arrParam = array(
+							"table" => "param_regiones",
+							"order" => "nombre_region",
+							"column" => "id_region",
+							"id" => $idRegion
+						);
+						$data['infoRegion'] = $this->general_model->get_basic_search($arrParam);//Info Regiones para mostrar la region por la que se filtro
+				}
+				
+				//Info Departamento
+				if($depto){
+						$arrParam = array(
+							"table" => "param_divipola",
+							"order" => "dpto_divipola",
+							"column" => "dpto_divipola",
+							"id" => $depto
+						);
+						$data['infoDepto'] = $this->general_model->get_basic_search($arrParam);//Info Departamento para mostrar la region por la que se filtro
+				}
+				
+				//Info Municipio
+				if($mcpio){
+						$arrParam = array(
+							"table" => "param_divipola",
+							"order" => "mpio_divipola",
+							"column" => "mpio_divipola",
+							"id" => $mcpio
+						);
+						$data['infoMcpio'] = $this->general_model->get_basic_search($arrParam);//Info Municipio para mostrar la region por la que se filtro
+				}
 				
 				$arrParam = array();
 				$data['info'] = $this->report_model->get_total_by($arrParam);
 				
-//conteo respiestas para alertas informativas				
-				$arrParam = array('tipoAlerta' => 1);
-				$infoInformativa = $this->report_model->get_respuestas_registro($arrParam);
+//conteo respuestas para alertas INFORMATIVAS - ROL DELEGADO
+				$arrParam = array(
+								'tipoAlerta' => 1, //INFORMATIVA
+								'rolAlerta' => 4, //DELEGADO
+				);
+				$infoInformativa = $this->report_model->get_respuestas_registro($arrParam);//alertas vigentes para los filtros
 				//recorro las alertas y reviso se se les dio respuesta, si no se le dio respuesta las voy contando
 				$data['contadorInformativaSi'] = 0;
 				$data['contadorInformativaNo'] = 0;
@@ -107,36 +157,54 @@ class Report extends CI_Controller {
 					endforeach;
 				}
 				
-//conteo respiestas para alertas NOTIFICACION		
-				$arrParam = array('tipoAlerta' => 2);
-				$infoInformativa = $this->report_model->get_respuestas_registro($arrParam);
+//conteo respuestas para alertas NOTIFICACION - ROL DELEGADO
+				$arrParam = array(
+								'tipoAlerta' => 2, //NOTIFICACION
+								'rolAlerta' => 4, //DELEGADO
+				);
+				$infoNotificacion = $this->report_model->get_respuestas_registro($arrParam);
 				//recorro las alertas y reviso se se les dio respuesta, si no se le dio respuesta las voy contando
+				$data['contadorNotificacionContestaron'] = 0;
 				$data['contadorNotificacionSi'] = 0;
-				$data['contadorNotificacionNo'] = 0;
-				if($infoInformativa){
-					foreach ($infoInformativa as $lista):
+				$data['contadorNotificacionNoContestaron'] = 0;
+				if($infoNotificacion){
+					foreach ($infoNotificacion as $lista):
 						$arrParam = array(
 								"idSitioSesion" => $lista['id_sitio_sesion'],
 								"idAlerta" => $lista['id_alerta']
 						);
 						$respuesta = $this->general_model->get_respuestas_alertas_vencidas_by($arrParam);
 						
-						if($respuesta){
+						$arrParam = array(
+								"idSitioSesion" => $lista['id_sitio_sesion'],
+								"idAlerta" => $lista['id_alerta'],
+								"respuestaAcepta" => 1
+						);//filtro por los que contestaron que SI
+						$respuestaSI = $this->general_model->get_respuestas_alertas_vencidas_by($arrParam);
+						
+						if($respuestaSI){
 							$data['contadorNotificacionSi']++;
+						}
+						
+						if($respuesta){
+							$data['contadorNotificacionContestaron']++;
 						}else{
-							$data['contadorNotificacionNo']++;
+							$data['contadorNotificacionNoContestaron']++;
 						}
 					endforeach;
 				}
 				
-//conteo respiestas para alertas CONSOLIDACION		
-				$arrParam = array('tipoAlerta' => 3);
-				$infoInformativa = $this->report_model->get_respuestas_registro($arrParam);
+//conteo respiestas para alertas CONSOLIDACION - ROL DELEGADO
+				$arrParam = array(
+								'tipoAlerta' => 3, //CONSOLIDACION
+								'rolAlerta' => 4, //DELEGADO
+				);
+				$infoConsolidacion = $this->report_model->get_respuestas_registro($arrParam);
 				//recorro las alertas y reviso se se les dio respuesta, si no se le dio respuesta las voy contando
 				$data['contadorConsolidacionSi'] = 0;
 				$data['contadorConsolidacionNo'] = 0;
-				if($infoInformativa){
-					foreach ($infoInformativa as $lista):
+				if($infoConsolidacion){
+					foreach ($infoConsolidacion as $lista):
 						$arrParam = array(
 								"idSitioSesion" => $lista['id_sitio_sesion'],
 								"idAlerta" => $lista['id_alerta']

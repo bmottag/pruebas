@@ -22,25 +22,54 @@
                     <i class="fa fa-life-saver fa-fw"></i> Lista
 				</div>
 				<div class="panel-body">
+				
+					<div class="alert alert-info">
+						<?php 
+						echo "<strong>Prueba / Grupo de Instrumentos / Fecha / Sesión : </strong><br>";
+						echo $infoSesiones[0]['nombre_prueba'] . " / " . $infoSesiones[0]["nombre_grupo_instrumentos"] . " / " . $infoSesiones[0]["fecha"] . " / " . $infoSesiones[0]["sesion_prueba"];
+						
+						if(isset($infoAlerta)){
+							echo "<br><strong>Alerta: </strong><br>" . $infoAlerta[0]['descripcion_alerta'] . " ----> Inicio: " . $infoAlerta[0]['fecha_inicio'];
+						}
+						
+						if(isset($infoRegion)){
+							echo "<br><strong>Región: </strong>" . $infoRegion[0]['nombre_region'];
+						}
+						
+						if(isset($infoDepto)){
+							echo "<br><strong>Departamento: </strong>" . $infoDepto[0]['dpto_divipola_nombre'];
+						}
+						
+						if(isset($infoMcpio)){
+							echo "<br><strong>Mnunicipio: </strong>" . $infoMcpio[0]['mpio_divipola_nombre'];
+						}
+						
+						
+						?>
+					</div>
+				
 				<div class="row">
 					<div class="col-lg-4">
-					<div class="alert alert-info">
+					<div class="alert alert-danger">
 						<strong>Alerta Informativa</strong><br>
-						Delegados que contestaron: <?php echo $contadorInformativaSi;?>
+						Delegados que Aceptarón: <?php echo $contadorInformativaSi;?>
 						<br>Delegados que No contestaron: <?php echo $contadorInformativaNo;?>
 					
 					</div></div>
 					
 					<div class="col-lg-4">
-					<div class="alert alert-info">
+					<div class="alert alert-danger">
 						<strong>Alerta de Notificación</strong><br>
-						Delegados que contestaron: <?php echo $contadorNotificacionSi;?>
-						<br>Delegados que No contestaron: <?php echo $contadorNotificacionNo;?>
+						Delegados que contestaron: <?php echo $contadorNotificacionContestaron;?>
+						<br>Delegados que No contestaron: <?php echo $contadorNotificacionNoContestaron;?>
+						<br>Delegados que Aceptarón: <?php echo $contadorNotificacionSi;?>
+						<?php $contadorNotificacionNo = $contadorNotificacionContestaron - $contadorNotificacionSi;?>
+						<br>Delegados que No Aceptarón: <?php echo $contadorNotificacionNo;?>
 					
 					</div></div>
 					
 					<div class="col-lg-4">
-					<div class="alert alert-info">
+					<div class="alert alert-danger">
 						<strong>Alerta de Consolidación</strong><br>
 						Delegados que contestaron: <?php echo $contadorConsolidacionSi;?>
 						<br>Delegados que NO contestaron: <?php echo $contadorConsolidacionNo;?>

@@ -82,6 +82,7 @@ class Dashboard extends MX_Controller {
 	public function registro_informativo()
 	{
 			$data = array();
+			$userRol = $this->session->userdata("rol");
 						
 			$msj = "Gracias por su respuesta.";
 			
@@ -105,6 +106,7 @@ class Dashboard extends MX_Controller {
 	public function registro_notificacion()
 	{
 			$data = array();
+			$userRol = $this->session->userdata("rol");
 
 			$msj = "Gracias por su respuesta.";
 			
@@ -139,6 +141,7 @@ class Dashboard extends MX_Controller {
 	public function registro_consolidacion()
 	{
 			$data = array();
+			$userRol = $this->session->userdata("rol");
 			$ausentes = $this->input->post('ausentes');
 			$citados = $this->input->post('citados');
 			

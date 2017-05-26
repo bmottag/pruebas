@@ -352,6 +352,11 @@ class General_model extends CI_Model {
 				if (array_key_exists("idAlerta", $arrDatos)) {
 					$this->db->where('fk_id_alerta', $arrDatos["idAlerta"]); 
 				}
+				
+				if (array_key_exists("respuestaAcepta", $arrDatos)) {
+					$this->db->where('acepta', $arrDatos["respuestaAcepta"]); //filtro para las NOTIFICACIONES
+				}
+				
 				$query = $this->db->get('registro');
 
 				if ($query->num_rows() > 0) {

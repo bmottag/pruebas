@@ -48,7 +48,7 @@
 				<li class="divider"></li>
 -->
 				<li>
-					<a href="<?php echo base_url("report/searchBy"); ?>"><i class="fa fa-life-saver fa-fw"></i> Buscar Información de Sitios</a>
+					<a href="<?php echo base_url("report/searchBy"); ?>"><i class="fa fa-life-saver fa-fw"></i> Información Alertas - Delegados</a>
 				</li>
 				
 				

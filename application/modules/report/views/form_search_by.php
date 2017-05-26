@@ -27,7 +27,43 @@
                         <div class="panel-body">
 
 									<form  name="form" id="form" role="form" method="post" class="form-horizontal" >
+									
+									
+<!-- INICIO FILTRO POR SESIONES -->
+									<?php if($infoSesiones){ ?>
+									
+									<div class="row">
+										<div class="col-sm-12">
+										<div class="alert alert-info">
+											<div class="form-group">
+												<div class="col-sm-8 col-sm-offset-2">
+													<label for="type" >Prueba / Grupo de Instrumentos / Fecha / Sesión : *</label>
+													<select name="sesion" id="sesion" class="form-control" required>
+														<option value=''>Select...</option>
+														<?php for ($i = 0; $i < count($infoSesiones); $i++) { ?>
+															<option value="<?php echo $infoSesiones[$i]["id_sesion"]; ?>" ><?php echo $infoSesiones[$i]["nombre_prueba"] . " / " . $infoSesiones[$i]["nombre_grupo_instrumentos"] . " / " . $infoSesiones[$i]["fecha"] . " / " . $infoSesiones[$i]["sesion_prueba"]; ?></option>	
+														<?php } ?>
+													</select>
+												</div>
+											</div>
 
+											<div class="form-group">
+												<div class="col-sm-8 col-sm-offset-2">
+													<label for="from">Descripción Alerta -----> Inicio Alerta: <small></small></label>
+													<select name="alerta" id="alerta" class="form-control">
+													
+													</select>
+												</div>
+											</div>
+										</div>
+										</div>
+									</div>
+
+									<?php } ?>
+<!-- FIN FILTRO POR SESIONES -->
+									
+
+									
 <!-- INICIO FILTRO POR REGION -->
 									<?php if($listaRegiones){ ?>
 									<div class="row">
@@ -81,52 +117,6 @@
 
 									<?php } ?>
 <!-- FIN FILTRO POR DEPARTAMENTO -->
-
-
-
-
-<!-- INICIO FILTRO POR SESIONES -->
-									<?php if($infoSesiones){ ?>
-									
-									<div class="row">
-										<div class="col-sm-12">
-										<div class="alert alert-info">
-											<div class="form-group">
-												<div class="col-sm-8 col-sm-offset-2">
-													<label for="type" >Prueba / Grupo de Instrumentos / Fecha / Sesión : *</label>
-													<select name="sesion" id="sesion" class="form-control" >
-														<option value=''>Select...</option>
-														<?php for ($i = 0; $i < count($infoSesiones); $i++) { ?>
-															<option value="<?php echo $infoSesiones[$i]["id_sesion"]; ?>" ><?php echo $infoSesiones[$i]["nombre_prueba"] . " / " . $infoSesiones[$i]["nombre_grupo_instrumentos"] . " / " . $infoSesiones[$i]["fecha"] . " / " . $infoSesiones[$i]["sesion_prueba"]; ?></option>	
-														<?php } ?>
-													</select>
-												</div>
-											</div>
-
-											<div class="form-group">
-												<div class="col-sm-8 col-sm-offset-2">
-													<label for="from">Descripción Alerta -----> Inicio Alerta: <small></small></label>
-													<select name="alerta" id="alerta" class="form-control">
-													
-													</select>
-												</div>
-											</div>
-										</div>
-										</div>
-									</div>
-
-									<?php } ?>
-<!-- FIN FILTRO POR SESIONES -->
-
-
-
-
-
-
-
-
-
-
 
 
 

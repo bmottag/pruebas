@@ -242,18 +242,18 @@
 
 		
 		/**
-		 * Lista de respuestas 
+		 * Lista de Alertas para el REPORTE
 		 * @since 24/5/2017
 		 */
 		public function get_respuestas_registro($arrDatos) 
 		{		
-				$fecha = date("Y-m-d");
-
+				$sesion = $this->input->post('sesion');
+				$alerta = $this->input->post('alerta');
+				
 				$idRegion = $this->input->post('region');				
 				$depto = $this->input->post('depto');
 				$mcpio = $this->input->post('mcpio');
-				$sesion = $this->input->post('sesion');
-				$alerta = $this->input->post('alerta');
+				
 		
 				$this->db->select('id_sitio_sesion, id_sitio, id_sesion, id_alerta');
 				
@@ -273,10 +273,21 @@
 				$this->db->join('param_organizaciones O', 'O.id_organizacion = Y.fk_id_organizacion', 'INNER');
 				$this->db->join('param_zonas Z', 'Z.id_zona = Y.fk_id_zona', 'INNER');
 				
-				$this->db->where('G.fecha =', $fecha); //FECHA ACTUAL
 				$this->db->where('A.estado_alerta', 1); //ALERTAS ACTIVAS
 				$tipoMensaje = array(1, 2);//filtrar por alertas que se muestren en el APP
-				$this->db->where_in('A.tipo_mensaje', $tipoMensaje);			
+				$this->db->where_in('A.tipo_mensaje', $tipoMensaje);	
+
+				if (array_key_exists("rolAlerta", $arrDatos)) {
+					$this->db->where('A.fk_id_rol', $arrDatos["rolAlerta"]); //TIPO ALERTA
+				}
+				
+				if ($sesion && $sesion != "") {
+					$this->db->where('X.fk_id_sesion', $sesion); //FILTRO POR SESION
+				}
+				
+				if ($alerta && $alerta != "") {
+					$this->db->where('A.id_alerta', $alerta); //FILTRO POR ALERTA
+				}
 				
 				if($idRegion && $idRegion != "") {
 					$this->db->where('Y.fk_id_region', $idRegion); //FILTRO POR REGION
@@ -290,16 +301,8 @@
 					$this->db->where('Y.fk_mpio_divipola', $mcpio); //FILTRO POR MUNICIPIO
 				}
 				
-				if ($sesion && $sesion != "") {
-					$this->db->where('X.fk_id_sesion', $sesion); //FILTRO POR DEPARTAMENTO
-				}
-				
-				if ($alerta && $alerta != "") {
-					$this->db->where('A.id_alerta', $alerta); //FILTRO POR ALERTA
-				}
-				
 				if (array_key_exists("tipoAlerta", $arrDatos)) {
-					$this->db->where('A.fk_id_tipo_alerta', $arrDatos["tipoAlerta"]); //SITIO-SESION
+					$this->db->where('A.fk_id_tipo_alerta', $arrDatos["tipoAlerta"]); //TIPO ALEERTA
 				}
 
 				$query = $this->db->get('sitio_sesion X');
