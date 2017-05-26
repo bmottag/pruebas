@@ -263,9 +263,9 @@ echo "<a href=" . base_url("report/responder_alerta/" . $lista['id_alerta'] . "/
 										}
 										
 									}else{
-										echo "<br><strong>Respuesta: </strong>";
+										echo "<strong>Respuesta: </strong>";
 										echo $acepta = $respuestas[0]['acepta']==1?"Si":"No";
-										echo "<br><strong>Ausente: </strong>" . $respuestas[0]['ausentes'];
+										echo "<br><strong>Ausentes: </strong>" . $respuestas[0]['ausentes'];
 										echo "<br><strong>Observación: </strong>" . $respuestas[0]['observacion'];
 										echo "<br><strong>Fecha registro: </strong>" . $respuestas[0]['fecha_registro'];
 									}

@@ -391,59 +391,123 @@ $( document ).ready( function () {
 
 
 
+
+
+	
+	
 <!--INICIO INFORMACION DE LAS SESIONES PARA EL SITIO DEL DELEGADO CONSOLIDACION -->
 <?php
 	if($infoSesiones){ 
-?>
-
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-info">
-						
-                        <div class="panel-heading">
-                            <i class="fa fa-life-saver fa-fw"></i> Lista de Sesiones asociadas con el Sitio asignado
-                        </div>
-						
-                        <div class="panel-body">
-						
+?>	
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="panel panel-info">
+				
+				<div class="panel-heading">
+					<i class="fa fa-life-saver fa-fw"></i> Lista de Sesiones asociadas con el Sitio asignado
+				</div>
+				
+				<div class="panel-body">
+				
 <a class="btn btn-default btn-circle" href="#anclaUp"><i class="fa fa-arrow-up"></i> </a>
-						
-							<table width="100%" class="table table-striped table-bordered table-hover" id="dataSafety">
-								<thead>
-									<tr>
-										<th>Sesión</th>
-										<th>Fecha</th>
-										<th>Hora Inicio</th>
-										<th>Hora Fin</th>
-										<th>Número de Citados</th>
-									</tr>
-								</thead>
-								<tbody>							
-								<?php
-									foreach ($infoSesiones as $lista):
-										echo "<tr>";
-										echo "<td>";
-										echo "<strong>Prueba:</strong><br>". $lista['nombre_prueba'];
-										echo "<br><strong>Grupo Instrumentos:</strong><br>". $lista['nombre_grupo_instrumentos'];
-										echo "<br><strong>Sesión:</strong><br>". $lista['sesion_prueba'];
-										echo "</td>";
-										echo "<td class='text-center'>" . $lista['fecha'] . "</td>";
-										echo "<td class='text-center'>" . $lista['hora_inicio_prueba'] . "</td>";
-										echo "<td class='text-center'>" . $lista['hora_fin_prueba'] . "</td>";
-										echo "<td class='text-center'>" . $lista['numero_citados'] . "</td>";
-										echo "</tr>";
-									endforeach;
-								?>
-								</tbody>
-							</table>
-					
-                        </div>
-                    </div>
-                </div>
-            </div>
-      
+				
+					<table width="100%" class="table table-striped table-bordered table-hover" id="dataSafety">
+						<thead>
+							<tr>
+								<th>Sesión</th>
+								<th>Fecha</th>
+								<th>Hora Inicio</th>
+								<th>Hora Fin</th>
+								<th>Número de Citados</th>
+								<th>Número de Ausentes</th>
+							</tr>
+						</thead>
+						<tbody>							
+						<?php
+							foreach ($infoSesiones as $lista):
+								echo "<tr>";
+								echo "<td>";
+								echo "<strong>Prueba:</strong><br>". $lista['nombre_prueba'];
+								echo "<br><strong>Grupo Instrumentos:</strong><br>". $lista['nombre_grupo_instrumentos'];
+								echo "<br><strong>Sesión:</strong><br>". $lista['sesion_prueba'];
+								echo "</td>";
+								echo "<td class='text-center'>" . $lista['fecha'] . "</td>";
+								echo "<td class='text-center'>" . $lista['hora_inicio_prueba'] . "</td>";
+								echo "<td class='text-center'>" . $lista['hora_fin_prueba'] . "</td>";
+								echo "<td class='text-center'>" . $lista['numero_citados'] . "</td>";
+								echo "<td class='text-center'>" . $lista['numero_ausentes'] . "</td>";
+								echo "</tr>";
+							endforeach;
+						?>
+						</tbody>
+					</table>
+			
+				</div>
+			</div>
+		</div>
+	</div>
 <?php	} ?>
 <!-- FIN INFORMACION DE LAS SESIONES PARA EL SITIO DEL DELEGADO CONSOLIDACION -->
+
+
+<!--INICIO RESPUESTA DEL USUARIO PARA EL SITIO EN EL QUE ESTA ASIGNADO -->
+<?php
+	if($infoRespuestas){ 
+?>	
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="panel panel-success">
+				
+				<div class="panel-heading">
+					<i class="fa fa-life-saver fa-fw"></i> Notificaciones
+				</div>
+				
+				<div class="panel-body">
+				
+<a class="btn btn-default btn-circle" href="#anclaUp"><i class="fa fa-arrow-up"></i> </a>
+				
+					<table width="100%" class="table table-striped table-bordered table-hover" id="dataSafety">
+						<thead>
+							<tr>
+								<th>Alerta</th>
+								<th>Respuesta</th>
+							</tr>
+						</thead>
+						<tbody>							
+						<?php
+							foreach ($infoRespuestas as $lista):
+								echo "<tr>";
+									echo "<td>";
+									echo "<strong>Descripción: </strong>" . $lista['descripcion_alerta'];
+									echo "<br><strong>Mensaje: </strong>" . $lista['mensaje_alerta'];
+									echo "<br><strong>Tipo Alerta: </strong>" . $lista['nombre_tipo_alerta'];
+									echo "<br><strong>Inicio Alerta: </strong>" . $lista['fecha_inicio'];
+									echo "<br><strong>Fin Alerta: </strong>" . $lista['fecha_fin'];
+									echo "</td>";
+									
+									echo "<td>";
+									echo "<strong>Respuesta: </strong>";
+									echo $acepta = $lista['acepta']==1?"Si":"No";
+									echo "<br><strong>Ausentes: </strong>" . $lista['ausentes'];
+									echo "<br><strong>Observación: </strong>" . $lista['observacion'];
+									echo "<br><strong>Fecha registro: </strong>" . $lista['fecha_registro'];									
+									echo "</td>";
+								echo "</tr>";
+							endforeach;
+						?>
+						</tbody>
+					</table>
+			
+				</div>
+			</div>
+		</div>
+	</div>
+<?php	} ?>
+<!-- FIN RESPUESTA DEL USUARIO PARA EL SITIO EN EL QUE ESTA ASIGNADO -->
+		
+	
+      
+
 
 
 </div>

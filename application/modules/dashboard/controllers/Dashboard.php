@@ -199,6 +199,10 @@ class Dashboard extends MX_Controller {
 			$arrParam = array("tipoAlerta" => 3);
 			$data['infoAlertaConsolidacion'] = $this->dashboard_model->get_alerta_by($arrParam);
 
+			//LISTADO DE RESPUESTAS QUE HA DADO EL USUARIO
+			$arrParam = array("idSitio" => $data['infoSitoDelegado'][0]['id_sitio']);
+			$data['infoRespuestas'] = $this->dashboard_model->get_respuestas_usuario_by($arrParam);
+
 
 			$data["view"] = "dashboard_delegado";
 			$this->load->view("layout", $data);
