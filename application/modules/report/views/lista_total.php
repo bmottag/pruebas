@@ -47,6 +47,10 @@
 						
 						?>
 					</div>
+					
+					<div class="alert alert-info">
+							Hay <strong><?php echo $conteoSitios; ?> SITIOS</strong> donde se realiza esta prueba
+					</div>
 				
 				<div class="row">
 					<div class="col-lg-4">

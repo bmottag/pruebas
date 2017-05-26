@@ -139,12 +139,15 @@ class Report extends CI_Controller {
 						$data['info'] = $this->report_model->get_total_by($arrParam);
 				}
 				
+				$data['conteoSitios'] = $this->report_model->get_numero_sitios_por_filtro($arrParam);
+
 //conteo respuestas para alertas INFORMATIVAS - ROL DELEGADO
 				$arrParam = array(
 								'tipoAlerta' => 1, //INFORMATIVA
 								'rolAlerta' => 4, //DELEGADO
 				);
 				$infoInformativa = $this->report_model->get_respuestas_registro($arrParam);//alertas vigentes para los filtros
+				
 				//recorro las alertas y reviso se se les dio respuesta, si no se le dio respuesta las voy contando
 				$data['contadorInformativaSi'] = 0;
 				$data['contadorInformativaNo'] = 0;
