@@ -75,7 +75,7 @@ if(!$infoMunicipiosCoordinador){
 		Usted esta asignado como <strong>COORDINADOR</strong> para los siguientes MUNICIPIOS:
 	</div>
 
-
+	<div class="row">
 	<?php
 		foreach($infoMunicipiosCoordinador as $lista):
 	?>
@@ -89,7 +89,7 @@ if(!$infoMunicipiosCoordinador){
 	<?php
 		endforeach;
 	?>
-
+	</div>
 
 <?php } ?>
 <!-- INFORMACION DEL SITIO PARA EL DELEGADO SI EXISTE INFORMAION -->

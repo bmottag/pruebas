@@ -224,13 +224,13 @@ class Dashboard extends MX_Controller {
 					
 //se buscan las alertas asignadas al coordinador			
 			$arrParam = array("tipoAlerta" => 1);
-			$data['infoAlertaInformativa'] = $this->dashboard_model->get_alerta_by($arrParam);
+			$data['infoAlertaInformativa'] = $this->dashboard_model->get_alerta_coordinador_by($arrParam);
 			
 			$arrParam = array("tipoAlerta" => 2);
-			$data['infoAlertaNotificacion'] = $this->dashboard_model->get_alerta_by($arrParam);
+			$data['infoAlertaNotificacion'] = $this->dashboard_model->get_alerta_coordinador_by($arrParam);
 
 			$arrParam = array("tipoAlerta" => 3);
-			$data['infoAlertaConsolidacion'] = $this->dashboard_model->get_alerta_by($arrParam);
+			$data['infoAlertaConsolidacion'] = $this->dashboard_model->get_alerta_coordinador_by($arrParam);
 
 
 			
