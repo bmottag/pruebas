@@ -989,47 +989,61 @@ class Admin extends MX_Controller {
 	}
 	
 	/**
+	 * Formulario para eliminar registros de la base de datos
+     * @since 25/5/2017
+	 */
+	public function atencion_eliminar()
+	{
+			$userRol = $this->session->rol;
+			if ($userRol != 1 ) { 
+				show_error('ERROR!!! - You are in the wrong place.');	
+			}
+		
+			$data["view"] = 'eliminar_db';
+			$this->load->view("layout", $data);
+	}
+	
+	/**
 	 * Eliminar registros de la base de datpos
 	 * @since 23/5/2017
 	 */
 	public function eliminar_db()
 	{
-			$data = array();			
-			$data["titulo"] = "ELIMINAR REGISTROS";
-			$data['linkBack'] = "dashboard/";
+			header('Content-Type: application/json');
+			$data = array();
+
 			
 			if ($this->admin_model->eliminarRegistros()) {
 				
-				$data["clase"] = "alert-success";
-				$data["msj"] = "Se eliminaron registros de la tabla Registro.";
+				$data["msj"] = "Tabla Registro";
 				
 				if ($this->admin_model->eliminarAlertas()) {
-					$data["msj"] .= "<br>Se eliminaron registros de la tabla Alertas.";
+					$data["msj"] .= ", Tabla Alertas";
 				}
 				
 				if ($this->admin_model->eliminarSitioSesion()) {
-					$data["msj"] .= "<br>Se eliminaron registros de la tabla Sitio Sesión.";
+					$data["msj"] .= ", Tabla Sitio Sesión";
 				}				
 				
 				
 				if ($this->admin_model->eliminarSesiones()) {
-					$data["msj"] .= "<br>Se eliminaron registros de la Sesiones.";
+					$data["msj"] .= ", Tabla Sesiones";
 					
 					if ($this->admin_model->eliminarGrupoInstrumentos()) {
-						$data["msj"] .= "<br>Se eliminaron registros de la tabla Grupo Instrumentos.";
+						$data["msj"] .= ", Tabla Grupo Instrumentos.";
 					}
 				}
 				
-				
-				
-				
+				$data["result"] = true;
+				$data["mensaje"] = "Se eliminaron los registros.";
+				$this->session->set_flashdata('retornoExito', 'Se eliminó los registros de ' . $data["msj"]);
 			}else{
-				$data["msj"] = "<strong>Error!!!</strong> Contactarse con el administrador.";
-				$data["clase"] = "alert-danger";
+				$data["result"] = "error";
+				$data["mensaje"] = "Error!!! Contactarse con el Administrador.";
+				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador');
 			}
-						
-			$data["view"] = "template/answer";
-			$this->load->view("layout", $data);
+
+			echo json_encode($data);
 	}
 	
     /**
