@@ -18,12 +18,12 @@ class Admin extends MX_Controller {
 			$arrParam = array("idUsuario" => $idUsuario);
 			$infoUsuario = $this->admin_model->get_users($arrParam);
 
-			$subjet = "Usuario ICFES";				
+			$subjet = "Usuario APP Control Operativo pruebas ICFES";				
 			$user = $infoUsuario[0]["nombres_usuario"] . " " . $infoUsuario[0]["apellidos_usuario"];
 			$to = $infoUsuario[0]["email"];
 		
 			//mensaje del correo
-			$msj = "<p>Los datos para ingresar al apliativo de pruebas es el siguiente:</p>";
+			$msj = "<p>Los datos para ingresar al APP de Control Operativo Pruebas ICFES, es el siguiente:</p>";
 			$msj .= "<br><strong>Usuario: </strong>" . $infoUsuario[0]["numero_documento"];
 			$msj .= "<br><strong>Contraseña: </strong>" . $infoUsuario[0]["clave"];
 			$msj .= "<br><br><strong><a href='" . base_url() . "'>Enlace Aplicación </a></strong><br>";
@@ -36,7 +36,7 @@ class Admin extends MX_Controller {
 							<p>Apreciado(a) $user:</p>
 							<p>$msj</p>
 							<p>Cordialmente,</p>
-							<p><strong>Pruebas ICFES</strong></p>
+							<p><strong>Administrador aplicativo de Control Operativo pruebas ICFES</strong></p>
 						</body>
 						</html>";
 
@@ -1203,6 +1203,75 @@ class Admin extends MX_Controller {
 					$data["mensaje"] = "Error!!! Contactarse con el Administrador.";
 					$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador');
 				}
+			}
+
+			echo json_encode($data);
+    }
+	
+	/**
+	 * Eliminar sesiones
+     * @since 26/5/2017
+	 */
+	public function eliminar_sesiones()
+	{			
+			header('Content-Type: application/json');
+			$data = array();
+			
+			$idSesion = $this->input->post('identificador');
+			
+			$this->load->model("general_model");
+			//verificar si a este SESION se le asigno ALERTAS
+			$arrParam = array(
+				"table" => "alertas",
+				"order" => "id_alerta",
+				"column" => "fk_id_sesion",
+				"id" => $idSesion
+			);
+			$verificar_1 = $this->general_model->get_basic_search($arrParam);	
+			
+			//verificar si a estA SESION se le asigno a un SITIO
+			$arrParam = array(
+				"table" => "sitio_sesion",
+				"order" => "fk_id_sesion",
+				"column" => "fk_id_sesion",
+				"id" => $idSesion
+			);
+			$verificar_2 = $this->general_model->get_basic_search($arrParam);	
+			
+			if($verificar_1){
+				$data["result"] = "error";
+				$data["mensaje"] = "Error!!!. A esta Sesión ya tiene Alertas asociadas.";
+			}elseif($verificar_2){
+				$data["result"] = "error";
+				$data["mensaje"] = "Error!!!. Esta Sesión se asocio con un Sitio.";
+			}else{
+				
+				//consultar datos de id_grupo_instrumentos para hacer el direccionamiento de la vista
+				$arrParam = array(
+					"table" => "sesiones",
+					"order" => "id_sesion",
+					"column" => "id_sesion",
+					"id" => $idSesion
+				);
+				$infoSesion = $this->general_model->get_basic_search($arrParam);
+				$data["idRecord"] = $infoSesion[0]["fk_id_grupo_instrumentos"];
+				
+				//eliminar registro de SITIO_SESION
+				$arrParam = array(
+					"table" => "sesiones",
+					"primaryKey" => "id_sesion",
+					"id" => $idSesion
+				);
+				
+				if ($this->general_model->deleteRecord($arrParam)) {
+					$data["result"] = true;
+					$data["mensaje"] = "Se eliminó la asociación.";
+					$this->session->set_flashdata('retornoExito', 'Se eliminó la asociación');
+				} else {
+					$data["result"] = "error";
+					$data["mensaje"] = "Error!!! Contactarse con el Administrador.";
+					$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador');
+				}				
 			}
 
 			echo json_encode($data);
