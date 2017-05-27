@@ -1277,5 +1277,52 @@ class Admin extends MX_Controller {
 			echo json_encode($data);
     }
 	
+	/**
+	 * Eliminar grupo instrumentos
+     * @since 26/5/2017
+	 */
+	public function eliminar_grupo_instrumentos()
+	{			
+			header('Content-Type: application/json');
+			$data = array();
+			
+			$idGrupo = $this->input->post('identificador');
+
+			$this->load->model("general_model");
+			//verificar si a este GRUPO INSTRUMETOS tiene sesiones asignadas
+			$arrParam = array(
+				"table" => "sesiones",
+				"order" => "id_sesion",
+				"column" => "fk_id_grupo_instrumentos",
+				"id" => $idGrupo
+			);
+			$verificar = $this->general_model->get_basic_search($arrParam);	
+			
+			if($verificar){
+				$data["result"] = "error";
+				$data["mensaje"] = "Error!!!. Este Grupo de Instrumentos ya tiene Sesiones.";
+			}else{
+
+				//eliminaos registr de la alerta
+				$arrParam = array(
+					"table" => "param_grupo_instrumentos",
+					"primaryKey" => "id_grupo_instrumentos",
+					"id" => $idGrupo
+				);
+				
+				if ($this->general_model->deleteRecord($arrParam)) {
+					$data["result"] = true;
+					$data["mensaje"] = "Se eliminó el Grupo de Instrumentos.";
+					$this->session->set_flashdata('retornoExito', 'Se eliminó el Grupo de Instrumentos');
+				} else {
+					$data["result"] = "error";
+					$data["mensaje"] = "Error!!! Contactarse con el Administrador.";
+					$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador');
+				}
+			}
+
+			echo json_encode($data);
+    }
+	
 	
 }

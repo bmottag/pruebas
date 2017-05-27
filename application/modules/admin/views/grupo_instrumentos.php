@@ -1,3 +1,5 @@
+<script type="text/javascript" src="<?php echo base_url("assets/js/validate/admin/grupo_instrumentos.js"); ?>"></script>
+
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
@@ -93,6 +95,12 @@ if ($retornoError) {
 									<button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#modal" id="<?php echo $lista['id_grupo_instrumentos']; ?>" >
 										Editar <span class="glyphicon glyphicon-edit" aria-hidden="true">
 									</button>
+									
+									<br><br>
+
+<button type="button" class="btn btn-danger btn-xs" id="<?php echo $lista['id_grupo_instrumentos']; ?>" >
+	Eliminar <span class="fa fa-times fa-fw" aria-hidden="true">
+</button>									
 						<?php
 									echo "</td>";
 									echo "<td class='text-center'>" . $lista['fecha'] . "</td>";
