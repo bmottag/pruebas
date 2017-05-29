@@ -126,14 +126,14 @@
 		public function get_sesiones_by($arrDatos) 
 		{
 				$this->db->select();
-				$this->db->join('sesiones S', 'S.id_sesion = X.fk_id_sesion', 'INNER');//SESIONES - ALERTA
+				$this->db->join('sesiones S', 'S.id_sesion = SS.fk_id_sesion', 'INNER');//SESIONES - ALERTA
 				
-				if (array_key_exists("tipoAlerta", $arrDatos)) {
-					$this->db->where('A.fk_id_tipo_alerta', $arrDatos["tipoAlerta"]); //TIPO ALERTA = INFORMATIVA
+				if (array_key_exists("idSitio", $arrDatos)) {
+					$this->db->where('SS.fk_id_sitio', $arrDatos["idSitio"]); //filtro por SITIO
 				}
 				
-				$this->db->order_by('X.fk_id_sitio', 'desc');
-				$query = $this->db->get('sitio_sesion X');
+				$this->db->order_by('SS.fk_id_sitio', 'desc');
+				$query = $this->db->get('sitio_sesion SS');
 
 				if ($query->num_rows() > 0) {
 					return $query->result_array();
