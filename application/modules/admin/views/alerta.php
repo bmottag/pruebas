@@ -98,9 +98,9 @@ if ($retornoError) {
 							foreach ($info as $lista):
 									echo "<tr>";
 									echo "<td>";
-									echo "<strong>Descripción:</strong><br>". $lista['descripcion_alerta'];
-									echo "<br><strong>Mensaje:</strong><br>". $lista['mensaje_alerta'];
-									echo "<p class='" . $lista['clase'] . "'><strong>Tipo Alerta:</strong>". $lista['nombre_tipo_alerta'] . "</p>";
+									echo "<strong>Descripción: </strong><br>". $lista['descripcion_alerta'];
+									echo "<br><strong>Mensaje: </strong><br>". $lista['mensaje_alerta'];
+									echo "<p class='" . $lista['clase'] . "'><strong>Tipo Alerta: </strong>". $lista['nombre_tipo_alerta'] . "</p>";
 									echo "</td>";
 									echo "<td class='text-center'>";
 						?>
