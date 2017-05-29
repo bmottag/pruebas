@@ -46,7 +46,7 @@
 				$alerta = $this->input->post('alerta');
 		
 				$this->db->select('Y.*,A.*, S.*, P.nombre_prueba, G.nombre_grupo_instrumentos, G.fecha,
-				O.nombre_organizacion, R.nombre_region, D.*, Z.nombre_zona, T.nombre_tipo_alerta, X.*');
+				O.nombre_organizacion, R.nombre_region, D.*, Z.nombre_zona, T.*, X.*');
 				
 				//SESION
 				$this->db->join('sesiones S', 'S.id_sesion = X.fk_id_sesion', 'INNER');
