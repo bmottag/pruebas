@@ -58,10 +58,10 @@
 	<!-- /.row -->
 	<div class="row">
 		<div class="col-lg-12">
-			<div class="panel panel-default">
+			<div class="panel panel-info">
 				<div class="panel-heading">
 					<a class="btn btn-success" href=" <?php echo base_url(). $botonRegreso; ?> "><span class="glyphicon glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Regresar </a> 
-                    <i class="fa fa-life-saver fa-fw"></i> Lista de Sesiones filtrado por Sitio
+                    <i class="fa fa-life-saver fa-fw"></i> Lista de Sesiones asociadas con el Sitio 
 				</div>
 				<div class="panel-body">
 
@@ -108,6 +108,71 @@
 		<!-- /.col-lg-12 -->
 	</div>
 	<!-- /.row -->
+	
+	
+	
+	
+	
+<!--INICIO RESPUESTA DEL USUARIO PARA EL SITIO EN EL QUE ESTA ASIGNADO -->
+<?php
+	if($infoRespuestas){ 
+?>	
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="panel panel-success">
+				
+				<div class="panel-heading">
+					<i class="fa fa-life-saver fa-fw"></i> Notificaciones
+				</div>
+				
+				<div class="panel-body">
+				
+<a class="btn btn-default btn-circle" href="#anclaUp"><i class="fa fa-arrow-up"></i> </a>
+				
+					<table width="100%" class="table table-striped table-bordered table-hover" id="dataSafety">
+						<thead>
+							<tr>
+								<th>Alerta</th>
+								<th>Respuesta</th>
+							</tr>
+						</thead>
+						<tbody>							
+						<?php
+							foreach ($infoRespuestas as $lista):
+								echo "<tr>";
+									echo "<td>";
+									echo "<strong>Descripción: </strong>" . $lista['descripcion_alerta'];
+									echo "<br><strong>Mensaje: </strong>" . $lista['mensaje_alerta'];
+									echo "<br><strong>Tipo Alerta: </strong>" . $lista['nombre_tipo_alerta'];
+									echo "<br><strong>Inicio Alerta: </strong>" . $lista['fecha_inicio'];
+									echo "<br><strong>Fin Alerta: </strong>" . $lista['fecha_fin'];
+									echo "</td>";
+									
+									echo "<td>";
+									echo "<strong>Respuesta: </strong>";
+									echo $acepta = $lista['acepta']==1?"Si":"No";
+									echo "<br><strong>Ausentes: </strong>" . $lista['ausentes'];
+									echo "<br><strong>Observación: </strong>" . $lista['observacion'];
+									echo "<br><strong>Fecha registro: </strong>" . $lista['fecha_registro'];									
+									echo "</td>";
+								echo "</tr>";
+							endforeach;
+						?>
+						</tbody>
+					</table>
+			
+				</div>
+			</div>
+		</div>
+	</div>
+<?php	} ?>
+<!-- FIN RESPUESTA DEL USUARIO PARA EL SITIO EN EL QUE ESTA ASIGNADO -->
+	
+	
+	
+	
+	
+	
 </div>
 <!-- /#page-wrapper -->
 

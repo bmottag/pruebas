@@ -201,7 +201,7 @@ class Dashboard extends MX_Controller {
 
 			//LISTADO DE RESPUESTAS QUE HA DADO EL USUARIO
 			$arrParam = array("idSitio" => $data['infoSitoDelegado'][0]['id_sitio']);
-			$data['infoRespuestas'] = $this->dashboard_model->get_respuestas_usuario_by($arrParam);
+			$data['infoRespuestas'] = $this->general_model->get_respuestas_usuario_by($arrParam);
 
 
 			$data["view"] = "dashboard_delegado";

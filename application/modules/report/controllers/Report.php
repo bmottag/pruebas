@@ -341,7 +341,7 @@ class Report extends CI_Controller {
      */
     public function mostrarSesiones($idSitio) 
 	{
-			$data["botonRegreso"] = "report/searchByRegiones";
+			$data["botonRegreso"] = "report/searchBy";
 							
 			$this->load->model("general_model");
 			$arrParam = array("idSitio" => $idSitio);
@@ -349,6 +349,9 @@ class Report extends CI_Controller {
 
 			$data['infoSitio'] = $this->general_model->get_sitios($arrParam);
 			
+			//LISTADO DE RESPUESTAS QUE se han dado para este sitio
+			$data['infoRespuestas'] = $this->general_model->get_respuestas_usuario_by($arrParam);
+		
 			$data["view"] = "lista_sesinones_by_sitio";
 			$this->load->view("layout", $data);
 

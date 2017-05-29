@@ -299,37 +299,7 @@
 		}
 		
 		
-		/**
-		 * Listas de respuest del usuario
-		 * @since 26/5/2017
-		 */
-		public function get_respuestas_usuario_by($arrDatos) 
-		{
-				$userID = $this->session->id;
-				
-				$this->db->select();
-				//SITIO-SESION
-				$this->db->join('sitio_sesion SS', 'SS.id_sitio_sesion = R.fk_id_sitio_sesion', 'INNER');
-				//ALERTA
-				$this->db->join('alertas A', 'A.id_alerta = R.fk_id_alerta', 'INNER');
-				$this->db->join('param_tipo_alerta T', 'T.id_tipo_alerta = A.fk_id_tipo_alerta', 'INNER');
-				//SESIONES
-				$this->db->join('sesiones S', 'S.id_sesion = SS.fk_id_sesion', 'INNER');
 
-				if (array_key_exists("idSitio", $arrDatos)) {
-					$this->db->where('SS.fk_id_sitio', $arrDatos["idSitio"]); 
-				}
-				
-				$this->db->where('fk_id_usuario', $userID ); 
-				
-				$query = $this->db->get('registro R');
-
-				if ($query->num_rows() > 0) {
-					return $query->result_array();;
-				} else {
-					return false;
-				}
-		}
 		
 		
 		

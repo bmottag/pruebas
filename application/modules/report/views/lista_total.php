@@ -207,7 +207,8 @@
 							foreach ($info as $lista):
 									echo "<tr>";
 									echo "<td>";
-									echo "<strong>Sitio: </strong>" . $lista['nombre_sitio'];
+									echo "<strong>Sitio: </strong>";
+echo "<a href='" . base_url('report/mostrarSesiones/' . $lista['id_sitio']) . "'>" . $lista['nombre_sitio'] . "</a>";
 									echo "<br><strong>Nodo o Región: </strong>" . $lista['nombre_region'];
 									echo "<br><strong>Departamento: </strong>" . $lista['dpto_divipola_nombre'];
 									echo "<br><strong>Municipio: </strong>" . $lista['mpio_divipola_nombre'];
