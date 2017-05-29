@@ -22,7 +22,7 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <i class='fa fa-book fa-fw'></i> Buscar Sitios - Seleccionar uno o varios de las siguientes opciones
+                            <i class='fa fa-book fa-fw'></i> Seleccionar uno o varios de las siguientes opciones
                         </div>
                         <div class="panel-body">
 

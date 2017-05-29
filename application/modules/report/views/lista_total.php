@@ -19,7 +19,7 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<a class="btn btn-success" href=" <?php echo base_url(). "report/searchBy"; ?> "><span class="glyphicon glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Regresar </a> 
-                    <i class="fa fa-life-saver fa-fw"></i> Lista
+                    <i class="fa fa-life-saver fa-fw"></i> Información Alertas Delegados
 				</div>
 				<div class="panel-body">
 				
