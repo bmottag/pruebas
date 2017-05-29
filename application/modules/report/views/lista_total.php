@@ -232,6 +232,7 @@ echo "<a href='" . base_url('report/mostrarSesiones/' . $lista['id_sitio']) . "'
 									echo "<p class='" . $lista['clase'] . "'><strong>Tipo Alerta: </strong>" . $lista['nombre_tipo_alerta'] . "</p>";
 									echo "<strong>Inicio Alerta: </strong>" . $lista['fecha_inicio'];
 									echo "<br><strong>Fin Alerta: </strong>" . $lista['fecha_fin'];
+									echo "<br><strong>Rol Alerta: </strong>" . $lista['nombre_rol'];
 									echo "</td>";
 									
 									

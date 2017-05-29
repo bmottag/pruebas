@@ -46,7 +46,7 @@
 				$alerta = $this->input->post('alerta');
 		
 				$this->db->select('Y.*,A.*, S.*, P.nombre_prueba, G.nombre_grupo_instrumentos, G.fecha,
-				O.nombre_organizacion, R.nombre_region, D.*, Z.nombre_zona, T.*, X.*');
+				O.nombre_organizacion, R.nombre_region, D.*, Z.nombre_zona, T.*, X.*, RR.nombre_rol');
 				
 				//SESION
 				$this->db->join('sesiones S', 'S.id_sesion = X.fk_id_sesion', 'INNER');
@@ -56,6 +56,7 @@
 				//ALERTA
 				$this->db->join('alertas A', 'A.fk_id_sesion = S.id_sesion', 'INNER');
 				$this->db->join('param_tipo_alerta T', 'T.id_tipo_alerta = A.fk_id_tipo_alerta', 'INNER');
+				$this->db->join('param_roles RR', 'RR.id_rol = A.fk_id_rol', 'INNER');
 				
 				//SITIO
 				$this->db->join('sitios Y', 'Y.id_sitio = X.fk_id_sitio', 'INNER');
