@@ -360,7 +360,7 @@
 				$depto = $this->input->post('depto');
 				$mcpio = $this->input->post('mcpio');
 
-				$sql = "SELECT SUM(numero_citados) citados, SUM(numero_ausentes) ausentes";
+				$sql = "SELECT SUM(numero_citados) citados, SUM(numero_presentes_efectivos) presentes, SUM(numero_ausentes) ausentes";
 				$sql.= " FROM sitio_sesion X ";
 				$sql.= "	INNER JOIN sesiones S ON S.id_sesion = X.fk_id_sesion 
 							INNER JOIN sitios Y ON Y.id_sitio = X.fk_id_sitio 

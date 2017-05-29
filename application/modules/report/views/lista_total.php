@@ -50,16 +50,24 @@
 					
 					<div class="alert alert-info">
 							Hay <strong><?php echo $conteoSitios; ?> SITIOS</strong> donde se realiza esta prueba
-							<br>Número todal de Citados:<strong><?php echo $conteoCitados['citados']; ?> </strong>
-							<br>Número todal de Ausentes:<strong><?php echo $conteoCitados['ausentes']; ?> </strong>
 					</div>
 				
 				<div class="row">
 					<div class="col-lg-4">
 					<div class="alert alert-danger">
 						<strong>Alerta Informativa</strong><br>
-						<?php echo $rol_busqueda; ?> que Aceptarón: <?php echo $contadorInformativaSi; ?>	
-						<br><?php echo $rol_busqueda; ?> que No contestaron: <?php echo $contadorInformativaNo;?>						
+						<?php
+							$total = $contadorInformativaSi + $contadorInformativaNo;
+							if($total != 0){
+								$porcentajeSi = ($contadorInformativaSi * 100)/$total;
+								$porcentajeNo = ($contadorInformativaNo * 100)/$total;
+							}else{
+								$porcentajeSi = 0;
+								$porcentajeNo = 0;
+							}
+						?>
+						<?php echo $rol_busqueda; ?> que aceptaron: <strong><?php echo $contadorInformativaSi . " (" . $porcentajeSi . "%)"; ?> </strong>
+						<br><?php echo $rol_busqueda; ?> que no contestaron: <strong><?php echo $contadorInformativaNo . " (" . $porcentajeNo . "%)"; ?> </strong>
 						
 <form  name="form" id="form_Informativa" role="form" method="post" class="form-horizontal" >
 
@@ -100,11 +108,23 @@
 					<div class="col-lg-4">
 					<div class="alert alert-danger">
 						<strong>Alerta de Notificación</strong><br>
-						<?php echo $rol_busqueda; ?> que contestaron: <?php echo $contadorNotificacionContestaron;?>
-						<br><?php echo $rol_busqueda; ?> que No contestaron: <?php echo $contadorNotificacionNoContestaron;?>
-						<br><?php echo $rol_busqueda; ?> que Aceptarón: <?php echo $contadorNotificacionSi;?>
-						<?php $contadorNotificacionNo = $contadorNotificacionContestaron - $contadorNotificacionSi;?>
-						<br><?php echo $rol_busqueda; ?> que No Aceptarón: <?php echo $contadorNotificacionNo;?>
+						<?php
+							$contadorNotificacionNo = $contadorNotificacionContestaron - $contadorNotificacionSi;
+							$total = $contadorNotificacionNoContestaron + $contadorNotificacionSi + $contadorNotificacionNo;
+							
+							if($total != 0){
+								$porcentajeNoContestaron = ($contadorNotificacionNoContestaron * 100)/$total;
+								$porcentajeSi = ($contadorNotificacionSi * 100)/$total;
+								$porcentajeNo = ($contadorNotificacionNo * 100)/$total;
+							}else{
+								$porcentajeNoContestaron = 0;
+								$porcentajeSi = 0;
+								$porcentajeNo = 0;
+							}
+						?>
+						<?php echo $rol_busqueda; ?> que no contestaron: <strong><?php echo $contadorNotificacionNoContestaron . " (" . $porcentajeNoContestaron . "%)"; ?> </strong>
+						<br><?php echo $rol_busqueda; ?> que aceptaron: <strong><?php echo $contadorNotificacionSi . " (" . $porcentajeSi . "%)"; ?> </strong>
+						<br><?php echo $rol_busqueda; ?> que no Aceptaron: <strong><?php echo $contadorNotificacionNo . " (" . $porcentajeNo . "%)"; ?> </strong>
 						
 <form  name="form" id="form_Notificacion" role="form" method="post" class="form-horizontal" >
 
@@ -145,8 +165,24 @@
 					<div class="col-lg-4">
 					<div class="alert alert-danger">
 						<strong>Alerta de Consolidación</strong><br>
-						<?php echo $rol_busqueda; ?> que contestaron: <?php echo $contadorConsolidacionSi;?>
-						<br><?php echo $rol_busqueda; ?> que NO contestaron: <?php echo $contadorConsolidacionNo;?>
+						<?php 
+							$total = $contadorConsolidacionSi + $contadorConsolidacionNo; 
+							$porcentajeSi = ($contadorConsolidacionSi * 100)/$total;
+							$porcentajeNo = ($contadorConsolidacionNo * 100)/$total;
+						?>
+						
+						<?php echo $rol_busqueda; ?> que contestaron: <strong><?php echo $contadorConsolidacionSi . " (" . $porcentajeSi . "%)"; ?> </strong>
+						<br><?php echo $rol_busqueda; ?> que no contestaron: <strong><?php echo $contadorConsolidacionNo . " (" . $porcentajeNo . "%)"; ?> </strong>
+						<?php 
+							$presentes =  $conteoCitados['citados'] - $conteoCitados['ausentes'];
+							$porcentajePresentes = ($presentes * 100)/$conteoCitados['citados']; 
+							$porcentajeAusentes = ($conteoCitados['ausentes'] * 100)/$conteoCitados['citados']; 
+						
+						?>
+						<br>Número todal de citados: <strong><?php echo $conteoCitados['citados']; ?> </strong>
+						<br>Número todal de presentes: <strong><?php echo $presentes . " (" . $porcentajePresentes . "%)"; ?> </strong>
+						<br>Número todal de ausentes: <strong><?php echo $conteoCitados['ausentes'] . " (" . $porcentajeAusentes . "%)"; ?> </strong>
+							
 
 <form  name="form" id="form_Consolidacion" role="form" method="post" class="form-horizontal" >
 
