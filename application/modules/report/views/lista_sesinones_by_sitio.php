@@ -143,8 +143,8 @@
 									echo "<td>";
 									echo "<strong>Descripción: </strong>" . $lista['descripcion_alerta'];
 									echo "<br><strong>Mensaje: </strong>" . $lista['mensaje_alerta'];
-									echo "<br><strong>Tipo Alerta: </strong>" . $lista['nombre_tipo_alerta'];
-									echo "<br><strong>Inicio Alerta: </strong>" . $lista['fecha_inicio'];
+									echo "<p class='" . $lista['clase'] . "'><strong>Tipo Alerta: </strong>" . $lista['nombre_tipo_alerta'] . "</p>";
+									echo "<strong>Inicio Alerta: </strong>" . $lista['fecha_inicio'];
 									echo "<br><strong>Fin Alerta: </strong>" . $lista['fecha_fin'];
 									echo "</td>";
 									
