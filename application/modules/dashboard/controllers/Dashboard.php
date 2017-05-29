@@ -95,7 +95,7 @@ class Dashboard extends MX_Controller {
 			if($userRol==4){
 				redirect("/dashboard/delegados","location",301);
 			}else{
-				redirect("/dashboard","location",301);	
+				redirect("/dashboard/coordinadores","location",301);	
 			}
 	}
 	
@@ -130,7 +130,7 @@ class Dashboard extends MX_Controller {
 			if($userRol==4){
 				redirect("/dashboard/delegados","location",301);
 			}else{
-				redirect("/dashboard","location",301);	
+				redirect("/dashboard/coordinadores","location",301);	
 			}
 	}
 	
@@ -167,7 +167,7 @@ class Dashboard extends MX_Controller {
 			if($userRol==4){
 				redirect("/dashboard/delegados","location",301);
 			}else{
-				redirect("/dashboard","location",301);	
+				redirect("/dashboard/coordinadores","location",301);	
 			}
 	}
 	
