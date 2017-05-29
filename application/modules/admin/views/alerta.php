@@ -100,7 +100,7 @@ if ($retornoError) {
 									echo "<td>";
 									echo "<strong>Descripción:</strong><br>". $lista['descripcion_alerta'];
 									echo "<br><strong>Mensaje:</strong><br>". $lista['mensaje_alerta'];
-									echo "<br><strong>Tipo Alerta:</strong><br>". $lista['nombre_tipo_alerta'];
+									echo "<p class='" . $lista['clase'] . "'><strong>Tipo Alerta:</strong>". $lista['nombre_tipo_alerta'] . "</p>";
 									echo "</td>";
 									echo "<td class='text-center'>";
 						?>
