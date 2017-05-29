@@ -148,7 +148,21 @@ if(!$infoSitoDelegado){
 
 	<div class="row">
 <!--INICIO ALERTA INFORMATIVA -->
-<?php if($infoAlertaInformativa){ ?>
+<?php 
+if($infoAlertaInformativa)
+{ 
+
+		foreach ($infoAlertaInformativa as $lista):
+		
+		//consultar si ya el usuario dio respuesta a esta alerta
+		$ci = &get_instance();
+		$ci->load->model("dashboard_model");
+		
+		$arrParam = array("idAlerta" => $lista["id_alerta"]);
+		$existeRegistro = $this->dashboard_model->get_registro_by($arrParam);
+		
+		if(!$existeRegistro){
+?>
 	
 		<div class="col-lg-6">				
 			<div class="panel panel-danger">
@@ -157,18 +171,7 @@ if(!$infoSitoDelegado){
 				</div>
 				<div class="panel-body">
 					
-				<?php
-					foreach ($infoAlertaInformativa as $lista):
-					
-					//consultar si ya el usuario dio respuesta a esta alerta
-					$ci = &get_instance();
-					$ci->load->model("dashboard_model");
-					
-					$arrParam = array("idAlerta" => $lista["id_alerta"]);
-					$existeRegistro = $this->dashboard_model->get_registro_by($arrParam);
-					
-					if(!$existeRegistro){
-				?>
+
 						
 					<div class="col-lg-12">	
 						<div class="alert alert-danger ">
@@ -197,41 +200,56 @@ if(!$infoSitoDelegado){
 						</div>
 					</div>
 
-				<?php
-					}
-					endforeach;
-				?>
-
 				</div>
 			</div>
 		</div>
-	
-<?php } ?>
+		
+<?php
+		}
+		endforeach;
+				
+} ?>
 <!--FIN ALERTA -->
 
 
 <!--INICIO ALERTA NOTIFICACION -->
-<?php if($infoAlertaNotificacion){ ?>
+<?php 
+if($infoAlertaNotificacion)
+{
 	
+		foreach ($infoAlertaNotificacion as $lista):
+		
+		//consultar si ya el usuario dio respuesta a esta alerta
+		$ci = &get_instance();
+		$ci->load->model("dashboard_model");
+		
+		$arrParam = array("idAlerta" => $lista["id_alerta"]);
+		$existeRegistro = $this->dashboard_model->get_registro_by($arrParam);
+		
+		if(!$existeRegistro){
+		?>
 		<div class="col-lg-6">				
 			<div class="panel panel-yellow">
 				<div class="panel-heading">
 					<i class="fa fa-calendar fa-fw"></i> ALERTA - <?php echo $infoAlertaNotificacion[0]['nombre_tipo_alerta']; ?>
 				</div>
 				<div class="panel-body">
-
-				<?php
-					foreach ($infoAlertaNotificacion as $lista):
-					
-					//consultar si ya el usuario dio respuesta a esta alerta
-					$ci = &get_instance();
-					$ci->load->model("dashboard_model");
-					
-					$arrParam = array("idAlerta" => $lista["id_alerta"]);
-					$existeRegistro = $this->dashboard_model->get_registro_by($arrParam);
-					
-					if(!$existeRegistro){
-				?>
+				
+<?php
+$retornoError = $this->session->flashdata('retornoErrorNotificacion');
+if ($retornoError) {
+    ?>
+	<div class="row">
+		<div class="col-lg-12">	
+			<div class="alert alert-danger ">
+				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+				<?php echo $retornoError ?>
+			</div>
+		</div>
+	</div>
+    <?php
+}
+?>
 						
 					<div class="col-lg-12">	
 						<div class="alert alert-warning ">
@@ -277,22 +295,33 @@ if(!$infoSitoDelegado){
 							
 						</div>
 					</div>
-
-				<?php
-					}
-					endforeach;
-				?>
 				
 				</div>
 			</div>
 		</div>
-	
-<?php } ?>
+	<?php
+		}
+		endforeach;
+} ?>
 <!--FIN ALERTA -->
 
 
 <!--INICIO ALERTA CONSOLIDACION -->
-<?php if($infoAlertaConsolidacion){ ?>
+<?php 
+if($infoAlertaConsolidacion)
+{ 
+		foreach ($infoAlertaConsolidacion as $lista):
+		
+		//consultar si ya el usuario dio respuesta a esta alerta
+		$ci = &get_instance();
+		$ci->load->model("dashboard_model");
+		
+		$arrParam = array("idAlerta" => $lista["id_alerta"]);
+		$existeRegistro = $this->dashboard_model->get_registro_by($arrParam);
+		
+		if(!$existeRegistro){
+			
+?>
 	
 		<div class="col-lg-6">				
 			<div class="panel panel-green">
@@ -301,19 +330,7 @@ if(!$infoSitoDelegado){
 				</div>
 				<div class="panel-body">
 
-				<?php
-					foreach ($infoAlertaConsolidacion as $lista):
-					
-					//consultar si ya el usuario dio respuesta a esta alerta
-					$ci = &get_instance();
-					$ci->load->model("dashboard_model");
-					
-					$arrParam = array("idAlerta" => $lista["id_alerta"]);
-					$existeRegistro = $this->dashboard_model->get_registro_by($arrParam);
-					
-					if(!$existeRegistro){
-						
-						
+<?php
 $retornoError = $this->session->flashdata('retornoErrorConsolidacion');
 if ($retornoError) {
     ?>
@@ -327,11 +344,7 @@ if ($retornoError) {
 	</div>
     <?php
 }
-												
-						
-				?>
-				
-
+?>
 						
 					<div class="col-lg-12">	
 						<div class="alert alert-success">
@@ -374,16 +387,14 @@ $( document ).ready( function () {
 						</div>
 					</div>
 
-				<?php
-					}
-					endforeach;
-				?>
-
 				</div>
 			</div>
 		</div>
-	
-<?php } ?>
+
+<?php
+		}
+		endforeach;
+} ?>
 <!--FIN ALERTA -->
 	</div>
 

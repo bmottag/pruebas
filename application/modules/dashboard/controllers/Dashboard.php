@@ -114,14 +114,14 @@ class Dashboard extends MX_Controller {
 			$observacion = $this->input->post('observacion');
 
 			if($acepta==2 && $observacion == ""){
-				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Debe indicar la Observación.');
+				$this->session->set_flashdata('retornoErrorNotificacion', '<strong>Error!!!</strong> Debe indicar la Observación.');
 			}elseif($acepta==""){
-				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Debe indicar su respuesta.');
+				$this->session->set_flashdata('retornoErrorNotificacion', '<strong>Error!!!</strong> Debe indicar su respuesta.');
 			}else{
 				if ($this->dashboard_model->saveRegistroNotificacion()) {
 					$this->session->set_flashdata('retornoExito', $msj);
 				} else {
-					$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador.');
+					$this->session->set_flashdata('retornoErrorNotificacion', '<strong>Error!!!</strong> Contactarse con el Administrador.');
 				}
 			}
 
