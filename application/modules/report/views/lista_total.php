@@ -19,7 +19,7 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<a class="btn btn-success" href=" <?php echo base_url(). "report/searchBy"; ?> "><span class="glyphicon glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Regresar </a> 
-                    <i class="fa fa-life-saver fa-fw"></i> Información Alertas Delegados
+                    <i class="fa fa-life-saver fa-fw"></i> Información Alertas <?php echo $rol_busqueda; ?>
 				</div>
 				<div class="panel-body">
 				
@@ -58,8 +58,8 @@
 					<div class="col-lg-4">
 					<div class="alert alert-danger">
 						<strong>Alerta Informativa</strong><br>
-						Delegados que Aceptarón: <?php echo $contadorInformativaSi; ?>	
-						<br>Delegados que No contestaron: <?php echo $contadorInformativaNo;?>						
+						<?php echo $rol_busqueda; ?> que Aceptarón: <?php echo $contadorInformativaSi; ?>	
+						<br><?php echo $rol_busqueda; ?> que No contestaron: <?php echo $contadorInformativaNo;?>						
 						
 <form  name="form" id="form_Informativa" role="form" method="post" class="form-horizontal" >
 
@@ -100,11 +100,11 @@
 					<div class="col-lg-4">
 					<div class="alert alert-danger">
 						<strong>Alerta de Notificación</strong><br>
-						Delegados que contestaron: <?php echo $contadorNotificacionContestaron;?>
-						<br>Delegados que No contestaron: <?php echo $contadorNotificacionNoContestaron;?>
-						<br>Delegados que Aceptarón: <?php echo $contadorNotificacionSi;?>
+						<?php echo $rol_busqueda; ?> que contestaron: <?php echo $contadorNotificacionContestaron;?>
+						<br><?php echo $rol_busqueda; ?> que No contestaron: <?php echo $contadorNotificacionNoContestaron;?>
+						<br><?php echo $rol_busqueda; ?> que Aceptarón: <?php echo $contadorNotificacionSi;?>
 						<?php $contadorNotificacionNo = $contadorNotificacionContestaron - $contadorNotificacionSi;?>
-						<br>Delegados que No Aceptarón: <?php echo $contadorNotificacionNo;?>
+						<br><?php echo $rol_busqueda; ?> que No Aceptarón: <?php echo $contadorNotificacionNo;?>
 						
 <form  name="form" id="form_Notificacion" role="form" method="post" class="form-horizontal" >
 
@@ -145,8 +145,8 @@
 					<div class="col-lg-4">
 					<div class="alert alert-danger">
 						<strong>Alerta de Consolidación</strong><br>
-						Delegados que contestaron: <?php echo $contadorConsolidacionSi;?>
-						<br>Delegados que NO contestaron: <?php echo $contadorConsolidacionNo;?>
+						<?php echo $rol_busqueda; ?> que contestaron: <?php echo $contadorConsolidacionSi;?>
+						<br><?php echo $rol_busqueda; ?> que NO contestaron: <?php echo $contadorConsolidacionNo;?>
 
 <form  name="form" id="form_Consolidacion" role="form" method="post" class="form-horizontal" >
 

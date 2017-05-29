@@ -44,7 +44,7 @@ class Report extends CI_Controller {
 	 */
     public function searchBy() 
 	{
-		
+			$data['rol_busqueda'] = "Delegados";
 			//Lista Regiones
 			$this->load->model("general_model");
 			$arrParam = array(
@@ -376,6 +376,208 @@ class Report extends CI_Controller {
 					echo "<option value='" . $fila["idAlerta"] . "' >" . $fila["descripcion"] . "</option>";
 				}
 			}
+    }
+	
+	
+	/**
+	 * Buscar por regiones
+     * @since 21/05/2017
+	 */
+    public function searchByCoordinador() 
+	{
+			$data['rol_busqueda'] = "Coordinadores";
+			//Lista Regiones
+			$this->load->model("general_model");
+			$arrParam = array(
+				"table" => "param_regiones",
+				"order" => "nombre_region",
+				"id" => "x"
+			);
+			$data['listaRegiones'] = $this->general_model->get_basic_search($arrParam);//Lista Regiones
+			
+			//Lista Departamentos
+			$data['listaDepartamentos'] = $this->general_model->get_dpto_divipola();//listado de departamentos
+			
+			//lista sesiones
+			$arrParam = array();
+			$data['infoSesiones'] = $this->general_model->get_sesiones($arrParam);//lista sesiones
+			
+			$data["view"] = "form_search_by";
+
+			if($this->input->post('sesion'))
+			{
+				$sesion = $this->input->post('sesion');
+				
+				$alerta = $this->input->post('alerta');
+				$alerta = $alerta==""?FALSE:$alerta;
+				
+				$idRegion = $this->input->post('region');	
+				$idRegion = $idRegion==""?FALSE:$idRegion;
+				
+				$depto = $this->input->post('depto');
+				$depto = $depto==""?FALSE:$depto;
+				
+				$mcpio = $this->input->post('mcpio');
+				$mcpio = $mcpio==""?FALSE:$mcpio;
+	
+				//lista sesiones
+				$arrParam = array("idSesion" => $sesion);
+				$data['infoSesiones'] = $this->general_model->get_sesiones($arrParam);//info de sesion que se filtro
+				
+				//Info Alerta
+				if($alerta){
+						$arrParam = array(
+							"table" => "alertas",
+							"order" => "id_alerta",
+							"column" => "id_alerta",
+							"id" => $alerta
+						);
+						$data['infoAlerta'] = $this->general_model->get_basic_search($arrParam);//Info Alerta para mostrar la region por la que se filtro
+				}
+				
+				//Info Regiones
+				if($idRegion){
+						$arrParam = array(
+							"table" => "param_regiones",
+							"order" => "nombre_region",
+							"column" => "id_region",
+							"id" => $idRegion
+						);
+						$data['infoRegion'] = $this->general_model->get_basic_search($arrParam);//Info Regiones para mostrar la region por la que se filtro
+				}
+				
+				//Info Departamento
+				if($depto){
+						$arrParam = array(
+							"table" => "param_divipola",
+							"order" => "dpto_divipola",
+							"column" => "dpto_divipola",
+							"id" => $depto
+						);
+						$data['infoDepto'] = $this->general_model->get_basic_search($arrParam);//Info Departamento para mostrar la region por la que se filtro
+				}
+				
+				//Info Municipio
+				if($mcpio){
+						$arrParam = array(
+							"table" => "param_divipola",
+							"order" => "mpio_divipola",
+							"column" => "mpio_divipola",
+							"id" => $mcpio
+						);
+						$data['infoMcpio'] = $this->general_model->get_basic_search($arrParam);//Info Municipio para mostrar la region por la que se filtro
+				}
+				
+				
+				if($this->input->post('tipoAlerta'))
+				{				
+						$arrParam = array(
+									"tipoAlerta" => $this->input->post('tipoAlerta'),
+									"respuestaUsuario" => $this->input->post('respuesta')
+						);
+						$data['info'] = $this->report_model->get_total_by($arrParam);
+				}
+				
+				//conteo de los sitios segun el filtro
+				$data['conteoSitios'] = $this->report_model->get_numero_sitios_por_filtro($arrParam);
+				
+				$data['conteoCitados'] = $this->report_model->get_numero_citados_por_filtro($arrParam);
+//pr($data['conteoCitados']);
+//echo$this->db->last_query();exit;
+				
+//conteo respuestas para alertas INFORMATIVAS - ROL COORDINADOR
+				$arrParam = array(
+								'tipoAlerta' => 1, //INFORMATIVA
+								'rolAlerta' => 3, //COORDINADOR
+				);
+				$infoInformativa = $this->report_model->get_respuestas_registro($arrParam);//alertas vigentes para los filtros
+				
+				//recorro las alertas y reviso se se les dio respuesta, si no se le dio respuesta las voy contando
+				$data['contadorInformativaSi'] = 0;
+				$data['contadorInformativaNo'] = 0;
+				if($infoInformativa){
+					foreach ($infoInformativa as $lista):
+						$arrParam = array(
+								"idSitioSesion" => $lista['id_sitio_sesion'],
+								"idAlerta" => $lista['id_alerta']
+						);
+						$respuesta = $this->general_model->get_respuestas_alertas_vencidas_by($arrParam);
+						
+						if($respuesta){
+							$data['contadorInformativaSi']++;
+						}else{
+							$data['contadorInformativaNo']++;
+						}
+					endforeach;
+				}
+				
+//conteo respuestas para alertas NOTIFICACION - ROL DELEGADO
+				$arrParam = array(
+								'tipoAlerta' => 2, //NOTIFICACION
+								'rolAlerta' => 3, //COORDINADOR
+				);
+				$infoNotificacion = $this->report_model->get_respuestas_registro($arrParam);
+				//recorro las alertas y reviso se se les dio respuesta, si no se le dio respuesta las voy contando
+				$data['contadorNotificacionContestaron'] = 0;
+				$data['contadorNotificacionSi'] = 0;
+				$data['contadorNotificacionNoContestaron'] = 0;
+				if($infoNotificacion){
+					foreach ($infoNotificacion as $lista):
+						$arrParam = array(
+								"idSitioSesion" => $lista['id_sitio_sesion'],
+								"idAlerta" => $lista['id_alerta']
+						);
+						$respuesta = $this->general_model->get_respuestas_alertas_vencidas_by($arrParam);
+						
+						$arrParam = array(
+								"idSitioSesion" => $lista['id_sitio_sesion'],
+								"idAlerta" => $lista['id_alerta'],
+								"respuestaAcepta" => 1
+						);//filtro por los que contestaron que SI
+						$respuestaSI = $this->general_model->get_respuestas_alertas_vencidas_by($arrParam);
+						
+						if($respuestaSI){
+							$data['contadorNotificacionSi']++;
+						}
+						
+						if($respuesta){
+							$data['contadorNotificacionContestaron']++;
+						}else{
+							$data['contadorNotificacionNoContestaron']++;
+						}
+					endforeach;
+				}
+				
+//conteo respiestas para alertas CONSOLIDACION - ROL DELEGADO
+				$arrParam = array(
+								'tipoAlerta' => 3, //CONSOLIDACION
+								'rolAlerta' => 3, //COORDINADOR
+				);
+				$infoConsolidacion = $this->report_model->get_respuestas_registro($arrParam);
+				//recorro las alertas y reviso se se les dio respuesta, si no se le dio respuesta las voy contando
+				$data['contadorConsolidacionSi'] = 0;
+				$data['contadorConsolidacionNo'] = 0;
+				if($infoConsolidacion){
+					foreach ($infoConsolidacion as $lista):
+						$arrParam = array(
+								"idSitioSesion" => $lista['id_sitio_sesion'],
+								"idAlerta" => $lista['id_alerta']
+						);
+						$respuesta = $this->general_model->get_respuestas_alertas_vencidas_by($arrParam);
+						
+						if($respuesta){
+							$data['contadorConsolidacionSi']++;
+						}else{
+							$data['contadorConsolidacionNo']++;
+						}
+					endforeach;
+				}
+
+
+				$data["view"] = "lista_total";
+			}
+			
+			$this->load->view("layout", $data);
     }
 	
 	
