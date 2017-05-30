@@ -91,7 +91,10 @@ $( document ).ready( function () {
 						if( data.result == "error" )
 						{
 							$("#div_load").css("display", "none");
+							$("#div_error").css("display", "inline");
+							$("#span_msj").html(data.mensaje);
 							$('#btnSubmit').removeAttr('disabled');							
+							alert(data.mensaje);
 							return false;
 						} 
 

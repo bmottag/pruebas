@@ -750,17 +750,36 @@ class Admin extends MX_Controller {
 			if ($idSesion != '') {
 				$msj = "Se actualizó la Sesión con exito.";
 			}
-
-			if ($idSesion = $this->admin_model->saveSesiones()) {
-				$data["result"] = true;
-				$data["idRecord"] = $idGrupo;
-				
-				$this->session->set_flashdata('retornoExito', $msj);
-			} else {
+			
+			//verificar que la hora inicial es menor a la hora final
+			$hourIn = $this->input->post('hourIni');
+			$hourOut = $this->input->post('hourFin');
+			$minIni = $this->input->post('minIni');
+			$minFin = $this->input->post('minFin');
+			
+			$verificar = true;
+			if($hourIn > $hourOut){
 				$data["result"] = "error";
-				$data["idRecord"] = "";
-				
-				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador.');
+				$data["mensaje"] = "Error!!!. La hora final debe ser mayor a la hora inicial.";
+				$verificar = false;
+			}elseif($hourIn == $hourOut && $minIni >= $minFin){
+				$data["result"] = "error";
+				$data["mensaje"] = "Error!!!. La hora final debe ser mayor a la hora inicial.";
+				$verificar = false;			
+			}
+
+			if($verificar){
+				if ($idSesion = $this->admin_model->saveSesiones()) {
+					$data["result"] = true;
+					$data["idRecord"] = $idGrupo;
+					
+					$this->session->set_flashdata('retornoExito', $msj);
+				} else {
+					$data["result"] = "error";
+					$data["idRecord"] = "";
+					
+					$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador.');
+				}
 			}
 
 			echo json_encode($data);
