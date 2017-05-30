@@ -471,6 +471,38 @@ class General_model extends CI_Model {
 					return false;
 				}
 		}
+		
+		/**
+		 * Examinandos
+		 * @since 29/5/2017
+		 */
+		public function get_examinandos_by($arrDatos)
+		{
+				$examinandos = array();
+				$this->db->select();
+				if (array_key_exists("idMunicipio", $arrDatos)) {
+					$this->db->where('fk_mpio_divipola', $arrDatos["idMunicipio"]);
+				}
+				if (array_key_exists("codigoDane", $arrDatos)) {
+					$this->db->where('fk_codigo_dane', $arrDatos["codigoDane"]);
+				}
+				if (array_key_exists("consecutivo", $arrDatos)) {
+					$this->db->where('consecutivo', $arrDatos["consecutivo"]);
+				}
+				
+				$query = $this->db->get('examinandos');
+					
+				if ($query->num_rows() > 0) {
+					$i = 0;
+					foreach ($query->result() as $row) {
+						$examinandos[$i]["id_examinando"] = $row->id_examinando;
+						$examinandos[$i]["snp"] = $row->snp;
+						$i++;
+					}
+				}
+				$this->db->close();
+				return $examinandos;
+		}
 
 
 

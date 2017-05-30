@@ -107,8 +107,27 @@ if($userRol==1){ //If it is an ADMIN user, show an special menu
 		</li>
 <?php
 }
+}elseif($userRol==4){
+?>
+
+		<li class="dropdown">
+			<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+				<i class="fa fa-gear fa-fw"></i>Mas cosas <i class="fa fa-caret-down"></i>
+			</a>
+			<ul class="dropdown-menu dropdown-messages">
+				<li>
+					<a href="<?php echo base_url("anulaciones"); ?>"><i class="fa fa-bug fa-fw"></i> Anulaciones</a>
+				</li>
+				
+				<li>
+					<a href="<?php echo base_url("novedades"); ?>"><i class="fa fa-users fa-fw"></i> Novedades</a>
+				</li>
+			</ul>
+		</li>
+		
+<?php
 }
-?>				
+?>
 
 		<li>
 			<a href="<?php echo base_url("menu/salir"); ?>"><i class="fa fa-sign-out fa-fw"></i> Salir</a>
