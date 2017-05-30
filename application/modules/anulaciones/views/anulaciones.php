@@ -120,8 +120,8 @@ if ($retornoError) {
 						<thead>
 							<tr>
 								<th class="text-center">Sesión</th>
-								<th class="text-center">Editar</th>
 								<th class="text-center">SNP Examinando</th>
+								<th class="text-center">Editar</th>
 								<th class="text-center">Motivo anulación</th>
 								<th class="text-center">Observación</th>
 							</tr>
