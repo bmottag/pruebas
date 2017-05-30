@@ -256,7 +256,7 @@ echo "<a href='" . base_url('report/mostrarSesiones/' . $lista['id_sitio']) . "'
 									echo "<strong>Prueba: </strong>" . $lista['nombre_prueba'];
 									echo "<br><strong>Grupo de Instrumentos: </strong>" . $lista['nombre_grupo_instrumentos'];
 									echo "<br><strong>Sesión: </strong>" . $lista['sesion_prueba'];
-									echo "<br><strong>Fecha: </strong>" . $lista['mpio_divipola_nombre'];
+									echo "<br><strong>Fecha: </strong>" . $lista['fecha'];
 									echo "<br><strong>Hora Inicial: </strong>" . $lista['hora_inicio_prueba'];
 									echo "<br><strong>Hora Final: </strong>" . $lista['hora_fin_prueba'];
 									echo "</td>";
