@@ -1,3 +1,5 @@
+<script type="text/javascript" src="<?php echo base_url("assets/js/validate/anulaciones/anulaciones.js"); ?>"></script>
+
 <script>
 $(function(){ 
 	$(".btn-success").click(function () {	
@@ -149,6 +151,12 @@ if ($retornoError) {
 									<button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#modal" id="<?php echo $lista['id_anulacion']; ?>" >
 										Editar <span class="glyphicon glyphicon-edit" aria-hidden="true">
 									</button>
+									
+									<br><br>
+
+<button type="button" class="btn btn-danger btn-xs" id="<?php echo $lista['id_anulacion']; ?>" >
+	Eliminar <span class="fa fa-times fa-fw" aria-hidden="true">
+</button>
 						<?php
 									echo "</td>";
 									echo "<td>" . $lista['nombre_motivo_anulacion'] . "</td>";

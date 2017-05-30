@@ -136,6 +136,39 @@ class Anulaciones extends MX_Controller {
 			}
     }
 	
+	/**
+	 * Eliminar anulacion
+     * @since 29/5/2017
+	 */
+	public function eliminar_anulacion()
+	{			
+			header('Content-Type: application/json');
+			$data = array();
+			
+			$idAnulacion = $this->input->post('identificador');
+			
+			$this->load->model("general_model");
+			//eliminaos registro
+			$arrParam = array(
+				"table" => "anulaciones",
+				"primaryKey" => "id_anulacion",
+				"id" => $idAnulacion
+			);
+				
+			if ($this->general_model->deleteRecord($arrParam)) {
+				$data["result"] = true;
+				$data["mensaje"] = "Se eliminó la Anulación.";
+				$this->session->set_flashdata('retornoExito', 'Se eliminó la Anulación');
+			} else {
+				$data["result"] = "error";
+				$data["mensaje"] = "Error!!! Contactarse con el Administrador.";
+				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador');
+			}
+
+
+			echo json_encode($data);
+    }
+	
 
 	
 	
