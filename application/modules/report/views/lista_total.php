@@ -167,8 +167,13 @@
 						<strong>Alerta de Consolidación</strong><br>
 						<?php 
 							$total = $contadorConsolidacionSi + $contadorConsolidacionNo; 
-							$porcentajeSi = ($contadorConsolidacionSi * 100)/$total;
-							$porcentajeNo = ($contadorConsolidacionNo * 100)/$total;
+							if($total != 0){
+								$porcentajeSi = ($contadorConsolidacionSi * 100)/$total;
+								$porcentajeNo = ($contadorConsolidacionNo * 100)/$total;
+							}else{
+								$porcentajeSi = 0;
+								$porcentajeNo = 0;
+							}
 						?>
 						
 						<?php echo $rol_busqueda; ?> que contestaron: <strong><?php echo $contadorConsolidacionSi . " (" . $porcentajeSi . "%)"; ?> </strong>

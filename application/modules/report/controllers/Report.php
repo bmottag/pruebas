@@ -130,11 +130,13 @@ class Report extends CI_Controller {
 				}
 				
 				
+				//CUANDO SE ESTA BUSCANDO INFORMAICION DE LAS ALERTAS
 				if($this->input->post('tipoAlerta'))
 				{				
 						$arrParam = array(
 									"tipoAlerta" => $this->input->post('tipoAlerta'),
-									"respuestaUsuario" => $this->input->post('respuesta')
+									"respuestaUsuario" => $this->input->post('respuesta'),
+									"rolAlerta" => 4
 						);
 						$data['info'] = $this->report_model->get_total_by($arrParam);
 				}
