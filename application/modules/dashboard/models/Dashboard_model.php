@@ -27,6 +27,9 @@
 				$this->db->where('A.fecha_inicio <=', $fecha); //FECHA INICIAL MAYOR A LA ACTUAL
 				$this->db->where('A.fecha_fin >=', $fecha); //FECHA FINAL MAYOR A LA ACTUAL
 				
+				$tipoMensaje = array(1, 2);//filtrar por alertas que se muestren en el APP
+				$this->db->where_in('A.tipo_mensaje', $tipoMensaje);	
+				
 				if (array_key_exists("tipoAlerta", $arrDatos)) {
 					$this->db->where('A.fk_id_tipo_alerta', $arrDatos["tipoAlerta"]); //FILTRO POR TIPO ALERTA
 				}
@@ -67,6 +70,9 @@
 				$this->db->where('A.estado_alerta', 1); //ALERTA ACTIVA
 				$this->db->where('A.fecha_inicio <=', $fecha); //FECHA INICIAL MAYOR A LA ACTUAL
 				$this->db->where('A.fecha_fin >=', $fecha); //FECHA FINAL MAYOR A LA ACTUAL
+				
+				$tipoMensaje = array(1, 2);//filtrar por alertas que se muestren en el APP
+				$this->db->where_in('A.tipo_mensaje', $tipoMensaje);
 				
 				if (array_key_exists("tipoAlerta", $arrDatos)) {
 					$this->db->where('A.fk_id_tipo_alerta', $arrDatos["tipoAlerta"]); //FILTRO POR TIPO ALERTA
