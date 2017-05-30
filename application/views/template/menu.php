@@ -112,7 +112,7 @@ if($userRol==1){ //If it is an ADMIN user, show an special menu
 
 		<li class="dropdown">
 			<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-				<i class="fa fa-gear fa-fw"></i>Mas cosas <i class="fa fa-caret-down"></i>
+				<i class="fa fa-gear fa-fw"></i>Novedades <i class="fa fa-caret-down"></i>
 			</a>
 			<ul class="dropdown-menu dropdown-messages">
 				<li>
@@ -120,7 +120,7 @@ if($userRol==1){ //If it is an ADMIN user, show an special menu
 				</li>
 				
 				<li>
-					<a href="<?php echo base_url("novedades"); ?>"><i class="fa fa-users fa-fw"></i> Novedades</a>
+					<a href="<?php echo base_url("novedades"); ?>"><i class="fa fa-users fa-fw"></i> Cambio de cuadernillo</a>
 				</li>
 			</ul>
 		</li>
