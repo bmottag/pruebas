@@ -24,10 +24,10 @@ class Anulaciones extends MX_Controller {
 			
 			$this->load->model("general_model");
 			$arrParam = array("idDelegado" => $userID);
-			$data['infoSitio'] = $this->general_model->get_sitios($arrParam);
+			$data['infoSitio'] = $this->general_model->get_sitios($arrParam);//informacion del sitio
 
 			$arrParam = array("idSitio" => $data['infoSitio'][0]['id_sitio']);
-			$data['info'] = $this->anulaciones_model->get_anulaciones($arrParam);
+			$data['info'] = $this->anulaciones_model->get_anulaciones($arrParam);//listado de anulaciones
 			
 			$data["view"] = 'anulaciones';
 			$this->load->view("layout", $data);

@@ -2,6 +2,7 @@ $( document ).ready( function () {
 
 	$("#consecutivo").bloquearTexto().maxlength(10);
 	$("#confirmarConsecutivo").bloquearTexto().maxlength(10);
+	$("#observacion").convertirMayuscula();
 	
 	$( "#form" ).validate( {
 		rules: {

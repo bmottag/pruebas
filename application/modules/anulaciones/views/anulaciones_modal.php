@@ -67,8 +67,11 @@
 				<div class="form-group text-left">
 					<label for="type" class="control-label">SNP Examinando : *</label>
 
-					<select name="snp" id="snp" class="form-control" required>					
-
+					<select name="snp" id="snp" class="form-control" required>	
+						<?php if($information){ ?>
+						<option value=''>Select...</option>
+							<option value="<?php echo $information[0]["fk_id_examinando"]; ?>" selected><?php echo $information[0]["snp"]; ?></option>
+						<?php } ?>
 					</select>
 				
 				</div>
