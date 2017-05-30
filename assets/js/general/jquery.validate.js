@@ -358,7 +358,7 @@ $.extend( $.validator, {
 		dateISO: "Please enter a valid date ( ISO ).",
 		number: "Please enter a valid number.",
 		digits: "Please enter only digits.",
-		equalTo: "Please enter the same value again.",
+		equalTo: "Ingrese el mismo valor de nuevo.",
 		maxlength: $.validator.format( "Ingresar como máximo {0} characters." ),
 		minlength: $.validator.format( "Ingrear como mínimo {0} characters." ),
 		rangelength: $.validator.format( "Please enter a value between {0} and {1} characters long." ),
