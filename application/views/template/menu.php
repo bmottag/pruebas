@@ -120,7 +120,7 @@ if($userRol==1){ //If it is an ADMIN user, show an special menu
 				</li>
 				
 				<li>
-					<a href="<?php echo base_url("novedades"); ?>"><i class="fa fa-users fa-fw"></i> Cambio de cuadernillo</a>
+					<a href="<?php echo base_url("novedades/cambio_cuadernillo"); ?>"><i class="fa fa-users fa-fw"></i> Cambio de cuadernillo</a>
 				</li>
 			</ul>
 		</li>
