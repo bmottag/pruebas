@@ -147,7 +147,7 @@ Asociar  <span class="badge"><?php echo $conteoSesiones; ?></span>
 									<a href="<?php echo base_url("admin/asignar_delegado/" . $lista['id_sitio'] . "/delegado"); ?>" class="btn btn-info btn-xs">Delegado <span class="fa fa-gears fa-fw" aria-hidden="true"></a>
 						<?php 
 if($lista['fk_id_user_delegado']){
-	echo "<p class='text-primary text-center'>C.C. " . $lista['cedula_delegado'] . "</br>";
+	echo "<p class='text-primary text-center'>" . $lista['nom_delegado'] . " " . $lista['ape_delegado'] . "</br>";
 	echo "<a href='" . base_url("admin/updateDelegado/" . $lista['id_sitio']) . "' class='text-primary text-center'>Eliminar</p>";
 }else{
 	echo "<p class='text-danger text-center'><strong>Falta</strong></p>";
@@ -159,7 +159,7 @@ if($lista['fk_id_user_delegado']){
 									<a href="<?php echo base_url("admin/asignar_delegado/" . $lista['id_sitio'] . "/coordinador"); ?>" class="btn btn-info btn-xs">Coordinador <span class="fa fa-gears fa-fw" aria-hidden="true"></a>
 						<?php 
 if($lista['fk_id_user_coordinador']){
-	echo "<p class='text-primary text-center'>C.C. " . $lista['cedula_coordinador'] . "</br>";
+	echo "<p class='text-primary text-center'>" . $lista['nom_coordinador'] . " " . $lista['ape_coordiandor'] . "</br>";
 echo "<a href='" . base_url("admin/updateCoordinador/" . $lista['fk_mpio_divipola']) . "' class='text-primary text-center'>Eliminar</p>";
 }else{
 	echo "<p class='text-danger text-center'><strong>Falta</strong></p>";

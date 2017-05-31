@@ -42,7 +42,7 @@
 			<div class="col-sm-6">
 				<div class="form-group text-left">
 					<label for="type" class="control-label">Código Postal : *</label>
-					<input type="text" id="codigoPostal" name="codigoPostal" class="form-control" value="<?php echo $information?$information[0]["codigo_postal_sitio"]:""; ?>" placeholder="Código Postal" required >
+					<input type="text" id="codigoPostal" name="codigoPostal" class="form-control" value="<?php echo $information?$information[0]["codigo_postal_sitio"]:""; ?>" placeholder="Código Postal" >
 				</div>
 			</div>
 		</div>
