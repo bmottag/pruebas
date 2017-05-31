@@ -1,10 +1,9 @@
 <script type="text/javascript" src="<?php echo base_url("assets/js/validate/anulaciones/anulaciones.js"); ?>"></script>
-<script type="text/javascript" src="<?php echo base_url("assets/js/validate/anulaciones/ajaxExaminando.js"); ?>"></script>
 
 <div class="modal-header">
 	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	<h4 class="modal-title" id="exampleModalLabel">Formulario de Anulaciones
-	<br><small>Adicionar/Editar Anualciones</small>
+	<br><small>Adicionar/Editar Anulaciones</small>
 	</h4>
 </div>
 
@@ -50,34 +49,18 @@
 			<div class="col-sm-6">
 				<div class="form-group text-left">
 					<label class="control-label" for="consecutivo">Consecutivo examinando : *</label>
-					<input type="text" id="consecutivo" name="consecutivo" class="form-control" value="<?php echo $information?$information[0]["consecutivo"]:""; ?>" placeholder="Consecutivo examinando" required >
+					<input type="password" id="consecutivo" name="consecutivo" class="form-control" value="<?php echo $information?$information[0]["consecutivo"]:""; ?>" placeholder="Consecutivo examinando" required >
 				</div>
 			</div>
 
 			<div class="col-sm-6">
 				<div class="form-group text-left">
 					<label class="control-label" for="confirmarConsecutivo">Confirmar consecutivo examinando : *</label>
-					<input type="text" id="confirmarConsecutivo" name="confirmarConsecutivo" class="form-control" value="<?php echo $information?$information[0]["consecutivo"]:""; ?>" placeholder="Confirmar consecutivo" required >
+					<input type="password" id="confirmarConsecutivo" name="confirmarConsecutivo" class="form-control" value="<?php echo $information?$information[0]["consecutivo"]:""; ?>" placeholder="Confirmar consecutivo" required >
 				</div>
 			</div>
 		</div>
-		
-		<div class="row">
-			<div class="col-sm-6">
-				<div class="form-group text-left">
-					<label for="type" class="control-label">SNP Examinando : *</label>
-
-					<select name="snp" id="snp" class="form-control" required>	
-						<?php if($information){ ?>
-						<option value=''>Select...</option>
-							<option value="<?php echo $information[0]["fk_id_examinando"]; ?>" selected><?php echo $information[0]["snp"]; ?></option>
-						<?php } ?>
-					</select>
 				
-				</div>
-			</div>
-		</div>
-		
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="form-group text-left">
@@ -86,13 +69,6 @@
 				</div>
 			</div>
 		</div>
-		
-
-
-
-
-		
-
 		
 		<div class="form-group">
 			<div class="row" align="center">

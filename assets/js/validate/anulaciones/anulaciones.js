@@ -9,8 +9,7 @@ $( document ).ready( function () {
 			sesion: 				{ required: true },
 			motivo: 				{ required: true },
 			consecutivo: 			{ required: true, minlength: 5, maxlength:10 },
-			confirmarConsecutivo: 	{ required: true, minlength: 5, maxlength:10, equalTo: "#consecutivo" },
-			snp: 					{ required: true }
+			confirmarConsecutivo: 	{ required: true, minlength: 5, maxlength:10, equalTo: "#consecutivo" }
 		},
 		errorElement: "em",
 		errorPlacement: function ( error, element ) {
@@ -94,8 +93,10 @@ $( document ).ready( function () {
                                             
 						if( data.result == "error" )
 						{
+							alert(data.mensaje);
 							$("#div_load").css("display", "none");
 							$("#div_error").css("display", "inline");
+							$("#span_msj").html(data.mensaje);
 							$('#btnSubmit').removeAttr('disabled');							
 							return false;
 						} 

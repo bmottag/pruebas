@@ -84,7 +84,7 @@ class Anulaciones extends MX_Controller {
 	{			
 			header('Content-Type: application/json');
 			$data = array();
-			
+
 			$idAnulacion = $this->input->post('hddId');
 
 			$msj = "Se adicionó la anulación.";
@@ -92,48 +92,38 @@ class Anulaciones extends MX_Controller {
 				$msj = "Se actualizó la anulación con exito.";
 			}			
 
-			$examinando = $this->input->post("examinando");
-			$confirm = $this->input->post("confirmarExaminando");
-			$examinando = str_replace(array("<",">","[","]","*","^","-","'","="),"",$examinando); 
+			$consecutivo = $this->input->post("consecutivo");
+			$confirm = $this->input->post("confirmarConsecutivo");
+			$consecutivo = str_replace(array("<",">","[","]","*","^","-","'","="),"",$consecutivo); 
 
-			if($examinando != $confirm){
+			if($consecutivo != $confirm){
 				$data["result"] = "error";
-				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Los consecutivos no coinciden.');
-			} else {
-					if ($this->anulaciones_model->saveAnulacion()) {
-						$data["result"] = true;					
-						$this->session->set_flashdata('retornoExito', $msj);
-					} else {
-						$data["result"] = "error";					
-						$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el administrador.');
+				$data["mensaje"] = "Los consecutivos no coinciden.";
+			}else{
+					//buscar el id de ese consecutivo
+					$this->load->model("general_model");
+					$arrParam = array(
+							"consecutivo" => $consecutivo,
+							"idMunicipio" => $this->input->post('hddIdMunicipio'),
+							"codigoDane" => $this->input->post('hddCodigoDane')
+					);
+					$infoSNP = $this->general_model->get_examinandos_by($arrParam);
+					
+					if(!$infoSNP){
+						$data["result"] = "error";
+						$data["mensaje"] = "El SNP ingresado no se encontró en la base de datos.";
+					}else{
+						if ($this->anulaciones_model->saveAnulacion($infoSNP['id_examinando'])) {
+							$data["result"] = true;
+							$this->session->set_flashdata('retornoExito', $msj);
+						} else {
+							$data["result"] = "error";
+							$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el administrador.');
+						}
 					}
 			}
 
 			echo json_encode($data);
-    }
-	
-	/**
-	 * Lista de examinandos
-     * @since 29/5/2017
-	 */
-    public function examinandoList()
-	{
-			header("Content-Type: text/plain; charset=utf-8"); //Para evitar problemas de acentos
-
-			$arrParam = array(
-					"consecutivo" => $this->input->post('consecutivo'),
-					"idMunicipio" => $this->input->post('idMunicipio'),
-					"codigoDane" => $this->input->post('codigoDane')
-			);
-			$this->load->model("general_model");
-			$lista = $this->general_model->get_examinandos_by($arrParam);
-		
-			echo "<option value=''>Select...</option>";
-			if ($lista) {
-				foreach ($lista as $fila) {
-					echo "<option value='" . $fila["id_examinando"] . "' >" . $fila["snp"] . "</option>";
-				}
-			}
     }
 	
 	/**

@@ -41,7 +41,7 @@
 		 * Add/Edit Anulacion
 		 * @since 29/5/2017
 		 */
-		public function saveAnulacion() 
+		public function saveAnulacion($idExaminando) 
 		{
 				$idAnulacion = $this->input->post('hddId');
 				$userID = $this->session->userdata("id");
@@ -49,7 +49,7 @@
 				$data = array(
 					'fk_id_sitio' => $this->input->post('hddIdSitio'),
 					'fk_id_sesion' => $this->input->post('sesion'),
-					'fk_id_examinando' => $this->input->post('snp'),
+					'fk_id_examinando' => $idExaminando,
 					'fk_id_motivo' => $this->input->post('motivo'),
 					'observacion' => $this->input->post('observacion'),
 					'fecha_anulacion' => date("Y-m-d G:i:s"),
