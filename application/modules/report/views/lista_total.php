@@ -59,8 +59,8 @@
 						<?php
 							$total = $contadorInformativaSi + $contadorInformativaNo;
 							if($total != 0){
-								$porcentajeSi = ($contadorInformativaSi * 100)/$total;
-								$porcentajeNo = ($contadorInformativaNo * 100)/$total;
+								$porcentajeSi = round((($contadorInformativaSi * 100)/$total), 1);
+								$porcentajeNo = round((($contadorInformativaNo * 100)/$total), 1);
 							}else{
 								$porcentajeSi = 0;
 								$porcentajeNo = 0;
@@ -113,9 +113,9 @@
 							$total = $contadorNotificacionNoContestaron + $contadorNotificacionSi + $contadorNotificacionNo;
 							
 							if($total != 0){
-								$porcentajeNoContestaron = ($contadorNotificacionNoContestaron * 100)/$total;
-								$porcentajeSi = ($contadorNotificacionSi * 100)/$total;
-								$porcentajeNo = ($contadorNotificacionNo * 100)/$total;
+								$porcentajeNoContestaron = round((($contadorNotificacionNoContestaron * 100)/$total),1);
+								$porcentajeSi = round((($contadorNotificacionSi * 100)/$total),1);
+								$porcentajeNo = round((($contadorNotificacionNo * 100)/$total),1);
 							}else{
 								$porcentajeNoContestaron = 0;
 								$porcentajeSi = 0;
@@ -168,8 +168,8 @@
 						<?php 
 							$total = $contadorConsolidacionSi + $contadorConsolidacionNo; 
 							if($total != 0){
-								$porcentajeSi = ($contadorConsolidacionSi * 100)/$total;
-								$porcentajeNo = ($contadorConsolidacionNo * 100)/$total;
+								$porcentajeSi = round((($contadorConsolidacionSi * 100)/$total),1);
+								$porcentajeNo = round((($contadorConsolidacionNo * 100)/$total),1);
 							}else{
 								$porcentajeSi = 0;
 								$porcentajeNo = 0;
