@@ -99,6 +99,12 @@ if($userRol==1){ //If it is an ADMIN user, show an special menu
 				<li class="divider"></li>
 				
 				<li>
+					<a href="<?php echo base_url("report"); ?>"><i class="fa fa-calendar fa-fw"></i> Ver Listados</a>
+				</li>
+				
+				<li class="divider"></li>
+				
+				<li>
 					<a href="<?php echo base_url("admin/atencion_eliminar"); ?>"><i class="fa fa-calendar fa-fw"></i> Eliminar Registros de la BD</a>
 				</li>
 				

@@ -8,6 +8,15 @@ class Report extends CI_Controller {
 		$this->load->model("report_model");
 		//$this->load->library('PHPExcel.php');
     }
+	
+	/**
+	 * Reportes con reportico
+     * @since 1/06/2017
+	 */
+    public function index() 
+	{					
+			$this->load->view("reportes");
+    }
 		
 	/**
 	 * Informacion de los registros
