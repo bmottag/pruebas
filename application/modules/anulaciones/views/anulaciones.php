@@ -157,6 +157,11 @@ if ($retornoError) {
 <button type="button" class="btn btn-danger btn-xs" id="<?php echo $lista['id_anulacion']; ?>" >
 	Eliminar <span class="fa fa-times fa-fw" aria-hidden="true">
 </button>
+
+									<br><br>
+<a href="<?php echo base_url("anulaciones/evidencia/" . $lista['id_anulacion']); ?>">Evidencia</a><br>
+<a href="<?php echo base_url("anulaciones/acta/" . $lista['id_anulacion']); ?>">Acta</a><br>
+									
 						<?php
 									echo "</td>";
 									echo "<td>" . $lista['nombre_motivo_anulacion'] . "</td>";

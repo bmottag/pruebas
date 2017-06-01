@@ -159,6 +159,112 @@ class Anulaciones extends MX_Controller {
 			echo json_encode($data);
     }
 	
+	/**
+	 * evidencia
+	 */
+	public function evidencia($idAnulacion, $error = '')
+	{		
+			//busco info de la anulacion
+			$arrParam = array(
+					"idAnulacion" => $idAnulacion
+				);
+			$data['information'] = $this->anulaciones_model->get_anulaciones($arrParam);
+			$data['tipo'] = "evidencia";
+						
+			$data['error'] = $error; //se usa para mostrar los errores al cargar la imagen 
+			$data["view"] = 'form_imagen';
+			$this->load->view("layout", $data);
+	}
+	
+	/**
+	 * acta
+	 */
+	public function acta($idAnulacion, $error = '')
+	{		
+			//busco info de la anulacion
+			$arrParam = array(
+					"idAnulacion" => $idAnulacion
+				);
+			$data['information'] = $this->anulaciones_model->get_anulaciones($arrParam);
+			$data['tipo'] = "acta";
+						
+			$data['error'] = $error; //se usa para mostrar los errores al cargar la imagen 
+			$data["view"] = 'form_imagen';
+			$this->load->view("layout", $data);
+	}
+	
+    //FUNCIÓN PARA SUBIR LA IMAGEN 
+    function do_upload() 
+	{
+			$config['upload_path'] = './images/anulaciones/';
+			$config['overwrite'] = true;
+			$config['allowed_types'] = 'gif|jpg|png';
+			$config['max_size'] = '2000';
+			$config['max_width'] = '1024';
+			$config['max_height'] = '1008';
+			$idAnulacion = $this->input->post("hddId");
+			$tipo = $this->input->post("tipo");
+			$config['file_name'] = $idAnulacion . "_" . $tipo;
+
+			$this->load->library('upload', $config);
+			//SI LA IMAGEN FALLA AL SUBIR MOSTRAMOS EL ERROR EN LA VISTA 
+			if (!$this->upload->do_upload()) {
+				$error = $this->upload->display_errors();
+				$this->evidencia($idAnulacion,$error);
+			} else {
+				$file_info = $this->upload->data();//subimos la imagen
+				
+				//USAMOS LA FUNCIÓN create_thumbnail Y LE PASAMOS EL NOMBRE DE LA IMAGEN,
+				//ASÍ YA TENEMOS LA IMAGEN REDIMENSIONADA
+				$this->_create_thumbnail($file_info['file_name']);
+				$data = array('upload_data' => $this->upload->data());
+				$imagen = $file_info['file_name'];
+				$path = "images/anulaciones/thumbs/" . $imagen;
+
+				//actualizamos el campo photo
+				$arrParam = array(
+					"table" => "anulaciones",
+					"primaryKey" => " 	id_anulacion",
+					"id" => $idAnulacion,
+					"column" => $tipo,
+					"value" => $path
+				);
+
+				$this->load->model("general_model");
+				$data['linkBack'] = "anulaciones";
+				$data['titulo'] = "<i class='fa fa-user fa-fw'></i>" . strtoupper($tipo) . " ANULACIÓN";
+				
+				if($this->general_model->updateRecord($arrParam))
+				{
+					$data['clase'] = "alert-success";
+					$data['msj'] = "Se guardó la imagen con exito.";
+				}else{
+					$data['clase'] = "alert-danger";
+					$data['msj'] = "Contactarse con el administrador.";
+				}
+							
+				$data["view"] = 'template/answer';
+				$this->load->view("layout", $data);
+				//redirect('employee/photo');
+			}
+    }
+	
+    //FUNCIÓN PARA CREAR LA MINIATURA A LA MEDIDA QUE LE DIGAMOS
+    function _create_thumbnail($filename) 
+	{
+        $config['image_library'] = 'gd2';
+        //CARPETA EN LA QUE ESTÁ LA IMAGEN A REDIMENSIONAR
+        $config['source_image'] = 'images/anulaciones/' . $filename;
+        $config['create_thumb'] = TRUE;
+        $config['maintain_ratio'] = TRUE;
+        //CARPETA EN LA QUE GUARDAMOS LA MINIATURA
+        $config['new_image'] = 'images/anulaciones/thumbs/';
+        $config['width'] = 150;
+        $config['height'] = 150;
+        $this->load->library('image_lib', $config);
+        $this->image_lib->resize();
+    }
+	
 
 	
 	
