@@ -40,7 +40,7 @@
 								echo "<tr>";
 								echo "<td class='text-center'>";
 								
-								if($information[0]["evidencia"])
+								if($information[0][$tipo])
 								{ 
 						?>
 <img src="<?php echo base_url($information[0][$tipo]); ?>" class="img-rounded" alt="Evidencia" width="50" height="50" />

@@ -6,7 +6,7 @@ $(function(){
 			var oID = $(this).attr("id");
             $.ajax ({
                 type: 'POST',
-				url: base_url + '/anulaciones/cargarModalAnulacion',
+				url: base_url + '/anulaciones/cargarModalAprobarAnulacion',
                 data: {'identificador': oID},
                 cache: false,
                 success: function (data) {
@@ -32,53 +32,7 @@ $(function(){
 		</div>
 		<!-- /.col-lg-12 -->				
 	</div>
-	
-	<div class="row">
-		<div class="col-md-4">
-			<div class="panel panel-info">
-				<div class="panel-heading">
-					<strong>Nombre Sitio: </strong><?php echo $infoSitio[0]['nombre_sitio']; ?>
-					<br><strong>Dirección: </strong><?php echo $infoSitio[0]['direccion_sitio']; ?>
-					<br><strong>Contacto: </strong><br><?php echo $infoSitio[0]['contacto_nombres'] . " " . $infoSitio[0]['contacto_apellidos']; ?>
-					<br><strong>Celular: </strong><?php echo $infoSitio[0]['contacto_celular']; ?>
-				</div>
-			</div>
-		</div>
 		
-		<div class="col-md-4">
-			<div class="panel panel-info">
-				<div class="panel-heading">
-					<strong>Nodo o Región: </strong><?php echo $infoSitio[0]['nombre_region']; ?>
-					<br><strong>Departamento: </strong><?php echo $infoSitio[0]['dpto_divipola_nombre']; ?>
-					<br><strong>Municipio: </strong><?php echo $infoSitio[0]['mpio_divipola_nombre']; ?>
-					<br><strong>Zona: </strong><?php echo $infoSitio[0]['nombre_zona']; ?>
-				</div>
-			</div>
-		</div>
-		
-		<div class="col-md-4">
-			<div class="panel panel-info">
-				<div class="panel-heading">
-					<strong>Delegado: </strong><br>
-					<?php 
-					if($infoSitio[0]['fk_id_user_delegado']){
-						echo "C.C. " . $infoSitio[0]['cedula_delegado'] . " " . $infoSitio[0]['nom_delegado'] . " "  . $infoSitio[0]['ape_delegado'];
-						echo "<br><strong>Celular: </strong>" . $infoSitio[0]['celular_delegado']; 
-					} else { echo "Falta asignar Delegado.";}
-					?>
-
-					<br><strong>Coordinador: </strong><br>
-					<?php 
-					if($infoSitio[0]['fk_id_user_coordinador']){
-						echo "C.C. " . $infoSitio[0]['cedula_coordinador'] . " " . $infoSitio[0]['nom_coordinador'] . " "  . $infoSitio[0]['ape_coordiandor'];
-						echo "<br><strong>Celular: </strong>" . $infoSitio[0]['celular_coordinador']; 
-					} else { echo "Falta asignar Coordinador.";}
-					?>
-				</div>
-			</div>
-		</div>
-	</div>
-	
 	<!-- /.row -->
 	<div class="row">
 		<div class="col-lg-12">
@@ -87,9 +41,6 @@ $(function(){
 					<i class="fa fa-bug"></i> LISTA DE ANULACIONES
 				</div>
 				<div class="panel-body">
-					<button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#modal" id="x">
-							<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Adicionar Anulación
-					</button><br>
 <?php
 $retornoExito = $this->session->flashdata('retornoExito');
 if ($retornoExito) {
@@ -123,7 +74,10 @@ if ($retornoError) {
 							<tr>
 								<th class="text-center">Sesión</th>
 								<th class="text-center">SNP Examinando</th>
-								<th class="text-center">Editar</th>
+								<th class="text-center">Aprobar</th>
+								<th class="text-center">Evidencia</th>
+								<th class="text-center">Acta</th>
+
 								<th class="text-center">Motivo anulación</th>
 								<th class="text-center">Observación</th>
 							</tr>
@@ -149,25 +103,39 @@ if ($retornoError) {
 									echo "<td class='text-center'>";
 						?>
 									<button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#modal" id="<?php echo $lista['id_anulacion']; ?>" >
-										Editar <span class="glyphicon glyphicon-edit" aria-hidden="true">
+										Aprobar <span class="glyphicon glyphicon-edit" aria-hidden="true">
 									</button>
 									
-									<br><br>
-
-<button type="button" class="btn btn-danger btn-xs" id="<?php echo $lista['id_anulacion']; ?>" >
-	Eliminar <span class="fa fa-times fa-fw" aria-hidden="true">
-</button>
-
-									<br><br>
-<a href="<?php echo base_url("anulaciones/evidencia/" . $lista['id_anulacion']); ?>">Evidencia</a><br>
-<a href="<?php echo base_url("anulaciones/acta/" . $lista['id_anulacion']); ?>">Acta</a><br>
 									
 						<?php
 									echo "</td>";
-									echo "<td>" . $lista['nombre_motivo_anulacion'] . "</td>";
+									
+								echo "<td class='text-center'>";
+								
+								if($lista["evidencia"])
+								{ 
+						?>
+<img src="<?php echo base_url($lista["evidencia"]); ?>" class="img-rounded" alt="Evidencia" width="50" height="50" />
+						<?php 
+								} 
+
+								echo "</td>";
+								
+								echo "<td class='text-center'>";
+								
+								if($lista["acta"])
+								{ 
+						?>
+<img src="<?php echo base_url($lista["acta"]); ?>" class="img-rounded" alt="Acta" width="50" height="50" />
+						<?php 
+								} 
+
+								echo "</td>";
 
 									
 									
+									
+									echo "<td>" . $lista['nombre_motivo_anulacion'] . "</td>";
 									echo "<td>" . $lista['observacion'] . "</td>";
 									echo "</tr>";
 							endforeach;
@@ -186,7 +154,6 @@ if ($retornoError) {
 </div>
 <!-- /#page-wrapper -->
 		
-				
 <!--INICIO Modal -->
 <div class="modal fade text-center" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">    
 	<div class="modal-dialog" role="document">

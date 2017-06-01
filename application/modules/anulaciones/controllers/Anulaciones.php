@@ -265,6 +265,77 @@ class Anulaciones extends MX_Controller {
         $this->image_lib->resize();
     }
 	
+	/**
+	 * Lista de anulaciones para el coordinador
+     * @since 1/6/2017
+	 */
+	public function anulaciones_coordinador()
+	{
+			$userRol = $this->session->userdata("rol");
+			$userID = $this->session->userdata("id");
+			if ($userRol != 3 ) { 
+				show_error('ERROR!!! - You are in the wrong place.');	
+			}
+			
+			$arrParam = array("idCoordinador" => $userID);
+			$data['info'] = $this->anulaciones_model->get_anulaciones($arrParam);//listado de anulaciones
+			
+			$data["view"] = 'anulaciones_coordinador';
+			$this->load->view("layout", $data);
+	}
+
+    /**
+     * Cargo modal - formulario aprobar anulaciones
+     * @since 29/5/2017
+     */
+    public function cargarModalAprobarAnulacion() 
+	{
+			header("Content-Type: text/plain; charset=utf-8"); //Para evitar problemas de acentos
+			
+			$data['information'] = FALSE;
+			$data["idAnulacion"] = $this->input->post("identificador");
+
+			$this->load->model("general_model");
+			//lista de motivo de anulaciones
+			$arrParam = array(
+				"table" => "param_motivo_anulacion",
+				"order" => "nombre_motivo_anulacion",
+				"id" => "x"
+			);
+			$data['motivos'] = $this->general_model->get_basic_search($arrParam);//lista de motivo de anulaciones
+
+			if ($data["idAnulacion"] != 'x') 
+			{
+				$arrParam = array(
+					"idAnulacion" => $data["idAnulacion"]
+				);
+				$data['information'] = $this->anulaciones_model->get_anulaciones($arrParam);
+			}
+			
+			$this->load->view("anulaciones_aprobar_modal", $data);
+    }	
+
+	/**
+	 * Guardar anulacion aprobacion
+     * @since 1/6/2017
+	 */
+	public function save_anulacion_aprobacion()
+	{			
+			header('Content-Type: application/json');
+			$data = array();
+
+			$idAnulacion = $this->input->post('hddId');
+
+			if ($this->anulaciones_model->saveAnulacionAprobar()) {
+				$data["result"] = true;
+				$this->session->set_flashdata('retornoExito', 'Se guardó con exito');
+			} else {
+				$data["result"] = "error";
+				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el administrador.');
+			}
+
+			echo json_encode($data);
+    }
 
 	
 	

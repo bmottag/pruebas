@@ -27,6 +27,10 @@
 				if (array_key_exists("idAnulacion", $arrDatos)) {
 					$this->db->where('A.id_anulacion', $arrDatos["idAnulacion"]);
 				}
+				
+				if (array_key_exists("idCoordinador", $arrDatos)) {
+					$this->db->where('X.fk_id_user_coordinador', $arrDatos["idCoordinador"]);
+				}
 
 				$query = $this->db->get('anulaciones A');
 
@@ -71,6 +75,33 @@
 				}
 		}
 
+		/**
+		 * Add/Edit Anulacion
+		 * @since 29/5/2017
+		 */
+		public function saveAnulacionAprobar() 
+		{
+				$idAnulacion = $this->input->post('hddId');
+				$userID = $this->session->userdata("id");
+				
+				$data = array(
+					'aprobada' => $this->input->post('aprobar'),
+					'observacion_aprobacion' => $this->input->post('observacion'),
+					'fecha_aprobacion' => date("Y-m-d G:i:s"),
+					'fk_id_user_coor' => $userID
+				);	
+
+				$this->db->where('id_anulacion', $idAnulacion);
+				$query = $this->db->update('anulaciones', $data);
+
+				if ($query) {
+					return true;
+				} else {
+					return false;
+				}
+		}
+
+		
 		
 		
 	    
