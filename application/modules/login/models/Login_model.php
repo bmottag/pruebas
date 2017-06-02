@@ -19,9 +19,10 @@
 			
 	    	$login = str_replace(array("<",">","[","]","*","^","-","'","="),"",$arrData["login"]);   
 	    	$passwd = str_replace(array("<",">","[","]","*","^","-","'","="),"",$arrData["passwd"]); 
-			$passwd = md5($passwd);
+			//$passwd = md5($passwd);
 			
-	    	$sql = "SELECT * FROM usuario WHERE log_user = '$login' and password = '$passwd'";
+	    	//$sql = "SELECT * FROM usuario WHERE log_user = '$login' and password = '$passwd'";//la contraseña en el mismo numero de documentno
+			$sql = "SELECT * FROM usuario WHERE log_user = '$login' and log_user = '$passwd'";
 	    	$query = $this->db->query($sql);
 
 	    	if ($query->num_rows() > 0){	    		
