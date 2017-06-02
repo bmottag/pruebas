@@ -69,11 +69,11 @@ $(function(){
 		<div class="col-md-4">
 			<div class="panel panel-success">
 				<div class="panel-heading">
-					<strong>Delegado: </strong><br>
+					<strong>Representante: </strong><br>
 					<?php 
 					if($infoSitio[0]['fk_id_user_delegado']){
 						echo "C.C. " . $infoSitio[0]['cedula_delegado'] . " " . $infoSitio[0]['nom_delegado'] . " "  . $infoSitio[0]['ape_delegado'];
-					} else { echo "Falta asignar Delegado.";}
+					} else { echo "Falta asignar Representante.";}
 					?>
 
 					<br><strong>Coordinador: </strong><br>

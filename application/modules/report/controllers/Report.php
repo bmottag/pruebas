@@ -53,7 +53,7 @@ class Report extends CI_Controller {
 	 */
     public function searchBy() 
 	{
-			$data['rol_busqueda'] = "Delegados";
+			$data['rol_busqueda'] = "Representantes";
 			//Lista Regiones
 			$this->load->model("general_model");
 			$arrParam = array(

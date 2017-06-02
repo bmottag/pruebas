@@ -19,7 +19,7 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<a class="btn btn-success" href=" <?php echo base_url(). "dashboard/coordinadores"; ?> "><span class="glyphicon glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Regresar </a> 
-                    <i class="fa fa-life-saver fa-fw"></i> Lista de Alertas que falta dar respuesta por el Delegado
+                    <i class="fa fa-life-saver fa-fw"></i> Lista de Alertas que falta dar respuesta por el Representante
 				</div>
 				<div class="panel-body">
 

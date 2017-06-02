@@ -97,7 +97,7 @@ if ($retornoError) {
 						<div class="col-lg-12">	
 							<div class="alert alert-danger">
 								<strong>Atención:</strong> <br>Al aceptar borrará toda la información de Alertas, 
-								Sesiones, Grupo de Instrumentos, Sesiones asignadas a cada Sitio y las respuestas de los Delegados.
+								Sesiones, Grupo de Instrumentos, Sesiones asignadas a cada Sitio y las respuestas de los Representantes.
 								
 								<br><br>
 								<button type="button" class="btn btn-danger btn-xs" >

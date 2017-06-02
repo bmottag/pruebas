@@ -42,7 +42,7 @@ if(!$infoAlerta){
 										<th>Sesión</th>
 										<th>Descripción Alerta</th>
 										<th>Mensaje Alerta</th>
-										<th>Delegado</th>
+										<th>Representante</th>
 										<th>Aceptada</th>
                                     </tr>
                                 </thead>
