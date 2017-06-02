@@ -146,10 +146,10 @@ class General_model extends CI_Model {
 				$this->db->select('S.*, O.nombre_organizacion, R.nombre_region, D.*, Z.nombre_zona, 
 				U.numero_documento as cedula_delegado, U.nombres_usuario nom_delegado, U.apellidos_usuario ape_delegado, U.celular celular_delegado,
 				Y.numero_documento as cedula_coordinador, Y.nombres_usuario nom_coordinador, Y.apellidos_usuario ape_coordiandor, Y.celular celular_coordinador');
-				$this->db->join('param_organizaciones O', 'O.id_organizacion = S.fk_id_organizacion', 'INNER');
 				$this->db->join('param_regiones R', 'R.id_region = S.fk_id_region', 'INNER');
 				$this->db->join('param_divipola D', 'D.mpio_divipola = S.fk_mpio_divipola', 'INNER');
-				$this->db->join('param_zonas Z', 'Z.id_zona = S.fk_id_zona', 'INNER');
+				$this->db->join('param_organizaciones O', 'O.id_organizacion = S.fk_id_organizacion', 'LEFT');
+				$this->db->join('param_zonas Z', 'Z.id_zona = S.fk_id_zona', 'LEFT');
 				$this->db->join('usuario U', 'U.id_usuario = S.fk_id_user_delegado', 'LEFT');
 				$this->db->join('usuario Y', 'Y.id_usuario = S.fk_id_user_coordinador', 'LEFT');
 				
@@ -161,7 +161,7 @@ class General_model extends CI_Model {
 					$this->db->where('S.fk_id_user_delegado', $arrDatos["idDelegado"]);
 				}
 				
-				$this->db->order_by('nombre_region, dpto_divipola_nombre, mpio_divipola_nombre, nombre_zona', 'asc');
+				$this->db->order_by('nombre_region, dpto_divipola_nombre, mpio_divipola_nombre', 'asc');
 				$query = $this->db->get('sitios S');
 
 				if ($query->num_rows() > 0) {

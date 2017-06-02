@@ -18,7 +18,6 @@ $( document ).ready( function () {
 			region:				{ required: true },
 			depto:				{ required: true },
 			mcpio:				{ required: true },
-			zona:				{ required: true },
 			estado:				{ required: true },
 			codigoDane:			{ required: true, minlength: 2, maxlength:20 },
 		},
