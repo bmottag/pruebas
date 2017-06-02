@@ -48,7 +48,7 @@
 				<li class="divider"></li>
 -->
 				<li>
-					<a href="<?php echo base_url("report/searchBy"); ?>"><i class="fa fa-list-alt fa-fw"></i> Información Alertas - Delegados</a>
+					<a href="<?php echo base_url("report/searchBy"); ?>"><i class="fa fa-list-alt fa-fw"></i> Información Alertas - Representantes</a>
 				</li>
 				
 				<li>
