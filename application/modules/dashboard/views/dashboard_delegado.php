@@ -57,92 +57,6 @@ if ($retornoError) {
 ?> 
 
 
-<!-- INFORMACION DEL SITIO PARA EL DELEGADO SI EXISTE INFORMAION -->
-<?php 
-//si no esta asignado para un sitio le muestro mensaje
-if(!$infoSitoDelegado){ 
-	$infoSesiones = false;
-?>
-	<div class="alert alert-info">
-		Por favor contactarse con el Encargado, usted no tiene nada asignado.
-	</div>
-<?php
-}else{
-	
-	//busco si el sitio tiene asociadas sesiones
-	$ci = &get_instance();
-	$ci->load->model("general_model");
-
-	$arrParam = array("idSitio" => $infoSitoDelegado[0]['id_sitio']);
-	$conteoSesiones = $this->general_model->countSesionesbySitio($arrParam);
-	$infoSesiones = false;
-	if($conteoSesiones != 0){
-		$infoSesiones = $this->general_model->get_sesiones_sitio($arrParam);
-	}
-?>
-
-	<div class="alert alert-info">
-		Usted esta asignado como <strong>DELGADO</strong> para el sitio:								
-	</div>
-
-	<div class="row">
-		<div class="col-md-4">
-			<div class="panel panel-info">
-				<div class="panel-heading">
-					<strong>Nombre Sitio: </strong><?php echo $infoSitoDelegado[0]['nombre_sitio']; ?>
-					<br><strong>Dirección: </strong><?php echo $infoSitoDelegado[0]['direccion_sitio']; ?>
-					<br><strong>Contacto: </strong><br><?php echo $infoSitoDelegado[0]['contacto_nombres'] . " " . $infoSitoDelegado[0]['contacto_apellidos']; ?>
-					<br><strong>Celular: </strong><?php echo $infoSitoDelegado[0]['contacto_celular']; ?>
-					<br><strong>Número de Sesiones: </strong><?php echo $conteoSesiones; ?>
-				</div>
-			</div>
-		</div>
-		
-		<div class="col-md-4">
-			<div class="panel panel-info">
-				<div class="panel-heading">
-					<strong>Nodo o Región: </strong><?php echo $infoSitoDelegado[0]['nombre_region']; ?>
-					<br><strong>Departamento: </strong><?php echo $infoSitoDelegado[0]['dpto_divipola_nombre']; ?>
-					<br><strong>Municipio: </strong><?php echo $infoSitoDelegado[0]['mpio_divipola_nombre']; ?>
-					<br><strong>Zona: </strong><?php echo $infoSitoDelegado[0]['nombre_zona']; ?>
-				</div>
-			</div>
-		</div>
-		
-		<div class="col-md-4">
-			<div class="panel panel-info">
-				<div class="panel-heading">
-					<strong>Representante: </strong><br>
-					<?php 
-					if($infoSitoDelegado[0]['fk_id_user_delegado']){
-						echo "C.C. " . $infoSitoDelegado[0]['cedula_delegado'] . " " . $infoSitoDelegado[0]['nom_delegado'] . " "  . $infoSitoDelegado[0]['ape_delegado'];
-						echo "<br><strong>Celular: </strong>" . $infoSitoDelegado[0]['celular_delegado']; 
-					} else { echo "Falta asignar Representante.";}
-					?>
-
-					<br><strong>Coordinador: </strong><br>
-					<?php 
-					if($infoSitoDelegado[0]['fk_id_user_coordinador']){
-						echo "C.C. " . $infoSitoDelegado[0]['cedula_coordinador'] . " " . $infoSitoDelegado[0]['nom_coordinador'] . " "  . $infoSitoDelegado[0]['ape_coordiandor'];
-						echo "<br><strong>Celular: </strong>" . $infoSitoDelegado[0]['celular_coordinador']; 
-					} else { echo "Falta asignar Coordinador.";}
-					?>
-				</div>
-			</div>
-		</div>
-	</div>
-
-<?php } ?>
-<!-- INFORMACION DEL SITIO PARA EL DELEGADO SI EXISTE INFORMAION -->
-
-
-
-
-
-
-
-
-
 
 
 		
@@ -402,6 +316,88 @@ $( document ).ready( function () {
 
 
 
+	
+<!-- INFORMACION DEL SITIO PARA EL DELEGADO SI EXISTE INFORMAION -->
+<?php 
+//si no esta asignado para un sitio le muestro mensaje
+if(!$infoSitoDelegado){ 
+	$infoSesiones = false;
+?>
+	<div class="alert alert-info">
+		Por favor contactarse con el Encargado, usted no tiene nada asignado.
+	</div>
+<?php
+}else{
+	
+	//busco si el sitio tiene asociadas sesiones
+	$ci = &get_instance();
+	$ci->load->model("general_model");
+
+	$arrParam = array("idSitio" => $infoSitoDelegado[0]['id_sitio']);
+	$conteoSesiones = $this->general_model->countSesionesbySitio($arrParam);
+	$infoSesiones = false;
+	if($conteoSesiones != 0){
+		$infoSesiones = $this->general_model->get_sesiones_sitio($arrParam);
+	}
+?>
+
+	<div class="alert alert-info">
+		Usted esta asignado como <strong>DELGADO</strong> para el sitio:								
+	</div>
+
+	<div class="row">
+		<div class="col-md-4">
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<strong>Nombre Sitio: </strong><?php echo $infoSitoDelegado[0]['nombre_sitio']; ?>
+					<br><strong>Dirección: </strong><?php echo $infoSitoDelegado[0]['direccion_sitio']; ?>
+					<?php if($infoSitoDelegado[0]['contacto_nombres']){ ?>
+					<br><strong>Contacto: </strong><br><?php echo $infoSitoDelegado[0]['contacto_nombres'] . " " . $infoSitoDelegado[0]['contacto_apellidos']; ?>
+					<br><strong>Celular: </strong><?php echo $infoSitoDelegado[0]['contacto_celular']; ?>
+					<?php } ?>
+					<br><strong>Número de Sesiones: </strong><?php echo $conteoSesiones; ?>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-md-4">
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<strong>Nodo o Región: </strong><?php echo $infoSitoDelegado[0]['nombre_region']; ?>
+					<br><strong>Departamento: </strong><?php echo $infoSitoDelegado[0]['dpto_divipola_nombre']; ?>
+					<br><strong>Municipio: </strong><?php echo $infoSitoDelegado[0]['mpio_divipola_nombre']; ?>
+					<br><strong>Zona: </strong><?php echo $infoSitoDelegado[0]['nombre_zona']; ?>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-md-4">
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<strong>Representante: </strong><br>
+					<?php 
+					if($infoSitoDelegado[0]['fk_id_user_delegado']){
+						echo "C.C. " . $infoSitoDelegado[0]['cedula_delegado'] . " " . $infoSitoDelegado[0]['nom_delegado'] . " "  . $infoSitoDelegado[0]['ape_delegado'];
+						echo "<br><strong>Celular: </strong>" . $infoSitoDelegado[0]['celular_delegado']; 
+					} else { echo "Falta asignar Representante.";}
+					?>
+
+					<br><strong>Coordinador: </strong><br>
+					<?php 
+					if($infoSitoDelegado[0]['fk_id_user_coordinador']){
+						echo "C.C. " . $infoSitoDelegado[0]['cedula_coordinador'] . " " . $infoSitoDelegado[0]['nom_coordinador'] . " "  . $infoSitoDelegado[0]['ape_coordiandor'];
+						echo "<br><strong>Celular: </strong>";
+						echo "<a href='tel:".$infoSitoDelegado[0]['celular_coordinador']."'>".$infoSitoDelegado[0]['celular_coordinador']."</a>"; 
+					} else { echo "Falta asignar Coordinador.";}
+					?>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<?php } ?>
+<!-- INFORMACION DEL SITIO PARA EL DELEGADO SI EXISTE INFORMACION -->	
+	
 
 
 
