@@ -46,31 +46,50 @@
 		</div>
 		
 		<div class="row">
-			<div class="col-sm-6">
-				<label class="control-label" for="consecutivo">Registro examinando : *</label>
+			<div class="col-sm-6 text-left">
+				<label class="control-label text-left" for="consecutivo">Registro examinando : *</label>
 			</div>
 			
-			<div class="col-sm-6">
-				<label class="control-label" for="confirmarConsecutivo">Confirmar registro examinando : *</label>
+			<div class="col-sm-6 text-left">
+				<label class="control-label text-left" for="confirmarConsecutivo">Confirmar registro examinando : *</label>
 			</div>
 		</div>
 			
+			
+	<?php if(!$information){ ?>
 		<div class="row">
 			<div class="col-sm-6">
 				<div class="form-group input-group">
 					<span class="input-group-addon">EKT20171</span>
-					<input type="password" id="consecutivo" name="consecutivo" class="form-control" value="<?php echo $information?$information[0]["consecutivo"]:""; ?>" placeholder="Registro" required >
+					<input type="password" id="consecutivo" name="consecutivo" class="form-control" value="" placeholder="Registro" required >
 				</div>
 			</div>
 
 			<div class="col-sm-6">
 				<div class="form-group input-group">
 					<span class="input-group-addon">EKT20171</span>
-					<input type="password" id="confirmarConsecutivo" name="confirmarConsecutivo" class="form-control" value="<?php echo $information?$information[0]["consecutivo"]:""; ?>" placeholder="Confirmar" required >
+					<input type="password" id="confirmarConsecutivo" name="confirmarConsecutivo" class="form-control" value="" placeholder="Confirmar" required >
+				</div>
+			</div>
+		</div>
+		
+	<?php }else{ ?>
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="form-group input-group">
+					<span class="input-group-addon">EKT20171</span>
+					<input type="text" id="consecutivo" name="consecutivo" class="form-control" value="<?php echo $information?$information[0]["consecutivo"]:""; ?>" placeholder="Registro" required >
 				</div>
 			</div>
 
+			<div class="col-sm-6">
+				<div class="form-group input-group">
+					<span class="input-group-addon">EKT20171</span>
+					<input type="text" id="confirmarConsecutivo" name="confirmarConsecutivo" class="form-control" value="<?php echo $information?$information[0]["consecutivo"]:""; ?>" placeholder="Confirmar" required >
+				</div>
+			</div>
 		</div>
+	<?php } ?>
 				
 		<div class="row">
 			<div class="col-sm-12">

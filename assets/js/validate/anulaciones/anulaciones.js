@@ -9,7 +9,8 @@ $( document ).ready( function () {
 			sesion: 				{ required: true },
 			motivo: 				{ required: true },
 			consecutivo: 			{ required: true, minlength: 4, maxlength:10 },
-			confirmarConsecutivo: 	{ required: true, minlength: 4, maxlength:10, equalTo: "#consecutivo" }
+			confirmarConsecutivo: 	{ required: true, minlength: 4, maxlength:10, equalTo: "#consecutivo" },
+			observacion: 			{ required: true }
 		},
 		errorElement: "em",
 		errorPlacement: function ( error, element ) {
