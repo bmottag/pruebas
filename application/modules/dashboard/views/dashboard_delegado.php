@@ -61,6 +61,7 @@ if ($retornoError) {
 <?php 
 //si no esta asignado para un sitio le muestro mensaje
 if(!$infoSitoDelegado){ 
+	$infoSesiones = false;
 ?>
 	<div class="alert alert-info">
 		Por favor contactarse con el Encargado, usted no tiene nada asignado.
