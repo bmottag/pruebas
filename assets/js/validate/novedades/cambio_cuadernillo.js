@@ -8,8 +8,8 @@ $( document ).ready( function () {
 		rules: {
 			sesion: 				{ required: true },
 			motivo: 				{ required: true },
-			consecutivo: 			{ required: true, minlength: 5, maxlength:10 },
-			confirmarConsecutivo: 	{ required: true, minlength: 5, maxlength:10, equalTo: "#consecutivo" }
+			consecutivo: 			{ required: true, minlength: 4, maxlength:10 },
+			confirmarConsecutivo: 	{ required: true, minlength: 4, maxlength:10, equalTo: "#consecutivo" }
 		},
 		errorElement: "em",
 		errorPlacement: function ( error, element ) {
