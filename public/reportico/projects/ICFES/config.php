@@ -30,7 +30,7 @@ define('SW_DEFAULT_SHOWCRITERIA', false);
 // are prevented. This means that the designer prevents entry of potentially
 // cdangerous ustom PHP source in the Custom Source Section or potentially
 // dangerous SQL statements in Pre-Execute Criteria sections
-define('SW_SAFE_DESIGN_MODE',true);
+define('SW_SAFE_DESIGN_MODE',false);
 
 // If false prevents any designing of reports
 define('SW_ALLOW_MAINTAIN', true);
@@ -65,7 +65,7 @@ define('SW_DB_DATEFORMAT', 'Y-m-d');
 define('SW_PREP_DATEFORMAT', 'Y-m-d');
 define('SW_DB_SERVER', '');
 define('SW_DB_PROTOCOL', '');
-define('SW_DB_ENCODING', 'None');
+define('SW_DB_ENCODING', 'UTF8');
 
 //HTML Output Encoding
 define('SW_OUTPUT_ENCODING', 'UTF8');
