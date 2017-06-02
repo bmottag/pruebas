@@ -47,7 +47,7 @@ $(function(){
 		<div class="col-lg-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<i class="fa fa-calendar"></i> LISTA DE ALERTAS
+					<i class="fa fa-bell"></i> LISTA DE ALERTAS
 				</div>
 				<div class="panel-body">
 					<button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#modal" id="x">

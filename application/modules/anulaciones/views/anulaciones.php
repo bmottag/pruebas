@@ -25,7 +25,7 @@ $(function(){
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<h4 class="list-group-item-heading">
-					<i class="fa fa-bug fa-fw"></i> ANULACIONES
+					<i class="fa fa-warning fa-fw"></i> NOVEDADES
 					</h4>
 				</div>
 			</div>
@@ -84,7 +84,7 @@ $(function(){
 		<div class="col-lg-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<i class="fa fa-bug"></i> LISTA DE ANULACIONES
+					<i class="fa fa-legal"></i> LISTA DE ANULACIONES
 				</div>
 				<div class="panel-body">
 					<button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#modal" id="x">

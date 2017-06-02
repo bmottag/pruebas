@@ -25,7 +25,7 @@ $(function(){
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<h4 class="list-group-item-heading">
-					<i class="fa fa-bug fa-fw"></i> NOVEDADES - CAMBIO DE CUADERNILLO
+					<i class="fa fa-warning fa-fw"></i> NOVEDADES
 					</h4>
 				</div>
 			</div>

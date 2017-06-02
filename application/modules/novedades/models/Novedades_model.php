@@ -45,13 +45,16 @@
 		{
 				$idCambioCuadernillo = $this->input->post('hddId');
 				$userID = $this->session->userdata("id");
+				$busqueda_1 = $this->input->post("busqueda_1");
+				$busqueda_2 = $this->input->post("busqueda_2");
+				$busqueda = $busqueda_1==""?$busqueda_2:$busqueda_1;
 				
 				$data = array(
 					'fk_id_sitio' => $this->input->post('hddIdSitio'),
 					'fk_id_sesion' => $this->input->post('sesion'),
 					'fk_id_examinando' => $idExaminando,
 					'fk_id_motivo_novedad' => $this->input->post('motivo'),
-					'fk_id_cuadernillo' => $this->input->post('busqueda_1'),
+					'fk_id_cuadernillo' => $busqueda,
 					'observacion' => $this->input->post('observacion'),
 					'fecha_cambio' => date("Y-m-d G:i:s"),
 					'fk_id_user_dele' => $userID,

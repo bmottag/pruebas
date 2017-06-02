@@ -511,11 +511,11 @@ class General_model extends CI_Model {
 				if (array_key_exists("codigoDane", $arrDatos)) {
 					$this->db->where('fk_codigo_dane', $arrDatos["codigoDane"]);
 				}
-			/*	if (array_key_exists("consecutivo", $arrDatos)) {
-					$this->db->where('consecutivo', $arrDatos["consecutivo"]);
-				}*/
 				if (array_key_exists("busqueda_1", $arrDatos)) {
 					$this->db->where('busqueda_1', $arrDatos["busqueda_1"]);
+				}
+				if (array_key_exists("busqueda_2", $arrDatos)) {
+					$this->db->where('busqueda_2', $arrDatos["busqueda_2"]);
 				}
 				
 				$query = $this->db->get('examinandos');

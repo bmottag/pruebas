@@ -504,7 +504,7 @@ class Admin extends MX_Controller {
 			$this->load->model("general_model");
 			$arrParam = array();
 			$data['info'] = $this->general_model->get_sitios($arrParam);
-			
+
 			$data["view"] = 'sitio';
 			$this->load->view("layout", $data);
 	}

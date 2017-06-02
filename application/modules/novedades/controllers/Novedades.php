@@ -93,27 +93,48 @@ class Novedades extends MX_Controller {
 
 			$consecutivo = $this->input->post("consecutivo");
 			$confirm = $this->input->post("confirmarConsecutivo");
+			$busqueda_1 = $this->input->post("busqueda_1");
+			$busqueda_2 = $this->input->post("busqueda_2");
 
 			if($consecutivo != $confirm){
 				$data["result"] = "error";
-				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Los consecutivos no coinciden.');
+				$data["mensaje"] = "Los consecutivos no coinciden.";
 			} else {
-					//buscar el id de ese consecutivo
-					$this->load->model("general_model");
-					$arrParam = array(
-							"consecutivo" => $consecutivo,
-							"idMunicipio" => $this->input->post('hddIdMunicipio'),
-							"codigoDane" => $this->input->post('hddCodigoDane')
-					);
-					$infoSNP = $this->general_model->get_examinandos_by($arrParam);
 				
-					if ($this->novedades_model->saveCambioCuadernillo($infoSNP['id_examinando'])) {
-						$data["result"] = true;					
-						$this->session->set_flashdata('retornoExito', $msj);
+				if($busqueda_1 =="" && $busqueda_2==""){
+					$data["result"] = "error";
+					$data["mensaje"] = "Seleccionar una de las busquedas.";
+				} else {
+				
+					if($busqueda_1 !="" && $busqueda_2!=""){
+						$data["result"] = "error";
+						$data["mensaje"] = "Solo seleccionar una opción.";
 					} else {
-						$data["result"] = "error";					
-						$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el administrador.');
+				
+							//buscar el id de ese consecutivo
+							$this->load->model("general_model");
+							$arrParam = array(
+									"consecutivo" => $consecutivo,
+									"idMunicipio" => $this->input->post('hddIdMunicipio'),
+									"codigoDane" => $this->input->post('hddCodigoDane')
+							);
+							$infoSNP = $this->general_model->get_examinandos_by($arrParam);
+							
+							if(!$infoSNP){
+								$data["result"] = "error";
+								$data["mensaje"] = "El SNP ingresado no se encontró en la base de datos.";
+							}else{
+						
+								if ($this->novedades_model->saveCambioCuadernillo($infoSNP['id_examinando'])) {
+									$data["result"] = true;					
+									$this->session->set_flashdata('retornoExito', $msj);
+								} else {
+									$data["result"] = "error";					
+									$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el administrador.');
+								}
+							}
 					}
+				}
 			}
 
 			echo json_encode($data);
@@ -156,7 +177,7 @@ class Novedades extends MX_Controller {
 	 * Lista de busquedas 
      * @since 30/5/2017
 	 */
-    public function busquedaList()
+    public function busquedaList($numeroBusqueda)
 	{
 			header("Content-Type: text/plain; charset=utf-8"); //Para evitar problemas de acentos
 			
@@ -176,8 +197,7 @@ class Novedades extends MX_Controller {
 					"consecutivo" => $consecutivo,
 					"idMunicipio" => $this->input->post('idMunicipio'),
 					"codigoDane" => $this->input->post('codigoDane'),
-					"busqueda_1" => $infoExaminando[0]['busqueda_1'],
-					"busqueda_2" => $infoExaminando[0]['busqueda_2']
+					"busqueda_" . $numeroBusqueda => $infoExaminando[0]['busqueda_' . $numeroBusqueda]
 			);
 			
 			$lista = $this->general_model->get_busqueda_by($arrParam);

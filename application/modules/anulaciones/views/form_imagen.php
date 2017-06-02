@@ -5,7 +5,7 @@
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<h4 class="list-group-item-heading">
-					<i class="fa fa-bug fa-fw"></i> ANULACIONES
+					<i class="fa fa-legal fa-fw"></i> ANULACIONES
 					</h4>
 				</div>
 			</div>
@@ -18,7 +18,7 @@
 		<div class="col-lg-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<i class="fa fa-user"></i> <?php echo strtoupper($tipo); ?>
+					<i class="fa fa-legal"></i> <?php echo strtoupper($tipo); ?>
 				</div>
 				<div class="panel-body">
 				

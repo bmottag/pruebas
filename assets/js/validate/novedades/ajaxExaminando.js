@@ -14,7 +14,7 @@ $(document).ready(function () {
             if (consecutivo > 0 || consecutivo != '') {
                 $.ajax ({
                     type: 'POST',
-                    url: base_url + 'novedades/busquedaList',
+                    url: base_url + 'novedades/busquedaList/1',
                     data: {'consecutivo': consecutivo, 'idMunicipio': idMunicipio, 'codigoDane': codigoDane},
                     cache: false,
                     success: function (data)
@@ -22,9 +22,21 @@ $(document).ready(function () {
                         $('#busqueda_1').html(data);
                     }
                 });
+				
+                $.ajax ({
+                    type: 'POST',
+                    url: base_url + 'novedades/busquedaList/2',
+                    data: {'consecutivo': consecutivo, 'idMunicipio': idMunicipio, 'codigoDane': codigoDane},
+                    cache: false,
+                    success: function (data)
+                    {
+                        $('#busqueda_2').html(data);
+                    }
+                });
             } else {
                 var data = '';
                 $('#busqueda_1').html(data);
+				$('#busqueda_2').html(data);
             }
 
     });

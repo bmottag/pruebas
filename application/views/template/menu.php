@@ -48,11 +48,11 @@
 				<li class="divider"></li>
 -->
 				<li>
-					<a href="<?php echo base_url("report/searchBy"); ?>"><i class="fa fa-life-saver fa-fw"></i> Información Alertas - Delegados</a>
+					<a href="<?php echo base_url("report/searchBy"); ?>"><i class="fa fa-list-alt fa-fw"></i> Información Alertas - Delegados</a>
 				</li>
 				
 				<li>
-					<a href="<?php echo base_url("report/searchByCoordinador"); ?>"><i class="fa fa-life-saver fa-fw"></i> Información Alertas - Coordinadores</a>
+					<a href="<?php echo base_url("report/searchByCoordinador"); ?>"><i class="fa fa-list-alt fa-fw"></i> Información Alertas - Coordinadores</a>
 				</li>
 				
 				
@@ -93,19 +93,19 @@ if($userRol==1){ //If it is an ADMIN user, show an special menu
 				</li>
 				
 				<li>
-					<a href="<?php echo base_url("admin/alertas"); ?>"><i class="fa fa-calendar fa-fw"></i> Alertas</a>
+					<a href="<?php echo base_url("admin/alertas"); ?>"><i class="fa fa-bell fa-fw"></i> Alertas</a>
 				</li>
 				
 				<li class="divider"></li>
 				
 				<li>
-					<a href="<?php echo base_url("report"); ?>"><i class="fa fa-calendar fa-fw"></i> Ver Listados</a>
+					<a href="<?php echo base_url("report"); ?>"><i class="fa fa-search fa-fw"></i> Ver Listados</a>
 				</li>
 				
 				<li class="divider"></li>
 				
 				<li>
-					<a href="<?php echo base_url("admin/atencion_eliminar"); ?>"><i class="fa fa-calendar fa-fw"></i> Eliminar Registros de la BD</a>
+					<a href="<?php echo base_url("admin/atencion_eliminar"); ?>"><i class="fa fa-ban fa-fw"></i> Eliminar Registros de la BD</a>
 				</li>
 				
 
@@ -118,15 +118,15 @@ if($userRol==1){ //If it is an ADMIN user, show an special menu
 
 		<li class="dropdown">
 			<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-				<i class="fa fa-gear fa-fw"></i>Novedades <i class="fa fa-caret-down"></i>
+				<i class="fa fa-warning fa-fw"></i>Novedades <i class="fa fa-caret-down"></i>
 			</a>
 			<ul class="dropdown-menu dropdown-messages">
 				<li>
-					<a href="<?php echo base_url("anulaciones"); ?>"><i class="fa fa-bug fa-fw"></i> Anulaciones</a>
+					<a href="<?php echo base_url("anulaciones"); ?>"><i class="fa fa-legal fa-fw"></i> Anulaciones</a>
 				</li>
 				
 				<li>
-					<a href="<?php echo base_url("novedades/cambio_cuadernillo"); ?>"><i class="fa fa-users fa-fw"></i> Cambio de cuadernillo</a>
+					<a href="<?php echo base_url("novedades/cambio_cuadernillo"); ?>"><i class="fa fa-bug fa-fw"></i> Cambio de cuadernillo</a>
 				</li>
 			</ul>
 		</li>
@@ -141,11 +141,11 @@ if($userRol==3){
 
 		<li class="dropdown">
 			<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-				<i class="fa fa-gear fa-fw"></i>Novedades <i class="fa fa-caret-down"></i>
+				<i class="fa fa-warning fa-fw"></i>Novedades <i class="fa fa-caret-down"></i>
 			</a>
 			<ul class="dropdown-menu dropdown-messages">
 				<li>
-					<a href="<?php echo base_url("anulaciones/anulaciones_coordinador"); ?>"><i class="fa fa-bug fa-fw"></i> Lista Anulaciones</a>
+					<a href="<?php echo base_url("anulaciones/anulaciones_coordinador"); ?>"><i class="fa fa-legal fa-fw"></i> Lista Anulaciones</a>
 				</li>
 
 			</ul>

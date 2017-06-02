@@ -76,7 +76,7 @@
 			</div>
 
 		</div>
-		
+		<p class="text-danger text-left">Seleccione una de las siguientes opciones.</p>
 		<div class="row">
 			<div class="col-sm-6">
 				<div class="form-group text-left">
