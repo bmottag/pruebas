@@ -147,8 +147,12 @@ if($userRol==3){
 				<li>
 					<a href="<?php echo base_url("anulaciones/anulaciones_coordinador"); ?>"><i class="fa fa-legal fa-fw"></i> Lista Anulaciones</a>
 				</li>
-
+				
+				<li>
+					<a href="<?php echo base_url("novedades/cambio_cuadernillo_coordinador"); ?>"><i class="fa fa-bug fa-fw"></i> Lista Cambio de Cuadernillo</a>
+				</li>
 			</ul>
+
 		</li>
 		
 <?php

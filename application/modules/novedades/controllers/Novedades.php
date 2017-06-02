@@ -210,6 +210,71 @@ class Novedades extends MX_Controller {
 			}
     }
 	
+	/**
+	 * Lista de cambio de cuadernillo para el coordinador
+     * @since 1/6/2017
+	 */
+	public function cambio_cuadernillo_coordinador()
+	{
+			$userRol = $this->session->userdata("rol");
+			$userID = $this->session->userdata("id");
+			if ($userRol != 3 ) { 
+				show_error('ERROR!!! - You are in the wrong place.');	
+			}
+			
+			$arrParam = array("idCoordinador" => $userID);
+			$data['info'] = $this->novedades_model->get_cambio_cuadernillo($arrParam);//listado de anulaciones
+			
+			$data["view"] = 'cambio_cuadernillo_coordinador';
+			$this->load->view("layout", $data);
+	}
+
+    /**
+     * Cargo modal - formulario aprobar cambio de cuadernillo
+     * @since 1/6/2017
+     */
+    public function cargarModalAprobarCambioCuadernillo() 
+	{
+			header("Content-Type: text/plain; charset=utf-8"); //Para evitar problemas de acentos
+			
+			$data['information'] = FALSE;
+			$data["idCambioCuadernillo"] = $this->input->post("identificador");
+
+
+			if ($data["idCambioCuadernillo"] != 'x') 
+			{
+				$arrParam = array(
+					"idCambioCuadernillo" => $data["idCambioCuadernillo"]
+				);
+				$data['information'] = $this->novedades_model->get_cambio_cuadernillo($arrParam);//listado de anulaciones
+			}
+			
+			$this->load->view("cambio_cuadernillo_aprobar_modal", $data);
+    }	
+
+	/**
+	 * Guardar anulacion aprobacion
+     * @since 1/6/2017
+	 */
+	public function save_cambio_cuadernillo_aprobacion()
+	{			
+			header('Content-Type: application/json');
+			$data = array();
+
+			$idAnulacion = $this->input->post('hddId');
+
+			if ($this->novedades_model->saveCambioCuadernilloAprobar()) {
+				$data["result"] = true;
+				$this->session->set_flashdata('retornoExito', 'Se guardó con exito');
+			} else {
+				$data["result"] = "error";
+				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el administrador.');
+			}
+
+			echo json_encode($data);
+    }
+
+	
 
 	
 	

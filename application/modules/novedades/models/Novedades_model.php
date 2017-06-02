@@ -9,7 +9,7 @@
 		 */
 		public function get_cambio_cuadernillo($arrDatos) 
 		{
-				$this->db->select();
+				$this->db->select('S.*, P.nombre_prueba, G.*, E.snp snp_examinando, H.snp snp_cuadernillo, M.nombre_motivo_novedad, A.*');
 				$this->db->join('sitios X', 'X.id_sitio = A.fk_id_sitio', 'INNER');
 
 				$this->db->join('sesiones S', 'S.id_sesion = A.fk_id_sesion', 'INNER');
@@ -19,6 +19,7 @@
 				$this->db->join('param_motivo_novedad M', 'M.id_motivo_novedad = A.fk_id_motivo_novedad', 'INNER');
 				
 				$this->db->join('examinandos E', 'E.id_examinando = A.fk_id_examinando', 'INNER');
+				$this->db->join('examinandos H', 'H.id_examinando = A.fk_id_cuadernillo', 'INNER');
 
 				if (array_key_exists("idSitio", $arrDatos)) {
 					$this->db->where('A.fk_id_sitio', $arrDatos["idSitio"]);
@@ -26,6 +27,10 @@
 				
 				if (array_key_exists("idCambioCuadernillo", $arrDatos)) {
 					$this->db->where('A.id_cambio_cuadernillo', $arrDatos["idCambioCuadernillo"]);
+				}
+				
+				if (array_key_exists("idCoordinador", $arrDatos)) {
+					$this->db->where('X.fk_id_user_coordinador', $arrDatos["idCoordinador"]);
 				}
 
 				$query = $this->db->get('novedades_cambio_cuadernillo A');
@@ -75,7 +80,31 @@
 				}
 		}
 
-		
+		/**
+		 * aprobacion cambio de cuadernillo
+		 * @since 1/6/2017
+		 */
+		public function saveCambioCuadernilloAprobar() 
+		{
+				$idCambioCuadernillo = $this->input->post('hddId');
+				$userID = $this->session->userdata("id");
+				
+				$data = array(
+					'aprobada' => $this->input->post('aprobar'),
+					'observacion_aprobacion' => $this->input->post('observacion'),
+					'fecha_aprobacion' => date("Y-m-d G:i:s"),
+					'fk_id_user_coor' => $userID
+				);	
+
+				$this->db->where('id_cambio_cuadernillo', $idCambioCuadernillo);
+				$query = $this->db->update('novedades_cambio_cuadernillo', $data);
+
+				if ($query) {
+					return true;
+				} else {
+					return false;
+				}
+		}
 		
 	    
 	}

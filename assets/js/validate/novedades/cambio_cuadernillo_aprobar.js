@@ -23,7 +23,8 @@ $( document ).ready( function () {
 			return true;
 		}
 	});
-		
+	
+	
 	$("#btnSubmit").click(function(){		
 	
 		if ($("#form").valid() == true){
