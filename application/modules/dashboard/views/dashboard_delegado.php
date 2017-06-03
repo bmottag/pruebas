@@ -342,7 +342,7 @@ if(!$infoSitoDelegado){
 ?>
 
 	<div class="alert alert-info">
-		Usted esta asignado como <strong>DELGADO</strong> para el sitio:								
+		Usted esta asignado como <strong>REPRESENTANTE</strong> para el sitio:								
 	</div>
 
 	<div class="row">
@@ -378,7 +378,8 @@ if(!$infoSitoDelegado){
 					<?php 
 					if($infoSitoDelegado[0]['fk_id_user_delegado']){
 						echo "C.C. " . $infoSitoDelegado[0]['cedula_delegado'] . " " . $infoSitoDelegado[0]['nom_delegado'] . " "  . $infoSitoDelegado[0]['ape_delegado'];
-						echo "<br><strong>Celular: </strong>" . $infoSitoDelegado[0]['celular_delegado']; 
+						echo "<br><strong>Celular: </strong>";						
+						echo "<a href='tel:".$infoSitoDelegado[0]['celular_delegado']."'>".$infoSitoDelegado[0]['celular_delegado']."</a>"; 
 					} else { echo "Falta asignar Representante.";}
 					?>
 

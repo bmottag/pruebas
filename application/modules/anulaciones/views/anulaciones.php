@@ -63,7 +63,8 @@ $(function(){
 					<?php 
 					if($infoSitio[0]['fk_id_user_delegado']){
 						echo "C.C. " . $infoSitio[0]['cedula_delegado'] . " " . $infoSitio[0]['nom_delegado'] . " "  . $infoSitio[0]['ape_delegado'];
-						echo "<br><strong>Celular: </strong>" . $infoSitio[0]['celular_delegado']; 
+						echo "<br><strong>Celular: </strong>"; 
+						echo "<a href='tel:".$infoSitoDelegado[0]['celular_delegado']."'>".$infoSitoDelegado[0]['celular_delegado']."</a>"; 
 					} else { echo "Falta asignar Representante.";}
 					?>
 
@@ -71,7 +72,8 @@ $(function(){
 					<?php 
 					if($infoSitio[0]['fk_id_user_coordinador']){
 						echo "C.C. " . $infoSitio[0]['cedula_coordinador'] . " " . $infoSitio[0]['nom_coordinador'] . " "  . $infoSitio[0]['ape_coordiandor'];
-						echo "<br><strong>Celular: </strong>" . $infoSitio[0]['celular_coordinador']; 
+						echo "<br><strong>Celular: </strong>"; 
+						echo "<a href='tel:".$infoSitoDelegado[0]['celular_coordinador']."'>".$infoSitoDelegado[0]['celular_coordinador']."</a>"; 
 					} else { echo "Falta asignar Coordinador.";}
 					?>
 				</div>
