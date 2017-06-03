@@ -153,13 +153,21 @@ class Dashboard extends MX_Controller {
 			if($ausentes == ""){
 				$this->session->set_flashdata('retornoErrorConsolidacion', '<strong>Error!!!</strong> Debe indicar los ausentes.');
 			}else{
-				if($ausentes > $citados){
-					$this->session->set_flashdata('retornoErrorConsolidacion', '<strong>Error!!!</strong> La cantidad de ausentes no puede ser mayor a la cantidad de citados.');
-				}else{
-					if ($this->dashboard_model->saveRegistroConsolidacion($infoSitioSesion)) {
-						$this->session->set_flashdata('retornoExito', $msj);
-					} else {
-						$this->session->set_flashdata('retornoErrorConsolidacion', '<strong>Error!!!</strong> Contactarse con el Administrador.');
+				if($ausetnes < 0){
+					$this->session->set_flashdata('retornoErrorConsolidacion', '<strong>Error!!!</strong> La cantidad de ausentes no puede menor que 0.');
+				}else{				
+					if($ausentes != $ausentesConfirmar){
+						$this->session->set_flashdata('retornoErrorConsolidacion', '<strong>Error!!!</strong> Confirmar la cantidad de ausentes.');
+					}else{				
+							if($ausentes > $citados){
+								$this->session->set_flashdata('retornoErrorConsolidacion', '<strong>Error!!!</strong> La cantidad de ausentes no puede ser mayor a la cantidad de citados.');
+							}else{
+								if ($this->dashboard_model->saveRegistroConsolidacion($infoSitioSesion)) {
+									$this->session->set_flashdata('retornoExito', $msj);
+								} else {
+									$this->session->set_flashdata('retornoErrorConsolidacion', '<strong>Error!!!</strong> Contactarse con el Administrador.');
+								}
+							}
 					}
 				}
 			}

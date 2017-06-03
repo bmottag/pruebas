@@ -275,6 +275,7 @@ if ($retornoError) {
 <script>
 $( document ).ready( function () {
 	$("#ausentes").bloquearTexto().maxlength(5);
+	$("#ausentesConfirmar").bloquearTexto().maxlength(5);
 });
 </script>
 					<form  name="formConsolidacion" id="<?php echo "formConsolidacion_" . $lista["id_alerta"]; ?>" class="form-horizontal" method="post" action="<?php echo base_url("dashboard/registro_consolidacion"); ?>">
@@ -287,6 +288,13 @@ $( document ).ready( function () {
 							<label class="col-sm-12 control-label" for="ausentes">Cantidad de ausentes</label>
 							<div class="col-sm-12">
 								<input type="text" id="ausentes" name="ausentes" class="form-control" required/>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="col-sm-12 control-label" for="ausentesConfirmar">Confirmar cantidad de ausentes</label>
+							<div class="col-sm-12">
+								<input type="text" id="ausentesConfirmar" name="ausentesConfirmar" class="form-control" required/>
 							</div>
 						</div>
 											
