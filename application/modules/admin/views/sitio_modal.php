@@ -41,7 +41,7 @@
 			
 			<div class="col-sm-6">
 				<div class="form-group text-left">
-					<label for="type" class="control-label">Código Postal : *</label>
+					<label for="type" class="control-label">Código Postal : </label>
 					<input type="text" id="codigoPostal" name="codigoPostal" class="form-control" value="<?php echo $information?$information[0]["codigo_postal_sitio"]:""; ?>" placeholder="Código Postal" >
 				</div>
 			</div>
@@ -82,7 +82,7 @@
 		<div class="row">
 			<div class="col-sm-6">
 				<div class="form-group text-left">
-					<label for="type" class="control-label">Organización : *</label>
+					<label for="type" class="control-label">Organización : </label>
 					<select name="organizacion" id="organizacion" class="form-control" >
 						<option value=''>Select...</option>
 						<?php for ($i = 0; $i < count($organizaciones); $i++) { ?>
@@ -136,7 +136,7 @@
 		<div class="row">
 			<div class="col-sm-6">
 				<div class="form-group text-left">
-					<label for="type" class="control-label">Zona : *</label>
+					<label for="type" class="control-label">Zona : </label>
 					<select name="zona" id="zona" class="form-control" >
 						<option value=''>Select...</option>
 						<?php for ($i = 0; $i < count($zonas); $i++) { ?>

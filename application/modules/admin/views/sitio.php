@@ -75,7 +75,7 @@ if ($retornoError) {
 								<th class="text-center">Nombre Sitio</th>
 								
 								<th class="text-center">Editar</th>
-								<th class="text-center">Contacto</th>
+								<th class="text-center">Contacto (Coordinador Sitio)</th>
 								<th class="text-center">Asociar con Prueba / Grupo de Instrumento / Sesión </th>
 								<th class="text-center">Representante</th>
 								<th class="text-center">Coordinador</th>
