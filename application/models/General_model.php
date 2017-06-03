@@ -531,6 +531,37 @@ class General_model extends CI_Model {
 				$this->db->close();
 				return $examinandos;
 		}
+		
+		/**
+		 * Lista de sitios
+		 * @since 12/5/2017
+		 */
+		public function get_coordinadores($arrDatos) 
+		{
+				$this->db->select('');
+				$this->db->join('usuario U', 'U.id_usuario = D.fk_id_coordinador_mcpio', 'INNER');
+				
+				
+				$where = "D.fk_id_coordinador_mcpio IS NOT NULL";
+				$this->db->where($where);
+				
+				if (array_key_exists("idMcpio", $arrDatos)) {
+					$this->db->where('D.mpio_divipola', $arrDatos["idMcpio"]);
+				}
+				
+				if (array_key_exists("idCoordinador", $arrDatos)) {
+					$this->db->where('D.fk_id_coordinador_mcpio', $arrDatos["idCoordinador"]);
+				}
+				
+				$this->db->order_by('dpto_divipola_nombre, mpio_divipola_nombre', 'asc');
+				$query = $this->db->get('param_divipola D');
+
+				if ($query->num_rows() > 0) {
+					return $query->result_array();
+				} else {
+					return false;
+				}
+		}
 
 
 

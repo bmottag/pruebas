@@ -86,6 +86,10 @@ if($userRol==1){ //If it is an ADMIN user, show an special menu
 					<a href="<?php echo base_url("admin/sitios"); ?>"><i class="fa fa-building-o fa-fw"></i> Sitios</a>
 				</li>
 				
+				<li>
+					<a href="<?php echo base_url("admin/coordinador"); ?>"><i class="fa fa-building-o fa-fw"></i> Coordinadores</a>
+				</li>
+				
 				<li class="divider"></li>
 
 				<li>

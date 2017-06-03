@@ -78,7 +78,7 @@ if ($retornoError) {
 								<th class="text-center">Contacto (Coordinador Sitio)</th>
 								<th class="text-center">Asociar con Prueba / Grupo de Instrumento / Sesión </th>
 								<th class="text-center">Representante</th>
-								<th class="text-center">Coordinador</th>
+								<th class="text-center">Operador</th>
 								
 								<th class="text-center">Nodo o región</th>
 								<th class="text-center">Departamento</th>
@@ -156,7 +156,7 @@ if($lista['fk_id_user_delegado']){
 									</td>
 									
 									<td class='text-center'>
-									<a href="<?php echo base_url("admin/asignar_delegado/" . $lista['id_sitio'] . "/coordinador"); ?>" class="btn btn-info btn-xs">Coordinador <span class="fa fa-gears fa-fw" aria-hidden="true"></a>
+									<a href="<?php echo base_url("admin/asignar_delegado/" . $lista['id_sitio'] . "/coordinador"); ?>" class="btn btn-info btn-xs">Operador <span class="fa fa-gears fa-fw" aria-hidden="true"></a>
 						<?php 
 if($lista['fk_id_user_coordinador']){
 	echo "<p class='text-primary text-center'>" . $lista['nom_coordinador'] . " " . $lista['ape_coordiandor'] . "</br>";

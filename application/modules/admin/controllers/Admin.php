@@ -1343,5 +1343,91 @@ class Admin extends MX_Controller {
 			echo json_encode($data);
     }
 	
+	/**
+	 * INICIO COORDINADOR
+	 */	
+	
+		
+	/**
+	 * Lista de COORDINADOR
+     * @since 3/6/2017
+	 */
+	public function coordinador()
+	{
+			$this->load->model("general_model");
+			$arrParam = array();
+			$data['info'] = $this->general_model->get_coordinadores($arrParam);
+
+			$data["view"] = 'coordinador';
+			$this->load->view("layout", $data);
+	}
+	
+    /**
+     * Cargo modal - formulario COORDINADOR
+     * @since 3/6/2017
+     */
+    public function cargarModalCoordinador() 
+	{
+			header("Content-Type: text/plain; charset=utf-8"); //Para evitar problemas de acentos
+			
+			$data['information'] = FALSE;
+			$data["identificador"] = $this->input->post("identificador");
+			
+			$this->load->model("general_model");
+			$data['usuarios'] = $this->general_model->lista_coordinador();//listado usuarios coordinadores
+			
+			$data['departamentos'] = $this->general_model->get_dpto_divipola();//listado de departamentos
+			
+			if ($data["identificador"] != 'x') {
+				$arrParam = array(
+					"idMcpio" => $data["identificador"]
+				);
+				$data['information'] = $this->general_model->get_coordinadores($arrParam);//info sitio
+			}
+			
+			$this->load->view("coordinador_modal", $data);
+    }
+	
+	/**
+	 * Update Coordinadores
+     * @since 3/6/2017
+	 */
+	public function save_coordinador()
+	{			
+			header('Content-Type: application/json');
+			$data = array();
+
+			$idMcpio = $this->input->post('mcpio');
+			$idUser = $this->input->post('usuario');
+
+			if ($this->admin_model->updateSitio_coordinador($idMcpio)) {
+				
+				//actualizamos el campo coordinador en la lista de municipios
+				$arrParam = array(
+					"table" => "param_divipola",
+					"primaryKey" => "mpio_divipola",
+					"id" => $idMcpio,
+					"column" => "fk_id_coordinador_mcpio",
+					"value" => $idUser
+				);
+
+				$this->load->model("general_model");
+
+				if ($this->general_model->updateRecord($arrParam)) {				
+						$data["result"] = true;
+						$this->session->set_flashdata('retornoExito', 'Se guardó la información');
+				}else{
+						$data["result"] = "error";				
+						$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador.');					
+				}
+			} else {
+				$data["result"] = "error";				
+				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador.');
+			}
+
+			echo json_encode($data);
+    }
+
+	
 	
 }
