@@ -18,12 +18,13 @@
 		<div class="col-lg-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
+					<a class="btn btn-success" href=" <?php echo base_url(). 'anulaciones'; ?> "><span class="glyphicon glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Regresar </a> 
 					<i class="fa fa-legal"></i> <?php echo strtoupper($tipo); ?>
 				</div>
 				<div class="panel-body">
 				
 					<div class="alert alert-info">
-						Guardar la foto de evidencia
+						<?php echo $mensaje; ?>
 					</div>				
 					
 					<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">

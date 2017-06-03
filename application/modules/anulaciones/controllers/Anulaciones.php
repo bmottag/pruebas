@@ -170,6 +170,7 @@ class Anulaciones extends MX_Controller {
 				);
 			$data['information'] = $this->anulaciones_model->get_anulaciones($arrParam);
 			$data['tipo'] = "evidencia";
+			$data['mensaje'] = "Guardar la foto de la evidencia";
 						
 			$data['error'] = $error; //se usa para mostrar los errores al cargar la imagen 
 			$data["view"] = 'form_imagen';
@@ -187,6 +188,7 @@ class Anulaciones extends MX_Controller {
 				);
 			$data['information'] = $this->anulaciones_model->get_anulaciones($arrParam);
 			$data['tipo'] = "acta";
+			$data['mensaje'] = "Guardar la foto del acta de anulación";
 						
 			$data['error'] = $error; //se usa para mostrar los errores al cargar la imagen 
 			$data["view"] = 'form_imagen';
