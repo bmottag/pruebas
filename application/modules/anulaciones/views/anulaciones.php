@@ -75,7 +75,7 @@ $(function(){
 					if($infoSitio[0]['fk_id_user_coordinador']){
 						echo "C.C. " . $infoSitio[0]['cedula_coordinador'] . " " . $infoSitio[0]['nom_coordinador'] . " "  . $infoSitio[0]['ape_coordiandor'];
 						echo "<br><strong>Celular: </strong>"; 
-						echo "<a href='tel:".$infoSitoDelegado[0]['celular_coordinador']."'>".$infoSitoDelegado[0]['celular_coordinador']."</a>"; 
+						echo "<a href='tel:".$infoSitio[0]['celular_coordinador']."'>".$infoSitio[0]['celular_coordinador']."</a>"; 
 					} else { echo "Falta asignar Coordinador.";}
 					?>
 				</div>
