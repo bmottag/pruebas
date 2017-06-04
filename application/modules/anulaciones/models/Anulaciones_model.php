@@ -58,7 +58,7 @@
 					'observacion' => $this->input->post('observacion'),
 					'fecha_anulacion' => date("Y-m-d G:i:s"),
 					'fk_id_user_dele' => $userID,
-					'aprobada' => 2
+					'aprobada' => 0
 				);	
 
 				//revisar si es para adicionar o editar
