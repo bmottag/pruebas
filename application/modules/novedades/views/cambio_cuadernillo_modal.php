@@ -51,31 +51,51 @@
 		</div>
 		
 		<div class="row">
-			<div class="col-sm-6">
+			<div class="col-sm-6 text-left">
 				<label class="control-label" for="consecutivo">Registro examinando : *</label>
 			</div>
 			
-			<div class="col-sm-6">
+			<div class="col-sm-6 text-left">
 				<label class="control-label" for="confirmarConsecutivo">Confirmar registro examinando : *</label>
 			</div>
 		</div>
 		
+	<?php if(!$information){ ?>
 		<div class="row">
 			<div class="col-sm-6">
 				<div class="form-group input-group">
 					<span class="input-group-addon">EKT20171</span>
-					<input type="password" id="consecutivo" name="consecutivo" class="form-control" value="<?php echo $information?$information[0]["consecutivo"]:""; ?>" placeholder="Registro" required >
+					<input type="password" id="consecutivo" name="consecutivo" class="form-control" value="" placeholder="Registro" required >
 				</div>
 			</div>
 
 			<div class="col-sm-6">
 				<div class="form-group input-group">
 					<span class="input-group-addon">EKT20171</span>
-					<input type="password" id="confirmarConsecutivo" name="confirmarConsecutivo" class="form-control" value="<?php echo $information?$information[0]["consecutivo"]:""; ?>" placeholder="Confirmar" required >
+					<input type="password" id="confirmarConsecutivo" name="confirmarConsecutivo" class="form-control" value="" placeholder="Confirmar" required >
+				</div>
+			</div>
+		</div>
+	
+	<?php }else{ ?>
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="form-group input-group">
+					<span class="input-group-addon">EKT20171</span>
+					<input type="text" id="consecutivo" name="consecutivo" class="form-control" value="<?php echo $information?$information[0]["consecutivo_examinando"]:""; ?>" placeholder="Registro" required >
 				</div>
 			</div>
 
+			<div class="col-sm-6">
+				<div class="form-group input-group">
+					<span class="input-group-addon">EKT20171</span>
+					<input type="text" id="confirmarConsecutivo" name="confirmarConsecutivo" class="form-control" value="<?php echo $information?$information[0]["consecutivo_examinando"]:""; ?>" placeholder="Confirmar" required >
+				</div>
+			</div>
 		</div>
+	<?php } ?>	
+	
+		
 		<p class="text-danger text-left">Seleccione una de las siguientes opciones.</p>
 		<div class="row">
 			<div class="col-sm-6">
@@ -83,7 +103,10 @@
 					<label for="type" class="control-label">Busqueda 1 : </label>
 
 					<select name="busqueda_1" id="busqueda_1" class="form-control" >	
-
+						<?php if($information && $information[0]['busqueda'] == 1){ ?>
+						<option value=''>Select...</option>
+							<option value="<?php echo $information[0]["fk_id_cuadernillo"]; ?>" selected><?php echo $information[0]["snp_cuadernillo"]; ?></option>
+						<?php } ?>
 					</select>
 				
 				</div>
@@ -94,7 +117,10 @@
 					<label for="type" class="control-label">Busqueda 2 : </label>
 
 					<select name="busqueda_2" id="busqueda_2" class="form-control" >	
-
+						<?php if($information && $information[0]['busqueda'] == 2){ ?>
+						<option value=''>Select...</option>
+							<option value="<?php echo $information[0]["fk_id_cuadernillo"]; ?>" selected><?php echo $information[0]["snp_cuadernillo"]; ?></option>
+						<?php } ?>
 					</select>
 				
 				</div>

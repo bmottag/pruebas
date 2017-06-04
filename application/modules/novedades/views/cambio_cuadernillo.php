@@ -39,8 +39,10 @@ $(function(){
 				<div class="panel-heading">
 					<strong>Nombre Sitio: </strong><?php echo $infoSitio[0]['nombre_sitio']; ?>
 					<br><strong>Dirección: </strong><?php echo $infoSitio[0]['direccion_sitio']; ?>
+					<?php if($infoSitio[0]['contacto_nombres']){ ?>
 					<br><strong>Contacto: </strong><br><?php echo $infoSitio[0]['contacto_nombres'] . " " . $infoSitio[0]['contacto_apellidos']; ?>
 					<br><strong>Celular: </strong><?php echo $infoSitio[0]['contacto_celular']; ?>
+					<?php } ?>
 				</div>
 			</div>
 		</div>
@@ -64,7 +66,7 @@ $(function(){
 					if($infoSitio[0]['fk_id_user_delegado']){
 						echo "C.C. " . $infoSitio[0]['cedula_delegado'] . " " . $infoSitio[0]['nom_delegado'] . " "  . $infoSitio[0]['ape_delegado'];
 						echo "<br><strong>Celular: </strong>"; 
-						echo "<a href='tel:".$infoSitoDelegado[0]['celular_delegado']."'>".$infoSitoDelegado[0]['celular_delegado']."</a>"; 
+						echo "<a href='tel:".$infoSitio[0]['celular_delegado']."'>".$infoSitio[0]['celular_delegado']."</a>"; 
 					} else { echo "Falta asignar Representante.";}
 					?>
 
@@ -126,6 +128,7 @@ if ($retornoError) {
 								<th class="text-center">Sesión</th>
 								<th class="text-center">SNP Examinando</th>
 								<th class="text-center">Editar</th>
+								<th class="text-center">Nuevo cuadernillo</th>
 								<th class="text-center">Motivo cambio cuadernillo</th>
 								<th class="text-center">Observación</th>
 							</tr>
@@ -136,16 +139,16 @@ if ($retornoError) {
 									echo "<tr>";
 									
 									echo "<td>";
-									echo "<strong>Prueba: </strong>" . $lista['nombre_prueba'];
-									echo "<br><strong>Grupo de Instrumentos: </strong>" . $lista['nombre_grupo_instrumentos'];
-									echo "<br><strong>Sesión: </strong>" . $lista['sesion_prueba'];
+									echo "<strong>Prueba: </strong><br>" . $lista['nombre_prueba'];
+									echo "<br><strong>Grupo de Instrumentos: </strong><br>" . $lista['nombre_grupo_instrumentos'];
+									echo "<br><strong>Sesión: </strong><br>" . $lista['sesion_prueba'];
 									echo "<br><strong>Fecha: </strong>" . $lista['fecha'];
 									echo "<br><strong>Hora Inicial: </strong>" . $lista['hora_inicio_prueba'];
 									echo "<br><strong>Hora Final: </strong>" . $lista['hora_fin_prueba'];
 									echo "</td>";
 									
 									echo "<td class='text-center'>";
-									echo '<p class="text-primary"><strong>' . $lista['snp'] . '</strong></p>';
+									echo '<p class="text-primary"><strong>' . $lista['snp_examinando'] . '</strong></p>';
 									echo "</td>";
 									
 									echo "<td class='text-center'>";
@@ -161,6 +164,11 @@ if ($retornoError) {
 </button>
 						<?php
 									echo "</td>";
+									
+									echo "<td class='text-center'>";
+									echo '<p class="text-primary"><strong>' . $lista['snp_cuadernillo'] . '</strong></p>';
+									echo "</td>";
+									
 									echo "<td>" . $lista['nombre_motivo_novedad'] . "</td>";
 
 									

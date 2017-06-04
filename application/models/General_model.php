@@ -517,6 +517,10 @@ class General_model extends CI_Model {
 				if (array_key_exists("busqueda_2", $arrDatos)) {
 					$this->db->where('busqueda_2', $arrDatos["busqueda_2"]);
 				}
+				if (array_key_exists("consecutivo", $arrDatos)) {
+					$this->db->where_not_in('consecutivo', $arrDatos["consecutivo"]);
+				}
+				$this->db->order_by('snp', 'asc');
 				
 				$query = $this->db->get('examinandos');
 					

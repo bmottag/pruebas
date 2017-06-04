@@ -9,7 +9,7 @@
 		 */
 		public function get_cambio_cuadernillo($arrDatos) 
 		{
-				$this->db->select('S.*, P.nombre_prueba, G.*, E.snp snp_examinando, H.snp snp_cuadernillo, M.nombre_motivo_novedad, A.*');
+				$this->db->select('S.*, P.nombre_prueba, G.*, E.snp snp_examinando, E.consecutivo consecutivo_examinando, H.snp snp_cuadernillo, H.consecutivo consecutivo_cuadernillo, M.nombre_motivo_novedad, A.*');
 				$this->db->join('sitios X', 'X.id_sitio = A.fk_id_sitio', 'INNER');
 
 				$this->db->join('sesiones S', 'S.id_sesion = A.fk_id_sesion', 'INNER');
@@ -52,18 +52,20 @@
 				$userID = $this->session->userdata("id");
 				$busqueda_1 = $this->input->post("busqueda_1");
 				$busqueda_2 = $this->input->post("busqueda_2");
-				$busqueda = $busqueda_1==""?$busqueda_2:$busqueda_1;
+				$cuadernillo = $busqueda_1==""?$busqueda_2:$busqueda_1;
+				$busqueda = $busqueda_1==""?2:1;
 				
 				$data = array(
 					'fk_id_sitio' => $this->input->post('hddIdSitio'),
 					'fk_id_sesion' => $this->input->post('sesion'),
 					'fk_id_examinando' => $idExaminando,
 					'fk_id_motivo_novedad' => $this->input->post('motivo'),
-					'fk_id_cuadernillo' => $busqueda,
+					'fk_id_cuadernillo' => $cuadernillo,
 					'observacion' => $this->input->post('observacion'),
 					'fecha_cambio' => date("Y-m-d G:i:s"),
 					'fk_id_user_dele' => $userID,
-					'aprobada' => 2
+					'aprobada' => 2,
+					'busqueda' => $busqueda
 				);	
 
 				//revisar si es para adicionar o editar
