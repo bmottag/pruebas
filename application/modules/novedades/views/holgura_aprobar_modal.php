@@ -1,8 +1,8 @@
-<script type="text/javascript" src="<?php echo base_url("assets/js/validate/novedades/cambio_cuadernillo_aprobar.js"); ?>"></script>
+<script type="text/javascript" src="<?php echo base_url("assets/js/validate/novedades/holgura_aprobar.js"); ?>"></script>
 
 <div class="modal-header">
 	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	<h4 class="modal-title" id="exampleModalLabel">Formulario para Aprobar Cambio de Cuadernillo
+	<h4 class="modal-title" id="exampleModalLabel">Formulario para Aprobar Holgura
 	</h4>
 </div>
 
@@ -11,7 +11,7 @@
 	<p class="text-danger text-left">Los campos con * son obligatorios.</p>
 
 	<form name="form" id="form" role="form" method="post" >
-		<input type="hidden" id="hddId" name="hddId" value="<?php echo $information?$information[0]["id_cambio_cuadernillo"]:""; ?>"/>
+		<input type="hidden" id="hddId" name="hddId" value="<?php echo $information?$information[0]["id_holgura"]:""; ?>"/>
 
 		<div class="form-group text-left">
 			<label class="control-label" for="aprobar">Aprobar / Desaprobar</label>

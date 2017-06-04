@@ -179,6 +179,32 @@
 					return false;
 				}
 		}
+		
+		/**
+		 * aprobacion holgura
+		 * @since 4/6/2017
+		 */
+		public function saveHolguraAprobar() 
+		{
+				$idHolgura = $this->input->post('hddId');
+				$userID = $this->session->userdata("id");
+				
+				$data = array(
+					'aprobada' => $this->input->post('aprobar'),
+					'observacion_aprobacion' => $this->input->post('observacion'),
+					'fecha_aprobacion' => date("Y-m-d G:i:s"),
+					'fk_id_user_coor' => $userID
+				);	
+
+				$this->db->where('id_holgura', $idHolgura);
+				$query = $this->db->update('novedades_holgura', $data);
+
+				if ($query) {
+					return true;
+				} else {
+					return false;
+				}
+		}
 
 		
 	    

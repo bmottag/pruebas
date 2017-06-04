@@ -160,6 +160,10 @@ if($userRol==3){
 				<li>
 					<a href="<?php echo base_url("novedades/cambio_cuadernillo_coordinador"); ?>"><i class="fa fa-bug fa-fw"></i> Lista Cambio de Cuadernillo</a>
 				</li>
+				
+				<li>
+					<a href="<?php echo base_url("novedades/holgura_coordinador"); ?>"><i class="fa fa-download fa-fw"></i> Lista Holguras</a>
+				</li>
 			</ul>
 
 		</li>

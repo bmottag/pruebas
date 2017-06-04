@@ -422,7 +422,70 @@ class Novedades extends MX_Controller {
 			echo json_encode($data);
     }
 	
+	/**
+	 * Lista de holguras para el coordinador
+     * @since 4/6/2017
+	 */
+	public function holgura_coordinador()
+	{
+			$userRol = $this->session->userdata("rol");
+			$userID = $this->session->userdata("id");
+			if ($userRol != 3 ) { 
+				show_error('ERROR!!! - You are in the wrong place.');	
+			}
+			
+			$arrParam = array("idCoordinador" => $userID);
+			$data['info'] = $this->novedades_model->get_holguras($arrParam);//listado de holguras
+			
+			$data["view"] = 'holgura_coordinador';
+			$this->load->view("layout", $data);
+	}
 
+    /**
+     * Cargo modal - formulario aprobar holgura
+     * @since 4/6/2017
+     */
+    public function cargarModalAprobarHolgura() 
+	{
+			header("Content-Type: text/plain; charset=utf-8"); //Para evitar problemas de acentos
+			
+			$data['information'] = FALSE;
+			$data["idHolgura"] = $this->input->post("identificador");
+
+
+			if ($data["idHolgura"] != 'x') 
+			{
+				$arrParam = array(
+					"idHolgura" => $data["idHolgura"]
+				);
+				$data['information'] = $this->novedades_model->get_holguras($arrParam);//informacion holgura
+			}
+	
+			$this->load->view("holgura_aprobar_modal", $data);
+    }	
+
+	/**
+	 * Guardar holgura aprobacion
+     * @since 4/6/2017
+	 */
+	public function save_holgura_aprobacion()
+	{			
+			header('Content-Type: application/json');
+			$data = array();
+
+			if ($this->novedades_model->saveHolguraAprobar()) {
+				$data["result"] = true;
+				$this->session->set_flashdata('retornoExito', 'Se guardó con exito');
+			} else {
+				$data["result"] = "error";
+				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el administrador.');
+			}
+
+			echo json_encode($data);
+    }
+	
+	
+	
 	
 	
 }
