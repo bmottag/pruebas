@@ -64,7 +64,7 @@
 					'observacion' => $this->input->post('observacion'),
 					'fecha_cambio' => date("Y-m-d G:i:s"),
 					'fk_id_user_dele' => $userID,
-					'aprobada' => 2,
+					'aprobada' => 0,
 					'busqueda' => $busqueda
 				);	
 
