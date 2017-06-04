@@ -39,6 +39,7 @@ $(function(){
 				<div class="panel-heading">
 					<strong>Nombre Sitio: </strong><?php echo $infoSitio[0]['nombre_sitio']; ?>
 					<br><strong>Dirección: </strong><?php echo $infoSitio[0]['direccion_sitio']; ?>
+					<br><strong>Código DANE: </strong><?php echo $infoSitio[0]['codigo_dane']; ?>
 					<?php if($infoSitio[0]['contacto_nombres']){ ?>
 					<br><strong>Contacto: </strong><br><?php echo $infoSitio[0]['contacto_nombres'] . " " . $infoSitio[0]['contacto_apellidos']; ?>
 					<br><strong>Celular: </strong><?php echo $infoSitio[0]['contacto_celular']; ?>
