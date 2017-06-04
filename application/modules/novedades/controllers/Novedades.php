@@ -274,6 +274,153 @@ class Novedades extends MX_Controller {
 			echo json_encode($data);
     }
 
+	/**
+	 * Lista de holguras para el sitio del Delegado
+     * @since 3/6/2017
+	 */
+	public function holgura()
+	{
+			$userRol = $this->session->userdata("rol");
+			$userID = $this->session->userdata("id");
+			if ($userRol != 4 ) { 
+				show_error('ERROR!!! - You are in the wrong place.');	
+			}
+			
+			$this->load->model("general_model");
+			$arrParam = array("idDelegado" => $userID);
+			$data['infoSitio'] = $this->general_model->get_sitios($arrParam);//informacion del sitio
+
+			$arrParam = array("idSitio" => $data['infoSitio'][0]['id_sitio']);
+			$data['info'] = $this->novedades_model->get_holguras($arrParam);//listado de holguras
+			
+			$data["view"] = 'holgura';
+			$this->load->view("layout", $data);
+	}
+	
+    /**
+     * Cargo modal - formulario holgura
+     * @since 3/6/2017
+     */
+    public function cargarModalHolgura() 
+	{
+			header("Content-Type: text/plain; charset=utf-8"); //Para evitar problemas de acentos
+			
+			$data['information'] = FALSE;
+			$data["idHolgura"] = $this->input->post("identificador");
+
+			$this->load->model("general_model");
+			//lista de snp holguras
+			$arrParam = array(
+				"table" => "snp_holguras",
+				"order" => "snp_holgura",
+				"id" => "x"
+			);
+			$data['snpHolgura'] = $this->general_model->get_basic_search($arrParam);//lista de snp holguras
+
+			//busco si el sitio tiene asociadas sesiones
+			$userID = $this->session->userdata("id");
+			$arrParam = array("idDelegado" => $userID);
+			$data['infoSitoDelegado'] = $this->general_model->get_sitios($arrParam);//busco el id del sitio
+			
+			$arrParam = array("idSitio" => $data['infoSitoDelegado'][0]['id_sitio']);
+			$conteoSesiones = $this->general_model->countSesionesbySitio($arrParam);//reviso si el sitio tiene sesiones
+			$data['infoSesiones'] = false;
+			if($conteoSesiones != 0){//si tiene sesiones las busco
+				$data['infoSesiones'] = $this->general_model->get_sesiones_sitio($arrParam);//sesiones del sitio
+			}		
+
+			if ($data["idHolgura"] != 'x') 
+			{
+				$arrParam = array(
+					"idHolgura" => $data["idHolgura"]
+				);
+				$data['information'] = $this->novedades_model->get_holguras($arrParam);
+			}
+			
+			$this->load->view("holgura_modal", $data);
+    }
+	
+	/**
+	 * Guardar holgura
+     * @since 4/5/2017
+	 */
+	public function save_holgura()
+	{			
+			header('Content-Type: application/json');
+			$data = array();
+			
+			$idHolgura = $this->input->post('hddId');
+
+			$msj = "Se adicionó la holgura.";
+			if ($idHolgura != '') {
+				$msj = "Se actualizó la holgura.";
+			}			
+
+			$consecutivo = $this->input->post("consecutivo");
+			$confirm = $this->input->post("confirmarConsecutivo");
+
+			if($consecutivo != $confirm){
+				$data["result"] = "error";
+				$data["mensaje"] = "Los consecutivos no coinciden.";
+			} else {
+					//buscar el id de ese consecutivo
+					$this->load->model("general_model");
+					$arrParam = array(
+							"consecutivo" => $consecutivo,
+							"idMunicipio" => $this->input->post('hddIdMunicipio'),
+							"codigoDane" => $this->input->post('hddCodigoDane')
+					);
+					$infoSNP = $this->general_model->get_examinandos_by($arrParam);
+					
+					if(!$infoSNP){
+						$data["result"] = "error";
+						$data["mensaje"] = "El SNP ingresado no se encontró en la base de datos.";
+					}else{
+							if ($this->novedades_model->saveHolgura($infoSNP['id_examinando'])) {
+								$data["result"] = true;					
+								$this->session->set_flashdata('retornoExito', $msj);
+							} else {
+								$data["result"] = "error";					
+								$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el administrador.');
+							}
+					}
+			}
+
+			echo json_encode($data);
+    }
+		
+	/**
+	 * Eliminar cambio de cuadernillo
+     * @since 30/5/2017
+	 */
+	public function eliminar_holgura()
+	{			
+			header('Content-Type: application/json');
+			$data = array();
+			
+			$idHolgura = $this->input->post('identificador');
+			
+			$this->load->model("general_model");
+			//eliminaos registro
+			$arrParam = array(
+				"table" => "novedades_holgura",
+				"primaryKey" => "id_holgura",
+				"id" => $idHolgura
+			);
+				
+			if ($this->general_model->deleteRecord($arrParam)) {
+				$data["result"] = true;
+				$data["mensaje"] = "Se eliminó la holgua.";
+				$this->session->set_flashdata('retornoExito', 'Se eliminó la holgura');
+			} else {
+				$data["result"] = "error";
+				$data["mensaje"] = "Error!!! Contactarse con el Administrador.";
+				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador');
+			}
+
+
+			echo json_encode($data);
+    }
 	
 
 	

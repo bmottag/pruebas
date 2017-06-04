@@ -43,7 +43,7 @@
 		}
 		
 		/**
-		 * Add/Edit Anulacion
+		 * Add/Edit Cambio cuadrnillo
 		 * @since 29/5/2017
 		 */
 		public function saveCambioCuadernillo($idExaminando) 
@@ -107,6 +107,79 @@
 					return false;
 				}
 		}
+		
+		/**
+		 * Lista de holguras
+		 * @since 3/6/2017
+		 */
+		public function get_holguras($arrDatos) 
+		{
+				$this->db->select('S.*, P.nombre_prueba, G.*, E.snp snp_examinando, E.consecutivo consecutivo_examinando, Z.snp_holgura, Z.consecutivo_holgura, A.*');
+				$this->db->join('sitios X', 'X.id_sitio = A.fk_id_sitio', 'INNER');
+
+				$this->db->join('sesiones S', 'S.id_sesion = A.fk_id_sesion', 'INNER');
+				$this->db->join('param_grupo_instrumentos G', 'G.id_grupo_instrumentos = S.fk_id_grupo_instrumentos', 'INNER');
+				$this->db->join('pruebas P', 'P.id_prueba = G.fk_id_prueba', 'INNER');
+				
+				$this->db->join('examinandos E', 'E.id_examinando = A.fk_id_examinando', 'INNER');
+				
+				$this->db->join('snp_holguras Z', 'Z.id_snp_holgura = A.fk_id_snp_holgura', 'INNER');
+
+				if (array_key_exists("idHolgura", $arrDatos)) {
+					$this->db->where('A.id_holgura', $arrDatos["idHolgura"]);
+				}
+				
+				if (array_key_exists("idSitio", $arrDatos)) {
+					$this->db->where('A.fk_id_sitio', $arrDatos["idSitio"]);
+				}
+				
+				if (array_key_exists("idCoordinador", $arrDatos)) {
+					$this->db->where('X.fk_id_user_coordinador', $arrDatos["idCoordinador"]);
+				}
+
+				$query = $this->db->get('novedades_holgura A');
+
+				if ($query->num_rows() > 0) {
+					return $query->result_array();
+				} else {
+					return false;
+				}
+		}
+		
+		/**
+		 * Add/Edit Holgura
+		 * @since 4/6/2017
+		 */
+		public function saveHolgura($idExaminando) 
+		{
+				$idHolgura = $this->input->post('hddId');
+				$userID = $this->session->userdata("id");
+				
+				$data = array(
+					'fk_id_sitio' => $this->input->post('hddIdSitio'),
+					'fk_id_sesion' => $this->input->post('sesion'),
+					'fk_id_examinando' => $idExaminando,
+					'fk_id_snp_holgura' => $this->input->post('snpHolgura'),
+					'observacion' => $this->input->post('observacion'),
+					'fecha_holgura' => date("Y-m-d G:i:s"),
+					'fk_id_user_dele' => $userID,
+					'aprobada' => 0
+				);	
+
+				//revisar si es para adicionar o editar
+				if ($idHolgura == '') {
+					$query = $this->db->insert('novedades_holgura', $data);
+				} else {
+					$this->db->where('id_holgura', $idHolgura);
+					$query = $this->db->update('novedades_holgura', $data);
+				}
+				if ($query) {
+					return true;
+				} else {
+					return false;
+				}
+		}
+
 		
 	    
 	}

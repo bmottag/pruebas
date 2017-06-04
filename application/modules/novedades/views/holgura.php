@@ -1,4 +1,4 @@
-<script type="text/javascript" src="<?php echo base_url("assets/js/validate/novedades/cambio_cuadernillo.js"); ?>"></script>
+<script type="text/javascript" src="<?php echo base_url("assets/js/validate/novedades/holgura.js"); ?>"></script>
 
 <script>
 $(function(){ 
@@ -6,7 +6,7 @@ $(function(){
 			var oID = $(this).attr("id");
             $.ajax ({
                 type: 'POST',
-				url: base_url + '/novedades/cargarModalCambioCuadernillo',
+				url: base_url + '/novedades/cargarModalHolgura',
                 data: {'identificador': oID},
                 cache: false,
                 success: function (data) {
@@ -88,11 +88,11 @@ $(function(){
 		<div class="col-lg-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<i class="fa fa-bug"></i> LISTA DE CAMBIO DE CUADERNILLOS
+					<i class="fa fa-download"></i> LISTA DE CAMBIO DE HOLGURAS
 				</div>
 				<div class="panel-body">
 					<button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#modal" id="x">
-							<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Adicionar Cambio de Cuadernillo
+							<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Adicionar Holgura
 					</button><br>
 <?php
 $retornoExito = $this->session->flashdata('retornoExito');
@@ -128,8 +128,7 @@ if ($retornoError) {
 								<th class="text-center">Sesión</th>
 								<th class="text-center">SNP Examinando</th>
 								<th class="text-center">Editar</th>
-								<th class="text-center">Nuevo cuadernillo</th>
-								<th class="text-center">Motivo cambio cuadernillo</th>
+								<th class="text-center">SNP Holgura</th>
 								<th class="text-center">Observación</th>
 							</tr>
 						</thead>
@@ -153,25 +152,21 @@ if ($retornoError) {
 									
 									echo "<td class='text-center'>";
 						?>
-									<button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#modal" id="<?php echo $lista['id_cambio_cuadernillo']; ?>" >
+									<button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#modal" id="<?php echo $lista['id_holgura']; ?>" >
 										Editar <span class="glyphicon glyphicon-edit" aria-hidden="true">
 									</button>
 									
 									<br><br>
 
-<button type="button" class="btn btn-danger btn-xs" id="<?php echo $lista['id_cambio_cuadernillo']; ?>" >
+<button type="button" class="btn btn-danger btn-xs" id="<?php echo $lista['id_holgura']; ?>" >
 	Eliminar <span class="fa fa-times fa-fw" aria-hidden="true">
 </button>
 						<?php
 									echo "</td>";
 									
 									echo "<td class='text-center'>";
-									echo '<p class="text-primary"><strong>' . $lista['snp_cuadernillo'] . '</strong></p>';
+									echo '<p class="text-primary"><strong>' . $lista['snp_holgura'] . '</strong></p>';
 									echo "</td>";
-									
-									echo "<td>" . $lista['nombre_motivo_novedad'] . "</td>";
-
-									
 									
 									echo "<td>" . $lista['observacion'] . "</td>";
 									echo "</tr>";
