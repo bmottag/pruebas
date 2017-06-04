@@ -101,9 +101,9 @@ if($userRol==1){ //If it is an ADMIN user, show an special menu
 				</li>
 				
 				<li class="divider"></li>
-				
+
 				<li>
-					<a href="<?php echo base_url("report"); ?>"><i class="fa fa-search fa-fw"></i> Ver Listados</a>
+					<a href="<?php echo base_url("public/reportico/run.php?execute_mode=MENU&project=ICFES"); ?>"><i class="fa fa-search fa-fw"></i> Ver Listados</a>
 				</li>
 				
 				<li class="divider"></li>
