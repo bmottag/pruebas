@@ -108,6 +108,11 @@ if ($retornoError) {
 									
 									
 						<?php
+									if($lista['aprobada']==1){
+										echo "<p class='text-primary text-center'>Aprobada</p>";
+									}elseif($lista['aprobada']==2){
+										echo "<p class='text-danger text-center'>Desprobada</p>";
+									}
 									echo "</td>";
 									
 								echo "<td class='text-center'>";

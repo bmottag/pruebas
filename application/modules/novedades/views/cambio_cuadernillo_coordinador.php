@@ -84,9 +84,9 @@ if ($retornoError) {
 									echo "<tr>";
 									
 									echo "<td>";
-									echo "<strong>Prueba: </strong>" . $lista['nombre_prueba'];
-									echo "<br><strong>Grupo de Instrumentos: </strong>" . $lista['nombre_grupo_instrumentos'];
-									echo "<br><strong>Sesión: </strong>" . $lista['sesion_prueba'];
+									echo "<strong>Prueba: </strong><br>" . $lista['nombre_prueba'];
+									echo "<br><strong>Grupo de Instrumentos: </strong><br>" . $lista['nombre_grupo_instrumentos'];
+									echo "<br><strong>Sesión: </strong><br>" . $lista['sesion_prueba'];
 									echo "<br><strong>Fecha: </strong>" . $lista['fecha'];
 									echo "<br><strong>Hora Inicial: </strong>" . $lista['hora_inicio_prueba'];
 									echo "<br><strong>Hora Final: </strong>" . $lista['hora_fin_prueba'];
@@ -108,6 +108,11 @@ if ($retornoError) {
 									
 									
 						<?php
+									if($lista['aprobada']==1){
+										echo "<p class='text-primary text-center'>Aprobada</p>";
+									}elseif($lista['aprobada']==2){
+										echo "<p class='text-danger text-center'>Desprobada</p>";
+									}
 									echo "</td>";
 									
 
