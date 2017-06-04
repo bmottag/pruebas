@@ -238,8 +238,8 @@
 						<thead>
 							<tr>
 								<th class="text-center">Sitio</th>
-								<th class="text-center">Sesión</th>
 								<th class="text-center">Alerta</th>
+								<th class="text-center">Sesión</th>
 								<th class="text-center">Respuesta</th>
 							</tr>
 						</thead>
@@ -254,7 +254,22 @@ echo "<a href='" . base_url('report/mostrarSesiones/' . $lista['id_sitio']) . "'
 									echo "<br><strong>Departamento: </strong>" . $lista['dpto_divipola_nombre'];
 									echo "<br><strong>Municipio: </strong>" . $lista['mpio_divipola_nombre'];
 									echo "<br><strong>Zona: </strong>" . $lista['nombre_zona'];
+									echo "<br><strong>Representante: </strong>";
+									echo "C.C. " . $infoSitoDelegado[0]['cedula_delegado'] . " " . $infoSitoDelegado[0]['nom_delegado'] . " "  . $infoSitoDelegado[0]['ape_delegado'];
+									echo "<br><strong>Celular representante: </strong>";
+									echo "<a href='tel:".$infoSitoDelegado[0]['celular_delegado']."'>".$infoSitoDelegado[0]['celular_delegado']."</a>"; 									
 									echo "</td>";
+
+
+									echo "<td>";
+									echo "<strong>Descripción: </strong>" . $lista['descripcion_alerta'];
+									echo "<br><strong>Mensaje: </strong>" . $lista['mensaje_alerta'];
+									echo "<p class='" . $lista['clase'] . "'><strong>Tipo Alerta: </strong>" . $lista['nombre_tipo_alerta'] . "</p>";
+									echo "<strong>Inicio Alerta: </strong>" . $lista['fecha_inicio'];
+									echo "<br><strong>Fin Alerta: </strong>" . $lista['fecha_fin'];
+									echo "<br><strong>Rol Alerta: </strong>" . $lista['nombre_rol'];
+									echo "</td>";
+									
 									
 									
 									echo "<td>";
@@ -264,16 +279,6 @@ echo "<a href='" . base_url('report/mostrarSesiones/' . $lista['id_sitio']) . "'
 									echo "<br><strong>Fecha: </strong>" . $lista['fecha'];
 									echo "<br><strong>Hora Inicial: </strong>" . $lista['hora_inicio_prueba'];
 									echo "<br><strong>Hora Final: </strong>" . $lista['hora_fin_prueba'];
-									echo "</td>";
-									
-									
-									echo "<td>";
-									echo "<strong>Descripción: </strong>" . $lista['descripcion_alerta'];
-									echo "<br><strong>Mensaje: </strong>" . $lista['mensaje_alerta'];
-									echo "<p class='" . $lista['clase'] . "'><strong>Tipo Alerta: </strong>" . $lista['nombre_tipo_alerta'] . "</p>";
-									echo "<strong>Inicio Alerta: </strong>" . $lista['fecha_inicio'];
-									echo "<br><strong>Fin Alerta: </strong>" . $lista['fecha_fin'];
-									echo "<br><strong>Rol Alerta: </strong>" . $lista['nombre_rol'];
 									echo "</td>";
 									
 									
