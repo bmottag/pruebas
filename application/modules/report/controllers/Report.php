@@ -256,7 +256,7 @@ class Report extends CI_Controller {
 	 * Formulario para dar respuesta a la alerta
      * @since 23/5/2017
 	 */
-	public function responder_alerta($idAlerta, $idDelegado, $idSitioSesion)
+	public function responder_alerta($idAlerta, $idDelegado, $idSitioSesion, $rol)
 	{
 			$this->load->model("general_model");
 			$arrParam = array(
@@ -264,7 +264,8 @@ class Report extends CI_Controller {
 					"idAlerta" => $idAlerta
 			);
 			$data['info'] = $this->general_model->get_informacion_respuestas_alertas_vencidas_by($arrParam);
-
+			
+			$data["rol"] = $rol;//se pasa el rol del operador o del coordinador
 			$data["view"] = 'form_responder_alerta';
 			$this->load->view("layout", $data);
 	}
@@ -277,15 +278,15 @@ class Report extends CI_Controller {
 	{
 			$data = array();
 						
-			$msj = "Gracias por su respuesta.";
+			$rol = $this->input->post('hddIdRol');
 			
 			if ($this->report_model->saveRegistroInformativoCoordinador()) {
-				$this->session->set_flashdata('retornoExito', $msj);
+				$this->session->set_flashdata('retornoExito', "Gracias por su respuesta.");
 			} else {
 				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador.');
 			}
 
-			redirect("/dashboard/coordinadores","location",301);
+			redirect("/dashboard/" . $rol,"location",301);
 	}
 	
 	/**
@@ -296,7 +297,7 @@ class Report extends CI_Controller {
 	{
 			$data = array();
 
-			$msj = "Gracias por su respuesta.";
+			$rol = $this->input->post('hddIdRol');
 			
 			$acepta = $this->input->post('acepta');
 			$observacion = $this->input->post('observacion');
@@ -307,13 +308,13 @@ class Report extends CI_Controller {
 				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Debe indicar su respuesta.');
 			}else{
 				if ($this->report_model->saveRegistroNotificacionCoordinador()) {
-					$this->session->set_flashdata('retornoExito', $msj);
+					$this->session->set_flashdata('retornoExito', "Gracias por su respuesta.");
 				} else {
 					$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador.');
 				}
 			}
 
-			redirect("/dashboard/coordinadores","location",301);
+			redirect("/dashboard/" . $rol,"location",301);
 	}
 	
 	/**
@@ -326,7 +327,7 @@ class Report extends CI_Controller {
 			$ausentes = $this->input->post('ausentes');
 			$citados = $this->input->post('citados');
 
-			$msj = "Gracias por su respuesta.";
+			$rol = $this->input->post('hddIdRol');
 
 			if($ausentes == ""){
 				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Debe indicar los ausentes.');
@@ -335,7 +336,7 @@ class Report extends CI_Controller {
 					$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> La cantidad de ausentes no puede ser mayor a la cantidad de citados.');
 				}else{
 					if ($this->report_model->saveRegistroConsolidacionCoordinador()) {
-						$this->session->set_flashdata('retornoExito', $msj);
+						$this->session->set_flashdata('retornoExito', "Gracias por su respuesta.");
 					} else {
 						$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador.');
 					}
@@ -343,7 +344,7 @@ class Report extends CI_Controller {
 			}
 
 
-			redirect("/dashboard/coordinadores","location",301);
+			redirect("/dashboard/" . $rol,"location",301);
 	}
 		
     /**

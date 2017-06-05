@@ -50,8 +50,9 @@
 		/**
 		 * Muestra las alertas ACTIVAS para el USUARIO
 		 * @since 14/5/2017
+		 * @revies 4/6/2017
 		 */
-		public function get_alerta_coordinador_by($arrDatos) 
+		public function get_alerta_operadors_by($arrDatos) 
 		{
 				$fecha = date("Y-m-d G:i:s");
 				$userRol = $this->session->rol;
@@ -79,7 +80,7 @@
 				}
 				
 				$this->db->where('A.fk_id_rol', $userRol); //filtro por ROL DEL USUARIO
-				$this->db->where('Y.fk_id_user_coordinador', $userID); //filtro por ID DEL USUARIO
+				$this->db->where('Y.fk_id_user_operador', $userID); //filtro por ID DEL USUARIO
 				
 				$this->db->order_by('A.id_alerta', 'desc');
 				$query = $this->db->get('alertas A');
@@ -293,6 +294,28 @@
 				$this->db->select('distinct(fk_mpio_divipola), dpto_divipola_nombre, mpio_divipola_nombre');
 				$this->db->join('param_divipola D', 'D.mpio_divipola = S.fk_mpio_divipola', 'INNER');
 				$this->db->where('S.fk_id_user_coordinador', $userID);
+				
+				$this->db->order_by('dpto_divipola_nombre, mpio_divipola_nombre', 'asc');
+				$query = $this->db->get('sitios S');
+
+				if ($query->num_rows() > 0) {
+					return $query->result_array();
+				} else {
+					return false;
+				}
+		}
+		
+		/**
+		 * Lista de municipios asignados al coordinador
+		 * @since 4/6/2017
+		 */
+		public function get_municipios_operador() 
+		{
+				$userID = $this->session->userdata("id");
+			
+				$this->db->select('distinct(fk_mpio_divipola), dpto_divipola_nombre, mpio_divipola_nombre');
+				$this->db->join('param_divipola D', 'D.mpio_divipola = S.fk_mpio_divipola', 'INNER');
+				$this->db->where('S.fk_id_user_operador', $userID);
 				
 				$this->db->order_by('dpto_divipola_nombre, mpio_divipola_nombre', 'asc');
 				$query = $this->db->get('sitios S');

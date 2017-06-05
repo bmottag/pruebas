@@ -148,6 +148,9 @@
 		 */
 		public function saveRegistroInformativoCoordinador() 
 		{
+				$rol = $this->input->post('hddIdRol');
+				$nota = 'Se realizó el registro por el ' . $rol;
+				
 				$data = array(
 					'fk_id_alerta' => $this->input->post('hddIdAlerta'),
 					'fk_id_usuario' => $this->input->post('hddIdUserDelegado'),
@@ -155,7 +158,7 @@
 					'acepta' => 1,
 					'fecha_registro' => date("Y-m-d G:i:s"),
 					'fk_id_user_coordinador' => $this->session->id,
-					'nota' => 'Se realizó el registro por el Coordinador.'
+					'nota' => $nota
 				);	
 
 				$query = $this->db->insert('registro', $data);
@@ -173,6 +176,9 @@
 		 */
 		public function saveRegistroNotificacionCoordinador() 
 		{
+				$rol = $this->input->post('hddIdRol');
+				$nota = 'Se realizó el registro por el ' . $rol;
+				
 				$data = array(
 					'fk_id_alerta' => $this->input->post('hddIdAlerta'),
 					'fk_id_usuario' => $this->input->post('hddIdUserDelegado'),
@@ -181,7 +187,7 @@
 					'observacion' => $this->input->post('observacion'),
 					'fecha_registro' => date("Y-m-d G:i:s"),
 					'fk_id_user_coordinador' => $this->session->id,
-					'nota' => 'Se realizó el registro por el Coordinador.'
+					'nota' => $nota
 				);	
 
 				$query = $this->db->insert('registro', $data);
@@ -199,6 +205,9 @@
 		 */
 		public function saveRegistroConsolidacionCoordinador() 
 		{
+				$rol = $this->input->post('hddIdRol');
+				$nota = 'Se realizó el registro por el ' . $rol;
+			
 				$ausentes = $this->input->post('ausentes');
 				$idSitioSesion = $this->input->post('hddIdSitioSesion');
 		
@@ -210,7 +219,7 @@
 					'ausentes' => $ausentes,
 					'fecha_registro' => date("Y-m-d G:i:s"),
 					'fk_id_user_coordinador' => $this->session->id,
-					'nota' => 'Se realizó el registro por el Coordinador.'
+					'nota' => $nota
 				);	
 
 				$query = $this->db->insert('registro', $data);

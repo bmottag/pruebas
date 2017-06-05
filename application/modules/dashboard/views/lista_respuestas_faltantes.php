@@ -18,7 +18,7 @@
 		<div class="col-lg-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<a class="btn btn-success" href=" <?php echo base_url(). "dashboard/coordinadores"; ?> "><span class="glyphicon glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Regresar </a> 
+					<a class="btn btn-success" href=" <?php echo base_url(). "dashboard/" . $rol; ?> "><span class="glyphicon glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Regresar </a> 
                     <i class="fa fa-life-saver fa-fw"></i> Lista de Alertas que falta dar respuesta por el Representante
 				</div>
 				<div class="panel-body">
@@ -27,8 +27,8 @@
 						<thead>
 							<tr>
 								<th class="text-center">Sitio</th>
-								<th class="text-center">Sesión</th>
 								<th class="text-center">Alerta</th>
+								<th class="text-center">Sesión</th>
 								<th class="text-center">Respuesta</th>
 							</tr>
 						</thead>
@@ -54,11 +54,23 @@
 							foreach ($info as $lista):
 									echo "<tr>";
 									echo "<td>";
-									echo "<strong>Sitio: </strong>" . $lista['nombre_sitio'];
+									echo "<strong>Sitio: </strong><br>" . $lista['nombre_sitio'];
 									echo "<br><strong>Nodo o Región: </strong>" . $lista['nombre_region'];
 									echo "<br><strong>Departamento: </strong>" . $lista['dpto_divipola_nombre'];
 									echo "<br><strong>Municipio: </strong>" . $lista['mpio_divipola_nombre'];
-									echo "<br><strong>Zona: </strong>" . $lista['nombre_zona'];
+									echo "<br><strong>Códifo DANE: </strong>" . $lista['codigo_dane'];
+									echo "<br><strong>Representante: </strong>" . $lista['nombre_delegado'];
+									echo "<br><strong>Celular: </strong>" . $lista['celular_delegado'];
+									echo "<br><strong>Email: </strong>" . $lista['email'];
+									echo "</td>";
+									
+									
+									echo "<td>";
+									echo "<strong>Descripción: </strong>" . $lista['descripcion_alerta'];
+									echo "<br><strong>Mensaje: </strong>" . $lista['mensaje_alerta'];
+									echo "<br><strong>Tipo Alerta: </strong>" . $lista['nombre_tipo_alerta'];
+									echo "<br><strong>Inicio Alerta: </strong>" . $lista['fecha_inicio'];
+									echo "<br><strong>Fin Alerta: </strong>" . $lista['fecha_fin'];
 									echo "</td>";
 									
 									
@@ -73,16 +85,7 @@
 									
 									
 									echo "<td>";
-									echo "<strong>Descripción: </strong>" . $lista['descripcion_alerta'];
-									echo "<br><strong>Mensaje: </strong>" . $lista['mensaje_alerta'];
-									echo "<br><strong>Tipo Alerta: </strong>" . $lista['nombre_tipo_alerta'];
-									echo "<br><strong>Inicio Alerta: </strong>" . $lista['fecha_inicio'];
-									echo "<br><strong>Fin Alerta: </strong>" . $lista['fecha_fin'];
-									echo "</td>";
-									
-									
-									echo "<td>";
-echo "<a href=" . base_url("report/responder_alerta/" . $lista['id_alerta'] . "/" . $lista['fk_id_user_delegado'] . "/" . $lista['id_sitio_sesion']) . " ><strong>Dar Respuesta</strong> </a>";
+echo "<a href=" . base_url("report/responder_alerta/" . $lista['id_alerta'] . "/" . $lista['fk_id_user_delegado'] . "/" . $lista['id_sitio_sesion'] . "/" . $rol) . " ><strong>Dar Respuesta</strong> </a>";
 									echo "</td>";
 							endforeach;
 					

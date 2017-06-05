@@ -315,7 +315,7 @@ class General_model extends CI_Model {
 				//ALERTA
 				$this->db->join('alertas A', 'A.fk_id_sesion = S.id_sesion', 'INNER');
 				
-				$this->db->where('Y.fk_id_user_coordinador', $this->session->id); //FILTRO POR ID DEL COORDINADOR
+				$this->db->where('Y.fk_id_user_'.$arrDatos["rol"], $this->session->id); //FILTRO POR ID DEL COORDINADOR o del OPERADOR
 				$this->db->where('A.estado_alerta', 1); //ALERTAS ACTIVAS
 				$this->db->where('A.fk_id_rol', 4); //ALERTAS QUE SON PARA DELEGADO
 				
@@ -327,7 +327,7 @@ class General_model extends CI_Model {
 				
 				
 				if (array_key_exists("tipoAlerta", $arrDatos)) {
-					$this->db->where('A.fk_id_tipo_alerta', $arrDatos["tipoAlerta"]); //SITIO-SESION
+					$this->db->where('A.fk_id_tipo_alerta', $arrDatos["tipoAlerta"]); //filtro por tipo de alerta
 				}
 			
 				$query = $this->db->get('sitios Y');
@@ -375,7 +375,8 @@ class General_model extends CI_Model {
 		public function get_informacion_respuestas_alertas_vencidas_by($arrDatos) 
 		{				
 				$this->db->select('Y.*,A.*, S.*, P.nombre_prueba, G.nombre_grupo_instrumentos, G.fecha,
-				O.nombre_organizacion, R.nombre_region, D.*, Z.nombre_zona, T.nombre_tipo_alerta, X.*');
+				O.nombre_organizacion, R.nombre_region, D.*, Z.nombre_zona, T.nombre_tipo_alerta, X.*,
+				CONCAT(U.nombres_usuario, " ", U.apellidos_usuario) nombre_delegado, U.numero_documento, U.celular celular_delegado, U.email');
 				
 				//SESION
 				$this->db->join('sesiones S', 'S.id_sesion = X.fk_id_sesion', 'INNER');
@@ -392,6 +393,9 @@ class General_model extends CI_Model {
 				$this->db->join('param_divipola D', 'D.mpio_divipola = Y.fk_mpio_divipola', 'INNER');
 				$this->db->join('param_organizaciones O', 'O.id_organizacion = Y.fk_id_organizacion', 'INNER');
 				$this->db->join('param_zonas Z', 'Z.id_zona = Y.fk_id_zona', 'INNER');
+				
+				//usuario representante
+				$this->db->join('usuario U', 'U.id_usuario = Y.fk_id_user_delegado', 'LEFT');
 								
 				if (array_key_exists("idAlerta", $arrDatos)) {
 					$this->db->where('A.id_alerta', $arrDatos["idAlerta"]); //FILTRO POR ALERTA
@@ -401,7 +405,7 @@ class General_model extends CI_Model {
 					$this->db->where('X.id_sitio_sesion', $arrDatos["idSitioSesion"]); //SITIO-SESION
 				}
 
-				//$this->db->order_by('R.nombre_region, D.dpto_divipola_nombre, D.mpio_divipola_nombre', 'desc');
+				$this->db->order_by('D.dpto_divipola_nombre, D.mpio_divipola_nombre, Y.nombre_sitio, A.id_alerta', 'asc');
 				$query = $this->db->get('sitio_sesion X');
 
 				if ($query->num_rows() > 0) {

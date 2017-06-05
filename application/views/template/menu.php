@@ -191,6 +191,8 @@ if($userRol==3){
 <?php
 	if($userRol==4){ //USUARIOS DELEGADOS
 		$enlace = base_url("dashboard/delegados");
+	}elseif($userRol==6){ //USUARIOS OPERADOR
+		$enlace = base_url("dashboard/operador");
 	}elseif($userRol==3){ //USUARIOS DELEGADOS
 		$enlace = base_url("dashboard/coordinadores");
 	}else{
