@@ -348,6 +348,27 @@
 	    }
 		
 	    /**
+	     * Actualiar operador del SITIO
+		 * param Id municipio int para asignar operador a todos los sitios con ese id
+	     * @since  4/6/2017
+	     */
+	    public function updateSitio_operador($idMunicipio)
+		{
+				$data = array(
+					'fk_id_user_operador' => $this->input->post("usuario")
+				);
+
+				$this->db->where('fk_mpio_divipola', $idMunicipio);
+				$query = $this->db->update('sitios', $data);
+
+				if ($query) {
+					return true;
+				} else {
+					return false;
+				}
+	    }
+		
+	    /**
 	     * Actualiar contacto del SITIO 
 	     * @since  20/5/2017
 	     */

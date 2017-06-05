@@ -121,11 +121,11 @@ class General_model extends CI_Model {
 		 * Lista de coordinadores que no tienen sitio asignado
 		 * @since  21/5/2017
 		 */
-		public function lista_coordinador()
+		public function lista_operador()
 		{	
 				$sql = "SELECT U.*";
 				$sql.= " FROM usuario U";
-				$sql.= " WHERE U.fk_id_rol = 3";
+				$sql.= " WHERE U.fk_id_rol = 6";
 				$sql.= " AND U.estado = 1";
 				
 				$query = $this->db->query($sql);
@@ -145,13 +145,15 @@ class General_model extends CI_Model {
 		{
 				$this->db->select('S.*, O.nombre_organizacion, R.nombre_region, D.*, Z.nombre_zona, 
 				U.numero_documento as cedula_delegado, U.nombres_usuario nom_delegado, U.apellidos_usuario ape_delegado, U.celular celular_delegado,
-				Y.numero_documento as cedula_coordinador, Y.nombres_usuario nom_coordinador, Y.apellidos_usuario ape_coordiandor, Y.celular celular_coordinador');
+				Y.numero_documento as cedula_coordinador, Y.nombres_usuario nom_coordinador, Y.apellidos_usuario ape_coordiandor, Y.celular celular_coordinador, 
+				K.nombres_usuario nom_operador, K.apellidos_usuario ape_operador');
 				$this->db->join('param_regiones R', 'R.id_region = S.fk_id_region', 'INNER');
 				$this->db->join('param_divipola D', 'D.mpio_divipola = S.fk_mpio_divipola', 'INNER');
 				$this->db->join('param_organizaciones O', 'O.id_organizacion = S.fk_id_organizacion', 'LEFT');
 				$this->db->join('param_zonas Z', 'Z.id_zona = S.fk_id_zona', 'LEFT');
 				$this->db->join('usuario U', 'U.id_usuario = S.fk_id_user_delegado', 'LEFT');
 				$this->db->join('usuario Y', 'Y.id_usuario = S.fk_id_user_coordinador', 'LEFT');
+				$this->db->join('usuario K', 'K.id_usuario = S.fk_id_user_operador', 'LEFT');
 				
 				if (array_key_exists("idSitio", $arrDatos)) {
 					$this->db->where('S.id_sitio', $arrDatos["idSitio"]);

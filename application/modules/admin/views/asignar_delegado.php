@@ -20,8 +20,9 @@
 		<div class="col-md-4">
 			<div class="panel panel-success">
 				<div class="panel-heading">
-					<strong>Nombre Sitio: </strong><?php echo $infoSitio[0]['nombre_sitio']; ?>
+					<strong>Nombre Sitio: </strong><br><?php echo $infoSitio[0]['nombre_sitio']; ?>
 					<br><strong>Dirección: </strong><?php echo $infoSitio[0]['direccion_sitio']; ?>
+					<br><strong>Código DANE: </strong><?php echo $infoSitio[0]['codigo_dane']; ?>
 				</div>
 			</div>
 		</div>
@@ -70,10 +71,10 @@
 				
 					<p class="text-danger text-left">Los campos con * son obligatorios.</p>
 					
-					<?php if($rol == "coordinador"){ ?>
+					<?php if($rol == "operador"){ ?>
 						<div class="alert alert-info">
 							<strong>Nota:</strong> 
-							El Coordinador se va a asignar a todos los sitios para el <strong>Municipio: <?php echo $infoSitio[0]["mpio_divipola_nombre"]; ?></strong>.
+							El Operador se va a asignar a todos los sitios para el <strong>Municipio: <?php echo $infoSitio[0]["mpio_divipola_nombre"]; ?></strong>.
 						</div>
 					<?php } ?>
 

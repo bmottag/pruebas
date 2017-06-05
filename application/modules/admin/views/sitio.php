@@ -158,11 +158,11 @@ if($lista['fk_id_user_delegado']){
 									</td>
 									
 									<td class='text-center'>
-									<a href="<?php echo base_url("admin/asignar_delegado/" . $lista['id_sitio'] . "/coordinador"); ?>" class="btn btn-info btn-xs">Operador <span class="fa fa-gears fa-fw" aria-hidden="true"></a>
+									<a href="<?php echo base_url("admin/asignar_delegado/" . $lista['id_sitio'] . "/operador"); ?>" class="btn btn-info btn-xs">Operador <span class="fa fa-gears fa-fw" aria-hidden="true"></a>
 						<?php 
-if($lista['fk_id_user_coordinador']){
-	echo "<p class='text-primary text-center'>" . $lista['nom_coordinador'] . " " . $lista['ape_coordiandor'] . "</br>";
-echo "<a href='" . base_url("admin/updateCoordinador/" . $lista['fk_mpio_divipola']) . "' class='text-primary text-center'>Eliminar</p>";
+if($lista['fk_id_user_operador']){
+	echo "<p class='text-primary text-center'>" . $lista['nom_operador'] . " " . $lista['ape_operador'] . "</br>";
+echo "<a href='" . base_url("admin/updateOperador/" . $lista['fk_mpio_divipola']) . "' class='text-primary text-center'>Eliminar</p>";
 }else{
 	echo "<p class='text-danger text-center'><strong>Falta</strong></p>";
 }
@@ -226,7 +226,7 @@ $(document).ready(function() {
 	$('#dataTables').DataTable({
 		responsive: true,
 		order: false,
-		"pageLength": 100
+		"pageLength": 50
 	});
 });
 </script>
