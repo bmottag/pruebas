@@ -37,7 +37,7 @@ $(function(){
 		<div class="col-md-4">
 			<div class="panel panel-info">
 				<div class="panel-heading">
-					<strong>Nombre Sitio: </strong><?php echo $infoSitio[0]['nombre_sitio']; ?>
+					<strong>Nombre Sitio: </strong><br><?php echo $infoSitio[0]['nombre_sitio']; ?>
 					<br><strong>Dirección: </strong><?php echo $infoSitio[0]['direccion_sitio']; ?>
 					<br><strong>Código DANE: </strong><?php echo $infoSitio[0]['codigo_dane']; ?>
 					<?php if($infoSitio[0]['contacto_nombres']){ ?>

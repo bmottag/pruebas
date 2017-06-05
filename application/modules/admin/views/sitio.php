@@ -72,19 +72,15 @@ if ($retornoError) {
 					<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
 						<thead>
 							<tr>
-								<th class="text-center">Nombre Sitio</th>
+								<th class="text-center">Sitio</th>
 								
 								<th class="text-center">Editar</th>
 								<th class="text-center">Contacto (Coordinador Sitio)</th>
 								<th class="text-center">Asociar con Prueba / Grupo de Instrumento / Sesión </th>
 								<th class="text-center">Representante</th>
 								<th class="text-center">Operador</th>
-								
-								<th class="text-center">Nodo o región</th>
-								<th class="text-center">Departamento</th>
-								<th class="text-center">Municipio</th>
-								<th class="text-center">Zona</th>
-								
+								<th class="text-center">Coordinador</th>
+																
 								<th class="text-center">Código DANE</th>
 								<th class="text-center">Dirección</th>
 								<th class="text-center">Teléfono</th>
@@ -104,7 +100,13 @@ if ($retornoError) {
 						<?php
 							foreach ($info as $lista):
 									echo "<tr>";
-									echo "<td>" . $lista['nombre_sitio'] . "</td>";
+									
+									echo "<td>";
+									echo "<strong>Sitio: </strong><br>" . $lista['nombre_sitio'];
+									echo "<br><strong>Nodo o Región: </strong>" . $lista['nombre_region'];
+									echo "<br><strong>Departamento: </strong>" . $lista['dpto_divipola_nombre'];
+									echo "<br><strong>Municipio: </strong>" . $lista['mpio_divipola_nombre'];
+									echo "</td>";
 									
 									echo "<td class='text-center'>";
 						?>
@@ -166,11 +168,17 @@ echo "<a href='" . base_url("admin/updateCoordinador/" . $lista['fk_mpio_divipol
 }
 						?>
 									</td>
+									
+									<td class='text-center'>
+						<?php 
+if($lista['fk_id_user_coordinador']){
+	echo "<p class='text-primary text-center'>" . $lista['nom_coordinador'] . " " . $lista['ape_coordiandor'] . "</br>";
+}else{
+	echo "<p class='text-danger text-center'><strong>Falta</strong></p>";
+}
+						?>
+									</td>
 						<?php
-									echo "<td>" . $lista['nombre_region'] . "</td>";
-									echo "<td>" . $lista['dpto_divipola_nombre'] . "</td>";
-									echo "<td>" . $lista['mpio_divipola_nombre'] . "</td>";
-									echo "<td>" . $lista['nombre_zona'] . "</td>";
 						
 									echo "<td>" . $lista['codigo_dane'] . "</td>";
 									echo "<td>" . $lista['direccion_sitio'] . "</td>";
