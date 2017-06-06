@@ -126,7 +126,8 @@ class Admin extends MX_Controller {
 					"value" => $documento
 				);
 				$result_user = $this->admin_model->verifyUser($arrParam);
-				$clave = $this->generar_clave();
+				//$clave = $this->generar_clave();
+				$clave = $this->input->post('documento');
 			}
 
 			if ($result_user) {
