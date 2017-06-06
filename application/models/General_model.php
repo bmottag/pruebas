@@ -138,6 +138,26 @@ class General_model extends CI_Model {
 		}
 		
 		/**
+		 * Lista de coordinadores que no tienen sitio asignado
+		 * @since  21/5/2017
+		 */
+		public function lista_coordinador()
+		{	
+				$sql = "SELECT U.*";
+				$sql.= " FROM usuario U";
+				$sql.= " WHERE U.fk_id_rol = 3";
+				$sql.= " AND U.estado = 1";
+				
+				$query = $this->db->query($sql);
+				
+				if ($query->num_rows() > 0) {
+					return $query->result_array();
+				} else {
+					return false;
+				}
+		}
+		
+		/**
 		 * Lista de sitios
 		 * @since 12/5/2017
 		 */
