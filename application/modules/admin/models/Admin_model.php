@@ -207,14 +207,21 @@
 					'fax_sitio' => $this->input->post('fax'),
 					'celular_sitio' => $this->input->post('celular'),
 					'email_sitio' => $this->input->post('email'),
-					'fk_id_organizacion' => $this->input->post('organizacion'),
 					'fk_id_region' => $this->input->post('region'),
 					'fk_dpto_divipola' => $this->input->post('depto'),
 					'fk_mpio_divipola' => $this->input->post('mcpio'),
-					'fk_id_zona' => $this->input->post('zona'),
 					'estado_sitio' => $this->input->post('estado'),
 					'codigo_dane' => $this->input->post('codigoDane')
 				);
+				
+				$zona = $this->input->post('zona');
+				$organizacion = $this->input->post('organizacion');
+				if($zona != ""){
+					$data['fk_id_zona'] = $zona;
+				}
+				if($organizacion != ""){
+					$data['fk_id_organizacion'] = $organizacion;
+				}
 				
 				//revisar si es para adicionar o editar
 				if ($idSitio == '') {

@@ -148,7 +148,7 @@
 			
 			<div class="col-sm-6">	
 				<div class="form-group text-left">
-					<label class="control-label" for="estado">Estado</label>
+					<label class="control-label" for="estado">Estado : *</label>
 					<select name="estado" id="estado" class="form-control" required>
 						<option value=''>Select...</option>
 						<option value=1 <?php if($information[0]["estado_sitio"] == 1) { echo "selected"; }  ?>>Activo</option>
