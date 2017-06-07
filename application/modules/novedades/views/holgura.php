@@ -40,7 +40,7 @@ $(function(){
 		<div class="col-lg-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<i class="fa fa-download"></i> LISTA DE CAMBIO DE HOLGURAS
+					<i class="fa fa-download"></i> LISTA DE HOLGURAS
 				</div>
 				<div class="panel-body">
 					<button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#modal" id="x">
@@ -99,7 +99,7 @@ if ($retornoError) {
 									echo "</td>";
 									
 									echo "<td class='text-center'>";
-									echo '<p class="text-primary"><strong>' . $lista['snp_examinando'] . '</strong></p>';
+									echo '<p class="text-primary"><strong>' . $lista['fk_id_examinando'] . '</strong></p>';
 									echo "</td>";
 									
 									echo "<td class='text-center'>";

@@ -2,14 +2,17 @@ $( document ).ready( function () {
 
 	$("#consecutivo").bloquearTexto().maxlength(10);
 	$("#confirmarConsecutivo").bloquearTexto().maxlength(10);
+	$("#consecutivo").bloquearTexto().maxlength(10);
+	$("#confirmarConsecutivo").bloquearTexto().maxlength(10);
 	$("#observacion").convertirMayuscula();
 	
 	$( "#form" ).validate( {
 		rules: {
 			sesion: 				{ required: true },
+			holgura: 				{ required: true },
+			confirmarHolgura: 		{ required: true, minlength: 4, maxlength:10, equalTo: "#holgura" },
 			consecutivo: 			{ required: true, minlength: 4, maxlength:10 },
 			confirmarConsecutivo: 	{ required: true, minlength: 4, maxlength:10, equalTo: "#consecutivo" },
-			snpHolgura: 			{ required: true },
 			observacion: 			{ required: true }
 		},
 		errorElement: "em",

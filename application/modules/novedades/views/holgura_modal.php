@@ -38,6 +38,52 @@
 		
 		<div class="row">
 			<div class="col-sm-6 text-left">
+				<label class="control-label" for="consecutivo">Registro holgura : *</label>
+			</div>
+			
+			<div class="col-sm-6 text-left">
+				<label class="control-label" for="confirmarConsecutivo">Confirmar registro holgura : *</label>
+			</div>
+		</div>
+		
+	<?php if(!$information){ ?>
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="form-group input-group">
+					<span class="input-group-addon">EKT20171</span>
+					<input type="password" id="holgura" name="holgura" class="form-control" value="" placeholder="Registro" required >
+				</div>
+			</div>
+
+			<div class="col-sm-6">
+				<div class="form-group input-group">
+					<span class="input-group-addon">EKT20171</span>
+					<input type="password" id="confirmarHolgura" name="confirmarHolgura" class="form-control" value="" placeholder="Confirmar" required >
+				</div>
+			</div>
+		</div>
+	
+	<?php }else{ ?>
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="form-group input-group">
+					<span class="input-group-addon">EKT20171</span>
+					<input type="text" id="holgura" name="holgura" class="form-control" value="<?php echo $information?$information[0]["consecutivo_holgura"]:""; ?>" placeholder="Registro" required >
+				</div>
+			</div>
+
+			<div class="col-sm-6">
+				<div class="form-group input-group">
+					<span class="input-group-addon">EKT20171</span>
+					<input type="text" id="confirmarHolgura" name="confirmarHolgura" class="form-control" value="<?php echo $information?$information[0]["consecutivo_holgura"]:""; ?>" placeholder="Confirmar" required >
+				</div>
+			</div>
+		</div>
+	<?php } ?>	
+	
+	
+		<div class="row">
+			<div class="col-sm-6 text-left">
 				<label class="control-label" for="consecutivo">Registro examinando : *</label>
 			</div>
 			
@@ -68,41 +114,27 @@
 			<div class="col-sm-6">
 				<div class="form-group input-group">
 					<span class="input-group-addon">EKT20171</span>
-					<input type="text" id="consecutivo" name="consecutivo" class="form-control" value="<?php echo $information?$information[0]["consecutivo_examinando"]:""; ?>" placeholder="Registro" required >
+					<input type="text" id="consecutivo" name="consecutivo" class="form-control" value="<?php echo $information?$information[0]["fk_id_examinando"]:""; ?>" placeholder="Registro" required >
 				</div>
 			</div>
 
 			<div class="col-sm-6">
 				<div class="form-group input-group">
 					<span class="input-group-addon">EKT20171</span>
-					<input type="text" id="confirmarConsecutivo" name="confirmarConsecutivo" class="form-control" value="<?php echo $information?$information[0]["consecutivo_examinando"]:""; ?>" placeholder="Confirmar" required >
+					<input type="text" id="confirmarConsecutivo" name="confirmarConsecutivo" class="form-control" value="<?php echo $information?$information[0]["fk_id_examinando"]:""; ?>" placeholder="Confirmar" required >
 				</div>
 			</div>
 		</div>
 	<?php } ?>	
 	
+	
 		
-		<div class="row">
-			<div class="col-sm-6">
-				<div class="form-group text-left">
-					<label for="type" class="control-label">SNP Holgura : </label>
 
-					<select name="snpHolgura" id="snpHolgura" class="form-control" >
-						<option value=''>Select...</option>
-						<?php for ($i = 0; $i < count($snpHolgura); $i++) { ?>
-							<option value="<?php echo $snpHolgura[$i]["id_snp_holgura"]; ?>" <?php if($information[0]["fk_id_snp_holgura"] == $snpHolgura[$i]["id_snp_holgura"]) { echo "selected"; }  ?>><?php echo $snpHolgura[$i]["snp_holgura"]; ?></option>	
-						<?php } ?>
-					</select>
-				
-				</div>
-			</div>
-			
-		</div>
 		
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="form-group text-left">
-					<label class="control-label" for="observacion">Observación : </label>
+					<label class="control-label" for="observacion">Observación : *</label>
 					<textarea id="observacion" name="observacion" class="form-control" rows="1"><?php echo $information?$information[0]["observacion"]:""; ?></textarea>
 				</div>
 			</div>
