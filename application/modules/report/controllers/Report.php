@@ -22,11 +22,12 @@ class Report extends CI_Controller {
 	 * Informacion de los registros
      * @since 21/05/2017
 	 */
-    public function registros($tipoAlerta) 
+    public function registros($tipoAlerta, $rol) 
 	{
 
 			$data["titulo"] = "<i class='fa fa-book fa-fw'></i> PAYROLL REPORT";
-			
+			$data["rol"] = $rol;
+
 			switch ($tipoAlerta) {
 				case 1:
 					$data["view"] = "lista_informativa";
@@ -58,6 +59,7 @@ class Report extends CI_Controller {
     public function searchBy() 
 	{
 			$data['rol_busqueda'] = "Representantes";
+			$data['regreso'] = "report/searchBy";
 			//Lista Regiones
 			$this->load->model("general_model");
 			$arrParam = array(
@@ -408,6 +410,7 @@ class Report extends CI_Controller {
     public function searchByCoordinador() 
 	{
 			$data['rol_busqueda'] = "Coordinadores";
+			$data['regreso'] = "report/searchByCoordinador";
 			$userID = $this->session->userdata("id");
 			
 			//Lista Regiones

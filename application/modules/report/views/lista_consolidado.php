@@ -7,7 +7,7 @@
 					<div class="panel panel-primary">
 						<div class="panel-heading">
 							<h4 class="list-group-item-heading">
-								<a class="btn btn-success" href=" <?php echo base_url(). 'dashboard/directivo'; ?> "><span class="glyphicon glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Regresar </a> 
+								<a class="btn btn-success" href=" <?php echo base_url(). "dashboard/" . $rol; ?> "><span class="glyphicon glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Regresar </a> 
 								<i class="fa fa-bar-chart-o fa-fw"></i> REPORTE
 							</h4>
 						</div>

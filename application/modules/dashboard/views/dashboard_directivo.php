@@ -108,7 +108,7 @@ if ($retornoError) {
 						</div>
 					</div>
 				</div>
-				<a href="<?php echo base_url("report/registros/1"); ?>">
+				<a href="<?php echo base_url("report/registros/1/directivo"); ?>">
 					<div class="panel-footer">
 						<span class="pull-left"> Lista Registros <br>Alerta Informativa </span>
 						<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -131,7 +131,7 @@ if ($retornoError) {
 						</div>
 					</div>
 				</div>
-				<a href="<?php echo base_url("report/registros/2"); ?>">
+				<a href="<?php echo base_url("report/registros/2/directivo"); ?>">
 					<div class="panel-footer">
 						<span class="pull-left">Lista Registros <br>Alerta Notificación </span>
 						<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -154,7 +154,7 @@ if ($retornoError) {
 						</div>
 					</div>
 				</div>
-				<a href="<?php echo base_url("report/registros/3"); ?>">
+				<a href="<?php echo base_url("report/registros/3/directivo"); ?>">
 					<div class="panel-footer">
 						<span class="pull-left">Lista Registros <br>Alerta Consolidación</span>
 						<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -231,3 +231,16 @@ echo "<a href='" . base_url('report/mostrarSesiones/' . $lista['id_sitio'] . '/d
 <!-- /#page-wrapper -->
 
 
+    <!-- Tables -->
+    <script>
+    $(document).ready(function() {
+        $('#dataTables').DataTable({
+            responsive: true,
+			 "ordering": false,
+			 paging: true,
+			"searching": true,
+			"pageLength": 50
+        });
+		
+    });
+    </script>

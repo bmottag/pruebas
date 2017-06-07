@@ -254,7 +254,7 @@ if(!$infoMunicipiosCoordinador){
 						</div>
 					</div>
 				</div>
-				<a href="<?php echo base_url("report/registros/1"); ?>">
+				<a href="<?php echo base_url("report/registros/1/coordinador"); ?>">
 					<div class="panel-footer">
 						<span class="pull-left"> Lista Registros <br>Alerta Informativa </span>
 						<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -277,7 +277,7 @@ if(!$infoMunicipiosCoordinador){
 						</div>
 					</div>
 				</div>
-				<a href="<?php echo base_url("report/registros/2"); ?>">
+				<a href="<?php echo base_url("report/registros/2/coordinador"); ?>">
 					<div class="panel-footer">
 						<span class="pull-left">Lista Registros <br>Alerta Notificación </span>
 						<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -300,7 +300,7 @@ if(!$infoMunicipiosCoordinador){
 						</div>
 					</div>
 				</div>
-				<a href="<?php echo base_url("report/registros/3"); ?>">
+				<a href="<?php echo base_url("report/registros/3/coordinador"); ?>">
 					<div class="panel-footer">
 						<span class="pull-left">Lista Registros <br>Alerta Consolidación</span>
 						<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

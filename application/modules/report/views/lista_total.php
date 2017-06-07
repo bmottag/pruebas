@@ -18,7 +18,7 @@
 		<div class="col-lg-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<a class="btn btn-success" href=" <?php echo base_url(). "report/searchBy"; ?> "><span class="glyphicon glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Regresar </a> 
+					<a class="btn btn-success" href=" <?php echo base_url(). $regreso; ?> "><span class="glyphicon glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Regresar </a> 
                     <i class="fa fa-life-saver fa-fw"></i> Información Alertas <?php echo $rol_busqueda; ?>
 				</div>
 				<div class="panel-body">
