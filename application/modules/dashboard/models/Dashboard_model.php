@@ -236,12 +236,15 @@
 		 * Contar Sitios
 		 * @since  6/6/2017
 		 */
-		public function countSitios()
+		public function countSitios($arrDatos)
 		{
-				$year = date('Y');
 
 				$sql = "SELECT count(id_sitio) CONTEO";
 				$sql.= " FROM sitios";
+				
+				if (array_key_exists("idCoordinador", $arrDatos)) {
+					$sql.= " WHERE fk_id_user_coordinador = " . $arrDatos["idCoordinador"];
+				}
 
 				$query = $this->db->query($sql);
 				$row = $query->row();
@@ -313,6 +316,26 @@
 				
 				$this->db->order_by('dpto_divipola_nombre, mpio_divipola_nombre', 'asc');
 				$query = $this->db->get('sitios S');
+
+				if ($query->num_rows() > 0) {
+					return $query->result_array();
+				} else {
+					return false;
+				}
+		}
+		
+		/**
+		 * Lista de municipios asignados al coordinador
+		 * @since 24/5/2017
+		 */
+		public function get_municipios_coordinador_v2() 
+		{
+				$userID = $this->session->userdata("id");
+			
+				$this->db->select();
+				$this->db->where('fk_id_coordinador_mcpio', $userID);
+				$this->db->order_by('dpto_divipola_nombre, mpio_divipola_nombre', 'asc');
+				$query = $this->db->get('param_divipola');
 
 				if ($query->num_rows() > 0) {
 					return $query->result_array();

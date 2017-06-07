@@ -225,12 +225,21 @@ class Dashboard extends MX_Controller {
 			$userRol = $this->session->userdata("rol");
 			$userID = $this->session->userdata("id");
 			$data['rol_busqueda'] = "Representantes";
+			
+	 //inicio consulta de SITIOS
+			$arrParam = array("idCoordinador" => $userID);
+			$data['noSitios'] = $this->dashboard_model->countSitios($arrParam);//cuenta de sitios
+			
+			//listado de sitios para el coordinador
+			$arrParam = array('idCoordinador' => $userID);
+			$data['infoSitios'] = $this->general_model->get_sitios($arrParam);
+			
 	/**
 	 * SI es coordinador busco los municipios en los que esta asignado
 	 */
 			if($userRol==3){
 				$arrParam = array("idDelegado" => $userID);
-				$data['infoMunicipiosCoordinador'] = $this->dashboard_model->get_municipios_coordinador();
+				$data['infoMunicipiosCoordinador'] = $this->dashboard_model->get_municipios_coordinador_v2();
 			}else{
 				show_error('ERROR!!! - You are in the wrong place.');	
 			}
@@ -500,8 +509,9 @@ class Dashboard extends MX_Controller {
 	 * Datos para las cajas 
 	 */
 	 
-	 //inicio consulta de pruebas vigentes
-			$data['noSitios'] = $this->dashboard_model->countSitios();//cuenta de sitios vigentes
+	 //inicio consulta de SITIOS
+			$arrParam = array();
+			$data['noSitios'] = $this->dashboard_model->countSitios($arrParam);//cuenta de sitios
 			
 	//inicio consulta de numero de alertas
 			$data['noRegistroInformativa'] = $this->dashboard_model->countAlertasByTipo(1);//cuenta de registro de informativa

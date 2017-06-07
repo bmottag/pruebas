@@ -205,7 +205,7 @@ if ($retornoError) {
 								echo "<td >" . $lista['dpto_divipola_nombre'] . "</td>";
 								echo "<td >" . $lista['mpio_divipola_nombre'] . "</td>";
 								echo "<td >";
-echo "<a href='" . base_url('report/mostrarSesiones/' . $lista['id_sitio'] . '/dashboard' ) . "'>" . $lista['nombre_sitio'] . "</a>";
+echo "<a href='" . base_url('report/mostrarSesiones/' . $lista['id_sitio'] . '/directivo' ) . "'>" . $lista['nombre_sitio'] . "</a>";
 								echo "</td>";
 								echo "<td class='text-center'>" . $lista['codigo_dane'] . "</td>";
 								echo "</tr>";
@@ -219,29 +219,8 @@ echo "<a href='" . base_url('report/mostrarSesiones/' . $lista['id_sitio'] . '/d
 				<!-- /.panel-body -->
 			</div>
 		</div>
-			
-			
-			
-		
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-		</div>
+	</div>
 	
 
 

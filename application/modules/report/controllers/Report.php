@@ -359,10 +359,12 @@ class Report extends CI_Controller {
 	{
 			if($regreso == "x"){
 				$data["botonRegreso"] = "report/searchBy";
-			}else{
+			}elseif($regreso == 'directivo'){
 				$data["botonRegreso"] = "dashboard/directivo";
+			}elseif($regreso == 'coordinador'){
+				$data["botonRegreso"] = "dashboard/coordinador";
 			}
-							
+				
 			$this->load->model("general_model");
 			$arrParam = array("idSitio" => $idSitio);
 			$data['info'] = $this->report_model->get_sesiones_by($arrParam);

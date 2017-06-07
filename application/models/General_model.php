@@ -183,6 +183,10 @@ class General_model extends CI_Model {
 					$this->db->where('S.fk_id_user_delegado', $arrDatos["idDelegado"]);
 				}
 				
+				if (array_key_exists("idCoordinador", $arrDatos)) {
+					$this->db->where('S.fk_id_user_coordinador', $arrDatos["idCoordinador"]);
+				}
+				
 				$this->db->order_by('nombre_region, dpto_divipola_nombre, mpio_divipola_nombre', 'asc');
 				$query = $this->db->get('sitios S');
 
