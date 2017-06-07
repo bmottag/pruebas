@@ -60,7 +60,10 @@
 									echo "<br><strong>Municipio: </strong>" . $lista['mpio_divipola_nombre'];
 									echo "<br><strong>Códifo DANE: </strong>" . $lista['codigo_dane'];
 									echo "<br><strong>Representante: </strong>" . $lista['nombre_delegado'];
-									echo "<br><strong>Celular: </strong>" . $lista['celular_delegado'];
+									echo "<br><strong>Celular: </strong>";
+
+echo "<a href='tel:".$lista['celular_delegado']."'>".$lista['celular_delegado']."</a>";
+									
 									echo "<br><strong>Email: </strong>" . $lista['email'];
 									echo "</td>";
 									

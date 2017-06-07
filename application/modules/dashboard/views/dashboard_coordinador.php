@@ -102,260 +102,13 @@ if(!$infoMunicipiosCoordinador){
 
 
 
-
-
-		
-
-	<div class="row">
-<!--INICIO ALERTA INFORMATIVA -->
-<?php 
-if($infoAlertaInformativa)
-{
-	foreach ($infoAlertaInformativa as $lista):
-	
-	//consultar si ya el usuario dio respuesta a esta alerta
-	$ci = &get_instance();
-	$ci->load->model("dashboard_model");
-	
-	$arrParam = array("idAlerta" => $lista["id_alerta"]);
-	$existeRegistro = $this->dashboard_model->get_registro_by($arrParam);
-	
-	if(!$existeRegistro){
-?>	
-		<div class="col-lg-6">				
-			<div class="panel panel-danger">
-				<div class="panel-heading">
-					<i class="fa fa-calendar fa-fw"></i> ALERTA - <?php echo $infoAlertaInformativa[0]['nombre_tipo_alerta']; ?>
-				</div>
-				<div class="panel-body">
-						
-					<div class="col-lg-12">	
-						<div class="alert alert-danger ">
-							<strong>Descripción Alerta: </strong><?php echo $lista['descripcion_alerta']; ?><br>
-							<strong>Mensaje Alerta: </strong><?php echo $lista['mensaje_alerta']; ?><br>
-							<strong>Nombre de Prueba: </strong><?php echo $lista['nombre_prueba']; ?><br>
-							<strong>Grupo Instrumentos: </strong><?php echo $lista['nombre_grupo_instrumentos']; ?><br>
-							<strong>Fecha: </strong><?php echo $lista['fecha']; ?><br>
-							<strong>Sesión Prueba: </strong><?php echo $lista['sesion_prueba']; ?><br>
-							<strong>Número de Citados: </strong><?php echo $lista['numero_citados']; ?><br>
-							
-					<br>
-					<form  name="form" id="<?php echo "form_" . $lista["id_alerta"]; ?>" class="form-horizontal" method="post" action="<?php echo base_url("dashboard/registro_informativo"); ?>" >
-						<input type="hidden" id="hddId" name="hddId" value="<?php echo $lista["id_alerta"]; ?>"/>
-						<input type="hidden" id="hddIdSitioSesion" name="hddIdSitioSesion" value="<?php echo $lista["id_sitio_sesion"]; ?>"/>
-					
-						<div class="form-group">
-							<div class="row" align="center">
-								<div style="width:50%;" align="center">
-									<input type="submit" id="btnSubmit" name="btnSubmit" value="Aceptar" class="btn btn-danger"/>
-								</div>
-							</div>
-						</div>
-					</form>	
-							
-						</div>
-					</div>
-
-				</div>
-			</div>
-		</div>
-<?php
-	}
-	endforeach;			
-} ?>
-<!--FIN ALERTA -->
-
-
-<!--INICIO ALERTA NOTIFICACION -->
-<?php 
-if($infoAlertaNotificacion)
-{
-	foreach ($infoAlertaNotificacion as $lista):
-	
-	//consultar si ya el usuario dio respuesta a esta alerta
-	$ci = &get_instance();
-	$ci->load->model("dashboard_model");
-	
-	$arrParam = array("idAlerta" => $lista["id_alerta"]);
-	$existeRegistro = $this->dashboard_model->get_registro_by($arrParam);
-	
-	if(!$existeRegistro){
-?>	
-		<div class="col-lg-6">				
-			<div class="panel panel-yellow">
-				<div class="panel-heading">
-					<i class="fa fa-calendar fa-fw"></i> ALERTA - <?php echo $infoAlertaNotificacion[0]['nombre_tipo_alerta']; ?>
-				</div>
-				<div class="panel-body">
-
-<?php
-$retornoError = $this->session->flashdata('retornoErrorNotificacion');
-if ($retornoError) {
-    ?>
-	<div class="row">
-		<div class="col-lg-12">	
-			<div class="alert alert-danger ">
-				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-				<?php echo $retornoError ?>
-			</div>
-		</div>
-	</div>
-    <?php
-}
-?>
-				
-					<div class="col-lg-12">	
-						<div class="alert alert-warning ">
-							<strong>Descripción Alerta: </strong><?php echo $lista['descripcion_alerta']; ?><br>
-							<strong>Mensaje Alerta: </strong><?php echo $lista['mensaje_alerta']; ?><br>
-							<strong>Nombre de Prueba: </strong><?php echo $lista['nombre_prueba']; ?><br>
-							<strong>Grupo Instrumentos: </strong><?php echo $lista['nombre_grupo_instrumentos']; ?><br>
-							<strong>Fecha: </strong><?php echo $lista['fecha']; ?><br>
-							<strong>Sesión Prueba: </strong><?php echo $lista['sesion_prueba']; ?><br>
-							<strong>Número de Citados: </strong><?php echo $lista['numero_citados']; ?><br>
-							
-					<br>
-					<form  name="form" id="<?php echo "form_" . $lista["id_alerta"]; ?>" class="form-horizontal" method="post" action="<?php echo base_url("dashboard/registro_notificacion"); ?>" >
-						<input type="hidden" id="hddId" name="hddId" value="<?php echo $lista["id_alerta"]; ?>"/>
-						<input type="hidden" id="hddIdSitioSesion" name="hddIdSitioSesion" value="<?php echo $lista["id_sitio_sesion"]; ?>"/>
-						
-						<div class="form-group">							
-							<div class="col-sm-12">
-								<label class="radio-inline">
-									<input type="radio" name="acepta" id="acepta1" value=1>Si
-								</label>
-								<label class="radio-inline">
-									<input type="radio" name="acepta" id="acepta2" value=2>No
-								</label>
-							</div>
-						</div>
-						
-						<div class="form-group">
-							<label class="col-sm-12 control-label" for="observacion">Observación</label>
-							<div class="col-sm-12">
-								<textarea id="observacion" name="observacion" placeholder="Observación"  class="form-control" rows="2"></textarea>
-							</div>
-						</div>
-					
-						<div class="form-group">
-							<div class="row" align="center">
-								<div style="width:50%;" align="center">
-									<input type="submit" id="btnSubmit" name="btnSubmit" value="Aceptar" class="btn btn-warning"/>
-								</div>
-							</div>
-						</div>
-					</form>	
-							
-						</div>
-					</div>
-				
-				</div>
-			</div>
-		</div>
-<?php
-	}
-	endforeach;
-} ?>
-<!--FIN ALERTA -->
-
-
-<!--INICIO ALERTA CONSOLIDACION -->
-<?php 
-if($infoAlertaConsolidacion)
-{
-	foreach ($infoAlertaConsolidacion as $lista):
-	
-	//consultar si ya el usuario dio respuesta a esta alerta
-	$ci = &get_instance();
-	$ci->load->model("dashboard_model");
-	
-	$arrParam = array("idAlerta" => $lista["id_alerta"]);
-	$existeRegistro = $this->dashboard_model->get_registro_by($arrParam);
-	
-	if(!$existeRegistro){
-?>						
-		<div class="col-lg-6">				
-			<div class="panel panel-green">
-				<div class="panel-heading">
-					<i class="fa fa-calendar fa-fw"></i> ALERTA - <?php echo $infoAlertaConsolidacion[0]['nombre_tipo_alerta']; ?>
-				</div>
-				<div class="panel-body">
-						
-<?php						
-$retornoError = $this->session->flashdata('retornoErrorConsolidacion');
-if ($retornoError) {
-    ?>
-	<div class="row">
-		<div class="col-lg-12">	
-			<div class="alert alert-danger ">
-				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-				<?php echo $retornoError ?>
-			</div>
-		</div>
-	</div>
-    <?php
-}						
-	?>
-						
-					<div class="col-lg-12">	
-						<div class="alert alert-success">
-							<strong>Descripción Alerta: </strong><?php echo $lista['descripcion_alerta']; ?><br>
-							<strong>Mensaje Alerta: </strong><?php echo $lista['mensaje_alerta']; ?><br>
-							<strong>Nombre de Prueba: </strong><?php echo $lista['nombre_prueba']; ?><br>
-							<strong>Grupo Instrumentos: </strong><?php echo $lista['nombre_grupo_instrumentos']; ?><br>
-							<strong>Fecha: </strong><?php echo $lista['fecha']; ?><br>
-							<strong>Sesión Prueba: </strong><?php echo $lista['sesion_prueba']; ?><br>
-							<strong>Número de Citados: </strong><?php echo $lista['numero_citados']; ?><br>
-							
-					<br>
-<script>
-$( document ).ready( function () {
-	$("#ausentes").bloquearTexto().maxlength(5);
-});
-</script>
-					<form  name="formConsolidacion" id="<?php echo "formConsolidacion_" . $lista["id_alerta"]; ?>" class="form-horizontal" method="post" action="<?php echo base_url("dashboard/registro_consolidacion"); ?>">
-						<input type="hidden" id="hddId" name="hddId" value="<?php echo $lista["id_alerta"]; ?>"/>
-						<input type="hidden" id="hddIdSitioSesion" name="hddIdSitioSesion" value="<?php echo $lista["id_sitio_sesion"]; ?>"/>
-						
-						<input type="hidden" id="citados" name="citados" value="<?php echo $lista["numero_citados"]; ?>"/>
-						
-						<div class="form-group">
-							<label class="col-sm-12 control-label" for="ausentes">Cantidad de ausentes</label>
-							<div class="col-sm-12">
-								<input type="text" id="ausentes" name="ausentes" class="form-control" required/>
-							</div>
-						</div>
-											
-						<div class="form-group">
-							<div class="row" align="center">
-								<div style="width:50%;" align="center">
-									<input type="submit" id="btnConsolidacion" name="btnConsolidacion" value="Enviar" class="btn btn-success"/>
-								</div>
-							</div>
-						</div>
-					</form>	
-							
-						</div>
-					</div>
-
-				</div>
-			</div>
-		</div>
-<?php
-	}
-	endforeach;
-} ?>
-<!--FIN ALERTA -->
-	</div>
-
-
 <!-- INICIO NOTIFICACIONES QUE NO SE LE HAN DADO RESPUESTA -->
 <?php
-	if($contadorInformativa!=0)
+	if($contadorInformativaNo!=0)
 	{ 
 		echo "<div class='alert alert-danger'>
-					<strong>Atención</strong>, hay <strong>" . $contadorInformativa .  "</strong> Alertas Informativas sin dar respuesta.
-					<a href=". base_url("dashboard/respuesta_coordinador/1") ." >RESPONDER </a>
+					<strong>Atención</strong>, hay <strong>" . $contadorInformativaNo .  "</strong> Alertas Informativas sin dar respuesta.
+					<a href=". base_url("dashboard/respuesta_coordinador/1/coordinador") ." >RESPONDER </a>
 				</div>";
 	}
 	
@@ -364,16 +117,16 @@ $( document ).ready( function () {
 	{ 
 		echo "<div class='alert alert-danger'>
 					<strong>Atención</strong>, hay <strong>" . $contadorNotificacion .  "</strong> Alertas de Notificación sin dar respuesta.
-					<a href=". base_url("dashboard/respuesta_coordinador/2") ." >RESPONDER </a>
+					<a href=". base_url("dashboard/respuesta_coordinador/2/coordinador") ." >RESPONDER </a>
 				</div>";
 	}
 
 
-	if($contadorConsolidacion!=0)
+	if($contadorConsolidacionNo!=0)
 	{ 
 		echo "<div class='alert alert-danger'>
-					<strong>Atención</strong>, hay <strong>" . $contadorConsolidacion .  "</strong> Alertas de Consolidación sin dar respuesta.
-					<a href=". base_url("dashboard/respuesta_coordinador/3") ." >RESPONDER </a>
+					<strong>Atención</strong>, hay <strong>" . $contadorConsolidacionNo .  "</strong> Alertas de Consolidación sin dar respuesta.
+					<a href=". base_url("dashboard/respuesta_coordinador/3/coordinador") ." >RESPONDER </a>
 				</div>";
 	}
 	
@@ -381,5 +134,90 @@ $( document ).ready( function () {
 <!-- INICIO NOTIFICACIONES QUE NO SE LE HAN DADO RESPUESTA -->
 
 
+
+
+
+
+
+
+				<div class="row">
+					<div class="col-lg-4">
+					<div class="alert alert-danger">
+						<strong>Alerta Informativa</strong><br>
+						<?php
+							$total = $contadorInformativaSi + $contadorInformativaNo;
+							if($total != 0){
+								$porcentajeSi = round((($contadorInformativaSi * 100)/$total), 1);
+								$porcentajeNo = round((($contadorInformativaNo * 100)/$total), 1);
+							}else{
+								$porcentajeSi = 0;
+								$porcentajeNo = 0;
+							}
+						?>
+						<?php echo $rol_busqueda; ?> que aceptaron: <strong><?php echo $contadorInformativaSi . " (" . $porcentajeSi . "%)"; ?> </strong>
+						<br><?php echo $rol_busqueda; ?> que no contestaron: <strong><?php echo $contadorInformativaNo . " (" . $porcentajeNo . "%)"; ?> </strong>
+						
+
+					
+					</div></div>
+					
+					<div class="col-lg-4">
+					<div class="alert alert-danger">
+						<strong>Alerta de Notificación</strong><br>
+						<?php
+							$contadorNotificacionNo = $contadorNotificacionContestaron - $contadorNotificacionSi;
+							$total = $contadorNotificacionNoContestaron + $contadorNotificacionSi + $contadorNotificacionNo;
+							
+							if($total != 0){
+								$porcentajeNoContestaron = round((($contadorNotificacionNoContestaron * 100)/$total),1);
+								$porcentajeSi = round((($contadorNotificacionSi * 100)/$total),1);
+								$porcentajeNo = round((($contadorNotificacionNo * 100)/$total),1);
+							}else{
+								$porcentajeNoContestaron = 0;
+								$porcentajeSi = 0;
+								$porcentajeNo = 0;
+							}
+						?>
+						<?php echo $rol_busqueda; ?> que no contestaron: <strong><?php echo $contadorNotificacionNoContestaron . " (" . $porcentajeNoContestaron . "%)"; ?> </strong>
+						<br><?php echo $rol_busqueda; ?> que aceptaron: <strong><?php echo $contadorNotificacionSi . " (" . $porcentajeSi . "%)"; ?> </strong>
+						<br><?php echo $rol_busqueda; ?> que no Aceptaron: <strong><?php echo $contadorNotificacionNo . " (" . $porcentajeNo . "%)"; ?> </strong>
+						
+
+					
+					</div></div>
+					
+					<div class="col-lg-4">
+					<div class="alert alert-danger">
+						<strong>Alerta de Consolidación</strong><br>
+						<?php 
+							$total = $contadorConsolidacionSi + $contadorConsolidacionNo; 
+							if($total != 0){
+								$porcentajeSi = round((($contadorConsolidacionSi * 100)/$total),1);
+								$porcentajeNo = round((($contadorConsolidacionNo * 100)/$total),1);
+							}else{
+								$porcentajeSi = 0;
+								$porcentajeNo = 0;
+							}
+						?>
+						
+						<?php echo $rol_busqueda; ?> que contestaron: <strong><?php echo $contadorConsolidacionSi . " (" . $porcentajeSi . "%)"; ?> </strong>
+						<br><?php echo $rol_busqueda; ?> que no contestaron: <strong><?php echo $contadorConsolidacionNo . " (" . $porcentajeNo . "%)"; ?> </strong>
+
+
+						
+					</div></div>
+				</div>
+
+
+
+
+
+
+
+
+
+
+
 </div>
 <!-- /#page-wrapper -->
+

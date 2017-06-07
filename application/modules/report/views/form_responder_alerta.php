@@ -30,8 +30,8 @@
 		Por favor dar repuesta a la alerta que no contesto el Representante
 	</div>
 
-	<div class="row">
-		<div class="col-md-4">
+
+		<div class="col-md-6">
 			<div class="panel panel-info">
 				<div class="panel-heading">
 					<strong>Nombre Sitio: </strong><br><?php echo $info[0]['nombre_sitio']; ?>
@@ -41,25 +41,12 @@
 					<br><strong>Contacto: </strong><br><?php echo $info[0]['contacto_nombres'] . " " . $info[0]['contacto_apellidos']; ?>
 					<br><strong>Celular: </strong><?php echo $info[0]['contacto_celular']; ?>
 					<?php } ?>
-				</div>
-			</div>
-		</div>
-		
-		<div class="col-md-4">
-			<div class="panel panel-info">
-				<div class="panel-heading">
-					<strong>Nodo o Región: </strong><?php echo $info[0]['nombre_region']; ?>
+
 					<br><strong>Departamento: </strong><?php echo $info[0]['dpto_divipola_nombre']; ?>
 					<br><strong>Municipio: </strong><?php echo $info[0]['mpio_divipola_nombre']; ?>
 					<br><strong>Zona: </strong><?php echo $info[0]['nombre_zona']; ?>
-				</div>
-			</div>
-		</div>
-		
-		<div class="col-md-4">
-			<div class="panel panel-info">
-				<div class="panel-heading">
-					<strong>Representante: </strong><br>
+
+					<br><strong>Representante: </strong><br>
 					<?php 
 					if($info[0]['fk_id_user_delegado']){
 						echo "C.C. " . $info[0]['numero_documento'] . " " . $info[0]['nombre_delegado'];
@@ -72,7 +59,7 @@
 				</div>
 			</div>
 		</div>
-	</div>	
+	
 				
 				
 <?php 

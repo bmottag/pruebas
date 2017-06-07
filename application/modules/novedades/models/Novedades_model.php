@@ -114,14 +114,12 @@
 		 */
 		public function get_holguras($arrDatos) 
 		{
-				$this->db->select('S.*, P.nombre_prueba, G.*, E.snp snp_examinando, E.consecutivo consecutivo_examinando, Z.snp_holgura, Z.consecutivo_holgura, A.*');
+				$this->db->select('S.*, P.nombre_prueba, G.*, Z.snp_holgura, Z.consecutivo_holgura, A.*');
 				$this->db->join('sitios X', 'X.id_sitio = A.fk_id_sitio', 'INNER');
 
 				$this->db->join('sesiones S', 'S.id_sesion = A.fk_id_sesion', 'INNER');
 				$this->db->join('param_grupo_instrumentos G', 'G.id_grupo_instrumentos = S.fk_id_grupo_instrumentos', 'INNER');
 				$this->db->join('pruebas P', 'P.id_prueba = G.fk_id_prueba', 'INNER');
-				
-				$this->db->join('examinandos E', 'E.id_examinando = A.fk_id_examinando', 'INNER');
 				
 				$this->db->join('snp_holguras Z', 'Z.id_snp_holgura = A.fk_id_snp_holgura', 'INNER');
 
@@ -150,7 +148,7 @@
 		 * Add/Edit Holgura
 		 * @since 4/6/2017
 		 */
-		public function saveHolgura($idExaminando) 
+		public function saveHolgura($idSNPHolgura) 
 		{
 				$idHolgura = $this->input->post('hddId');
 				$userID = $this->session->userdata("id");
@@ -158,8 +156,8 @@
 				$data = array(
 					'fk_id_sitio' => $this->input->post('hddIdSitio'),
 					'fk_id_sesion' => $this->input->post('sesion'),
-					'fk_id_examinando' => $idExaminando,
-					'fk_id_snp_holgura' => $this->input->post('snpHolgura'),
+					'fk_id_examinando' => $this->input->post('consecutivo'),
+					'fk_id_snp_holgura' => $idSNPHolgura,
 					'observacion' => $this->input->post('observacion'),
 					'fecha_holgura' => date("Y-m-d G:i:s"),
 					'fk_id_user_dele' => $userID,

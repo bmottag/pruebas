@@ -356,27 +356,30 @@ class Novedades extends MX_Controller {
 				$msj = "Se actualizó la holgura.";
 			}			
 
-			$consecutivo = $this->input->post("consecutivo");
-			$confirm = $this->input->post("confirmarConsecutivo");
+			$holgura = $this->input->post("holgura");
+			$confirm = $this->input->post("confirmarHolgura");
 
-			if($consecutivo != $confirm){
+			if($holgura != $confirm){
 				$data["result"] = "error";
 				$data["mensaje"] = "Los consecutivos no coinciden.";
 			} else {
 					//buscar el id de ese consecutivo
 					$this->load->model("general_model");
-					$arrParam = array(
-							"consecutivo" => $consecutivo,
-							"idMunicipio" => $this->input->post('hddIdMunicipio'),
-							"codigoDane" => $this->input->post('hddCodigoDane')
-					);
-					$infoSNP = $this->general_model->get_examinandos_by($arrParam);
 					
-					if(!$infoSNP){
+
+					$arrParam = array(
+						"table" => "snp_holguras",
+						"order" => "id_snp_holgura",
+						"column" => "consecutivo_holgura",
+						"id" => $holgura
+					);
+					$holguras = $this->general_model->get_basic_search($arrParam);//lista de holguras
+									
+					if(!$holguras){
 						$data["result"] = "error";
 						$data["mensaje"] = "El SNP ingresado no se encontró en la base de datos.";
 					}else{
-							if ($this->novedades_model->saveHolgura($infoSNP['id_examinando'])) {
+							if ($this->novedades_model->saveHolgura($holguras[0]['id_snp_holgura'])) {
 								$data["result"] = true;					
 								$this->session->set_flashdata('retornoExito', $msj);
 							} else {
