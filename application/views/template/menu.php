@@ -35,6 +35,39 @@
             <ul class="nav navbar-top-links navbar-right">
                 <!-- /.dropdown -->	
 				
+				
+				
+				
+<?php 
+if($userRol==2){ //If it is an ADMIN user, show an special menu
+?>				
+		<li class="dropdown">
+			<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+				<i class="fa fa-list-alt"></i> Reportes <i class="fa fa-caret-down"></i>
+			</a>
+			<ul class="dropdown-menu dropdown-messages">
+			
+				<li>
+					<a href="<?php echo base_url("report/searchBy"); ?>"><i class="fa fa-list-alt fa-fw"></i> Información Alertas - Representantes</a>
+				</li>
+				
+			</ul>
+		</li>
+<?php 
+}
+?>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
 <?php 
 if($userRol==1){ //If it is an ADMIN user, show an special menu
 ?>

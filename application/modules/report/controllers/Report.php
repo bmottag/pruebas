@@ -40,7 +40,11 @@ class Report extends CI_Controller {
 			}
 
 			$arrParam = array("tipoAlerta" => $tipoAlerta);
-			$data['infoAlerta'] = $this->report_model->get_consolidado_by($arrParam);
+			//$data['infoAlerta'] = $this->report_model->get_consolidado_by($arrParam);
+			
+			$data['info'] = $this->report_model->get_total_by($arrParam);
+			
+			
 //echo $this->db->last_query();			
 //pr($data['infoAlerta']); exit;
 						
@@ -351,9 +355,13 @@ class Report extends CI_Controller {
      * Cargo modal - lista de sesiones
      * @since 21/5/2017
      */
-    public function mostrarSesiones($idSitio) 
+    public function mostrarSesiones($idSitio, $regreso="x") 
 	{
-			$data["botonRegreso"] = "report/searchBy";
+			if($regreso == "x"){
+				$data["botonRegreso"] = "report/searchBy";
+			}else{
+				$data["botonRegreso"] = "dashboard/directivo";
+			}
 							
 			$this->load->model("general_model");
 			$arrParam = array("idSitio" => $idSitio);

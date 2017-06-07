@@ -76,7 +76,7 @@ if ($retornoError) {
 				<div class="panel-heading">
 					<div class="row">
 						<div class="col-xs-3">
-							<i class="fa fa-book fa-5x"></i>
+							<i class="fa fa-home fa-5x"></i>
 						</div>
 						<div class="col-xs-9 text-right">
 							<div class="huge"><?php echo $noSitios; ?></div>
@@ -87,7 +87,7 @@ if ($retornoError) {
 				
 				<a href="#anclaPruebas">
 					<div class="panel-footer">
-						<span class="pull-left">Lista de Pruebas</span>
+						<span class="pull-left">Lista de Sitios</span>
 						<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
 						<div class="clearfix"></div>
 					</div>
@@ -100,11 +100,11 @@ if ($retornoError) {
 				<div class="panel-heading">
 					<div class="row">
 						<div class="col-xs-3">
-							<i class="fa fa-life-saver fa-5x"></i>
+							<i class="fa fa-info fa-5x"></i>
 						</div>
 						<div class="col-xs-9 text-right">
 							<div class="huge"><?php echo $noRegistroInformativa; ?></div>
-							<div>Alerta Informativa</div>
+							<div>Número de respuestas Alerta Informativa</div>
 						</div>
 					</div>
 				</div>
@@ -123,11 +123,11 @@ if ($retornoError) {
 				<div class="panel-heading">
 					<div class="row">
 						<div class="col-xs-3">
-							<i class="fa fa-truck fa-5x"></i>
+							<i class="fa fa-thumb-tack fa-5x"></i>
 						</div>
 						<div class="col-xs-9 text-right">
 							<div class="huge"><?php echo $noRegistroNotificacion; ?></div>
-							<div>Alerta Notificación</div>
+							<div>Número de respuestas Alerta Notificación</div>
 						</div>
 					</div>
 				</div>
@@ -146,11 +146,11 @@ if ($retornoError) {
 				<div class="panel-heading">
 					<div class="row">
 						<div class="col-xs-3">
-							<i class="fa fa-search fa-5x"></i>
+							<i class="fa fa-crosshairs fa-5x"></i>
 						</div>
 						<div class="col-xs-9 text-right">
 							<div class="huge"><?php echo $noRegistroConsolidacion; ?></div>
-							<div>Alerta Consolidación</div>
+							<div>Número de respuestas Alerta Consolidación</div>
 						</div>
 					</div>
 				</div>
@@ -174,7 +174,7 @@ if ($retornoError) {
 				<div class="col-lg-12">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <i class="fa fa-book fa-fw"></i> Lista de Sitios
+                            <i class="fa fa-home fa-fw"></i> Lista de Sitios
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -204,7 +204,9 @@ if ($retornoError) {
 								echo "<tr>";								
 								echo "<td >" . $lista['dpto_divipola_nombre'] . "</td>";
 								echo "<td >" . $lista['mpio_divipola_nombre'] . "</td>";
-								echo "<td >" . $lista['nombre_sitio'] . "</td>";
+								echo "<td >";
+echo "<a href='" . base_url('report/mostrarSesiones/' . $lista['id_sitio'] . '/dashboard' ) . "'>" . $lista['nombre_sitio'] . "</a>";
+								echo "</td>";
 								echo "<td class='text-center'>" . $lista['codigo_dane'] . "</td>";
 								echo "</tr>";
 							endforeach;

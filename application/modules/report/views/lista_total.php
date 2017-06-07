@@ -255,9 +255,9 @@ echo "<a href='" . base_url('report/mostrarSesiones/' . $lista['id_sitio']) . "'
 									echo "<br><strong>Municipio: </strong>" . $lista['mpio_divipola_nombre'];
 									echo "<br><strong>Zona: </strong>" . $lista['nombre_zona'];
 									echo "<br><strong>Representante: </strong>";
-									echo "C.C. " . $infoSitoDelegado[0]['cedula_delegado'] . " " . $infoSitoDelegado[0]['nom_delegado'] . " "  . $infoSitoDelegado[0]['ape_delegado'];
+									echo "C.C. " . $lista['cedula_delegado'] . " " . $lista['nom_delegado'] . " "  . $lista['ape_delegado'];
 									echo "<br><strong>Celular representante: </strong>";
-									echo "<a href='tel:".$infoSitoDelegado[0]['celular_delegado']."'>".$infoSitoDelegado[0]['celular_delegado']."</a>"; 									
+									echo "<a href='tel:".$lista['celular_delegado']."'>".$lista['celular_delegado']."</a>"; 									
 									echo "</td>";
 
 
