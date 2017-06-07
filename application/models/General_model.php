@@ -166,7 +166,7 @@ class General_model extends CI_Model {
 				$this->db->select('S.*, O.nombre_organizacion, R.nombre_region, D.*, Z.nombre_zona, 
 				U.numero_documento as cedula_delegado, U.nombres_usuario nom_delegado, U.apellidos_usuario ape_delegado, U.celular celular_delegado,
 				Y.numero_documento as cedula_coordinador, Y.nombres_usuario nom_coordinador, Y.apellidos_usuario ape_coordiandor, Y.celular celular_coordinador, 
-				K.nombres_usuario nom_operador, K.apellidos_usuario ape_operador');
+				K.nombres_usuario nom_operador, K.apellidos_usuario ape_operador, K.numero_documento as cedula_operador');
 				$this->db->join('param_regiones R', 'R.id_region = S.fk_id_region', 'INNER');
 				$this->db->join('param_divipola D', 'D.mpio_divipola = S.fk_mpio_divipola', 'INNER');
 				$this->db->join('param_organizaciones O', 'O.id_organizacion = S.fk_id_organizacion', 'LEFT');
@@ -581,6 +581,37 @@ class General_model extends CI_Model {
 				
 				if (array_key_exists("idCoordinador", $arrDatos)) {
 					$this->db->where('D.fk_id_coordinador_mcpio', $arrDatos["idCoordinador"]);
+				}
+				
+				$this->db->order_by('dpto_divipola_nombre, mpio_divipola_nombre', 'asc');
+				$query = $this->db->get('param_divipola D');
+
+				if ($query->num_rows() > 0) {
+					return $query->result_array();
+				} else {
+					return false;
+				}
+		}
+		
+		/**
+		 * Lista operadores
+		 * @since 12/5/2017
+		 */
+		public function get_operadores($arrDatos) 
+		{
+				$this->db->select('');
+				$this->db->join('usuario U', 'U.id_usuario = D.fk_id_operador_mcpio', 'INNER');
+				
+				
+				$where = "D.fk_id_operador_mcpio IS NOT NULL";
+				$this->db->where($where);
+				
+				if (array_key_exists("idMcpio", $arrDatos)) {
+					$this->db->where('D.mpio_divipola', $arrDatos["idMcpio"]);
+				}
+				
+				if (array_key_exists("idOperador", $arrDatos)) {
+					$this->db->where('D.fk_id_operador_mcpio', $arrDatos["idCoordinador"]);
 				}
 				
 				$this->db->order_by('dpto_divipola_nombre, mpio_divipola_nombre', 'asc');

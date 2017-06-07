@@ -146,10 +146,11 @@ Asociar  <span class="badge"><?php echo $conteoSesiones; ?></span>
 									</td>
 									
 									<td class='text-center'>
-									<a href="<?php echo base_url("admin/asignar_delegado/" . $lista['id_sitio'] . "/delegado"); ?>" class="btn btn-info btn-xs">Delegado <span class="fa fa-gears fa-fw" aria-hidden="true"></a>
+									<a href="<?php echo base_url("admin/asignar_delegado/" . $lista['id_sitio'] . "/delegado"); ?>" class="btn btn-info btn-xs">Representante <span class="fa fa-gears fa-fw" aria-hidden="true"></a>
 						<?php 
 if($lista['fk_id_user_delegado']){
 	echo "<p class='text-primary text-center'>" . $lista['nom_delegado'] . " " . $lista['ape_delegado'] . "</br>";
+	echo "C.C. " . $lista['cedula_delegado'] . "</br>";
 	echo "<a href='" . base_url("admin/updateDelegado/" . $lista['id_sitio']) . "' class='text-primary text-center'>Eliminar</p>";
 }else{
 	echo "<p class='text-danger text-center'><strong>Falta</strong></p>";
@@ -158,11 +159,10 @@ if($lista['fk_id_user_delegado']){
 									</td>
 									
 									<td class='text-center'>
-									<a href="<?php echo base_url("admin/asignar_delegado/" . $lista['id_sitio'] . "/operador"); ?>" class="btn btn-info btn-xs">Operador <span class="fa fa-gears fa-fw" aria-hidden="true"></a>
 						<?php 
 if($lista['fk_id_user_operador']){
 	echo "<p class='text-primary text-center'>" . $lista['nom_operador'] . " " . $lista['ape_operador'] . "</br>";
-echo "<a href='" . base_url("admin/updateOperador/" . $lista['fk_mpio_divipola']) . "' class='text-primary text-center'>Eliminar</p>";
+	echo "C.C. " . $lista['cedula_operador'] . "</br>";
 }else{
 	echo "<p class='text-danger text-center'><strong>Falta</strong></p>";
 }
@@ -173,6 +173,7 @@ echo "<a href='" . base_url("admin/updateOperador/" . $lista['fk_mpio_divipola']
 						<?php 
 if($lista['fk_id_user_coordinador']){
 	echo "<p class='text-primary text-center'>" . $lista['nom_coordinador'] . " " . $lista['ape_coordiandor'] . "</br>";
+	echo "C.C. " . $lista['cedula_coordinador'] . "</br>";
 }else{
 	echo "<p class='text-danger text-center'><strong>Falta</strong></p>";
 }
