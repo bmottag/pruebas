@@ -165,7 +165,7 @@ if($userRol==4){
 
 
 <?php 
-if($userRol==3){ 
+if($userRol==3){//COORDINADOR 
 ?>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -188,6 +188,19 @@ if($userRol==3){
                     </ul>
                     <!-- /.dropdown-messages -->
                 </li>
+				
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+						<i class="fa fa-list-alt"></i> Reportes <i class="fa fa-caret-down"></i>
+					</a>
+					<ul class="dropdown-menu dropdown-messages">
+					
+						<li>
+							<a href="<?php echo base_url("report/searchByCoordinador"); ?>"><i class="fa fa-list-alt fa-fw"></i> Información Alertas - Representantes</a>
+						</li>
+						
+					</ul>
+				</li>
 <?php
 }
 ?>

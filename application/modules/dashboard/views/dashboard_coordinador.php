@@ -380,3 +380,18 @@ echo "<a href='" . base_url('report/mostrarSesiones/' . $lista['id_sitio'] . '/c
 </div>
 <!-- /#page-wrapper -->
 
+
+
+    <!-- Tables -->
+    <script>
+    $(document).ready(function() {
+        $('#dataTables').DataTable({
+            responsive: true,
+			 "ordering": false,
+			 paging: true,
+			"searching": true,
+			"pageLength": 30
+        });
+		
+    });
+    </script>

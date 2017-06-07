@@ -408,23 +408,20 @@ class Report extends CI_Controller {
     public function searchByCoordinador() 
 	{
 			$data['rol_busqueda'] = "Coordinadores";
+			$userID = $this->session->userdata("id");
+			
 			//Lista Regiones
 			$this->load->model("general_model");
 			$arrParam = array(
-				"table" => "param_regiones",
-				"order" => "nombre_region",
-				"id" => "x"
+				"idCoordinador" => $userID
 			);
-			$data['listaRegiones'] = $this->general_model->get_basic_search($arrParam);//Lista Regiones
-			
-			//Lista Departamentos
-			$data['listaDepartamentos'] = $this->general_model->get_dpto_divipola();//listado de departamentos
+			$data['listaDepartamentos'] = $this->general_model->get_dpto_divipola_by($arrParam);//listado de departamentos
 			
 			//lista sesiones
 			$arrParam = array();
 			$data['infoSesiones'] = $this->general_model->get_sesiones($arrParam);//lista sesiones
 			
-			$data["view"] = "form_search_by";
+			$data["view"] = "form_search_by_coordinador";
 
 			if($this->input->post('sesion'))
 			{
@@ -432,9 +429,6 @@ class Report extends CI_Controller {
 				
 				$alerta = $this->input->post('alerta');
 				$alerta = $alerta==""?FALSE:$alerta;
-				
-				$idRegion = $this->input->post('region');	
-				$idRegion = $idRegion==""?FALSE:$idRegion;
 				
 				$depto = $this->input->post('depto');
 				$depto = $depto==""?FALSE:$depto;
@@ -455,17 +449,6 @@ class Report extends CI_Controller {
 							"id" => $alerta
 						);
 						$data['infoAlerta'] = $this->general_model->get_basic_search($arrParam);//Info Alerta para mostrar la region por la que se filtro
-				}
-				
-				//Info Regiones
-				if($idRegion){
-						$arrParam = array(
-							"table" => "param_regiones",
-							"order" => "nombre_region",
-							"column" => "id_region",
-							"id" => $idRegion
-						);
-						$data['infoRegion'] = $this->general_model->get_basic_search($arrParam);//Info Regiones para mostrar la region por la que se filtro
 				}
 				
 				//Info Departamento
@@ -501,18 +484,18 @@ class Report extends CI_Controller {
 				}
 				
 				//conteo de los sitios segun el filtro
-				$data['conteoSitios'] = $this->report_model->get_numero_sitios_por_filtro($arrParam);
+				$data['conteoSitios'] = $this->report_model->get_numero_sitios_por_filtro_by_coordinador();
 				
-				$data['conteoCitados'] = $this->report_model->get_numero_citados_por_filtro($arrParam);
+				$data['conteoCitados'] = $this->report_model->get_numero_citados_por_filtro_by_coordinnador($arrParam);
 //pr($data['conteoCitados']);
 //echo$this->db->last_query();exit;
 				
 //conteo respuestas para alertas INFORMATIVAS - ROL COORDINADOR
 				$arrParam = array(
 								'tipoAlerta' => 1, //INFORMATIVA
-								'rolAlerta' => 3, //COORDINADOR
+								'rolAlerta' => 4, //representante
 				);
-				$infoInformativa = $this->report_model->get_respuestas_registro($arrParam);//alertas vigentes para los filtros
+				$infoInformativa = $this->report_model->get_respuestas_registro_by_coordinador($arrParam);//alertas vigentes para los filtros
 				
 				//recorro las alertas y reviso se se les dio respuesta, si no se le dio respuesta las voy contando
 				$data['contadorInformativaSi'] = 0;
@@ -536,9 +519,9 @@ class Report extends CI_Controller {
 //conteo respuestas para alertas NOTIFICACION - ROL DELEGADO
 				$arrParam = array(
 								'tipoAlerta' => 2, //NOTIFICACION
-								'rolAlerta' => 3, //COORDINADOR
+								'rolAlerta' => 4, //representante
 				);
-				$infoNotificacion = $this->report_model->get_respuestas_registro($arrParam);
+				$infoNotificacion = $this->report_model->get_respuestas_registro_by_coordinador($arrParam);
 				//recorro las alertas y reviso se se les dio respuesta, si no se le dio respuesta las voy contando
 				$data['contadorNotificacionContestaron'] = 0;
 				$data['contadorNotificacionSi'] = 0;
@@ -573,9 +556,9 @@ class Report extends CI_Controller {
 //conteo respiestas para alertas CONSOLIDACION - ROL DELEGADO
 				$arrParam = array(
 								'tipoAlerta' => 3, //CONSOLIDACION
-								'rolAlerta' => 3, //COORDINADOR
+								'rolAlerta' => 4, //representante
 				);
-				$infoConsolidacion = $this->report_model->get_respuestas_registro($arrParam);
+				$infoConsolidacion = $this->report_model->get_respuestas_registro_by_coordinador($arrParam);
 				//recorro las alertas y reviso se se les dio respuesta, si no se le dio respuesta las voy contando
 				$data['contadorConsolidacionSi'] = 0;
 				$data['contadorConsolidacionNo'] = 0;

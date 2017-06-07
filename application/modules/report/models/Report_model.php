@@ -398,11 +398,159 @@
 				return $query->row_array();
 		}
 		
+		/**
+		 * Conteo de sitios para el reporte general
+		 * @since 26/5/2017
+		 */
+		public function get_numero_sitios_por_filtro_by_coordinador() 
+		{
+				$userRol = $this->session->userdata("rol");
+				$userID = $this->session->userdata("id");
 		
+				$sesion = $this->input->post('sesion');
+				
+				$depto = $this->input->post('depto');
+				$mcpio = $this->input->post('mcpio');
+
+				$sql = "SELECT COUNT(DISTINCT(id_sitio)) CONTEO";
+				$sql.= " FROM sitio_sesion X ";
+				$sql.= "	INNER JOIN sesiones S ON S.id_sesion = X.fk_id_sesion 
+							INNER JOIN sitios Y ON Y.id_sitio = X.fk_id_sitio 
+							INNER JOIN param_divipola D ON D.mpio_divipola = Y.fk_mpio_divipola";
+											
+				if ($sesion && $sesion != "") {
+					$sql.= " WHERE X.fk_id_sesion = '$sesion'"; //FILTRO POR SESION
+				}
+				
+				if ($userRol==3) {
+					$sql.= " AND D.fk_id_coordinador_mcpio = '$userID'"; //FILTRO POR COORDINADOR
+				}
+								
+				if ($depto && $depto != "") {
+					$sql.= " AND Y.fk_dpto_divipola = '$depto'"; //FILTRO POR DEPARTAMENTO
+				}
+			
+				if ($mcpio && $mcpio != "") {
+					$sql.= " AND Y.fk_mpio_divipola = '$mcpio'"; //FILTRO POR MUNICIPIO
+				}
+
+				$query = $this->db->query($sql);
+				$row = $query->row();
+				return $row->CONTEO;
+		}	
 		
+		/**
+		 * Conteo de citados para el reporte general
+		 * @since 26/5/2017
+		 */
+		public function get_numero_citados_por_filtro_by_coordinnador() 
+		{		
+				$userRol = $this->session->userdata("rol");
+				$userID = $this->session->userdata("id");
 		
+				$sesion = $this->input->post('sesion');
+				
+				$depto = $this->input->post('depto');
+				$mcpio = $this->input->post('mcpio');
+
+				$sql = "SELECT SUM(numero_citados) citados, SUM(numero_presentes_efectivos) presentes, SUM(numero_ausentes) ausentes";
+				$sql.= " FROM sitio_sesion X ";
+				$sql.= "	INNER JOIN sesiones S ON S.id_sesion = X.fk_id_sesion 
+							INNER JOIN sitios Y ON Y.id_sitio = X.fk_id_sitio 
+							INNER JOIN param_divipola D ON D.mpio_divipola = Y.fk_mpio_divipola";			
+				if ($sesion && $sesion != "") {
+					$sql.= " WHERE X.fk_id_sesion = '$sesion'"; //FILTRO POR SESION
+				}
+				
+				if ($userRol==3) {
+					$sql.= " AND D.fk_id_coordinador_mcpio = '$userID'"; //FILTRO POR COORDINADOR
+				}
+				
+				if ($depto && $depto != "") {
+					$sql.= " AND Y.fk_dpto_divipola = '$depto'"; //FILTRO POR DEPARTAMENTO
+				}
+			
+				if ($mcpio && $mcpio != "") {
+					$sql.= " AND Y.fk_mpio_divipola = '$mcpio'"; //FILTRO POR MUNICIPIO
+				}
+
+				$query = $this->db->query($sql);
+				return $query->row_array();
+		}	
 		
+		/**
+		 * Lista de Alertas para el REPORTE
+		 * @since 24/5/2017
+		 */
+		public function get_respuestas_registro_by_coordinador($arrDatos) 
+		{		
+				$userRol = $this->session->userdata("rol");
+				$userID = $this->session->userdata("id");
 		
+				$sesion = $this->input->post('sesion');
+				$alerta = $this->input->post('alerta');
+						
+				$depto = $this->input->post('depto');
+				$mcpio = $this->input->post('mcpio');
+		
+				$this->db->select('id_sitio_sesion, id_sitio, id_sesion, id_alerta');
+				
+				//SESION
+				$this->db->join('sesiones S', 'S.id_sesion = X.fk_id_sesion', 'INNER');
+				$this->db->join('param_grupo_instrumentos G', 'G.id_grupo_instrumentos = S.fk_id_grupo_instrumentos', 'INNER');
+				$this->db->join('pruebas P', 'P.id_prueba = G.fk_id_prueba', 'INNER');
+				
+				//ALERTA
+				$this->db->join('alertas A', 'A.fk_id_sesion = S.id_sesion', 'INNER');
+				$this->db->join('param_tipo_alerta T', 'T.id_tipo_alerta = A.fk_id_tipo_alerta', 'INNER');
+				
+				//SITIO
+				$this->db->join('sitios Y', 'Y.id_sitio = X.fk_id_sitio', 'INNER');
+				$this->db->join('param_regiones R', 'R.id_region = Y.fk_id_region', 'INNER');
+				$this->db->join('param_divipola D', 'D.mpio_divipola = Y.fk_mpio_divipola', 'INNER');
+				$this->db->join('param_organizaciones O', 'O.id_organizacion = Y.fk_id_organizacion', 'INNER');
+				$this->db->join('param_zonas Z', 'Z.id_zona = Y.fk_id_zona', 'INNER');
+				
+				$this->db->where('A.estado_alerta', 1); //ALERTAS ACTIVAS
+				$tipoMensaje = array(1, 2);//filtrar por alertas que se muestren en el APP
+				$this->db->where_in('A.tipo_mensaje', $tipoMensaje);	
+
+				if (array_key_exists("rolAlerta", $arrDatos)) {
+					$this->db->where('A.fk_id_rol', $arrDatos["rolAlerta"]); //TIPO ALERTA
+				}
+				
+				if ($userRol==3) {
+					$this->db->where('D.fk_id_coordinador_mcpio', $userID);
+				}
+				
+				if ($sesion && $sesion != "") {
+					$this->db->where('X.fk_id_sesion', $sesion); //FILTRO POR SESION
+				}
+				
+				if ($alerta && $alerta != "") {
+					$this->db->where('A.id_alerta', $alerta); //FILTRO POR ALERTA
+				}
+				
+				if ($depto && $depto != "") {
+					$this->db->where('Y.fk_dpto_divipola', $depto); //FILTRO POR DEPARTAMENTO
+				}
+			
+				if ($mcpio && $mcpio != "") {
+					$this->db->where('Y.fk_mpio_divipola', $mcpio); //FILTRO POR MUNICIPIO
+				}
+				
+				if (array_key_exists("tipoAlerta", $arrDatos)) {
+					$this->db->where('A.fk_id_tipo_alerta', $arrDatos["tipoAlerta"]); //TIPO ALEERTA
+				}
+
+				$query = $this->db->get('sitio_sesion X');
+
+				if ($query->num_rows() > 0) {
+					return $query->result_array();
+				} else {
+					return false;
+				}
+		}	
 		
 		
 		

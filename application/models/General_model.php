@@ -44,15 +44,42 @@ class General_model extends CI_Model {
 		}
 		
 		/**
+		 * Lista de departamentos
+		 * @since 7/6/2017
+		 */
+		public function get_dpto_divipola_by($arrDatos) 
+		{
+				$this->db->select('DISTINCT(dpto_divipola), dpto_divipola_nombre');
+				if (array_key_exists("idCoordinador", $arrDatos)) {
+					$this->db->where('fk_id_coordinador_mcpio', $arrDatos["idCoordinador"]);
+				}
+				$this->db->order_by('dpto_divipola_nombre', 'asc');
+				$query = $this->db->get('param_divipola D');
+
+				if ($query->num_rows() > 0) {
+					return $query->result_array();
+				} else {
+					return false;
+				}
+		}
+		
+		/**
 		 * Municipios por departamento
 		 * @since 12/5/2016
 		 */
 		public function get_municipios_by($arrDatos)
 		{
+				$userRol = $this->session->userdata("rol");
+				$userID = $this->session->userdata("id");
+			
 				$municipios = array();
 				$this->db->select();
 				if (array_key_exists("idDepto", $arrDatos)) {
 					$this->db->where('dpto_divipola', $arrDatos["idDepto"]);
+				}
+				
+				if ($userRol==3) {
+					$this->db->where('fk_id_coordinador_mcpio', $userID);
 				}
 				$this->db->order_by('mpio_divipola_nombre', 'asc');
 				$query = $this->db->get('param_divipola');
