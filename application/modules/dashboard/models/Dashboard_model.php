@@ -233,6 +233,22 @@
 		}
 		
 		/**
+		 * Contar Sitios
+		 * @since  6/6/2017
+		 */
+		public function countSitios()
+		{
+				$year = date('Y');
+
+				$sql = "SELECT count(id_sitio) CONTEO";
+				$sql.= " FROM sitios";
+
+				$query = $this->db->query($sql);
+				$row = $query->row();
+				return $row->CONTEO;
+		}
+		
+		/**
 		 * Contar pruebas
 		 * @since  21/5/2017
 		 */

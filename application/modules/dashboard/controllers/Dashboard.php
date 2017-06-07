@@ -477,5 +477,42 @@ class Dashboard extends MX_Controller {
 	}
 	
 	
+	/**
+	 * Dashboard directivo
+	 */
+	public function directivo()
+	{	
+			$userRol = $this->session->userdata("rol");
+			$userID = $this->session->userdata("id");
+			/**
+			 * Esta vista solo es para ADMINISTRADORES Y DIRECTIOVOS
+			 */
+			if($userRol!=2){
+				show_error('ERROR!!! - You are in the wrong place.');
+			}
+			
+			$this->load->model("general_model");
+			
+			$arrParam = array();
+			$data['infoSitios'] = $this->general_model->get_sitios($arrParam);
+
+	/**
+	 * Datos para las cajas 
+	 */
+	 
+	 //inicio consulta de pruebas vigentes
+			$data['noSitios'] = $this->dashboard_model->countSitios();//cuenta de sitios vigentes
+			
+	//inicio consulta de numero de alertas
+			$data['noRegistroInformativa'] = $this->dashboard_model->countAlertasByTipo(1);//cuenta de registro de informativa
+			$data['noRegistroNotificacion'] = $this->dashboard_model->countAlertasByTipo(2);//cuenta de registro de notificaciones
+			$data['noRegistroConsolidacion'] = $this->dashboard_model->countAlertasByTipo(3);//cuenta de registro de notificaciones
+			
+
+			$data["view"] = "dashboard_directivo";
+			$this->load->view("layout", $data);
+	}
+	
+	
 }
 

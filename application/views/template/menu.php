@@ -17,6 +17,8 @@
 			$enlace = base_url("dashboard/operador");
 		}elseif($userRol==3){ //USUARIOS DELEGADOS
 			$enlace = base_url("dashboard/coordinador");
+		}elseif($userRol==2){ //USUARIOS DIRECTIVO
+			$enlace = base_url("dashboard/directivo");
 		}else{
 			$enlace = base_url("dashboard");
 		}
