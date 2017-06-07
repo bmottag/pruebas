@@ -179,9 +179,15 @@
 						<?php echo $rol_busqueda; ?> que contestaron: <strong><?php echo $contadorConsolidacionSi . " (" . $porcentajeSi . "%)"; ?> </strong>
 						<br><?php echo $rol_busqueda; ?> que no contestaron: <strong><?php echo $contadorConsolidacionNo . " (" . $porcentajeNo . "%)"; ?> </strong>
 						<?php 
-							$presentes =  $conteoCitados['citados'] - $conteoCitados['ausentes'];
-							$porcentajePresentes = ($presentes * 100)/$conteoCitados['citados']; 
-							$porcentajeAusentes = ($conteoCitados['ausentes'] * 100)/$conteoCitados['citados']; 
+							if($conteoCitados['citados'] !=0){
+								$presentes =  $conteoCitados['citados'] - $conteoCitados['ausentes'];
+								$porcentajePresentes = ($presentes * 100)/$conteoCitados['citados']; 
+								$porcentajeAusentes = ($conteoCitados['ausentes'] * 100)/$conteoCitados['citados']; 
+							}else{
+								$presentes =  0;
+								$porcentajePresentes = 0; 
+								$porcentajeAusentes = 0;
+							}
 						
 						?>
 						<br>Número todal de citados: <strong><?php echo $conteoCitados['citados']; ?> </strong>
