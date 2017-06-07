@@ -219,11 +219,12 @@ class Dashboard extends MX_Controller {
 	/**
 	 * Controlador para coordinadores
 	 */
-	public function coordinadores()
+	public function coordinador()
 	{	
 			$this->load->model("general_model");
 			$userRol = $this->session->userdata("rol");
 			$userID = $this->session->userdata("id");
+			$data['rol_busqueda'] = "Representantes";
 	/**
 	 * SI es coordinador busco los municipios en los que esta asignado
 	 */
@@ -233,25 +234,18 @@ class Dashboard extends MX_Controller {
 			}else{
 				show_error('ERROR!!! - You are in the wrong place.');	
 			}
-					
-//se buscan las alertas asignadas al coordinador			
-			$arrParam = array("tipoAlerta" => 1);
-			$data['infoAlertaInformativa'] = $this->dashboard_model->get_alerta_coordinador_by($arrParam);
 			
-			$arrParam = array("tipoAlerta" => 2);
-			$data['infoAlertaNotificacion'] = $this->dashboard_model->get_alerta_coordinador_by($arrParam);
-
-			$arrParam = array("tipoAlerta" => 3);
-			$data['infoAlertaConsolidacion'] = $this->dashboard_model->get_alerta_coordinador_by($arrParam);
-
-
 			
-//se buscan las alertas informativas vencidas que tienen el coordinador a cargo
-			$arrParam = array("tipoAlerta" => 1);
+//se buscan las alertas informativas vencidas que tienen el coordinador a cargo			
+			$arrParam = array(
+							"tipoAlerta" => 1,
+							"rol" => "coordinador"
+			);
 			$infoAlertaVencidaInformativa = $this->general_model->get_alertas_vencidas_by($arrParam);
 			
-			//recorro las alertas y reviso se se les dio respuesta, si no se le dio respuesta las voy contando
-			$data['contadorInformativa'] = 0;
+			//recorro las alertas y reviso se se les dio respuesta, si no se le dio respuesta las voy contando		
+			$data['contadorInformativaSi'] = 0;
+			$data['contadorInformativaNo'] = 0;
 			if($infoAlertaVencidaInformativa){
 				foreach ($infoAlertaVencidaInformativa as $lista):
 					$arrParam = array(
@@ -259,20 +253,31 @@ class Dashboard extends MX_Controller {
 							"idAlerta" => $lista['id_alerta']
 					);
 					$respuesta = $this->general_model->get_respuestas_alertas_vencidas_by($arrParam);
-					
-					if(!$respuesta){
-						$data['contadorInformativa']++;
+										
+					if($respuesta){
+						$data['contadorInformativaSi']++;
+					}else{
+						$data['contadorInformativaNo']++;
 					}
 				endforeach;
 			}
 			
 
 //se buscan las alertas NOTIFICACION vencidas que tienen el coordinador a cargo			
-			$arrParam = array("tipoAlerta" => 2);
+			$arrParam = array(
+							"tipoAlerta" => 2,
+							"rol" => "coordinador"
+			);
 			$infoAlertaVencidaNotificacion = $this->general_model->get_alertas_vencidas_by($arrParam);
 
 			//recorro las alertas y reviso se se les dio respuesta, si no se le dio respuesta las voy contando
 			$data['contadorNotificacion'] = 0;
+			
+			$data['contadorNotificacionContestaron'] = 0;
+			$data['contadorNotificacionSi'] = 0;
+			$data['contadorNotificacionNoContestaron'] = 0;
+		
+			
 			if($infoAlertaVencidaNotificacion){
 				foreach ($infoAlertaVencidaNotificacion as $lista):
 					$arrParam = array(
@@ -284,17 +289,44 @@ class Dashboard extends MX_Controller {
 					if(!$respuesta){
 						$data['contadorNotificacion']++;
 					}
+					
+					
+					$arrParam = array(
+							"idSitioSesion" => $lista['id_sitio_sesion'],
+							"idAlerta" => $lista['id_alerta'],
+							"respuestaAcepta" => 1
+					);//filtro por los que contestaron que SI
+					$respuestaSI = $this->general_model->get_respuestas_alertas_vencidas_by($arrParam);
+					
+					if($respuestaSI){
+						$data['contadorNotificacionSi']++;
+					}
+					
+					if($respuesta){
+						$data['contadorNotificacionContestaron']++;
+					}else{
+						$data['contadorNotificacionNoContestaron']++;
+					}
+					
+					
+					
 				endforeach;
 			}
 
 			
 			
 //se buscan las alertas CONSOLIDACION vencidas que tienen el coordinador a cargo
-			$arrParam = array("tipoAlerta" => 3);
+			$arrParam = array(
+							"tipoAlerta" => 3,
+							"rol" => "coordinador"
+			);
 			$infoAlertaVencidaConsolidacion = $this->general_model->get_alertas_vencidas_by($arrParam);
 			
 			//recorro las alertas y reviso se se les dio respuesta, si no se le dio respuesta las voy contando
-			$data['contadorConsolidacion'] = 0;
+
+			
+			$data['contadorConsolidacionSi'] = 0;
+			$data['contadorConsolidacionNo'] = 0;
 			if($infoAlertaVencidaConsolidacion){
 				foreach ($infoAlertaVencidaConsolidacion as $lista):
 					$arrParam = array(
@@ -303,9 +335,13 @@ class Dashboard extends MX_Controller {
 					);
 					$respuesta = $this->general_model->get_respuestas_alertas_vencidas_by($arrParam);
 					
-					if(!$respuesta){
-						$data['contadorConsolidacion']++;
+				
+					if($respuesta){
+						$data['contadorConsolidacionSi']++;
+					}else{
+						$data['contadorConsolidacionNo']++;
 					}
+					
 				endforeach;
 			}
 			
