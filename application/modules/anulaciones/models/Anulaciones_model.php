@@ -11,6 +11,7 @@
 		{
 				$this->db->select();
 				$this->db->join('sitios X', 'X.id_sitio = A.fk_id_sitio', 'INNER');
+				$this->db->join('param_divipola D', 'D.mpio_divipola = X.fk_mpio_divipola', 'INNER');
 
 				$this->db->join('sesiones S', 'S.id_sesion = A.fk_id_sesion', 'INNER');
 				$this->db->join('param_grupo_instrumentos G', 'G.id_grupo_instrumentos = S.fk_id_grupo_instrumentos', 'INNER');

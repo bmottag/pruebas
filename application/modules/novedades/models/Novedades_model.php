@@ -9,8 +9,9 @@
 		 */
 		public function get_cambio_cuadernillo($arrDatos) 
 		{
-				$this->db->select('S.*, P.nombre_prueba, G.*, E.snp snp_examinando, E.consecutivo consecutivo_examinando, H.snp snp_cuadernillo, H.consecutivo consecutivo_cuadernillo, M.nombre_motivo_novedad, A.*');
+				$this->db->select('X.nombre_sitio, X.codigo_dane, D.*,S.*, P.nombre_prueba, G.*, E.snp snp_examinando, E.consecutivo consecutivo_examinando, H.snp snp_cuadernillo, H.consecutivo consecutivo_cuadernillo, M.nombre_motivo_novedad, A.*');
 				$this->db->join('sitios X', 'X.id_sitio = A.fk_id_sitio', 'INNER');
+				$this->db->join('param_divipola D', 'D.mpio_divipola = X.fk_mpio_divipola', 'INNER');
 
 				$this->db->join('sesiones S', 'S.id_sesion = A.fk_id_sesion', 'INNER');
 				$this->db->join('param_grupo_instrumentos G', 'G.id_grupo_instrumentos = S.fk_id_grupo_instrumentos', 'INNER');
@@ -114,8 +115,9 @@
 		 */
 		public function get_holguras($arrDatos) 
 		{
-				$this->db->select('S.*, P.nombre_prueba, G.*, Z.snp_holgura, Z.consecutivo_holgura, A.*');
+				$this->db->select('D.*, X.nombre_sitio, X.codigo_dane, S.*, P.nombre_prueba, G.*, Z.snp_holgura, Z.consecutivo_holgura, A.*');
 				$this->db->join('sitios X', 'X.id_sitio = A.fk_id_sitio', 'INNER');
+				$this->db->join('param_divipola D', 'D.mpio_divipola = X.fk_mpio_divipola', 'INNER');
 
 				$this->db->join('sesiones S', 'S.id_sesion = A.fk_id_sesion', 'INNER');
 				$this->db->join('param_grupo_instrumentos G', 'G.id_grupo_instrumentos = S.fk_id_grupo_instrumentos', 'INNER');

@@ -70,6 +70,7 @@ if ($retornoError) {
 					<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
 						<thead>
 							<tr>
+								<th class="text-center">Sitio</th>
 								<th class="text-center">Sesión</th>
 								<th class="text-center">SNP Examinando</th>
 								<th class="text-center">Nuevo cuadernillo</th>
@@ -82,6 +83,12 @@ if ($retornoError) {
 						<?php
 							foreach ($info as $lista):
 									echo "<tr>";
+									echo "<td>";
+									echo "<strong>Sitio: </strong>" . $lista['nombre_sitio'];
+									echo "<br><strong>Departamento: </strong>" . $lista['dpto_divipola_nombre'];
+									echo "<br><strong>Municipio: </strong>" . $lista['mpio_divipola_nombre'];
+									echo "<br><strong>Código DANE: </strong>" . $lista['codigo_dane'];
+									echo "</td>";
 									
 									echo "<td>";
 									echo "<strong>Prueba: </strong><br>" . $lista['nombre_prueba'];
