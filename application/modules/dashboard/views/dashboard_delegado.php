@@ -362,8 +362,10 @@ if(!$infoSitoDelegado){
 					<br><strong>Código DANE: </strong><?php echo $infoSitoDelegado[0]['codigo_dane']; ?>
 					<?php if($infoSitoDelegado[0]['contacto_nombres']){ ?>
 					<br><strong>Contacto: </strong><br><?php echo $infoSitoDelegado[0]['contacto_nombres'] . " " . $infoSitoDelegado[0]['contacto_apellidos']; ?>
-					<br><strong>Celular: </strong><?php echo $infoSitoDelegado[0]['contacto_celular']; ?>
-					<?php } ?>
+					<br>Celular: <?php echo $infoSitoDelegado[0]['contacto_celular']; ?>
+					<?php 
+					echo "<a href='tel:".$infoSitoDelegado[0]['contacto_celular']."'>".$infoSitoDelegado[0]['contacto_celular']."</a>"; 
+					} ?>
 					<br><strong>Número de Sesiones: </strong><?php echo $conteoSesiones; ?>
 				</div>
 			</div>
@@ -384,19 +386,27 @@ if(!$infoSitoDelegado){
 			<div class="panel panel-info">
 				<div class="panel-heading">
 					<strong>Representante: </strong><br>
-					<?php 
+					<?php
 					if($infoSitoDelegado[0]['fk_id_user_delegado']){
 						echo "C.C. " . $infoSitoDelegado[0]['cedula_delegado'] . " " . $infoSitoDelegado[0]['nom_delegado'] . " "  . $infoSitoDelegado[0]['ape_delegado'];
-						echo "<br><strong>Celular: </strong>";						
+						echo "<br>Celular: ";						
 						echo "<a href='tel:".$infoSitoDelegado[0]['celular_delegado']."'>".$infoSitoDelegado[0]['celular_delegado']."</a>"; 
 					} else { echo "Falta asignar Representante.";}
+					?>
+					<br><strong>Operador ASD: </strong><br>
+					<?php 
+					if($infoSitoDelegado[0]['fk_id_user_operador']){
+						echo "C.C. " . $infoSitoDelegado[0]['cedula_operador'] . " " . $infoSitoDelegado[0]['nom_operador'] . " "  . $infoSitoDelegado[0]['ape_operador'];
+						echo "<br>Celular: ";
+						echo "<a href='tel:".$infoSitoDelegado[0]['celular_operador']."'>".$infoSitoDelegado[0]['celular_coordinador']."</a>"; 
+					} else { echo "Falta asignar Operador.";}
 					?>
 
 					<br><strong>Coordinador: </strong><br>
 					<?php 
 					if($infoSitoDelegado[0]['fk_id_user_coordinador']){
 						echo "C.C. " . $infoSitoDelegado[0]['cedula_coordinador'] . " " . $infoSitoDelegado[0]['nom_coordinador'] . " "  . $infoSitoDelegado[0]['ape_coordiandor'];
-						echo "<br><strong>Celular: </strong>";
+						echo "<br>Celular: ";
 						echo "<a href='tel:".$infoSitoDelegado[0]['celular_coordinador']."'>".$infoSitoDelegado[0]['celular_coordinador']."</a>"; 
 					} else { echo "Falta asignar Coordinador.";}
 					?>
@@ -477,7 +487,7 @@ if(!$infoSitoDelegado){
 			<div class="panel panel-success">
 				
 				<div class="panel-heading">
-					<i class="fa fa-life-saver fa-fw"></i> Notificaciones
+					<i class="fa fa-life-saver fa-fw"></i> Respuestas Alertas
 				</div>
 				
 				<div class="panel-body">

@@ -124,7 +124,7 @@
 						?>
 						<?php echo $rol_busqueda; ?> que no contestaron: <strong><?php echo $contadorNotificacionNoContestaron . " (" . $porcentajeNoContestaron . "%)"; ?> </strong>
 						<br><?php echo $rol_busqueda; ?> que aceptaron: <strong><?php echo $contadorNotificacionSi . " (" . $porcentajeSi . "%)"; ?> </strong>
-						<br><?php echo $rol_busqueda; ?> que no Aceptaron: <strong><?php echo $contadorNotificacionNo . " (" . $porcentajeNo . "%)"; ?> </strong>
+						<br><?php echo $rol_busqueda; ?> que no aceptaron: <strong><?php echo $contadorNotificacionNo . " (" . $porcentajeNo . "%)"; ?> </strong>
 						
 <form  name="form" id="form_Notificacion" role="form" method="post" class="form-horizontal" >
 
@@ -190,9 +190,9 @@
 							}
 						
 						?>
-						<br>Número todal de citados: <strong><?php echo $conteoCitados['citados']; ?> </strong>
-						<br>Número todal de presentes: <strong><?php echo $presentes . " (" . $porcentajePresentes . "%)"; ?> </strong>
-						<br>Número todal de ausentes: <strong><?php echo $conteoCitados['ausentes'] . " (" . $porcentajeAusentes . "%)"; ?> </strong>
+						<br>Número total de citados: <strong><?php echo $conteoCitados['citados']; ?> </strong>
+						<br>Número total de presentes: <strong><?php echo $presentes . " (" . $porcentajePresentes . "%)"; ?> </strong>
+						<br>Número total de ausentes: <strong><?php echo $conteoCitados['ausentes'] . " (" . $porcentajeAusentes . "%)"; ?> </strong>
 							
 
 <form  name="form" id="form_Consolidacion" role="form" method="post" class="form-horizontal" >

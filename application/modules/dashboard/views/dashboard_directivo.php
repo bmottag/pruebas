@@ -202,8 +202,8 @@ if ($retornoError) {
 						<?php
 							foreach ($infoSitios as $lista):
 								echo "<tr>";								
-								echo "<td >" . $lista['dpto_divipola_nombre'] . "</td>";
-								echo "<td >" . $lista['mpio_divipola_nombre'] . "</td>";
+								echo "<td >" . strtoupper($lista['dpto_divipola_nombre']) . "</td>";
+								echo "<td >" . strtoupper($lista['mpio_divipola_nombre']) . "</td>";
 								echo "<td >";
 echo "<a href='" . base_url('report/mostrarSesiones/' . $lista['id_sitio'] . '/directivo' ) . "'>" . $lista['nombre_sitio'] . "</a>";
 								echo "</td>";

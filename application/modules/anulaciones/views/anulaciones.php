@@ -82,6 +82,7 @@ if ($retornoError) {
 								<th class="text-center">Editar</th>
 								<th class="text-center">Motivo anulación</th>
 								<th class="text-center">Observación</th>
+								<th class="text-center">Aprobada</th>
 							</tr>
 						</thead>
 						<tbody>							
@@ -125,6 +126,23 @@ if ($retornoError) {
 									
 									
 									echo "<td>" . $lista['observacion'] . "</td>";
+									echo "<td class='text-center'>";
+									switch ($lista['aprobada']) {
+										case 0:
+											$valor = 'Falta';
+											$clase = "text-primary";
+											break;
+										case 1:
+											$valor = 'Aprobado';
+											$clase = "text-success";
+											break;
+										case 2:
+											$valor = 'Desaprobada';
+											$clase = "text-danger";
+											break;
+									}
+									echo '<p class="' . $clase . '"><strong>' . $valor . '</strong></p>';
+									echo "</td>";
 									echo "</tr>";
 							endforeach;
 						?>
@@ -153,7 +171,7 @@ if ($retornoError) {
 					<br><strong>Código DANE: </strong><?php echo $infoSitio[0]['codigo_dane']; ?>
 					<?php if($infoSitio[0]['contacto_nombres']){ ?>
 					<br><strong>Contacto: </strong><br><?php echo $infoSitio[0]['contacto_nombres'] . " " . $infoSitio[0]['contacto_apellidos']; ?>
-					<br><strong>Celular: </strong><?php echo $infoSitio[0]['contacto_celular']; ?>
+					<br>Celular: <?php echo $infoSitio[0]['contacto_celular']; ?>
 					<?php } ?>
 				</div>
 			</div>
@@ -177,7 +195,7 @@ if ($retornoError) {
 					<?php 
 					if($infoSitio[0]['fk_id_user_delegado']){
 						echo "C.C. " . $infoSitio[0]['cedula_delegado'] . " " . $infoSitio[0]['nom_delegado'] . " "  . $infoSitio[0]['ape_delegado'];
-						echo "<br><strong>Celular: </strong>"; 
+						echo "<br>Celular: "; 
 						echo "<a href='tel:".$infoSitio[0]['celular_delegado']."'>".$infoSitio[0]['celular_delegado']."</a>"; 
 					} else { echo "Falta asignar Representante.";}
 					?>
@@ -186,7 +204,7 @@ if ($retornoError) {
 					<?php 
 					if($infoSitio[0]['fk_id_user_coordinador']){
 						echo "C.C. " . $infoSitio[0]['cedula_coordinador'] . " " . $infoSitio[0]['nom_coordinador'] . " "  . $infoSitio[0]['ape_coordiandor'];
-						echo "<br><strong>Celular: </strong>"; 
+						echo "<br>Celular: "; 
 						echo "<a href='tel:".$infoSitio[0]['celular_coordinador']."'>".$infoSitio[0]['celular_coordinador']."</a>"; 
 					} else { echo "Falta asignar Coordinador.";}
 					?>

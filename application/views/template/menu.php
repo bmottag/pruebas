@@ -13,14 +13,19 @@
 		
 		if($userRol==4){ //USUARIOS DELEGADOS
 			$enlace = base_url("dashboard/delegados");
+			$titulo = 'Representante';
 		}elseif($userRol==6){ //USUARIOS OPERADOR
 			$enlace = base_url("dashboard/operador");
+			$titulo = 'Operador';
 		}elseif($userRol==3){ //USUARIOS DELEGADOS
 			$enlace = base_url("dashboard/coordinador");
+			$titulo = 'Coordinador';
 		}elseif($userRol==2){ //USUARIOS DIRECTIVO
 			$enlace = base_url("dashboard/directivo");
+			$titulo = 'Directivo';
 		}else{
 			$enlace = base_url("dashboard");
+			$titulo = 'Admin';
 		}
 ?>
 
@@ -229,7 +234,7 @@ if($userRol==3){//COORDINADOR
                         </li>
 
                         <li>
-							<a href="<?php echo $enlace; ?>"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+							<a href="<?php echo $enlace; ?>"><i class="fa fa-dashboard fa-fw"></i> Dashboard <?php echo $titulo; ?></a>
                         </li>
 						
 

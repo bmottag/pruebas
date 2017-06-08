@@ -39,7 +39,7 @@
 					<br><strong>Código DANE: </strong><?php echo $info[0]['codigo_dane']; ?>
 					<?php if($info[0]['contacto_nombres']){ ?>
 					<br><strong>Contacto: </strong><br><?php echo $info[0]['contacto_nombres'] . " " . $info[0]['contacto_apellidos']; ?>
-					<br><strong>Celular: </strong><?php echo $info[0]['contacto_celular']; ?>
+					<br>Celular: <?php echo $info[0]['contacto_celular']; ?>
 					<?php } ?>
 
 					<br><strong>Departamento: </strong><?php echo $info[0]['dpto_divipola_nombre']; ?>
@@ -50,7 +50,7 @@
 					<?php 
 					if($info[0]['fk_id_user_delegado']){
 						echo "C.C. " . $info[0]['numero_documento'] . " " . $info[0]['nombre_delegado'];
-						echo "<br><strong>Celular: </strong>";						
+						echo "<br>Celular: ";						
 						echo "<a href='tel:".$info[0]['celular_delegado']."'>".$info[0]['celular_delegado']."</a>"; 
 						echo "<br><strong>Email: </strong>" . $info[0]['email'];
 					} else { echo "Falta asignar Representante.";}

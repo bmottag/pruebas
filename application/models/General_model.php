@@ -193,7 +193,7 @@ class General_model extends CI_Model {
 				$this->db->select('S.*, O.nombre_organizacion, R.nombre_region, D.*, Z.nombre_zona, 
 				U.numero_documento as cedula_delegado, U.nombres_usuario nom_delegado, U.apellidos_usuario ape_delegado, U.celular celular_delegado,
 				Y.numero_documento as cedula_coordinador, Y.nombres_usuario nom_coordinador, Y.apellidos_usuario ape_coordiandor, Y.celular celular_coordinador, 
-				K.nombres_usuario nom_operador, K.apellidos_usuario ape_operador, K.numero_documento as cedula_operador');
+				K.celular celular_operador, K.nombres_usuario nom_operador, K.apellidos_usuario ape_operador, K.numero_documento as cedula_operador');
 				$this->db->join('param_regiones R', 'R.id_region = S.fk_id_region', 'INNER');
 				$this->db->join('param_divipola D', 'D.mpio_divipola = S.fk_mpio_divipola', 'INNER');
 				$this->db->join('param_organizaciones O', 'O.id_organizacion = S.fk_id_organizacion', 'LEFT');

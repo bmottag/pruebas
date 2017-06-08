@@ -81,8 +81,8 @@ if(!$infoMunicipiosCoordinador){
 	?>
 	<div class="col-md-4">
 		<div class="alert alert-info">
-				<strong>Departamento: </strong><?php echo $lista['dpto_divipola_nombre']; ?>
-				</br><strong> Municipio: </strong><?php echo $lista['mpio_divipola_nombre']; ?>		
+				<strong>Departamento: </strong><?php echo strtoupper($lista['dpto_divipola_nombre']); ?>
+				</br><strong> Municipio: </strong><?php echo strtoupper($lista['mpio_divipola_nombre']); ?>		
 		</div>
 	</div>
 
@@ -181,7 +181,7 @@ if(!$infoMunicipiosCoordinador){
 						?>
 						<?php echo $rol_busqueda; ?> que no contestaron: <strong><?php echo $contadorNotificacionNoContestaron . " (" . $porcentajeNoContestaron . "%)"; ?> </strong>
 						<br><?php echo $rol_busqueda; ?> que aceptaron: <strong><?php echo $contadorNotificacionSi . " (" . $porcentajeSi . "%)"; ?> </strong>
-						<br><?php echo $rol_busqueda; ?> que no Aceptaron: <strong><?php echo $contadorNotificacionNo . " (" . $porcentajeNo . "%)"; ?> </strong>
+						<br><?php echo $rol_busqueda; ?> que no aceptaron: <strong><?php echo $contadorNotificacionNo . " (" . $porcentajeNo . "%)"; ?> </strong>
 						
 
 					
@@ -348,8 +348,8 @@ if(!$infoMunicipiosCoordinador){
 						<?php
 							foreach ($infoSitios as $lista):
 								echo "<tr>";								
-								echo "<td >" . $lista['dpto_divipola_nombre'] . "</td>";
-								echo "<td >" . $lista['mpio_divipola_nombre'] . "</td>";
+								echo "<td >" . strtoupper($lista['dpto_divipola_nombre']) . "</td>";
+								echo "<td >" . strtoupper($lista['mpio_divipola_nombre']) . "</td>";
 								echo "<td >";
 echo "<a href='" . base_url('report/mostrarSesiones/' . $lista['id_sitio'] . '/coordinador' ) . "'>" . $lista['nombre_sitio'] . "</a>";
 								echo "</td>";

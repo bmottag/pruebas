@@ -35,7 +35,7 @@ $( document ).ready( function () {
 			
 				$.ajax({
 					type: "POST",	
-					url: base_url + "novedades/save_cambio_cuadernillo_aprobacion",	
+					url: base_url + "anulaciones/save_anulacion_aprobacion",	
 					data: $("#form").serialize(),
 					dataType: "json",
 					contentType: "application/x-www-form-urlencoded;charset=UTF-8",
@@ -58,7 +58,7 @@ $( document ).ready( function () {
 							$("#div_load").css("display", "none");
 							$('#btnSubmit').removeAttr('disabled');
 
-							var url = base_url + "novedades/cambio_cuadernillo_coordinador";
+							var url = base_url + "anulaciones/anulaciones_coordinador";
 							$(location).attr("href", url);
 						}
 						else

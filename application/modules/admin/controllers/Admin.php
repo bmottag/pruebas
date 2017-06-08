@@ -132,7 +132,7 @@ class Admin extends MX_Controller {
 
 			if ($result_user) {
 				$data["result"] = "error";
-				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Este número de documetno ya existe en la base de datos.');
+				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Este número de documento ya existe en la base de datos.');
 			} else {
 					if ($idUsuario = $this->admin_model->saveUser($clave)) {
 						$data["result"] = true;					
