@@ -18,6 +18,22 @@
 		}
 		
 		/**
+		 * Verify if the user already exist by the social insurance number
+		 * @since  7/6/2017
+		 */
+		public function verifyCodigoDane() 
+		{
+				$codigoDane = $this->input->post('codigoDane');
+			
+				$this->db->where("codigo_dane", $codigoDane);
+				$query = $this->db->get("sitios");
+
+				if ($query->num_rows() >= 1) {
+					return true;
+				} else{ return false; }
+		}
+		
+		/**
 		 * Lista de usuarios
 		 * @since 10/5/2017
 		 */

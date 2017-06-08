@@ -59,10 +59,13 @@ $( document ).ready( function () {
 					success: function(data){
                                             
 						if( data.result == "error" )
-						{
-							$("#div_load").css("display", "none");
-							$('#btnSubmit').removeAttr('disabled');							
-							return false;
+						{						
+								$("#div_load").css("display", "none");
+								$("#div_error").css("display", "inline");
+								$("#span_msj").html(data.mensaje);
+								$('#btnSubmit').removeAttr('disabled');
+								alert(data.mensaje);
+								return false;							
 						} 
 
 						if( data.result )//true

@@ -569,18 +569,27 @@ class Admin extends MX_Controller {
 			$msj = "Se adicionó el Sitio con exito.";
 			if ($idSitio != '') {
 				$msj = "Se actualizó el Sitio con exito.";
+			}else {
+				//Verificar si el codigo dane ya existe en la base de datos
+				$result_codigo_dane = $this->admin_model->verifyCodigoDane();
 			}
 
-			if ($idSitio = $this->admin_model->saveSitio()) {
-				$data["result"] = true;
-				$data["idRecord"] = $idSitio;
-				
-				$this->session->set_flashdata('retornoExito', $msj);
-			} else {
+			
+			if ($result_codigo_dane) {
 				$data["result"] = "error";
-				$data["idRecord"] = "";
-				
-				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador.');
+				$data["mensaje"] = "Error!!!. El código DANE ya existe en la base de datos.";
+			} else {
+					if ($idSitio = $this->admin_model->saveSitio()) {
+						$data["result"] = true;
+						$data["idRecord"] = $idSitio;
+						
+						$this->session->set_flashdata('retornoExito', $msj);
+					} else {
+						$data["result"] = "error";
+						$data["idRecord"] = "";
+						
+						$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador.');
+					}
 			}
 
 			echo json_encode($data);
