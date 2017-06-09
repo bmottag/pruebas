@@ -44,7 +44,7 @@
 				
 				
 <?php 
-if($userRol==2){ //If it is an ADMIN user, show an special menu
+if($userRol==2 || $userRol==1){ //SI es usuario ADMIN o DIRECTIVO
 ?>				
 		<li class="dropdown">
 			<a class="dropdown-toggle" data-toggle="dropdown" href="#">

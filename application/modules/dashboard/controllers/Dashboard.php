@@ -230,7 +230,7 @@ class Dashboard extends MX_Controller {
 			$arrParam = array("idCoordinador" => $userID);
 			$data['noSitios'] = $this->dashboard_model->countSitios($arrParam);//cuenta de sitios
 			
-			//listado de sitios para el coordinador
+	//listado de sitios para el coordinador
 			$arrParam = array('idCoordinador' => $userID);
 			$data['infoSitios'] = $this->general_model->get_sitios($arrParam);
 			
@@ -393,6 +393,14 @@ class Dashboard extends MX_Controller {
 			$this->load->model("general_model");
 			$userRol = $this->session->userdata("rol");
 			$userID = $this->session->userdata("id");
+			$data['rol_busqueda'] = "Representantes";
+	 //inicio consulta de SITIOS
+			$arrParam = array("idOperador" => $userID);
+			$data['noSitios'] = $this->dashboard_model->countSitios($arrParam);//cuenta de sitios
+			
+	//listado de sitios para el operador
+			$arrParam = array('idOperador' => $userID);
+			$data['infoSitios'] = $this->general_model->get_sitios($arrParam);
 	/**
 	 * SI es operador busco los municipios en los que esta asignado
 	 */
@@ -423,7 +431,8 @@ class Dashboard extends MX_Controller {
 			$infoAlertaVencidaInformativa = $this->general_model->get_alertas_vencidas_by($arrParam);
 
 			//recorro las alertas y reviso se se les dio respuesta, si no se le dio respuesta las voy contando
-			$data['contadorInformativa'] = 0;
+			$data['contadorInformativaSi'] = 0;
+			$data['contadorInformativaNo'] = 0;
 			if($infoAlertaVencidaInformativa){
 				foreach ($infoAlertaVencidaInformativa as $lista):
 					$arrParam = array(
@@ -432,11 +441,20 @@ class Dashboard extends MX_Controller {
 					);
 					$respuesta = $this->general_model->get_respuestas_alertas_vencidas_by($arrParam);
 					
-					if(!$respuesta){
-						$data['contadorInformativa']++;
+					if($respuesta){
+						$data['contadorInformativaSi']++;
+					}else{
+						$data['contadorInformativaNo']++;
 					}
 				endforeach;
 			}
+			
+
+//conteo de los sitios segun el filtro
+			$data['conteoSitios'] = $this->general_model->get_numero_sitios_por_filtro_by_coordinador($arrParam);
+//conteo de citados			
+			$data['conteoCitados'] = $this->general_model->get_numero_citados_por_filtro_by_coordinnador($arrParam);
+
 			
 
 //se buscan las alertas NOTIFICACION vencidas que tienen el coordinador a cargo			
@@ -463,6 +481,24 @@ class Dashboard extends MX_Controller {
 			}
 
 			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+
 			
 //se buscan las alertas CONSOLIDACION vencidas que tienen el coordinador a cargo
 			$arrParam = array(

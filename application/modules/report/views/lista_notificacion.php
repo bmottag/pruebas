@@ -23,7 +23,7 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <i class="fa fa-thumb-tack fa-fw"></i> <?php echo $info[0]['nombre_tipo_alerta']; ?>
+                            <i class="fa fa-thumb-tack fa-fw"></i> <?php echo $titulo; ?>
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -104,11 +104,13 @@ $respuestas = $this->general_model->get_respuestas_alertas_vencidas_by($arrParam
 										
 										//si el usuario logeado es el mismo coordinador de la del sition
 										//entonces puede dar respuesta a la alerta
+										//o si es directivo puede dar respuesta
+										$userRol = $this->session->userdata("rol");
 										$userID = $this->session->userdata("id");
 										
-										if($lista['fk_id_user_coordinador'] == $userID){
+										if(($userRol == 3 && $lista['fk_id_user_coordinador'] == $userID) || $userRol == 2){
 											
-echo "<a href=" . base_url("report/responder_alerta/" . $lista['id_alerta'] . "/" . $lista['fk_id_user_delegado'] . "/" . $lista['id_sitio_sesion']) . " ><strong>Dar Respuesta</strong> </a>";
+echo "<a href=" . base_url("report/responder_alerta/" . $lista['id_alerta'] . "/" . $lista['fk_id_user_delegado'] . "/" . $lista['id_sitio_sesion'] . "/" . $rol) . " ><strong>Dar Respuesta</strong> </a>";
 											
 											
 										}

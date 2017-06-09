@@ -31,12 +31,15 @@ class Report extends CI_Controller {
 			switch ($tipoAlerta) {
 				case 1:
 					$data["view"] = "lista_informativa";
+					$data["titulo"] = "Alerta Informativa";
 					break;
 				case 2:
 					$data["view"] = "lista_notificacion";
+					$data["titulo"] = "Alerta Notificación";
 					break;
 				case 3:
 					$data["view"] = "lista_consolidado";
+					$data["titulo"] = "Alerta Consolidación";
 					break;
 			}
 

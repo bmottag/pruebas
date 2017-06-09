@@ -245,6 +245,10 @@
 				if (array_key_exists("idCoordinador", $arrDatos)) {
 					$sql.= " WHERE fk_id_user_coordinador = " . $arrDatos["idCoordinador"];
 				}
+				
+				if (array_key_exists("idOperador", $arrDatos)) {
+					$sql.= " WHERE fk_id_user_operador = " . $arrDatos["idOperador"];
+				}
 
 				$query = $this->db->query($sql);
 				$row = $query->row();

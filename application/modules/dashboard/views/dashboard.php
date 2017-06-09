@@ -394,7 +394,7 @@ $( document ).ready( function () {
 				<div class="panel-heading">
 					<div class="row">
 						<div class="col-xs-3">
-							<i class="fa fa-life-saver fa-5x"></i>
+							<i class="fa fa-info fa-5x"></i>
 						</div>
 						<div class="col-xs-9 text-right">
 							<div class="huge"><?php echo $noRegistroInformativa; ?></div>
@@ -417,7 +417,7 @@ $( document ).ready( function () {
 				<div class="panel-heading">
 					<div class="row">
 						<div class="col-xs-3">
-							<i class="fa fa-truck fa-5x"></i>
+							<i class="fa fa-thumb-tack fa-5x"></i>
 						</div>
 						<div class="col-xs-9 text-right">
 							<div class="huge"><?php echo $noRegistroNotificacion; ?></div>
@@ -440,7 +440,7 @@ $( document ).ready( function () {
 				<div class="panel-heading">
 					<div class="row">
 						<div class="col-xs-3">
-							<i class="fa fa-search fa-5x"></i>
+							<i class="fa fa-crosshairs fa-5x"></i>
 						</div>
 						<div class="col-xs-9 text-right">
 							<div class="huge"><?php echo $noRegistroConsolidacion; ?></div>

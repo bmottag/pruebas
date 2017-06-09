@@ -214,6 +214,10 @@ class General_model extends CI_Model {
 					$this->db->where('S.fk_id_user_coordinador', $arrDatos["idCoordinador"]);
 				}
 				
+				if (array_key_exists("idOperador", $arrDatos)) {
+					$this->db->where('S.fk_id_user_operador', $arrDatos["idOperador"]);
+				}
+				
 				$this->db->order_by('nombre_region, dpto_divipola_nombre, mpio_divipola_nombre', 'asc');
 				$query = $this->db->get('sitios S');
 
@@ -767,6 +771,10 @@ class General_model extends CI_Model {
 				if ($userRol==3) {
 					$sql.= " AND D.fk_id_coordinador_mcpio = '$userID'"; //FILTRO POR COORDINADOR
 				}
+				
+				if ($userRol==6) {
+					$sql.= " AND D.fk_id_operador_mcpio = '$userID'"; //FILTRO POR OPERADOR
+				}
 								
 				if ($depto && $depto != "") {
 					$sql.= " AND Y.fk_dpto_divipola = '$depto'"; //FILTRO POR DEPARTAMENTO
@@ -808,6 +816,10 @@ class General_model extends CI_Model {
 					$sql.= " AND D.fk_id_coordinador_mcpio = '$userID'"; //FILTRO POR COORDINADOR
 				}
 				
+				if ($userRol==6) {
+					$sql.= " AND D.fk_id_operador_mcpio = '$userID'"; //FILTRO POR OPERADOR
+				}
+				
 				if ($depto && $depto != "") {
 					$sql.= " AND Y.fk_dpto_divipola = '$depto'"; //FILTRO POR DEPARTAMENTO
 				}
@@ -820,6 +832,43 @@ class General_model extends CI_Model {
 				return $query->row_array();
 		}	
 		
+		/**
+		 * Conteo de citados para el reporte general
+		 * @since 26/5/2017
+		 */
+		public function get_numero_citados_por_filtro($arrDatos) 
+		{		
+				$sesion = $this->input->post('sesion');
+				
+				$idRegion = $this->input->post('region');				
+				$depto = $this->input->post('depto');
+				$mcpio = $this->input->post('mcpio');
+
+				$sql = "SELECT SUM(numero_citados) citados, SUM(numero_presentes_efectivos) presentes, SUM(numero_ausentes) ausentes";
+				$sql.= " FROM sitio_sesion X ";
+				$sql.= "	INNER JOIN sesiones S ON S.id_sesion = X.fk_id_sesion 
+							INNER JOIN sitios Y ON Y.id_sitio = X.fk_id_sitio 
+							INNER JOIN param_regiones R ON R.id_region = Y.fk_id_region 
+							INNER JOIN param_divipola D ON D.mpio_divipola = Y.fk_mpio_divipola";			
+				if ($sesion && $sesion != "") {
+					$sql.= " WHERE X.fk_id_sesion = '$sesion'"; //FILTRO POR SESION
+				}
+				
+				if($idRegion && $idRegion != "") {
+					$sql.= " AND Y.fk_id_region = '$idRegion'"; //FILTRO POR REGION
+				}
+				
+				if ($depto && $depto != "") {
+					$sql.= " AND Y.fk_dpto_divipola = '$depto'"; //FILTRO POR DEPARTAMENTO
+				}
+			
+				if ($mcpio && $mcpio != "") {
+					$sql.= " AND Y.fk_mpio_divipola = '$mcpio'"; //FILTRO POR MUNICIPIO
+				}
+
+				$query = $this->db->query($sql);
+				return $query->row_array();
+		}
 
 
 

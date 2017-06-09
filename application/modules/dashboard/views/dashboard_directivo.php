@@ -63,13 +63,101 @@ if ($retornoError) {
 
 
 
+<!--INICIO INFO DE LAS ALERTAS -->
+				<div class="row">
+					<div class="col-lg-4">
+					<div class="alert alert-danger">
+						<strong>Alerta Informativa</strong><br>
+						<?php
+							$total = $contadorInformativaSi + $contadorInformativaNo;
+							if($total != 0){
+								$porcentajeSi = round((($contadorInformativaSi * 100)/$total), 1);
+								$porcentajeNo = round((($contadorInformativaNo * 100)/$total), 1);
+							}else{
+								$porcentajeSi = 0;
+								$porcentajeNo = 0;
+							}
+						?>
+						<?php echo $rol_busqueda; ?> que aceptaron: <strong><?php echo $contadorInformativaSi . " (" . $porcentajeSi . "%)"; ?> </strong>
+						<br><?php echo $rol_busqueda; ?> que no contestaron: <strong><?php echo $contadorInformativaNo . " (" . $porcentajeNo . "%)"; ?> </strong>
+						
+
+					
+					</div></div>
+					
+					<div class="col-lg-4">
+					<div class="alert alert-danger">
+						<strong>Alerta de Notificación</strong><br>
+						<?php
+							$contadorNotificacionNo = $contadorNotificacionContestaron - $contadorNotificacionSi;
+							$total = $contadorNotificacionNoContestaron + $contadorNotificacionSi + $contadorNotificacionNo;
+							$totalNotificacion = $contadorNotificacionSi + $contadorNotificacionNo;
+							
+							if($total != 0){
+								$porcentajeNoContestaron = round((($contadorNotificacionNoContestaron * 100)/$total),1);
+								$porcentajeSi = round((($contadorNotificacionSi * 100)/$total),1);
+								$porcentajeNo = round((($contadorNotificacionNo * 100)/$total),1);
+							}else{
+								$porcentajeNoContestaron = 0;
+								$porcentajeSi = 0;
+								$porcentajeNo = 0;
+							}
+						?>
+						<?php echo $rol_busqueda; ?> que no contestaron: <strong><?php echo $contadorNotificacionNoContestaron . " (" . $porcentajeNoContestaron . "%)"; ?> </strong>
+						<br><?php echo $rol_busqueda; ?> que aceptaron: <strong><?php echo $contadorNotificacionSi . " (" . $porcentajeSi . "%)"; ?> </strong>
+						<br><?php echo $rol_busqueda; ?> que no aceptaron: <strong><?php echo $contadorNotificacionNo . " (" . $porcentajeNo . "%)"; ?> </strong>
+						
+
+					
+					</div></div>
+					
+					<div class="col-lg-4">
+					<div class="alert alert-danger">
+						<strong>Alerta de Consolidación</strong><br>
+						<?php 
+							$totalConsolidado = $contadorConsolidacionSi + $contadorConsolidacionNo; 
+							if($totalConsolidado != 0){
+								$porcentajeSi = round((($contadorConsolidacionSi * 100)/$totalConsolidado),1);
+								$porcentajeNo = round((($contadorConsolidacionNo * 100)/$totalConsolidado),1);
+							}else{
+								$porcentajeSi = 0;
+								$porcentajeNo = 0;
+							}
+						?>
+						Total Sitios: <strong><?php echo $conteoSitios; ?> </strong><br>
+						<?php echo $rol_busqueda; ?> que contestaron: <strong><?php echo $contadorConsolidacionSi . " (" . $porcentajeSi . "%)"; ?> </strong>
+						<br><?php echo $rol_busqueda; ?> que no contestaron: <strong><?php echo $contadorConsolidacionNo . " (" . $porcentajeNo . "%)"; ?> </strong>
+						<?php 
+							if($conteoCitados['citados'] !=0){
+								$presentes =  $conteoCitados['citados'] - $conteoCitados['ausentes'];
+								$porcentajePresentes = ($presentes * 100)/$conteoCitados['citados']; 
+								$porcentajeAusentes = ($conteoCitados['ausentes'] * 100)/$conteoCitados['citados']; 
+							}else{
+								$presentes =  0;
+								$porcentajePresentes = 0; 
+								$porcentajeAusentes = 0;
+							}
+						
+						?>
+						<br>Número total de citados: <strong><?php echo $conteoCitados['citados']; ?> </strong>
+						<br>Número total de presentes: <strong><?php echo $presentes . " (" . $porcentajePresentes . "%)"; ?> </strong>
+						<br>Número total de ausentes: <strong><?php echo $conteoCitados['ausentes'] . " (" . $porcentajeAusentes . "%)"; ?> </strong>
+
+
+						
+					</div></div>
+				</div>
+<!--FIN INFO DE LAS ALERTAS -->
+
+
+
 
 
 
 
 
 					
-	<!-- /.row -->
+	<!-- /.row CAJAS DE COLORES -->
 	<div class="row">
 		<div class="col-lg-3 col-md-6">
 			<div class="panel panel-primary">
@@ -168,91 +256,6 @@ if ($retornoError) {
 	
 	
 	
-<!--INICIO INFO DE LAS ALERTAS -->
-				<div class="row">
-					<div class="col-lg-4">
-					<div class="alert alert-danger">
-						<strong>Alerta Informativa</strong><br>
-						<?php
-							$total = $contadorInformativaSi + $contadorInformativaNo;
-							if($total != 0){
-								$porcentajeSi = round((($contadorInformativaSi * 100)/$total), 1);
-								$porcentajeNo = round((($contadorInformativaNo * 100)/$total), 1);
-							}else{
-								$porcentajeSi = 0;
-								$porcentajeNo = 0;
-							}
-						?>
-						<?php echo $rol_busqueda; ?> que aceptaron: <strong><?php echo $contadorInformativaSi . " (" . $porcentajeSi . "%)"; ?> </strong>
-						<br><?php echo $rol_busqueda; ?> que no contestaron: <strong><?php echo $contadorInformativaNo . " (" . $porcentajeNo . "%)"; ?> </strong>
-						
-
-					
-					</div></div>
-					
-					<div class="col-lg-4">
-					<div class="alert alert-danger">
-						<strong>Alerta de Notificación</strong><br>
-						<?php
-							$contadorNotificacionNo = $contadorNotificacionContestaron - $contadorNotificacionSi;
-							$total = $contadorNotificacionNoContestaron + $contadorNotificacionSi + $contadorNotificacionNo;
-							$totalNotificacion = $contadorNotificacionSi + $contadorNotificacionNo;
-							
-							if($total != 0){
-								$porcentajeNoContestaron = round((($contadorNotificacionNoContestaron * 100)/$total),1);
-								$porcentajeSi = round((($contadorNotificacionSi * 100)/$total),1);
-								$porcentajeNo = round((($contadorNotificacionNo * 100)/$total),1);
-							}else{
-								$porcentajeNoContestaron = 0;
-								$porcentajeSi = 0;
-								$porcentajeNo = 0;
-							}
-						?>
-						<?php echo $rol_busqueda; ?> que no contestaron: <strong><?php echo $contadorNotificacionNoContestaron . " (" . $porcentajeNoContestaron . "%)"; ?> </strong>
-						<br><?php echo $rol_busqueda; ?> que aceptaron: <strong><?php echo $contadorNotificacionSi . " (" . $porcentajeSi . "%)"; ?> </strong>
-						<br><?php echo $rol_busqueda; ?> que no aceptaron: <strong><?php echo $contadorNotificacionNo . " (" . $porcentajeNo . "%)"; ?> </strong>
-						
-
-					
-					</div></div>
-					
-					<div class="col-lg-4">
-					<div class="alert alert-danger">
-						<strong>Alerta de Consolidación</strong><br>
-						<?php 
-							$totalConsolidado = $contadorConsolidacionSi + $contadorConsolidacionNo; 
-							if($totalConsolidado != 0){
-								$porcentajeSi = round((($contadorConsolidacionSi * 100)/$totalConsolidado),1);
-								$porcentajeNo = round((($contadorConsolidacionNo * 100)/$totalConsolidado),1);
-							}else{
-								$porcentajeSi = 0;
-								$porcentajeNo = 0;
-							}
-						?>
-						Total Sitios: <strong><?php echo $conteoSitios; ?> </strong><br>
-						<?php echo $rol_busqueda; ?> que contestaron: <strong><?php echo $contadorConsolidacionSi . " (" . $porcentajeSi . "%)"; ?> </strong>
-						<br><?php echo $rol_busqueda; ?> que no contestaron: <strong><?php echo $contadorConsolidacionNo . " (" . $porcentajeNo . "%)"; ?> </strong>
-						<?php 
-							if($conteoCitados['citados'] !=0){
-								$presentes =  $conteoCitados['citados'] - $conteoCitados['ausentes'];
-								$porcentajePresentes = ($presentes * 100)/$conteoCitados['citados']; 
-								$porcentajeAusentes = ($conteoCitados['ausentes'] * 100)/$conteoCitados['citados']; 
-							}else{
-								$presentes =  0;
-								$porcentajePresentes = 0; 
-								$porcentajeAusentes = 0;
-							}
-						
-						?>
-						<br>Número total de citados: <strong><?php echo $conteoCitados['citados']; ?> </strong>
-						<br>Número total de presentes: <strong><?php echo $presentes . " (" . $porcentajePresentes . "%)"; ?> </strong>
-						<br>Número total de ausentes: <strong><?php echo $conteoCitados['ausentes'] . " (" . $porcentajeAusentes . "%)"; ?> </strong>
-
-
-						
-					</div></div>
-				</div>
-<!--FIN INFO DE LAS ALERTAS -->
 	
 	
 	
