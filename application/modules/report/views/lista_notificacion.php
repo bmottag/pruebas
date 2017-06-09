@@ -102,13 +102,14 @@ $respuestas = $this->general_model->get_respuestas_alertas_vencidas_by($arrParam
 									if(!$respuestas){ 
 										echo "<p class='text-danger text-left'>Alerta sin respuesta.</p>";
 										
-										//si el usuario logeado es el mismo coordinador de la del sition
+										//si el usuario logeado es el mismo coordinador de la del sitio
+										//si el usuario logeado es el mismo operador de la del sitio
 										//entonces puede dar respuesta a la alerta
 										//o si es directivo puede dar respuesta
 										$userRol = $this->session->userdata("rol");
 										$userID = $this->session->userdata("id");
 										
-										if(($userRol == 3 && $lista['fk_id_user_coordinador'] == $userID) || $userRol == 2){
+										if(($userRol == 6 && $lista['fk_id_user_operador'] == $userID) || ($userRol == 3 && $lista['fk_id_user_coordinador'] == $userID) || $userRol == 2){
 											
 echo "<a href=" . base_url("report/responder_alerta/" . $lista['id_alerta'] . "/" . $lista['fk_id_user_delegado'] . "/" . $lista['id_sitio_sesion'] . "/" . $rol) . " ><strong>Dar Respuesta</strong> </a>";
 											
