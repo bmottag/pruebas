@@ -11,14 +11,14 @@ class Dashboard extends MX_Controller {
 	/**
 	 * Index Page for this controller.
 	 */
-	public function index()
+	public function admin()
 	{	
 			$userRol = $this->session->userdata("rol");
 			$userID = $this->session->userdata("id");
 			/**
-			 * Esta vista solo es para ADMINISTRADORES Y DIRECTIOVOS
+			 * Esta vista solo es para ADMINISTRADORES
 			 */
-			if($userRol==3 || $userRol==4){			
+			if($userRol!=1){			
 				show_error('ERROR!!! - You are in the wrong place.');
 			}
 			

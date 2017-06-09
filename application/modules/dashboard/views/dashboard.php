@@ -57,306 +57,10 @@ if ($retornoError) {
 ?> 
 
 
-<!-- INFORMACION DEL SITIO PARA EL DELEGADO SI EXISTE INFORMAION -->
-<?php if($userRol==4 && $infoSitoDelegado){ //si es DELEGADO ?>
-
-	<div class="row">
-		<div class="col-md-4">
-			<div class="panel panel-success">
-				<div class="panel-heading">
-					<strong>Nombre Sitio: </strong><?php echo $infoSitoDelegado[0]['nombre_sitio']; ?>
-					<br><strong>Dirección: </strong><?php echo $infoSitoDelegado[0]['direccion_sitio']; ?>
-				</div>
-			</div>
-		</div>
-		
-		<div class="col-md-4">
-			<div class="panel panel-success">
-				<div class="panel-heading">
-					<strong>Nodo o Región: </strong><?php echo $infoSitoDelegado[0]['nombre_region']; ?>
-					<br><strong>Departamento: </strong><?php echo $infoSitoDelegado[0]['dpto_divipola_nombre']; ?>
-					<br><strong>Municipio: </strong><?php echo $infoSitoDelegado[0]['mpio_divipola_nombre']; ?>
-					<br><strong>Zona: </strong><?php echo $infoSitoDelegado[0]['nombre_zona']; ?>
-				</div>
-			</div>
-		</div>
-		
-		<div class="col-md-4">
-			<div class="panel panel-success">
-				<div class="panel-heading">
-					<strong>Representante: </strong><br>
-					<?php 
-					if($infoSitoDelegado[0]['fk_id_user_delegado']){
-						echo "C.C. " . $infoSitoDelegado[0]['cedula_delegado'] . " " . $infoSitoDelegado[0]['nom_delegado'] . " "  . $infoSitoDelegado[0]['ape_delegado'];
-					} else { echo "Falta asignar Representante.";}
-					?>
-
-					<br><strong>Coordinador: </strong><br>
-					<?php 
-					if($infoSitoDelegado[0]['fk_id_user_coordinador']){
-						echo "C.C. " . $infoSitoDelegado[0]['cedula_coordinador'] . " " . $infoSitoDelegado[0]['nom_coordinador'] . " "  . $infoSitoDelegado[0]['ape_coordiandor'];
-					} else { echo "Falta asignar Coordinador.";}
-					?>
-				</div>
-			</div>
-		</div>
-	</div>
-
-<?php } ?>
-<!-- INFORMACION DEL SITIO PARA EL DELEGADO SI EXISTE INFORMAION -->
 
 
 
 
-
-
-
-
-
-
-
-		
-
-	<div class="row">
-<!--INICIO ALERTA INFORMATIVA -->
-<?php if($infoAlertaInformativa){ ?>
-	
-		<div class="col-lg-6">				
-			<div class="panel panel-danger">
-				<div class="panel-heading">
-					<i class="fa fa-calendar fa-fw"></i> ALERTA - <?php echo $infoAlertaInformativa[0]['nombre_tipo_alerta']; ?>
-				</div>
-				<div class="panel-body">
-					
-				<?php
-					foreach ($infoAlertaInformativa as $lista):
-					
-					//consultar si ya el usuario dio respuesta a esta alerta
-					$ci = &get_instance();
-					$ci->load->model("dashboard_model");
-					
-					$arrParam = array("idAlerta" => $lista["id_alerta"]);
-					$existeRegistro = $this->dashboard_model->get_registro_by($arrParam);
-					
-					if(!$existeRegistro){
-				?>
-						
-					<div class="col-lg-12">	
-						<div class="alert alert-danger ">
-							<strong>Descripción Alerta: </strong><?php echo $lista['descripcion_alerta']; ?><br>
-							<strong>Mensaje Alerta: </strong><?php echo $lista['mensaje_alerta']; ?><br>
-							<strong>Nombre de Prueba: </strong><?php echo $lista['nombre_prueba']; ?><br>
-							<strong>Grupo Instrumentos: </strong><?php echo $lista['nombre_grupo_instrumentos']; ?><br>
-							<strong>Fecha: </strong><?php echo $lista['fecha']; ?><br>
-							<strong>Sesión Prueba: </strong><?php echo $lista['sesion_prueba']; ?><br>
-							<strong>Número de Citados: </strong><?php echo $lista['numero_citados']; ?><br>
-							
-					<br>
-					<form  name="form" id="<?php echo "form_" . $lista["id_alerta"]; ?>" class="form-horizontal" method="post" action="<?php echo base_url("dashboard/registro_informativo"); ?>" >
-						<input type="hidden" id="hddId" name="hddId" value="<?php echo $lista["id_alerta"]; ?>"/>
-						<input type="hidden" id="hddIdSitioSesion" name="hddIdSitioSesion" value="<?php echo $lista["id_sitio_sesion"]; ?>"/>
-					
-						<div class="form-group">
-							<div class="row" align="center">
-								<div style="width:50%;" align="center">
-									<input type="submit" id="btnSubmit" name="btnSubmit" value="Aceptar" class="btn btn-danger"/>
-								</div>
-							</div>
-						</div>
-					</form>	
-							
-						</div>
-					</div>
-
-				<?php
-					}
-					endforeach;
-				?>
-
-				</div>
-			</div>
-		</div>
-	
-<?php } ?>
-<!--FIN ALERTA -->
-
-
-<!--INICIO ALERTA NOTIFICACION -->
-<?php if($infoAlertaNotificacion){ ?>
-	
-		<div class="col-lg-6">				
-			<div class="panel panel-yellow">
-				<div class="panel-heading">
-					<i class="fa fa-calendar fa-fw"></i> ALERTA - <?php echo $infoAlertaNotificacion[0]['nombre_tipo_alerta']; ?>
-				</div>
-				<div class="panel-body">
-
-				<?php
-					foreach ($infoAlertaNotificacion as $lista):
-					
-					//consultar si ya el usuario dio respuesta a esta alerta
-					$ci = &get_instance();
-					$ci->load->model("dashboard_model");
-					
-					$arrParam = array("idAlerta" => $lista["id_alerta"]);
-					$existeRegistro = $this->dashboard_model->get_registro_by($arrParam);
-					
-					if(!$existeRegistro){
-				?>
-						
-					<div class="col-lg-12">	
-						<div class="alert alert-warning ">
-							<strong>Descripción Alerta: </strong><?php echo $lista['descripcion_alerta']; ?><br>
-							<strong>Mensaje Alerta: </strong><?php echo $lista['mensaje_alerta']; ?><br>
-							<strong>Nombre de Prueba: </strong><?php echo $lista['nombre_prueba']; ?><br>
-							<strong>Grupo Instrumentos: </strong><?php echo $lista['nombre_grupo_instrumentos']; ?><br>
-							<strong>Fecha: </strong><?php echo $lista['fecha']; ?><br>
-							<strong>Sesión Prueba: </strong><?php echo $lista['sesion_prueba']; ?><br>
-							<strong>Número de Citados: </strong><?php echo $lista['numero_citados']; ?><br>
-							
-					<br>
-					<form  name="form" id="<?php echo "form_" . $lista["id_alerta"]; ?>" class="form-horizontal" method="post" action="<?php echo base_url("dashboard/registro_notificacion"); ?>" >
-						<input type="hidden" id="hddId" name="hddId" value="<?php echo $lista["id_alerta"]; ?>"/>
-						<input type="hidden" id="hddIdSitioSesion" name="hddIdSitioSesion" value="<?php echo $lista["id_sitio_sesion"]; ?>"/>
-						
-						<div class="form-group">							
-							<div class="col-sm-12">
-								<label class="radio-inline">
-									<input type="radio" name="acepta" id="acepta1" value=1>Si
-								</label>
-								<label class="radio-inline">
-									<input type="radio" name="acepta" id="acepta2" value=2>No
-								</label>
-							</div>
-						</div>
-						
-						<div class="form-group">
-							<label class="col-sm-12 control-label" for="observacion">Observación</label>
-							<div class="col-sm-12">
-								<textarea id="observacion" name="observacion" placeholder="Observación"  class="form-control" rows="2"></textarea>
-							</div>
-						</div>
-					
-						<div class="form-group">
-							<div class="row" align="center">
-								<div style="width:50%;" align="center">
-									<input type="submit" id="btnSubmit" name="btnSubmit" value="Aceptar" class="btn btn-warning"/>
-								</div>
-							</div>
-						</div>
-					</form>	
-							
-						</div>
-					</div>
-
-				<?php
-					}
-					endforeach;
-				?>
-				
-				</div>
-			</div>
-		</div>
-	
-<?php } ?>
-<!--FIN ALERTA -->
-
-
-<!--INICIO ALERTA CONSOLIDACION -->
-<?php if($infoAlertaConsolidacion){ ?>
-	
-		<div class="col-lg-6">				
-			<div class="panel panel-green">
-				<div class="panel-heading">
-					<i class="fa fa-calendar fa-fw"></i> ALERTA - <?php echo $infoAlertaConsolidacion[0]['nombre_tipo_alerta']; ?>
-				</div>
-				<div class="panel-body">
-
-				<?php
-					foreach ($infoAlertaConsolidacion as $lista):
-					
-					//consultar si ya el usuario dio respuesta a esta alerta
-					$ci = &get_instance();
-					$ci->load->model("dashboard_model");
-					
-					$arrParam = array("idAlerta" => $lista["id_alerta"]);
-					$existeRegistro = $this->dashboard_model->get_registro_by($arrParam);
-					
-					if(!$existeRegistro){
-						
-						
-$retornoError = $this->session->flashdata('retornoErrorConsolidacion');
-if ($retornoError) {
-    ?>
-	<div class="row">
-		<div class="col-lg-12">	
-			<div class="alert alert-danger ">
-				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-				<?php echo $retornoError ?>
-			</div>
-		</div>
-	</div>
-    <?php
-}
-												
-						
-				?>
-				
-
-						
-					<div class="col-lg-12">	
-						<div class="alert alert-success">
-							<strong>Descripción Alerta: </strong><?php echo $lista['descripcion_alerta']; ?><br>
-							<strong>Mensaje Alerta: </strong><?php echo $lista['mensaje_alerta']; ?><br>
-							<strong>Nombre de Prueba: </strong><?php echo $lista['nombre_prueba']; ?><br>
-							<strong>Grupo Instrumentos: </strong><?php echo $lista['nombre_grupo_instrumentos']; ?><br>
-							<strong>Fecha: </strong><?php echo $lista['fecha']; ?><br>
-							<strong>Sesión Prueba: </strong><?php echo $lista['sesion_prueba']; ?><br>
-							<strong>Número de Citados: </strong><?php echo $lista['numero_citados']; ?><br>
-							
-					<br>
-<script>
-$( document ).ready( function () {
-	$("#ausentes").bloquearTexto().maxlength(5);
-});
-</script>
-					<form  name="formConsolidacion" id="<?php echo "formConsolidacion_" . $lista["id_alerta"]; ?>" class="form-horizontal" method="post" action="<?php echo base_url("dashboard/registro_consolidacion"); ?>">
-						<input type="hidden" id="hddId" name="hddId" value="<?php echo $lista["id_alerta"]; ?>"/>
-						<input type="hidden" id="hddIdSitioSesion" name="hddIdSitioSesion" value="<?php echo $lista["id_sitio_sesion"]; ?>"/>
-						
-						<input type="hidden" id="citados" name="citados" value="<?php echo $lista["numero_citados"]; ?>"/>
-						
-						<div class="form-group">
-							<label class="col-sm-12 control-label" for="ausentes">Cantidad de ausentes</label>
-							<div class="col-sm-12">
-								<input type="text" id="ausentes" name="ausentes" class="form-control" required/>
-							</div>
-						</div>
-											
-						<div class="form-group">
-							<div class="row" align="center">
-								<div style="width:50%;" align="center">
-									<input type="submit" id="btnConsolidacion" name="btnConsolidacion" value="Enviar" class="btn btn-success"/>
-								</div>
-							</div>
-						</div>
-					</form>	
-							
-						</div>
-					</div>
-
-				<?php
-					}
-					endforeach;
-				?>
-
-				</div>
-			</div>
-		</div>
-	
-<?php } ?>
-<!--FIN ALERTA -->
-	</div>
 					
 
 <?php
@@ -402,7 +106,7 @@ $( document ).ready( function () {
 						</div>
 					</div>
 				</div>
-				<a href="<?php echo base_url("report/registros/1"); ?>">
+				<a href="<?php echo base_url("report/registros/1/admin"); ?>">
 					<div class="panel-footer">
 						<span class="pull-left"> Lista Registros <br>Alerta Informativa </span>
 						<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -425,7 +129,7 @@ $( document ).ready( function () {
 						</div>
 					</div>
 				</div>
-				<a href="<?php echo base_url("report/registros/2"); ?>">
+				<a href="<?php echo base_url("report/registros/2/admin"); ?>">
 					<div class="panel-footer">
 						<span class="pull-left">Lista Registros <br>Alerta Notificación </span>
 						<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -448,7 +152,7 @@ $( document ).ready( function () {
 						</div>
 					</div>
 				</div>
-				<a href="<?php echo base_url("report/registros/3"); ?>">
+				<a href="<?php echo base_url("report/registros/3/admin"); ?>">
 					<div class="panel-footer">
 						<span class="pull-left">Lista Registros <br>Alerta Consolidación</span>
 						<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

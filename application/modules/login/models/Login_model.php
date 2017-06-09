@@ -68,7 +68,7 @@
 						}elseif($userRol==2){//vista para coordinadores
 							redirect("/dashboard/directivo","location",301);
 						}else{
-							redirect("/dashboard","location",301);
+							redirect("/dashboard/admin","location",301);
 						}
 	    				break;
 	    		case 2: //INACTIVE USER
