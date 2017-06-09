@@ -97,7 +97,8 @@ $arrParam = array(
 );
 $respuestas = $this->general_model->get_respuestas_alertas_vencidas_by($arrParam);
 
-									
+$userRol = $this->session->userdata("rol");
+$userID = $this->session->userdata("id");									
 									
 									if(!$respuestas){ 
 										echo "<p class='text-danger text-left'>Alerta sin respuesta.</p>";
@@ -106,9 +107,9 @@ $respuestas = $this->general_model->get_respuestas_alertas_vencidas_by($arrParam
 										//si el usuario logeado es el mismo operador de la del sitio
 										//entonces puede dar respuesta a la alerta
 										//o si es directivo puede dar respuesta
-										$userRol = $this->session->userdata("rol");
-										$userID = $this->session->userdata("id");
-										
+
+										//si no se dio respuesta entonces|
+										//dar respuesta para el directivo o el coordinador o el operador
 										if(($userRol == 6 && $lista['fk_id_user_operador'] == $userID) || ($userRol == 3 && $lista['fk_id_user_coordinador'] == $userID) || $userRol == 2){
 											
 echo "<a href=" . base_url("report/responder_alerta/" . $lista['id_alerta'] . "/" . $lista['fk_id_user_delegado'] . "/" . $lista['id_sitio_sesion'] . "/" . $rol) . " ><strong>Dar Respuesta</strong> </a>";
@@ -122,6 +123,14 @@ echo "<a href=" . base_url("report/responder_alerta/" . $lista['id_alerta'] . "/
 										echo "<br><strong>Ausentes: </strong>" . $respuestas[0]['ausentes'];
 										echo "<br><strong>Observación: </strong>" . $respuestas[0]['observacion'];
 										echo "<br><strong>Fecha registro: </strong>" . $respuestas[0]['fecha_registro'];
+
+//si no se acepta la alerta enotnces se crea enlace para poder aceptarla por parte del coordiandor, director o operador
+if($respuestas[0]['acepta']==2){
+		if(($userRol == 6 && $lista['fk_id_user_operador'] == $userID) || ($userRol == 3 && $lista['fk_id_user_coordinador'] == $userID) || $userRol == 2){						
+echo "<br><a href=" . base_url("report/update_alerta_notificacion/" . $respuestas[0]['id_registro'] . "/" . $rol) . " ><strong>Cambiar Respuesta</strong> </a>";
+		}
+}
+										
 									}
 									echo "</td>";
 							endforeach;

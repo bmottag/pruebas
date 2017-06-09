@@ -280,6 +280,31 @@ class Report extends CI_Controller {
 	}
 	
 	/**
+	 * Formulario para actualizar la alerta notificacion cuando no se acepto
+     * @since 9/6/2017
+	 */
+	public function update_alerta_notificacion($idRegistro, $rol)
+	{
+			$data["rol"] = $rol;
+			$this->load->model("general_model");
+			//informacion de la respuesta
+			$arrParam = array(
+					"idRegistro" => $idRegistro
+			);
+			$data['infoRespuesta'] = $this->general_model->get_respuestas_alertas_vencidas_by($arrParam);
+			
+			//informacion de la alerta sesion y sitio
+			$arrParam = array(
+					"idSitioSesion" => $data['infoRespuesta'][0]['fk_id_sitio_sesion'],
+					"idAlerta" => $data['infoRespuesta'][0]['fk_id_alerta']
+			);
+			$data['info'] = $this->general_model->get_informacion_respuestas_alertas_vencidas_by($arrParam);
+
+			$data["view"] = 'form_update_alerta_notificacion';
+			$this->load->view("layout", $data);
+	}
+	
+	/**
 	 * Registro de la aceptacion de la alerta informativa
 	 * @since 23/5/2017
 	 */
@@ -317,6 +342,33 @@ class Report extends CI_Controller {
 				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Debe indicar su respuesta.');
 			}else{
 				if ($this->report_model->saveRegistroNotificacionCoordinador()) {
+					$this->session->set_flashdata('retornoExito', "Gracias por su respuesta.");
+				} else {
+					$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador.');
+				}
+			}
+
+			redirect("/dashboard/" . $rol,"location",301);
+	}
+	
+	/**
+	 * Actualizacion de respuesta a la alerta notificacion
+	 * @since 9/6/2017
+	 */
+	public function registro_update_notificacion()
+	{
+			$data = array();
+
+			$rol = $this->input->post('hddIdRol');
+			
+			$acepta = $this->input->post('acepta');
+
+			if($acepta && $acepta==2){
+				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Este formulario solo es para aceptar la alerta.');
+			}elseif($acepta==""){
+				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Debe indicar su respuesta.');
+			}else{
+				if ($this->report_model->updateRegistroNotificacion()) {
 					$this->session->set_flashdata('retornoExito', "Gracias por su respuesta.");
 				} else {
 					$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador.');

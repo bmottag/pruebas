@@ -203,6 +203,41 @@
 		}
 		
 		/**
+		 * Actualiza una alerta de notificacion
+		 * @since 9/6/2017
+		 */
+		public function updateRegistroNotificacion() 
+		{
+				$rol = $this->input->post('hddIdRol');
+				$idRegistro = $this->input->post('hddIdRegistro');
+				//se une la observacion inicial con la observacion de la actualizacion
+				$observacion = $this->input->post('hddObservacion');
+				$newObservation = 'Primera observación: ' . $observacion . '<p>Segunda Observación' . $this->input->post('observacion') . '</p>';
+				
+				//se une la nota inicial con la nota de la actualizacion
+				$nota = $this->input->post('hddNota');
+				$newNota = $nota . '<p>Se actualizó el registro por el ' . $rol . '</p>';
+				
+				$data = array(
+					'acepta' => $this->input->post('acepta'),
+					'observacion' => $newObservation ,
+					'fecha_actualizacion' => date("Y-m-d G:i:s"),
+					'fk_id_user_actualiza' => $this->session->id,
+					'nota' => $newNota
+				);	
+
+				$this->db->where('id_registro', $idRegistro);
+				$query = $this->db->update('registro', $data);
+				
+
+				if ($query) {
+					return true;
+				} else {
+					return false;
+				}
+		}
+		
+		/**
 		 * Guardar respuesta del usuario
 		 * @since 19/5/2017
 		 */
