@@ -157,9 +157,9 @@ class Report extends CI_Controller {
 				}
 				
 				//conteo de los sitios segun el filtro
-				$data['conteoSitios'] = $this->report_model->get_numero_sitios_por_filtro($arrParam);
+				$data['conteoSitios'] = $this->general_model->get_numero_sitios_por_filtro($arrParam);
 				
-				$data['conteoCitados'] = $this->report_model->get_numero_citados_por_filtro($arrParam);
+				$data['conteoCitados'] = $this->general_model->get_numero_citados_por_filtro($arrParam);
 //pr($data['conteoCitados']);
 //echo$this->db->last_query();exit;
 				
@@ -409,7 +409,7 @@ class Report extends CI_Controller {
 	 */
     public function searchByCoordinador() 
 	{
-			$data['rol_busqueda'] = "Coordinadores";
+			$data['rol_busqueda'] = "Representantes";
 			$data['regreso'] = "report/searchByCoordinador";
 			$userID = $this->session->userdata("id");
 			
@@ -487,9 +487,9 @@ class Report extends CI_Controller {
 				}
 				
 				//conteo de los sitios segun el filtro
-				$data['conteoSitios'] = $this->report_model->get_numero_sitios_por_filtro_by_coordinador();
+				$data['conteoSitios'] = $this->general_model->get_numero_sitios_por_filtro_by_coordinador();
 				
-				$data['conteoCitados'] = $this->report_model->get_numero_citados_por_filtro_by_coordinnador($arrParam);
+				$data['conteoCitados'] = $this->general_model->get_numero_citados_por_filtro_by_coordinnador($arrParam);
 //pr($data['conteoCitados']);
 //echo$this->db->last_query();exit;
 				

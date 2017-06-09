@@ -567,6 +567,7 @@ class Admin extends MX_Controller {
 			$idSitio = $this->input->post('hddId');
 			
 			$msj = "Se adicionó el Sitio con exito.";
+			$result_codigo_dane = false;
 			if ($idSitio != '') {
 				$msj = "Se actualizó el Sitio con exito.";
 			}else {
@@ -574,7 +575,6 @@ class Admin extends MX_Controller {
 				$result_codigo_dane = $this->admin_model->verifyCodigoDane();
 			}
 
-			
 			if ($result_codigo_dane) {
 				$data["result"] = "error";
 				$data["mensaje"] = "Error!!!. El código DANE ya existe en la base de datos.";
