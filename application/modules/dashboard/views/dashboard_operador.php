@@ -351,10 +351,10 @@ $( document ).ready( function () {
 
 <!-- INICIO NOTIFICACIONES QUE NO SE LE HAN DADO RESPUESTA -->
 <?php
-	if($contadorInformativaSi!=0)
+	if($contadorInformativaNo!=0)
 	{ 
 		echo "<div class='alert alert-danger'>
-					<strong>Atención</strong>, hay <strong>" . $contadorInformativaSi .  "</strong> Alertas Informativas sin dar respuesta.
+					<strong>Atención</strong>, hay <strong>" . $contadorInformativaNo .  "</strong> Alertas Informativas sin dar respuesta.
 					<a href=". base_url("dashboard/respuesta_coordinador/1/operador") ." >RESPONDER </a>
 				</div>";
 	}
@@ -369,10 +369,10 @@ $( document ).ready( function () {
 	}
 
 
-	if($contadorConsolidacion!=0)
+	if($contadorConsolidacionNo!=0)
 	{ 
 		echo "<div class='alert alert-danger'>
-					<strong>Atención</strong>, hay <strong>" . $contadorConsolidacion .  "</strong> Alertas de Consolidación sin dar respuesta.
+					<strong>Atención</strong>, hay <strong>" . $contadorConsolidacionNo .  "</strong> Alertas de Consolidación sin dar respuesta.
 					<a href=". base_url("dashboard/respuesta_coordinador/3/operador") ." >RESPONDER </a>
 				</div>";
 	}
@@ -558,7 +558,7 @@ $( document ).ready( function () {
 							<i class="fa fa-crosshairs fa-5x"></i>
 						</div>
 						<div class="col-xs-9 text-right">
-							<div class="huge"><?php echo $totalConsolidado; ?></div>
+							<div class="huge"><?php echo $contadorConsolidacionSi; ?></div>
 							<div>Número de respuestas Alerta Consolidación</div>
 						</div>
 					</div>
