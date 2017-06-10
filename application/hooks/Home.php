@@ -14,7 +14,7 @@ class Home {
 
     public function check_login() {
         $error = FALSE;
-        $arrModules = array("login", "gh_directorio", "ieredirect");
+        $arrModules = array("login", "cron", "ieredirect");
         if (!in_array($this->ci->uri->segment(1), $arrModules)) {
             if ($this->ci->uri->segment(1) == "menu") {
                 if(($this->ci->uri->segment(2) . '/' . $this->ci->uri->segment(3)) != 'menu/salir') {
