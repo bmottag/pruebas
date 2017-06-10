@@ -454,8 +454,8 @@ $( document ).ready( function () {
 						<?php 
 							if($conteoCitados['citados'] !=0){
 								$presentes =  $conteoCitados['citados'] - $conteoCitados['ausentes'];
-								$porcentajePresentes = ($presentes * 100)/$conteoCitados['citados']; 
-								$porcentajeAusentes = ($conteoCitados['ausentes'] * 100)/$conteoCitados['citados']; 
+								$porcentajePresentes = round(($presentes * 100)/$conteoCitados['citados']); 
+								$porcentajeAusentes = round(($conteoCitados['ausentes'] * 100)/$conteoCitados['citados']); 
 							}else{
 								$presentes =  0;
 								$porcentajePresentes = 0; 
