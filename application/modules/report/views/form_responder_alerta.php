@@ -84,6 +84,26 @@ if($info[0]['fk_id_tipo_alerta'] == 1){//informativa
 					<i class="fa fa-calendar fa-fw"></i> ALERTA - <?php echo $info[0]['nombre_tipo_alerta']; ?>
 				</div>
 				<div class="panel-body">
+				
+				
+				
+<?php
+$retornoError = $this->session->flashdata('retornoErrorConsolidacion');
+if ($retornoError) {
+    ?>
+	<div class="row">
+		<div class="col-lg-12">	
+			<div class="alert alert-danger ">
+				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+				<?php echo $retornoError ?>
+			</div>
+		</div>
+	</div>
+    <?php
+}
+?>
+				
+				
 					<div class="col-lg-12">	
 						
 						<div class="alert alert-<?php echo $class2; ?>">
@@ -155,6 +175,14 @@ if($info[0]['fk_id_tipo_alerta'] == 1){//informativa
 }if($info[0]['fk_id_tipo_alerta'] == 3){//consolidacion
 ?>
 
+<script>
+$( document ).ready( function () {
+	$("#ausentes").bloquearTexto().maxlength(5);
+	$("#ausentesConfirmar").bloquearTexto().maxlength(5);
+});
+</script>
+
+
 <form  name="form" id="form" class="form-horizontal" method="post" action="<?php echo base_url("report/registro_consolidacion_by_coordinador"); ?>" >
 	<input type="hidden" id="hddIdRol" name="hddIdRol" value="<?php echo $rol; ?>"/>
 	<input type="hidden" id="hddIdAlerta" name="hddIdAlerta" value="<?php echo $info[0]["id_alerta"]; ?>"/>
@@ -166,6 +194,13 @@ if($info[0]['fk_id_tipo_alerta'] == 1){//informativa
 		<label class="col-sm-12 control-label" for="ausentes">Cantidad de ausentes</label>
 		<div class="col-sm-12">
 			<input type="text" id="ausentes" name="ausentes" class="form-control" required/>
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<label class="col-sm-12 control-label" for="ausentesConfirmar">Confirmar cantidad de ausentes</label>
+		<div class="col-sm-12">
+			<input type="text" id="ausentesConfirmar" name="ausentesConfirmar" class="form-control" required/>
 		</div>
 	</div>
 	

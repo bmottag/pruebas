@@ -53,6 +53,10 @@ class General_model extends CI_Model {
 				if (array_key_exists("idCoordinador", $arrDatos)) {
 					$this->db->where('fk_id_coordinador_mcpio', $arrDatos["idCoordinador"]);
 				}
+				
+				if (array_key_exists("idOperdador", $arrDatos)) {
+					$this->db->where('fk_id_operador_mcpio', $arrDatos["idOperdador"]);
+				}
 				$this->db->order_by('dpto_divipola_nombre', 'asc');
 				$query = $this->db->get('param_divipola D');
 
@@ -81,6 +85,10 @@ class General_model extends CI_Model {
 				if ($userRol==3) {
 					$this->db->where('fk_id_coordinador_mcpio', $userID);
 				}
+				if ($userRol==6) {
+					$this->db->where('fk_id_operador_mcpio', $userID);
+				}
+				
 				$this->db->order_by('mpio_divipola_nombre', 'asc');
 				$query = $this->db->get('param_divipola');
 					

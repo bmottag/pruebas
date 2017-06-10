@@ -332,23 +332,32 @@ class Report extends CI_Controller {
 			$data = array();
 
 			$rol = $this->input->post('hddIdRol');
+			$idAlerta = $this->input->post('hddIdAlerta');
+			$idSitioSesion = $this->input->post('hddIdSitioSesion');
+			$idDelegado = $this->input->post('hddIdUserDelegado');
 			
 			$acepta = $this->input->post('acepta');
 			$observacion = $this->input->post('observacion');
 
+			$error = true;
 			if($acepta && $acepta==2 && $observacion == ""){
-				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Debe indicar la Observación.');
+				$this->session->set_flashdata('retornoErrorConsolidacion', '<strong>Error!!!</strong> Debe indicar la Observación.');
 			}elseif($acepta==""){
-				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Debe indicar su respuesta.');
+				$this->session->set_flashdata('retornoErrorConsolidacion', '<strong>Error!!!</strong> Debe indicar su respuesta.');
 			}else{
 				if ($this->report_model->saveRegistroNotificacionCoordinador()) {
+					$error = false;
 					$this->session->set_flashdata('retornoExito', "Gracias por su respuesta.");
 				} else {
 					$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador.');
 				}
 			}
 
-			redirect("/dashboard/" . $rol,"location",301);
+			if($error){
+				redirect("/report/responder_alerta/" . $idAlerta . "/" . $idDelegado . "/" . $idSitioSesion . "/" . $rol,"location",301);
+			}else{
+				redirect("/dashboard/" . $rol,"location",301);
+			}
 	}
 	
 	/**
@@ -360,22 +369,29 @@ class Report extends CI_Controller {
 			$data = array();
 
 			$rol = $this->input->post('hddIdRol');
+			$idRegistro = $this->input->post('hddIdRegistro');
 			
 			$acepta = $this->input->post('acepta');
-
+			
+			$error = true;
 			if($acepta && $acepta==2){
-				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Este formulario solo es para aceptar la alerta.');
+				$this->session->set_flashdata('retornoErrorConsolidacion', '<strong>Error!!!</strong> Este formulario solo es para aceptar la alerta.');
 			}elseif($acepta==""){
-				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Debe indicar su respuesta.');
+				$this->session->set_flashdata('retornoErrorConsolidacion', '<strong>Error!!!</strong> Debe indicar su respuesta.');
 			}else{
 				if ($this->report_model->updateRegistroNotificacion()) {
+					$error = false;
 					$this->session->set_flashdata('retornoExito', "Gracias por su respuesta.");
 				} else {
 					$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador.');
 				}
 			}
 
-			redirect("/dashboard/" . $rol,"location",301);
+			if($error){
+				redirect("/report/update_alerta_notificacion/" . $idRegistro . "/" . $rol,"location",301);
+			}else{
+				redirect("/dashboard/" . $rol,"location",301);
+			}
 	}
 	
 	/**
@@ -386,26 +402,47 @@ class Report extends CI_Controller {
 	{
 			$data = array();
 			$ausentes = $this->input->post('ausentes');
+			$ausentesConfirmar = $this->input->post('ausentesConfirmar');
 			$citados = $this->input->post('citados');
 
 			$rol = $this->input->post('hddIdRol');
-
+			$idAlerta = $this->input->post('hddIdAlerta');
+			$idSitioSesion = $this->input->post('hddIdSitioSesion');
+			$idDelegado = $this->input->post('hddIdUserDelegado');
+			
+			$error = false;
+			
+			
+			
 			if($ausentes == ""){
-				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Debe indicar los ausentes.');
+				$this->session->set_flashdata('retornoErrorConsolidacion', '<strong>Error!!!</strong> Debe indicar los ausentes.');
 			}else{
-				if($ausentes > $citados){
-					$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> La cantidad de ausentes no puede ser mayor a la cantidad de citados.');
-				}else{
-					if ($this->report_model->saveRegistroConsolidacionCoordinador()) {
-						$this->session->set_flashdata('retornoExito', "Gracias por su respuesta.");
-					} else {
-						$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador.');
+				if($ausentes < 0){
+					$this->session->set_flashdata('retornoErrorConsolidacion', '<strong>Error!!!</strong> La cantidad de ausentes no puede ser menor que 0.');
+				}else{				
+					if($ausentes != $ausentesConfirmar){
+						$this->session->set_flashdata('retornoErrorConsolidacion', '<strong>Error!!!</strong> Confirmar la cantidad de ausentes.');
+					}else{				
+							if($ausentes > $citados){
+								$this->session->set_flashdata('retornoErrorConsolidacion', '<strong>Error!!!</strong> La cantidad de ausentes no puede ser mayor a la cantidad de citados.');
+							}else{
+								if ($this->report_model->saveRegistroConsolidacionCoordinador()) 
+								{
+									$error = true;
+									$this->session->set_flashdata('retornoExito', "Gracias por su respuesta.");
+								} else {
+									$this->session->set_flashdata('retornoErrorConsolidacion', '<strong>Error!!!</strong> Contactarse con el Administrador.');
+								}
+							}
 					}
 				}
 			}
-
-
-			redirect("/dashboard/" . $rol,"location",301);
+			
+	if(!$error){
+			redirect("/report/responder_alerta/" . $idAlerta . "/" . $idDelegado . "/" . $idSitioSesion . "/" . $rol,"location",301);
+	}else{
+		      redirect("/dashboard/" . $rol,"location",301);
+	}
 	}
 		
     /**
@@ -466,13 +503,19 @@ class Report extends CI_Controller {
 	{
 			$data['rol_busqueda'] = "Representantes";
 			$data['regreso'] = "report/searchByCoordinador";
+			$userRol = $this->session->userdata("rol");
 			$userID = $this->session->userdata("id");
 			
 			//Lista Regiones
 			$this->load->model("general_model");
-			$arrParam = array(
-				"idCoordinador" => $userID
-			);
+			
+			if($userRol == 3){
+				$arrParam = array("idCoordinador" => $userID);
+			}elseif($userRol == 6){
+				$arrParam = array("idOperdador" => $userID);
+			}
+			
+			
 			$data['listaDepartamentos'] = $this->general_model->get_dpto_divipola_by($arrParam);//listado de departamentos
 			
 			//lista sesiones

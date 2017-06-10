@@ -69,7 +69,24 @@
 				</div>
 				<div class="panel-body">
 					<div class="col-lg-12">	
-						
+
+<?php
+$retornoError = $this->session->flashdata('retornoErrorConsolidacion');
+if ($retornoError) {
+    ?>
+	<div class="row">
+		<div class="col-lg-12">	
+			<div class="alert alert-danger ">
+				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+				<?php echo $retornoError ?>
+			</div>
+		</div>
+	</div>
+    <?php
+}
+?>
+					
+					
 						<div class="alert alert-warning">
 							<strong>Descripción Alerta: </strong><?php echo $info[0]['descripcion_alerta']; ?><br>
 							<strong>Mensaje Alerta: </strong><?php echo $info[0]['mensaje_alerta']; ?><br>
