@@ -181,8 +181,8 @@
 						<?php 
 							if($conteoCitados['citados'] !=0){
 								$presentes =  $conteoCitados['citados'] - $conteoCitados['ausentes'];
-								$porcentajePresentes = ($presentes * 100)/$conteoCitados['citados']; 
-								$porcentajeAusentes = ($conteoCitados['ausentes'] * 100)/$conteoCitados['citados']; 
+								$porcentajePresentes = round(($presentes * 100)/$conteoCitados['citados'],1);
+								$porcentajeAusentes = round(($conteoCitados['ausentes'] * 100)/$conteoCitados['citados'],1);
 							}else{
 								$presentes =  0;
 								$porcentajePresentes = 0; 
@@ -308,11 +308,24 @@ $respuestas = $this->general_model->get_respuestas_alertas_vencidas_by($arrParam
 										
 										//si el usuario logeado es el mismo coordinador de la del sition
 										//entonces puede dar respuesta a la alerta
+										$userRol = $this->session->userdata("rol");
 										$userID = $this->session->userdata("id");
+										
+										switch ($userRol) {
+											case 2:
+												$rol = 'directivo';
+												break;
+											case 3:
+												$rol = 'coordinador';
+												break;
+											case 6:
+												$rol = 'operador';
+												break;
+										}
 										
 										if($lista['fk_id_user_coordinador'] == $userID){
 											
-echo "<a href=" . base_url("report/responder_alerta/" . $lista['id_alerta'] . "/" . $lista['fk_id_user_delegado'] . "/" . $lista['id_sitio_sesion']) . " ><strong>Dar Respuesta</strong> </a>";
+echo "<a href=" . base_url("report/responder_alerta/" . $lista['id_alerta'] . "/" . $lista['fk_id_user_delegado'] . "/" . $lista['id_sitio_sesion'] . "/" . $rol) . " ><strong>Dar Respuesta</strong> </a>";
 											
 											
 										}
