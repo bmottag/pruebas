@@ -108,14 +108,14 @@ class General_model extends CI_Model {
 					$this->db->where('fk_id_sesion', $arrDatos["idSesion"]);
 				}
 				$this->db->where('estado_alerta', 1);
-				$this->db->order_by('descripcion_alerta', 'asc');
+				$this->db->order_by('mensaje_alerta', 'asc');
 				$query = $this->db->get('alertas');
 					
 				if ($query->num_rows() > 0) {
 					$i = 0;
 					foreach ($query->result() as $row) {
 						$sesiones[$i]["idAlerta"] = $row->id_alerta;
-						$sesiones[$i]["descripcion"] = $row->descripcion_alerta . " ----> Inicio: " . $row->fecha_inicio;
+						$sesiones[$i]["descripcion"] = $row->mensaje_alerta . " ----> Inicio: " . $row->fecha_inicio;
 						$i++;
 					}
 				}
