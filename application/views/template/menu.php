@@ -210,6 +210,28 @@ if($userRol==3){//COORDINADOR
 }
 ?>
 
+
+<?php 
+if($userRol==6){//OPERADOR
+?>
+
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+						<i class="fa fa-list-alt"></i> Reportes <i class="fa fa-caret-down"></i>
+					</a>
+					<ul class="dropdown-menu dropdown-messages">
+					
+						<li>
+							<a href="<?php echo base_url("report/searchByCoordinador"); ?>"><i class="fa fa-list-alt fa-fw"></i> Información Alertas - Representantes</a>
+						</li>
+						
+					</ul>
+				</li>
+<?php
+}
+?>
+
+
 				<li>
 					<a href="<?php echo base_url("menu/salir"); ?>"><i class="fa fa-sign-out fa-fw"></i> Salir</a>
 				</li>
