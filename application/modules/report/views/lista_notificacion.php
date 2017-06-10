@@ -110,10 +110,13 @@ $userID = $this->session->userdata("id");
 
 										//si no se dio respuesta entonces|
 										//dar respuesta para el directivo o el coordinador o el operador
-										if(($userRol == 6 && $lista['fk_id_user_operador'] == $userID) || ($userRol == 3 && $lista['fk_id_user_coordinador'] == $userID) || $userRol == 2){
-											
+										if(($userRol == 6 && $lista['fk_id_user_operador'] == $userID) || ($userRol == 3 && $lista['fk_id_user_coordinador'] == $userID) || $userRol == 2 || $userRol == 1){
+											//si no existe el representante entonces no se muestra el enlace
+											if($lista['fk_id_user_delegado']){											
 echo "<a href=" . base_url("report/responder_alerta/" . $lista['id_alerta'] . "/" . $lista['fk_id_user_delegado'] . "/" . $lista['id_sitio_sesion'] . "/" . $rol) . " ><strong>Dar Respuesta</strong> </a>";
-											
+											}else{
+												echo "<p class='text-danger'>Falta asignar representante para este Sitio</p>";
+											}
 											
 										}
 										
