@@ -24,7 +24,7 @@
 			$enlace = base_url("dashboard/directivo");
 			$titulo = 'Directivo';
 		}else{
-			$enlace = base_url("dashboard");
+			$enlace = base_url("dashboard/admin");
 			$titulo = 'Admin';
 		}
 ?>
