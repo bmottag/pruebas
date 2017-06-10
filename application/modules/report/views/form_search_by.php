@@ -49,7 +49,7 @@
 
 											<div class="form-group">
 												<div class="col-sm-8 col-sm-offset-2">
-													<label for="from">Descripción Alerta -----> Inicio Alerta: <small></small></label>
+													<label for="from">Alerta -----> Inicio Alerta: <small></small></label>
 													<select name="alerta" id="alerta" class="form-control">
 													
 													</select>
