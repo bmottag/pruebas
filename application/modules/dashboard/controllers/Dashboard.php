@@ -143,6 +143,7 @@ class Dashboard extends MX_Controller {
 			$data = array();
 			$userRol = $this->session->userdata("rol");
 			$ausentes = $this->input->post('ausentes');
+			$ausentesConfirmar = $this->input->post('ausentesConfirmar');
 			$citados = $this->input->post('citados');
 			
 			//buscar datos de la tabla sitio_sesion		
@@ -153,7 +154,7 @@ class Dashboard extends MX_Controller {
 			if($ausentes == ""){
 				$this->session->set_flashdata('retornoErrorConsolidacion', '<strong>Error!!!</strong> Debe indicar los ausentes.');
 			}else{
-				if($ausetnes < 0){
+				if($ausentes < 0){
 					$this->session->set_flashdata('retornoErrorConsolidacion', '<strong>Error!!!</strong> La cantidad de ausentes no puede menor que 0.');
 				}else{				
 					if($ausentes != $ausentesConfirmar){
