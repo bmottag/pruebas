@@ -88,7 +88,12 @@ echo "<a href='tel:".$lista['celular_delegado']."'>".$lista['celular_delegado'].
 									
 									
 									echo "<td>";
+									//si no existe el representante entonces no se muestra el enlace
+									if($lista['fk_id_user_delegado']){
 echo "<a href=" . base_url("report/responder_alerta/" . $lista['id_alerta'] . "/" . $lista['fk_id_user_delegado'] . "/" . $lista['id_sitio_sesion'] . "/" . $rol) . " ><strong>Dar Respuesta</strong> </a>";
+									}else{
+										echo "<p class='text-danger'>Falta asignar representante para este Sitio</p>";
+									}
 									echo "</td>";
 							endforeach;
 					

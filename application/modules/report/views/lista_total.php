@@ -301,33 +301,39 @@ $arrParam = array(
 );
 $respuestas = $this->general_model->get_respuestas_alertas_vencidas_by($arrParam);
 
+
+									//si el usuario logeado es el mismo coordinador de la del sition
+									//entonces puede dar respuesta a la alerta
+									$userRol = $this->session->userdata("rol");
+									$userID = $this->session->userdata("id");
+									
+									switch ($userRol) {
+										case 2:
+											$rol = 'directivo';
+											break;
+										case 3:
+											$rol = 'coordinador';
+											break;
+										case 6:
+											$rol = 'operador';
+											break;
+									}
+
 									
 									
 									if(!$respuestas){ 
 										echo "<p class='text-danger text-left'>Alerta sin respuesta.</p>";
 										
-										//si el usuario logeado es el mismo coordinador de la del sition
-										//entonces puede dar respuesta a la alerta
-										$userRol = $this->session->userdata("rol");
-										$userID = $this->session->userdata("id");
-										
-										switch ($userRol) {
-											case 2:
-												$rol = 'directivo';
-												break;
-											case 3:
-												$rol = 'coordinador';
-												break;
-											case 6:
-												$rol = 'operador';
-												break;
-										}
-										
-										if($lista['fk_id_user_coordinador'] == $userID){
-											
+
+										//para usuario directivo, coordinador y operador. el administrador no puede responder
+										if($userRol!=1){
+											//si no existe el representante entonces no se muestra el enlace
+											if($lista['fk_id_user_delegado']){
 echo "<a href=" . base_url("report/responder_alerta/" . $lista['id_alerta'] . "/" . $lista['fk_id_user_delegado'] . "/" . $lista['id_sitio_sesion'] . "/" . $rol) . " ><strong>Dar Respuesta</strong> </a>";
-											
-											
+											}else{
+												echo "<p class='text-danger'>Falta asignar representante para este Sitio</p>";
+											}
+											echo "</td>";											
 										}
 										
 									}else{
@@ -336,6 +342,15 @@ echo "<a href=" . base_url("report/responder_alerta/" . $lista['id_alerta'] . "/
 										echo "<br><strong>Ausentes: </strong>" . $respuestas[0]['ausentes'];
 										echo "<br><strong>Observación: </strong>" . $respuestas[0]['observacion'];
 										echo "<br><strong>Fecha registro: </strong>" . $respuestas[0]['fecha_registro'];
+										
+										
+										
+//si no se acepta la alerta enotnces se crea enlace para poder aceptarla por parte del coordiandor, director o operador
+if($respuestas[0]['acepta']==2){
+		if(($userRol == 6 && $lista['fk_id_user_operador'] == $userID) || ($userRol == 3 && $lista['fk_id_user_coordinador'] == $userID) || $userRol == 2){						
+echo "<br><a href=" . base_url("report/update_alerta_notificacion/" . $respuestas[0]['id_registro'] . "/" . $rol) . " ><strong>Cambiar Respuesta</strong> </a>";
+		}
+}
 									}
 									echo "</td>";
 							endforeach;
