@@ -308,6 +308,9 @@ $respuestas = $this->general_model->get_respuestas_alertas_vencidas_by($arrParam
 									$userID = $this->session->userdata("id");
 									
 									switch ($userRol) {
+										case 1:
+											$rol = 'admin';
+											break;
 										case 2:
 											$rol = 'directivo';
 											break;
@@ -325,16 +328,15 @@ $respuestas = $this->general_model->get_respuestas_alertas_vencidas_by($arrParam
 										echo "<p class='text-danger text-left'>Alerta sin respuesta.</p>";
 										
 
-										//para usuario directivo, coordinador y operador. el administrador no puede responder
-										if($userRol!=1){
+
 											//si no existe el representante entonces no se muestra el enlace
 											if($lista['fk_id_user_delegado']){
 echo "<a href=" . base_url("report/responder_alerta/" . $lista['id_alerta'] . "/" . $lista['fk_id_user_delegado'] . "/" . $lista['id_sitio_sesion'] . "/" . $rol) . " ><strong>Dar Respuesta</strong> </a>";
 											}else{
 												echo "<p class='text-danger'>Falta asignar representante para este Sitio</p>";
 											}
-											echo "</td>";											
-										}
+																		
+
 										
 									}else{
 										echo "<strong>Respuesta: </strong>";
@@ -347,7 +349,7 @@ echo "<a href=" . base_url("report/responder_alerta/" . $lista['id_alerta'] . "/
 										
 //si no se acepta la alerta enotnces se crea enlace para poder aceptarla por parte del coordiandor, director o operador
 if($respuestas[0]['acepta']==2){
-		if(($userRol == 6 && $lista['fk_id_user_operador'] == $userID) || ($userRol == 3 && $lista['fk_id_user_coordinador'] == $userID) || $userRol == 2){						
+		if(($userRol == 6 && $lista['fk_id_user_operador'] == $userID) || ($userRol == 3 && $lista['fk_id_user_coordinador'] == $userID) || $userRol == 2 || $userRol == 1){						
 echo "<br><a href=" . base_url("report/update_alerta_notificacion/" . $respuestas[0]['id_registro'] . "/" . $rol) . " ><strong>Cambiar Respuesta</strong> </a>";
 		}
 }
