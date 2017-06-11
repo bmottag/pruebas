@@ -64,7 +64,7 @@ echo "----------------------------<br>";
 						$cabeceras  = 'MIME-Version: 1.0' . "\r\n";
 						$cabeceras .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 						$cabeceras .= 'To: ' . $user . '<' . $to . '>' . "\r\n";
-						$cabeceras .= 'From: ICFES <jelozanoo@gmail.com>' . "\r\n";
+						$cabeceras .= 'From: ICFES <administrador@operativoicfes.com>' . "\r\n";
 
 						//enviar correo
 						$success = mail($to, $subjet, $mensaje, $cabeceras);
