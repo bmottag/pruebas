@@ -460,7 +460,7 @@ class General_model extends CI_Model {
 				$this->db->join('sitios Y', 'Y.id_sitio = X.fk_id_sitio', 'INNER');
 				$this->db->join('param_regiones R', 'R.id_region = Y.fk_id_region', 'INNER');
 				$this->db->join('param_divipola D', 'D.mpio_divipola = Y.fk_mpio_divipola', 'INNER');
-				$this->db->join('param_organizaciones O', 'O.id_organizacion = Y.fk_id_organizacion', 'INNER');
+				$this->db->join('param_organizaciones O', 'O.id_organizacion = Y.fk_id_organizacion', 'LEFT');
 				$this->db->join('param_zonas Z', 'Z.id_zona = Y.fk_id_zona', 'INNER');
 				
 				//usuario representante

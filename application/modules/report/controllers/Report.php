@@ -24,8 +24,6 @@ class Report extends CI_Controller {
 	 */
     public function registros($tipoAlerta, $rol) 
 	{
-
-			$data["titulo"] = "<i class='fa fa-book fa-fw'></i> PAYROLL REPORT";
 			$data["rol"] = $rol;
 
 			switch ($tipoAlerta) {
