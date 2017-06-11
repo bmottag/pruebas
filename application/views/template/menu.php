@@ -56,6 +56,12 @@ if($userRol==2 || $userRol==1){ //SI es usuario ADMIN o DIRECTIVO
 					<a href="<?php echo base_url("report/searchBy"); ?>"><i class="fa fa-list-alt fa-fw"></i> Información Alertas - Representantes</a>
 				</li>
 				
+				<li class="divider"></li>
+
+				<li>
+					<a href="<?php echo base_url("public/reportico/run.php?execute_mode=MENU&project=ICFES"); ?>"><i class="fa fa-search fa-fw"></i> Ver Listados</a>
+				</li>
+				
 			</ul>
 		</li>
 <?php 
@@ -74,7 +80,7 @@ if($userRol==2 || $userRol==1){ //SI es usuario ADMIN o DIRECTIVO
 				
 				
 <?php 
-if($userRol==1){ //If it is an ADMIN user, show an special menu
+if($userRol==1){ //ADMIN
 ?>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -121,12 +127,6 @@ if($userRol==1){ //If it is an ADMIN user, show an special menu
 						</li>
 						
 						<li class="divider"></li>
-
-						<li>
-							<a href="<?php echo base_url("public/reportico/run.php?execute_mode=MENU&project=ICFES"); ?>"><i class="fa fa-search fa-fw"></i> Ver Listados</a>
-						</li>
-						
-						<li class="divider"></li>
 						
 						<li>
 							<a href="<?php echo base_url("admin/atencion_eliminar"); ?>"><i class="fa fa-ban fa-fw"></i> Eliminar Registros de la BD</a>
@@ -141,7 +141,7 @@ if($userRol==1){ //If it is an ADMIN user, show an special menu
 
 
 <?php 
-if($userRol==4){ 
+if($userRol==4){ //ROL DELEGADO
 ?>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
