@@ -39,6 +39,9 @@
 		 */
 		public function get_total_by($arrDatos) 
 		{		
+				//fecha para uscar las que ya se vencieron
+				$fechaActual = date('Y-m-d G:i:s');
+		
 				$idRegion = $this->input->post('region');				
 				$depto = $this->input->post('depto');
 				$mcpio = $this->input->post('mcpio');
@@ -72,6 +75,8 @@
 				$this->db->where('A.estado_alerta', 1); //ALERTAS ACTIVAS
 				$tipoMensaje = array(1, 2);//filtrar por alertas que se muestren en el APP
 				$this->db->where_in('A.tipo_mensaje', $tipoMensaje);	
+				
+				$this->db->where('A.fecha_fin <=', $fechaActual); //FECHA FINAL SEA MAYOR A LA FECHA ACTUAL
 
 				if (array_key_exists("rolAlerta", $arrDatos)) {
 					$this->db->where('A.fk_id_rol', $arrDatos["rolAlerta"]); //TIPO ALERTA
@@ -107,7 +112,10 @@
 				if($userRol==3) {
 					$this->db->where('Y.fk_id_user_coordinador', $this->session->id); //FILTRO POR ID DEL COORDINADOR
 				}				
-				
+				//FILTRO POR OPERADOR SI EL USUARIO DE SESION ES OPERADOR
+				if($userRol==6) {
+					$this->db->where('Y.fk_id_user_operador', $this->session->id); //FILTRO POR ID DEL OPERADOR
+				}
 
 
 				//$this->db->order_by('R.nombre_region, D.dpto_divipola_nombre, D.mpio_divipola_nombre', 'desc');
