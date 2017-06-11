@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2017-06-01 16:16:50
+<?php /* Smarty version 2.6.26, created on 2017-06-04 13:41:55
          compiled from admin.tpl */ ?>
 <?php if (! $this->_tpl_vars['REPORTICO_AJAX_CALLED']): ?>
 <?php if (! $this->_tpl_vars['EMBEDDED_REPORT']): ?>
@@ -222,7 +222,7 @@ $this->_sections['critno']['last']       = ($this->_sections['critno']['iteratio
 <div style="height: 78px" class="swAdminBanner">
 <div style="float: right;">
 <img height="78px" src="<?php echo $this->_tpl_vars['REPORTICO_URL_DIR']; ?>
-/images/reportico100.png"/>
+/images/logo.png"/>
 <div class="smallbanner">Version <a href="http://www.reportico.org/" target="_blank"><?php echo $this->_tpl_vars['REPORTICO_VERSION']; ?>
 </a></div>
 </div>

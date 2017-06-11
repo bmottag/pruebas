@@ -55,9 +55,9 @@ define('SW_DB_DATABASE', SW_FRAMEWORK_DB_DATABASE);
 else
 {
 define('SW_DB_DRIVER', SW_DB_TYPE);
-define('SW_DB_USER', 'root');
-define('SW_DB_PASSWORD', '');
-define('SW_DB_HOST', '127.0.0.1');
+define('SW_DB_USER', 'pruebas_icfes');
+define('SW_DB_PASSWORD', 'znMFI~gH!zU4');
+define('SW_DB_HOST', 'localhost');
 define('SW_DB_DATABASE', 'pruebas_icfes');
 }
 define('SW_DB_CONNECT_FROM_CONFIG', true);
