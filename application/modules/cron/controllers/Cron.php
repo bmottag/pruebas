@@ -19,8 +19,8 @@ class Cron extends MX_Controller {
 			
 
 
-			$subjet = "Alertas - Pruebas ICFES";				
-pr($infoAlerta);			
+			$subjet = "Alertas - Coltrol operativo ICFES";				
+
 if($infoAlerta){
 		foreach ($infoAlerta as $lista):					
 				
@@ -56,9 +56,7 @@ if($infoAlerta){
 						<p><strong>Administrador aplicativo de Control Operativo pruebas ICFES</strong></p>
 					</body>
 					</html>";
-echo $to . "<br>"; 
-echo $mensaje;
-echo "----------------------------<br>";
+
 					if($user){
 		
 						$cabeceras  = 'MIME-Version: 1.0' . "\r\n";
@@ -68,10 +66,6 @@ echo "----------------------------<br>";
 
 						//enviar correo
 						$success = mail($to, $subjet, $mensaje, $cabeceras);
-						
-						
-						
-						
 					}
 					
 		endforeach;
@@ -80,6 +74,59 @@ echo "----------------------------<br>";
 	}
 	
 	
+	/**
+	 * Controlador para enviar correo de ingreso al aplicativo por rol
+	 */
+	public function aplicativo($idRol)
+	{				
+			$this->load->model("general_model");
+			$arrParam = array(
+				"table" => "usuario",
+				"order" => "id_usuario",
+				"column" => "fk_id_rol",
+				"id" => $idRol
+			);
+			$information = $this->general_model->get_basic_search($arrParam);
+			
+			$subjet = "Ingreso aplicativo - Control operativo ICFES";
+
+			if($information){
+				foreach ($information as $lista):					
+					
+					$user = $lista["nombres_usuario"] . " " . $lista["apellidos_usuario"];
+					$to = $lista["email"];
+
+					//mensaje del correo
+					$msj = "<p>Los datos para ingresar al APP de Control Operativo Pruebas ICFES, son los siguientes:</p>";
+					$msj .= "<br><strong>Usuario: </strong>" . $lista["numero_documento"];
+					$msj .= "<br><strong>Contraseña: </strong>" . $lista["clave"];
+					$msj .= "<br><br><strong><a href='" . base_url() . "'>Enlace Aplicación </a></strong><br>";
+
+					
+					$mensaje = "<html>
+					<head>
+					  <title> $subjet </title>
+					</head>
+					<body>
+						<p>Señor(a)	$user:</p>
+						<p>$msj</p>
+						<p>Cordialmente,</p>
+						<p><strong>Administrador aplicativo de Control Operativo pruebas ICFES</strong></p>
+					</body>
+					</html>";
+		
+					$cabeceras  = 'MIME-Version: 1.0' . "\r\n";
+					$cabeceras .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+					$cabeceras .= 'To: ' . $user . '<' . $to . '>' . "\r\n";
+					$cabeceras .= 'From: ICFES <administrador@operativoicfes.com>' . "\r\n";
+
+					//enviar correo
+					$success = mail($to, $subjet, $mensaje, $cabeceras);
+						
+				endforeach;
+			}
+	}
+
 	
 }
 
