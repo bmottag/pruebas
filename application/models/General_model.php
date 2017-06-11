@@ -226,7 +226,7 @@ class General_model extends CI_Model {
 					$this->db->where('S.fk_id_user_operador', $arrDatos["idOperador"]);
 				}
 				
-				$this->db->order_by('nombre_region, dpto_divipola_nombre, mpio_divipola_nombre', 'asc');
+				$this->db->order_by('nombre_region, dpto_divipola_nombre, mpio_divipola_nombre, S.nombre_sitio', 'asc');
 				$query = $this->db->get('sitios S');
 
 				if ($query->num_rows() > 0) {
