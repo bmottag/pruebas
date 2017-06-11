@@ -378,9 +378,18 @@ class General_model extends CI_Model {
 				//ALERTA
 				$this->db->join('alertas A', 'A.fk_id_sesion = S.id_sesion', 'INNER');
 				
-				if (array_key_exists("rol", $arrDatos)) {
-					$this->db->where('Y.fk_id_user_'.$arrDatos["rol"], $this->session->id); //FILTRO POR ID DEL COORDINADOR o del OPERADOR
+				
+				//FILTRO POR COORDINADOR SI EL USUARIO DE SESION ES COORDINADOR
+				$userRol = $this->session->rol;
+				if($userRol==3) {
+					$this->db->where('Y.fk_id_user_coordinador', $this->session->id); //FILTRO POR ID DEL COORDINADOR
+				}				
+				//FILTRO POR OPERADOR SI EL USUARIO DE SESION ES OPERADOR
+				if($userRol==6) {
+					$this->db->where('Y.fk_id_user_operador', $this->session->id); //FILTRO POR ID DEL OPERADOR
 				}
+				
+				
 				$this->db->where('A.estado_alerta', 1); //ALERTAS ACTIVAS
 				$this->db->where('A.fk_id_rol', 4); //ALERTAS QUE SON PARA DELEGADO
 				

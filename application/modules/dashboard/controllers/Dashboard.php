@@ -254,8 +254,7 @@ class Dashboard extends MX_Controller {
 			
 //se buscan las alertas INFORMATIVAS vencidas que tienen el COORDINADOR a cargo			
 			$arrParam = array(
-							"tipoAlerta" => 1,
-							"rol" => "coordinador"
+							"tipoAlerta" => 1
 			);
 			$infoAlertaVencidaInformativa = $this->general_model->get_alertas_vencidas_by($arrParam);
 			
@@ -281,8 +280,7 @@ class Dashboard extends MX_Controller {
 
 //se buscan las alertas NOTIFICACION vencidas que tienen el COORDINADOR a cargo			
 			$arrParam = array(
-							"tipoAlerta" => 2,
-							"rol" => "coordinador"
+							"tipoAlerta" => 2
 			);
 			$infoAlertaVencidaNotificacion = $this->general_model->get_alertas_vencidas_by($arrParam);
 
@@ -330,8 +328,7 @@ class Dashboard extends MX_Controller {
 			
 //se buscan las alertas CONSOLIDACION vencidas que tienen el COORDINADOR a cargo
 			$arrParam = array(
-							"tipoAlerta" => 3,
-							"rol" => "coordinador"
+							"tipoAlerta" => 3
 			);
 			$infoAlertaVencidaConsolidacion = $this->general_model->get_alertas_vencidas_by($arrParam);
 			
