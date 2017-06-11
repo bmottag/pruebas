@@ -403,6 +403,10 @@
 					$this->db->where('D.fk_id_coordinador_mcpio', $userID);
 				}
 				
+				if ($userRol==6) {
+					$this->db->where('D.fk_id_operador_mcpio', $userID); //FILTRO POR OPERADOR
+				}
+				
 				if ($sesion && $sesion != "") {
 					$this->db->where('X.fk_id_sesion', $sesion); //FILTRO POR SESION
 				}
