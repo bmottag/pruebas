@@ -552,7 +552,7 @@ class Dashboard extends MX_Controller {
 			/**
 			 * Esta vista solo es para ADMINISTRADORES Y DIRECTIOVOS
 			 */
-			if($userRol!=2){
+			if($userRol>2){
 				show_error('ERROR!!! - You are in the wrong place.');
 			}
 			
