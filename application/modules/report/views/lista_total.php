@@ -377,7 +377,7 @@ $(document).ready(function() {
 	$('#dataTables').DataTable({
 		responsive: true,
 		order: false,
-		"pageLength": 25
+		"pageLength": 100
 	});
 });
 </script>
