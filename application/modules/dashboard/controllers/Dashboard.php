@@ -737,7 +737,7 @@ class Dashboard extends MX_Controller {
 			
 			//consultar informacion de la alerta
 			$arrParam = array("idAlerta" => $idAlerta);
-			$infoAlerta = $this->specific_model->get_info_alerta($arrParam);
+			$data['infoAlerta'] = $this->specific_model->get_info_alerta($arrParam);
 				
 
 			//se buscan las alertas INFORMATIVAS que se tienen el OPERADOR a cargo
@@ -749,7 +749,7 @@ class Dashboard extends MX_Controller {
 			
 			
 			$data["rol"] = $rol;//se pasa el rol del operador o del coordinador
-			$data["view"] = "lista_respuestas_faltantes";
+			$data["view"] = "lista_respuestas_faltantes_por_alerta";
 						
 			$this->load->view("layout", $data);
 	}
