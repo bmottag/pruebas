@@ -5,7 +5,7 @@
 		location.reload(true)
 	}
 
-	setInterval('reloadPage()','30000');//30 segundos
+	setInterval('reloadPage()','40000');//40 segundos
 </script>
 
 <?php
@@ -185,7 +185,7 @@ if($infoAlerta["fk_id_tipo_alerta"] == 1)//INFORMATIVA
 				<div class="col-lg-12">	
 					<div class="alert alert-danger">
 						<strong>Mensaje Alerta: </strong><?php echo $infoAlerta['mensaje_alerta']; ?><br>
-						<strong>Tipo de Alerta: </strong>Alerta informativa<br><br>
+						<strong>Tipo de Alerta: </strong>ALERTA INFORMATIVA<br><br>
 
 						<p>
 							<strong>Conteo de respuestas</strong>
@@ -285,7 +285,7 @@ if($infoAlerta["fk_id_tipo_alerta"] == 2)//NOTIFICACION
 				<div class="col-lg-12">	
 					<div class="alert alert-warning">
 						<strong>Mensaje Alerta: </strong><?php echo $infoAlerta['mensaje_alerta']; ?><br>
-						<strong>Tipo de Alerta: </strong>Alerta de notificación<br><br>
+						<strong>Tipo de Alerta: </strong>ALERTA DE NOTIFICACIÓN<br><br>
 						
 						<p>
 							<strong>Conteo de respuestas</strong>
@@ -382,7 +382,7 @@ if($infoAlerta["fk_id_tipo_alerta"] == 3)//CONSOLIDACION
 				<div class="col-lg-12">	
 					<div class="alert alert-success ">
 						<strong>Mensaje Alerta: </strong><?php echo $infoAlerta['mensaje_alerta']; ?><br>
-						<strong>Tipo de Alerta: </strong>Alerta de consolidación<br><br>
+						<strong>Tipo de Alerta: </strong>ALERTA DE CONSOLIDACIÓN<br><br>
 
 						<p>
 							<strong>Conteo de respuestas</strong>
@@ -760,7 +760,7 @@ $( document ).ready( function () {
 				<div class="row">
 					<div class="col-lg-4">
 					<div class="alert alert-danger">
-						<strong>Alerta Informativa</strong><br>
+						<strong>ALERTA INFORMATIVA</strong><br>
 						<?php
 							$total = $contadorInformativaSi + $contadorInformativaNo;
 							if($total != 0){
@@ -779,8 +779,8 @@ $( document ).ready( function () {
 					</div></div>
 					
 					<div class="col-lg-4">
-					<div class="alert alert-danger">
-						<strong>Alerta de Notificación</strong><br>
+					<div class="alert alert-warning">
+						<strong>ALERTA DE NOTIFICACIÓN</strong><br>
 						<?php
 							$contadorNotificacionNo = $contadorNotificacionContestaron - $contadorNotificacionSi;
 							$total = $contadorNotificacionNoContestaron + $contadorNotificacionSi + $contadorNotificacionNo;
@@ -805,8 +805,8 @@ $( document ).ready( function () {
 					</div></div>
 					
 					<div class="col-lg-4">
-					<div class="alert alert-danger">
-						<strong>Alerta de Consolidación</strong><br>
+					<div class="alert alert-success">
+						<strong>ALERTA DE CONSOLIDACIÓN</strong><br>
 						<?php 
 							$totalConsolidado = $contadorConsolidacionSi + $contadorConsolidacionNo; 
 							if($totalConsolidado != 0){
