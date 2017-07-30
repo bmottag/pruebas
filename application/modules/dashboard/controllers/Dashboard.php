@@ -723,6 +723,37 @@ class Dashboard extends MX_Controller {
 			$this->load->view("layout", $data);
 	}
 	
+	/**
+	 * Lista de todas las alertas para una alerta especifica
+	 * Fltrada para el operador o coordinador de sesion
+	 * @since 29/7/2017
+	 */
+	public function alerta_especifica($idAlerta, $rol)
+	{
+			$this->load->model("specific_model");
+			$this->load->model("general_model");
+			
+			
+			
+			//consultar informacion de la alerta
+			$arrParam = array("idAlerta" => $idAlerta);
+			$infoAlerta = $this->specific_model->get_info_alerta($arrParam);
+				
+
+			//se buscan las alertas INFORMATIVAS que se tienen el OPERADOR a cargo
+			$data['infoAlertaVencida'] = $this->general_model->get_alertas_vencidas_by($arrParam);
+			
+			
+			
+			
+			
+			
+			$data["rol"] = $rol;//se pasa el rol del operador o del coordinador
+			$data["view"] = "lista_respuestas_faltantes";
+						
+			$this->load->view("layout", $data);
+	}
+	
 	
 }
 

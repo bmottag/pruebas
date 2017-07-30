@@ -116,8 +116,8 @@ if(!$infoMunicipiosOperador){
 			<div class="panel panel-primary">
 			
 				<div class="panel-heading">
-					<i class="fa fa-home fa-fw"></i> <strong>SESIÓN: </strong><?php echo $lista["nombre_prueba"] . " / " . $lista["nombre_grupo_instrumentos"] . " / " . $lista["fecha"] . " / " . $lista["sesion_prueba"]; ?>
-					<br><strong>Total sitios: </strong><?php echo $conteoSitios; ?>
+					<i class="fa fa-arrow-right fa-fw"></i> <strong>SESIÓN: </strong><?php echo $lista["nombre_prueba"] . " / " . $lista["nombre_grupo_instrumentos"] . " / " . $lista["fecha"] . " / " . $lista["sesion_prueba"]; ?>
+					<br><i class="fa fa-arrow-right fa-fw"></i><strong>Total sitios: </strong><?php echo $conteoSitios; ?>
 				</div>
 				
 				<!-- /.panel-heading -->
@@ -192,7 +192,7 @@ if($infoAlerta["fk_id_tipo_alerta"] == 1)//INFORMATIVA
 							<span class="pull-right text-muted"></span>
 						</p>
 						
-						<a href="<?php echo base_url("dashboard/respuesta_coordinador/3/operador");?>" >
+						<a href="<?php echo base_url("dashboard/alerta_especifica/" . $lista['id_alerta'] . "/operador");?>" >
 							<div class="progress">
 								<div class="progress-bar progress-bar-info" role="progressbar" style="width:<?php echo $porcentajeSi; ?>%">
 								Aceptaron <?php echo $contadorInformativaSi . " (" . $porcentajeSi . "%)"; ?>
@@ -292,7 +292,7 @@ if($infoAlerta["fk_id_tipo_alerta"] == 2)//NOTIFICACION
 							<span class="pull-right text-muted"></span>
 						</p>
 						
-						<a href="<?php echo base_url("dashboard/respuesta_coordinador/3/operador");?>" >
+						<a href="<?php echo base_url("dashboard/alerta_especifica/" . $lista['id_alerta'] . "/operador");?>" >
 							<div class="progress">
 								<div class="progress-bar progress-bar-info" role="progressbar" style="width:<?php echo $porcentajeSiContestaron; ?>%">
 								Contestaron <?php echo $contadorNotificacionContestaron . " (" . $porcentajeSiContestaron . "%)"; ?>
@@ -389,7 +389,7 @@ if($infoAlerta["fk_id_tipo_alerta"] == 3)//CONSOLIDACION
 							<span class="pull-right text-muted"></span>
 						</p>
 						
-						<a href="<?php echo base_url("dashboard/respuesta_coordinador/3/operador");?>" >
+						<a href="<?php echo base_url("dashboard/alerta_especifica/" . $lista['id_alerta'] . "/operador");?>" >
 							<div class="progress">
 								<div class="progress-bar progress-bar-info" role="progressbar" style="width:<?php echo $porcentajeSi; ?>%">
 								Contestaron <?php echo $contadorConsolidacionSi . " (" . $porcentajeSi . "%)"; ?>
