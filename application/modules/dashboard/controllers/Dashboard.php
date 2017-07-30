@@ -449,7 +449,7 @@ class Dashboard extends MX_Controller {
 //conteo de los sitios segun el filtro
 			$data['conteoSitios'] = $this->general_model->get_numero_sitios_por_filtro_by_coordinador($arrParam);
 //conteo de citados			
-			$data['conteoCitados'] = $this->general_model->get_numero_citados_por_filtro_by_coordinnador($arrParam);
+			$data['conteoCitados'] = $this->general_model->get_numero_citados_por_filtro_by_coordinnador();
 
 			
 			
@@ -533,7 +533,29 @@ class Dashboard extends MX_Controller {
 			
 			
 			
-			
+
+			 
+			 
+			/**
+			 * INICIO
+			 * Listado de alertas
+			 * @since 28/7/2017
+			 */			 
+			 
+			 //alertas para el coordinador en sesion
+			$this->load->model("specific_model");
+			$data["listadoSesiones"] = $this->specific_model->get_sesiones_operador();
+		
+			/**
+			 * FIN
+			 */				 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
 			
 			
 			

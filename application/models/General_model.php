@@ -403,6 +403,10 @@ class General_model extends CI_Model {
 				if (array_key_exists("tipoAlerta", $arrDatos)) {
 					$this->db->where('A.fk_id_tipo_alerta', $arrDatos["tipoAlerta"]); //filtro por tipo de alerta
 				}
+				
+				if (array_key_exists("idAlerta", $arrDatos)) {
+					$this->db->where('A.id_alerta', $arrDatos["idAlerta"]); //id alerta
+				}
 			
 				$query = $this->db->get('sitios Y');
 
@@ -814,7 +818,7 @@ class General_model extends CI_Model {
 		 * Conteo de citados para el reporte general
 		 * @since 26/5/2017
 		 */
-		public function get_numero_citados_por_filtro_by_coordinnador() 
+		public function get_numero_citados_por_filtro_by_coordinnador($idSesion="") 
 		{		
 				$userRol = $this->session->userdata("rol");
 				$userID = $this->session->userdata("id");
@@ -828,8 +832,10 @@ class General_model extends CI_Model {
 				$sql.= " FROM sitio_sesion X ";
 				$sql.= "	INNER JOIN sesiones S ON S.id_sesion = X.fk_id_sesion 
 							INNER JOIN sitios Y ON Y.id_sitio = X.fk_id_sitio 
-							INNER JOIN param_divipola D ON D.mpio_divipola = Y.fk_mpio_divipola";			
-				if ($sesion && $sesion != "") {
+							INNER JOIN param_divipola D ON D.mpio_divipola = Y.fk_mpio_divipola";
+				if ($idSesion != "") {
+					$sql.= " WHERE X.fk_id_sesion = '$idSesion'"; //FILTRO POR SESION
+				}elseif ($sesion && $sesion != "") {
 					$sql.= " WHERE X.fk_id_sesion = '$sesion'"; //FILTRO POR SESION
 				}
 				
@@ -890,8 +896,7 @@ class General_model extends CI_Model {
 				$query = $this->db->query($sql);
 				return $query->row_array();
 		}
-
-
+		
 
 		
 
