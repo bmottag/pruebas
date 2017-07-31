@@ -585,7 +585,7 @@ class Report extends CI_Controller {
 				//conteo de los sitios segun el filtro
 				$data['conteoSitios'] = $this->general_model->get_numero_sitios_por_filtro_by_coordinador();
 				
-				$data['conteoCitados'] = $this->general_model->get_numero_citados_por_filtro_by_coordinnador($arrParam);
+				$data['conteoCitados'] = $this->general_model->get_numero_citados_por_filtro_by_coordinnador();
 //pr($data['conteoCitados']);
 //echo$this->db->last_query();exit;
 				
@@ -678,7 +678,7 @@ class Report extends CI_Controller {
 				}
 
 
-				$data["view"] = "lista_total";
+				$data["view"] = "lista_total_coordinador";
 			}
 			
 			$this->load->view("layout", $data);
