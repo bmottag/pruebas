@@ -100,6 +100,12 @@ class Specific_model extends CI_Model {
 		{		
 				//fecha para buscar las que ya se vencieron
 				$fechaActual = date('Y-m-d G:i:s');	
+				
+				//si es una consulta para el reporte con los datos filtrados por post
+				$sesion = $this->input->post('sesion');
+				$alerta = $this->input->post('alerta');
+				$depto = $this->input->post('depto');
+				$mcpio = $this->input->post('mcpio');
 
 				$this->db->select('distinct(id_alerta)');
 
@@ -114,6 +120,22 @@ class Specific_model extends CI_Model {
 				
 				if (array_key_exists("idSesion", $arrDatos)) {
 					$this->db->where('S.id_sesion', $arrDatos["idSesion"]); //filtro por SESION
+				}
+				
+				if ($sesion && $sesion != "") {
+					$this->db->where('S.id_sesion', $sesion); //filtro por SESION
+				}
+				
+				if ($alerta && $alerta != "") {
+					$this->db->where('A.id_alerta', $alerta); //FILTRO POR ALERTA
+				}
+				
+				if ($depto && $depto != "") {
+					$this->db->where('Y.fk_dpto_divipola', $depto); //FILTRO POR DEPARTAMENTO
+				}
+			
+				if ($mcpio && $mcpio != "") {
+					$this->db->where('Y.fk_mpio_divipola', $mcpio); //FILTRO POR MUNICIPIO
 				}
 				
 				//FILTRO POR COORDINADOR SI EL USUARIO DE SESION ES COORDINADOR
