@@ -57,49 +57,6 @@ if ($retornoError) {
 ?> 
 
 
-<!-- INFORMACION DEL SITIO PARA EL DELEGADO SI EXISTE INFORMAION -->
-<?php 
-//si no esta asignado para un sitio le muestro mensaje
-if(!$infoMunicipiosOperador){ 
-?>
-	<div class="alert alert-info">
-		Por favor contactarse con el Encargado, usted no tiene nada asignado.
-	</div>
-<?php
-}else{
-	
-
-?>
-
-	<div class="alert alert-info">
-		Usted esta asignado como <strong>OPERADOR</strong> para los siguientes MUNICIPIOS:
-	</div>
-
-	<div class="row">
-	<?php
-		foreach($infoMunicipiosOperador as $lista):
-	?>
-	<div class="col-md-4">
-		<div class="alert alert-info">
-				<strong>Departamento: </strong><?php echo $lista['dpto_divipola_nombre']; ?>
-				</br><strong> Municipio: </strong><?php echo $lista['mpio_divipola_nombre']; ?>		
-		</div>
-	</div>
-
-	<?php
-		endforeach;
-	?>
-	</div>
-
-<?php } ?>
-<!-- INFORMACION DEL SITIO PARA EL DELEGADO SI EXISTE INFORMAION -->
-
-
-
-
-
-
-
 <!--INFO DE LAS SESIONES -->
 <?php 
 	if($listadoSesiones)
@@ -194,10 +151,10 @@ if($infoAlerta["fk_id_tipo_alerta"] == 1)//INFORMATIVA
 						
 						<a href="<?php echo base_url("dashboard/alerta_especifica/" . $lista['id_alerta'] . "/operador");?>" >
 							<div class="progress">
-								<div class="progress-bar progress-bar-info" role="progressbar" style="width:<?php echo $porcentajeSi; ?>%">
+								<div class="progress-bar progress-bar-info" role="progressbar" style="width:50%">
 								Aceptaron <?php echo $contadorInformativaSi . " (" . $porcentajeSi . "%)"; ?>
 								</div>
-								<div class="progress-bar progress-bar-danger" role="progressbar" style="width:<?php echo $porcentajeNo; ?>%">
+								<div class="progress-bar progress-bar-danger" role="progressbar" style="width:50%">
 								No contestaron <?php echo $contadorInformativaNo . " (" . $porcentajeNo . "%)"; ?>
 								</div>
 							</div> 
@@ -294,10 +251,10 @@ if($infoAlerta["fk_id_tipo_alerta"] == 2)//NOTIFICACION
 						
 						<a href="<?php echo base_url("dashboard/alerta_especifica/" . $lista['id_alerta'] . "/operador");?>" >
 							<div class="progress">
-								<div class="progress-bar progress-bar-info" role="progressbar" style="width:<?php echo $porcentajeSiContestaron; ?>%">
+								<div class="progress-bar progress-bar-info" role="progressbar" style="width:50%">
 								Contestaron <?php echo $contadorNotificacionContestaron . " (" . $porcentajeSiContestaron . "%)"; ?>
 								</div>
-								<div class="progress-bar progress-bar-warning" role="progressbar" style="width:<?php echo $porcentajeNoContestaron; ?>%">
+								<div class="progress-bar progress-bar-warning" role="progressbar" style="width:50%">
 								No contestaron <?php echo $contadorNotificacionNoContestaron . " (" . $porcentajeNoContestaron . "%)"; ?>
 								</div>
 							</div> 
@@ -305,10 +262,10 @@ if($infoAlerta["fk_id_tipo_alerta"] == 2)//NOTIFICACION
 
 						
 							<div class="progress">
-								<div class="progress-bar progress-bar-info" role="progressbar" style="width:<?php echo $porcentajeSi; ?>%">
+								<div class="progress-bar progress-bar-success" role="progressbar" style="width:50%">
 								Aceptaron <?php echo $contadorNotificacionSi . " (" . $porcentajeSi . "%)"; ?>
 								</div>
-								<div class="progress-bar progress-bar-danger" role="progressbar" style="width:<?php echo $porcentajeNo; ?>%">
+								<div class="progress-bar progress-bar-danger" role="progressbar" style="width:50%">
 								No aceptaron <?php echo $contadorNotificacionNo . " (" . $porcentajeNo . "%)"; ?>
 								</div>
 							</div> 
@@ -369,8 +326,8 @@ if($infoAlerta["fk_id_tipo_alerta"] == 3)//CONSOLIDACION
 
 			if($conteoCitadosSesion['citados'] !=0){
 				$presentes =  $conteoCitadosSesion['citados'] - $conteoCitadosSesion['ausentes'];
-				$porcentajePresentes = round(($presentes * 100)/$conteoCitadosSesion['citados']); 
-				$porcentajeAusentes = round(($conteoCitadosSesion['ausentes'] * 100)/$conteoCitadosSesion['citados']); 
+				$porcentajePresentes = round(($presentes * 100)/$conteoCitadosSesion['citados'],1); 
+				$porcentajeAusentes = round(($conteoCitadosSesion['ausentes'] * 100)/$conteoCitadosSesion['citados'],1); 
 			}else{
 				$presentes =  0;
 				$porcentajePresentes = 0; 
@@ -389,27 +346,32 @@ if($infoAlerta["fk_id_tipo_alerta"] == 3)//CONSOLIDACION
 							<span class="pull-right text-muted"></span>
 						</p>
 						
-						<a href="<?php echo base_url("dashboard/alerta_especifica/" . $lista['id_alerta'] . "/operador");?>" >
+						
 							<div class="progress">
-								<div class="progress-bar progress-bar-info" role="progressbar" style="width:<?php echo $porcentajeSi; ?>%">
+							
+<a href="<?php echo base_url("dashboard/alerta_especifica/" . $lista['id_alerta'] . "/operador/contestaron");?>" >							
+								<div class="progress-bar progress-bar-info" role="progressbar" style="width:50%">
 								Contestaron <?php echo $contadorConsolidacionSi . " (" . $porcentajeSi . "%)"; ?>
 								</div>
-								<div class="progress-bar progress-bar-danger" role="progressbar" style="width:<?php echo $porcentajeNo; ?>%">
+</a>
+<a href="<?php echo base_url("dashboard/alerta_especifica/" . $lista['id_alerta'] . "/operador/NO");?>" >
+								<div class="progress-bar progress-bar-warning" role="progressbar" style="width:50%">
 								No contestaron <?php echo $contadorConsolidacionNo . " (" . $porcentajeNo . "%)"; ?>
 								</div>
+</a>
 							</div> 
 						</a>	
 						
 						<p>
-							<strong>Número total de citados</strong>
-							<span class="pull-right text-muted"><?php echo $conteoCitadosSesion['citados']; ?></span>
+							<strong>Número total de citados
+							<span class="pull-right"><?php echo number_format($conteoCitadosSesion['citados']); ?></span></strong>
 						</p>							
 							<div class="progress">
-								<div class="progress-bar progress-bar-info" role="progressbar" style="width:<?php echo $porcentajePresentes; ?>%">
-								Presentes <?php echo $presentes . " (" . $porcentajePresentes . "%)"; ?>
+								<div class="progress-bar progress-bar-success" role="progressbar" style="width:50%">
+								Presentes <?php echo number_format($presentes) . " (" . $porcentajePresentes . "%)"; ?>
 								</div>
-								<div class="progress-bar progress-bar-danger" role="progressbar" style="width:<?php echo $porcentajeAusentes; ?>%">
-								Ausentes <?php echo $conteoCitadosSesion['ausentes'] . " (" . $porcentajeAusentes . "%)"; ?> 
+								<div class="progress-bar progress-bar-danger" role="progressbar" style="width:50%">
+								Ausentes <?php echo number_format($conteoCitadosSesion['ausentes']) . " (" . $porcentajeAusentes . "%)"; ?> 
 								</div>
 							</div> 
 							
@@ -718,234 +680,7 @@ $( document ).ready( function () {
 <!--FIN ALERTA -->
 	</div>
 
-
-<!-- INICIO NOTIFICACIONES QUE NO SE LE HAN DADO RESPUESTA -->
-<?php
-	if($contadorInformativaNo!=0)
-	{ 
-		echo "<div class='alert alert-danger'>
-					<strong>Atención</strong>, hay <strong>" . $contadorInformativaNo .  "</strong> Alertas Informativas sin dar respuesta.
-					<a href=". base_url("dashboard/respuesta_coordinador/1/operador") ." >RESPONDER </a>
-				</div>";
-	}
-	
-
-	if($contadorNotificacion!=0)
-	{ 
-		echo "<div class='alert alert-danger'>
-					<strong>Atención</strong>, hay <strong>" . $contadorNotificacion .  "</strong> Alertas de Notificación sin dar respuesta.
-					<a href=". base_url("dashboard/respuesta_coordinador/2/operador") ." >RESPONDER </a>
-				</div>";
-	}
-
-
-	if($contadorConsolidacionNo!=0)
-	{ 
-		echo "<div class='alert alert-danger'>
-					<strong>Atención</strong>, hay <strong>" . $contadorConsolidacionNo .  "</strong> Alertas de Consolidación sin dar respuesta.
-					<a href=". base_url("dashboard/respuesta_coordinador/3/operador") ." >RESPONDER </a>
-				</div>";
-	}
-	
-?>
-<!-- INICIO NOTIFICACIONES QUE NO SE LE HAN DADO RESPUESTA -->
-
-
-
-
-
-
-
-
-				<div class="row">
-					<div class="col-lg-4">
-					<div class="alert alert-danger">
-						<strong>ALERTA INFORMATIVA</strong><br>
-						<?php
-							$total = $contadorInformativaSi + $contadorInformativaNo;
-							if($total != 0){
-								$porcentajeSi = round((($contadorInformativaSi * 100)/$total), 1);
-								$porcentajeNo = round((($contadorInformativaNo * 100)/$total), 1);
-							}else{
-								$porcentajeSi = 0;
-								$porcentajeNo = 0;
-							}
-						?>
-						<?php echo $rol_busqueda; ?> que aceptaron: <strong><?php echo $contadorInformativaSi . " (" . $porcentajeSi . "%)"; ?> </strong>
-						<br><?php echo $rol_busqueda; ?> que no contestaron: <strong><?php echo $contadorInformativaNo . " (" . $porcentajeNo . "%)"; ?> </strong>
-						
-
-					
-					</div></div>
-					
-					<div class="col-lg-4">
-					<div class="alert alert-warning">
-						<strong>ALERTA DE NOTIFICACIÓN</strong><br>
-						<?php
-							$contadorNotificacionNo = $contadorNotificacionContestaron - $contadorNotificacionSi;
-							$total = $contadorNotificacionNoContestaron + $contadorNotificacionSi + $contadorNotificacionNo;
-							$totalNotificacion = $contadorNotificacionSi + $contadorNotificacionNo;
-							
-							if($total != 0){
-								$porcentajeNoContestaron = round((($contadorNotificacionNoContestaron * 100)/$total),1);
-								$porcentajeSi = round((($contadorNotificacionSi * 100)/$total),1);
-								$porcentajeNo = round((($contadorNotificacionNo * 100)/$total),1);
-							}else{
-								$porcentajeNoContestaron = 0;
-								$porcentajeSi = 0;
-								$porcentajeNo = 0;
-							}
-						?>
-						<?php echo $rol_busqueda; ?> que no contestaron: <strong><?php echo $contadorNotificacionNoContestaron . " (" . $porcentajeNoContestaron . "%)"; ?> </strong>
-						<br><?php echo $rol_busqueda; ?> que aceptaron: <strong><?php echo $contadorNotificacionSi . " (" . $porcentajeSi . "%)"; ?> </strong>
-						<br><?php echo $rol_busqueda; ?> que no aceptaron: <strong><?php echo $contadorNotificacionNo . " (" . $porcentajeNo . "%)"; ?> </strong>
-						
-
-					
-					</div></div>
-					
-					<div class="col-lg-4">
-					<div class="alert alert-success">
-						<strong>ALERTA DE CONSOLIDACIÓN</strong><br>
-						<?php 
-							$totalConsolidado = $contadorConsolidacionSi + $contadorConsolidacionNo; 
-							if($totalConsolidado != 0){
-								$porcentajeSi = round((($contadorConsolidacionSi * 100)/$totalConsolidado),1);
-								$porcentajeNo = round((($contadorConsolidacionNo * 100)/$totalConsolidado),1);
-							}else{
-								$porcentajeSi = 0;
-								$porcentajeNo = 0;
-							}
-						?>
-						Total Sitios: <strong><?php echo $conteoSitios; ?> </strong><br>
-						<?php echo $rol_busqueda; ?> que contestaron: <strong><?php echo $contadorConsolidacionSi . " (" . $porcentajeSi . "%)"; ?> </strong>
-						<br><?php echo $rol_busqueda; ?> que no contestaron: <strong><?php echo $contadorConsolidacionNo . " (" . $porcentajeNo . "%)"; ?> </strong>
-						
-						<?php 
-							if($conteoCitados['citados'] !=0){
-								$presentes =  $conteoCitados['citados'] - $conteoCitados['ausentes'];
-								$porcentajePresentes = round(($presentes * 100)/$conteoCitados['citados']); 
-								$porcentajeAusentes = round(($conteoCitados['ausentes'] * 100)/$conteoCitados['citados']); 
-							}else{
-								$presentes =  0;
-								$porcentajePresentes = 0; 
-								$porcentajeAusentes = 0;
-							}
-						
-						?>
-						<br>Número total de citados: <strong><?php echo $conteoCitados['citados']; ?> </strong>
-						<br>Número total de presentes: <strong><?php echo $presentes . " (" . $porcentajePresentes . "%)"; ?> </strong>
-						<br>Número total de ausentes: <strong><?php echo $conteoCitados['ausentes'] . " (" . $porcentajeAusentes . "%)"; ?> </strong>
-
-
-						
-					</div></div>
-				</div>
-
-
-
-
-
-
-
-	<!-- /.row -->
-	<div class="row">
-		<div class="col-lg-3 col-md-6">
-			<div class="panel panel-primary">
-				<div class="panel-heading">
-					<div class="row">
-						<div class="col-xs-3">
-							<i class="fa fa-home fa-5x"></i>
-						</div>
-						<div class="col-xs-9 text-right">
-							<div class="huge"><?php echo $noSitios; ?></div>
-							<div>Sitios</div>
-						</div>
-					</div>
-				</div>
-				
-				<a href="#anclaPruebas">
-					<div class="panel-footer">
-						<span class="pull-left">Lista de Sitios</span>
-						<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-						<div class="clearfix"></div>
-					</div>
-				</a>
-			</div>
-		</div>				
-
-		<div class="col-lg-3 col-md-6">
-			<div class="panel panel-red">
-				<div class="panel-heading">
-					<div class="row">
-						<div class="col-xs-3">
-							<i class="fa fa-info fa-5x"></i>
-						</div>
-						<div class="col-xs-9 text-right">
-							<div class="huge"><?php echo $contadorInformativaSi; ?></div>
-							<div>Número de respuestas Alerta Informativa</div>
-						</div>
-					</div>
-				</div>
-				<a href="<?php echo base_url("report/registros/1/coordinador"); ?>">
-					<div class="panel-footer">
-						<span class="pull-left"> Lista Registros <br>Alerta Informativa </span>
-						<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-						<div class="clearfix"></div>
-					</div>
-				</a>
-			</div>
-		</div>
 		
-		<div class="col-lg-3 col-md-6">
-			<div class="panel panel-yellow">
-				<div class="panel-heading">
-					<div class="row">
-						<div class="col-xs-3">
-							<i class="fa fa-thumb-tack fa-5x"></i>
-						</div>
-						<div class="col-xs-9 text-right">
-							<div class="huge"><?php echo $totalNotificacion; ?></div>
-							<div>Número de respuestas Alerta Notificación</div>
-						</div>
-					</div>
-				</div>
-				<a href="<?php echo base_url("report/registros/2/coordinador"); ?>">
-					<div class="panel-footer">
-						<span class="pull-left">Lista Registros <br>Alerta Notificación </span>
-						<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-						<div class="clearfix"></div>
-					</div>
-				</a>
-			</div>
-		</div>	
-
-		<div class="col-lg-3 col-md-6">
-			<div class="panel panel-green">
-				<div class="panel-heading">
-					<div class="row">
-						<div class="col-xs-3">
-							<i class="fa fa-crosshairs fa-5x"></i>
-						</div>
-						<div class="col-xs-9 text-right">
-							<div class="huge"><?php echo $contadorConsolidacionSi; ?></div>
-							<div>Número de respuestas Alerta Consolidación</div>
-						</div>
-					</div>
-				</div>
-				<a href="<?php echo base_url("report/registros/3/coordinador"); ?>">
-					<div class="panel-footer">
-						<span class="pull-left">Lista Registros <br>Alerta Consolidación</span>
-						<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-						<div class="clearfix"></div>
-					</div>
-				</a>
-			</div>
-		</div>		
-	</div>
-				
-				
-				
 
 
 

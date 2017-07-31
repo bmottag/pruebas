@@ -397,12 +397,9 @@ class Dashboard extends MX_Controller {
 			$arrParam = array('idOperador' => $userID);
 			$data['infoSitios'] = $this->general_model->get_sitios($arrParam);
 	/**
-	 * SI es operador busco los municipios en los que esta asignado
+	 * ACA SOLO PUEDE INGRESAR EL USUARIO OPERADOR
 	 */
-			if($userRol==6){
-				//$arrParam = array("idDelegado" => $userID);
-				$data['infoMunicipiosOperador'] = $this->dashboard_model->get_municipios_operador();
-			}else{
+			if($userRol!=6){
 				show_error('ERROR!!! - You are in the wrong place.');	
 			}
 					
@@ -418,32 +415,6 @@ class Dashboard extends MX_Controller {
 
 
 			
-
-//se buscan las alertas INFORMATIVAS que se tienen el OPERADOR a cargo
-			$arrParam = array(
-							"tipoAlerta" => 1,
-							"rol" => "operador"
-						);
-			$infoAlertaVencidaInformativa = $this->general_model->get_alertas_vencidas_by($arrParam);
-
-			//recorro las alertas y reviso se se les dio respuesta, si no se le dio respuesta las voy contando
-			$data['contadorInformativaSi'] = 0;
-			$data['contadorInformativaNo'] = 0;
-			if($infoAlertaVencidaInformativa){
-				foreach ($infoAlertaVencidaInformativa as $lista):
-					$arrParam = array(
-							"idSitioSesion" => $lista['id_sitio_sesion'],
-							"idAlerta" => $lista['id_alerta']
-					);
-					$respuesta = $this->general_model->get_respuestas_alertas_vencidas_by($arrParam);
-					
-					if($respuesta){
-						$data['contadorInformativaSi']++;
-					}else{
-						$data['contadorInformativaNo']++;
-					}
-				endforeach;
-			}
 			
 
 //conteo de los sitios segun el filtro
@@ -452,85 +423,9 @@ class Dashboard extends MX_Controller {
 			$data['conteoCitados'] = $this->general_model->get_numero_citados_por_filtro_by_coordinnador();
 
 			
-			
-
-//se buscan las alertas NOTIFICACION vencidas que tienen el OPERADOR a cargo			
-			$arrParam = array(
-							"tipoAlerta" => 2,
-							"rol" => "operador"
-			);
-			$infoAlertaVencidaNotificacion = $this->general_model->get_alertas_vencidas_by($arrParam);
-
-			//recorro las alertas y reviso se se les dio respuesta, si no se le dio respuesta las voy contando
-			$data['contadorNotificacion'] = 0;
-			
-			$data['contadorNotificacionContestaron'] = 0;
-			$data['contadorNotificacionSi'] = 0;
-			$data['contadorNotificacionNoContestaron'] = 0;
-		
-			
-			if($infoAlertaVencidaNotificacion){
-				foreach ($infoAlertaVencidaNotificacion as $lista):
-					$arrParam = array(
-							"idSitioSesion" => $lista['id_sitio_sesion'],
-							"idAlerta" => $lista['id_alerta']
-					);
-					$respuesta = $this->general_model->get_respuestas_alertas_vencidas_by($arrParam);
-					
-					if(!$respuesta){
-						$data['contadorNotificacion']++;
-					}
-										
-					$arrParam = array(
-							"idSitioSesion" => $lista['id_sitio_sesion'],
-							"idAlerta" => $lista['id_alerta'],
-							"respuestaAcepta" => 1
-					);//filtro por los que contestaron que SI
-					$respuestaSI = $this->general_model->get_respuestas_alertas_vencidas_by($arrParam);
-					
-					if($respuestaSI){
-						$data['contadorNotificacionSi']++;
-					}
-					
-					if($respuesta){
-						$data['contadorNotificacionContestaron']++;
-					}else{
-						$data['contadorNotificacionNoContestaron']++;
-					}
-
-				endforeach;
-			}
 
 
 
-//se buscan las alertas CONSOLIDACION vencidas que tienen el OPERADOR a cargo
-			$arrParam = array(
-							"tipoAlerta" => 3,
-							"rol" => "operador"
-			);
-			$infoAlertaVencidaConsolidacion = $this->general_model->get_alertas_vencidas_by($arrParam);
-			
-			//recorro las alertas y reviso se se les dio respuesta, si no se le dio respuesta las voy contando
-			$data['contadorConsolidacionSi'] = 0;
-			$data['contadorConsolidacionNo'] = 0;
-			if($infoAlertaVencidaConsolidacion){
-				foreach ($infoAlertaVencidaConsolidacion as $lista):
-					$arrParam = array(
-							"idSitioSesion" => $lista['id_sitio_sesion'],
-							"idAlerta" => $lista['id_alerta']
-					);
-					$respuesta = $this->general_model->get_respuestas_alertas_vencidas_by($arrParam);
-					
-					if($respuesta){
-						$data['contadorConsolidacionSi']++;
-					}else{
-						$data['contadorConsolidacionNo']++;
-					}
-					
-				endforeach;
-			}			
-			
-			
 			
 			
 
