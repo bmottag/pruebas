@@ -88,7 +88,6 @@ if ($retornoError) {
 					
 					
 						<div class="alert alert-warning">
-							<strong>Descripción Alerta: </strong><?php echo $info[0]['descripcion_alerta']; ?><br>
 							<strong>Mensaje Alerta: </strong><?php echo $info[0]['mensaje_alerta']; ?><br>
 							<strong>Nombre de Prueba: </strong><?php echo $info[0]['nombre_prueba']; ?><br>
 							<strong>Grupo Instrumentos: </strong><?php echo $info[0]['nombre_grupo_instrumentos']; ?><br>

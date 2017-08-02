@@ -38,7 +38,6 @@ if($infoAlerta){
 					$msj .= "<br><strong>Departamento:</strong>" . $lista['dpto_divipola_nombre'];
 					$msj .= "<br><strong>Municipio:</strong>" . $lista['mpio_divipola_nombre'];
 					$msj .= "<br><strong>Tipo de Alerta:</strong>" . $lista['nombre_tipo_alerta'];
-					$msj .= "<br><strong>Descripción Alerta: </strong>" . $lista["descripcion_alerta"];
 					$msj .= "<br><strong>Mensaje Alerta: </strong>" . $lista["mensaje_alerta"];
 					$msj .= "<br><strong>Nombre de Prueba: </strong>" . $lista["nombre_prueba"];
 					$msj .= "<br><strong>Grupo Instrumentos: </strong>" . $lista["nombre_grupo_instrumentos"];

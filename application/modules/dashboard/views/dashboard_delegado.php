@@ -90,7 +90,6 @@ if($infoAlertaInformativa)
 						
 					<div class="col-lg-12">	
 						<div class="alert alert-danger ">
-							<strong>Descripción Alerta: </strong><?php echo $lista['descripcion_alerta']; ?><br>
 							<strong>Mensaje Alerta: </strong><?php echo $lista['mensaje_alerta']; ?><br>
 							<strong>Nombre de Prueba: </strong><?php echo $lista['nombre_prueba']; ?><br>
 							<strong>Grupo Instrumentos: </strong><?php echo $lista['nombre_grupo_instrumentos']; ?><br>
@@ -168,7 +167,6 @@ if ($retornoError) {
 						
 					<div class="col-lg-12">	
 						<div class="alert alert-warning ">
-							<strong>Descripción Alerta: </strong><?php echo $lista['descripcion_alerta']; ?><br>
 							<strong>Mensaje Alerta: </strong><?php echo $lista['mensaje_alerta']; ?><br>
 							<strong>Nombre de Prueba: </strong><?php echo $lista['nombre_prueba']; ?><br>
 							<strong>Grupo Instrumentos: </strong><?php echo $lista['nombre_grupo_instrumentos']; ?><br>
@@ -263,7 +261,6 @@ if ($retornoError) {
 						
 					<div class="col-lg-12">	
 						<div class="alert alert-success">
-							<strong>Descripción Alerta: </strong><?php echo $lista['descripcion_alerta']; ?><br>
 							<strong>Mensaje Alerta: </strong><?php echo $lista['mensaje_alerta']; ?><br>
 							<strong>Nombre de Prueba: </strong><?php echo $lista['nombre_prueba']; ?><br>
 							<strong>Grupo Instrumentos: </strong><?php echo $lista['nombre_grupo_instrumentos']; ?><br>

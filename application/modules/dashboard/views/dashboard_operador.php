@@ -149,16 +149,21 @@ if($infoAlerta["fk_id_tipo_alerta"] == 1)//INFORMATIVA
 							<span class="pull-right text-muted"></span>
 						</p>
 						
-						<a href="<?php echo base_url("dashboard/alerta_especifica/" . $lista['id_alerta'] . "/operador");?>" >
 							<div class="progress">
+<a href="<?php echo base_url("dashboard/alerta_especifica/" . $lista['id_alerta'] . "/operador/aceptaron");?>" >
 								<div class="progress-bar progress-bar-info" role="progressbar" style="width:50%">
-								Aceptaron <?php echo $contadorInformativaSi . " (" . $porcentajeSi . "%)"; ?>
+								Contestaron <?php echo $contadorInformativaSi . " (" . $porcentajeSi . "%)"; ?>
 								</div>
+</a>
+
+<a href="<?php echo base_url("dashboard/alerta_especifica/" . $lista['id_alerta'] . "/operador/no_contestaron");?>" >
 								<div class="progress-bar progress-bar-danger" role="progressbar" style="width:50%">
 								No contestaron <?php echo $contadorInformativaNo . " (" . $porcentajeNo . "%)"; ?>
 								</div>
+</a>
+								
 							</div> 
-						</a>	
+						
 					</div>
 				</div>
 			</div>	
@@ -463,7 +468,6 @@ if($infoAlertaInformativa)
 						
 					<div class="col-lg-12">	
 						<div class="alert alert-danger ">
-							<strong>Descripción Alerta: </strong><?php echo $lista['descripcion_alerta']; ?><br>
 							<strong>Mensaje Alerta: </strong><?php echo $lista['mensaje_alerta']; ?><br>
 							<strong>Nombre de Prueba: </strong><?php echo $lista['nombre_prueba']; ?><br>
 							<strong>Grupo Instrumentos: </strong><?php echo $lista['nombre_grupo_instrumentos']; ?><br>
@@ -538,7 +542,6 @@ if ($retornoError) {
 				
 					<div class="col-lg-12">	
 						<div class="alert alert-warning ">
-							<strong>Descripción Alerta: </strong><?php echo $lista['descripcion_alerta']; ?><br>
 							<strong>Mensaje Alerta: </strong><?php echo $lista['mensaje_alerta']; ?><br>
 							<strong>Nombre de Prueba: </strong><?php echo $lista['nombre_prueba']; ?><br>
 							<strong>Grupo Instrumentos: </strong><?php echo $lista['nombre_grupo_instrumentos']; ?><br>
@@ -631,7 +634,6 @@ if ($retornoError) {
 						
 					<div class="col-lg-12">	
 						<div class="alert alert-success">
-							<strong>Descripción Alerta: </strong><?php echo $lista['descripcion_alerta']; ?><br>
 							<strong>Mensaje Alerta: </strong><?php echo $lista['mensaje_alerta']; ?><br>
 							<strong>Nombre de Prueba: </strong><?php echo $lista['nombre_prueba']; ?><br>
 							<strong>Grupo Instrumentos: </strong><?php echo $lista['nombre_grupo_instrumentos']; ?><br>
@@ -707,6 +709,7 @@ $( document ).ready( function () {
 					<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
 						<thead>
 							<tr>
+								<th>#</th>
 								<th>Departamento</th>
 								<th>Municipio</th>
 								<th>Sitio</th>
@@ -715,8 +718,11 @@ $( document ).ready( function () {
 						</thead>
 						<tbody>							
 						<?php
+							$i=0;
 							foreach ($infoSitios as $lista):
+								$i++;
 								echo "<tr>";								
+								echo "<td >" . $i . "</td>";
 								echo "<td >" . strtoupper($lista['dpto_divipola_nombre']) . "</td>";
 								echo "<td >" . strtoupper($lista['mpio_divipola_nombre']) . "</td>";
 								echo "<td >";
