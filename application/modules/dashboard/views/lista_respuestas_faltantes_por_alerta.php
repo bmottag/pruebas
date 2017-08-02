@@ -52,13 +52,11 @@
 						<thead>
 							<tr>
 								<th class="text-center">Sitio</th>
-								<th class="text-center">Respuesta</th>
 							</tr>
 						</thead>
         <tfoot>
             <tr>
                 <th class="text-center">Sitio</th>
-                <th class="text-center">Respuesta</th>
             </tr>
         </tfoot>
 						<tbody>	
@@ -83,6 +81,13 @@
 							foreach ($info as $lista):
 									echo "<tr>";
 									echo "<td>";
+									//si no existe el representante entonces no se muestra el enlace
+									if($lista['fk_id_user_delegado']){
+echo "<a href=" . base_url("report/responder_alerta/" . $lista['id_alerta'] . "/" . $lista['fk_id_user_delegado'] . "/" . $lista['id_sitio_sesion'] . "/" . $rol) . " ><strong><u>Dar Respuesta</u></strong> </a>";
+									}else{
+										echo "<p class='text-danger'>Falta asignar representante para este Sitio</p>";
+									}
+									echo "<br><br>";
 									echo "<strong>Sitio: </strong>" . $lista['nombre_sitio'];
 									echo "<br><strong>Nodo o Región: </strong>" . $lista['nombre_region'];
 									echo "<br><strong>Departamento: </strong>" . $lista['dpto_divipola_nombre'];
@@ -94,15 +99,8 @@
 echo "<a href='tel:".$lista['celular_delegado']."'>".$lista['celular_delegado']."</a>";
 									
 									echo "<br><strong>Email: </strong>" . $lista['email'];
-									echo "</td>";
-									
-									echo "<td>";
-									//si no existe el representante entonces no se muestra el enlace
-									if($lista['fk_id_user_delegado']){
-echo "<a href=" . base_url("report/responder_alerta/" . $lista['id_alerta'] . "/" . $lista['fk_id_user_delegado'] . "/" . $lista['id_sitio_sesion'] . "/" . $rol) . " ><strong>Dar Respuesta</strong> </a>";
-									}else{
-										echo "<p class='text-danger'>Falta asignar representante para este Sitio</p>";
-									}
+
+
 									echo "</td>";
 							endforeach;
 					
