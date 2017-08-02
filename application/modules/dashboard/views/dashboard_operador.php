@@ -152,13 +152,13 @@ if($infoAlerta["fk_id_tipo_alerta"] == 1)//INFORMATIVA
 							<div class="progress">
 <a href="<?php echo base_url("dashboard/alerta_especifica/" . $lista['id_alerta'] . "/operador/aceptaron");?>" >
 								<div class="progress-bar progress-bar-info" role="progressbar" style="width:50%">
-								Contestaron <?php echo $contadorInformativaSi . " (" . $porcentajeSi . "%)"; ?>
+								Contestaron <?php echo number_format($contadorInformativaSi) . " (" . $porcentajeSi . "%)"; ?>
 								</div>
 </a>
 
 <a href="<?php echo base_url("dashboard/alerta_especifica/" . $lista['id_alerta'] . "/operador/no_contestaron");?>" >
 								<div class="progress-bar progress-bar-danger" role="progressbar" style="width:50%">
-								No contestaron <?php echo $contadorInformativaNo . " (" . $porcentajeNo . "%)"; ?>
+								No contestaron <?php echo number_format($contadorInformativaNo) . " (" . $porcentajeNo . "%)"; ?>
 								</div>
 </a>
 								
@@ -257,10 +257,10 @@ if($infoAlerta["fk_id_tipo_alerta"] == 2)//NOTIFICACION
 						<a href="<?php echo base_url("dashboard/alerta_especifica/" . $lista['id_alerta'] . "/operador");?>" >
 							<div class="progress">
 								<div class="progress-bar progress-bar-info" role="progressbar" style="width:50%">
-								Contestaron <?php echo $contadorNotificacionContestaron . " (" . $porcentajeSiContestaron . "%)"; ?>
+								Contestaron <?php echo number_format($contadorNotificacionContestaron) . " (" . $porcentajeSiContestaron . "%)"; ?>
 								</div>
 								<div class="progress-bar progress-bar-warning" role="progressbar" style="width:50%">
-								No contestaron <?php echo $contadorNotificacionNoContestaron . " (" . $porcentajeNoContestaron . "%)"; ?>
+								No contestaron <?php echo number_format($contadorNotificacionNoContestaron) . " (" . $porcentajeNoContestaron . "%)"; ?>
 								</div>
 							</div> 
 
@@ -268,10 +268,10 @@ if($infoAlerta["fk_id_tipo_alerta"] == 2)//NOTIFICACION
 						
 							<div class="progress">
 								<div class="progress-bar progress-bar-success" role="progressbar" style="width:50%">
-								Aceptaron <?php echo $contadorNotificacionSi . " (" . $porcentajeSi . "%)"; ?>
+								Aceptaron <?php echo number_format($contadorNotificacionSi) . " (" . $porcentajeSi . "%)"; ?>
 								</div>
 								<div class="progress-bar progress-bar-danger" role="progressbar" style="width:50%">
-								No aceptaron <?php echo $contadorNotificacionNo . " (" . $porcentajeNo . "%)"; ?>
+								No aceptaron <?php echo number_format($contadorNotificacionNo) . " (" . $porcentajeNo . "%)"; ?>
 								</div>
 							</div> 
 						</a>	
@@ -356,12 +356,12 @@ if($infoAlerta["fk_id_tipo_alerta"] == 3)//CONSOLIDACION
 							
 <a href="<?php echo base_url("dashboard/alerta_especifica/" . $lista['id_alerta'] . "/operador/contestaron");?>" >							
 								<div class="progress-bar progress-bar-info" role="progressbar" style="width:50%">
-								Contestaron <?php echo $contadorConsolidacionSi . " (" . $porcentajeSi . "%)"; ?>
+								Contestaron <?php echo number_format($contadorConsolidacionSi) . " (" . $porcentajeSi . "%)"; ?>
 								</div>
 </a>
 <a href="<?php echo base_url("dashboard/alerta_especifica/" . $lista['id_alerta'] . "/operador/NO");?>" >
 								<div class="progress-bar progress-bar-warning" role="progressbar" style="width:50%">
-								No contestaron <?php echo $contadorConsolidacionNo . " (" . $porcentajeNo . "%)"; ?>
+								No contestaron <?php echo number_format($contadorConsolidacionNo) . " (" . $porcentajeNo . "%)"; ?>
 								</div>
 </a>
 							</div> 
