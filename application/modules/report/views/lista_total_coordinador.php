@@ -108,7 +108,7 @@ if($infoAlerta["fk_id_tipo_alerta"] == 1)//INFORMATIVA
 						<a href="<?php echo base_url("dashboard/alerta_especifica/" . $lista['id_alerta'] . "/operador");?>" >
 							<div class="progress">
 								<div class="progress-bar progress-bar-info" role="progressbar" style="width:50%">
-								Aceptaron <?php echo $contadorInformativaSi . " (" . $porcentajeSi . "%)"; ?>
+								Contestaron <?php echo $contadorInformativaSi . " (" . $porcentajeSi . "%)"; ?>
 								</div>
 								<div class="progress-bar progress-bar-danger" role="progressbar" style="width:50%">
 								No contestaron <?php echo $contadorInformativaNo . " (" . $porcentajeNo . "%)"; ?>
