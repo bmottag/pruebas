@@ -73,7 +73,7 @@ if ($retornoError) {
 			<div class="panel panel-primary">
 			
 				<div class="panel-heading">
-					<i class="fa fa-arrow-right fa-fw"></i> <strong>SESIÓN: </strong><?php echo $lista["nombre_prueba"] . " / " . $lista["nombre_grupo_instrumentos"] . " / " . $lista["fecha"] . " / " . $lista["sesion_prueba"]; ?>
+					<i class="fa fa-arrow-right fa-fw"></i><strong>SESIÓN: </strong><?php echo $lista["nombre_prueba"] . " / " . $lista["nombre_grupo_instrumentos"] . " / " . $lista["fecha"] . " / " . $lista["sesion_prueba"]; ?>
 					<br><i class="fa fa-arrow-right fa-fw"></i><strong>Total sitios: </strong><?php echo $conteoSitios; ?>
 				</div>
 				
