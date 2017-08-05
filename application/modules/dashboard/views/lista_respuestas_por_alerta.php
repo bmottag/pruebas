@@ -1,3 +1,8 @@
+<?php
+	$userRol = $this->session->rol;
+	$userID = $this->session->id;
+?>
+
 <div id="page-wrapper">
 	<br>
 	<div class="row">
