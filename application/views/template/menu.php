@@ -109,11 +109,19 @@ if($userRol==1){ //ADMIN
 						</li>
 						
 						<li>
-							<a href="<?php echo base_url("admin/coordinador"); ?>"><i class="fa fa-building-o fa-fw"></i> Coordinadores</a>
+							<a href="<?php echo base_url("admin/coordinador"); ?>"><i class="fa fa-building-o fa-fw"></i> Coordinadores por municipio</a>
 						</li>
 						
 						<li>
-							<a href="<?php echo base_url("admin/operador"); ?>"><i class="fa fa-building-o fa-fw"></i> Operadores</a>
+							<a href="<?php echo base_url("admin/coordinador_nodo"); ?>"><i class="fa fa-building-o fa-fw"></i> Coordinadores por nodo</a>
+						</li>
+						
+						<li>
+							<a href="<?php echo base_url("admin/operador"); ?>"><i class="fa fa-building-o fa-fw"></i> Operadores por municipio</a>
+						</li>
+						
+						<li>
+							<a href="<?php echo base_url("admin/operador_nodo"); ?>"><i class="fa fa-building-o fa-fw"></i> Operadores por nodo</a>
 						</li>
 						
 						<li class="divider"></li>

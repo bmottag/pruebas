@@ -684,10 +684,7 @@ class General_model extends CI_Model {
 				} else {
 					return false;
 				}
-		}
-		
-		
-		
+		}	
 		
 		/**
 		 * Obtener alertas 
@@ -896,6 +893,69 @@ class General_model extends CI_Model {
 				$query = $this->db->query($sql);
 				return $query->row_array();
 		}
+		
+		/**
+		 * Lista de sitios
+		 * @since 3/7/2017
+		 */
+		public function get_coordinadores_nodo($arrDatos) 
+		{
+				$this->db->select('');
+				$this->db->join('usuario U', 'U.id_usuario = D.fk_id_coordinador_region', 'INNER');
+				
+				
+				$where = "D.fk_id_coordinador_region IS NOT NULL";
+				$this->db->where($where);
+				
+				if (array_key_exists("idRegion", $arrDatos)) {
+					$this->db->where('D.id_region', $arrDatos["idRegion"]);
+				}
+				
+				if (array_key_exists("idCoordinador", $arrDatos)) {
+					$this->db->where('D.fk_id_coordinador_region', $arrDatos["idCoordinador"]);
+				}
+				
+				$this->db->order_by('nombre_region', 'asc');
+				$query = $this->db->get('param_regiones D');
+
+				if ($query->num_rows() > 0) {
+					return $query->result_array();
+				} else {
+					return false;
+				}
+		}
+		
+		/**
+		 * Lista operadores
+		 * @since 12/5/2017
+		 */
+		public function get_operadores_nodo($arrDatos) 
+		{
+				$this->db->select('');
+				$this->db->join('usuario U', 'U.id_usuario = D.fk_id_operador_region', 'INNER');
+				
+				
+				$where = "D.fk_id_operador_region IS NOT NULL";
+				$this->db->where($where);
+				
+				if (array_key_exists("idRegion", $arrDatos)) {
+					$this->db->where('D.id_region', $arrDatos["idRegion"]);
+				}
+				
+				if (array_key_exists("idOperador", $arrDatos)) {
+					$this->db->where('D.fk_id_operador_region', $arrDatos["idCoordinador"]);
+				}
+				
+				$this->db->order_by('nombre_region', 'asc');
+				$query = $this->db->get('param_regiones D');
+
+				if ($query->num_rows() > 0) {
+					return $query->result_array();
+				} else {
+					return false;
+				}
+		}
+
 		
 
 		
