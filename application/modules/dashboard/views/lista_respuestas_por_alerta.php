@@ -77,13 +77,19 @@
 						"idAlerta" => $lista['id_alerta']
 				);
 				$respuesta = $this->general_model->get_respuestas_alertas_vencidas_by($arrParam);
-			
 				
-				if($respuesta){
-					
-					
-					
-
+				$bandera = FALSE;
+				if($answer == "si" && $respuesta[0]['acepta']==1){
+					$bandera = TRUE;
+				}
+				if($answer == "no" && $respuesta[0]['acepta']==2){
+					$bandera = TRUE;
+				}
+				if($answer == "contestaron"){
+					$bandera = TRUE;
+				}
+			
+				if($respuesta && $bandera){
 					$info = $this->general_model->get_informacion_respuestas_alertas_vencidas_by($arrParam);
 	
 							foreach ($info as $lista):

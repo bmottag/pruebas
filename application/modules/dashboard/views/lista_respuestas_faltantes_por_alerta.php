@@ -51,7 +51,13 @@
 					<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
 						<thead>
 							<tr>
+								<th class="text-center">Dar respuesta</th>
 								<th class="text-center">Sitio</th>
+								<th class="text-center">Nodo o Región</th>
+								<th class="text-center">Departamento</th>
+								<th class="text-center">Municipio</th>
+								<th class="text-center">Códifo DANE</th>
+								<th class="text-center">Representante</th>
 							</tr>
 						</thead>
         <tfoot>
@@ -87,18 +93,29 @@ echo "<a href=" . base_url("report/responder_alerta/" . $lista['id_alerta'] . "/
 									}else{
 										echo "<p class='text-danger'>Falta asignar representante para este Sitio</p>";
 									}
-									echo "<br><br>";
-									echo "<strong>Sitio: </strong>" . $lista['nombre_sitio'];
-									echo "<br><strong>Nodo o Región: </strong>" . $lista['nombre_region'];
-									echo "<br><strong>Departamento: </strong>" . $lista['dpto_divipola_nombre'];
-									echo "<br><strong>Municipio: </strong>" . $lista['mpio_divipola_nombre'];
-									echo "<br><strong>Códifo DANE: </strong>" . $lista['codigo_dane'];
-									echo "<br><strong>Representante: </strong>" . $lista['nombre_delegado'];
-									echo "<br>Celular: ";
+									echo "</td>";
+									echo "<td>";
+									echo $lista['nombre_sitio'];
+									echo "</td>";
+									echo "<td>";
+									echo $lista['nombre_region'];
+									echo "</td>";
+									echo "<td>";
+									echo $lista['dpto_divipola_nombre'];
+									echo "</td>";
+									echo "<td>";
+									echo $lista['mpio_divipola_nombre'];
+									echo "</td>";
+									echo "<td>";
+									echo $lista['codigo_dane'];
+									echo "</td>";
+									echo "<td>";
+									echo $lista['nombre_delegado'];
+									echo "<br>";
 
 echo "<a href='tel:".$lista['celular_delegado']."'>".$lista['celular_delegado']."</a>";
 									
-									echo "<br><strong>Email: </strong>" . $lista['email'];
+									echo "<br>" . $lista['email'];
 
 
 									echo "</td>";

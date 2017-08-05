@@ -272,12 +272,18 @@ if($infoAlerta["fk_id_tipo_alerta"] == 2)//NOTIFICACION
 
 						
 							<div class="progress">
+<a href="<?php echo base_url("dashboard/alerta_especifica/" . $lista['id_alerta'] . "/operador/si");?>" >
 								<div class="progress-bar progress-bar-success" role="progressbar" style="width:50%">
-								Aceptaron <?php echo number_format($contadorNotificacionSi) . " (" . $porcentajeSi . "%)"; ?>
+								Si <?php echo number_format($contadorNotificacionSi) . " (" . $porcentajeSi . "%)"; ?>
 								</div>
+</a>
+								
+<a href="<?php echo base_url("dashboard/alerta_especifica/" . $lista['id_alerta'] . "/operador/no");?>" >
 								<div class="progress-bar progress-bar-danger" role="progressbar" style="width:50%">
-								No aceptaron <?php echo number_format($contadorNotificacionNo) . " (" . $porcentajeNo . "%)"; ?>
+								No <?php echo number_format($contadorNotificacionNo) . " (" . $porcentajeNo . "%)"; ?>
 								</div>
+</a>
+
 							</div> 
 						</a>	
 					</div>

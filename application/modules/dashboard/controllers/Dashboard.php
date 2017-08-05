@@ -639,10 +639,19 @@ class Dashboard extends MX_Controller {
 			
 			$data["rol"] = $rol;//se pasa el rol del operador o del coordinador
 			
-			if($respuesta == "contestaron"){
-				$data["view"] = "lista_respuestas_por_alerta";
-			}else{
-				$data["view"] = "lista_respuestas_faltantes_por_alerta";
+			$data["view"] = "lista_respuestas_por_alerta";
+			switch ($respuesta) {
+				case "contestaron":
+					$data["answer"] = $respuesta;
+					break;
+				case "si":
+					$data["answer"] = $respuesta;
+					break;
+				case "no":
+					$data["answer"] = $respuesta;
+					break;
+				default:
+					$data["view"] = "lista_respuestas_faltantes_por_alerta";
 			}
 						
 			$this->load->view("layout", $data);
