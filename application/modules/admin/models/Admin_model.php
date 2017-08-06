@@ -371,6 +371,27 @@
 	    }
 		
 	    /**
+	     * Actualiar coordinador del SITIO
+		 * param Id region int para asignar coordinador a todos los sitios con ese id
+	     * @since  5/8/2017
+	     */
+	    public function updateSitio_coordinador_nodo($idRegion)
+		{
+				$data = array(
+					'fk_id_user_coordinador' => $this->input->post("usuario")
+				);
+
+				$this->db->where('fk_id_region', $idRegion);
+				$query = $this->db->update('sitios', $data);
+
+				if ($query) {
+					return true;
+				} else {
+					return false;
+				}
+	    }
+		
+	    /**
 	     * Actualiar operador del SITIO
 		 * param Id municipio int para asignar operador a todos los sitios con ese id
 	     * @since  4/6/2017
@@ -382,6 +403,27 @@
 				);
 
 				$this->db->where('fk_mpio_divipola', $idMunicipio);
+				$query = $this->db->update('sitios', $data);
+
+				if ($query) {
+					return true;
+				} else {
+					return false;
+				}
+	    }
+		
+	    /**
+	     * Actualiar operador del SITIO
+		 * param Id region int para asignar operador a todos los sitios con ese id
+	     * @since  5/8/2017
+	     */
+	    public function updateSitio_operador_nodo($idRegion)
+		{
+				$data = array(
+					'fk_id_user_operador' => $this->input->post("usuario")
+				);
+
+				$this->db->where('fk_id_region', $idRegion);
 				$query = $this->db->update('sitios', $data);
 
 				if ($query) {

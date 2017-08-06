@@ -1439,6 +1439,92 @@ class Admin extends MX_Controller {
     }
 	
 	/**
+	 * Lista de COORDINADOR
+     * @since 3/8/2017
+	 */
+	public function coordinador_nodo()
+	{
+			$this->load->model("general_model");
+			$arrParam = array();
+			$data['info'] = $this->general_model->get_coordinadores_nodo($arrParam);
+
+			$data["view"] = 'coordinador_nodo';
+			$this->load->view("layout", $data);
+	}
+	
+    /**
+     * Cargo modal - formulario COORDINADOR
+     * @since 3/8/2017
+     */
+    public function cargarModalCoordinadorNodo() 
+	{
+			header("Content-Type: text/plain; charset=utf-8"); //Para evitar problemas de acentos
+			
+			$data['information'] = FALSE;
+			$data["identificador"] = $this->input->post("identificador");
+			
+			$this->load->model("general_model");
+			$data['usuarios'] = $this->general_model->lista_coordinador();//listado usuarios coordinadores
+			
+			$arrParam = array(
+				"table" => "param_regiones",
+				"order" => "nombre_region",
+				"id" => "x"
+			);
+			$data['regiones'] = $this->general_model->get_basic_search($arrParam);//listado regiones
+			
+			if ($data["identificador"] != 'x') {
+				$arrParam = array(
+					"idRegion" => $data["identificador"]
+				);
+				$data['information'] = $this->general_model->get_coordinadores_nodo($arrParam);//info sitio
+			}
+			
+			$this->load->view("coordinador_modal_nodo", $data);
+    }
+	
+	/**
+	 * Update Coordinadores
+     * @since 3/8/2017
+	 */
+	public function save_coordinador_nodo()
+	{			
+			header('Content-Type: application/json');
+			$data = array();
+
+			$idRegion = $this->input->post('region');
+			$idUser = $this->input->post('usuario');
+				
+			if ($this->admin_model->updateSitio_coordinador_nodo($idRegion)) {
+				
+				//actualizamos el campo coordinador en la lista de municipios
+				$arrParam = array(
+					"table" => "param_regiones",
+					"primaryKey" => "id_region",
+					"id" => $idRegion,
+					"column" => "fk_id_coordinador_region",
+					"value" => $idUser
+				);
+
+				$this->load->model("general_model");
+
+				if ($this->general_model->updateRecord($arrParam)) {				
+						$data["result"] = true;
+						$this->session->set_flashdata('retornoExito', 'Se guardó la información');
+				}else{
+						$data["result"] = "error";				
+						$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador.');					
+				}
+			} else {
+				$data["result"] = "error";				
+				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador.');
+			}
+
+
+			echo json_encode($data);
+    }
+	
+	/**
 	 * INICIO OPERADOR
 	 */	
 	
@@ -1522,7 +1608,113 @@ class Admin extends MX_Controller {
 
 			echo json_encode($data);
     }
+	
+	/**
+	 * Lista de OPERADOR
+     * @since 5/6/2017
+	 */
+	public function operador_nodo()
+	{
+			$this->load->model("general_model");
+			$arrParam = array();
+			$data['info'] = $this->general_model->get_operadores_nodo($arrParam);
 
+			$data["view"] = 'operador_nodo';
+			$this->load->view("layout", $data);
+	}
+	
+    /**
+     * Cargo modal - formulario OPERADOR
+     * @since 5/6/2017
+     */
+    public function cargarModalOperadorNodo() 
+	{
+			header("Content-Type: text/plain; charset=utf-8"); //Para evitar problemas de acentos
+			
+			$data['information'] = FALSE;
+			$data["identificador"] = $this->input->post("identificador");
+			
+			$this->load->model("general_model");
+			$data['usuarios'] = $this->general_model->lista_operador();//listado usuarios coordinadores
+			
+			$arrParam = array(
+				"table" => "param_regiones",
+				"order" => "nombre_region",
+				"id" => "x"
+			);
+			$data['regiones'] = $this->general_model->get_basic_search($arrParam);//listado regiones
+			
+			if ($data["identificador"] != 'x') {
+				$arrParam = array(
+					"idRegion" => $data["identificador"]
+				);
+				$data['information'] = $this->general_model->get_operadores_nodo($arrParam);//info sitio
+			}
+			
+			$this->load->view("operador_modal_nodo", $data);
+    }
+	
+	/**
+	 * Update OPERADOR
+     * @since 5/6/2017
+	 */
+	public function save_operador_nodo()
+	{			
+			header('Content-Type: application/json');
+			$data = array();
+
+			$idRegion = $this->input->post('region');
+			$idUser = $this->input->post('usuario');
+
+			if ($this->admin_model->updateSitio_operador_nodo($idRegion)) {
+				
+				//actualizamos el campo coordinador en la lista de municipios
+				$arrParam = array(
+					"table" => "param_regiones",
+					"primaryKey" => "id_region",
+					"id" => $idRegion,
+					"column" => "fk_id_operador_region",
+					"value" => $idUser
+				);
+
+				$this->load->model("general_model");
+
+				if ($this->general_model->updateRecord($arrParam)) {				
+						$data["result"] = true;
+						$this->session->set_flashdata('retornoExito', 'Se guardó la información');
+				}else{
+						$data["result"] = "error";				
+						$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador.');					
+				}
+			} else {
+				$data["result"] = "error";				
+				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador.');
+			}
+
+			echo json_encode($data);
+    }
+	
+	/**
+	 * Lista de cambio de cuadernillo para el coordinador
+     * @since 1/6/2017
+	 */
+	public function subir_archivo()
+	{		
+			$data["view"] = 'cargar_archivo';
+			$this->load->view("layout", $data);
+	}
+
+	/**
+	 * Lista de cambio de cuadernillo para el coordinador
+     * @since 1/6/2017
+	 */
+	public function do_upload()
+	{		
+			echo "hol mundo"; exit;
+	
+			$data["view"] = 'cargar_archivo';
+			$this->load->view("layout", $data);
+	}
 	
 	
 }
