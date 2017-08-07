@@ -24,9 +24,11 @@
 				<div class="panel-heading">
 					<h4 class="list-group-item-heading">
 						DASHBOARD
-<!-- Audio que se reproduce cuando se activa una alerta -->						
+<!--
+<input type="button" onclick="sonido.play()" value="play">
+ Audio que se reproduce cuando se activa una alerta -->						
 <audio id="sonido">
-	<source src="<?php echo base_url(); ?>images/Ring03.wav"></source>
+	<source src="<?php echo base_url(); ?>images/notificacion.mp3"></source>
 </audio>
 					</h4>
 				</div>
