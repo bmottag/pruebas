@@ -220,7 +220,7 @@
 				$idRegistro = $this->input->post('hddIdRegistro');
 				//se une la observacion inicial con la observacion de la actualizacion
 				$observacion = $this->input->post('hddObservacion');
-				$newObservation = 'Primera observación: ' . $observacion . '<p>Segunda Observación' . $this->input->post('observacion') . '</p>';
+				$newObservation = 'Primera observación: ' . $observacion . '<p>Segunda Observación: ' . $this->input->post('observacion') . '</p>';
 				
 				//se une la nota inicial con la nota de la actualizacion
 				$nota = $this->input->post('hddNota');
