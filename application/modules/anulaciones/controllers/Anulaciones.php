@@ -338,6 +338,38 @@ class Anulaciones extends MX_Controller {
 
 			echo json_encode($data);
     }
+	
+	/**
+	 * Guardar imagen
+     * @since 6/8/2017
+	 */
+	public function ajax()
+	{		
+			$src = $this->input->post('src');
+			$tipo = $this->input->post('tipo');
+			$idAnulacion = $this->input->post('idAnulacion');
+
+			//actualizamos el campo coordinador en la lista de municipios
+			$arrParam = array(
+				"table" => "anulaciones",
+				"primaryKey" => "id_anulacion",
+				"id" => $idAnulacion,
+				"column" => "foto_" . $tipo,
+				"value" => $src
+			);
+
+			$this->load->model("general_model");
+
+			if ($this->general_model->updateRecord($arrParam)) {				
+					$data["result"] = true;
+					$this->session->set_flashdata('retornoExito', 'Se guardó la información');
+			}else{
+					$data["result"] = "error";				
+					$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador.');					
+			}
+			
+			$this->output->set_output($src);
+	}
 
 	
 	

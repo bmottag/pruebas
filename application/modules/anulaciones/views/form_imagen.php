@@ -1,3 +1,5 @@
+<script type="text/javascript" src="<?php echo base_url("assets/js/general/say-cheese.js"); ?>"></script>
+
 <div id="page-wrapper">
 	<br>
 	<div class="row">
@@ -56,7 +58,35 @@
 						?>
 						</tbody>
 					</table>
+					
+				<div class="row">
+					<div class="col-lg-4">	
+						<div id="webcam">
+						</div>
+						
+						<button type="button" class="btn btn-success btn-block" id="obturador">
+							<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Tomar foto
+						</button>
+					</div>
+					
+					<div class="col-lg-4">	
+						<div id="say-cheese-snapshot">
+						</div><br>
+						
+						<button type="button" class="btn btn-success btn-block" id="guardarFoto">
+							<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Guardar foto
+						</button>					
+					</div>
+					
+					<div class="col-lg-4">	
+						<img id="fotoGuardada" src="" style="display:none" />					
+					</div>
+				</div>
 
+				
+				<br><br>
+				
+				
 					<form  name="form" id="form" class="form-horizontal" method="post" enctype="multipart/form-data" action="<?php echo base_url("anulaciones/do_upload"); ?>">
 						<input type="hidden" id="hddId" name="hddId" value="<?php echo $information?$information[0]["id_anulacion"]:""; ?>"/>
 						<input type="hidden" id="tipo" name="tipo" value="<?php echo $tipo; ?>"/>
@@ -117,3 +147,50 @@
         });
     });
     </script>
+	
+	
+<script>
+	var img=null;
+					
+	var sayCheese = new SayCheese('#webcam', { 
+					snapshots: true,
+					width: 320,
+					height: 240
+	});
+	
+	sayCheese.start();
+	
+	$('#obturador').bind('click', function(e){
+		sayCheese.takeSnapshot(320,240);
+		return false;
+	})
+	
+	sayCheese.on('snapshot', function(snapshot) {
+		// do something with the snapshot
+		img = document.createElement('img');
+		
+		$(img).on('load', function(){
+			$('#say-cheese-snapshot').html(img);
+		});
+		img.src = snapshot.toDataURL('images/png');
+	});
+	
+	$('#guardarFoto').bind('click', function(){
+		var src = img.src;
+		
+		data = {
+			src: src,
+			tipo: "<?php echo $tipo; ?>",
+			idAnulacion: "<?php echo $information[0]["id_anulacion"]; ?>"
+		}
+
+		$.ajax({
+			url: '<?php echo base_url() ?>anulaciones/ajax',
+			data: data,
+			type: 'post',
+			success: function(respuesta){
+					$('#fotoGuardada').attr('src', respuesta).show(300);
+			}
+		});
+	});
+</script>
