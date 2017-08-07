@@ -105,14 +105,18 @@ if($infoAlerta["fk_id_tipo_alerta"] == 1)//INFORMATIVA
 							<span class="pull-right text-muted"></span>
 						</p>
 						
-						<a href="<?php echo base_url("dashboard/alerta_especifica/" . $lista['id_alerta'] . "/operador");?>" >
 							<div class="progress">
+<a href="<?php echo base_url("dashboard/alerta_especifica/" . $lista['id_alerta'] . "/operador/contestaron");?>" >
 								<div class="progress-bar progress-bar-info" role="progressbar" style="width:50%">
 								Contestaron <?php echo $contadorInformativaSi . " (" . $porcentajeSi . "%)"; ?>
 								</div>
+</a>
+								
+<a href="<?php echo base_url("dashboard/alerta_especifica/" . $lista['id_alerta'] . "/operador/no_contestaron");?>" >
 								<div class="progress-bar progress-bar-danger" role="progressbar" style="width:50%">
 								No contestaron <?php echo $contadorInformativaNo . " (" . $porcentajeNo . "%)"; ?>
 								</div>
+</a>
 							</div> 
 						</a>	
 					</div>
@@ -205,25 +209,35 @@ if($infoAlerta["fk_id_tipo_alerta"] == 2)//NOTIFICACION
 							<span class="pull-right text-muted"></span>
 						</p>
 						
-						<a href="<?php echo base_url("dashboard/alerta_especifica/" . $lista['id_alerta'] . "/operador");?>" >
+
 							<div class="progress">
+<a href="<?php echo base_url("dashboard/alerta_especifica/" . $lista['id_alerta'] . "/operador/contestaron");?>" >
 								<div class="progress-bar progress-bar-info" role="progressbar" style="width:50%">
 								Contestaron <?php echo $contadorNotificacionContestaron . " (" . $porcentajeSiContestaron . "%)"; ?>
 								</div>
+</a>
+								
+<a href="<?php echo base_url("dashboard/alerta_especifica/" . $lista['id_alerta'] . "/operador/no_contestaron");?>" >
 								<div class="progress-bar progress-bar-warning" role="progressbar" style="width:50%">
 								No contestaron <?php echo $contadorNotificacionNoContestaron . " (" . $porcentajeNoContestaron . "%)"; ?>
 								</div>
+</a>
 							</div> 
 
 
 						
 							<div class="progress">
+<a href="<?php echo base_url("dashboard/alerta_especifica/" . $lista['id_alerta'] . "/operador/si");?>" >
 								<div class="progress-bar progress-bar-success" role="progressbar" style="width:50%">
-								Aceptaron <?php echo $contadorNotificacionSi . " (" . $porcentajeSi . "%)"; ?>
+								Si <?php echo $contadorNotificacionSi . " (" . $porcentajeSi . "%)"; ?>
 								</div>
+</a>
+								
+<a href="<?php echo base_url("dashboard/alerta_especifica/" . $lista['id_alerta'] . "/operador/no");?>" >
 								<div class="progress-bar progress-bar-danger" role="progressbar" style="width:50%">
-								No aceptaron <?php echo $contadorNotificacionNo . " (" . $porcentajeNo . "%)"; ?>
+								No <?php echo $contadorNotificacionNo . " (" . $porcentajeNo . "%)"; ?>
 								</div>
+</a>
 							</div> 
 						</a>	
 					</div>
@@ -305,12 +319,13 @@ if($infoAlerta["fk_id_tipo_alerta"] == 3)//CONSOLIDACION
 						
 							<div class="progress">
 							
-<a href="<?php echo base_url("dashboard/alerta_especifica/" . $lista['id_alerta'] . "/operador/contestaron");?>" >							
+<a href="<?php echo base_url("dashboard/alerta_especifica/" . $lista['id_alerta'] . "/operador/contestaron");?>" >
 								<div class="progress-bar progress-bar-info" role="progressbar" style="width:50%">
 								Contestaron <?php echo $contadorConsolidacionSi . " (" . $porcentajeSi . "%)"; ?>
 								</div>
 </a>
-<a href="<?php echo base_url("dashboard/alerta_especifica/" . $lista['id_alerta'] . "/operador/NO");?>" >
+
+<a href="<?php echo base_url("dashboard/alerta_especifica/" . $lista['id_alerta'] . "/operador/no_contestaron");?>" >
 								<div class="progress-bar progress-bar-warning" role="progressbar" style="width:50%">
 								No contestaron <?php echo $contadorConsolidacionNo . " (" . $porcentajeNo . "%)"; ?>
 								</div>
