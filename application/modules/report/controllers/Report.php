@@ -509,8 +509,10 @@ class Report extends CI_Controller {
 			
 			if($userRol == 3){
 				$arrParam = array("idCoordinador" => $userID);
+				$data['rol'] = "coordinador";
 			}elseif($userRol == 6){
 				$arrParam = array("idOperdador" => $userID);
+				$data['rol'] = "operador";
 			}
 			
 			
