@@ -60,11 +60,17 @@
 								<th class="text-center">Representante</th>
 							</tr>
 						</thead>
-        <tfoot>
-            <tr>
-                <th class="text-center">Sitio</th>
-            </tr>
-        </tfoot>
+						<tfoot>
+							<tr>
+								<th class="text-center">Dar respuesta</th>
+								<th class="text-center">Sitio</th>
+								<th class="text-center">Nodo o Región</th>
+								<th class="text-center">Departamento</th>
+								<th class="text-center">Municipio</th>
+								<th class="text-center">Códifo DANE</th>
+								<th class="text-center">Representante</th>
+							</tr>
+						</tfoot>
 						<tbody>	
 						
 		<?php
