@@ -6,6 +6,11 @@
 	}
 
 	setInterval('reloadPage()','30000');//30 segundos
+	
+	
+	$(document).ready(function(){
+		var sonido = document.getElementById("sonido");
+	});
 </script>
 
 <?php
@@ -19,6 +24,10 @@
 				<div class="panel-heading">
 					<h4 class="list-group-item-heading">
 						DASHBOARD
+<!-- Audio que se reproduce cuando se activa una alerta -->						
+<audio id="sonido">
+	<source src="<?php echo base_url(); ?>images/Ring03.wav"></source>
+</audio>
 					</h4>
 				</div>
 			</div>
@@ -57,7 +66,17 @@ if ($retornoError) {
 ?> 
 
 
-
+<!--Reporducir sonido si existe una alerta activa para el delegado -->
+<?php 
+if($infoAlertaInformativa || $infoAlertaNotificacion || $infoAlertaConsolidacion)
+{ 
+?>
+<script languaje="javascript">
+	sonido.play();
+</script>
+<?php
+}
+?>
 
 		
 
