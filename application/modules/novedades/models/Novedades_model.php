@@ -205,6 +205,41 @@
 					return false;
 				}
 		}
+		
+		/**
+		 * Lista de otras novedades
+		 * @since 7/8/2017
+		 */
+		public function get_otras($arrDatos) 
+		{
+				$this->db->select('D.*, X.nombre_sitio, X.codigo_dane, S.*, P.nombre_prueba, G.*, A.*');
+				$this->db->join('sitios X', 'X.id_sitio = A.fk_id_sitio', 'INNER');
+				$this->db->join('param_divipola D', 'D.mpio_divipola = X.fk_mpio_divipola', 'INNER');
+
+				$this->db->join('sesiones S', 'S.id_sesion = A.fk_id_sesion', 'INNER');
+				$this->db->join('param_grupo_instrumentos G', 'G.id_grupo_instrumentos = S.fk_id_grupo_instrumentos', 'INNER');
+				$this->db->join('pruebas P', 'P.id_prueba = G.fk_id_prueba', 'INNER');
+
+				if (array_key_exists("idOtra", $arrDatos)) {
+					$this->db->where('A.id_otra', $arrDatos["idOtra"]);
+				}
+				
+				if (array_key_exists("idSitio", $arrDatos)) {
+					$this->db->where('A.fk_id_sitio', $arrDatos["idSitio"]);
+				}
+				
+				if (array_key_exists("idCoordinador", $arrDatos)) {
+					$this->db->where('X.fk_id_user_coordinador', $arrDatos["idCoordinador"]);
+				}
+
+				$query = $this->db->get('novedades_otra A');
+
+				if ($query->num_rows() > 0) {
+					return $query->result_array();
+				} else {
+					return false;
+				}
+		}
 
 		
 	    

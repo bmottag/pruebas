@@ -168,6 +168,10 @@ if($userRol==4){ //ROL DELEGADO
 						<li>
 							<a href="<?php echo base_url("novedades/holgura"); ?>"><i class="fa fa-download fa-fw"></i> Holguras</a>
 						</li>
+						
+						<li>
+							<a href="<?php echo base_url("novedades/otras"); ?>"><i class="fa fa-fire fa-fw"></i> Otras novedades</a>
+						</li>
 
                     </ul>
                     <!-- /.dropdown-messages -->

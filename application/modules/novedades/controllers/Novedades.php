@@ -487,6 +487,117 @@ class Novedades extends MX_Controller {
 			echo json_encode($data);
     }
 	
+	/**
+	 * Lista de otras novedades para el sitio del Delegado
+     * @since 7/8/2017
+	 */
+	public function otras()
+	{
+			$userRol = $this->session->userdata("rol");
+			$userID = $this->session->userdata("id");
+			if ($userRol != 4 ) { 
+				show_error('ERROR!!! - You are in the wrong place.');	
+			}
+			
+			$this->load->model("general_model");
+			$arrParam = array("idDelegado" => $userID);
+			$data['infoSitio'] = $this->general_model->get_sitios($arrParam);//informacion del sitio
+
+			$arrParam = array("idSitio" => $data['infoSitio'][0]['id_sitio']);
+			$data['info'] = $this->novedades_model->get_otras($arrParam);//listado de otras novedades
+			
+			$data["view"] = 'otras';
+			$this->load->view("layout", $data);
+	}
+	
+    /**
+     * Cargo modal - formulario otras novedades
+     * @since 7/8/2017
+     */
+    public function cargarModalOtras() 
+	{
+			header("Content-Type: text/plain; charset=utf-8"); //Para evitar problemas de acentos
+			
+			$data['information'] = FALSE;
+			$data["idOtra"] = $this->input->post("identificador");
+
+			$this->load->model("general_model");
+
+			//busco si el sitio tiene asociadas sesiones
+			$userID = $this->session->userdata("id");
+			$arrParam = array("idDelegado" => $userID);
+			$data['infoSitoDelegado'] = $this->general_model->get_sitios($arrParam);//busco el id del sitio
+			
+			$arrParam = array("idSitio" => $data['infoSitoDelegado'][0]['id_sitio']);
+			$conteoSesiones = $this->general_model->countSesionesbySitio($arrParam);//reviso si el sitio tiene sesiones
+			$data['infoSesiones'] = false;
+			if($conteoSesiones != 0){//si tiene sesiones las busco
+				$data['infoSesiones'] = $this->general_model->get_sesiones_sitio($arrParam);//sesiones del sitio
+			}		
+
+			if ($data["idOtra"] != 'x') 
+			{
+				$arrParam = array(
+					"idOtra" => $data["idOtra"]
+				);
+				$data['information'] = $this->novedades_model->get_otras($arrParam);
+			}
+			
+			$this->load->view("otras_modal", $data);
+    }
+	
+	/**
+	 * Guardar otras novedades
+     * @since 7/8/2017
+	 */
+	public function save_otras()
+	{			
+			header('Content-Type: application/json');
+			$data = array();
+			
+			$idHolgura = $this->input->post('hddId');
+
+			$msj = "Se adicionó la holgura.";
+			if ($idHolgura != '') {
+				$msj = "Se actualizó la holgura.";
+			}			
+
+			$holgura = $this->input->post("holgura");
+			$confirm = $this->input->post("confirmarHolgura");
+
+			if($holgura != $confirm){
+				$data["result"] = "error";
+				$data["mensaje"] = "Los consecutivos no coinciden.";
+			} else {
+					//buscar el id de ese consecutivo
+					$this->load->model("general_model");
+					
+
+					$arrParam = array(
+						"table" => "snp_holguras",
+						"order" => "id_snp_holgura",
+						"column" => "consecutivo_holgura",
+						"id" => $holgura
+					);
+					$holguras = $this->general_model->get_basic_search($arrParam);//lista de holguras
+									
+					if(!$holguras){
+						$data["result"] = "error";
+						$data["mensaje"] = "El SNP ingresado no se encontró en la base de datos.";
+					}else{
+							if ($this->novedades_model->saveHolgura($holguras[0]['id_snp_holgura'])) {
+								$data["result"] = true;					
+								$this->session->set_flashdata('retornoExito', $msj);
+							} else {
+								$data["result"] = "error";					
+								$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el administrador.');
+							}
+					}
+			}
+
+			echo json_encode($data);
+    }
+	
 	
 	
 	
