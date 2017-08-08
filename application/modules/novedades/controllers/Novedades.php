@@ -413,7 +413,7 @@ class Novedades extends MX_Controller {
 				
 			if ($this->general_model->deleteRecord($arrParam)) {
 				$data["result"] = true;
-				$data["mensaje"] = "Se eliminó la holgua.";
+				$data["mensaje"] = "Se eliminó la holgura.";
 				$this->session->set_flashdata('retornoExito', 'Se eliminó la holgura');
 			} else {
 				$data["result"] = "error";
@@ -555,45 +555,55 @@ class Novedades extends MX_Controller {
 			header('Content-Type: application/json');
 			$data = array();
 			
-			$idHolgura = $this->input->post('hddId');
+			$idOtra = $this->input->post('hddId');
 
-			$msj = "Se adicionó la holgura.";
-			if ($idHolgura != '') {
-				$msj = "Se actualizó la holgura.";
+			$msj = "Se adicionó otra novedad.";
+			if ($idOtra != '') {
+				$msj = "Se actualizó la novedad.";
 			}			
 
-			$holgura = $this->input->post("holgura");
-			$confirm = $this->input->post("confirmarHolgura");
-
-			if($holgura != $confirm){
-				$data["result"] = "error";
-				$data["mensaje"] = "Los consecutivos no coinciden.";
+			if ($this->novedades_model->saveOtra()) {
+				$data["result"] = true;					
+				$this->session->set_flashdata('retornoExito', $msj);
 			} else {
-					//buscar el id de ese consecutivo
-					$this->load->model("general_model");
-					
-
-					$arrParam = array(
-						"table" => "snp_holguras",
-						"order" => "id_snp_holgura",
-						"column" => "consecutivo_holgura",
-						"id" => $holgura
-					);
-					$holguras = $this->general_model->get_basic_search($arrParam);//lista de holguras
-									
-					if(!$holguras){
-						$data["result"] = "error";
-						$data["mensaje"] = "El SNP ingresado no se encontró en la base de datos.";
-					}else{
-							if ($this->novedades_model->saveHolgura($holguras[0]['id_snp_holgura'])) {
-								$data["result"] = true;					
-								$this->session->set_flashdata('retornoExito', $msj);
-							} else {
-								$data["result"] = "error";					
-								$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el administrador.');
-							}
-					}
+				$data["result"] = "error";					
+				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el administrador.');
 			}
+
+
+
+			echo json_encode($data);
+    }
+	
+	/**
+	 * Eliminar otra novedad
+     * @since 7/8/2017
+	 */
+	public function eliminar_otra()
+	{			
+			header('Content-Type: application/json');
+			$data = array();
+			
+			$idOtra = $this->input->post('identificador');
+			
+			$this->load->model("general_model");
+			//eliminaos registro
+			$arrParam = array(
+				"table" => "novedades_otra",
+				"primaryKey" => "id_otra",
+				"id" => $idOtra
+			);
+				
+			if ($this->general_model->deleteRecord($arrParam)) {
+				$data["result"] = true;
+				$data["mensaje"] = "Se eliminó la novedad.";
+				$this->session->set_flashdata('retornoExito', 'Se eliminó la novedad');
+			} else {
+				$data["result"] = "error";
+				$data["mensaje"] = "Error!!! Contactarse con el Administrador.";
+				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador');
+			}
+
 
 			echo json_encode($data);
     }

@@ -1,4 +1,4 @@
-<script type="text/javascript" src="<?php echo base_url("assets/js/validate/novedades/holgura.js"); ?>"></script>
+<script type="text/javascript" src="<?php echo base_url("assets/js/validate/novedades/otra.js"); ?>"></script>
 
 <script>
 $(function(){ 

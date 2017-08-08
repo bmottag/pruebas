@@ -240,6 +240,38 @@
 					return false;
 				}
 		}
+		
+		/**
+		 * Add/Edit otra novedad
+		 * @since 7/8/2017
+		 */
+		public function saveOtra() 
+		{
+				$idOtra = $this->input->post('hddId');
+				$userID = $this->session->userdata("id");
+				
+				$data = array(
+					'fk_id_sitio' => $this->input->post('hddIdSitio'),
+					'fk_id_sesion' => $this->input->post('sesion'),
+					'observacion' => $this->input->post('observacion'),
+					'fecha_otra' => date("Y-m-d G:i:s"),
+					'fk_id_user_dele' => $userID,
+					'aprobada' => 0
+				);	
+
+				//revisar si es para adicionar o editar
+				if ($idOtra == '') {
+					$query = $this->db->insert('novedades_otra', $data);
+				} else {
+					$this->db->where('id_otra', $idOtra);
+					$query = $this->db->update('novedades_otra', $data);
+				}
+				if ($query) {
+					return true;
+				} else {
+					return false;
+				}
+		}
 
 		
 	    
