@@ -608,6 +608,68 @@ class Novedades extends MX_Controller {
 			echo json_encode($data);
     }
 	
+	/**
+	 * Lista de otras novedades para el coordinador
+     * @since 7/8/2017
+	 */
+	public function otra_coordinador()
+	{
+			$userRol = $this->session->userdata("rol");
+			$userID = $this->session->userdata("id");
+			if ($userRol != 3 ) { 
+				show_error('ERROR!!! - You are in the wrong place.');	
+			}
+			
+			$arrParam = array("idCoordinador" => $userID);
+			$data['info'] = $this->novedades_model->get_otras($arrParam);//listado de otras novedades
+			
+			$data["view"] = 'otra_coordinador';
+			$this->load->view("layout", $data);
+	}
+
+    /**
+     * Cargo modal - formulario aprobar otra novedad
+     * @since 7/8/2017
+     */
+    public function cargarModalAprobarOtra() 
+	{
+			header("Content-Type: text/plain; charset=utf-8"); //Para evitar problemas de acentos
+			
+			$data['information'] = FALSE;
+			$data["idOtra"] = $this->input->post("identificador");
+
+
+			if ($data["idOtra"] != 'x') 
+			{
+				$arrParam = array(
+					"idOtra" => $data["idOtra"]
+				);
+				$data['information'] = $this->novedades_model->get_otras($arrParam);//informacion otra novedad
+			}
+	
+			$this->load->view("otra_aprobar_modal", $data);
+    }	
+
+	/**
+	 * Guardar otra novedad aprobacion
+     * @since 7/8/2017
+	 */
+	public function save_otra_aprobacion()
+	{			
+			header('Content-Type: application/json');
+			$data = array();
+
+			if ($this->novedades_model->saveHolguraAprobar()) {
+				$data["result"] = true;
+				$this->session->set_flashdata('retornoExito', 'Se guardó con exito');
+			} else {
+				$data["result"] = "error";
+				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el administrador.');
+			}
+
+			echo json_encode($data);
+    }
+	
 	
 	
 	

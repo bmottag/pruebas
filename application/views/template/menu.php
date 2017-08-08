@@ -201,6 +201,10 @@ if($userRol==3){//COORDINADOR
 						<li>
 							<a href="<?php echo base_url("novedades/holgura_coordinador"); ?>"><i class="fa fa-download fa-fw"></i> Lista Holguras</a>
 						</li>
+						
+						<li>
+							<a href="<?php echo base_url("novedades/otra_coordinador"); ?>"><i class="fa fa-fire fa-fw"></i> Lista otras novedades</a>
+						</li>
 
                     </ul>
                     <!-- /.dropdown-messages -->
