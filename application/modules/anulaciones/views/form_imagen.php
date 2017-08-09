@@ -42,11 +42,16 @@
 						<?php
 								echo "<tr>";
 								echo "<td class='text-center'>";
+								$tipo2 = "foto_" . $tipo;
 								
 								if($information[0][$tipo])
 								{ 
 						?>
 <img src="<?php echo base_url($information[0][$tipo]); ?>" class="img-rounded" alt="Evidencia" width="50" height="50" />
+						<?php 
+								}elseif($information[0][$tipo2]){
+						?>
+<img src="<?php echo $information[0][$tipo2]; ?>" class="img-rounded" alt="Evidencia" width="50" height="50" />
 						<?php 
 								} 
 
