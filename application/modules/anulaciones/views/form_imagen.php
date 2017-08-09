@@ -68,24 +68,31 @@
 					<div class="col-lg-4">	
 						<div id="webcam">
 						</div>
-						
+					</div>
+					
+					<div class="col-lg-4">	
+						<div id="say-cheese-snapshot">
+						</div>					
+					</div>
+					
+					<div class="col-lg-4">	
+						<img id="fotoGuardada" src="" style="display:none" />					
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-lg-4">	
 						<button type="button" class="btn btn-success btn-block" id="obturador">
 							<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Tomar foto
 						</button>
 					</div>
 					
 					<div class="col-lg-4">	
-						<div id="say-cheese-snapshot">
-						</div><br>
-						
 						<button type="button" class="btn btn-success btn-block" id="guardarFoto">
 							<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Guardar foto
 						</button>					
 					</div>
-					
-					<div class="col-lg-4">	
-						<img id="fotoGuardada" src="" style="display:none" />					
-					</div>
+
 				</div>
 
 				
