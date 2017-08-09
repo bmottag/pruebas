@@ -340,161 +340,48 @@ class Dashboard extends MX_Controller {
 			$this->load->view("layout", $data);
 	}
 	
-	
 	/**
 	 * Dashboard directivo
 	 */
 	public function directivo()
 	{	
+			$this->load->model("general_model");
 			$userRol = $this->session->userdata("rol");
 			$userID = $this->session->userdata("id");
-			/**
-			 * Esta vista solo es para ADMINISTRADORES Y DIRECTIOVOS
-			 */
-			if($userRol>2){
-				show_error('ERROR!!! - You are in the wrong place.');
-			}
-			
-			$this->load->model("general_model");
-			
-			$arrParam = array();
-			$data['infoSitios'] = $this->general_model->get_sitios($arrParam);
-
-	/**
-	 * Datos para las cajas 
-	 */
-	 
+			$data['rol_busqueda'] = "Representantes";
 	 //inicio consulta de SITIOS
 			$arrParam = array();
 			$data['noSitios'] = $this->dashboard_model->countSitios($arrParam);//cuenta de sitios
 			
-	//inicio consulta de numero de alertas
-			$data['noRegistroInformativa'] = $this->dashboard_model->countAlertasByTipo(1);//cuenta de registro de informativa
-			$data['noRegistroNotificacion'] = $this->dashboard_model->countAlertasByTipo(2);//cuenta de registro de notificaciones
-			$data['noRegistroConsolidacion'] = $this->dashboard_model->countAlertasByTipo(3);//cuenta de registro de notificaciones
-		
+	//listado de sitios
+			$arrParam = array();
+			$data['infoSitios'] = $this->general_model->get_sitios($arrParam);
+			
+	/**
+	 * ACA SOLO PUEDE INGRESAR EL USUARIO COORDINADOR
+	 */
+			if($userRol!=2){
+				show_error('ERROR!!! - You are in the wrong place.');	
+			}
+			
 //conteo de los sitios segun el filtro
 			$data['conteoSitios'] = $this->general_model->get_numero_sitios_por_filtro($arrParam);
 //conteo de citados			
 			$data['conteoCitados'] = $this->general_model->get_numero_citados_por_filtro($arrParam);
-			
-			
-/**
- * Informacion de las alertas
- */
-			$data['rol_busqueda'] = "Representantes";
-//se buscan las alertas informativas vencidas que tienen el coordinador a cargo			
-			$arrParam = array(
-							"tipoAlerta" => 1
-			);
-			$infoAlertaVencidaInformativa = $this->general_model->get_alertas_vencidas_by($arrParam);
-			
-			//recorro las alertas y reviso se se les dio respuesta, si no se le dio respuesta las voy contando		
-			$data['contadorInformativaSi'] = 0;
-			$data['contadorInformativaNo'] = 0;
-			if($infoAlertaVencidaInformativa){
-				foreach ($infoAlertaVencidaInformativa as $lista):
-					$arrParam = array(
-							"idSitioSesion" => $lista['id_sitio_sesion'],
-							"idAlerta" => $lista['id_alerta']
-					);
-					$respuesta = $this->general_model->get_respuestas_alertas_vencidas_by($arrParam);
-										
-					if($respuesta){
-						$data['contadorInformativaSi']++;
-					}else{
-						$data['contadorInformativaNo']++;
-					}
-				endforeach;
-			}
-			
 
-//se buscan las alertas NOTIFICACION vencidas que tienen el coordinador a cargo			
-			$arrParam = array(
-							"tipoAlerta" => 2
-			);
-			$infoAlertaVencidaNotificacion = $this->general_model->get_alertas_vencidas_by($arrParam);
-
-			//recorro las alertas y reviso se se les dio respuesta, si no se le dio respuesta las voy contando
-			$data['contadorNotificacion'] = 0;
-			
-			$data['contadorNotificacionContestaron'] = 0;
-			$data['contadorNotificacionSi'] = 0;
-			$data['contadorNotificacionNoContestaron'] = 0;
+			/**
+			 * INICIO
+			 * Listado de alertas
+			 * @since 28/7/2017
+			 */			 
+			 
+			 //alertas para el coordinador en sesion
+			$this->load->model("specific_model");
+			$data["listadoSesiones"] = $this->specific_model->get_sesiones_operador();
 		
-			
-			if($infoAlertaVencidaNotificacion){
-				foreach ($infoAlertaVencidaNotificacion as $lista):
-					$arrParam = array(
-							"idSitioSesion" => $lista['id_sitio_sesion'],
-							"idAlerta" => $lista['id_alerta']
-					);
-					$respuesta = $this->general_model->get_respuestas_alertas_vencidas_by($arrParam);
-					
-					if(!$respuesta){
-						$data['contadorNotificacion']++;
-					}
-					
-					
-					$arrParam = array(
-							"idSitioSesion" => $lista['id_sitio_sesion'],
-							"idAlerta" => $lista['id_alerta'],
-							"respuestaAcepta" => 1
-					);//filtro por los que contestaron que SI
-					$respuestaSI = $this->general_model->get_respuestas_alertas_vencidas_by($arrParam);
-					
-					if($respuestaSI){
-						$data['contadorNotificacionSi']++;
-					}
-					
-					if($respuesta){
-						$data['contadorNotificacionContestaron']++;
-					}else{
-						$data['contadorNotificacionNoContestaron']++;
-					}
-					
-					
-					
-				endforeach;
-			}
-
-			
-			
-//se buscan las alertas CONSOLIDACION vencidas que tienen el coordinador a cargo
-			$arrParam = array(
-							"tipoAlerta" => 3
-			);
-			$infoAlertaVencidaConsolidacion = $this->general_model->get_alertas_vencidas_by($arrParam);
-			
-			//recorro las alertas y reviso se se les dio respuesta, si no se le dio respuesta las voy contando
-
-			
-			$data['contadorConsolidacionSi'] = 0;
-			$data['contadorConsolidacionNo'] = 0;
-			if($infoAlertaVencidaConsolidacion){
-				foreach ($infoAlertaVencidaConsolidacion as $lista):
-					$arrParam = array(
-							"idSitioSesion" => $lista['id_sitio_sesion'],
-							"idAlerta" => $lista['id_alerta']
-					);
-					$respuesta = $this->general_model->get_respuestas_alertas_vencidas_by($arrParam);
-					
-				
-					if($respuesta){
-						$data['contadorConsolidacionSi']++;
-					}else{
-						$data['contadorConsolidacionNo']++;
-					}
-					
-				endforeach;
-			} 
- 
- 
- 
- 
- 
-			
-			
+			/**
+			 * FIN
+			 */				 
 
 			$data["view"] = "dashboard_directivo";
 			$this->load->view("layout", $data);
