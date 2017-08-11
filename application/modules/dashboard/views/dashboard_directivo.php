@@ -141,13 +141,12 @@ if($infoAlerta["fk_id_tipo_alerta"] == 1)//INFORMATIVA
 			<div class="row">	
 				<div class="col-lg-12">	
 					<div class="alert alert-danger">
-						<strong>Mensaje Alerta: </strong><?php echo $infoAlerta['mensaje_alerta']; ?><br>
-						<strong>Tipo de Alerta: </strong>ALERTA INFORMATIVA<br><br>
+						<strong>Mensaje Alerta: </strong><br><?php echo $infoAlerta['mensaje_alerta']; ?><br>
+						<!-- <strong>Tipo de Alerta: </strong>ALERTA INFORMATIVA<br><br> -->
+						<strong>Hora alerta: </strong><?php echo $infoAlerta['hora_alerta']; ?><br>
 
-						<p>
-							<strong>Conteo de respuestas</strong>
+							<strong>Conteo de respuestas:</strong>
 							<span class="pull-right text-muted"></span>
-						</p>
 						
 							<div class="progress">
 <a href="<?php echo base_url("dashboard/alerta_especifica/" . $lista['id_alerta'] . "/directivo/contestaron");?>" >
@@ -246,13 +245,12 @@ if($infoAlerta["fk_id_tipo_alerta"] == 2)//NOTIFICACION
 			<div class="row">	
 				<div class="col-lg-12">	
 					<div class="alert alert-warning">
-						<strong>Mensaje Alerta: </strong><?php echo $infoAlerta['mensaje_alerta']; ?><br>
-						<strong>Tipo de Alerta: </strong>ALERTA DE NOTIFICACIÓN<br><br>
+						<strong>Mensaje Alerta: </strong><br><?php echo $infoAlerta['mensaje_alerta']; ?><br>
+						<!-- <strong>Tipo de Alerta: </strong>ALERTA DE NOTIFICACIÓN<br><br> -->
+						<strong>Hora alerta: </strong><?php echo $infoAlerta['hora_alerta']; ?><br>
 						
-						<p>
-							<strong>Conteo de respuestas</strong>
+							<strong>Conteo de respuestas:</strong>
 							<span class="pull-right text-muted"></span>
-						</p>
 						
 <a href="<?php echo base_url("dashboard/alerta_especifica/" . $lista['id_alerta'] . "/directivo/contestaron");?>" >
 							<div class="progress">
@@ -354,13 +352,12 @@ if($infoAlerta["fk_id_tipo_alerta"] == 3)//CONSOLIDACION
 			<div class="row">	
 				<div class="col-lg-12">	
 					<div class="alert alert-success ">
-						<strong>Mensaje Alerta: </strong><?php echo $infoAlerta['mensaje_alerta']; ?><br>
-						<strong>Tipo de Alerta: </strong>ALERTA DE CONSOLIDACIÓN<br><br>
+						<strong>Mensaje Alerta: </strong><br><?php echo $infoAlerta['mensaje_alerta']; ?><br>
+						<!-- <strong>Tipo de Alerta: </strong>ALERTA DE CONSOLIDACIÓN<br><br> -->
+						<strong>Hora alerta: </strong><?php echo $infoAlerta['hora_alerta']; ?><br>
 
-						<p>
-							<strong>Conteo de respuestas</strong>
+							<strong>Conteo de respuestas:</strong>
 							<span class="pull-right text-muted"></span>
-						</p>
 						
 						
 							<div class="progress">
