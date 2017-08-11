@@ -56,14 +56,25 @@
 					<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
 						<thead>
 							<tr>
-								<th class="text-center">Sitio</th>
 								<th class="text-center">Respuesta</th>
+								<th class="text-center">Sitio</th>
+								<th class="text-center">Nodo o Región</th>
+								<th class="text-center">Departamento</th>
+								<th class="text-center">Municipio</th>
+								<th class="text-center">Códifo DANE</th>
+								<th class="text-center">Representante</th>
+								
 							</tr>
 						</thead>
         <tfoot>
             <tr>
-                <th class="text-center">Sitio</th>
                 <th class="text-center">Respuesta</th>
+				<th class="text-center">Sitio</th>
+				<th class="text-center">Nodo o Región</th>
+				<th class="text-center">Departamento</th>
+				<th class="text-center">Municipio</th>
+				<th class="text-center">Códifo DANE</th>
+				<th class="text-center">Representante</th>
             </tr>
         </tfoot>
 						<tbody>	
@@ -94,25 +105,15 @@
 	
 							foreach ($info as $lista):
 									echo "<tr>";
-									echo "<td>";
-									echo "<strong>Sitio: </strong>" . $lista['nombre_sitio'];
-									echo "<br><strong>Nodo o Región: </strong>" . $lista['nombre_region'];
-									echo "<br><strong>Departamento: </strong>" . $lista['dpto_divipola_nombre'];
-									echo "<br><strong>Municipio: </strong>" . $lista['mpio_divipola_nombre'];
-									echo "<br><strong>Códifo DANE: </strong>" . $lista['codigo_dane'];
-									echo "<br><strong>Representante: </strong>" . $lista['nombre_delegado'];
-									echo "<br>Celular: ";
-
-echo "<a href='tel:".$lista['celular_delegado']."'>".$lista['celular_delegado']."</a>";
-									
-									echo "<br><strong>Email: </strong>" . $lista['email'];
-									echo "</td>";
 									
 									echo "<td>";
 										echo "<strong>Respuesta: </strong>";
 										echo $acepta = $respuesta[0]['acepta']==1?"Si":"No";
-										echo "<br><strong>Ausentes: </strong>" . $respuesta[0]['ausentes'];
 										echo "<br><strong>Observación: </strong>" . $respuesta[0]['observacion'];
+										if($respuesta[0]['ausentes']!=""){
+											echo "<br><strong>Ausentes: </strong>" . $respuesta[0]['ausentes'];
+											echo "<br><a href=" . base_url("report/update_alerta_consolidacion/" . $respuesta[0]['id_registro'] . "/" . $rol) . " ><strong>Editar Respuesta</strong> </a>";
+										}
 										echo "<br><strong>Fecha registro: </strong>" . $respuesta[0]['fecha_registro'];
 										
 										
@@ -123,10 +124,31 @@ if($respuesta[0]['acepta']==2){
 echo "<br><a href=" . base_url("report/update_alerta_notificacion/" . $respuesta[0]['id_registro'] . "/" . $rol) . " ><strong>Cambiar Respuesta</strong> </a>";
 		}
 }
-								
 									echo "</td>";
 						
-						
+									echo "<td>";
+									echo $lista['nombre_sitio'];
+									echo "</td>";
+									echo "<td>";
+									echo $lista['nombre_region'];
+									echo "</td>";
+									echo "<td>";
+									echo $lista['dpto_divipola_nombre'];
+									echo "</td>";
+									echo "<td>";
+									echo $lista['mpio_divipola_nombre'];
+									echo "</td>";
+									echo "<td>";
+									echo $lista['codigo_dane'];
+									echo "</td>";
+									echo "<td>";
+									echo $lista['nombre_delegado'];
+									echo "<br>";
+
+echo "<a href='tel:".$lista['celular_delegado']."'>".$lista['celular_delegado']."</a>";
+									
+									echo "<br>" . $lista['email'];
+									echo "</td>";
 
 									echo "</tr>";
 							endforeach;
