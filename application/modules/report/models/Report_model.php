@@ -468,8 +468,6 @@
 					'fk_id_user_coordinador' => $this->session->id,
 					'nota' => $nota
 				);	
-
-				$query = $this->db->insert('registro', $data);
 				
 				$this->db->where('id_registro', $idRegistro);
 				$query = $this->db->update('registro', $data);

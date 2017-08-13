@@ -62,23 +62,6 @@
 	
 				
 				
-				
-<?php 
-
-
-if($info[0]['fk_id_tipo_alerta'] == 1){//informativa
-	$class = "danger";
-	$class2 = "danger";
-}elseif($info[0]['fk_id_tipo_alerta'] == 2){//notificacion
-	$class = "yellow";
-	$class2 = "warning";
-}if($info[0]['fk_id_tipo_alerta'] == 3){//consolidacion
-	$class = "green";
-	$class2 = "success";
-}
-
-?>
-				
 		<div class="col-lg-6">				
 			<div class="panel panel-green">
 				<div class="panel-heading">
@@ -152,7 +135,7 @@ $( document ).ready( function () {
 	<div class="form-group">
 		<div class="row" align="center">
 			<div style="width:50%;" align="center">
-				<input type="submit" id="btnSubmit" name="btnSubmit" value="Aceptar" class="btn btn-<?php echo $class2; ?>"/>
+				<input type="submit" id="btnSubmit" name="btnSubmit" value="Aceptar" class="btn btn-success"/>
 			</div>
 		</div>
 	</div>
