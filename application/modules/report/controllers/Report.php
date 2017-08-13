@@ -686,6 +686,81 @@ class Report extends CI_Controller {
 			$this->load->view("layout", $data);
     }
 	
+	/**
+	 * Formulario para actualizar la alerta de consolidacion
+     * @since 9/8/2017
+	 */
+	public function update_alerta_consolidacion($idRegistro, $rol)
+	{
+			$data["rol"] = $rol;
+			$this->load->model("general_model");
+			//informacion de la respuesta
+			$arrParam = array(
+					"idRegistro" => $idRegistro
+			);
+			$data['infoRespuesta'] = $this->general_model->get_respuestas_alertas_vencidas_by($arrParam);
+
+			//informacion de la alerta sesion y sitio
+			$arrParam = array(
+					"idSitioSesion" => $data['infoRespuesta'][0]['fk_id_sitio_sesion'],
+					"idAlerta" => $data['infoRespuesta'][0]['fk_id_alerta']
+			);
+			$data['info'] = $this->general_model->get_informacion_respuestas_alertas_vencidas_by($arrParam);
+
+			$data["view"] = 'form_update_alerta_consolidacion';
+			$this->load->view("layout", $data);
+	}
+	
+	/**
+	 * Actualizacion de las alertas de consolidacion
+	 * @since 11/8/2017
+	 */
+	public function update_registro_consolidacion_by_coordinador()
+	{
+			$data = array();
+			$ausentes = $this->input->post('ausentes');
+			$ausentesConfirmar = $this->input->post('ausentesConfirmar');
+			$citados = $this->input->post('citados');
+
+			$rol = $this->input->post('hddIdRol');
+			$idAlerta = $this->input->post('hddIdAlerta');
+			$idSitioSesion = $this->input->post('hddIdSitioSesion');
+			$idDelegado = $this->input->post('hddIdUserDelegado');
+			
+			$idRegistro = $this->input->post('idRegistro');
+			
+			$error = false;
+			
+			
+			
+			if($ausentes == ""){
+				$this->session->set_flashdata('retornoErrorConsolidacion', '<strong>Error!!!</strong> Debe indicar los ausentes.');
+			}else{
+				if($ausentes < 0){
+					$this->session->set_flashdata('retornoErrorConsolidacion', '<strong>Error!!!</strong> La cantidad de ausentes no puede ser menor que 0.');
+				}else{				
+					if($ausentes != $ausentesConfirmar){
+						$this->session->set_flashdata('retornoErrorConsolidacion', '<strong>Error!!!</strong> Confirmar la cantidad de ausentes.');
+					}else{				
+							if($ausentes > $citados){
+								$this->session->set_flashdata('retornoErrorConsolidacion', '<strong>Error!!!</strong> La cantidad de ausentes no puede ser mayor a la cantidad de citados.');
+							}else{
+								if ($this->report_model->updateRegistroConsolidacionCoordinador()) 
+								{
+									$error = true;
+									$this->session->set_flashdata('retornoExito', "Gracias por su respuesta.");
+								} else {
+									$this->session->set_flashdata('retornoErrorConsolidacion', '<strong>Error!!!</strong> Contactarse con el Administrador.');
+								}
+							}
+					}
+				}
+			}
+			
+
+			redirect("/dashboard/" . $rol,"location",301);
+
+	}
 	
 	
 	

@@ -50,7 +50,7 @@
 					<?php 
 					if($info[0]['fk_id_user_delegado']){
 						echo "C.C. " . $info[0]['numero_documento'] . " " . $info[0]['nombre_delegado'];
-						echo "<br>Celular: ";						
+						echo "<br><strong>Celular: </strong>";						
 						echo "<a href='tel:".$info[0]['celular_delegado']."'>".$info[0]['celular_delegado']."</a>"; 
 						echo "<br><strong>Email: </strong>" . $info[0]['email'];
 					} else { echo "Falta asignar Representante.";}

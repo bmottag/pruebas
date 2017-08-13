@@ -444,6 +444,55 @@
 				}
 		}	
 		
+		/**
+		 * Guardar respuesta del usuario
+		 * @since 11/8/2017
+		 */
+		public function updateRegistroConsolidacionCoordinador() 
+		{
+				$rol = $this->input->post('hddIdRol');
+				$nota = 'Se realizó el registro por el ' . $rol;
+			
+				$ausentes = $this->input->post('ausentes');
+				$idSitioSesion = $this->input->post('hddIdSitioSesion');
+				
+				$idRegistro = $this->input->post('idRegistro');
+		
+				$data = array(
+					'fk_id_alerta' => $this->input->post('hddIdAlerta'),
+					'fk_id_usuario' => $this->input->post('hddIdUserDelegado'),
+					'fk_id_sitio_sesion' => $this->input->post('hddIdSitioSesion'),
+					'acepta' => 1,
+					'ausentes' => $ausentes,
+					'fecha_registro' => date("Y-m-d G:i:s"),
+					'fk_id_user_coordinador' => $this->session->id,
+					'nota' => $nota
+				);	
+
+				$query = $this->db->insert('registro', $data);
+				
+				$this->db->where('id_registro', $idRegistro);
+				$query = $this->db->update('registro', $data);
+
+				if ($query) {
+					
+					//actualizo tabla sitio_sesion con la cantidad de ausentes
+					$presentes = $this->input->post('citados') - $ausentes;
+					
+					$data = array(
+						'numero_ausentes' => $ausentes,
+						'numero_presentes_efectivos' => $presentes
+					);
+
+					$this->db->where('id_sitio_sesion', $idSitioSesion);
+					$query = $this->db->update('sitio_sesion', $data);
+
+					return true;
+				} else {
+					return false;
+				}
+		}
+		
 		
 		
 		
