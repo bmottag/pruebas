@@ -11,7 +11,21 @@ $(function(){
                     $('#tablaDatos').html(data);
                 }
             });
-	});	
+	});
+
+	$(".btn-info").click(function () {	
+			var oID = $(this).attr("id");
+            $.ajax ({
+                type: 'POST',
+				url: base_url + '/novedades/cargarModalEditarHolgura',
+                data: {'identificador': oID},
+                cache: false,
+                success: function (data) {
+                    $('#tablaDatosEditar').html(data);
+                }
+            });
+	});
+	
 });
 </script>
 
@@ -112,6 +126,11 @@ if ($retornoError) {
 										Aprobar <span class="glyphicon glyphicon-edit" aria-hidden="true">
 									</button>
 									
+									<br><br>
+									
+									<button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#modalEditar" id="update-<?php echo $lista['id_holgura']; ?>" >
+										Editar <span class="glyphicon glyphicon-edit" aria-hidden="true">
+									</button>
 									
 						<?php
 									if($lista['aprobada']==1){
@@ -143,6 +162,16 @@ if ($retornoError) {
 <div class="modal fade text-center" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">    
 	<div class="modal-dialog" role="document">
 		<div class="modal-content" id="tablaDatos">
+
+		</div>
+	</div>
+</div>                       
+<!--FIN Modal -->
+
+<!--INICIO Modal -->
+<div class="modal fade text-center" id="modalEditar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">    
+	<div class="modal-dialog" role="document">
+		<div class="modal-content" id="tablaDatosEditar">
 
 		</div>
 	</div>

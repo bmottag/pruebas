@@ -783,6 +783,106 @@ class Novedades extends MX_Controller {
 			echo json_encode($data);
     }	
 	
+    /**
+     * Cargo modal - formulario holgura para editarlo por parte del coordinador
+     * @since 14/8/2017
+     */
+    public function cargarModalEditarHolgura() 
+	{
+			header("Content-Type: text/plain; charset=utf-8"); //Para evitar problemas de acentos
+			
+			$data['information'] = FALSE;
+
+			$identificador = $this->input->post("identificador");			
+			//como se coloca un ID diferente para que no entre en conflicto con los otros modales, toca sacar el ID
+			$porciones = explode("-", $identificador);
+			$data["idHolgura"] = $porciones[1];
+
+			$this->load->model("general_model");
+			//lista de snp holguras
+			$arrParam = array(
+				"table" => "snp_holguras",
+				"order" => "snp_holgura",
+				"id" => "x"
+			);
+			$data['snpHolgura'] = $this->general_model->get_basic_search($arrParam);//lista de snp holguras
+	
+
+			if ($data["idHolgura"] != 'x') 
+			{
+				$arrParam = array(
+					"idHolgura" => $data["idHolgura"]
+				);
+				$data['information'] = $this->novedades_model->get_holguras($arrParam);
+		
+				//busco si el sitio tiene asociadas sesiones			
+				$arrParam = array("idSitio" => $data['information'][0]['id_sitio']);
+				$conteoSesiones = $this->general_model->countSesionesbySitio($arrParam);//reviso si el sitio tiene sesiones
+				$data['infoSesiones'] = false;
+				if($conteoSesiones != 0){//si tiene sesiones las busco
+					$data['infoSesiones'] = $this->general_model->get_sesiones_sitio($arrParam);//sesiones del sitio
+				}
+				
+				//busco informacion del sitio
+				$arrParam = array("idSitio" => $data['information'][0]['id_sitio']);
+				$data['infoSitoDelegado'] = $this->general_model->get_sitios($arrParam);//busco el id del sitio
+				
+			}
+			
+			$this->load->view("holgura_aprobar_editar_modal", $data);
+    }
+	
+	/**
+	 * Guardar holgura
+     * @since 14/8/2017
+	 */
+	public function update_holgura()
+	{			
+			header('Content-Type: application/json');
+			$data = array();
+			
+			$idHolgura = $this->input->post('hddId');
+
+			$msj = "Se adicionó la holgura.";
+			if ($idHolgura != '') {
+				$msj = "Se actualizó la holgura.";
+			}			
+
+			$holgura = $this->input->post("holgura");
+			$confirm = $this->input->post("confirmarHolgura");
+
+			if($holgura != $confirm){
+				$data["result"] = "error";
+				$data["mensaje"] = "Los consecutivos no coinciden.";
+			} else {
+					//buscar el id de ese consecutivo
+					$this->load->model("general_model");
+					
+
+					$arrParam = array(
+						"table" => "snp_holguras",
+						"order" => "id_snp_holgura",
+						"column" => "consecutivo_holgura",
+						"id" => $holgura
+					);
+					$holguras = $this->general_model->get_basic_search($arrParam);//lista de holguras
+									
+					if(!$holguras){
+						$data["result"] = "error";
+						$data["mensaje"] = "El SNP ingresado no se encontró en la base de datos.";
+					}else{
+							if ($this->novedades_model->updateHolgura($holguras[0]['id_snp_holgura'])) {
+								$data["result"] = true;					
+								$this->session->set_flashdata('retornoExito', $msj);
+							} else {
+								$data["result"] = "error";					
+								$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el administrador.');
+							}
+					}
+			}
+
+			echo json_encode($data);
+    }
 	
 	
 }

@@ -115,7 +115,7 @@
 		 */
 		public function get_holguras($arrDatos) 
 		{
-				$this->db->select('D.*, X.nombre_sitio, X.codigo_dane, S.*, P.nombre_prueba, G.*, Z.snp_holgura, Z.consecutivo_holgura, A.*');
+				$this->db->select('D.*, X.id_sitio, X.nombre_sitio, X.codigo_dane, S.*, P.nombre_prueba, G.*, Z.snp_holgura, Z.consecutivo_holgura, A.*');
 				$this->db->join('sitios X', 'X.id_sitio = A.fk_id_sitio', 'INNER');
 				$this->db->join('param_divipola D', 'D.mpio_divipola = X.fk_mpio_divipola', 'INNER');
 
@@ -299,6 +299,33 @@
 
 				$this->db->where('id_cambio_cuadernillo', $idCambioCuadernillo);
 				$query = $this->db->update('novedades_cambio_cuadernillo', $data);
+
+				if ($query) {
+					return true;
+				} else {
+					return false;
+				}
+		}
+		
+		/**
+		 * Edit Holgura
+		 * @since 14/8/2017
+		 */
+		public function updateHolgura($idSNPHolgura) 
+		{
+				$idHolgura = $this->input->post('hddId');
+				$userID = $this->session->userdata("id");
+				
+				$data = array(
+					'fk_id_sitio' => $this->input->post('hddIdSitio'),
+					'fk_id_sesion' => $this->input->post('sesion'),
+					'fk_id_examinando' => $this->input->post('consecutivo'),
+					'fk_id_snp_holgura' => $idSNPHolgura,
+					'observacion' => $this->input->post('observacion')
+				);	
+
+				$this->db->where('id_holgura', $idHolgura);
+				$query = $this->db->update('novedades_holgura', $data);
 
 				if ($query) {
 					return true;
