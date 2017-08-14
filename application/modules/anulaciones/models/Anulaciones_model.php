@@ -101,6 +101,32 @@
 					return false;
 				}
 		}
+		
+		/**
+		 * Add/Edit Anulacion
+		 * @since 14/8/2017
+		 */
+		public function updateAnulacion($idExaminando) 
+		{
+				$idAnulacion = $this->input->post('hddId');
+				
+				$data = array(
+					'fk_id_sitio' => $this->input->post('hddIdSitio'),
+					'fk_id_sesion' => $this->input->post('sesion'),
+					'fk_id_examinando' => $idExaminando,
+					'fk_id_motivo' => $this->input->post('motivo'),
+					'observacion' => $this->input->post('observacion')
+				);	
+
+				$this->db->where('id_anulacion', $idAnulacion);
+				$query = $this->db->update('anulaciones', $data);
+
+				if ($query) {
+					return true;
+				} else {
+					return false;
+				}
+		}
 
 		
 		

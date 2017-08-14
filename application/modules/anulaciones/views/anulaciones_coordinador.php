@@ -13,7 +13,21 @@ $(function(){
                     $('#tablaDatos').html(data);
                 }
             });
+	});
+
+	$(".btn-info").click(function () {	
+			var oID = $(this).attr("id");
+            $.ajax ({
+                type: 'POST',
+				url: base_url + '/anulaciones/cargarModalEditarAnulacion',
+                data: {'identificador': oID},
+                cache: false,
+                success: function (data) {
+                    $('#tablaDatosEditar').html(data);
+                }
+            });
 	});	
+	
 });
 </script>
 
@@ -75,7 +89,7 @@ if ($retornoError) {
 								<th class="text-center">Sitio</th>
 								<th class="text-center">Sesión</th>
 								<th class="text-center">SNP Examinando</th>
-								<th class="text-center">Aprobar</th>
+								<th class="text-center">Aprobar / Editar</th>
 								<th class="text-center">Evidencia</th>
 								<th class="text-center">Acta</th>
 
@@ -111,6 +125,12 @@ if ($retornoError) {
 						?>
 									<button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#modal" id="<?php echo $lista['id_anulacion']; ?>" >
 										Aprobar <span class="glyphicon glyphicon-edit" aria-hidden="true">
+									</button>
+									
+									<br><br>
+									
+									<button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#modalEditar" id="editar-<?php echo $lista['id_anulacion']; ?>" >
+										Editar <span class="glyphicon glyphicon-edit" aria-hidden="true">
 									</button>
 									
 									
@@ -170,6 +190,16 @@ if ($retornoError) {
 <div class="modal fade text-center" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">    
 	<div class="modal-dialog" role="document">
 		<div class="modal-content" id="tablaDatos">
+
+		</div>
+	</div>
+</div>                       
+<!--FIN Modal -->
+
+<!--INICIO Modal -->
+<div class="modal fade text-center" id="modalEditar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">    
+	<div class="modal-dialog" role="document">
+		<div class="modal-content" id="tablaDatosEditar">
 
 		</div>
 	</div>
