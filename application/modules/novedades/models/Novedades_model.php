@@ -9,7 +9,7 @@
 		 */
 		public function get_cambio_cuadernillo($arrDatos) 
 		{
-				$this->db->select('X.nombre_sitio, X.codigo_dane, D.*,S.*, P.nombre_prueba, G.*, E.snp snp_examinando, E.consecutivo consecutivo_examinando, H.snp snp_cuadernillo, H.consecutivo consecutivo_cuadernillo, M.nombre_motivo_novedad, A.*');
+				$this->db->select('X.id_sitio, X.nombre_sitio, X.codigo_dane, D.*,S.*, P.nombre_prueba, G.*, E.snp snp_examinando, E.consecutivo consecutivo_examinando, H.snp snp_cuadernillo, H.consecutivo consecutivo_cuadernillo, M.nombre_motivo_novedad, A.*');
 				$this->db->join('sitios X', 'X.id_sitio = A.fk_id_sitio', 'INNER');
 				$this->db->join('param_divipola D', 'D.mpio_divipola = X.fk_mpio_divipola', 'INNER');
 
@@ -266,6 +266,40 @@
 					$this->db->where('id_otra', $idOtra);
 					$query = $this->db->update('novedades_otra', $data);
 				}
+				if ($query) {
+					return true;
+				} else {
+					return false;
+				}
+		}
+		
+		/**
+		 * Edit Cambio cuadrnillo
+		 * @since 14/8/2017
+		 */
+		public function updateCambioCuadernillo($idExaminando) 
+		{
+				$idCambioCuadernillo = $this->input->post('hddId');
+				$userID = $this->session->userdata("id");
+				$busqueda_1 = $this->input->post("busqueda_1");
+				$busqueda_2 = $this->input->post("busqueda_2");
+				$cuadernillo = $busqueda_1==""?$busqueda_2:$busqueda_1;
+				$busqueda = $busqueda_1==""?2:1;
+				
+				$data = array(
+					'fk_id_sitio' => $this->input->post('hddIdSitio'),
+					'fk_id_sesion' => $this->input->post('sesion'),
+					'fk_id_examinando' => $idExaminando,
+					'fk_id_motivo_novedad' => $this->input->post('motivo'),
+					'fk_id_cuadernillo' => $cuadernillo,
+					'observacion' => $this->input->post('observacion'),
+					'busqueda' => $busqueda
+				);	
+
+
+				$this->db->where('id_cambio_cuadernillo', $idCambioCuadernillo);
+				$query = $this->db->update('novedades_cambio_cuadernillo', $data);
+
 				if ($query) {
 					return true;
 				} else {

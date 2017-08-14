@@ -670,7 +670,118 @@ class Novedades extends MX_Controller {
 			echo json_encode($data);
     }
 	
+    /**
+     * Cargo modal - formulario para editar cambio de cuadernillo  por parte del coordinador
+     * @since 14/8/2017
+     */
+    public function cargarModalEditarCambioCuadernillo() 
+	{
+			header("Content-Type: text/plain; charset=utf-8"); //Para evitar problemas de acentos
+			
+			$data['information'] = FALSE;
+			
+			$identificador = $this->input->post("identificador");			
+			//como se coloca un ID diferente para que no entre en conflicto con los otros modales, toca sacar el ID
+			$porciones = explode("-", $identificador);
+			$data["idCambioCuadernillo"] = $porciones[1];
+
+			$this->load->model("general_model");
+			//lista de motivo de cambio cuadernillo
+			$arrParam = array(
+				"table" => "param_motivo_novedad",
+				"order" => "id_motivo_novedad",
+				"id" => "x"
+			);
+			$data['motivos'] = $this->general_model->get_basic_search($arrParam);//lista de motivo de anulaciones			
+
+			if ($data["idCambioCuadernillo"] != 'x') 
+			{
+				$arrParam = array(
+					"idCambioCuadernillo" => $data["idCambioCuadernillo"]
+				);
+				$data['information'] = $this->novedades_model->get_cambio_cuadernillo($arrParam);
+				
+				//busco si el sitio tiene asociadas sesiones			
+				$arrParam = array("idSitio" => $data['information'][0]['id_sitio']);
+				$conteoSesiones = $this->general_model->countSesionesbySitio($arrParam);//reviso si el sitio tiene sesiones
+				$data['infoSesiones'] = false;
+				if($conteoSesiones != 0){//si tiene sesiones las busco
+					$data['infoSesiones'] = $this->general_model->get_sesiones_sitio($arrParam);//sesiones del sitio
+				}
+				
+				//busco informacion del sitio
+				$arrParam = array("idSitio" => $data['information'][0]['id_sitio']);
+				$data['infoSitoDelegado'] = $this->general_model->get_sitios($arrParam);//busco el id del sitio
+				
+			}
+			
+			$this->load->view("cambio_cuadernillo_aprobar_editar_modal", $data);
+    }
 	
+	/**
+	 * Guardar cambio de cuadernillo
+     * @since 14/8/2017
+	 */
+	public function update_cambio_cuadernillo()
+	{			
+			header('Content-Type: application/json');
+			$data = array();
+			
+			$idAnulacion = $this->input->post('hddId');
+
+			$msj = "Se adicionó el cambio de cudernillo.";
+			if ($idAnulacion != '') {
+				$msj = "Se actualizó el cambio de cuadernillo.";
+			}			
+
+			$consecutivo = $this->input->post("consecutivo");
+			$confirm = $this->input->post("confirmarConsecutivo");
+			$busqueda_1 = $this->input->post("busqueda_1");
+			$busqueda_2 = $this->input->post("busqueda_2");
+
+			if($consecutivo != $confirm){
+				$data["result"] = "error";
+				$data["mensaje"] = "Los consecutivos no coinciden.";
+			} else {
+				
+				if($busqueda_1 =="" && $busqueda_2==""){
+					$data["result"] = "error";
+					$data["mensaje"] = "Seleccionar una de las busquedas.";
+				} else {
+				
+					if($busqueda_1 !="" && $busqueda_2!=""){
+						$data["result"] = "error";
+						$data["mensaje"] = "Solo seleccionar una opción.";
+					} else {
+				
+							//buscar el id de ese consecutivo
+							$this->load->model("general_model");
+							$arrParam = array(
+									"consecutivo" => $consecutivo,
+									"idMunicipio" => $this->input->post('hddIdMunicipio'),
+									"codigoDane" => $this->input->post('hddCodigoDane')
+							);
+							$infoSNP = $this->general_model->get_examinandos_by($arrParam);
+							
+							if(!$infoSNP){
+								$data["result"] = "error";
+								$data["mensaje"] = "El SNP ingresado no se encontró en la base de datos.";
+							}else{
+						
+								if ($this->novedades_model->updateCambioCuadernillo($infoSNP['id_examinando'])) {
+									$data["result"] = true;					
+									$this->session->set_flashdata('retornoExito', $msj);
+								} else {
+									$data["result"] = "error";					
+									$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el administrador.');
+								}
+							}
+					}
+				}
+			}
+
+			echo json_encode($data);
+    }	
 	
 	
 	
