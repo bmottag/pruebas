@@ -212,7 +212,7 @@
 		 */
 		public function get_otras($arrDatos) 
 		{
-				$this->db->select('D.*, X.nombre_sitio, X.codigo_dane, S.*, P.nombre_prueba, G.*, A.*');
+				$this->db->select('D.*, X.id_sitio, X.nombre_sitio, X.codigo_dane, S.*, P.nombre_prueba, G.*, A.*');
 				$this->db->join('sitios X', 'X.id_sitio = A.fk_id_sitio', 'INNER');
 				$this->db->join('param_divipola D', 'D.mpio_divipola = X.fk_mpio_divipola', 'INNER');
 
@@ -348,6 +348,31 @@
 					'observacion_aprobacion' => $this->input->post('observacion'),
 					'fecha_aprobacion' => date("Y-m-d G:i:s"),
 					'fk_id_user_coor' => $userID
+				);	
+
+				$this->db->where('id_otra', $idOtra);
+				$query = $this->db->update('novedades_otra', $data);
+
+				if ($query) {
+					return true;
+				} else {
+					return false;
+				}
+		}
+		
+		/**
+		 * Edit otra novedad
+		 * @since 14/8/2017
+		 */
+		public function updateOtra() 
+		{
+				$idOtra = $this->input->post('hddId');
+				$userID = $this->session->userdata("id");
+				
+				$data = array(
+					'fk_id_sitio' => $this->input->post('hddIdSitio'),
+					'fk_id_sesion' => $this->input->post('sesion'),
+					'observacion' => $this->input->post('observacion')
 				);	
 
 				$this->db->where('id_otra', $idOtra);
