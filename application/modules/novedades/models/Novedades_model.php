@@ -333,6 +333,32 @@
 					return false;
 				}
 		}
+		
+		/**
+		 * aprobacion otra novedad
+		 * @since 14/8/2017
+		 */
+		public function saveOtraAprobar() 
+		{
+				$idOtra = $this->input->post('hddId');
+				$userID = $this->session->userdata("id");
+				
+				$data = array(
+					'aprobada' => $this->input->post('aprobar'),
+					'observacion_aprobacion' => $this->input->post('observacion'),
+					'fecha_aprobacion' => date("Y-m-d G:i:s"),
+					'fk_id_user_coor' => $userID
+				);	
+
+				$this->db->where('id_otra', $idOtra);
+				$query = $this->db->update('novedades_otra', $data);
+
+				if ($query) {
+					return true;
+				} else {
+					return false;
+				}
+		}
 
 		
 	    

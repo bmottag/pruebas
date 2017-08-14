@@ -659,7 +659,7 @@ class Novedades extends MX_Controller {
 			header('Content-Type: application/json');
 			$data = array();
 
-			if ($this->novedades_model->saveHolguraAprobar()) {
+			if ($this->novedades_model->saveOtraAprobar()) {
 				$data["result"] = true;
 				$this->session->set_flashdata('retornoExito', 'Se guardó con exito');
 			} else {
