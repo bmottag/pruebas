@@ -1054,6 +1054,9 @@ class Admin extends MX_Controller {
 					$data["msj"] .= ", Tabla Sitio Sesión";
 				}				
 				
+				if ($this->admin_model->eliminarNovedades()) {
+					$data["msj"] .= ", Tablas de novedades";
+				}
 				
 				if ($this->admin_model->eliminarSesiones()) {
 					$data["msj"] .= ", Tabla Sesiones";
@@ -1698,8 +1701,11 @@ class Admin extends MX_Controller {
 	 * Lista de cambio de cuadernillo para el coordinador
      * @since 1/6/2017
 	 */
-	public function subir_archivo()
+	public function subir_archivo($error="", $success="")
 	{		
+	
+			$data["error"] = $error;
+			$data["success"] = $success;
 			$data["view"] = 'cargar_archivo';
 			$this->load->view("layout", $data);
 	}
@@ -1710,11 +1716,56 @@ class Admin extends MX_Controller {
 	 */
 	public function do_upload()
 	{		
-			echo "hol mundo"; exit;
+            $config['upload_path'] = './tmp/';
+            $config['overwrite'] = true;
+            $config['allowed_types'] = 'csv';
+            $config['max_size'] = '5000';
+            $config['file_name'] = 'archivo.csv';
+
+            $this->load->library('upload', $config);
+
+            if (!$this->upload->do_upload()) {
+                $error = $this->upload->display_errors();
+                $msgError = html_escape(substr($error, 3, -4));
+                $this->subir_archivo($msgError);
+            }else {				
+                $file_info = $this->upload->data();
+                $data = array('upload_data' => $this->upload->data());
+
+                $archivo = $file_info['file_name'];
+
+				$registros = array();
+				if (($fichero = fopen(FCPATH . 'tmp/' . $archivo, "a+")) !== FALSE) {
+					// Lee los nombres de los campos
+					$nombres_campos = fgetcsv($fichero, 0, ";");
+					$num_campos = count($nombres_campos);
+					// Lee los registros
+
+					while (($datos = fgetcsv($fichero, 0, ";")) !== FALSE) {
+						// Crea un array asociativo con los nombres y valores de los campos
+						for ($icampo = 0; $icampo < $num_campos; $icampo++) {
+							$registro[$nombres_campos[$icampo]] = $datos[$icampo];
+						}
+						// Añade el registro leido al array de registros
+						$registros[] = $registro;
+					}
+					fclose($fichero);
+					
+					foreach ($registros as $lista) {
+						$idUsuario = $this->admin_model->cargar_informacion_sitio($lista);
+					}
+				}
+
+            }
+			
+			$success = 'El archivo se cargo correctamente.';
+			$this->subir_archivo('', $success);
+			
+    }
 	
-			$data["view"] = 'cargar_archivo';
-			$this->load->view("layout", $data);
-	}
+	
+	
+
 	
 	
 }

@@ -658,6 +658,31 @@
 		 * Eliminar registros de la tabla SESIONES
 		 * @since  23/5/2017
 		 */
+		public function eliminarNovedades()
+		{
+				$sql = "TRUNCATE TABLE anulaciones";
+				$query = $this->db->query($sql);
+				
+				$sql = "TRUNCATE TABLE novedades_cambio_cuadernillo";
+				$query = $this->db->query($sql);
+				
+				$sql = "TRUNCATE TABLE novedades_holgura";
+				$query = $this->db->query($sql);
+				
+				$sql = "TRUNCATE TABLE novedades_otra";
+				$query = $this->db->query($sql);
+
+				if ($query) {
+					return true;
+				} else {
+					return false;
+				}
+		}
+		
+		/**
+		 * Eliminar registros de la tabla SESIONES
+		 * @since  23/5/2017
+		 */
 		public function eliminarSesiones()
 		{
 				$sql = "DELETE FROM sesiones";
@@ -694,6 +719,22 @@
 		{
 				$sql = "DELETE FROM param_grupo_instrumentos";
 				$query = $this->db->query($sql);
+
+				if ($query) {
+					return true;
+				} else {
+					return false;
+				}
+		}
+		
+		/**
+		 * Cargar informacion 
+		 * @since 14/8/2017
+		 */
+		public function cargar_informacion_sitio($lista) 
+		{
+				$lista['fecha_creacion'] = date("Y-m-d");
+				$query = $this->db->insert('sitios', $lista);
 
 				if ($query) {
 					return true;
