@@ -1078,6 +1078,36 @@ class Admin extends MX_Controller {
 			echo json_encode($data);
 	}
 	
+	/**
+	 * Eliminar sitios y exminandos de la base de datpos
+	 * @since 15/8/2017
+	 */
+	public function eliminar_sitios_db()
+	{
+			header('Content-Type: application/json');
+			$data = array();
+
+			
+			if ($this->admin_model->eliminarExaminandos()) {
+				
+				$data["msj"] = "Tabla Examinandos";
+				
+				if ($this->admin_model->eliminarSitios()) {
+					$data["msj"] .= ", Tabla Sitios";
+				}
+				
+				$data["result"] = true;
+				$data["mensaje"] = "Se eliminaron los registros.";
+				$this->session->set_flashdata('retornoExito', 'Se eliminó los registros de ' . $data["msj"]);
+			}else{
+				$data["result"] = "error";
+				$data["mensaje"] = "Error!!! Contactarse con el Administrador.";
+				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador');
+			}
+
+			echo json_encode($data);
+	}
+	
     /**
      * actualizamos el campo delegado de los sitio
      */

@@ -40,6 +40,49 @@ $(function(){
 					});
 			}
 	});
+	
+	$(".btn-warning").click(function () {	
+			
+			//Activa icono guardando
+			if(window.confirm('Esta seguro de eliminar los registros de la Base de Datos?'))
+			{
+					$(".btn-warning").attr('disabled','-1');
+					$.ajax ({
+						type: 'POST',
+						url: base_url + 'admin/eliminar_sitios_db',
+						cache: false,
+						success: function(data){
+												
+							if( data.result == "error" )
+							{
+								alert(data.mensaje);
+								$(".btn-warning").removeAttr('disabled');							
+								return false;
+							} 
+											
+							if( data.result )//true
+							{	                                                        
+								$(".btn-warning").removeAttr('disabled');
+
+								var url = base_url + "admin/atencion_eliminar";
+								$(location).attr("href", url);
+							}
+							else
+							{
+								alert('Error. Reload the web page.');
+								$(".btn-warning").removeAttr('disabled');
+							}	
+						},
+						error: function(result) {
+							alert('Error. Reload the web page.');
+							$(".btn-danger").removeAttr('disabled');
+						}
+
+					});
+			}
+	});
+	
+	
 });
 </script>
 
@@ -94,10 +137,10 @@ if ($retornoError) {
 }
 ?> 
 					<div class="row">
-						<div class="col-lg-12">	
+						<div class="col-lg-4">	
 							<div class="alert alert-danger">
 								<strong>Atención:</strong> <br>Al aceptar borrará toda la información de Alertas, 
-								Sesiones, Grupo de Instrumentos, Sesiones asignadas a cada Sitio y las respuestas de los Representantes.
+								Sesiones, Grupo de Instrumentos, Sesiones asignadas a cada Sitio, Novedades y las respuestas de los Representantes.
 								
 								<br><br>
 								<button type="button" class="btn btn-danger btn-xs" >
@@ -105,7 +148,30 @@ if ($retornoError) {
 								</button>						
 							</div>
 						</div>
+
+						<div class="col-lg-4">	
+							<div class="alert alert-warning">
+								<strong>Atención:</strong> <br>Al aceptar borrará toda la información de Examinandos y Sitios.
+								<br><br>
+								<button type="button" class="btn btn-warning btn-xs" >
+									Aceptar <span class="fa fa-times fa-fw" aria-hidden="true">
+								</button>						
+							</div>
+						</div>
+						
+						<div class="col-lg-4">	
+							<div class="alert alert-info">
+								Subir registros a la tabla de sitios.
+								<br><br>
+<a class="btn btn-info btn-xs" href=" <?php echo base_url(). 'admin/subir_archivo'; ?> ">
+Subir sitios <span class="glyphicon glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a> 
+						
+							</div>
+						</div>
+						
 					</div>
+					
+					
 				</div>
 				<!-- /.row (nested) -->
 			</div>

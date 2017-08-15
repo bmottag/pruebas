@@ -656,7 +656,7 @@
 		
 		/**
 		 * Eliminar registros de la tabla SESIONES
-		 * @since  23/5/2017
+		 * @since  14/8/2017
 		 */
 		public function eliminarNovedades()
 		{
@@ -670,6 +670,38 @@
 				$query = $this->db->query($sql);
 				
 				$sql = "TRUNCATE TABLE novedades_otra";
+				$query = $this->db->query($sql);
+
+				if ($query) {
+					return true;
+				} else {
+					return false;
+				}
+		}
+		
+		/**
+		 * Eliminar registros de la tabla SESIONES
+		 * @since  15/8/2017
+		 */
+		public function eliminarExaminandos()
+		{
+				$sql = "DELETE FROM examinandos";
+				$query = $this->db->query($sql);
+
+				if ($query) {
+					return true;
+				} else {
+					return false;
+				}
+		}
+		
+		/**
+		 * Eliminar registros de la tabla SESIONES
+		 * @since  15/8/2017
+		 */
+		public function eliminarSitios()
+		{
+				$sql = "DELETE FROM sitios";
 				$query = $this->db->query($sql);
 
 				if ($query) {
