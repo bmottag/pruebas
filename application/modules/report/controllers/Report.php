@@ -457,6 +457,8 @@ class Report extends CI_Controller {
 				$data["botonRegreso"] = "dashboard/coordinador";
 			}elseif($regreso == 'operador'){
 				$data["botonRegreso"] = "dashboard/operador";
+			}elseif($regreso == 'admin'){
+				$data["botonRegreso"] = "dashboard/admin";
 			}
 				
 			$this->load->model("general_model");

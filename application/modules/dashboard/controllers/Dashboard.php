@@ -13,8 +13,11 @@ class Dashboard extends MX_Controller {
 	 */
 	public function admin()
 	{	
+			$this->load->model("general_model");
 			$userRol = $this->session->userdata("rol");
 			$userID = $this->session->userdata("id");
+			$data['rol_busqueda'] = "Representantes";
+			
 			/**
 			 * Esta vista solo es para ADMINISTRADORES
 			 */
@@ -22,55 +25,33 @@ class Dashboard extends MX_Controller {
 				show_error('ERROR!!! - You are in the wrong place.');
 			}
 			
-			$this->load->model("general_model");
+	 //inicio consulta de SITIOS
+			$arrParam = array();
+			$data['noSitios'] = $this->dashboard_model->countSitios($arrParam);//cuenta de sitios
+			
+	//listado de sitios
+			$arrParam = array();
+			$data['infoSitios'] = $this->general_model->get_sitios($arrParam);
+			
+//conteo de los sitios segun el filtro
+			$data['conteoSitios'] = $this->general_model->get_numero_sitios_por_filtro($arrParam);
+//conteo de citados			
+			$data['conteoCitados'] = $this->general_model->get_numero_citados_por_filtro($arrParam);
 
-			$arrParam = array("tipoAlerta" => 1);
-			$data['infoAlertaInformativa'] = $this->dashboard_model->get_alerta_by($arrParam);
-			
-			$arrParam = array("tipoAlerta" => 2);
-			$data['infoAlertaNotificacion'] = $this->dashboard_model->get_alerta_by($arrParam);
+			/**
+			 * INICIO
+			 * Listado de alertas
+			 * @since 28/7/2017
+			 */			 
+			 
+			 //alertas para el coordinador en sesion
+			$this->load->model("specific_model");
+			$data["listadoSesiones"] = $this->specific_model->get_sesiones_operador();
+		
+			/**
+			 * FIN
+			 */				 
 
-			$arrParam = array("tipoAlerta" => 3);
-			$data['infoAlertaConsolidacion'] = $this->dashboard_model->get_alerta_by($arrParam);
-//echo $this->db->last_query();			
-//pr($data['infoAlertaConsolidacion']); exit;	
-
-	/**
-	 * Datos para las cajas 
-	 */
-	 
-	 //inicio consulta de pruebas vigentes
-			$data['noPruebasVigentes'] = $this->dashboard_model->countPruebas();//cuenta de pruebas vigentes
-			
-			$year = date('Y');
-			$arrParam = array(
-				"table" => "pruebas",
-				"order" => "nombre_prueba",
-				"column" => "anio_prueba",
-				"id" => $year
-			);
-			$data['infoPruebas'] = $this->general_model->get_basic_search($arrParam);//lista pruebas; se filtra por año actual
-			
-			
-	//inicio consulta de numero de alertas
-			$data['noRegistroInformativa'] = $this->dashboard_model->countAlertasByTipo(1);//cuenta de registro de informativa
-			$data['noRegistroNotificacion'] = $this->dashboard_model->countAlertasByTipo(2);//cuenta de registro de notificaciones
-			$data['noRegistroConsolidacion'] = $this->dashboard_model->countAlertasByTipo(3);//cuenta de registro de notificaciones
-			
-	//inicio consulta de sesiones que estan abiertas en un rango mayor a 7 dias y menor a 7 dias de la fecha actual
-			$fecha = date("Y-m-d");
-			$fechaInicio = strtotime ( '-7 day' , strtotime ( $fecha ) ) ;//le sumo 7 dias a la fecha actual
-			$data['fechaInicio'] = date ( 'Y-m-d' , $fechaInicio );
-			
-			$fechaFin = strtotime ( '+7 day' , strtotime ( $fecha ) ) ;//le resto 7 dias a la fecha actual
-			$data['fechaFin'] = date ( 'Y-m-d' , $fechaFin );
-
-			$arrParam = array(
-				"fechaInicio" => $data['fechaInicio'],
-				"fechaFin" => $data['fechaFin']
-			);
-			$data['infoSesiones'] = $this->dashboard_model->get_sesiones_actuales($arrParam);
-	
 			$data["view"] = "dashboard";
 			$this->load->view("layout", $data);
 	}
