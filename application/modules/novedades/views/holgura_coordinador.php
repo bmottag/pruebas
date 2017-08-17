@@ -125,19 +125,22 @@ if ($retornoError) {
 									<button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#modal" id="<?php echo $lista['id_holgura']; ?>" >
 										Aprobar <span class="glyphicon glyphicon-edit" aria-hidden="true">
 									</button>
-									
-									<br><br>
+															
+						<?php
+									if($lista['aprobada']==1){
+										echo "<p class='text-primary text-center'><strong>Aprobada</strong></p>";
+									}elseif($lista['aprobada']==2){
+										echo "<p class='text-danger text-center'><strong>Desprobada</strong></p>";
+									}else{
+										echo "<br><br>";
+									}
+						?>
 									
 									<button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#modalEditar" id="update-<?php echo $lista['id_holgura']; ?>" >
 										Editar <span class="glyphicon glyphicon-edit" aria-hidden="true">
 									</button>
 									
 						<?php
-									if($lista['aprobada']==1){
-										echo "<p class='text-primary text-center'>Aprobada</p>";
-									}elseif($lista['aprobada']==2){
-										echo "<p class='text-danger text-center'>Desprobada</p>";
-									}
 									echo "</td>";
 									
 									echo "<td>" . $lista['observacion'] . "</td>";
