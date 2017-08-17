@@ -6,6 +6,10 @@
 	}
 
 	setInterval('reloadPage()','40000');//40 segundos
+	
+	$(document).ready(function(){
+		var sonido = document.getElementById("sonido");
+	});
 </script>
 
 <?php
@@ -19,6 +23,12 @@
 				<div class="panel-heading">
 					<h4 class="list-group-item-heading">
 						DASHBOARD
+<!--
+<input type="button" onclick="sonido.play()" value="play">
+ Audio que se reproduce cuando se activa una alerta -->						
+<audio id="sonido">
+	<source src="<?php echo base_url(); ?>images/notificacion.mp3"></source>
+</audio>
 					</h4>
 				</div>
 			</div>
@@ -238,6 +248,18 @@ if($infoAlerta["fk_id_tipo_alerta"] == 2)//NOTIFICACION
 				$porcentajeSi = 0;
 				$porcentajeNo = 0;
 			}
+			
+
+
+if($contadorNotificacionNo > 0)
+{ 
+?>
+<!--Reporducir sonido si existe una alerta activa para el delegado -->
+<script languaje="javascript">
+	sonido.play();
+</script>
+<?php
+}
 						
 				
 ?>			
