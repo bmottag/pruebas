@@ -60,14 +60,14 @@
 		<div class="row">
 			<div class="col-sm-6">
 				<div class="form-group input-group">
-					<span class="input-group-addon">EKT20171</span>
+					<span class="input-group-addon">SNP</span>
 					<input type="password" id="consecutivo" name="consecutivo" class="form-control" value="" placeholder="Registro" required >
 				</div>
 			</div>
 
 			<div class="col-sm-6">
 				<div class="form-group input-group">
-					<span class="input-group-addon">EKT20171</span>
+					<span class="input-group-addon">SNP</span>
 					<input type="password" id="confirmarConsecutivo" name="confirmarConsecutivo" class="form-control" value="" placeholder="Confirmar" required >
 				</div>
 			</div>
@@ -77,14 +77,14 @@
 		<div class="row">
 			<div class="col-sm-6">
 				<div class="form-group input-group">
-					<span class="input-group-addon">EKT20171</span>
+					<span class="input-group-addon">SNP</span>
 					<input type="text" id="consecutivo" name="consecutivo" class="form-control" value="<?php echo $information?$information[0]["consecutivo"]:""; ?>" placeholder="Registro" required >
 				</div>
 			</div>
 
 			<div class="col-sm-6">
 				<div class="form-group input-group">
-					<span class="input-group-addon">EKT20171</span>
+					<span class="input-group-addon">SNP</span>
 					<input type="text" id="confirmarConsecutivo" name="confirmarConsecutivo" class="form-control" value="<?php echo $information?$information[0]["consecutivo"]:""; ?>" placeholder="Confirmar" required >
 				</div>
 			</div>
