@@ -238,7 +238,47 @@ class Dashboard extends MX_Controller {
 		
 			/**
 			 * FIN
-			 */				 
+			 */
+
+
+			/**
+			 * INICIO
+			 * consultar en las novedades si existe alguna sin responder para colocar un mensaje en el dashboard 
+			 * @since 16/8/2017
+			 */			 			 
+
+			$arrParam = array("idCoordinador" => $userID);
+			$anulaciones = $this->specific_model->get_anulaciones_sin_aprobar($arrParam);
+			
+			$arrParam = array("idCoordinador" => $userID);
+			$cambio_cuadernillo = $this->specific_model->get_cambio_cuadernillo_sin_aprobar($arrParam);
+			
+			$arrParam = array("idCoordinador" => $userID);
+			$holguras = $this->specific_model->get_holguras_sin_aprobar($arrParam);
+			
+			$arrParam = array("idCoordinador" => $userID);
+			$otras = $this->specific_model->get_otras_sin_aprobar($arrParam);
+			
+			$data['msjNovedades'] = false;
+			if($anulaciones || $cambio_cuadernillo || $holguras || $otras){
+				$data['msjNovedades'] = "Existen novedades por aprobar:"; 
+				if($anulaciones){
+					$data['msjNovedades'].= " - Anulaciones";
+				}
+				if($cambio_cuadernillo){
+					$data['msjNovedades'].= " - Cambio de cuadernillo";
+				}
+				if($holguras){
+					$data['msjNovedades'].= " - Holguras";
+				}
+				if($otras){
+					$data['msjNovedades'].= " - Otras novedades";
+				}
+			}
+			
+			/**
+			 * FIN
+			 */
 
 			$data["view"] = "dashboard_coordinador";
 			$this->load->view("layout", $data);

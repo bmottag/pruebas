@@ -67,6 +67,28 @@ if ($retornoError) {
 ?> 
 
 
+<?php
+if ($msjNovedades) {
+    ?>
+	
+<!--Reporducir sonido si existe una alerta activa para el delegado -->
+<script languaje="javascript">
+	sonido.play();
+</script>
+	
+	<div class="row">
+		<div class="col-lg-12">	
+			<div class="alert alert-danger ">
+				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+				<?php echo $msjNovedades ?>
+			</div>
+		</div>
+	</div>
+    <?php
+}
+?> 
+
+
 <!--INFO DE LAS SESIONES -->
 <?php 
 	if($listadoSesiones)

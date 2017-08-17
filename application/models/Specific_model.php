@@ -166,6 +166,97 @@ class Specific_model extends CI_Model {
 				}
 		}
 		
+		/**
+		 * Lista de anulaciones
+		 * @since 16/8/2017
+		 */
+		public function get_anulaciones_sin_aprobar($arrDatos) 
+		{
+				$this->db->select();
+				$this->db->join('sitios X', 'X.id_sitio = A.fk_id_sitio', 'INNER');
+				
+				if (array_key_exists("idCoordinador", $arrDatos)) {
+					$this->db->where('X.fk_id_user_coordinador', $arrDatos["idCoordinador"]);
+				}
+				$this->db->where('A.aprobada', 0);
+
+				$query = $this->db->get('anulaciones A');
+
+				if ($query->num_rows() > 0) {
+					return true;
+				} else {
+					return false;
+				}
+		}
+		
+		/**
+		 * Lista de cuadernillos
+		 * @since 16/8/2017
+		 */
+		public function get_cambio_cuadernillo_sin_aprobar($arrDatos) 
+		{
+				$this->db->select();
+				$this->db->join('sitios X', 'X.id_sitio = A.fk_id_sitio', 'INNER');
+				
+				if (array_key_exists("idCoordinador", $arrDatos)) {
+					$this->db->where('X.fk_id_user_coordinador', $arrDatos["idCoordinador"]);
+				}
+				$this->db->where('A.aprobada', 0);
+
+				$query = $this->db->get('novedades_cambio_cuadernillo A');
+
+				if ($query->num_rows() > 0) {
+					return true;
+				} else {
+					return false;
+				}
+		}
+		
+		/**
+		 * Lista de holguras
+		 * @since 16/8/2017
+		 */
+		public function get_holguras_sin_aprobar($arrDatos) 
+		{
+				$this->db->select();
+				$this->db->join('sitios X', 'X.id_sitio = A.fk_id_sitio', 'INNER');
+				
+				if (array_key_exists("idCoordinador", $arrDatos)) {
+					$this->db->where('X.fk_id_user_coordinador', $arrDatos["idCoordinador"]);
+				}
+				$this->db->where('A.aprobada', 0);
+
+				$query = $this->db->get('novedades_holgura A');
+
+				if ($query->num_rows() > 0) {
+					return true;
+				} else {
+					return false;
+				}
+		}
+		
+		/**
+		 * Lista de otras novedades
+		 * @since 16/8/2017
+		 */
+		public function get_otras_sin_aprobar($arrDatos)
+		{
+				$this->db->select();
+				$this->db->join('sitios X', 'X.id_sitio = A.fk_id_sitio', 'INNER');
+				
+				if (array_key_exists("idCoordinador", $arrDatos)) {
+					$this->db->where('X.fk_id_user_coordinador', $arrDatos["idCoordinador"]);
+				}
+				$this->db->where('A.aprobada', 0);
+
+				$query = $this->db->get('novedades_otra A');
+
+				if ($query->num_rows() > 0) {
+					return true;
+				} else {
+					return false;
+				}
+		}
 
 
 
