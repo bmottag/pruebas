@@ -1096,6 +1096,10 @@ class Admin extends MX_Controller {
 					$data["msj"] .= ", Tabla Sitios";
 				}
 				
+				if ($this->admin_model->eliminarHolguras()) {
+					$data["msj"] .= ", Tabla Holguras";
+				}
+				
 				$data["result"] = true;
 				$data["mensaje"] = "Se eliminaron los registros.";
 				$this->session->set_flashdata('retornoExito', 'Se eliminó los registros de ' . $data["msj"]);

@@ -728,6 +728,22 @@
 		}
 		
 		/**
+		 * Eliminar registros de la tabla HOLGURAS
+		 * @since  19/8/2017
+		 */
+		public function eliminarHolguras()
+		{	
+				$sql = "DELETE FROM snp_holguras";
+				$query = $this->db->query($sql);
+
+				if ($query) {
+					return true;
+				} else {
+					return false;
+				}
+		}
+		
+		/**
 		 * Eliminar registros de la tabla SESIONES
 		 * @since  23/5/2017
 		 */
@@ -781,6 +797,9 @@
 		 */
 		public function cargar_informacion_sitio($lista) 
 		{
+				$sql = "ALTER TABLE sitios AUTO_INCREMENT=1";
+				$query = $this->db->query($sql);
+			
 				$lista['fecha_creacion'] = date("Y-m-d");
 				$query = $this->db->insert('sitios', $lista);
 
@@ -813,6 +832,9 @@
 		 */
 		public function cargar_informacion_examinandos($lista) 
 		{
+				$sql = "ALTER TABLE examinandos AUTO_INCREMENT=1";
+				$query = $this->db->query($sql);
+			
 				$query = $this->db->insert('examinandos', $lista);
 
 				if ($query) {
@@ -822,6 +844,23 @@
 				}
 		}
 		
+		/**
+		 * Cargar informacion holguras
+		 * @since 19/8/2017
+		 */
+		public function cargar_informacion_holguras($lista) 
+		{
+				$sql = "ALTER TABLE snp_holguras AUTO_INCREMENT=1";
+				$query = $this->db->query($sql);
+			
+				$query = $this->db->insert('snp_holguras', $lista);
+
+				if ($query) {
+					return true;
+				} else {
+					return false;
+				}
+		}
 		
 	    
 	}

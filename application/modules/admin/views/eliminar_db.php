@@ -192,7 +192,7 @@ if ($retornoError) {
 
 						<div class="col-lg-4">	
 							<div class="alert alert-warning">
-								<strong>Atención:</strong> <br>Al aceptar borrará toda la información de Examinandos y Sitios.
+								<strong>Borrar Examinandos, Holguras y Sitios:</strong> <br>Al aceptar borrará toda la información de Examinandos, Holguras y Sitios.
 								<br><br>
 								<button type="button" class="btn btn-warning btn-xs" >
 									Aceptar <span class="fa fa-times fa-fw" aria-hidden="true">
@@ -260,6 +260,16 @@ Subir Examinandos <span class="glyphicon glyphicon glyphicon-chevron-right" aria
 								<br><br>
 <a class="btn btn-success btn-xs" href=" <?php echo base_url(). 'admin/subir_archivo/cargar_usuarios'; ?> ">
 Subir Usuarios <span class="glyphicon glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a> 
+						
+							</div>
+						</div>
+						
+						<div class="col-lg-4">	
+							<div class="alert alert-success">
+								Subir registros a la tabla <strong>Holguras</strong>.
+								<br><br>
+<a class="btn btn-success btn-xs" href=" <?php echo base_url(). 'admin/subir_archivo/cargar_holguras'; ?> ">
+Subir Holguras <span class="glyphicon glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a> 
 						
 							</div>
 						</div>
