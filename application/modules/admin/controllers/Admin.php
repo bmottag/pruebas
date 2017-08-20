@@ -1108,6 +1108,30 @@ class Admin extends MX_Controller {
 			echo json_encode($data);
 	}
 	
+	/**
+	 * Eliminar usuarios de la base de datos
+	 * @since 19/8/2017
+	 */
+	public function eliminar_usuarios_db()
+	{
+			header('Content-Type: application/json');
+			$data = array();
+
+			
+			if ($this->admin_model->eliminarUsuarios())
+			{
+				$data["result"] = true;
+				$data["mensaje"] = "Se eliminaron los registros.";
+				$this->session->set_flashdata('retornoExito', 'Se eliminó los registros de la tabla de usuarios.');
+			}else{
+				$data["result"] = "error";
+				$data["mensaje"] = "Error!!! Contactarse con el Administrador.";
+				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador');
+			}
+
+			echo json_encode($data);
+	}
+	
     /**
      * actualizamos el campo delegado de los sitio
      */
@@ -1731,12 +1755,12 @@ class Admin extends MX_Controller {
 	 * Lista de cambio de cuadernillo para el coordinador
      * @since 1/6/2017
 	 */
-	public function subir_archivo($error="", $success="")
+	public function subir_archivo($vista, $error="", $success="")
 	{		
 	
 			$data["error"] = $error;
 			$data["success"] = $success;
-			$data["view"] = 'cargar_archivo';
+			$data["view"] = $vista;
 			$this->load->view("layout", $data);
 	}
 
@@ -1744,13 +1768,13 @@ class Admin extends MX_Controller {
 	 * Lista de cambio de cuadernillo para el coordinador
      * @since 1/6/2017
 	 */
-	public function do_upload()
+	public function do_upload($model)
 	{		
             $config['upload_path'] = './tmp/';
             $config['overwrite'] = true;
             $config['allowed_types'] = 'csv';
             $config['max_size'] = '5000';
-            $config['file_name'] = 'archivo.csv';
+            $config['file_name'] = $model . '.csv';
 
             $this->load->library('upload', $config);
 
@@ -1782,14 +1806,20 @@ class Admin extends MX_Controller {
 					fclose($fichero);
 					
 					foreach ($registros as $lista) {
-						$idUsuario = $this->admin_model->cargar_informacion_sitio($lista);
+						$idUsuario = $this->admin_model->$model($lista);
 					}
 				}
 
             }
 			
+			if($model == "cargar_informacion_sitio"){
+				$vista = "cargar_archivo";
+			}else{
+				$vista = "cargar_usuarios";
+			}
+			
 			$success = 'El archivo se cargo correctamente.';
-			$this->subir_archivo('', $success);
+			$this->subir_archivo($vista,'', $success);
 			
     }
 	

@@ -713,6 +713,22 @@
 		
 		/**
 		 * Eliminar registros de la tabla SESIONES
+		 * @since  19/8/2017
+		 */
+		public function eliminarUsuarios()
+		{	
+				$sql = "TRUNCATE TABLE usuario";
+				$query = $this->db->query($sql);
+
+				if ($query) {
+					return true;
+				} else {
+					return false;
+				}
+		}
+		
+		/**
+		 * Eliminar registros de la tabla SESIONES
 		 * @since  23/5/2017
 		 */
 		public function eliminarSesiones()
@@ -767,6 +783,22 @@
 		{
 				$lista['fecha_creacion'] = date("Y-m-d");
 				$query = $this->db->insert('sitios', $lista);
+
+				if ($query) {
+					return true;
+				} else {
+					return false;
+				}
+		}
+		
+		/**
+		 * Cargar informacion usuarios
+		 * @since 19/8/2017
+		 */
+		public function cargar_informacion_usuarios($lista) 
+		{
+				$lista['fecha_creacion'] = date("Y-m-d");
+				$query = $this->db->insert('usuario', $lista);
 
 				if ($query) {
 					return true;

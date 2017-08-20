@@ -82,6 +82,47 @@ $(function(){
 			}
 	});
 	
+	$(".btn-info").click(function () {	
+			
+			//Activa icono guardando
+			if(window.confirm('Esta seguro de eliminar los registros de la Base de Datos?'))
+			{
+					$(".btn-info").attr('disabled','-1');
+					$.ajax ({
+						type: 'POST',
+						url: base_url + 'admin/eliminar_usuarios_db',
+						cache: false,
+						success: function(data){
+												
+							if( data.result == "error" )
+							{
+								alert(data.mensaje);
+								$(".btn-info").removeAttr('disabled');							
+								return false;
+							} 
+											
+							if( data.result )//true
+							{	                                                        
+								$(".btn-info").removeAttr('disabled');
+
+								var url = base_url + "admin/atencion_eliminar";
+								$(location).attr("href", url);
+							}
+							else
+							{
+								alert('Error. Reload the web page.');
+								$(".btn-info").removeAttr('disabled');
+							}	
+						},
+						error: function(result) {
+							alert('Error. Reload the web page.');
+							$(".btn-danger").removeAttr('disabled');
+						}
+
+					});
+			}
+	});
+	
 	
 });
 </script>
@@ -107,7 +148,7 @@ $(function(){
 		<div class="col-lg-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<i class="fa fa-gears"></i> ATENCIÓN
+					<i class="fa fa-gears"></i> ELIMINAR REGISTROS DE LA BASE DE DATOS
 				</div>
 				<div class="panel-body">
 				
@@ -161,10 +202,54 @@ if ($retornoError) {
 						
 						<div class="col-lg-4">	
 							<div class="alert alert-info">
-								Subir registros a la tabla de sitios.
+								<strong>Atención - Borrar lista de usuarios:</strong> <br>Al aceptar borrará la lista de usuarios.
+								
 								<br><br>
-<a class="btn btn-info btn-xs" href=" <?php echo base_url(). 'admin/subir_archivo'; ?> ">
-Subir sitios <span class="glyphicon glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a> 
+								<button type="button" class="btn btn-info btn-xs" >
+									Aceptar <span class="fa fa-times fa-fw" aria-hidden="true">
+								</button>						
+							</div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<!-- /.row (nested) -->
+			</div>
+			<!-- /.panel-body -->
+		</div>
+		<!-- /.panel -->
+	</div>
+	<!-- /.col-lg-12 -->
+	
+	
+	<!-- /.row -->
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<i class="fa fa-gears"></i> SUBIR REGISTROS A LA BASE DE DATOS
+				</div>
+				<div class="panel-body">
+									
+					<div class="row">
+						
+						<div class="col-lg-4">	
+							<div class="alert alert-success">
+								Subir registros a la tabla <strong>Sitios</strong>.
+								<br><br>
+<a class="btn btn-success btn-xs" href=" <?php echo base_url(). 'admin/subir_archivo/cargar_archivo'; ?> ">
+Subir Sitios <span class="glyphicon glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a> 
+						
+							</div>
+						</div>
+						
+						<div class="col-lg-4">	
+							<div class="alert alert-success">
+								Subir registros a la tabla <strong>Usuarios</strong>.
+								<br><br>
+<a class="btn btn-success btn-xs" href=" <?php echo base_url(). 'admin/subir_archivo/cargar_usuarios'; ?> ">
+Subir Usuarios <span class="glyphicon glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a> 
 						
 							</div>
 						</div>
@@ -180,5 +265,10 @@ Subir sitios <span class="glyphicon glyphicon glyphicon-chevron-right" aria-hidd
 		<!-- /.panel -->
 	</div>
 	<!-- /.col-lg-12 -->
+	
+	
+	
+	
+	
 </div>
 <!-- /.row -->

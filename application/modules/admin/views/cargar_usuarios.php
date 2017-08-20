@@ -7,7 +7,7 @@
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<h4 class="list-group-item-heading">
-					<i class="fa fa-legal fa-fw"></i> CARGAR SITIOS
+					<i class="fa fa-legal fa-fw"></i> CARGAR USUARIOS
 					</h4>
 				</div>
 			</div>
@@ -20,12 +20,12 @@
 		<div class="col-lg-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<i class="fa fa-legal"></i> Seleccionar archivo para cargue de sitios
+					<i class="fa fa-legal"></i> Seleccionar archivo para cargue de usuarios
 				</div>
 				<div class="panel-body">
 				
 					<div class="alert alert-info">
-						Seleccionar archivo para cargue de sitios
+						Seleccionar archivo para cargue de usuarios
 					</div>				
 					
 					
@@ -40,7 +40,7 @@
 
 
 
-        <form name="formCargue" id="formCargue" role="form" method="post" enctype="multipart/form-data" action="<?php echo site_url("/admin/do_upload/cargar_informacion_sitio"); ?>">
+        <form name="formCargue" id="formCargue" role="form" method="post" enctype="multipart/form-data" action="<?php echo site_url("/admin/do_upload/cargar_informacion_usuarios"); ?>">
             <div class="row">
                 <div class="form-group col-md-4">
                     <label>Ajuntar Archivo:</label>
