@@ -807,6 +807,21 @@
 				}
 		}
 		
+		/**
+		 * Cargar informacion examinandos
+		 * @since 19/8/2017
+		 */
+		public function cargar_informacion_examinandos($lista) 
+		{
+				$query = $this->db->insert('examinandos', $lista);
+
+				if ($query) {
+					return true;
+				} else {
+					return false;
+				}
+		}
+		
 		
 	    
 	}

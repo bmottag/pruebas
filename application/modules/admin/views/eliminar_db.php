@@ -246,6 +246,16 @@ Subir Sitios <span class="glyphicon glyphicon glyphicon-chevron-right" aria-hidd
 						
 						<div class="col-lg-4">	
 							<div class="alert alert-success">
+								Subir registros a la tabla <strong>Examinandos</strong>. Tener en cuenta que primero debe subir la información de sitios.
+								<br><br>
+<a class="btn btn-success btn-xs" href=" <?php echo base_url(). 'admin/subir_archivo/cargar_examinandos'; ?> ">
+Subir Examinandos <span class="glyphicon glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a> 
+						
+							</div>
+						</div>
+						
+						<div class="col-lg-4">	
+							<div class="alert alert-success">
 								Subir registros a la tabla <strong>Usuarios</strong>.
 								<br><br>
 <a class="btn btn-success btn-xs" href=" <?php echo base_url(). 'admin/subir_archivo/cargar_usuarios'; ?> ">
