@@ -75,7 +75,7 @@ $(function(){
 						},
 						error: function(result) {
 							alert('Error. Reload the web page.');
-							$(".btn-danger").removeAttr('disabled');
+							$(".btn-warning").removeAttr('disabled');
 						}
 
 					});
@@ -116,7 +116,48 @@ $(function(){
 						},
 						error: function(result) {
 							alert('Error. Reload the web page.');
-							$(".btn-danger").removeAttr('disabled');
+							$(".btn-info").removeAttr('disabled');
+						}
+
+					});
+			}
+	});
+	
+	$(".btn-atencion").click(function () {	
+			
+			//Activa icono guardando
+			if(window.confirm('Esta seguro de eliminar los registros de la Base de Datos?'))
+			{
+					$(".btn-atencion").attr('disabled','-1');
+					$.ajax ({
+						type: 'POST',
+						url: base_url + 'admin/eliminar_respuestas_db',
+						cache: false,
+						success: function(data){
+												
+							if( data.result == "error" )
+							{
+								alert(data.mensaje);
+								$(".btn-atencion").removeAttr('disabled');							
+								return false;
+							} 
+											
+							if( data.result )//true
+							{	                                                        
+								$(".btn-atencion").removeAttr('disabled');
+
+								var url = base_url + "admin/atencion_eliminar";
+								$(location).attr("href", url);
+							}
+							else
+							{
+								alert('Error. Reload the web page.');
+								$(".btn-atencion").removeAttr('disabled');
+							}	
+						},
+						error: function(result) {
+							alert('Error. Reload the web page.');
+							$(".btn-atencion").removeAttr('disabled');
 						}
 
 					});
@@ -206,6 +247,17 @@ if ($retornoError) {
 								
 								<br><br>
 								<button type="button" class="btn btn-info btn-xs" >
+									Aceptar <span class="fa fa-times fa-fw" aria-hidden="true">
+								</button>						
+							</div>
+						</div>
+						
+						<div class="col-lg-4">	
+							<div class="alert alert-atencion">
+								<strong>Borrar Respuestas y Novedades:</strong> <br>Al aceptar borrará las respuestas de los usuarios y las novedades.
+								
+								<br><br>
+								<button type="button" class="btn btn-atencion btn-xs" >
 									Aceptar <span class="fa fa-times fa-fw" aria-hidden="true">
 								</button>						
 							</div>

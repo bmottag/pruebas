@@ -1136,6 +1136,36 @@ class Admin extends MX_Controller {
 			echo json_encode($data);
 	}
 	
+	/**
+	 * Eliminar registros de la base de datpos
+	 * @since 20/8/2017
+	 */
+	public function eliminar_respuestas_db()
+	{
+			header('Content-Type: application/json');
+			$data = array();
+
+			
+			if ($this->admin_model->eliminarRegistros()) {
+				
+				$data["msj"] = "Tabla Registro";
+				
+				if ($this->admin_model->eliminarNovedades()) {
+					$data["msj"] .= ", Tablas de novedades";
+				}
+				
+				$data["result"] = true;
+				$data["mensaje"] = "Se eliminaron los registros.";
+				$this->session->set_flashdata('retornoExito', 'Se eliminó los registros de ' . $data["msj"]);
+			}else{
+				$data["result"] = "error";
+				$data["mensaje"] = "Error!!! Contactarse con el Administrador.";
+				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador');
+			}
+
+			echo json_encode($data);
+	}
+	
     /**
      * actualizamos el campo delegado de los sitio
      */
