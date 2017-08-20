@@ -717,7 +717,7 @@
 		 */
 		public function eliminarUsuarios()
 		{	
-				$sql = "TRUNCATE TABLE usuario";
+				$sql = "DELETE FROM usuario WHERE fk_id_rol != 1";
 				$query = $this->db->query($sql);
 
 				if ($query) {
@@ -816,6 +816,7 @@
 		 */
 		public function cargar_informacion_usuarios($lista) 
 		{
+				$lista['estado'] = 1;
 				$lista['fecha_creacion'] = date("Y-m-d");
 				$query = $this->db->insert('usuario', $lista);
 

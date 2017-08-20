@@ -202,7 +202,7 @@ if ($retornoError) {
 						
 						<div class="col-lg-4">	
 							<div class="alert alert-info">
-								<strong>Atención - Borrar lista de usuarios:</strong> <br>Al aceptar borrará la lista de usuarios.
+								<strong>Borrar usuarios:</strong> <br>Al aceptar borrará los Delegados, Operadores, Coordinadores y Directivos.
 								
 								<br><br>
 								<button type="button" class="btn btn-info btn-xs" >
@@ -263,7 +263,11 @@ Subir Usuarios <span class="glyphicon glyphicon glyphicon-chevron-right" aria-hi
 						
 							</div>
 						</div>
-						
+					</div>
+					
+					
+					<div class="row">
+					
 						<div class="col-lg-4">	
 							<div class="alert alert-success">
 								Subir registros a la tabla <strong>Holguras</strong>.
