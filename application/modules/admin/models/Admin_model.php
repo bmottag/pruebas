@@ -44,6 +44,14 @@
 				if (array_key_exists("idUsuario", $arrDatos)) {
 					$this->db->where('id_usuario', $arrDatos["idUsuario"]);
 				}
+				if (array_key_exists("idRol", $arrDatos)) {
+					$this->db->where('fk_id_rol', $arrDatos["idRol"]);
+				}
+				if (array_key_exists("codigo_dane", $arrDatos)) {
+					$where = "fk_codigo_dane is not NULL";
+					$this->db->where($where);
+				}
+				
 				$this->db->order_by('nombres_usuario', 'asc');
 				$query = $this->db->get('usuario U');
 

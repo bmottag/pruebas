@@ -1857,6 +1857,42 @@ class Admin extends MX_Controller {
 			
     }
 	
+	/**
+	 * Actualizar la tabla de sitios con el id del usuario delegado
+     * @since 20/8/2017
+	 */
+	public function update_sitios_representantes()
+	{		
+			//buscar listado de usuarios delegados que tienen codigo dane
+			$arrParam = array(
+				"idRol" => 4,
+				"codigo_dane" => true
+			);
+			$usersRepresentantes = $this->admin_model->get_users($arrParam);
+			
+			if($usersRepresentantes)
+			{
+				$this->load->model("general_model");
+				//actualizar tabla de sitios con el id del delegado
+				foreach ($usersRepresentantes as $fila)
+				{
+					$arrParam = array(
+						"table" => "sitios",
+						"primaryKey" => "codigo_dane",
+						"id" => $fila["fk_codigo_dane"],
+						"column" => "fk_id_user_delegado",
+						"value" => $fila["id_usuario"]
+					);
+
+					$this->general_model->updateRecord($arrParam);
+				}
+			}
+			
+			//regresar a la pantalla inicial
+			$this->session->set_flashdata('retornoExito', 'Se actualizó la información.');
+			redirect("/admin/atencion_eliminar/",'refresh');
+	}
+	
 	
 	
 

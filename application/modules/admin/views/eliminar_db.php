@@ -312,6 +312,11 @@ Subir Examinandos <span class="glyphicon glyphicon glyphicon-chevron-right" aria
 								<br><br>
 <a class="btn btn-success btn-xs" href=" <?php echo base_url(). 'admin/subir_archivo/cargar_usuarios'; ?> ">
 Subir Usuarios <span class="glyphicon glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a> 
+
+								<br><br>
+								Actualizar la tabla de sitios con los registros de los representantes.
+<a class="btn btn-success btn-xs" href=" <?php echo base_url(). 'admin/update_sitios_representantes'; ?> ">
+Actualizar <span class="glyphicon glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a> 
 						
 							</div>
 						</div>
