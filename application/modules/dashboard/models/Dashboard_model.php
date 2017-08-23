@@ -107,6 +107,8 @@
 				);	
 
 				$query = $this->db->insert('registro', $data);
+				
+				$query = $this->db->insert('log_registro', $data);
 
 				if ($query) {
 					return true;
@@ -151,6 +153,8 @@
 				);	
 
 				$query = $this->db->insert('registro', $data);
+				
+				$query = $this->db->insert('log_registro', $data);
 
 				if ($query) {
 					return true;
@@ -178,6 +182,8 @@
 				);	
 
 				$query = $this->db->insert('registro', $data);
+				
+				$query = $this->db->insert('log_registro', $data);
 
 				if ($query) {
 					
