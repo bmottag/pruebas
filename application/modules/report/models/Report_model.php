@@ -241,6 +241,17 @@
 				$this->db->where('id_registro', $idRegistro);
 				$query = $this->db->update('registro', $data);
 				
+				$data = array(
+					'fk_id_alerta' => $this->input->post('hddIdAlerta'),
+					'fk_id_sitio_sesion' => $this->input->post('hddIdSitioSesion'),
+					'acepta' => $this->input->post('acepta'),
+					'observacion' => $newObservation,
+					'fecha_registro' => date("Y-m-d G:i:s"),
+					'fecha_actualizacion' => date("Y-m-d G:i:s"),
+					'fk_id_user_actualiza' => $this->session->id,
+					'nota' => $newNota
+				);
+				$query = $this->db->insert('log_registro', $data);
 
 				if ($query) {
 					return true;
@@ -477,6 +488,19 @@
 				
 				$this->db->where('id_registro', $idRegistro);
 				$query = $this->db->update('registro', $data);
+				
+				$data = array(
+					'fk_id_alerta' => $this->input->post('hddIdAlerta'),
+					'fk_id_usuario' => $this->input->post('hddIdUserDelegado'),
+					'fk_id_sitio_sesion' => $this->input->post('hddIdSitioSesion'),
+					'acepta' => 1,
+					'ausentes' => $ausentes,
+					'fecha_registro' => date("Y-m-d G:i:s"),
+					'fecha_actualizacion' => date("Y-m-d G:i:s"),
+					'fk_id_user_actualiza' => $this->session->id,
+					'nota' => $nota
+				);
+				$query = $this->db->insert('log_registro', $data);
 
 				if ($query) {
 					
