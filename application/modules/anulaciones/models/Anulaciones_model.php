@@ -65,9 +65,15 @@
 				//revisar si es para adicionar o editar
 				if ($idAnulacion == '') {
 					$query = $this->db->insert('anulaciones', $data);
+					
+					$data["fk_id_anulacion"] = $this->db->insert_id();
+					$query = $this->db->insert('log_anulaciones', $data);
 				} else {
 					$this->db->where('id_anulacion', $idAnulacion);
 					$query = $this->db->update('anulaciones', $data);
+					
+					$data["fk_id_anulacion"] = $idAnulacion;
+					$query = $this->db->insert('log_anulaciones', $data);
 				}
 				if ($query) {
 					return true;
@@ -94,6 +100,10 @@
 
 				$this->db->where('id_anulacion', $idAnulacion);
 				$query = $this->db->update('anulaciones', $data);
+				
+				//log para la auditoria
+				$data["fk_id_anulacion"] = $idAnulacion;
+				$query = $this->db->insert('log_anulaciones', $data);
 
 				if ($query) {
 					return true;
@@ -120,6 +130,10 @@
 
 				$this->db->where('id_anulacion', $idAnulacion);
 				$query = $this->db->update('anulaciones', $data);
+				
+				//log para la auditoria
+				$data["fk_id_anulacion"] = $idAnulacion;
+				$query = $this->db->insert('log_anulaciones', $data);
 
 				if ($query) {
 					return true;
