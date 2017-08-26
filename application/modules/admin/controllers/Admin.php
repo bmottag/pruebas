@@ -1848,6 +1848,8 @@ class Admin extends MX_Controller {
 			
 			if($model == "cargar_informacion_sitio"){
 				$vista = "cargar_archivo";
+			}elseif($model == "cargar_informacion_sitio_sesion"){
+				$vista = "cargar_sitio_sesion";
 			}else{
 				$vista = "cargar_usuarios";
 			}

@@ -804,10 +804,7 @@
 		 * @since 14/8/2017
 		 */
 		public function cargar_informacion_sitio($lista) 
-		{
-				$sql = "ALTER TABLE sitios AUTO_INCREMENT=1";
-				$query = $this->db->query($sql);
-			
+		{			
 				$lista['fecha_creacion'] = date("Y-m-d");
 				$query = $this->db->insert('sitios', $lista);
 
@@ -840,10 +837,7 @@
 		 * @since 19/8/2017
 		 */
 		public function cargar_informacion_examinandos($lista) 
-		{
-				$sql = "ALTER TABLE examinandos AUTO_INCREMENT=1";
-				$query = $this->db->query($sql);
-			
+		{		
 				$query = $this->db->insert('examinandos', $lista);
 
 				if ($query) {
@@ -858,11 +852,24 @@
 		 * @since 19/8/2017
 		 */
 		public function cargar_informacion_holguras($lista) 
-		{
-				$sql = "ALTER TABLE snp_holguras AUTO_INCREMENT=1";
-				$query = $this->db->query($sql);
-			
+		{			
 				$query = $this->db->insert('snp_holguras', $lista);
+
+				if ($query) {
+					return true;
+				} else {
+					return false;
+				}
+		}
+		
+		/**
+		 * Cargar informacion 
+		 * @since 25/8/2017
+		 */
+		public function cargar_informacion_sitio_sesion($lista) 
+		{			
+				$lista['fecha_creacion'] = date("Y-m-d");
+				$query = $this->db->insert('sitio_sesion', $lista);
 
 				if ($query) {
 					return true;
