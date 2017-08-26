@@ -109,6 +109,10 @@
 
 				$this->db->where('id_cambio_cuadernillo', $idCambioCuadernillo);
 				$query = $this->db->update('novedades_cambio_cuadernillo', $data);
+				
+				//log auditoria
+				$data["fk_id_cambio_cuadernillo"] = $idCambioCuadernillo;
+				$query = $this->db->insert('log_novedades_cambio_cuadernillo', $data);
 
 				if ($query) {
 					return true;
@@ -282,9 +286,17 @@
 				//revisar si es para adicionar o editar
 				if ($idOtra == '') {
 					$query = $this->db->insert('novedades_otra', $data);
+					
+					//log auditoria
+					$data["fk_id_log_otra"] = $this->db->insert_id();
+					$query = $this->db->insert('log_novedades_otra', $data);
 				} else {
 					$this->db->where('id_otra', $idOtra);
 					$query = $this->db->update('novedades_otra', $data);
+					
+					//log auditoria
+					$data["fk_id_log_otra"] = $idOtra;
+					$query = $this->db->insert('log_novedades_otra', $data);
 				}
 				if ($query) {
 					return true;
@@ -319,6 +331,10 @@
 
 				$this->db->where('id_cambio_cuadernillo', $idCambioCuadernillo);
 				$query = $this->db->update('novedades_cambio_cuadernillo', $data);
+				
+				//log auditoria
+				$data["fk_id_cambio_cuadernillo"] = $idCambioCuadernillo;
+				$query = $this->db->insert('log_novedades_cambio_cuadernillo', $data);
 
 				if ($query) {
 					return true;
@@ -376,6 +392,10 @@
 
 				$this->db->where('id_otra', $idOtra);
 				$query = $this->db->update('novedades_otra', $data);
+				
+				//log auditoria
+				$data["fk_id_log_otra"] = $idOtra;
+				$query = $this->db->insert('log_novedades_otra', $data);
 
 				if ($query) {
 					return true;
@@ -401,6 +421,10 @@
 
 				$this->db->where('id_otra', $idOtra);
 				$query = $this->db->update('novedades_otra', $data);
+				
+				//log auditoria
+				$data["fk_id_log_otra"] = $idOtra;
+				$query = $this->db->insert('log_novedades_otra', $data);
 
 				if ($query) {
 					return true;
