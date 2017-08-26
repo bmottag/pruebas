@@ -72,9 +72,17 @@
 				//revisar si es para adicionar o editar
 				if ($idCambioCuadernillo == '') {
 					$query = $this->db->insert('novedades_cambio_cuadernillo', $data);
+					
+					//log auditoria
+					$data["fk_id_cambio_cuadernillo"] = $this->db->insert_id();
+					$query = $this->db->insert('log_novedades_cambio_cuadernillo', $data);
 				} else {
 					$this->db->where('id_cambio_cuadernillo', $idCambioCuadernillo);
 					$query = $this->db->update('novedades_cambio_cuadernillo', $data);
+					
+					//log auditoria
+					$data["fk_id_cambio_cuadernillo"] = $idCambioCuadernillo;
+					$query = $this->db->insert('log_novedades_cambio_cuadernillo', $data);
 				}
 				if ($query) {
 					return true;
@@ -169,9 +177,17 @@
 				//revisar si es para adicionar o editar
 				if ($idHolgura == '') {
 					$query = $this->db->insert('novedades_holgura', $data);
+					
+					//log auditoria
+					$data["fk_id_holgura"] = $this->db->insert_id();
+					$query = $this->db->insert('log_novedades_holgura', $data);
 				} else {
 					$this->db->where('id_holgura', $idHolgura);
 					$query = $this->db->update('novedades_holgura', $data);
+					
+					//log auditoria
+					$data["fk_id_holgura"] = $idHolgura;
+					$query = $this->db->insert('log_novedades_holgura', $data);
 				}
 				if ($query) {
 					return true;
@@ -198,6 +214,10 @@
 
 				$this->db->where('id_holgura', $idHolgura);
 				$query = $this->db->update('novedades_holgura', $data);
+				
+				//log auditoria
+				$data["fk_id_holgura"] = $idHolgura;
+				$query = $this->db->insert('log_novedades_holgura', $data);
 
 				if ($query) {
 					return true;
@@ -326,6 +346,10 @@
 
 				$this->db->where('id_holgura', $idHolgura);
 				$query = $this->db->update('novedades_holgura', $data);
+				
+				//log auditoria
+				$data["fk_id_holgura"] = $idHolgura;
+				$query = $this->db->insert('log_novedades_holgura', $data);
 
 				if ($query) {
 					return true;
