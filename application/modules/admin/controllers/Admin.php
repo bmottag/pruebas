@@ -40,6 +40,7 @@ class Admin extends MX_Controller {
 						</body>
 						</html>";
 
+						
 			$cabeceras  = 'MIME-Version: 1.0' . "\r\n";
 			$cabeceras .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 			$cabeceras .= 'To: ' . $user . '<' . $to . '>' . "\r\n";
@@ -1909,9 +1910,12 @@ class Admin extends MX_Controller {
 			{
 				foreach ($users as $fila)
 				{
-					$this->email($fila["id_usuario"]);//envio correo al usuario
+					if($fila["email"]!="grupoasd123@grupoasd.com.co"){
+						$this->email($fila["id_usuario"]);//envio correo al usuario
+					}
 				}
 			}
+			
 			//regresar a la pantalla inicial
 			$this->session->set_flashdata('retornoExito', 'Se enviaron los correos.');
 			redirect("/dashboard/admin",'refresh');
