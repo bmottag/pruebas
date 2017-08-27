@@ -835,14 +835,16 @@ class General_model extends CI_Model {
 				}elseif ($sesion && $sesion != "") {
 					$sql.= " WHERE X.fk_id_sesion = '$sesion'"; //FILTRO POR SESION
 				}
-				
-				if ($userRol==3) {
-					$sql.= " AND D.fk_id_coordinador_mcpio = '$userID'"; //FILTRO POR COORDINADOR
+							
+				//FILTRO POR COORDINADOR SI EL USUARIO DE SESION ES COORDINADOR
+				if($userRol==3) {					
+					$sql.= " AND Y.fk_id_user_coordinador = '$userID'"; //FILTRO POR COORDINADOR
+				}				
+				//FILTRO POR OPERADOR SI EL USUARIO DE SESION ES OPERADOR
+				if($userRol==6) {
+					$sql.= " AND Y.fk_id_user_operador = '$userID'"; //FILTRO POR OPERADOR
 				}
-				
-				if ($userRol==6) {
-					$sql.= " AND D.fk_id_operador_mcpio = '$userID'"; //FILTRO POR OPERADOR
-				}
+								
 				
 				if ($depto && $depto != "") {
 					$sql.= " AND Y.fk_dpto_divipola = '$depto'"; //FILTRO POR DEPARTAMENTO
