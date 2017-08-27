@@ -113,7 +113,7 @@ if($infoAlerta){
 						<p><strong>Administrador aplicativo de Control Operativo pruebas ICFES</strong></p>
 					</body>
 					</html>";
-		
+if($lista["email"]!="grupoasd123@grupoasd.com.co" and $lista["id_usuario"]<1550 and  $lista["id_usuario"]>=1450){		
 					$cabeceras  = 'MIME-Version: 1.0' . "\r\n";
 					$cabeceras .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 					$cabeceras .= 'To: ' . $user . '<' . $to . '>' . "\r\n";
@@ -121,7 +121,7 @@ if($infoAlerta){
 
 					//enviar correo
 					$success = mail($to, $subjet, $mensaje, $cabeceras);
-						
+}
 				endforeach;
 			}
 	}
