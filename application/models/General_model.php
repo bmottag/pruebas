@@ -784,18 +784,18 @@ class General_model extends CI_Model {
 				$sql.= " FROM sitio_sesion X ";
 				$sql.= "	INNER JOIN sesiones S ON S.id_sesion = X.fk_id_sesion 
 							INNER JOIN sitios Y ON Y.id_sitio = X.fk_id_sitio 
-							INNER JOIN param_divipola D ON D.mpio_divipola = Y.fk_mpio_divipola";
+							WHERE 1=1";
 											
 				if ($sesion && $sesion != "") {
-					$sql.= " WHERE X.fk_id_sesion = '$sesion'"; //FILTRO POR SESION
+					$sql.= " AND X.fk_id_sesion = '$sesion'"; //FILTRO POR SESION
 				}
 				
 				if ($userRol==3) {
-					$sql.= " AND D.fk_id_coordinador_mcpio = '$userID'"; //FILTRO POR COORDINADOR
+					$sql.= " AND Y.fk_id_user_coordinador = '$userID'"; //FILTRO POR COORDINADOR
 				}
 				
 				if ($userRol==6) {
-					$sql.= " AND D.fk_id_operador_mcpio = '$userID'"; //FILTRO POR OPERADOR
+					$sql.= " AND Y.fk_id_user_operador = '$userID'"; //FILTRO POR OPERADOR
 				}
 								
 				if ($depto && $depto != "") {
