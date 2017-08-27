@@ -1,13 +1,5 @@
 <a name="anclaUp"></a>
 
-<script type="text/javascript">
-	function reloadPage() {
-		location.reload(true)
-	}
-
-	setInterval('reloadPage()','40000');//40 segundos
-</script>
-
 <?php
 	$userRol = $this->session->rol;
 ?>

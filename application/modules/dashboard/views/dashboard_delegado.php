@@ -5,7 +5,7 @@
 		location.reload(true)
 	}
 
-	setInterval('reloadPage()','30000');//30 segundos
+	setInterval('reloadPage()','50000');//30 segundos
 	
 	
 	$(document).ready(function(){
@@ -380,7 +380,7 @@ if(!$infoSitoDelegado){
 					<br><strong>Código DANE: </strong><?php echo $infoSitoDelegado[0]['codigo_dane']; ?>
 					<?php if($infoSitoDelegado[0]['contacto_nombres']){ ?>
 					<br><strong>Contacto: </strong><br><?php echo $infoSitoDelegado[0]['contacto_nombres'] . " " . $infoSitoDelegado[0]['contacto_apellidos']; ?>
-					<br>Celular: <?php echo $infoSitoDelegado[0]['contacto_celular']; ?>
+					<br>Celular:
 					<?php 
 					echo "<a href='tel:".$infoSitoDelegado[0]['contacto_celular']."'>".$infoSitoDelegado[0]['contacto_celular']."</a>"; 
 					} ?>
