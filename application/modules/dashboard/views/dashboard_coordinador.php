@@ -5,7 +5,7 @@
 		location.reload(true)
 	}
 
-	setInterval('reloadPage()','60000');//40 segundos
+	setInterval('reloadPage()','300000');//300 segundos
 	
 	$(document).ready(function(){
 		var sonido = document.getElementById("sonido");

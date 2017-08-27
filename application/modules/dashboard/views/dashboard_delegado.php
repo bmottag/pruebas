@@ -5,7 +5,7 @@
 		location.reload(true)
 	}
 
-	setInterval('reloadPage()','50000');//30 segundos
+	setInterval('reloadPage()','300000');//300 segundos
 	
 	
 	$(document).ready(function(){
