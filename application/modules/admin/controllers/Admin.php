@@ -18,7 +18,7 @@ class Admin extends MX_Controller {
 			$arrParam = array("idUsuario" => $idUsuario);
 			$infoUsuario = $this->admin_model->get_users($arrParam);
 
-			$subjet = "Usuario APP - Control operativo ICFES";				
+			$subjet = "Ingreso aplicativo - Control operativo ICFES Pruebas Saber 11";				
 			$user = $infoUsuario[0]["nombres_usuario"] . " " . $infoUsuario[0]["apellidos_usuario"];
 			$to = $infoUsuario[0]["email"];
 		
@@ -33,7 +33,7 @@ class Admin extends MX_Controller {
 						  <title> $subjet </title>
 						</head>
 						<body>
-							<p>Apreciado(a) $user:</p>
+							<p>Señor(a) $user:</p>
 							<p>$msj</p>
 							<p>Cordialmente,</p>
 							<p><strong>Administrador aplicativo de Control Operativo pruebas ICFES</strong></p>
@@ -43,7 +43,7 @@ class Admin extends MX_Controller {
 			$cabeceras  = 'MIME-Version: 1.0' . "\r\n";
 			$cabeceras .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 			$cabeceras .= 'To: ' . $user . '<' . $to . '>' . "\r\n";
-			$cabeceras .= 'From: VCI APP <administrador@operativoicfes.com>' . "\r\n";
+			$cabeceras .= 'From: ICFES APP <administrador@operativoicfes.com>' . "\r\n";
 
 			//enviar correo
 			mail($to, $subjet, $mensaje, $cabeceras);
@@ -1893,6 +1893,28 @@ class Admin extends MX_Controller {
 			//regresar a la pantalla inicial
 			$this->session->set_flashdata('retornoExito', 'Se actualizó la información.');
 			redirect("/admin/atencion_eliminar/",'refresh');
+	}
+	
+	/**
+	 * Envio de correo con el enlace a los usuarios
+     * @since 27/8/2017
+	 */
+	public function envio_correo()
+	{		
+			//buscar listado de usuarios
+			$arrParam = array();
+			$users = $this->admin_model->get_users($arrParam);
+
+			if($users)
+			{
+				foreach ($users as $fila)
+				{
+					$this->email($fila["id_usuario"]);//envio correo al usuario
+				}
+			}
+			//regresar a la pantalla inicial
+			$this->session->set_flashdata('retornoExito', 'Se enviaron los correos.');
+			redirect("/dashboard/admin",'refresh');
 	}
 	
 	
