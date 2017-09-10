@@ -364,6 +364,13 @@ class General_model extends CI_Model {
 				//fecha para uscar las que ya se vencieron
 				$fechaActual = date('Y-m-d G:i:s');
 				
+				//si es una consulta para el reporte con los datos filtrados por post
+				$sesion = $this->input->post('sesion');
+				$alerta = $this->input->post('alerta');
+				$depto = $this->input->post('depto');
+				$mcpio = $this->input->post('mcpio');
+				$region = $this->input->post('region');
+				
 				$fechaMinima = strtotime ( '-1 day' , strtotime ( $fechaActual ) ) ;
 				$fechaMinima = date ( 'Y-m-d G:i:s' , $fechaMinima );//fecha minima para la busqueda
 		
@@ -406,6 +413,27 @@ class General_model extends CI_Model {
 				
 				if (array_key_exists("idAlerta", $arrDatos)) {
 					$this->db->where('A.id_alerta', $arrDatos["idAlerta"]); //id alerta
+				}
+				
+
+				if ($sesion && $sesion != "") {
+					$this->db->where('S.id_sesion', $sesion); //filtro por SESION
+				}
+				
+				if ($alerta && $alerta != "") {
+					$this->db->where('A.id_alerta', $alerta); //FILTRO POR ALERTA
+				}
+				
+				if ($region && $region != "") {
+					$this->db->where('Y.fk_id_region', $region); //FILTRO POR REGION
+				}
+				
+				if ($depto && $depto != "") {
+					$this->db->where('Y.fk_dpto_divipola', $depto); //FILTRO POR DEPARTAMENTO
+				}
+			
+				if ($mcpio && $mcpio != "") {
+					$this->db->where('Y.fk_mpio_divipola', $mcpio); //FILTRO POR MUNICIPIO
 				}
 			
 				$query = $this->db->get('sitios Y');
@@ -824,6 +852,7 @@ class General_model extends CI_Model {
 				
 				$depto = $this->input->post('depto');
 				$mcpio = $this->input->post('mcpio');
+				$region = $this->input->post('region');
 
 				$sql = "SELECT SUM(numero_citados) citados, SUM(numero_presentes_efectivos) presentes, SUM(numero_ausentes) ausentes";
 				$sql.= " FROM sitio_sesion X ";
@@ -852,6 +881,10 @@ class General_model extends CI_Model {
 			
 				if ($mcpio && $mcpio != "") {
 					$sql.= " AND Y.fk_mpio_divipola = '$mcpio'"; //FILTRO POR MUNICIPIO
+				}
+				
+				if ($region && $region != "") {
+					$sql.= " AND Y.fk_id_region = '$region'"; //FILTRO POR REGION
 				}
 
 				$query = $this->db->query($sql);

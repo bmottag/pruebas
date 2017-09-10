@@ -82,6 +82,7 @@ class Specific_model extends CI_Model {
 					$this->db->where('Y.fk_id_user_operador', $this->session->id); //FILTRO POR ID DEL OPERADOR
 				}
 			
+				$this->db->order_by('S.id_sesion', 'desc');
 				$query = $this->db->get('sitios Y');
 
 				if ($query->num_rows() > 0) {
@@ -106,6 +107,7 @@ class Specific_model extends CI_Model {
 				$alerta = $this->input->post('alerta');
 				$depto = $this->input->post('depto');
 				$mcpio = $this->input->post('mcpio');
+				$region = $this->input->post('region');
 
 				$this->db->select('distinct(id_alerta)');
 
@@ -128,6 +130,10 @@ class Specific_model extends CI_Model {
 				
 				if ($alerta && $alerta != "") {
 					$this->db->where('A.id_alerta', $alerta); //FILTRO POR ALERTA
+				}
+				
+				if ($region && $region != "") {
+					$this->db->where('Y.fk_id_region', $region); //FILTRO POR REGION
 				}
 				
 				if ($depto && $depto != "") {
