@@ -160,7 +160,8 @@ class Specific_model extends CI_Model {
 				$tipoMensaje = array(1, 2);//filtrar por alertas que se muestren en el APP
 				$this->db->where_in('A.tipo_mensaje', $tipoMensaje);
 				
-				$this->db->where('A.fecha_fin <=', $fechaActual); //FECHA FINAL SEA MAYOR A LA FECHA ACTUAL
+				//$this->db->where('A.fecha_fin <=', $fechaActual); //FECHA FINAL SEA MAYOR A LA FECHA ACTUAL
+				$this->db->where('A.fecha_alerta <=', $fechaActual); //FECHA FINAL SEA MAYOR A LA FECHA ACTUAL
 			
 				$this->db->order_by('A.id_alerta', 'asc');
 				$query = $this->db->get('sitios Y');

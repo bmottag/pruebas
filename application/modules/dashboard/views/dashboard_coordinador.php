@@ -97,7 +97,7 @@ if ($msjNovedades) {
 		$ci = &get_instance();
 		$ci->load->model("specific_model");
 		$ci->load->model("general_model");
-		foreach ($listadoSesiones as $lista):	
+		foreach ($listadoSesiones as $lista_1):	
 ?>
 	<div class="row">
 			
@@ -105,7 +105,7 @@ if ($msjNovedades) {
 			<div class="panel panel-primary">
 			
 				<div class="panel-heading">
-					<i class="fa fa-arrow-right fa-fw"></i><strong>SESIÓN: </strong><?php echo $lista["nombre_prueba"] . " / " . $lista["nombre_grupo_instrumentos"] . " / " . $lista["fecha"] . " / " . $lista["sesion_prueba"]; ?>
+					<i class="fa fa-arrow-right fa-fw"></i><strong>SESIÓN: </strong><?php echo $lista_1["nombre_prueba"] . " / " . $lista_1["nombre_grupo_instrumentos"] . " / " . $lista_1["fecha"] . " / " . $lista_1["sesion_prueba"]; ?>
 					<br><i class="fa fa-arrow-right fa-fw"></i><strong>Total sitios: </strong><?php echo $conteoSitios; ?>
 				</div>
 				
@@ -114,7 +114,7 @@ if ($msjNovedades) {
 <?php
 	//Buscar la alertas para esta sesion y el coordinador de sesion
 	$arrParam = array(
-		"idSesion" => $lista["id_sesion"]
+		"idSesion" => $lista_1["id_sesion"]
 	);
 	$alertasVencidas = $this->specific_model->get_alertas_vencidas_totales($arrParam);
 
@@ -383,7 +383,7 @@ if($infoAlerta["fk_id_tipo_alerta"] == 3)//CONSOLIDACION
 			}
 			
 			//numero de citados, ausentes, presentes
-			$idSesion = $lista['id_sesion'];
+			$idSesion = $lista_1['id_sesion'];
 			$conteoCitadosSesion = $this->general_model->get_numero_citados_por_filtro_by_coordinnador($idSesion);
 
 			if($conteoCitadosSesion['citados'] !=0){
