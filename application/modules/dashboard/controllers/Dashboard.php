@@ -189,6 +189,9 @@ class Dashboard extends MX_Controller {
 			$arrParam = array("tipoAlerta" => 3);
 			$data['infoAlertaConsolidacion'] = $this->dashboard_model->get_alerta_by($arrParam);
 
+			//alertas tipo de mensaje 4, para mostrarlas cada hora
+			$data['infoAlertaConsolidacionTipo4'] = $this->dashboard_model->get_alerta_consolidacion_tipo_4();
+
 			//LISTADO DE RESPUESTAS QUE HA DADO EL USUARIO
 			$arrParam = array("idSitio" => $data['infoSitoDelegado'][0]['id_sitio']);
 			$data['infoRespuestas'] = $this->general_model->get_respuestas_usuario_by($arrParam);
@@ -444,6 +447,69 @@ class Dashboard extends MX_Controller {
 					$data["view"] = "lista_respuestas_faltantes_por_alerta";
 			}
 						
+			$this->load->view("layout", $data);
+	}
+	
+	/**
+	 * Actualizacion de las alertas de consolidacion que son tipo 4
+	 * @since 10/9/2017
+	 */
+	public function update_registro_consolidacion_by_delegado()
+	{
+			$data = array();
+			$ausentes = $this->input->post('ausentes');
+			$ausentesConfirmar = $this->input->post('ausentesConfirmar');
+			$citados = $this->input->post('citados');
+
+			$idAlerta = $this->input->post('hddIdAlerta');
+			$idSitioSesion = $this->input->post('hddIdSitioSesion');
+			
+			$idRegistro = $this->input->post('idRegistro');
+			
+			$error = false;
+			
+			
+			
+			if($ausentes == ""){
+				$this->session->set_flashdata('retornoErrorConsolidacion', '<strong>Error!!!</strong> Debe indicar los ausentes.');
+			}else{
+				if($ausentes < 0){
+					$this->session->set_flashdata('retornoErrorConsolidacion', '<strong>Error!!!</strong> La cantidad de ausentes no puede ser menor que 0.');
+				}else{				
+					if($ausentes != $ausentesConfirmar){
+						$this->session->set_flashdata('retornoErrorConsolidacion', '<strong>Error!!!</strong> Confirmar la cantidad de ausentes.');
+					}else{				
+							if($ausentes > $citados){
+								$this->session->set_flashdata('retornoErrorConsolidacion', '<strong>Error!!!</strong> La cantidad de ausentes no puede ser mayor a la cantidad de citados.');
+							}else{
+								if ($this->dashboard_model->updateRegistroConsolidacionDelegado()) 
+								{
+									$error = true;
+									$this->session->set_flashdata('retornoExito', "Gracias por su respuesta.");
+								} else {
+									$this->session->set_flashdata('retornoErrorConsolidacion', '<strong>Error!!!</strong> Contactarse con el Administrador.');
+								}
+							}
+					}
+				}
+			}
+			
+
+			redirect("/dashboard/delegados","location",301);
+
+	}
+	
+	/**
+	 * historial de una alerta especifica
+     * @since 10/9/2016
+     * @author BMOTTAG
+	 */
+	public function historico($rol, $idAlerta, $idSitioSesion)
+	{
+			$this->load->model("specific_model");
+			$data["info"] = $this->specific_model->get_historial($idAlerta,$idSitioSesion);
+
+			$data["view"] = 'historico';
 			$this->load->view("layout", $data);
 	}
 	

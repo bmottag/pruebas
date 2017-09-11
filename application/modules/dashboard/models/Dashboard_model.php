@@ -48,6 +48,45 @@
 		}
 		
 		/**
+		 * Muestra las alertas ACTIVAS para el USUARIO que son para que siempre este registrando
+		 * @since 9/9/2017
+		 */
+		public function get_alerta_consolidacion_tipo_4() 
+		{
+				$fecha = date("Y-m-d G:i:s");
+				$userRol = $this->session->rol;
+				$userID = $this->session->id;
+
+			
+				$this->db->select();
+				$this->db->join('param_tipo_alerta T', 'T.id_tipo_alerta = A.fk_id_tipo_alerta', 'INNER');//tipo alerta
+				$this->db->join('param_roles R', 'R.id_rol = A.fk_id_rol', 'INNER');//ROLES - ALERTA
+				$this->db->join('sesiones S', 'S.id_sesion = A.fk_id_sesion', 'INNER');//SESIONES - ALERTA
+				$this->db->join('param_grupo_instrumentos G', 'G.id_grupo_instrumentos = S.fk_id_grupo_instrumentos', 'INNER'); //GRUPO INSTRUMENTO - SESIONES
+				$this->db->join('pruebas P', 'P.id_prueba = G.fk_id_prueba', 'INNER');//PRUEBA - GRUPO INSTRUMENTO
+				$this->db->join('sitio_sesion X', 'X.fk_id_sesion = S.id_sesion', 'INNER');//SITIO - SESION
+				$this->db->join('sitios Y', 'Y.id_sitio = X.fk_id_sitio', 'INNER');//SITIO
+
+				$this->db->where('A.estado_alerta', 1); //ALERTA ACTIVA
+				$this->db->where('A.fecha_inicio <=', $fecha); //FECHA INICIAL MAYOR A LA ACTUAL
+				
+				$tipoMensaje = array(4);//filtrar por alertas que se muestren en el APP cada hora
+				$this->db->where_in('A.tipo_mensaje', $tipoMensaje);	
+								
+				$this->db->where('A.fk_id_rol', $userRol); //filtro por ROL DEL USUARIO
+				$this->db->where('Y.fk_id_user_delegado', $userID); //filtro por ID DEL USUARIO
+				
+				$this->db->order_by('A.id_alerta', 'desc');
+				$query = $this->db->get('alertas A');
+
+				if ($query->num_rows() > 0) {
+					return $query->result_array();
+				} else {
+					return false;
+				}
+		}
+		
+		/**
 		 * Muestra las alertas ACTIVAS para el USUARIO
 		 * @since 14/5/2017
 		 * @revies 4/6/2017
@@ -371,6 +410,65 @@
 
 				if ($query->num_rows() > 0) {
 					return $query->result_array();
+				} else {
+					return false;
+				}
+		}
+		
+		/**
+		 * Guardar respuesta del usuario delegado cuando actualiza alerta de consolidacion tipo 4
+		 * @since 11/8/2017
+		 */
+		public function updateRegistroConsolidacionDelegado() 
+		{
+				$nota = 'Se realizó el registro por el Representante';
+			
+				$ausentes = $this->input->post('ausentes');
+				$idSitioSesion = $this->input->post('hddIdSitioSesion');
+				
+				$idRegistro = $this->input->post('idRegistro');
+		
+				$data = array(
+					'fk_id_alerta' => $this->input->post('hddIdAlerta'),
+					'fk_id_usuario' => $this->session->id,
+					'fk_id_sitio_sesion' => $this->input->post('hddIdSitioSesion'),
+					'acepta' => 1,
+					'ausentes' => $ausentes,
+					'fecha_registro' => date("Y-m-d G:i:s"),
+					'fk_id_user_coordinador' => $this->session->id,
+					'nota' => $nota
+				);	
+				
+				$this->db->where('id_registro', $idRegistro);
+				$query = $this->db->update('registro', $data);
+				
+				$data = array(
+					'fk_id_alerta' => $this->input->post('hddIdAlerta'),
+					'fk_id_usuario' => $this->session->id,
+					'fk_id_sitio_sesion' => $this->input->post('hddIdSitioSesion'),
+					'acepta' => 1,
+					'ausentes' => $ausentes,
+					'fecha_registro' => date("Y-m-d G:i:s"),
+					'fecha_actualizacion' => date("Y-m-d G:i:s"),
+					'fk_id_user_actualiza' => $this->session->id,
+					'nota' => $nota
+				);
+				$query = $this->db->insert('log_registro', $data);
+
+				if ($query) {
+					
+					//actualizo tabla sitio_sesion con la cantidad de ausentes
+					$presentes = $this->input->post('citados') - $ausentes;
+					
+					$data = array(
+						'numero_ausentes' => $ausentes,
+						'numero_presentes_efectivos' => $presentes
+					);
+
+					$this->db->where('id_sitio_sesion', $idSitioSesion);
+					$query = $this->db->update('sitio_sesion', $data);
+
+					return true;
 				} else {
 					return false;
 				}

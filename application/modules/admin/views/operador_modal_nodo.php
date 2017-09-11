@@ -35,7 +35,7 @@
 					<select name="usuario" id="usuario" class="form-control" required>
 						<option value=''>Select...</option>
 						<?php for ($i = 0; $i < count($usuarios); $i++) { ?>
-							<option value="<?php echo $usuarios[$i]["id_usuario"]; ?>" <?php if($information[0]["fk_id_coordinador_mcpio"] == $usuarios[$i]["id_usuario"]) { echo "selected"; }  ?>><?php echo  "C.C. " . $usuarios[$i]["numero_documento"] . " - " . $usuarios[$i]["nombres_usuario"] . " " . $usuarios[$i]["apellidos_usuario"]; ?></option>
+							<option value="<?php echo $usuarios[$i]["id_usuario"]; ?>" <?php if($information[0]["fk_id_operador_region"] == $usuarios[$i]["id_usuario"]) { echo "selected"; }  ?>><?php echo  "C.C. " . $usuarios[$i]["numero_documento"] . " - " . $usuarios[$i]["nombres_usuario"] . " " . $usuarios[$i]["apellidos_usuario"]; ?></option>
 						<?php } ?>
 					</select>
 				</div>

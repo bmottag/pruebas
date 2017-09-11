@@ -190,14 +190,14 @@ $( document ).ready( function () {
 	<input type="hidden" id="citados" name="citados" value="<?php echo $info[0]["numero_citados"]; ?>"/>
 
 	<div class="form-group">
-		<label class="col-sm-12 control-label" for="ausentes">Cantidad de ausentes</label>
+		<label class="col-sm-12 control-label" for="ausentes">Cantidad</label>
 		<div class="col-sm-12">
 			<input type="text" id="ausentes" name="ausentes" class="form-control" required/>
 		</div>
 	</div>
 	
 	<div class="form-group">
-		<label class="col-sm-12 control-label" for="ausentesConfirmar">Confirmar cantidad de ausentes</label>
+		<label class="col-sm-12 control-label" for="ausentesConfirmar">Confirmar cantidad</label>
 		<div class="col-sm-12">
 			<input type="text" id="ausentesConfirmar" name="ausentesConfirmar" class="form-control" required/>
 		</div>

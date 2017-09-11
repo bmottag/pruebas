@@ -264,6 +264,37 @@ class Specific_model extends CI_Model {
 					return false;
 				}
 		}
+		
+		/**
+		 * Historial de los registros de las alertas
+		 * @since 10/9/2017
+		 */
+		public function get_historial($idAlerta,$idSitioSesion) 
+		{			
+				$this->db->select();
+				//SITIO-SESION
+				$this->db->join('sitio_sesion SS', 'SS.id_sitio_sesion = R.fk_id_sitio_sesion', 'INNER');
+				//ALERTA
+				$this->db->join('alertas A', 'A.id_alerta = R.fk_id_alerta', 'INNER');
+				$this->db->join('param_tipo_alerta T', 'T.id_tipo_alerta = A.fk_id_tipo_alerta', 'INNER');
+				//SESIONES
+				$this->db->join('sesiones S', 'S.id_sesion = SS.fk_id_sesion', 'INNER');
+
+
+				$this->db->where('SS.id_sitio_sesion', $idSitioSesion);
+				$this->db->where('A.id_alerta', $idAlerta);				
+
+				
+				//$this->db->where('fk_id_usuario', $userID ); 
+				
+				$query = $this->db->get('log_registro R');
+
+				if ($query->num_rows() > 0) {
+					return $query->result_array();;
+				} else {
+					return false;
+				}
+		}
 
 
 
