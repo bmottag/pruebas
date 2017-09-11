@@ -65,6 +65,8 @@
 						<option value=1 <?php if($information[0]["tipo_mensaje"] == 1) { echo "selected"; }  ?>>Notificar por APP</option>
 						<option value=3 <?php if($information[0]["tipo_mensaje"] == 3) { echo "selected"; }  ?>>Notificar por EMAIL</option>
 						<option value=2 <?php if($information[0]["tipo_mensaje"] == 2) { echo "selected"; }  ?>>Notificar por EMAIL y APP</option>
+						<option value='' >------------</option>
+						<option value=4 <?php if($information[0]["tipo_mensaje"] == 4) { echo "selected"; }  ?>>Notificar por APP - cada hora</option>
 					</select>
 				</div>
 			</div>
