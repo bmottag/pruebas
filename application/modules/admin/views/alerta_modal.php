@@ -127,7 +127,7 @@
 					<label for="type" class="control-label">Duración (en minutos): *</label>
 					<select name="duracion" id="duracion" class="form-control" required>	
 						<?php
-						for ($xxx = 1; $xxx < 60; $xxx++) {
+						for ($xxx = 1; $xxx < 121; $xxx++) {
 							
 							$xxx = $xxx<10?"0".$xxx:$xxx;
 						?>

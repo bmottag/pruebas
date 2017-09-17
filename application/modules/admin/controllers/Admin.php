@@ -14,19 +14,20 @@ class Admin extends MX_Controller {
      * @since 24/5/2017
 	 */
 	public function email($idUsuario)
-	{
+	{ 
 			$arrParam = array("idUsuario" => $idUsuario);
 			$infoUsuario = $this->admin_model->get_users($arrParam);
 
-			$subjet = "Ingreso aplicativo - Control operativo ICFES Pruebas Saber 11";				
+			$subjet = "Ingreso APP ICFES Pruebas Saber 359 - Día (2) 13/09/2017 - Sesión 1 (Mañana) y Sesión 2 (Tarde)";
 			$user = $infoUsuario[0]["nombres_usuario"] . " " . $infoUsuario[0]["apellidos_usuario"];
 			$to = $infoUsuario[0]["email"];
 		
 			//mensaje del correo
-			$msj = "<p>Los datos para ingresar al APP de Control Operativo Pruebas ICFES, son los siguientes:</p>";
+			$msj = "<p>Los datos para ingresar a la APP de Control Operativo Pruebas ICFES Saber 359 - Día (2) 13/09/2017 - Sesión 1 (Mañana) y Sesión 2 (Tarde), son los siguientes:</p>";
 			$msj .= "<br><strong>Usuario: </strong>" . $infoUsuario[0]["numero_documento"];
 			$msj .= "<br><strong>Contraseña: </strong>" . $infoUsuario[0]["clave"];
-			$msj .= "<br><br><strong><a href='" . base_url() . "'>Enlace Aplicación </a></strong><br>";
+			$msj .= "<br><br><strong><a href='" . base_url() . "'>Enlace Aplicación Saber 359 - Día (1) 12/09/2017 - Reunión Previa  </a></strong><br>";
+			
 				
 			$mensaje = "<html>
 						<head>

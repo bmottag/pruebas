@@ -82,7 +82,7 @@ class Specific_model extends CI_Model {
 					$this->db->where('Y.fk_id_user_operador', $this->session->id); //FILTRO POR ID DEL OPERADOR
 				}
 			
-				$this->db->order_by('S.id_sesion', 'desc');
+				$this->db->order_by('S.sesion_prueba, G.nombre_grupo_instrumentos', 'asc');
 				$query = $this->db->get('sitios Y');
 
 				if ($query->num_rows() > 0) {
@@ -100,7 +100,10 @@ class Specific_model extends CI_Model {
 		public function get_alertas_vencidas_totales($arrDatos) 
 		{		
 				//fecha para buscar las que ya se vencieron
-				$fechaActual = date('Y-m-d G:i:s');	
+				$fechaActual = date('Y-m-d G:i:s');
+
+				$fechaMinima = strtotime ( '+4 hours' , strtotime ( $fechaActual ) ) ;
+				$fechaMinima = date ( 'Y-m-d G:i:s' , $fechaMinima );//fecha minima para la busqueda				
 				
 				//si es una consulta para el reporte con los datos filtrados por post
 				$sesion = $this->input->post('sesion');
@@ -161,7 +164,7 @@ class Specific_model extends CI_Model {
 				$this->db->where_in('A.tipo_mensaje', $tipoMensaje);
 				
 				//$this->db->where('A.fecha_fin <=', $fechaActual); //FECHA FINAL SEA MAYOR A LA FECHA ACTUAL
-				$this->db->where('A.fecha_alerta <=', $fechaActual); //FECHA FINAL SEA MAYOR A LA FECHA ACTUAL
+				$this->db->where('A.fecha_alerta <=', $fechaMinima); //FECHA FINAL SEA MAYOR A LA FECHA ACTUAL
 			
 				$this->db->order_by('A.id_alerta', 'asc');
 				$query = $this->db->get('sitios Y');
