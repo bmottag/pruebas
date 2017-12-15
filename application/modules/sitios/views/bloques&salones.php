@@ -36,7 +36,7 @@ $(function(){
                 data: {'idSitio': oID, 'idBloque': 'x'},
                 cache: false,
                 success: function (data) {
-                    $('#tablaDatos').html(data);
+                    $('#tablaDatosSalon').html(data);
                 }
             });
 	});	

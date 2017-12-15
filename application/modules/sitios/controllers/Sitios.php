@@ -86,7 +86,7 @@ class Sitios extends CI_Controller {
 				$msj = "Se actualizó el bloque con exito.";
 			}
 			
-			if ($idSitio = $this->sitios_model->saveBloques()) {
+			if ($this->sitios_model->saveBloques()) {
 				$data["result"] = true;
 				
 				$this->session->set_flashdata('retornoExito', $msj);
@@ -126,13 +126,18 @@ class Sitios extends CI_Controller {
     public function cargarModalSalones() 
 	{
 			header("Content-Type: text/plain; charset=utf-8"); //Para evitar problemas de acentos
+			$this->load->model("general_model");
 						
 			$data['information'] = FALSE;
 			$data["idSitio"] = $this->input->post("idSitio");
 			$data["idBloque"] = $this->input->post("idBloque");
 			
+			//lista de bloques
+			$arrParam = array("idSitio" => $data["idSitio"]);
+			$data['infoBloques'] = $this->general_model->get_sitios_bloques($arrParam);
+			
 			if ($data["idBloque"] != 'x') {
-				$this->load->model("general_model");
+				
 				$arrParam = array(
 					"idBloque" => $data["idBloque"]
 				);
@@ -141,7 +146,38 @@ class Sitios extends CI_Controller {
 				$data["idSitio"] = $data['information'][0]['fk_id_sitio'];
 			}
 			
-			$this->load->view("form_bloque_modal", $data);
+			$this->load->view("form_salon_modal", $data);
+    }
+	
+	/**
+	 * Guardar salones
+     * @since 15/12/2017
+	 */
+	public function save_salones()
+	{			
+			header('Content-Type: application/json');
+			$data = array();
+			
+			$idSitio = $this->input->post('hddIdSitio');
+			$idBloque = $this->input->post('hddIdBloque');
+			$data["idRecord"] = $idSitio;
+			
+			$msj = "Se adicionó el salón con éxito.";
+			if ($idSitio != '') {
+				$msj = "Se actualizó el salón con éxito.";
+			}
+			
+			if ($this->sitios_model->saveSalones()) {
+				$data["result"] = true;
+				
+				$this->session->set_flashdata('retornoExito', $msj);
+			} else {
+				$data["result"] = "error";
+				
+				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador.');
+			}
+
+			echo json_encode($data);
     }
 	
 	

@@ -18,7 +18,7 @@
 		<div class="row">
 			<div class="col-sm-6">
 				<div class="form-group text-left">
-					<label for="type" class="control-label">Nombre : *</label>
+					<label class="control-label" for="bloque">Nombre : *</label>
 					<input type="text" id="bloque" name="bloque" class="form-control" value="<?php echo $information?$information[0]["nombre_bloque"]:""; ?>" placeholder="Nombre" required >
 				</div>
 			</div>
