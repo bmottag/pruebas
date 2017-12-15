@@ -222,11 +222,12 @@ class Anulaciones extends MX_Controller {
 				$data = array('upload_data' => $this->upload->data());
 				$imagen = $file_info['file_name'];
 				$path = "images/anulaciones/thumbs/" . $imagen;
+				$pathBig = "images/anulaciones/" . $imagen;
 
 				//actualizamos el campo photo
 				$arrParam = array(
 					"table" => "anulaciones",
-					"primaryKey" => " 	id_anulacion",
+					"primaryKey" => "id_anulacion",
 					"id" => $idAnulacion,
 					"column" => $tipo,
 					"value" => $path
@@ -238,6 +239,19 @@ class Anulaciones extends MX_Controller {
 				
 				if($this->general_model->updateRecord($arrParam))
 				{
+					//actualizamos el campo photo tamaño grande
+					$arrParam = array(
+						"table" => "anulaciones",
+						"primaryKey" => "id_anulacion",
+						"id" => $idAnulacion,
+						"column" => $tipo . "_grande",
+						"value" => $pathBig
+					);
+					
+					$this->general_model->updateRecord($arrParam);
+					
+					
+					
 					$data['clase'] = "alert-success";
 					$data['msj'] = "Se guardó la imagen con exito.";
 				}else{

@@ -195,7 +195,8 @@
 					'nombre_prueba' => $this->input->post('nombrePrueba'),
 					'descripcion_prueba' => $this->input->post('descripcion'),
 					'anio_prueba' => $this->input->post('anio'),
-					'semestre_prueba' => $this->input->post('semestre')
+					'semestre_prueba' => $this->input->post('semestre'),
+					'sigla' => $this->input->post('sigla')
 				);
 				
 				//revisar si es para adicionar o editar

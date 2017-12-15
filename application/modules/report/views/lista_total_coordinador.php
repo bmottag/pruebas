@@ -66,10 +66,10 @@ if($infoAlerta["fk_id_tipo_alerta"] == 1)//INFORMATIVA
 			$contadorInformativaSi = 0;
 			$contadorInformativaNo = 0;
 			if($infoAlertaVencidaInformativa){
-				foreach ($infoAlertaVencidaInformativa as $lista):
+				foreach ($infoAlertaVencidaInformativa as $lista_1):
 					$arrParam = array(
-							"idSitioSesion" => $lista['id_sitio_sesion'],
-							"idAlerta" => $lista['id_alerta']
+							"idSitioSesion" => $lista_1['id_sitio_sesion'],
+							"idAlerta" => $lista_1['id_alerta']
 					);
 					$respuesta = $this->general_model->get_respuestas_alertas_vencidas_by($arrParam);
 					
@@ -146,10 +146,10 @@ if($infoAlerta["fk_id_tipo_alerta"] == 2)//NOTIFICACION
 		
 			
 			if($infoAlertaVencidaNotificacion){
-				foreach ($infoAlertaVencidaNotificacion as $lista):
+				foreach ($infoAlertaVencidaNotificacion as $lista_2):
 					$arrParam = array(
-							"idSitioSesion" => $lista['id_sitio_sesion'],
-							"idAlerta" => $lista['id_alerta']
+							"idSitioSesion" => $lista_2['id_sitio_sesion'],
+							"idAlerta" => $lista_2['id_alerta']
 					);
 					$respuesta = $this->general_model->get_respuestas_alertas_vencidas_by($arrParam);
 					
@@ -158,8 +158,8 @@ if($infoAlerta["fk_id_tipo_alerta"] == 2)//NOTIFICACION
 					}
 										
 					$arrParam = array(
-							"idSitioSesion" => $lista['id_sitio_sesion'],
-							"idAlerta" => $lista['id_alerta'],
+							"idSitioSesion" => $lista_2['id_sitio_sesion'],
+							"idAlerta" => $lista_2['id_alerta'],
 							"respuestaAcepta" => 1
 					);//filtro por los que contestaron que SI
 					$respuestaSI = $this->general_model->get_respuestas_alertas_vencidas_by($arrParam);
@@ -264,10 +264,10 @@ if($infoAlerta["fk_id_tipo_alerta"] == 3)//CONSOLIDACION
 			$contadorConsolidacionSi = 0;
 			$contadorConsolidacionNo = 0;
 			if($infoAlertaVencidaConsolidacion){
-				foreach ($infoAlertaVencidaConsolidacion as $lista):
+				foreach ($infoAlertaVencidaConsolidacion as $lista_3):
 					$arrParam = array(
-							"idSitioSesion" => $lista['id_sitio_sesion'],
-							"idAlerta" => $lista['id_alerta']
+							"idSitioSesion" => $lista_3['id_sitio_sesion'],
+							"idAlerta" => $lista_3['id_alerta']
 					);
 					$respuesta = $this->general_model->get_respuestas_alertas_vencidas_by($arrParam);
 					
@@ -291,7 +291,7 @@ if($infoAlerta["fk_id_tipo_alerta"] == 3)//CONSOLIDACION
 			}
 			
 			//numero de citados, ausentes, presentes
-			$idSesion = $lista['id_sesion'];
+			$idSesion = $infoSesiones[0]['id_sesion'];
 			$conteoCitadosSesion = $this->general_model->get_numero_citados_por_filtro_by_coordinnador($idSesion);
 
 			if($conteoCitadosSesion['citados'] !=0){

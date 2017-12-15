@@ -78,11 +78,15 @@
 						<thead>
 							<tr>
 								<th class="text-center">Sesión</th>
+								<th class="text-center">Fecha</th>
 								<th class="text-center">Hora Inicio</th>
 								<th class="text-center">Hora Fin</th>
 								<th class="text-center">Número de citados</th>
+								<th class="text-center">Ausentes</th>
+	<!--
 								<th class="text-center">Número de ausentes</th>
 								<th class="text-center">Número de presentes</th>
+	-->
 							</tr>
 						</thead>
 						<tbody>							
@@ -90,11 +94,17 @@
 							foreach ($info as $lista):
 									echo "<tr>";
 									echo "<td>" . $lista['sesion_prueba'] . "</td>";
-									echo "<td>" . $lista['hora_inicio_prueba'] . "</td>";
-									echo "<td>" . $lista['hora_fin_prueba'] . "</td>";
-									echo "<td>" . $lista['numero_citados'] . "</td>";
-									echo "<td>" . $lista['numero_ausentes'] . "</td>";
-									echo "<td>" . $lista['numero_presentes_efectivos'] . "</td>";
+									echo "<td class='text-center'>" . $lista['fecha'] . "</td>";
+									echo "<td class='text-center'>" . $lista['hora_inicio_prueba'] . "</td>";
+									echo "<td class='text-center'>" . $lista['hora_fin_prueba'] . "</td>";
+									echo "<td class='text-center'>" . $lista['numero_citados'] . "</td>";
+						?>
+		<td class='text-center'>
+		<a href="<?php echo base_url("dashboard/ausentes/" . $infoSitio[0]['codigo_dane'] . "/" . $lista['id_sesion']); ?>" class="btn btn-warning btn-xs">Ausentes <span class="fa fa-gears fa-fw" aria-hidden="true"></a>
+		</td>
+						<?php
+									//echo "<td>" . $lista['numero_ausentes'] . "</td>";
+									//echo "<td>" . $lista['numero_presentes_efectivos'] . "</td>";
 							endforeach;
 						?>
 						</tbody>

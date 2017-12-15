@@ -65,8 +65,6 @@
 						<option value=1 <?php if($information[0]["tipo_mensaje"] == 1) { echo "selected"; }  ?>>Notificar por APP</option>
 						<option value=3 <?php if($information[0]["tipo_mensaje"] == 3) { echo "selected"; }  ?>>Notificar por EMAIL</option>
 						<option value=2 <?php if($information[0]["tipo_mensaje"] == 2) { echo "selected"; }  ?>>Notificar por EMAIL y APP</option>
-						<option value='' >------------</option>
-						<option value=4 <?php if($information[0]["tipo_mensaje"] == 4) { echo "selected"; }  ?>>Notificar por APP - cada hora</option>
 					</select>
 				</div>
 			</div>
@@ -127,7 +125,7 @@
 					<label for="type" class="control-label">Duración (en minutos): *</label>
 					<select name="duracion" id="duracion" class="form-control" required>	
 						<?php
-						for ($xxx = 1; $xxx < 121; $xxx++) {
+						for ($xxx = 1; $xxx < 60; $xxx++) {
 							
 							$xxx = $xxx<10?"0".$xxx:$xxx;
 						?>

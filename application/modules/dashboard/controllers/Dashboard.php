@@ -189,9 +189,6 @@ class Dashboard extends MX_Controller {
 			$arrParam = array("tipoAlerta" => 3);
 			$data['infoAlertaConsolidacion'] = $this->dashboard_model->get_alerta_by($arrParam);
 
-			//alertas tipo de mensaje 4, para mostrarlas cada hora
-			$data['infoAlertaConsolidacionTipo4'] = $this->dashboard_model->get_alerta_consolidacion_tipo_4();
-
 			//LISTADO DE RESPUESTAS QUE HA DADO EL USUARIO
 			$arrParam = array("idSitio" => $data['infoSitoDelegado'][0]['id_sitio']);
 			$data['infoRespuestas'] = $this->general_model->get_respuestas_usuario_by($arrParam);
@@ -451,67 +448,52 @@ class Dashboard extends MX_Controller {
 	}
 	
 	/**
-	 * Actualizacion de las alertas de consolidacion que son tipo 4
-	 * @since 10/9/2017
+	 * Formulario para seleccionar los ausentes
+     * @since 3/11/2017
 	 */
-	public function update_registro_consolidacion_by_delegado()
+	public function ausentes($codigoDane, $idSesion)
 	{
-			$data = array();
-			$ausentes = $this->input->post('ausentes');
-			$ausentesConfirmar = $this->input->post('ausentesConfirmar');
-			$citados = $this->input->post('citados');
+			$this->load->helper('form');
+			$this->load->model("general_model");
+			
+			$data['codigoDane'] = $codigoDane;
+			$data['idSesion'] = $idSesion;
+			
+			$arrParam = array("codigoDane" => $codigoDane, "idSesion" => $idSesion);
+			$data['infoExaminandos'] = $this->general_model->get_examinandos($arrParam);//info lista de examinandos por sitio
 
-			$idAlerta = $this->input->post('hddIdAlerta');
-			$idSitioSesion = $this->input->post('hddIdSitioSesion');
-			
-			$idRegistro = $this->input->post('idRegistro');
-			
-			$error = false;
-			
-			
-			
-			if($ausentes == ""){
-				$this->session->set_flashdata('retornoErrorConsolidacion', '<strong>Error!!!</strong> Debe indicar los ausentes.');
-			}else{
-				if($ausentes < 0){
-					$this->session->set_flashdata('retornoErrorConsolidacion', '<strong>Error!!!</strong> La cantidad de ausentes no puede ser menor que 0.');
-				}else{				
-					if($ausentes != $ausentesConfirmar){
-						$this->session->set_flashdata('retornoErrorConsolidacion', '<strong>Error!!!</strong> Confirmar la cantidad de ausentes.');
-					}else{				
-							if($ausentes > $citados){
-								$this->session->set_flashdata('retornoErrorConsolidacion', '<strong>Error!!!</strong> La cantidad de ausentes no puede ser mayor a la cantidad de citados.');
-							}else{
-								if ($this->dashboard_model->updateRegistroConsolidacionDelegado()) 
-								{
-									$error = true;
-									$this->session->set_flashdata('retornoExito', "Gracias por su respuesta.");
-								} else {
-									$this->session->set_flashdata('retornoErrorConsolidacion', '<strong>Error!!!</strong> Contactarse con el Administrador.');
-								}
-							}
-					}
-				}
-			}
-			
-
-			redirect("/dashboard/delegados","location",301);
-
+			$data["view"] = 'ausentes';
+			$this->load->view("layout", $data);
 	}
 	
 	/**
-	 * historial de una alerta especifica
-     * @since 10/9/2016
+	 * Guardar ausentes
+     * @since 3/11/2017
      * @author BMOTTAG
 	 */
-	public function historico($rol, $idAlerta, $idSitioSesion)
-	{
-			$this->load->model("specific_model");
-			$data["info"] = $this->specific_model->get_historial($idAlerta,$idSitioSesion);
+	public function save_ausentes()
+	{			
+			header('Content-Type: application/json');
+			$data = array();
+			$codigoDane = $this->input->post('hddCodigoDane');
+			$idSesion = $this->input->post('hddIdSesion');
+			$data["idRecord"] = $codigoDane . "/" . $idSesion;
 
-			$data["view"] = 'historico';
-			$this->load->view("layout", $data);
-	}
+			if ($this->dashboard_model->guardar_ausentes($codigoDane, $idSesion)) {
+				$data["result"] = true;
+				$data["mensaje"] = "Solicitud guardada correctamente.";
+				
+				$this->session->set_flashdata('retornoExito', 'Solicitud guardada correctamente.');
+			} else {
+				$data["result"] = "error";
+				$data["mensaje"] = "Error al guardar. Intente nuevamente o actualice la p\u00e1gina.";
+				
+				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Intente nuevamente o actualice la p\u00e1gina');
+			}
+
+			echo json_encode($data);
+    }
+
 	
 	
 }

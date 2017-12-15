@@ -50,14 +50,14 @@
 		<div class="row">
 			<div class="col-sm-6">
 				<div class="form-group input-group">
-					<span class="input-group-addon">SNP</span>
+					<span class="input-group-addon"><?php echo $infoSesiones[0]["sigla"]; ?></span>
 					<input type="password" id="holgura" name="holgura" class="form-control" value="" placeholder="Registro" required >
 				</div>
 			</div>
 
 			<div class="col-sm-6">
 				<div class="form-group input-group">
-					<span class="input-group-addon">SNP</span>
+					<span class="input-group-addon"><?php echo $infoSesiones[0]["sigla"]; ?></span>
 					<input type="password" id="confirmarHolgura" name="confirmarHolgura" class="form-control" value="" placeholder="Confirmar" required >
 				</div>
 			</div>
@@ -67,14 +67,14 @@
 		<div class="row">
 			<div class="col-sm-6">
 				<div class="form-group input-group">
-					<span class="input-group-addon">SNP</span>
+					<span class="input-group-addon"><?php echo $infoSesiones[0]["sigla"]; ?></span>
 					<input type="text" id="holgura" name="holgura" class="form-control" value="<?php echo $information?$information[0]["consecutivo_holgura"]:""; ?>" placeholder="Registro" required >
 				</div>
 			</div>
 
 			<div class="col-sm-6">
 				<div class="form-group input-group">
-					<span class="input-group-addon">SNP</span>
+					<span class="input-group-addon"><?php echo $infoSesiones[0]["sigla"]; ?></span>
 					<input type="text" id="confirmarHolgura" name="confirmarHolgura" class="form-control" value="<?php echo $information?$information[0]["consecutivo_holgura"]:""; ?>" placeholder="Confirmar" required >
 				</div>
 			</div>
@@ -96,14 +96,14 @@
 		<div class="row">
 			<div class="col-sm-6">
 				<div class="form-group input-group">
-					<span class="input-group-addon">SNP</span>
+					<span class="input-group-addon">EK20173</span>
 					<input type="password" id="consecutivo" name="consecutivo" class="form-control" value="" placeholder="Registro" required >
 				</div>
 			</div>
 
 			<div class="col-sm-6">
 				<div class="form-group input-group">
-					<span class="input-group-addon">SNP</span>
+					<span class="input-group-addon">EK20173</span>
 					<input type="password" id="confirmarConsecutivo" name="confirmarConsecutivo" class="form-control" value="" placeholder="Confirmar" required >
 				</div>
 			</div>
@@ -113,14 +113,14 @@
 		<div class="row">
 			<div class="col-sm-6">
 				<div class="form-group input-group">
-					<span class="input-group-addon">SNP</span>
+					<span class="input-group-addon">EK20173</span>
 					<input type="text" id="consecutivo" name="consecutivo" class="form-control" value="<?php echo $information?$information[0]["fk_id_examinando"]:""; ?>" placeholder="Registro" required >
 				</div>
 			</div>
 
 			<div class="col-sm-6">
 				<div class="form-group input-group">
-					<span class="input-group-addon">SNP</span>
+					<span class="input-group-addon">EK20173</span>
 					<input type="text" id="confirmarConsecutivo" name="confirmarConsecutivo" class="form-control" value="<?php echo $information?$information[0]["fk_id_examinando"]:""; ?>" placeholder="Confirmar" required >
 				</div>
 			</div>

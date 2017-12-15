@@ -118,14 +118,14 @@ $( document ).ready( function () {
 	<input type="hidden" id="idRegistro" name="idRegistro" value="<?php echo $infoRespuesta[0]['id_registro']; ?>"/>
 
 	<div class="form-group">
-		<label class="col-sm-12 control-label" for="ausentes">Cantidad</label>
+		<label class="col-sm-12 control-label" for="ausentes">Cantidad de ausentes</label>
 		<div class="col-sm-12">
 			<input type="text" id="ausentes" name="ausentes" class="form-control" value="<?php echo $infoRespuesta[0]['ausentes']; ?>" required/>
 		</div>
 	</div>
 	
 	<div class="form-group">
-		<label class="col-sm-12 control-label" for="ausentesConfirmar">Confirmar cantidad</label>
+		<label class="col-sm-12 control-label" for="ausentesConfirmar">Confirmar cantidad de ausentes</label>
 		<div class="col-sm-12">
 			<input type="text" id="ausentesConfirmar" name="ausentesConfirmar" class="form-control" value="<?php echo $infoRespuesta[0]['ausentes']; ?>" required/>
 		</div>

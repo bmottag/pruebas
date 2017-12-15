@@ -63,6 +63,15 @@
 			</div>
 		</div>
 		
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="form-group text-left">
+						<label for="type" class="control-label">Sigla : *</label>
+						<input type="text" id="sigla" name="sigla" class="form-control" value="<?php echo $information?$information[0]["sigla"]:""; ?>" placeholder="Sigla" required >
+				</div>
+			</div>
+		</div>
+		
 		<div class="form-group">
 			<div class="row" align="center">
 				<div style="width:50%;" align="center">

@@ -138,12 +138,13 @@
 		{
 				$this->db->select();
 				$this->db->join('sesiones S', 'S.id_sesion = SS.fk_id_sesion', 'INNER');//SESIONES - ALERTA
+				$this->db->join('param_grupo_instrumentos G', 'G.id_grupo_instrumentos = S.fk_id_grupo_instrumentos', 'INNER');
 				
 				if (array_key_exists("idSitio", $arrDatos)) {
 					$this->db->where('SS.fk_id_sitio', $arrDatos["idSitio"]); //filtro por SITIO
 				}
 				
-				$this->db->order_by('SS.fk_id_sitio', 'desc');
+				$this->db->order_by('S.id_sesion', 'asc');
 				$query = $this->db->get('sitio_sesion SS');
 
 				if ($query->num_rows() > 0) {
