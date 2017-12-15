@@ -310,6 +310,54 @@ class General_model extends CI_Model {
 		}
 		
 		/**
+		 * Lista de sesiones por sitio ACTIVAS por hora sesion
+		 * @since 5/11/2017
+		 */
+		public function get_sesiones_sitio_activas($arrDatos) 
+		{
+				$currentDay = date('Y-m-d');
+				
+				$currentHour = date('H:i');
+			
+				$this->db->select();
+				$this->db->join('sesiones S', 'S.id_sesion = X.fk_id_sesion', 'INNER');
+				$this->db->join('param_grupo_instrumentos G', 'G.id_grupo_instrumentos = S.fk_id_grupo_instrumentos', 'INNER');
+				$this->db->join('pruebas P', 'P.id_prueba = G.fk_id_prueba', 'INNER');
+				$this->db->join('sitios Y', 'Y.id_sitio = X.fk_id_sitio', 'INNER');
+				$this->db->join('param_regiones R', 'R.id_region = Y.fk_id_region', 'INNER');
+				$this->db->join('param_divipola D', 'D.mpio_divipola = Y.fk_mpio_divipola', 'INNER');
+				if (array_key_exists("idSitio", $arrDatos)) {
+					$this->db->where('X.fk_id_sitio', $arrDatos["idSitio"]);
+				}
+				
+				if (array_key_exists("idSesion", $arrDatos)) {
+					$this->db->where('X.fk_id_sesion', $arrDatos["idSesion"]);
+				}
+				
+				if (array_key_exists("idSesionSitio", $arrDatos)) {
+					$this->db->where('X.id_sitio_sesion', $arrDatos["idSesionSitio"]);
+				}
+				
+				//filtro para cuando se edita el SITIO - SESION se verifique que no se repite la relacion
+				if (array_key_exists("idSitioSesionDistinta", $arrDatos)) {
+					$this->db->where('X.id_sitio_sesion !=', $arrDatos["idSitioSesionDistinta"]);
+				}				
+				
+				$this->db->where('G.fecha =', $currentDay);
+				$this->db->where('S.hora_inicio_prueba <=', $currentHour); //FECHA INICIAL MAYOR A LA ACTUAL
+				$this->db->where('S.hora_fin_prueba >=', $currentHour); //FECHA FINAL MAYOR A LA ACTUAL
+				
+				$this->db->order_by('X.id_sitio_sesion', 'asc');	
+				$query = $this->db->get('sitio_sesion X');
+
+				if ($query->num_rows() > 0) {
+					return $query->result_array();
+				} else {
+					return false;
+				}
+		}
+		
+		/**
 		 * Contar registros de sesiones por sitio
 		 * filtrado por fecha vigente
 		 * @since  21/5/2017
@@ -991,7 +1039,76 @@ class General_model extends CI_Model {
 				}
 		}
 
+		/**
+		 * Examinandos para lista de ausentes
+		 * @since 3/11/2017
+		 */
+		public function get_examinandos($arrDatos)
+		{			
+				$this->db->select();
+
+				if (array_key_exists("codigoDane", $arrDatos)) {
+					$this->db->where('fk_codigo_dane', $arrDatos["codigoDane"]);
+				}
+				if (array_key_exists("idSesion", $arrDatos)) {
+					$this->db->where('fk_id_sesion', $arrDatos["idSesion"]);
+				}
+				$this->db->order_by('nombre', "ASC");
+				$query = $this->db->get('examinandos');
+					
+				if ($query->num_rows() > 0) {
+					return $query->result_array();
+				} else {
+					return false;
+				}
+		}
+
+		/**
+		 * Lista de bloques por salon
+		 * @since 14/12/2017
+		 */
+		public function get_sitios_bloques($arrDatos) 
+		{
+				$this->db->select('');
+				
+				if (array_key_exists("idSitio", $arrDatos)) {
+					$this->db->where('fk_id_sitio', $arrDatos["idSitio"]);
+				}
+				if (array_key_exists("idBloque", $arrDatos)) {
+					$this->db->where('id_sitio_bloque', $arrDatos["idBloque"]);
+				}
+								
+				$this->db->order_by('nombre_bloque', 'asc');
+				$query = $this->db->get('sitios_bloques');
+
+				if ($query->num_rows() > 0) {
+					return $query->result_array();
+				} else {
+					return false;
+				}
+		}
 		
+		/**
+		 * Lista de salones por bloque
+		 * @since 15/12/2017
+		 */
+		public function get_salones_by($arrDatos) 
+		{
+				$this->db->select('');
+				
+				if (array_key_exists("idBloque", $arrDatos)) {
+					$this->db->where('fk_id_sitio_bloque', $arrDatos["idBloque"]);
+				}
+								
+				$this->db->order_by('nombre_salon', 'asc');
+				$query = $this->db->get('sitios_salones');
+
+				if ($query->num_rows() > 0) {
+					return $query->result_array();
+				} else {
+					return false;
+				}
+		}		
 
 		
 
