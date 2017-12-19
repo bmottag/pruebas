@@ -38,6 +38,13 @@ class Sitios extends CI_Controller {
 			
 			//lista de bloques
 			$data['infoBloques'] = $this->general_model->get_sitios_bloques($arrParam);
+		
+			//lista de salones para el primer bloque de la lista anterior
+			$data['infoSalones'] = false;
+			if($data['infoBloques']){
+				$arrParam = array("idBloque" => $data['infoBloques'][0]['id_sitio_bloque']);
+				$data['infoSalones'] = $this->general_model->get_salones_by($arrParam);
+			}
 
 			$data["view"] ='bloques&salones';
 			$this->load->view("layout", $data);
@@ -57,9 +64,7 @@ class Sitios extends CI_Controller {
 			
 			if ($data["idBloque"] != 'x') {
 				$this->load->model("general_model");
-				$arrParam = array(
-					"idBloque" => $data["idBloque"]
-				);
+				$arrParam = array("idBloque" => $data["idBloque"]);
 				$data['information'] = $this->general_model->get_sitios_bloques($arrParam);//info bloques
 				
 				$data["idSitio"] = $data['information'][0]['fk_id_sitio'];
@@ -81,9 +86,9 @@ class Sitios extends CI_Controller {
 			$idBloque = $this->input->post('hddIdBloque');
 			$data["idRecord"] = $idSitio;
 			
-			$msj = "Se adicionó el bloque con exito.";
-			if ($idSitio != '') {
-				$msj = "Se actualizó el bloque con exito.";
+			$msj = "Se adicionó el bloque con éxito.";
+			if ($idBloque != '') {
+				$msj = "Se actualizó el bloque con éxito.";
 			}
 			
 			if ($this->sitios_model->saveBloques()) {
@@ -130,21 +135,19 @@ class Sitios extends CI_Controller {
 						
 			$data['information'] = FALSE;
 			$data["idSitio"] = $this->input->post("idSitio");
-			$data["idBloque"] = $this->input->post("idBloque");
+			$data["idSalon"] = $this->input->post("idSalon");
+			
+			if ($data["idSalon"] != 'x') {
+				
+				$arrParam = array("idSalon" => $data["idSalon"]);
+				$data['information'] = $this->general_model->get_salones_by($arrParam);//info salon
+			
+				$data["idSitio"] = $data['information'][0]['fk_id_sitio'];
+			}
 			
 			//lista de bloques
 			$arrParam = array("idSitio" => $data["idSitio"]);
 			$data['infoBloques'] = $this->general_model->get_sitios_bloques($arrParam);
-			
-			if ($data["idBloque"] != 'x') {
-				
-				$arrParam = array(
-					"idBloque" => $data["idBloque"]
-				);
-				$data['information'] = $this->general_model->get_sitios_bloques($arrParam);//info bloques
-				
-				$data["idSitio"] = $data['information'][0]['fk_id_sitio'];
-			}
 			
 			$this->load->view("form_salon_modal", $data);
     }

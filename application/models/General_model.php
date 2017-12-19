@@ -1065,6 +1065,7 @@ class General_model extends CI_Model {
 
 		/**
 		 * Lista de bloques por salon
+		 * ordenado por nombre bloque
 		 * @since 14/12/2017
 		 */
 		public function get_sitios_bloques($arrDatos) 
@@ -1090,18 +1091,22 @@ class General_model extends CI_Model {
 		
 		/**
 		 * Lista de salones por bloque
+		 * ordenado por salon
 		 * @since 15/12/2017
 		 */
 		public function get_salones_by($arrDatos) 
 		{
 				$this->db->select('');
-				
+				$this->db->join('sitios_bloques B', 'B.id_sitio_bloque = S.fk_id_sitio_bloque', 'INNER');
 				if (array_key_exists("idBloque", $arrDatos)) {
 					$this->db->where('fk_id_sitio_bloque', $arrDatos["idBloque"]);
 				}
+				if (array_key_exists("idSalon", $arrDatos)) {
+					$this->db->where('id_sitio_salon', $arrDatos["idSalon"]);
+				}
 								
 				$this->db->order_by('nombre_salon', 'asc');
-				$query = $this->db->get('sitios_salones');
+				$query = $this->db->get('sitios_salones S');
 
 				if ($query->num_rows() > 0) {
 					return $query->result_array();

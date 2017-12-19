@@ -23,7 +23,7 @@ $(function(){
                 data: {'idSitio': '', 'idBloque': oID},
                 cache: false,
                 success: function (data) {
-                    $('#tablaDatosSalon').html(data);
+                    $('#tablaDatos').html(data);
                 }
             });
 	});
@@ -33,13 +33,27 @@ $(function(){
             $.ajax ({
                 type: 'POST',
 				url: base_url + 'sitios/cargarModalSalones',
-                data: {'idSitio': oID, 'idBloque': 'x'},
+                data: {'idSitio': oID, 'idSalon': 'x'},
                 cache: false,
                 success: function (data) {
                     $('#tablaDatosSalon').html(data);
                 }
             });
-	});	
+	});
+
+	$(".btn-default").click(function () {	
+			var oID = $(this).attr("id");
+            $.ajax ({
+                type: 'POST',
+				url: base_url + 'sitios/cargarModalSalones',
+                data: {'idSitio': '', 'idSalon': oID},
+                cache: false,
+                success: function (data) {
+                    $('#tablaDatosSalon').html(data);
+                }
+            });
+	});
+	
 });
 </script>
 
@@ -57,14 +71,50 @@ $(function(){
 				<div class="panel-body">
 				
 					<div class="alert alert-warning">
-						<strong>Sitios: </strong><?php echo $infoSitio[0]['nombre_sitio']; ?>
+						<strong>Sitio: </strong><?php echo $infoSitio[0]['nombre_sitio']; ?><br>
+						<strong>Código DANE: </strong><?php echo $infoSitio[0]['codigo_dane']; ?><br>
+						<strong>Departemanto: </strong><?php echo $infoSitio[0]['dpto_divipola_nombre']; ?><br>
+						<strong>Municipio: </strong><?php echo $infoSitio[0]['mpio_divipola_nombre']; ?>
 					</div>					
-								
-					<button type="button" class="btn btn-outline btn-success btn-block" data-toggle="modal" data-target="#modal" id="<?php echo $infoSitio[0]['id_sitio']; ?>">
-							<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Adicionar bloque
-					</button><br>
+									
+				</div>
 					
-					<br>
+				<!-- /.panel-body -->
+			</div>
+			<!-- /.panel -->
+		</div>
+		<!-- /.col-lg-12 -->
+	</div>
+	<!-- /.row -->
+	
+<?php
+$retornoExito = $this->session->flashdata('retornoExito');
+if ($retornoExito) {
+    ?>
+	<div class="col-lg-12">	
+		<div class="alert alert-success">
+			<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+			<?php echo $retornoExito ?>		
+		</div>
+	</div>
+    <?php
+}
+
+$retornoError = $this->session->flashdata('retornoError');
+if ($retornoError) {
+    ?>
+	<div class="col-lg-12">	
+		<div class="alert alert-danger ">
+			<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+			<?php echo $retornoError ?>
+		</div>
+	</div>
+    <?php
+}
+?> 
+
+
+	
 				<?php
 					if($infoBloques){
 				?>
@@ -98,69 +148,166 @@ $(function(){
 			</div>
 		</div>
 				
+			
+		<div class="row">
+			<div class="col-lg-6">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						Listado de bloques
+					</div>
+					<!-- /.panel-heading -->
+					<div class="panel-body">
+						<div class="table-responsive">
+						
+							<table width="100%" class="table table-striped table-hover">
+								<thead>
+									<tr>
+										<th class='text-center'>Nombre</th>
+										<th class='text-center'>Estado</th>
+										<th class='text-center'>Editar</th>
+									</tr>
+								</thead>
+								<tbody>							
+								<?php
+									foreach ($infoBloques as $lista):
+											echo "<tr>";
+											echo "<td>" . $lista['nombre_bloque'] . "</td>";										
+											
+											echo "<td class='text-center'>";
+											switch ($lista['estado_bloque']) {
+												case 1:
+													$valor = 'Activo';
+													$clase = "text-success";
+													break;
+												case 2:
+													$valor = 'Inactivo';
+													$clase = "text-danger";
+													break;
+											}
+											echo '<p class="' . $clase . '"><strong>' . $valor . '</strong></p>';
+											echo "</td>";
+											
+											
+											
+											echo "<td class='text-center'>";									
+								?>
+											<button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#modal" id="<?php echo $lista['id_sitio_bloque']; ?>" >
+												<span class="glyphicon glyphicon-edit" aria-hidden="true">
+											</button>									
+								<?php
+											echo "</td>";
+											echo "</tr>";
+									endforeach;
+								?>
+								</tbody>
+							</table>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-lg-6">
+				<br>
+				<button type="button" class="btn btn-outline btn-success btn-block" data-toggle="modal" data-target="#modal" id="<?php echo $infoSitio[0]['id_sitio']; ?>">
+						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Adicionar bloque
+				</button>
 				
-					<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
-						<thead>
-							<tr>
-								<th>Nombre</th>
-								<th>Estado</th>
-								<th>Observaciones</th>
-								<th>Edit</th>
-							</tr>
-						</thead>
-						<tbody>							
-						<?php
-							foreach ($infoBloques as $lista):
-									echo "<tr>";
-									echo "<td>" . $lista['nombre_bloque'] . "</td>";
-									echo "<td class='text-center'>" . $lista['estado_bloque'] . "</td>";
-									echo "<td>" . $lista['observacion_bloque'] . "</td>";
-									
-									echo "<td class='text-center'>";									
-						?>
-									<button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#modal" id="<?php echo $lista['id_sitio_bloque']; ?>" >
-										Editar <span class="glyphicon glyphicon-edit" aria-hidden="true">
-									</button>									
-						<?php
-									echo "</td>";
-									echo "</tr>";
-							endforeach;
-						?>
-						</tbody>
-					</table>
+				<br><br>
+
+				<button type="button" class="btn btn-outline btn-primary btn-block" data-toggle="modal" data-target="#modal_salon" id="<?php echo $infoSitio[0]['id_sitio']; ?>">
+						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Adicionar salon
+				</button><br>
+			</div>
+
+		</div>
 				<?php } ?>
 				
 				
-
-					<button type="button" class="btn btn-outline btn-primary btn-block" data-toggle="modal" data-target="#modal_salon" id="<?php echo $infoSitio[0]['id_sitio']; ?>">
-							<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Adicionar salon
-					</button><br>
 				
+				<?php
+					if($infoSalones){
+						$i=0;
+				?>
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						Listado de salones
+					</div>
+					<!-- /.panel-heading -->
+					<div class="panel-body">
+						<div class="table-responsive">
 				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-
-				</div>
-
+							<table width="100%" class="table table-striped table-hover">
+								<thead>
+									<tr>
+										<th class='text-center'>#</th>
+										<th class='text-center'>Salón</th>
+										<th class='text-center'>Capacidad</th>
+										<th class='text-center'>Tipo de salón</th>
+										<th class='text-center'>Estado</th>
+										<th class='text-center'>Edit</th>
+									</tr>
+								</thead>
+								<tbody>							
+								<?php
+									foreach ($infoSalones as $lista):
+											$i++;
+									
+											echo "<tr>";
+											echo "<td class='text-center'>" . $i . "</td>";
+											echo "<td>" . $lista['nombre_salon'] . "</td>";
+											echo "<td class='text-center'>" . $lista['capacidad_salon'] . "</td>";
+											
+											switch ($lista['tipo_salon']) {
+												case 1:
+													$tipoSalon = 'Arquitectura';
+													break;
+												case 2:
+													$tipoSalon = 'Electrónico';
+													break;
+												case 2:
+													$tipoSalon = 'Papel';
+													break;
+											}
+											echo "<td>" . $tipoSalon . "</td>";
+	
+											echo "<td class='text-center'>";
+											switch ($lista['estado_salon']) {
+												case 1:
+													$valor = 'Activo';
+													$clase = "text-success";
+													break;
+												case 2:
+													$valor = 'Inactivo';
+													$clase = "text-danger";
+													break;
+											}
+											echo '<p class="' . $clase . '"><strong>' . $valor . '</strong></p>';
+											echo "</td>";
+											
+											echo "<td class='text-center'>";									
+								?>
+											<button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#modal_salon" id="<?php echo $lista['id_sitio_salon']; ?>" >
+												Editar <span class="glyphicon glyphicon-edit" aria-hidden="true">
+											</button>									
+								<?php
+											echo "</td>";
+											echo "</tr>";								
+									endforeach;
+								?>
+								</tbody>
+							</table>
 					
-				<!-- /.panel-body -->
+						</div>
+					</div>
+				</div>
 			</div>
-			<!-- /.panel -->
 		</div>
-		<!-- /.col-lg-12 -->
-	</div>
-	<!-- /.row -->
+				<?php } ?>
+	
+	
 </div>
 <!-- /#page-wrapper -->
 

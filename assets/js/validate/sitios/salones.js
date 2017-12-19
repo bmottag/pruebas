@@ -1,4 +1,7 @@
 $( document ).ready( function () {
+	
+	$("#salon").convertirMayuscula();
+	$("#observacion").convertirMayuscula();
 		
 	$( "#form" ).validate( {
 		rules: {

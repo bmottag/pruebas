@@ -55,7 +55,7 @@
 				if ($idSalon == '') {
 					$query = $this->db->insert('sitios_salones', $data);
 				} else {
-					$this->db->where('id_sitio_salon', $idBloque);
+					$this->db->where('id_sitio_salon', $idSalon);
 					$query = $this->db->update('sitios_salones', $data);
 				}
 				if ($query) {

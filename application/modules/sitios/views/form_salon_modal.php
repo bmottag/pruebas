@@ -60,7 +60,7 @@
 					<select name="bloque" id="bloque" class="form-control" >
 						<option value=''>Select...</option>
 						<?php for ($i = 0; $i < count($infoBloques); $i++) { ?>
-							<option value="<?php echo $infoBloques[$i]["id_sitio_bloque"]; ?>" ><?php echo $infoBloques[$i]["nombre_bloque"]; ?></option>	
+							<option value="<?php echo $infoBloques[$i]["id_sitio_bloque"]; ?>" <?php if($infoBloques[$i]["id_sitio_bloque"] == $information[0]["fk_id_sitio_bloque"]) { echo "selected"; }  ?>><?php echo $infoBloques[$i]["nombre_bloque"]; ?></option>	
 						<?php } ?>
 					</select>
 				</div>
