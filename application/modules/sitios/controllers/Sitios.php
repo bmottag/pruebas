@@ -114,13 +114,55 @@ class Sitios extends CI_Controller {
 
 			$this->load->model("general_model");
 			$arrParam['idBloque'] = $this->input->post('identificador');
-			$lista = $this->general_model->get_salones_by($arrParam);
+			$infoSalones = $this->general_model->get_salones_by($arrParam);
 		
-			echo "<option value=''>Select...</option>";
-			if ($lista) {
-				foreach ($lista as $fila) {
-					echo "<option value='" . $fila["idMcpio"] . "' >" . $fila["municipio"] . "</option>";
-				}
+			if ($infoSalones) {
+				$i=0;
+								
+				foreach ($infoSalones as $lista):
+						$i++;
+				
+						echo "<tr>";
+						echo "<td class='text-center'>" . $i . "</td>";
+						echo "<td>" . $lista['nombre_salon'] . "</td>";
+						echo "<td class='text-center'>" . $lista['capacidad_salon'] . "</td>";
+						
+						switch ($lista['tipo_salon']) {
+							case 1:
+								$tipoSalon = 'Arquitectura';
+								break;
+							case 2:
+								$tipoSalon = 'Electrónico';
+								break;
+							case 2:
+								$tipoSalon = 'Papel';
+								break;
+						}
+						echo "<td>" . $tipoSalon . "</td>";
+
+						echo "<td class='text-center'>";
+						switch ($lista['estado_salon']) {
+							case 1:
+								$valor = 'Activo';
+								$clase = "text-success";
+								break;
+							case 2:
+								$valor = 'Inactivo';
+								$clase = "text-danger";
+								break;
+						}
+						echo '<p class="' . $clase . '"><strong>' . $valor . '</strong></p>';
+						echo "</td>";
+						
+						echo "<td class='text-center'>";						
+						echo "<a class='btn btn-default btn-xs' href='" . base_url('jobs/add_tool_box/' . $lista['id_sitio_salon'] ) . "'>
+											Editar <span class='glyphicon glyphicon-edit' aria-hidden='true'>
+							</a>";
+						echo "</td>";
+						echo "</tr>";
+				endforeach;
+				
+
 			}
     }
 	

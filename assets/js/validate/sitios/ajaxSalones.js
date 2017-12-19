@@ -5,14 +5,14 @@
 
 $(document).ready(function () {
 	    
-    $('#depto').change(function () {
-        $('#depto option:selected').each(function () {
-            var depto = $('#depto').val();
-            if (depto > 0 || depto != '-') {
+    $('#bloques').change(function () {
+        $('#bloques option:selected').each(function () {
+            var bloques = $('#bloques').val();
+            if (bloques > 0 || bloques != '-') {
                 $.ajax ({
                     type: 'POST',
                     url: base_url + 'sitios/salonesList',
-                    data: {'identificador': depto},
+                    data: {'identificador': bloques},
                     cache: false,
                     success: function (data)
                     {

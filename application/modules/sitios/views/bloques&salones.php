@@ -69,13 +69,19 @@ $(function(){
 					<i class="fa fa-cube"></i> Bloques para un sitio
 				</div>
 				<div class="panel-body">
-				
-					<div class="alert alert-warning">
-						<strong>Sitio: </strong><?php echo $infoSitio[0]['nombre_sitio']; ?><br>
-						<strong>Código DANE: </strong><?php echo $infoSitio[0]['codigo_dane']; ?><br>
-						<strong>Departemanto: </strong><?php echo $infoSitio[0]['dpto_divipola_nombre']; ?><br>
-						<strong>Municipio: </strong><?php echo $infoSitio[0]['mpio_divipola_nombre']; ?>
-					</div>					
+					
+					<div class="col-lg-6">	
+						<div class="alert alert-warning">
+							<strong>Sitio: </strong><?php echo $infoSitio[0]['nombre_sitio']; ?><br>
+							<strong>Código DANE: </strong><?php echo $infoSitio[0]['codigo_dane']; ?><br>
+						</div>
+					</div>
+					<div class="col-lg-6">	
+						<div class="alert alert-warning">
+							<strong>Departemanto: </strong><?php echo $infoSitio[0]['dpto_divipola_nombre']; ?><br>
+							<strong>Municipio: </strong><?php echo $infoSitio[0]['mpio_divipola_nombre']; ?>
+						</div>
+					</div>
 									
 				</div>
 					
@@ -115,45 +121,15 @@ if ($retornoError) {
 
 
 	
-				<?php
-					if($infoBloques){
-				?>
-				
-				
-		<div class="row">
-			<div class="col-sm-6">
-				<div class="form-group text-left">
-					<label for="type" class="control-label">Departamento : *</label>
-					<select name="depto" id="depto" class="form-control" >
-						<option value=''>Select...</option>
-						<?php for ($i = 0; $i < count($infoBloques); $i++) { ?>
-							<option value="<?php echo $infoBloques[$i]["id_sitio_bloque"]; ?>" ><?php echo $infoBloques[$i]["nombre_bloque"]; ?></option>	
-						<?php } ?>
-					</select>
-				</div>
-			</div>
-			
-			<div class="col-sm-6">
-				<div class="form-group text-left">
-					<label for="type" class="control-label">Municipio : *</label>
-
-					<select name="mcpio" id="mcpio" class="form-control" required>					
-						<?php if($information){ ?>
-						<option value=''>Select...</option>
-							<option value="<?php echo $information[0]["fk_mpio_divipola"]; ?>" selected><?php echo $information[0]["nombre_bloque"]; ?></option>
-						<?php } ?>
-					</select>
-				
-				</div>
-			</div>
-		</div>
-				
-			
+			<?php
+				if($infoBloques){
+			?>
+								
 		<div class="row">
 			<div class="col-lg-6">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						Listado de bloques
+						<strong>Listado de bloques</strong>
 					</div>
 					<!-- /.panel-heading -->
 					<div class="panel-body">
@@ -221,25 +197,37 @@ if ($retornoError) {
 			</div>
 
 		</div>
-				<?php } ?>
-				
-				
+
 				
 				<?php
 					if($infoSalones){
-						$i=0;
 				?>
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						Listado de salones
+						<div class="row">
+							<div class="col-sm-6">
+								<strong>Listado de salones</strong>
+							</div>
+						
+							<div class="col-sm-6">
+								<div class="form-group text-left">
+									<label class="control-label" for="bloques">Bloques : </label>
+									<select name="bloques" id="bloques" class="form-control" >
+										<?php for ($i = 0; $i < count($infoBloques); $i++) { ?>
+											<option value="<?php echo $infoBloques[$i]["id_sitio_bloque"]; ?>" ><?php echo $infoBloques[$i]["nombre_bloque"]; ?></option>	
+										<?php } ?>
+									</select>
+								</div>
+							</div>
+						</div>
 					</div>
 					<!-- /.panel-heading -->
 					<div class="panel-body">
-						<div class="table-responsive">
+						<div class="table-responsive" >
 				
-							<table width="100%" class="table table-striped table-hover">
+							<table width="100%" class="table table-striped table-hover" >
 								<thead>
 									<tr>
 										<th class='text-center'>#</th>
@@ -250,8 +238,9 @@ if ($retornoError) {
 										<th class='text-center'>Edit</th>
 									</tr>
 								</thead>
-								<tbody>							
+								<tbody id="mcpio">							
 								<?php
+									$i=0;
 									foreach ($infoSalones as $lista):
 											$i++;
 									
@@ -305,8 +294,9 @@ if ($retornoError) {
 				</div>
 			</div>
 		</div>
-				<?php } ?>
-	
+				<?php } //Fin Info Salones ?>
+				
+		<?php } //Fin Info bloques ?>
 	
 </div>
 <!-- /#page-wrapper -->
@@ -344,4 +334,3 @@ if ($retornoError) {
         });
     });
     </script>
- 
