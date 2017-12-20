@@ -120,10 +120,6 @@ if ($retornoError) {
 ?> 
 
 
-	
-			<?php
-				if($infoBloques){
-			?>
 								
 		<div class="row">
 			<div class="col-lg-6">
@@ -145,6 +141,8 @@ if ($retornoError) {
 								</thead>
 								<tbody>							
 								<?php
+								if($infoBloques){
+									
 									foreach ($infoBloques as $lista):
 											echo "<tr>";
 											echo "<td>" . $lista['nombre_bloque'] . "</td>";										
@@ -174,6 +172,8 @@ if ($retornoError) {
 											echo "</td>";
 											echo "</tr>";
 									endforeach;
+									
+								} //Fin Info bloques
 								?>
 								</tbody>
 							</table>
@@ -238,7 +238,7 @@ if ($retornoError) {
 										<th class='text-center'>Edit</th>
 									</tr>
 								</thead>
-								<tbody id="mcpio">							
+								<tbody id="salones">							
 								<?php
 									$i=0;
 									foreach ($infoSalones as $lista):
@@ -295,8 +295,7 @@ if ($retornoError) {
 			</div>
 		</div>
 				<?php } //Fin Info Salones ?>
-				
-		<?php } //Fin Info bloques ?>
+
 	
 </div>
 <!-- /#page-wrapper -->

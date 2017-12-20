@@ -1,3 +1,5 @@
+<script type="text/javascript" src="<?php echo base_url("assets/js/validate/sitios/ajaxSalones.js"); ?>"></script>
+
 <div id="page-wrapper">
 	<br>
 	
@@ -7,6 +9,32 @@
 			<div class="panel panel-info">
 				<div class="panel-heading">
 					<i class="fa fa-briefcase"></i> Lista de sitios
+					
+						<div class="row">
+							<div class="col-sm-6">
+								<div class="form-group text-left">
+									<label class="control-label" for="depto">Departamento : </label>
+									<select name="depto" id="depto" class="form-control" >
+										<option value=''>Select...</option>
+										<?php for ($i = 0; $i < count($departamentos); $i++) { ?>
+											<option value="<?php echo $departamentos[$i]["dpto_divipola"]; ?>" ><?php echo $departamentos[$i]["dpto_divipola_nombre"]; ?></option>	
+										<?php } ?>
+									</select>
+								</div>
+							</div>
+						
+							<div class="col-sm-6">
+								<div class="form-group text-left">
+									<label class="control-label" for="mcpio">Municipio : </label>
+									<select name="mcpio" id="mcpio" class="form-control" required>					
+										<?php if($information){ ?>
+										<option value=''>Select...</option>
+											<option value="<?php echo $information[0]["fk_mpio_divipola"]; ?>" selected><?php echo $information[0]["mpio_divipola_nombre"]; ?></option>
+										<?php } ?>
+									</select>
+								</div>
+							</div>
+						</div>
 				</div>
 				<div class="panel-body">
 
@@ -23,7 +51,7 @@
 								<th class="text-center">Enlaces</th>
 							</tr>
 						</thead>
-						<tbody>							
+						<tbody id="sitios">							
 						<?php
 							foreach ($info as $lista):
 									echo "<tr>";
@@ -45,6 +73,7 @@
 
 						<?php
 									echo "</td>";
+									echo "</tr>";
 							endforeach;
 						?>
 						</tbody>

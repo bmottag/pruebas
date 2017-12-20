@@ -11,7 +11,7 @@ class Sitios extends CI_Controller {
 	
 	/**
 	 * Lista de sitios
-     * @since 24/10/2017
+     * @since 14/12/2017
      * @author BMOTTAG
 	 */
 	public function index()
@@ -22,6 +22,8 @@ class Sitios extends CI_Controller {
 			$arrParam = array();
 			$data['info'] = $this->general_model->get_sitios($arrParam);
 			
+			$data['departamentos'] = $this->general_model->get_dpto_divipola();//listado de departamentos
+	
 			$data["view"] = 'sitios_list';			
 			$this->load->view("layout", $data);
 	}
@@ -223,6 +225,41 @@ class Sitios extends CI_Controller {
 			}
 
 			echo json_encode($data);
+    }
+	
+	/**
+	 * Lista de sitios por DEPTO y MPIO
+     * @since 20/12/2017
+	 */
+    public function sitioList()
+	{
+			header("Content-Type: text/plain; charset=utf-8"); //Para evitar problemas de acentos
+
+			$this->load->model("general_model");
+			$arrParam = array("depto" => $this->input->post('depto'), "mcpio" => $this->input->post('mcpio'));
+			$infoSitios = $this->general_model->get_sitios($arrParam);
+		
+			if ($infoSitios) {
+								
+				foreach ($infoSitios as $lista):
+						echo "<tr>";
+						echo "<td >" . strtoupper($lista['dpto_divipola_nombre']) . "</td>";
+						echo "<td >" . strtoupper($lista['mpio_divipola_nombre']) . "</td>";	
+						echo "<td >" . $lista['nombre_sitio'] . "</td>";
+						echo "<td class='text-center'>" . $lista['codigo_dane'] . "</td>";
+						
+						echo "<td class='text-center'>";
+
+						echo "<a class='btn btn-default btn-xs' href='" . base_url('sitios/salones/' . $lista['id_sitio']) . "'>
+								Bloques y Salones <span class='fa fa-cube' aria-hidden='true'>
+							</a>";
+
+						echo "</td>";
+						echo "</tr>";
+				endforeach;
+				
+
+			}
     }
 	
 	

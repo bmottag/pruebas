@@ -226,6 +226,14 @@ class General_model extends CI_Model {
 					$this->db->where('S.fk_id_user_operador', $arrDatos["idOperador"]);
 				}
 				
+				if (array_key_exists("depto", $arrDatos)) {
+					$this->db->where('S.fk_dpto_divipola', $arrDatos["depto"]);
+				}
+				
+				if (array_key_exists("mcpio", $arrDatos) && $arrDatos["mcpio"] != "") {
+					$this->db->where('S.fk_mpio_divipola', $arrDatos["mcpio"]);
+				}
+				
 				$this->db->order_by('nombre_region, dpto_divipola_nombre, mpio_divipola_nombre, S.nombre_sitio', 'asc');
 				$query = $this->db->get('sitios S');
 
