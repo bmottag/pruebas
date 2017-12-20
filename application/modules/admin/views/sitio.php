@@ -38,9 +38,22 @@ $(function(){
 					<i class="fa fa-building-o"></i> LISTA DE SITIOS
 				</div>
 				<div class="panel-body">
-					<button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#modal" id="x">
-							<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Adicionar Sitios
-					</button><br>
+			
+					<div class="row">
+						<div class="col-sm-6">
+							<button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#modal" id="x">
+									<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Adicionar Sitios
+							</button>
+						</div>
+					
+						<div class="col-sm-6">
+							<a class='btn btn-default btn-block' href='<?php echo base_url('sitios'); ?>'>
+								Bloques y Salones <span class="fa fa-cube" aria-hidden="true">
+							</a>
+						</div>
+					</div>
+					<br>
+					
 <?php
 $retornoExito = $this->session->flashdata('retornoExito');
 if ($retornoExito) {
