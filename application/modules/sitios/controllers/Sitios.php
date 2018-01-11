@@ -298,6 +298,90 @@ class Sitios extends CI_Controller {
 		redirect('sitios/salones/' . $idSitio);
     }
 	
+	/**
+	 * Form Upload Fotos
+     * @since 11/1/2018
+     * @author BMOTTAG
+	 */
+	public function fotos($idSitio, $error = '')
+	{
+			$this->load->model("general_model");
+
+			//info de sitio
+			$arrParam = array("idSitio" => $idSitio);
+			$data['infoSitio'] = $this->general_model->get_sitios($arrParam);
+			
+			$data['idSitio'] = $idSitio;
+
+			//lista de fotos
+			$data['fotos'] = $this->sitios_model->get_fotos($idSitio);
+			$data['error'] = $error; //se usa para mostrar los errores al cargar la imagen 			
+
+			$data["view"] = "fotos";
+			$this->load->view("layout", $data);
+	}
+	
+	/**
+	 * FUNCIÓN PARA SUBIR LA IMAGEN 
+	 */
+    function do_upload_fotos() 
+	{
+        $config['upload_path'] = './images/sitios/';
+        $config['overwrite'] = false;
+        $config['allowed_types'] = 'gif|jpg|png';
+        $config['max_size'] = '3000';
+        $config['max_width'] = '2024';
+        $config['max_height'] = '2008';
+        $idSitio = $this->input->post("hddIdSitio");
+
+        $this->load->library('upload', $config);
+        //SI LA IMAGEN FALLA AL SUBIR MOSTRAMOS EL ERROR EN LA VISTA 
+        if (!$this->upload->do_upload()) {
+            $error = $this->upload->display_errors();
+            $this->fotos($idSitio,$error);
+        } else {
+            $file_info = $this->upload->data();//subimos la imagen
+			
+			$data = array('upload_data' => $this->upload->data());
+			$imagen = $file_info['file_name'];
+			$path = "images/sitios/" . $imagen;
+			
+			//insertar datos
+			if($this->sitios_model->add_fotos($path))
+			{
+				$this->session->set_flashdata('retornoExito', 'Se subio la imagen con éxito.');
+			}else{
+				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Ask for help');
+			}
+						
+			redirect('sitios/fotos/' . $idSitio);
+        }
+    }
+	
+    /**
+     * Delete Foto
+     */
+    public function deleteFoto($idFoto, $idSitio) 
+	{
+			if (empty($idFoto) || empty($idSitio) ) {
+				show_error('ERROR!!! - You are in the wrong place.');
+			}
+		
+			$arrParam = array(
+				"table" => "sitios_fotos",
+				"primaryKey" => "id_sitio_foto",
+				"id" => $idFoto
+			);
+			
+			$this->load->model("general_model");
+			if ($this->general_model->deleteRecord($arrParam)) {
+				$this->session->set_flashdata('retornoExito', 'Se eliminó la imagen.');
+			} else {
+				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Ask for help');
+			}
+			redirect(base_url('sitios/fotos/' . $idSitio), 'refresh');
+    }
+	
 	
 	
 }

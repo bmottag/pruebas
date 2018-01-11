@@ -88,6 +88,49 @@
 					return false;
 				}
 		}
+		
+		/**
+		 * Get fotos info
+		 * @since 11/1/2018
+		 */
+		public function get_fotos($idSitio) 
+		{		
+				$this->db->select();
+				$this->db->where('fk_id_sitio', $idSitio); 
+				$this->db->order_by('id_sitio_foto', 'asc');
+				$query = $this->db->get('sitios_fotos');
+
+				if ($query->num_rows() > 0) {
+					return $query->result_array();
+				} else {
+					return false;
+				}
+		}
+		
+		/**
+		 * Add fotos
+		 * @since 11/1/2018
+		 */
+		public function add_fotos($path) 
+		{							
+				$idUser = $this->session->userdata("id");
+		
+				$data = array(
+					'fk_id_sitio' => $this->input->post('hddIdSitio'),
+					'fk_id_usuario' => $idUser,
+					'descripcion_foto' => $this->input->post('description'),
+					'foto_sitio' => $path,
+					'fecha_foto' => date("Y-m-d G:i:s")
+				);			
+
+				$query = $this->db->insert('sitios_fotos', $data);
+
+				if ($query) {
+					return true;
+				} else {
+					return false;
+				}
+		}
 
 		
 	    
