@@ -262,6 +262,42 @@ class Sitios extends CI_Controller {
 			}
     }
 	
+	/**
+	 * georreferenciacion
+	 */
+	public function georreferenciacion($idSitio)
+	{
+			if (empty($idSitio)) {
+				show_error('ERROR!!! - You are in the wrong place.');
+			}
+			
+			$this->load->model("general_model");
+			//info de sitio
+			$arrParam = array("idSitio" => $idSitio);
+			$data['infoSitio'] = $this->general_model->get_sitios($arrParam);
+			
+			$data['idSitio'] = $idSitio; 
+			$data["view"] = 'sitio_georreferenciacion';
+			$this->load->view("layout", $data);
+	}
+	
+	/**
+	 * GUARDAR GEORREFERENCIACION
+	 */
+    public function update_georreferenciacion($idSitio) 
+	{
+		if($this->sitios_model->updateAddressSitio())
+		{
+			$data['clase'] = "alert-success";
+			$data['msj'] = "Se actualizarón los datos.";
+		}else{
+			$data['clase'] = "alert-danger";
+			$data['msj'] = "Error, contactarse con el administrador.";
+		}
+					
+		redirect('sitios/salones/' . $idSitio);
+    }
+	
 	
 	
 }

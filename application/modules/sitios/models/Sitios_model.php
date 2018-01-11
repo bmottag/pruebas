@@ -64,6 +64,30 @@
 					return false;
 				}
 		}
+		
+		/**
+		 * updateAddressSitio
+		 * @since 11/1/2018
+		 */
+		public function updateAddressSitio() 
+		{
+				$idSitio = $this->input->post('hddId');
+							
+				if($this->input->post('latitud') != 0){				
+					$data['latitud'] = $this->input->post('latitud');
+					$data['longitud'] = $this->input->post('longitud');
+					$data['address'] = $this->input->post('address');
+					
+					$this->db->where('id_sitio', $idSitio);
+					$query = $this->db->update('sitios', $data);
+				}
+
+				if ($query) {
+					return true;
+				} else {
+					return false;
+				}
+		}
 
 		
 	    

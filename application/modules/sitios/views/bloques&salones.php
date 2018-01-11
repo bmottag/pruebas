@@ -184,16 +184,21 @@ if ($retornoError) {
 			</div>
 			
 			<div class="col-lg-6">
-				<br>
+				
 				<button type="button" class="btn btn-outline btn-success btn-block" data-toggle="modal" data-target="#modal" id="<?php echo $infoSitio[0]['id_sitio']; ?>">
 						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Adicionar bloque
 				</button>
 				
-				<br><br>
+				<br>
 
 				<button type="button" class="btn btn-outline btn-primary btn-block" data-toggle="modal" data-target="#modal_salon" id="<?php echo $infoSitio[0]['id_sitio']; ?>">
 						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Adicionar salon
 				</button><br>
+				
+				<a class="btn btn-outline btn-danger btn-block" href=" <?php echo base_url().'sitios/georreferenciacion/' . $infoSitio[0]['id_sitio']; ?> "><span class="glyphicon glyphicon-screenshot" aria-hidden="true"></span> Georreferenciación </a><br>
+				
+				<a class="btn btn-outline btn-warning btn-block" href=" <?php echo base_url().'sitios/fotos/' . $infoSitio[0]['id_sitio']; ?> "><span class="fa fa-photo" aria-hidden="true"></span> Fotos </a><br>
+				
 			</div>
 
 		</div>
