@@ -1,5 +1,23 @@
 <script type="text/javascript" src="<?php echo base_url("assets/js/validate/sitios/ajaxSalones.js"); ?>"></script>
 
+<script>
+$(function(){ 
+	$(".btn-success").click(function () {	
+			var oID = $(this).attr("id");
+			var enlace_regreso = $('#enlace_regreso').val();
+            $.ajax ({
+                type: 'POST',
+				url: base_url + 'admin/cargarModalSitio',
+                data: {'identificador': oID, 'enlace_regreso': enlace_regreso},
+                cache: false,
+                success: function (data) {
+                    $('#tablaDatos').html(data);
+                }
+            });
+	});	
+});
+</script>
+
 <div id="page-wrapper">
 	<br>
 	
@@ -40,7 +58,7 @@
 
 				<?php
 					if($info){
-				?>				
+				?>	<input type="hidden" id="enlace_regreso" name="enlace_regreso" value="sitios"/>				
 					<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
 						<thead>
 							<tr>				
@@ -68,6 +86,10 @@
 										Bloques y Salones <span class="fa fa-cube" aria-hidden="true">
 									</a>
 									
+									<button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#modal" id="<?php echo $lista['id_sitio']; ?>" >
+										Editar <span class="glyphicon glyphicon-edit" aria-hidden="true">
+									</button>
+									
 								</div>
 
 
@@ -90,7 +112,16 @@
 </div>
 <!-- /#page-wrapper -->
 		
+<!--INICIO Modal para adicionar SITIOS -->
+<div class="modal fade text-center" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">    
+	<div class="modal-dialog" role="document">
+		<div class="modal-content" id="tablaDatos">
 
+		</div>
+	</div>
+</div>                       
+<!--FIN Modal para adicionar SITIOS -->
+		
 <!-- Tables -->
 <script>
 $(document).ready(function() {

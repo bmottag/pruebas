@@ -73,7 +73,7 @@ $( document ).ready( function () {
 							$("#div_load").css("display", "none");
 							$('#btnSubmit').removeAttr('disabled');
 
-							var url = base_url + "admin/sitios";
+							var url = base_url + data.enlace_regreso;
 							$(location).attr("href", url);
 						}
 						else

@@ -521,7 +521,8 @@ class Admin extends MX_Controller {
 			
 			$data['information'] = FALSE;
 			$data["identificador"] = $this->input->post("identificador");
-			
+			$data["enlace_regreso"] = $this->input->post("enlace_regreso");
+
 			$this->load->model("general_model");
 			$arrParam = array(
 				"table" => "param_organizaciones",
@@ -566,11 +567,12 @@ class Admin extends MX_Controller {
 			$data = array();
 
 			$idSitio = $this->input->post('hddId');
-			
-			$msj = "Se adicionó el Sitio con exito.";
+			$data["enlace_regreso"] = $this->input->post('enlace_regreso');
+	
+			$msj = "Se adicionó el Sitio con éxito.";
 			$result_codigo_dane = false;
 			if ($idSitio != '') {
-				$msj = "Se actualizó el Sitio con exito.";
+				$msj = "Se actualizó el Sitio con éxito.";
 			}else {
 				//Verificar si el codigo dane ya existe en la base de datos
 				$result_codigo_dane = $this->admin_model->verifyCodigoDane();
