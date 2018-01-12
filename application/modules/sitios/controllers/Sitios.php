@@ -288,13 +288,11 @@ class Sitios extends CI_Controller {
 	{
 		if($this->sitios_model->updateAddressSitio())
 		{
-			$data['clase'] = "alert-success";
-			$data['msj'] = "Se actualizarón los datos.";
+			$this->session->set_flashdata('retornoExito', 'Se actualizarón los datos.');
 		}else{
-			$data['clase'] = "alert-danger";
-			$data['msj'] = "Error, contactarse con el administrador.";
+			$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Ask for help');
 		}
-					
+							
 		redirect('sitios/salones/' . $idSitio);
     }
 	
