@@ -40,7 +40,13 @@
             <ul class="nav navbar-top-links navbar-right">
                 <!-- /.dropdown -->	
 				
+				<li>
+					<a href="<?php echo $enlace; ?>"><i class="fa fa-dashboard fa-fw"></i> Dashboard <?php echo $titulo; ?></a>
+				</li>
 				
+				<li>
+					<a href="<?php echo base_url("sitios"); ?>"><i class="fa fa-building-o fa-fw"></i> Sitios</a>
+				</li>				
 				
 				
 <?php 
@@ -256,29 +262,4 @@ if($userRol==6){//OPERADOR
             </ul>
             <!-- /.navbar-top-links -->
 
-
-
-			
-			
-			
-
-
-            <div class="navbar-default sidebar" role="navigation">
-                <div class="sidebar-nav navbar-collapse">
-                    <ul class="nav" id="side-menu">
-
-                        <li>
-                            <a href="#"><i class="fa fa-user fa-fw"></i> <?php echo $this->session->firstname; ?></a>
-                        </li>
-
-                        <li>
-							<a href="<?php echo $enlace; ?>"><i class="fa fa-dashboard fa-fw"></i> Dashboard <?php echo $titulo; ?></a>
-                        </li>
-						
-
-                    </ul>
-                </div>
-                <!-- /.sidebar-collapse -->
-            </div>
-            <!-- /.navbar-static-side -->
         </nav>
