@@ -131,6 +131,35 @@
 					return false;
 				}
 		}
+		
+		/**
+		 * Actualizar datos de los salones
+		 * @since 12/1/2018
+		 */
+		public function updateInfoSalon() 
+		{
+				$idSalon = $this->input->post('hddIdSalon');
+		
+				$data = array(
+					'aire_acondicionado' => $this->input->post('aire_acondicionado'),
+					'ventilacion_natural' => $this->input->post('ventilacion_natural'),
+					'iluminacion' => $this->input->post('iluminacion'),
+					'separador_piso_techo' => $this->input->post('separador_piso_techo'),
+					'puerta' => $this->input->post('puerta'),
+					'forma_mobiliario' => $this->input->post('forma_mobiliario'),
+					'tamaño' => $this->input->post('tamaño'),
+					'tipo_piso' => $this->input->post('tipo_piso')					
+				);
+
+				$this->db->where('id_sitio_salon', $idSalon);
+				$query = $this->db->update('sitios_salones', $data);
+
+				if ($query) {
+					return true;
+				} else {
+					return false;
+				}
+		}
 
 		
 	    

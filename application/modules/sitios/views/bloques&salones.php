@@ -285,7 +285,11 @@ if ($retornoError) {
 								?>
 											<button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#modal_salon" id="<?php echo $lista['id_sitio_salon']; ?>" >
 												Editar <span class="glyphicon glyphicon-edit" aria-hidden="true">
-											</button>									
+											</button>
+
+<a class='btn btn-info btn-xs' href='<?php echo base_url('sitios/add_info_salon/' . $lista['id_sitio_salon'] ); ?>'>
+											Más <span class='glyphicon glyphicon-plus' aria-hidden='true'>
+							</a>											
 								<?php
 											echo "</td>";
 											echo "</tr>";								

@@ -157,8 +157,8 @@ class Sitios extends CI_Controller {
 						echo "</td>";
 						
 						echo "<td class='text-center'>";						
-						echo "<a class='btn btn-default btn-xs' href='" . base_url('jobs/add_tool_box/' . $lista['id_sitio_salon'] ) . "'>
-											Editar <span class='glyphicon glyphicon-edit' aria-hidden='true'>
+						echo "<a class='btn btn-info btn-xs' href='" . base_url('sitios/add_info_salon/' . $lista['id_sitio_salon'] ) . "'>
+											Más <span class='glyphicon glyphicon-plus' aria-hidden='true'>
 							</a>";
 						echo "</td>";
 						echo "</tr>";
@@ -288,7 +288,7 @@ class Sitios extends CI_Controller {
 	{
 		if($this->sitios_model->updateAddressSitio())
 		{
-			$this->session->set_flashdata('retornoExito', 'Se actualizarón los datos.');
+			$this->session->set_flashdata('retornoExito', 'Se actualizaron los datos.');
 		}else{
 			$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Ask for help');
 		}
@@ -380,6 +380,54 @@ class Sitios extends CI_Controller {
 			redirect(base_url('sitios/fotos/' . $idSitio), 'refresh');
     }
 	
+	/**
+	 * Adicionar informacion del salon
+     * @since 11/1/2018
+	 */
+	public function add_info_salon($idSalon)
+	{
+			$data['information'] = FALSE;
+			
+			$this->load->model("general_model");
+
+			//info salon
+			$arrParam = array("idSalon" => $idSalon);
+			$data['information'] = $this->general_model->get_salones_by($arrParam);
+			
+			$data["idSitio"] = $data['information'][0]['fk_id_sitio'];
+
+			//info de sitio
+			$arrParam = array("idSitio" => $data["idSitio"]);
+			$data['infoSitio'] = $this->general_model->get_sitios($arrParam);
+
+			$data["view"] = 'form_salon_total';
+			$this->load->view("layout", $data);
+	}
+
+	/**
+	 * Save info salon
+     * @since 12/1/2018
+	 */
+	public function save_info_salon()
+	{			
+			header('Content-Type: application/json');
+			$data = array();
+			
+			$data["idRecord"] = $this->input->post('hddIdSalon');
+
+			if ($this->sitios_model->updateInfoSalon()) 
+			{
+				$data["result"] = true;
+				$data["mensaje"] = "Se actualizaron los datos.";
+				$this->session->set_flashdata('retornoExito', 'Se actualizaron los datos.');
+			} else {
+				$data["result"] = "error";
+				$data["mensaje"] = "Error!!! Ask for help.";
+				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Ask for help');
+			}
+			
+			echo json_encode($data);
+    }	
 	
 	
 }
