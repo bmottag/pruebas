@@ -73,7 +73,7 @@ $(function(){
 					<div class="col-lg-6">	
 						<div class="alert alert-info">
 							<strong>Sitio: </strong><?php echo $infoSitio[0]['nombre_sitio']; ?><br>
-							<strong>Código DANE: </strong><?php echo $infoSitio[0]['codigo_dane']; ?><br>
+							<strong>Código DANE: </strong><?php echo $infoSitio[0]['codigo_dane']; ?>
 						</div>
 					</div>
 					<div class="col-lg-6">	
@@ -196,7 +196,12 @@ if ($retornoError) {
 				</div>
 			</div>
 			
-
+			<div class="col-lg-6">	
+				<div class="alert alert-info">
+					<strong>No. de Bloques: </strong><?php echo $noBloques; ?><br>
+					<strong>No. de Salones: </strong><?php echo $noSalones; ?>
+				</div>
+			</div>
 
 		</div>
 

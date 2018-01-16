@@ -1124,7 +1124,45 @@ class General_model extends CI_Model {
 				} else {
 					return false;
 				}
+		}
+
+		/**
+		 * Contar registros de bloques
+		 * @since  16/1/2018
+		 */
+		public function countBloques($arrDatos)
+		{
+			$sql = "SELECT count(id_sitio_bloque) CONTEO";
+			$sql.= " FROM sitios_bloques";	
+			$sql.= " WHERE 1=1";
+
+			if (array_key_exists("idSitio", $arrDatos)) {
+				$sql.= " AND fk_id_sitio = " . $arrDatos["idSitio"];
+			}
+			$query = $this->db->query($sql);
+			$row = $query->row();
+			return $row->CONTEO;
+		}
+		
+		/**
+		 * Contar registros de salones
+		 * @since  16/1/2018
+		 */
+		public function countSalones($arrDatos)
+		{
+			$sql = "SELECT count(S.id_sitio_salon) CONTEO";
+			$sql.= " FROM sitios_salones S";
+			$sql.= " INNER JOIN sitios_bloques B ON B.id_sitio_bloque = S.fk_id_sitio_bloque";		
+			$sql.= " WHERE 1=1";
+
+			if (array_key_exists("idSitio", $arrDatos)) {
+				$sql.= " AND fk_id_sitio = " . $arrDatos["idSitio"];
+			}
+			$query = $this->db->query($sql);
+			$row = $query->row();
+			return $row->CONTEO;
 		}		
+
 
 		
 

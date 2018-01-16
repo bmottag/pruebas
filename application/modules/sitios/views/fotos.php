@@ -16,7 +16,7 @@
 					<div class="col-lg-6">	
 						<div class="alert alert-warning">
 							<strong>Sitio: </strong><?php echo $infoSitio[0]['nombre_sitio']; ?><br>
-							<strong>Código DANE: </strong><?php echo $infoSitio[0]['codigo_dane']; ?><br>
+							<strong>Código DANE: </strong><?php echo $infoSitio[0]['codigo_dane']; ?>
 						</div>
 					</div>
 					<div class="col-lg-6">	
