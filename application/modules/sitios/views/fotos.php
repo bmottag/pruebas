@@ -194,12 +194,14 @@ if ($retornoError) {
 					<table class="table table-bordered table-striped table-hover table-condensed">
 						<tr class="dafault">
 							<td><p class="text-center"><strong>Descripción</strong></p></td>
+							<td><p class="text-center"><strong>Fecha</strong></p></td>
 							<td><p class="text-center"><strong>Foto</strong></p></td>
 							<td><p class="text-center"><strong>Eliminar</strong></p></td>
 						</tr>
 						<?php
 							foreach ($fotos as $data):
 								echo "<tr>";					
+								echo "<td>" . $data['fecha_foto'] . "</td>";
 								echo "<td>";
 								switch ($data['descripcion_foto']) {
 									case 1:

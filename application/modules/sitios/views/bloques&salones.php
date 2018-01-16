@@ -195,9 +195,6 @@ if ($retornoError) {
 						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Adicionar salon
 				</button><br>
 				
-				<a class="btn btn-outline btn-danger btn-block" href=" <?php echo base_url().'sitios/georreferenciacion/' . $infoSitio[0]['id_sitio']; ?> "><span class="glyphicon glyphicon-screenshot" aria-hidden="true"></span> Georreferenciación </a><br>
-				
-				<a class="btn btn-outline btn-warning btn-block" href=" <?php echo base_url().'sitios/fotos/' . $infoSitio[0]['id_sitio']; ?> "><span class="fa fa-photo" aria-hidden="true"></span> Fotos </a><br>
 				
 			</div>
 
@@ -235,7 +232,7 @@ if ($retornoError) {
 							<table width="100%" class="table table-striped table-hover" >
 								<thead>
 									<tr>
-										<th class='text-center'>#</th>
+										<th class='text-center'>Bloque</th>
 										<th class='text-center'>Salón</th>
 										<th class='text-center'>Capacidad</th>
 										<th class='text-center'>Tipo de salón</th>
@@ -250,8 +247,8 @@ if ($retornoError) {
 											$i++;
 									
 											echo "<tr>";
-											echo "<td class='text-center'>" . $i . "</td>";
-											echo "<td>" . $lista['nombre_salon'] . "</td>";
+											echo "<td class='text-center'>" . $lista['nombre_bloque'] . "</td>";
+											echo "<td class='text-center'>" . $lista['nombre_salon'] . "</td>";
 											echo "<td class='text-center'>" . $lista['capacidad_salon'] . "</td>";
 											
 											switch ($lista['tipo_salon']) {
@@ -265,7 +262,7 @@ if ($retornoError) {
 													$tipoSalon = 'Papel';
 													break;
 											}
-											echo "<td>" . $tipoSalon . "</td>";
+											echo "<td class='text-center'>" . $tipoSalon . "</td>";
 	
 											echo "<td class='text-center'>";
 											switch ($lista['estado_salon']) {
