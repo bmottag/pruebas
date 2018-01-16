@@ -362,9 +362,10 @@ class Sitios extends CI_Controller {
 			$data = array('upload_data' => $this->upload->data());
 			$imagen = $file_info['file_name'];
 			$path = "images/sitios/" . $imagen;
+			$columnaFoto = "foto_sitio";
 			
 			//insertar datos
-			if($this->sitios_model->add_fotos($path))
+			if($this->sitios_model->add_fotos($columnaFoto, $path))
 			{
 				$this->session->set_flashdata('retornoExito', 'Se subio la imagen con éxito.');
 			}else{
@@ -374,6 +375,28 @@ class Sitios extends CI_Controller {
 			redirect('sitios/fotos/' . $idSitio);
         }
     }
+	
+	/**
+	 * Guardar imagen
+     * @since 16/1/2018
+	 */
+	public function ajax()
+	{		
+			$idSitio = $this->input->post('idSitio');
+			$src = $this->input->post('src');
+			$columnaFoto = "foto_dispositivo";
+			
+			//insertar datos
+			if($this->sitios_model->add_fotos($columnaFoto, $src))
+			{
+				$this->session->set_flashdata('retornoExito', 'Se subio la imagen con éxito.');
+			}else{
+				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Ask for help');
+			}
+			
+			$this->output->set_output($src);
+			//redirect('sitios/fotos/' . $idSitio);
+	}
 	
     /**
      * Delete Foto
