@@ -119,7 +119,20 @@ if ($retornoError) {
 }
 ?> 
 
-
+		<ul class="nav nav-pills">
+			<li>
+				<button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#modal" id="<?php echo $infoSitio[0]['id_sitio']; ?>">
+						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Adicionar bloque
+				</button>
+			
+			</li>
+			<li>
+				<button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modal_salon" id="<?php echo $infoSitio[0]['id_sitio']; ?>">
+						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Adicionar salón
+				</button>
+			</li>
+		</ul>
+		
 								
 		<div class="row">
 			<div class="col-lg-6">
@@ -145,7 +158,7 @@ if ($retornoError) {
 									
 									foreach ($infoBloques as $lista):
 											echo "<tr>";
-											echo "<td>" . $lista['nombre_bloque'] . "</td>";										
+											echo "<td class='text-center'>" . $lista['nombre_bloque'] . "</td>";										
 											
 											echo "<td class='text-center'>";
 											switch ($lista['estado_bloque']) {
@@ -183,20 +196,7 @@ if ($retornoError) {
 				</div>
 			</div>
 			
-			<div class="col-lg-6">
-				
-				<button type="button" class="btn btn-outline btn-success btn-block" data-toggle="modal" data-target="#modal" id="<?php echo $infoSitio[0]['id_sitio']; ?>">
-						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Adicionar bloque
-				</button>
-				
-				<br>
 
-				<button type="button" class="btn btn-outline btn-primary btn-block" data-toggle="modal" data-target="#modal_salon" id="<?php echo $infoSitio[0]['id_sitio']; ?>">
-						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Adicionar salon
-				</button><br>
-				
-				
-			</div>
 
 		</div>
 
