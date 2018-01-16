@@ -45,7 +45,7 @@
 				</li>
 				
 				<li>
-					<a href="<?php echo base_url("sitios"); ?>"><i class="fa fa-building-o fa-fw"></i> Sitios</a>
+					<a href="<?php echo base_url("sitios"); ?>"><i class="fa fa-building-o fa-fw"></i> Gestión de Sitios</a>
 				</li>				
 				
 				

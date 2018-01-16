@@ -66,7 +66,10 @@ $(function(){
 								<th>Municipio</th>
 								<th>Sitio</th>
 								<th>Código DANE</th>
-								<th class="text-center">Enlaces</th>
+								<th class="text-center">Editar</th>
+								<th class="text-center">Gestión de Bloques y Salones</th>
+								<th class="text-center">Georreferenciación</th>
+								<th class="text-center">Fotos</th>
 							</tr>
 						</thead>
 						<tbody id="sitios">							
@@ -77,24 +80,39 @@ $(function(){
 									echo "<td >" . strtoupper($lista['mpio_divipola_nombre']) . "</td>";	
 									echo "<td >" . $lista['nombre_sitio'] . "</td>";
 									echo "<td class='text-center'>" . $lista['codigo_dane'] . "</td>";
-									
+
 									echo "<td class='text-center'>";
-						?>
-						
-								<div class="btn-group">
-									<a class='btn btn-default btn-xs' href='<?php echo base_url('sitios/salones/' . $lista['id_sitio']) ?>'>
-										Bloques y Salones <span class="fa fa-cube" aria-hidden="true">
-									</a>
-									
+						?>									
 									<button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#modal" id="<?php echo $lista['id_sitio']; ?>" >
 										Editar <span class="glyphicon glyphicon-edit" aria-hidden="true">
 									</button>
-									
-								</div>
-
-
 						<?php
 									echo "</td>";
+									
+									echo "<td class='text-center'>";
+						?>
+									<a class='btn btn-default btn-xs' href='<?php echo base_url('sitios/salones/' . $lista['id_sitio']) ?>'>
+										Bloques y Salones <span class="fa fa-cube" aria-hidden="true">
+									</a>
+						<?php
+									echo "</td>";
+									
+									echo "<td class='text-center'>";
+						?>
+									<a class='btn btn-danger btn-xs' href='<?php echo base_url('sitios/georreferenciacion/' . $lista['id_sitio']) ?>'>
+										Georreferenciación <span class="glyphicon glyphicon-screenshot" aria-hidden="true">
+									</a>
+						<?php
+									echo "</td>";
+									
+									echo "<td class='text-center'>";
+						?>
+									<a class='btn btn-warning btn-xs' href='<?php echo base_url('sitios/fotos/' . $lista['id_sitio']) ?>'>
+										Fotos <span class="fa fa-photo" aria-hidden="true">
+									</a>
+						<?php
+									echo "</td>";
+									
 									echo "</tr>";
 							endforeach;
 						?>

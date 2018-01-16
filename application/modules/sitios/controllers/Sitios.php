@@ -29,6 +29,25 @@ class Sitios extends CI_Controller {
 	}
 	
 	/**
+	 * Buscar sitio
+     * @since 16/1/2018
+     * @author BMOTTAG
+	 */
+	public function busqueda()
+	{
+			$this->load->model("general_model");
+			
+			//listado de sitios
+			$arrParam = array();
+			$data['info'] = $this->general_model->get_sitios($arrParam);
+			
+			$data['departamentos'] = $this->general_model->get_dpto_divipola();//listado de departamentos
+	
+			$data["view"] = 'sitios_list';			
+			$this->load->view("layout", $data);
+	}
+	
+	/**
 	 * Lista de bloques y salones
 	 */
 	public function salones($idSitio)

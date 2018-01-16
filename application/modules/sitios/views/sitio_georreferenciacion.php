@@ -6,7 +6,7 @@
 		<div class="col-lg-12">
 			<div class="panel panel-warning">
 				<div class="panel-heading">
-					<a class="btn btn-warning btn-xs" href=" <?php echo base_url().'sitios/salones/' . $idSitio; ?> "><span class="glyphicon glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Regresar </a> 
+					<a class="btn btn-warning btn-xs" href=" <?php echo base_url().'sitios'; ?> "><span class="glyphicon glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Regresar </a> 
 					<i class="glyphicon glyphicon-screenshot"></i> Georreferenciación
 				</div>
 				<div class="panel-body">
