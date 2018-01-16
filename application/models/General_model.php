@@ -1107,13 +1107,16 @@ class General_model extends CI_Model {
 				$this->db->select('');
 				$this->db->join('sitios_bloques B', 'B.id_sitio_bloque = S.fk_id_sitio_bloque', 'INNER');
 				if (array_key_exists("idBloque", $arrDatos)) {
-					$this->db->where('fk_id_sitio_bloque', $arrDatos["idBloque"]);
+					$this->db->where('S.fk_id_sitio_bloque', $arrDatos["idBloque"]);
 				}
 				if (array_key_exists("idSalon", $arrDatos)) {
-					$this->db->where('id_sitio_salon', $arrDatos["idSalon"]);
+					$this->db->where('S.id_sitio_salon', $arrDatos["idSalon"]);
+				}
+				if (array_key_exists("idSitio", $arrDatos)) {
+					$this->db->where('B.fk_id_sitio', $arrDatos["idSitio"]);
 				}
 								
-				$this->db->order_by('nombre_salon', 'asc');
+				$this->db->order_by('nombre_bloque, nombre_salon', 'asc');
 				$query = $this->db->get('sitios_salones S');
 
 				if ($query->num_rows() > 0) {

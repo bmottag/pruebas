@@ -63,21 +63,21 @@ $(function(){
 	<!-- /.row -->
 	<div class="row">
 		<div class="col-lg-12">
-			<div class="panel panel-warning">
+			<div class="panel panel-info">
 				<div class="panel-heading">
-					<a class="btn btn-warning btn-xs" href=" <?php echo base_url().'sitios'; ?> "><span class="glyphicon glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Regresar </a> 
-					<i class="fa fa-cube"></i> Bloques para un sitio
+					<a class="btn btn-info btn-xs" href=" <?php echo base_url().'sitios'; ?> "><span class="glyphicon glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Regresar </a> 
+					<i class="fa fa-cube"></i> <strong>Gestión de Bloques y Salones</strong>
 				</div>
 				<div class="panel-body">
 					
 					<div class="col-lg-6">	
-						<div class="alert alert-warning">
+						<div class="alert alert-info">
 							<strong>Sitio: </strong><?php echo $infoSitio[0]['nombre_sitio']; ?><br>
 							<strong>Código DANE: </strong><?php echo $infoSitio[0]['codigo_dane']; ?><br>
 						</div>
 					</div>
 					<div class="col-lg-6">	
-						<div class="alert alert-warning">
+						<div class="alert alert-info">
 							<strong>Departemanto: </strong><?php echo $infoSitio[0]['dpto_divipola_nombre']; ?><br>
 							<strong>Municipio: </strong><?php echo $infoSitio[0]['mpio_divipola_nombre']; ?>
 						</div>
@@ -121,13 +121,13 @@ if ($retornoError) {
 
 		<ul class="nav nav-pills">
 			<li>
-				<button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#modal" id="<?php echo $infoSitio[0]['id_sitio']; ?>">
+				<button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal" id="<?php echo $infoSitio[0]['id_sitio']; ?>">
 						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Adicionar bloque
 				</button>
 			
 			</li>
 			<li>
-				<button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modal_salon" id="<?php echo $infoSitio[0]['id_sitio']; ?>">
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_salon" id="<?php echo $infoSitio[0]['id_sitio']; ?>">
 						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Adicionar salón
 				</button>
 			</li>
@@ -217,6 +217,7 @@ if ($retornoError) {
 								<div class="form-group text-left">
 									<label class="control-label" for="bloques">Bloques : </label>
 									<select name="bloques" id="bloques" class="form-control" >
+										<option value=''>Seleccione...</option>
 										<?php for ($i = 0; $i < count($infoBloques); $i++) { ?>
 											<option value="<?php echo $infoBloques[$i]["id_sitio_bloque"]; ?>" ><?php echo $infoBloques[$i]["nombre_bloque"]; ?></option>	
 										<?php } ?>

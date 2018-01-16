@@ -60,12 +60,9 @@ class Sitios extends CI_Controller {
 			//lista de bloques
 			$data['infoBloques'] = $this->general_model->get_sitios_bloques($arrParam);
 		
-			//lista de salones para el primer bloque de la lista anterior
-			$data['infoSalones'] = false;
-			if($data['infoBloques']){
-				$arrParam = array("idBloque" => $data['infoBloques'][0]['id_sitio_bloque']);
-				$data['infoSalones'] = $this->general_model->get_salones_by($arrParam);
-			}
+			//lista de salones
+			$arrParam = array("idSitio" => $idSitio);
+			$data['infoSalones'] = $this->general_model->get_salones_by($arrParam);
 
 			$data["view"] ='bloques&salones';
 			$this->load->view("layout", $data);
@@ -144,7 +141,7 @@ class Sitios extends CI_Controller {
 						$i++;
 				
 						echo "<tr>";
-						echo "<td class='text-center'>" . $i . "</td>";
+						echo "<td class='text-center'>" . $lista['nombre_bloque'] . "</td>";
 						echo "<td>" . $lista['nombre_salon'] . "</td>";
 						echo "<td class='text-center'>" . $lista['capacidad_salon'] . "</td>";
 						

@@ -64,7 +64,7 @@
 						<div class="form-group text-left">
 							<label class="control-label" for="descripcion1">Descripción</label>
 							<select name="descripcion1" id="descripcion1" class="form-control" required>
-								<option value=''>Select...</option>
+								<option value=''>Seleccione...</option>
 								<option value=1>Acceso discapacitados</option>
 								<option value=2>Batería sanitaria</option>
 								<option value=3>Fachada</option>
@@ -135,7 +135,7 @@ if ($retornoError) {
 					<label class="col-sm-4 control-label" for="descripcion">Descripción: *</label>
 					<div class="col-sm-5">
 						<select name="descripcion" id="descripcion" class="form-control" required>
-							<option value=''>Select...</option>
+							<option value=''>Seleccione...</option>
 							<option value=1>Acceso discapacitados</option>
 							<option value=2>Batería sanitaria</option>
 							<option value=3>Fachada</option>
