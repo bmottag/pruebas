@@ -97,7 +97,7 @@
 		{		
 				$this->db->select();
 				$this->db->where('fk_id_sitio', $idSitio); 
-				$this->db->order_by('id_sitio_foto', 'asc');
+				$this->db->order_by('id_sitio_foto', 'desc');
 				$query = $this->db->get('sitios_fotos');
 
 				if ($query->num_rows() > 0) {
