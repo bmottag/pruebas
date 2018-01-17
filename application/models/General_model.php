@@ -1185,6 +1185,27 @@ class General_model extends CI_Model {
 				}
 		}
 		
+		/**
+		 * Lista de zonas
+		 * @since 17/1/2018
+		 */
+		public function get_zonas($arrDatos) 
+		{
+				$this->db->select('');
+				
+				if (array_key_exists("idZona", $arrDatos)) {
+					$this->db->where('id_zona', $arrDatos["idZona"]);
+				}
+								
+				$this->db->order_by('nombre_zona', 'asc');
+				$query = $this->db->get('param_zonas D');
+
+				if ($query->num_rows() > 0) {
+					return $query->result_array();
+				} else {
+					return false;
+				}
+		}
 
 
 }

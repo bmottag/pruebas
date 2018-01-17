@@ -4,8 +4,8 @@ $(function(){
 			var oID = $(this).attr("id");
             $.ajax ({
                 type: 'POST',
-				url: base_url + 'more/cargarModalRegion',
-                data: {'idRegion': oID},
+				url: base_url + 'more/cargarModalZona',
+                data: {'idZona': oID},
                 cache: false,
                 success: function (data) {
                     $('#tablaDatos').html(data);
@@ -23,11 +23,11 @@ $(function(){
 		<div class="col-lg-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<i class="fa fa-globe"></i> <strong>Nodo o Región</strong>
+					<i class="fa fa-stack-exchange"></i> <strong>Zona</strong>
 				</div>
 				<div class="panel-body">
 					<button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#modal" id="x">
-							<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Adicionar Nodo o Región
+							<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Adicionar Zona
 					</button><br>
 <?php
 $retornoExito = $this->session->flashdata('retornoExito');
@@ -60,7 +60,7 @@ if ($retornoError) {
 					<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
 						<thead>
 							<tr>
-								<th class="text-center">Nodo o Región</th>
+								<th class="text-center">Zona</th>
 								<th class="text-center">Fecha creación</th>
 								<th class="text-center">Fecha actualización</th>
 								<th class="text-center">Editar</th>
@@ -70,12 +70,12 @@ if ($retornoError) {
 						<?php
 							foreach ($info as $lista):
 									echo "<tr>";
-									echo "<td>" . $lista['nombre_region'] . "</td>";
+									echo "<td>" . $lista['nombre_zona'] . "</td>";
 									echo "<td>" . $lista['fecha_creacion'] . "</td>";
 									echo "<td>" . $lista['fecha_actualizacion'] . "</td>";
 									echo "<td class='text-center'>";
 						?>
-									<button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#modal" id="<?php echo $lista['id_region']; ?>" >
+									<button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#modal" id="<?php echo $lista['id_zona']; ?>" >
 										Editar <span class="glyphicon glyphicon-edit" aria-hidden="true">
 									</button>
 						<?php

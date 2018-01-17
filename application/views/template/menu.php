@@ -58,7 +58,11 @@
 						<li class="divider"></li>
 
 						<li>
-							<a href="<?php echo base_url("more/region"); ?>"><i class="fa fa-search fa-fw"></i> Nodo o Región</a>
+							<a href="<?php echo base_url("more/region"); ?>"><i class="fa fa-globe fa-fw"></i> Nodo o Región</a>
+						</li>
+
+						<li>
+							<a href="<?php echo base_url("more/zona"); ?>"><i class="fa fa-stack-exchange fa-fw"></i> Zona</a>
 						</li>
 						
 					</ul>

@@ -1,10 +1,10 @@
 $( document ).ready( function () {
 	
-	$("#nombreRegion").convertirMayuscula();
+	$("#nombreZona").convertirMayuscula();
 	
 	$( "#form" ).validate( {
 		rules: {
-			nombreRegion:		{ required: true, minlength: 3, maxlength:50 }
+			nombreZona:		{ required: true, minlength: 3, maxlength:50 }
 		},
 		errorElement: "em",
 		errorPlacement: function ( error, element ) {
@@ -35,7 +35,7 @@ $( document ).ready( function () {
 			
 				$.ajax({
 					type: "POST",	
-					url: base_url + "more/save_region",	
+					url: base_url + "more/save_zona",	
 					data: $("#form").serialize(),
 					dataType: "json",
 					contentType: "application/x-www-form-urlencoded;charset=UTF-8",
@@ -55,7 +55,7 @@ $( document ).ready( function () {
 							$("#div_load").css("display", "none");
 							$('#btnSubmit').removeAttr('disabled');
 
-							var url = base_url + "more/region";
+							var url = base_url + "more/zona";
 							$(location).attr("href", url);
 						}
 						else
