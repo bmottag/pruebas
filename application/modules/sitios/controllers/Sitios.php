@@ -314,7 +314,7 @@ class Sitios extends CI_Controller {
 			$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Ask for help');
 		}
 							
-		redirect('sitios/salones/' . $idSitio);
+		redirect('sitios');
     }
 	
 	/**
