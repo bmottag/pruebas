@@ -6,21 +6,21 @@
 	<!-- /.row -->
 	<div class="row">
 		<div class="col-lg-12">
-			<div class="panel panel-warning">
+			<div class="panel panel-info">
 				<div class="panel-heading">
-					<a class="btn btn-warning btn-xs" href=" <?php echo base_url().'sitios'; ?> "><span class="glyphicon glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Regresar </a> 
-					<i class="fa fa-photo"></i> Fotos
+					<a class="btn btn-info btn-xs" href=" <?php echo base_url().'sitios'; ?> "><span class="glyphicon glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Regresar </a> 
+					<i class="fa fa-photo"></i> <strong>Fotos</strong>
 				</div>
 				<div class="panel-body">
 					
 					<div class="col-lg-6">	
-						<div class="alert alert-warning">
+						<div class="alert alert-info">
 							<strong>Sitio: </strong><?php echo $infoSitio[0]['nombre_sitio']; ?><br>
 							<strong>Código DANE: </strong><?php echo $infoSitio[0]['codigo_dane']; ?>
 						</div>
 					</div>
 					<div class="col-lg-6">	
-						<div class="alert alert-warning">
+						<div class="alert alert-info">
 							<strong>Departemanto: </strong><?php echo $infoSitio[0]['dpto_divipola_nombre']; ?><br>
 							<strong>Municipio: </strong><?php echo $infoSitio[0]['mpio_divipola_nombre']; ?>
 						</div>
@@ -37,9 +37,9 @@
 	
 	<div class="row">
 		<div class="col-lg-12">				
-			<div class="panel panel-success">
+			<div class="panel panel-default">
 				<div class="panel-heading">
-					Tomar foto
+					<strong>Tomar foto</strong>
 				</div>
 				<div class="panel-body">
 				
@@ -96,9 +96,9 @@
 	<!-- /.row -->
 	<div class="row">
 		<div class="col-lg-12">
-			<div class="panel panel-warning">
+			<div class="panel panel-default">
 				<div class="panel-heading">
-					Subir foto
+					<strong>Subir foto</strong>
 				</div>
 				<div class="panel-body">
 				
@@ -130,7 +130,8 @@ if ($retornoError) {
 
 		<form  name="form" id="form" class="form-horizontal" method="post" enctype="multipart/form-data" action="<?php echo base_url("sitios/do_upload_fotos"); ?>">
 		<input type="hidden" id="hddIdSitio" name="hddIdSitio" value="<?php echo $idSitio; ?>"/>
-				
+		
+		<div class="col-lg-6">	
 				<div class="form-group">
 					<label class="col-sm-4 control-label" for="descripcion">Descripción: *</label>
 					<div class="col-sm-5">
@@ -144,16 +145,16 @@ if ($retornoError) {
 					</div>
 				</div>
 				
-				<div class="col-lg-6">				
+				<div class="col-lg-12">				
 					<div class="form-group">					
-						<label class="col-sm-5 control-label" for="hddTask">Adjuntar imagen</label>
+						<label class="col-sm-4 control-label" for="hddTask">Adjuntar imagen</label>
 						<div class="col-sm-5">
 							 <input type="file" name="userfile" />
 						</div>
 					</div>
 				</div>
 					
-				<div class="col-lg-6">				
+				<div class="col-lg-12">				
 					<div class="form-group">
 						<div class="row" align="center">
 							<div style="width:50%;" align="center">
@@ -164,7 +165,10 @@ if ($retornoError) {
 						</div>
 					</div>
 				</div>
+		</div>
 		</form>
+		
+		<div class="col-lg-6">	
 
 					<?php if($error){ ?>
 					<div class="col-lg-12">
@@ -187,11 +191,34 @@ if ($retornoError) {
 							
 					</div>
 				</div>
+		</div>
 
-					<?php 
-						if($fotos){
-					?>
-					<table class="table table-bordered table-striped table-hover table-condensed">
+					
+					<!-- /.row (nested) -->
+				</div>
+				<!-- /.panel-body -->
+			</div>
+			<!-- /.panel -->
+		</div>
+		<!-- /.col-lg-12 -->
+	</div>
+	<!-- /.row -->
+	
+<?php if($fotos){ ?>	
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<strong>Fotos cargadas</strong>
+					</div>
+					<!-- /.panel-heading -->
+					<div class="panel-body">
+						<div class="table-responsive">
+						
+							<table width="100%" class="table table-striped table-hover">
+
+							
+
 						<tr class="dafault">
 							<td><p class="text-center"><strong>Descripción</strong></p></td>
 							<td><p class="text-center"><strong>Fecha</strong></p></td>
@@ -244,18 +271,16 @@ if ($retornoError) {
 							endforeach;
 						?>
 					</table>
-					<?php } ?>
-					<!--FIN HAZARDS -->
-					
-					<!-- /.row (nested) -->
+							
+						</div>
+					</div>
 				</div>
-				<!-- /.panel-body -->
 			</div>
-			<!-- /.panel -->
-		</div>
-		<!-- /.col-lg-12 -->
-	</div>
-	<!-- /.row -->
+
+		</div>	
+<?php } ?>
+	
+	
 </div>
 <!-- /#page-wrapper -->
 
