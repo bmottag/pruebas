@@ -473,5 +473,19 @@ class Sitios extends CI_Controller {
 			echo json_encode($data);
     }	
 	
+	/**
+	 * Formulario Sitio
+	 */
+	public function sitio($idSitio)
+	{		
+			$this->load->model("general_model");
+			//info de sitio
+			$arrParam = array("idSitio" => $idSitio);
+			$data['information'] = $this->general_model->get_sitios($arrParam);
+
+			$data["view"] ='form_sitio';
+			$this->load->view("layout", $data);
+	}
+	
 	
 }

@@ -82,10 +82,10 @@ $(function(){
 									echo "<td class='text-center'>" . $lista['codigo_dane'] . "</td>";
 
 									echo "<td class='text-center'>";
-						?>									
-									<button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#modal" id="<?php echo $lista['id_sitio']; ?>" >
+						?>																
+									<a class='btn btn-success btn-xs' href='<?php echo base_url('sitios/sitio/' . $lista['id_sitio']) ?>'>
 										Editar <span class="glyphicon glyphicon-edit" aria-hidden="true">
-									</button>
+									</a>
 						<?php
 									echo "</td>";
 									
