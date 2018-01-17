@@ -1163,7 +1163,27 @@ class General_model extends CI_Model {
 			return $row->CONTEO;
 		}		
 
+		/**
+		 * Lista de regiones
+		 * @since 17/1/2018
+		 */
+		public function get_regiones($arrDatos) 
+		{
+				$this->db->select('');
+				
+				if (array_key_exists("idRegion", $arrDatos)) {
+					$this->db->where('D.id_region', $arrDatos["idRegion"]);
+				}
+								
+				$this->db->order_by('nombre_region', 'asc');
+				$query = $this->db->get('param_regiones D');
 
+				if ($query->num_rows() > 0) {
+					return $query->result_array();
+				} else {
+					return false;
+				}
+		}
 		
 
 
