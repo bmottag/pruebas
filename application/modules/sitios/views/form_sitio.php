@@ -1,5 +1,5 @@
-<script type="text/javascript" src="<?php echo base_url("assets/js/validate/hauling/ajaxTruck.js"); ?>"></script>
-<script type="text/javascript" src="<?php echo base_url("assets/js/validate/hauling/hauling.js"); ?>"></script>
+<script type="text/javascript" src="<?php echo base_url("assets/js/validate/sitios/sitio.js"); ?>"></script>
+<script type="text/javascript" src="<?php echo base_url("assets/js/validate/admin/ajaxMcpio.js"); ?>"></script>
 
 <div id="page-wrapper">
 	<br>
@@ -99,7 +99,7 @@ if ($retornoError) {
 			<div class="form-group">
 				<label class="col-sm-4 control-label" for="ext_telefono">Extensión : </label>
 				<div class="col-sm-7">
-					<input type="text" id="ext_telefono" name="ext_telefono" class="form-control" value="<?php echo $information?$information[0]["ext_telefono"]:""; ?>" placeholder="Extensión" required >
+					<input type="text" id="ext_telefono" name="ext_telefono" class="form-control" value="<?php echo $information?$information[0]["ext_telefono"]:""; ?>" placeholder="Extensión" >
 				</div>
 			</div>
 		</div>
@@ -119,7 +119,7 @@ if ($retornoError) {
 			<div class="form-group">
 				<label class="col-sm-4 control-label" for="ext_fax">Extensión  : </label>
 				<div class="col-sm-7">
-					<input type="text" id="ext_fax" name="ext_fax" class="form-control" value="<?php echo $information?$information[0]["ext_fax"]:""; ?>" placeholder="Extensión" required >
+					<input type="text" id="ext_fax" name="ext_fax" class="form-control" value="<?php echo $information?$information[0]["ext_fax"]:""; ?>" placeholder="Extensión" >
 				</div>
 			</div>
 		</div>
@@ -179,9 +179,9 @@ if ($retornoError) {
 	<div class="row">
 		<div class="col-lg-3">
 			<div class="form-group">
-				<label class="col-sm-4 control-label" for="depto">Pais : *</label>
+				<label class="col-sm-4 control-label" for="pais">País : *</label>
 				<div class="col-sm-8">
-					<select name="depto" id="depto" class="form-control" >
+					<select name="pais" id="pais" class="form-control" >
 						<option value=''>Select...</option>
 						<?php for ($i = 0; $i < count($departamentos); $i++) { ?>
 							<option value="<?php echo $departamentos[$i]["dpto_divipola"]; ?>" <?php if($information[0]["fk_dpto_divipola"] == $departamentos[$i]["dpto_divipola"]) { echo "selected"; }  ?>><?php echo $departamentos[$i]["dpto_divipola_nombre"]; ?></option>	
@@ -247,10 +247,10 @@ if ($retornoError) {
 	</div>
 	
 	<div class="row">
-		<div class="col-lg-6">	
+		<div class="col-lg-4">	
 			<div class="form-group">
 				<label class="col-sm-5 control-label" for="discapacitados">Acceso para discapacitados : *</label>
-				<div class="col-sm-6">
+				<div class="col-sm-7">
 					<select name="discapacitados" id="discapacitados" class="form-control" required>
 						<option value=''>Select...</option>
 						<option value=1 <?php if($information[0]["discapacitados"] == 1) { echo "selected"; }  ?>>Si</option>
@@ -260,7 +260,7 @@ if ($retornoError) {
 			</div>
 		</div>
 			
-		<div class="col-lg-3">
+		<div class="col-lg-4">
 			<div class="form-group">
 				<label class="col-sm-4 control-label" for="capacidad">Capacidad : *</label>
 				<div class="col-sm-7">
@@ -268,7 +268,7 @@ if ($retornoError) {
 				</div>
 			</div>
 		</div>
-		<div class="col-lg-3">
+		<div class="col-lg-4">
 			<div class="form-group">
 				<label class="col-sm-4 control-label" for="calificacion">Calificación : *</label>
 				<div class="col-sm-7">
@@ -298,7 +298,7 @@ if ($retornoError) {
 			<div class="form-group">
 				<label class="col-sm-4 control-label" for="observacion">Observación : *</label>
 				<div class="col-sm-7">
-					<textarea id="observacion" name="observacion" placeholder="observacion"  class="form-control" rows="3"><?php echo $information?$information["observacion"]:""; ?></textarea>
+					<textarea id="observacion" name="observacion" placeholder="Observación"  class="form-control" rows="3"><?php echo $information?$information[0]["observacion"]:""; ?></textarea>
 				</div>
 			</div>
 		</div>
@@ -306,31 +306,33 @@ if ($retornoError) {
 	</div>
 
 						
-						<div class="form-group">
-							<div class="row" align="center">
-								<div style="width:100%;" align="center">
-									<input type="button" id="btnSubmit" name="btnSubmit" value="Save" class="btn btn-primary"/>
-								</div>
-							</div>
-						</div>
+	<div class="form-group">
+		<div class="row" align="center">
+			<div style="width:100%;" align="center">
+				<button type="button" id="btnSubmit" name="btnSubmit" class='btn btn-primary'>
+						Save <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true">
+				</button>
+			</div>
+		</div>
+	</div>
 																		
-						<div class="form-group">
-							<div class="row" align="center">
-								<div style="width:80%;" align="center">
-									<div id="div_load" style="display:none">		
-										<div class="progress progress-striped active">
-											<div class="progress-bar" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
-												<span class="sr-only">45% completado</span>
-											</div>
-										</div>
-									</div>
-									<div id="div_error" style="display:none">			
-										<div class="alert alert-danger"><span class="glyphicon glyphicon-remove" id="span_msj">&nbsp;</span></div>
-									</div>
-								</div>
+		<div class="form-group">
+			<div class="row" align="center">
+				<div style="width:80%;" align="center">
+					<div id="div_load" style="display:none">		
+						<div class="progress progress-striped active">
+							<div class="progress-bar" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
+								<span class="sr-only">45% completado</span>
 							</div>
 						</div>
-					</form>
+					</div>
+					<div id="div_error" style="display:none">			
+						<div class="alert alert-danger"><span class="glyphicon glyphicon-remove" id="span_msj">&nbsp;</span></div>
+					</div>
+				</div>
+			</div>
+		</div>
+</form>
 
 					<!-- /.row (nested) -->
 				</div>

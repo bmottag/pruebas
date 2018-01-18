@@ -476,16 +476,85 @@ class Sitios extends CI_Controller {
 	/**
 	 * Formulario Sitio
 	 */
-	public function sitio($idSitio)
+	public function sitio($idSitio = 'x')
 	{		
+			$data['information'] = false;
 			$this->load->model("general_model");
-			//info de sitio
-			$arrParam = array("idSitio" => $idSitio);
-			$data['information'] = $this->general_model->get_sitios($arrParam);
+			
+			$arrParam = array(
+				"table" => "param_organizaciones",
+				"order" => "id_organizacion",
+				"id" => "x"
+			);
+			$data['organizaciones'] = $this->general_model->get_basic_search($arrParam);//listado organizaciones
+			
+			$arrParam = array(
+				"table" => "param_regiones",
+				"order" => "nombre_region",
+				"id" => "x"
+			);
+			$data['regiones'] = $this->general_model->get_basic_search($arrParam);//listado regiones
+			
+			$arrParam = array(
+				"table" => "param_zonas",
+				"order" => "nombre_zona",
+				"id" => "x"
+			);
+			$data['zonas'] = $this->general_model->get_basic_search($arrParam);//listado zonas
+			
+			$data['departamentos'] = $this->general_model->get_dpto_divipola();//listado de departamentos
+			
+
+			if ($idSitio != 'x') {
+				//info de sitio
+				$arrParam = array("idSitio" => $idSitio);
+				$data['information'] = $this->general_model->get_sitios($arrParam);
+			}
 
 			$data["view"] ='form_sitio';
 			$this->load->view("layout", $data);
 	}
+	
+	/**
+	 * Update Sitios
+     * @since 17/1/2018
+	 */
+	public function save_sitio()
+	{			
+			header('Content-Type: application/json');
+			$data = array();
+
+			$idSitio = $this->input->post('hddId');
+	
+			$msj = "Se adicionó el Sitio con éxito.";
+			$result_codigo_dane = false;
+			if ($idSitio != '') {
+				$msj = "Se actualizó el Sitio con éxito.";
+			}else {
+				//Verificar si el codigo dane ya existe en la base de datos
+				$this->load->model("general_model");
+				$result_codigo_dane = $this->general_model->verifyCodigoDane();
+			}
+
+			if ($result_codigo_dane) {
+				$data["result"] = "error";
+				$data["mensaje"] = "Error!!!. El código DANE ya existe en la base de datos.";
+			} else {
+					if ($idSitio = $this->sitios_model->saveSitio()) {
+						$data["result"] = true;
+						$data["idRecord"] = $idSitio;
+						
+						$this->session->set_flashdata('retornoExito', $msj);
+					} else {
+						$data["result"] = "error";
+						$data["idRecord"] = "";
+						
+						$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador.');
+					}
+			}
+
+			echo json_encode($data);
+    }
 	
 	
 }

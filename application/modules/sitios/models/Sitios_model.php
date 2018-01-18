@@ -160,6 +160,63 @@
 					return false;
 				}
 		}
+		
+		/**
+		 * Add/Edit SITIO
+		 * @since 11/5/2017
+		 */
+		public function saveSitio() 
+		{
+				$idSitio = $this->input->post('hddId');
+				
+				$data = array(
+					'nombre_sitio' => $this->input->post('nombreSitio'),
+					'direccion_sitio' => $this->input->post('direccion'),
+					'codigo_postal_sitio' => $this->input->post('codigoPostal'),
+					'barrio_sitio' => $this->input->post('barrioSitio'),
+					'telefono_sitio' => $this->input->post('telefono'),
+					'fax_sitio' => $this->input->post('fax'),
+					'celular_sitio' => $this->input->post('celular'),
+					'email_sitio' => $this->input->post('email'),
+					'fk_id_region' => $this->input->post('region'),
+					'fk_dpto_divipola' => $this->input->post('depto'),
+					'fk_mpio_divipola' => $this->input->post('mcpio'),
+					'estado_sitio' => 1,
+					'codigo_dane' => $this->input->post('codigoDane'),
+					'ext_telefono' => $this->input->post('ext_telefono'),
+					'ext_fax' => $this->input->post('ext_fax'),
+					'fk_id_pais' => $this->input->post('pais'),
+					'discapacitados' => $this->input->post('discapacitados'),
+					'capacidad' => $this->input->post('capacidad'),
+					'calificacion' => $this->input->post('calificacion'),
+					'etiqueta' => $this->input->post('etiqueta'),
+					'observacion' => $this->input->post('observacion')
+				);
+				
+				$zona = $this->input->post('zona');
+				$organizacion = $this->input->post('organizacion');
+				if($zona != ""){
+					$data['fk_id_zona'] = $zona;
+				}
+				if($organizacion != ""){
+					$data['fk_id_organizacion'] = $organizacion;
+				}
+				
+				//revisar si es para adicionar o editar
+				if ($idSitio == '') {
+					$data['fecha_creacion'] = date("Y-m-d");
+					$query = $this->db->insert('sitios', $data);
+					$idSitio = $this->db->insert_id();				
+				} else {
+					$this->db->where('id_sitio', $idSitio);
+					$query = $this->db->update('sitios', $data);
+				}
+				if ($query) {
+					return $idSitio;
+				} else {
+					return false;
+				}
+		}
 
 		
 	    
