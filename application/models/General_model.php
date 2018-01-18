@@ -1206,6 +1206,22 @@ class General_model extends CI_Model {
 					return false;
 				}
 		}
+		
+		/**
+		 * Verificar si ya existe el codigo del DANE
+		 * @since  7/6/2017
+		 */
+		public function verifyCodigoDane() 
+		{
+				$codigoDane = $this->input->post('codigoDane');
+			
+				$this->db->where("codigo_dane", $codigoDane);
+				$query = $this->db->get("sitios");
+
+				if ($query->num_rows() >= 1) {
+					return true;
+				} else{ return false; }
+		}
 
 
 }

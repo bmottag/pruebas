@@ -575,7 +575,8 @@ class Admin extends MX_Controller {
 				$msj = "Se actualizó el Sitio con éxito.";
 			}else {
 				//Verificar si el codigo dane ya existe en la base de datos
-				$result_codigo_dane = $this->admin_model->verifyCodigoDane();
+				$this->load->model("general_model");
+				$result_codigo_dane = $this->general_model->verifyCodigoDane();
 			}
 
 			if ($result_codigo_dane) {
