@@ -2,13 +2,12 @@
 
 <script>
 $(function(){ 
-	$(".btn-success").click(function () {	
+	$(".btn-info").click(function () {	
 			var oID = $(this).attr("id");
-			var enlace_regreso = $('#enlace_regreso').val();
             $.ajax ({
                 type: 'POST',
-				url: base_url + 'admin/cargarModalSitio',
-                data: {'identificador': oID, 'enlace_regreso': enlace_regreso},
+				url: base_url + 'sitios/cargarModalDisponibilidad',
+                data: {'idSitio': oID},
                 cache: false,
                 success: function (data) {
                     $('#tablaDatos').html(data);
@@ -86,6 +85,10 @@ $(function(){
 									<a class='btn btn-success btn-xs' href='<?php echo base_url('sitios/sitio/' . $lista['id_sitio']) ?>'>
 										Editar <span class="glyphicon glyphicon-edit" aria-hidden="true">
 									</a>
+									
+									<button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#modal" id="<?php echo $lista['id_sitio']; ?>" >
+										Disponibilidad <span class="glyphicon glyphicon-edit" aria-hidden="true">
+									</button>
 						<?php
 									echo "</td>";
 									
@@ -130,7 +133,7 @@ $(function(){
 </div>
 <!-- /#page-wrapper -->
 		
-<!--INICIO Modal para adicionar SITIOS -->
+<!--INICIO Modal -->
 <div class="modal fade text-center" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">    
 	<div class="modal-dialog" role="document">
 		<div class="modal-content" id="tablaDatos">
@@ -138,7 +141,7 @@ $(function(){
 		</div>
 	</div>
 </div>                       
-<!--FIN Modal para adicionar SITIOS -->
+<!--FIN Modal  -->
 		
 <!-- Tables -->
 <script>

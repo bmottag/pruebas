@@ -217,6 +217,29 @@
 					return false;
 				}
 		}
+		
+		/**
+		 * Update disponibilidad
+		 * @since 18/1/2018
+		 */
+		public function saveDisponibilidad() 
+		{			
+				$idSitio = $this->input->post('hddIdSitio');
+				
+				$data = array(
+					'disponibilidad' => $this->input->post('disponibilidad'),
+					'motivo_disponibilidad' => $this->input->post('motivo_disponibilidad')
+				);
+			
+				$this->db->where('id_sitio', $idSitio);
+				$query = $this->db->update('sitios', $data);
+
+				if ($query) {
+					return true;
+				} else {
+					return false;
+				}
+		}
 
 		
 	    

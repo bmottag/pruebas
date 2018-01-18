@@ -556,5 +556,43 @@ class Sitios extends CI_Controller {
 			echo json_encode($data);
     }
 	
+    /**
+     * Cargo modal - formulario DISPONIBILIDAD SITIO
+     * @since 18/1/2018
+     */
+    public function cargarModalDisponibilidad() 
+	{
+			header("Content-Type: text/plain; charset=utf-8"); //Para evitar problemas de acentos
+						
+			$data['information'] = FALSE;
+			$data["idSitio"] = $this->input->post("idSitio");
+			
+			$this->load->model("general_model");
+			//info de sitio
+			$arrParam = array("idSitio" => $data["idSitio"]);
+			$data['information'] = $this->general_model->get_sitios($arrParam);
+			
+			$this->load->view("form_disponibilidad_modal", $data);
+    }
+	
+	/**
+	 * Update Sitios disponibilidad
+     * @since 18/1/2018
+	 */
+	public function save_disponibilidad()
+	{			
+			header('Content-Type: application/json');
+		
+			if ($idSitio = $this->sitios_model->saveDisponibilidad()) {
+				$data["result"] = true;
+				$this->session->set_flashdata('retornoExito', 'Se actualizó la disponibilidad del sitios');
+			} else {
+				$data["result"] = "error";
+				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador.');
+			}
+
+			echo json_encode($data);
+    }
+	
 	
 }
