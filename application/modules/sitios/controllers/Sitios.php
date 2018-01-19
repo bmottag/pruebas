@@ -594,5 +594,74 @@ class Sitios extends CI_Controller {
 			echo json_encode($data);
     }
 	
+	/**
+	 * Lista de contactos por sitio
+	 */
+	public function contactos($idSitio)
+	{		
+			$this->load->model("general_model");
+			//info de sitio
+			$arrParam = array("idSitio" => $idSitio);
+			$data['infoSitio'] = $this->general_model->get_sitios($arrParam);
+			
+			//lista de contactos
+			$data['infoContactos'] = $this->general_model->get_contactos($arrParam);
+		
+			$data["view"] ='contactos';
+			$this->load->view("layout", $data);
+	}
+
+    /**
+     * Cargo modal - formulario CONTACTOS
+     * @since 18/1/2018
+     */
+    public function cargarModalContactos() 
+	{
+			header("Content-Type: text/plain; charset=utf-8"); //Para evitar problemas de acentos
+						
+			$data['information'] = FALSE;
+			$data["idSitio"] = $this->input->post("idSitio");
+			$data["idContacto"] = $this->input->post("idContacto");
+			
+			if ($data["idContacto"] != 'x') {
+				$this->load->model("general_model");
+				$arrParam = array("idContacto" => $data["idContacto"]);
+				$data['information'] = $this->general_model->get_contactos($arrParam);//info contactos
+				
+				$data["idSitio"] = $data['information'][0]['fk_id_sitio'];
+			}
+			
+			$this->load->view("form_contacto_modal", $data);
+    }
+	
+	/**
+	 * Guardar CONTACTOS
+     * @since 18/1/2018
+	 */
+	public function save_contactos()
+	{			
+			header('Content-Type: application/json');
+			$data = array();
+			
+			$idSitio = $this->input->post('hddIdSitio');
+			$idContacto = $this->input->post('hddIdContacto');
+			$data["idRecord"] = $idSitio;
+			
+			$msj = "Se adicionó el Contacto con éxito.";
+			if ($idContacto != '') {
+				$msj = "Se actualizó el Contacto con éxito.";
+			}
+			
+			if ($this->sitios_model->saveContacto()) {
+				$data["result"] = true;
+				$this->session->set_flashdata('retornoExito', $msj);
+			} else {
+				$data["result"] = "error";
+				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador.');
+			}
+
+			echo json_encode($data);
+    }
+	
 	
 }

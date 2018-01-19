@@ -89,6 +89,10 @@ $(function(){
 									<button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#modal" id="<?php echo $lista['id_sitio']; ?>" >
 										Disponibilidad <span class="glyphicon glyphicon-edit" aria-hidden="true">
 									</button>
+									
+									<a class='btn btn-success btn-xs' href='<?php echo base_url('sitios/contactos/' . $lista['id_sitio']) ?>'>
+										Contactos <span class="glyphicon glyphicon-edit" aria-hidden="true">
+									</a>
 						<?php
 									echo "</td>";
 									

@@ -240,6 +240,39 @@
 					return false;
 				}
 		}
+		
+		/**
+		 * Add/Edit CONTACTO
+		 * @since 19/1/2018
+		 */
+		public function saveContacto() 
+		{
+				$idContacto = $this->input->post('hddIdContacto');
+				
+				$data = array(
+					'fk_id_sitio' => $this->input->post('hddIdSitio'),
+					'nombre_contacto' => $this->input->post('nombres'),
+					'apellido_contacto' => $this->input->post('apellidos'),
+					'cargo_contacto' => $this->input->post('cargo'),
+					'documento' => $this->input->post('documento'),
+					'telefono_contacto' => $this->input->post('telefono'),
+					'email_contacto' => $this->input->post('email')
+				);
+				
+				//revisar si es para adicionar o editar
+				if ($idContacto == '') {
+					$data['fecha_creacion'] = date("Y-m-d");
+					$query = $this->db->insert('sitios_contactos', $data);			
+				} else {
+					$this->db->where('id_sitio_contacto', $idContacto);
+					$query = $this->db->update('sitios_contactos', $data);
+				}
+				if ($query) {
+					return true;
+				} else {
+					return false;
+				}
+		}
 
 		
 	    

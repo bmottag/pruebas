@@ -1222,6 +1222,30 @@ class General_model extends CI_Model {
 					return true;
 				} else{ return false; }
 		}
+		
+		/**
+		 * Lista de contactos
+		 * @since 18/1/2018
+		 */
+		public function get_contactos($arrDatos) 
+		{
+				$this->db->select('');
+				if (array_key_exists("idSitio", $arrDatos)) {
+					$this->db->where('S.fk_id_sitio', $arrDatos["idSitio"]);
+				}
+				if (array_key_exists("idContacto", $arrDatos)) {
+					$this->db->where('S.id_sitio_contacto', $arrDatos["idContacto"]);
+				}
+								
+				$this->db->order_by('nombre_contacto, apellido_contacto', 'asc');
+				$query = $this->db->get('sitios_contactos S');
+
+				if ($query->num_rows() > 0) {
+					return $query->result_array();
+				} else {
+					return false;
+				}
+		}
 
 
 }
