@@ -663,5 +663,84 @@ class Sitios extends CI_Controller {
 			echo json_encode($data);
     }
 	
+	/**
+	 * Vista para adicionar equipos de computo al salon
+     * @since 5/2/2018
+	 */
+	public function computadores_salon($idSalon)
+	{
+			$data['information'] = FALSE;
+			
+			$this->load->model("general_model");
+
+			//info salon
+			$arrParam = array("idSalon" => $idSalon);
+			$data['information'] = $this->general_model->get_salones_by($arrParam);
+			
+			$data["idSitio"] = $data['information'][0]['fk_id_sitio'];
+
+			//info de sitio
+			$arrParam = array("idSitio" => $data["idSitio"]);
+			$data['infoSitio'] = $this->general_model->get_sitios($arrParam);
+
+			$data["view"] = 'form_computadores';
+			$this->load->view("layout", $data);
+	}
+	
+    /**
+     * Cargo modal - formulario COMPUTADORES
+     * @since 5/2/2018
+     */
+    public function cargarModalComputadores() 
+	{
+			header("Content-Type: text/plain; charset=utf-8"); //Para evitar problemas de acentos
+			$this->load->model("general_model");
+						
+			$data['information'] = FALSE;
+			$data["idSalon"] = $this->input->post("idSalon");
+			$data["idComputador"] = $this->input->post("idComputador");
+			
+			if ($data["idComputador"] != 'x') {
+				
+				$arrParam = array("idSalon" => $data["idSalon"]);
+				$data['information'] = $this->general_model->get_salones_by($arrParam);//info salon
+			
+				$data["idSitio"] = $data['information'][0]['fk_id_sitio'];
+			}
+			
+			$this->load->view("form_computador_modal", $data);
+    }
+	
+	/**
+	 * Guardar computadores
+     * @since 5/2/2018
+	 */
+	public function save_computadores()
+	{			
+			header('Content-Type: application/json');
+			$data = array();
+			
+			$idSalon = $this->input->post('hddIdSalon');
+			$idComputador = $this->input->post('hddIdComputador');
+			$data["idRecord"] = $idSalon;
+			
+			$msj = "Se adicionó el computador con éxito.";
+			if ($idComputador != '') {
+				$msj = "Se actualizó el computador con éxito.";
+			}
+			
+			if ($this->sitios_model->saveComputador()) {
+				$data["result"] = true;
+				
+				$this->session->set_flashdata('retornoExito', $msj);
+			} else {
+				$data["result"] = "error";
+				
+				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador.');
+			}
+
+			echo json_encode($data);
+    }
+	
 	
 }

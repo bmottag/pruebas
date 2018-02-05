@@ -274,6 +274,42 @@
 				}
 		}
 
+		/**
+		 * Add/Edit COMPUTADORES
+		 * @since 5/2/2018
+		 */
+		public function saveComputador() 
+		{
+				$idComputador = $this->input->post('hddIdComputador');
+				
+				$data = array(
+					'fk_id_sitio_salon' => $this->input->post('hddIdSalon'),
+					'cpu' => $this->input->post('cpu'),
+					'os' => $this->input->post('os'),
+					'memoria' => $this->input->post('memoria'),
+					'resolucion' => $this->input->post('resolucion'),
+					'skype' => $this->input->post('skype'),
+					'transferencia_usb' => $this->input->post('transferencia_usb'),
+					'virus_scan' => $this->input->post('virus_scan'),
+					'unidad_usb' => $this->input->post('unidad_usb'),
+					'comentarios' => $this->input->post('comentarios'),
+					'adecuado' => $this->input->post('adecuado')
+				);
+				
+				//revisar si es para adicionar o editar
+				if ($idComputador == '') {
+					$query = $this->db->insert('sitios_computadores', $data);
+				} else {
+					$this->db->where('id_sitio_computador', $idComputador);
+					$query = $this->db->update('sitios_computadores', $data);
+				}
+				if ($query) {
+					return true;
+				} else {
+					return false;
+				}
+		}
+
 		
 	    
 	}

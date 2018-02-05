@@ -292,7 +292,11 @@ if ($retornoError) {
 
 <a class='btn btn-info btn-xs' href='<?php echo base_url('sitios/add_info_salon/' . $lista['id_sitio_salon'] ); ?>'>
 											Más <span class='glyphicon glyphicon-plus' aria-hidden='true'>
-							</a>											
+							</a>
+
+<a class='btn btn-danger btn-xs' href='<?php echo base_url('sitios/computadores_salon/' . $lista['id_sitio_salon'] ); ?>'>
+											Computadores <span class='glyphicon glyphicon-plus' aria-hidden='true'>
+							</a>							
 								<?php
 											echo "</td>";
 											echo "</tr>";								
