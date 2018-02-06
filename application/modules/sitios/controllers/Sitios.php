@@ -675,13 +675,17 @@ class Sitios extends CI_Controller {
 
 			//info salon
 			$arrParam = array("idSalon" => $idSalon);
-			$data['information'] = $this->general_model->get_salones_by($arrParam);
+			$data['inforSalon'] = $this->general_model->get_salones_by($arrParam);
 			
-			$data["idSitio"] = $data['information'][0]['fk_id_sitio'];
+			//lista computadores
+			$data['information'] = $this->general_model->get_computadores($arrParam);
+
+			$data["idSitio"] = $data['inforSalon'][0]['fk_id_sitio'];
 
 			//info de sitio
 			$arrParam = array("idSitio" => $data["idSitio"]);
 			$data['infoSitio'] = $this->general_model->get_sitios($arrParam);
+			
 
 			$data["view"] = 'form_computadores';
 			$this->load->view("layout", $data);
@@ -702,10 +706,10 @@ class Sitios extends CI_Controller {
 			
 			if ($data["idComputador"] != 'x') {
 				
-				$arrParam = array("idSalon" => $data["idSalon"]);
-				$data['information'] = $this->general_model->get_salones_by($arrParam);//info salon
-			
-				$data["idSitio"] = $data['information'][0]['fk_id_sitio'];
+				$arrParam = array("idComputador" => $data["idComputador"]);
+				$data['information'] = $this->general_model->get_computadores($arrParam);//info computador
+				
+				$data["idSalon"] = $data['information'][0]['fk_id_sitio_salon'];
 			}
 			
 			$this->load->view("form_computador_modal", $data);

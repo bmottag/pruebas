@@ -283,7 +283,6 @@
 				$idComputador = $this->input->post('hddIdComputador');
 				
 				$data = array(
-					'fk_id_sitio_salon' => $this->input->post('hddIdSalon'),
 					'cpu' => $this->input->post('cpu'),
 					'os' => $this->input->post('os'),
 					'memoria' => $this->input->post('memoria'),
@@ -298,6 +297,7 @@
 				
 				//revisar si es para adicionar o editar
 				if ($idComputador == '') {
+					$data['fk_id_sitio_salon'] = $this->input->post('hddIdSalon');
 					$query = $this->db->insert('sitios_computadores', $data);
 				} else {
 					$this->db->where('id_sitio_computador', $idComputador);

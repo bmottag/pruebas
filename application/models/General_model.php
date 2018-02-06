@@ -1246,6 +1246,29 @@ class General_model extends CI_Model {
 					return false;
 				}
 		}
+		
+	/**
+	 * Lista de computadores
+	 * @since 6/2/2018
+	 */
+	public function get_computadores($arrData) 
+	{		
+			$this->db->select();
+
+			if (array_key_exists("idSalon", $arrData)) {
+				$this->db->where('C.fk_id_sitio_salon', $arrData["idSalon"]);
+			}
+			if (array_key_exists("idComputador", $arrData)) {
+				$this->db->where('C.id_sitio_computador', $arrData["idComputador"]);
+			}
+			$query = $this->db->get('sitios_computadores C');
+
+			if ($query->num_rows() > 0) {
+				return $query->result_array();
+			} else {
+				return false;
+			}
+	}
 
 
 }
