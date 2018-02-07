@@ -262,9 +262,12 @@ if ($retornoError) {
 													$tipoSalon = 'Arquitectura';
 													break;
 												case 2:
+													$tipoSalon = 'Computo';
+													break;
+												case 3:
 													$tipoSalon = 'Electrónico';
 													break;
-												case 2:
+												case 4:
 													$tipoSalon = 'Papel';
 													break;
 											}

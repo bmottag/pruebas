@@ -115,8 +115,9 @@
 					<select name="tipo_salon" id="tipo_salon" class="form-control" required>
 						<option value=''>Select...</option>
 						<option value=1 <?php if($information[0]["tipo_salon"] == 1) { echo "selected"; }  ?>>Arquitectura</option>
-						<option value=2 <?php if($information[0]["tipo_salon"] == 2) { echo "selected"; }  ?>>Electrónico</option>
-						<option value=3 <?php if($information[0]["tipo_salon"] == 3) { echo "selected"; }  ?>>Papel</option>
+						<option value=2 <?php if($information[0]["tipo_salon"] == 2) { echo "selected"; }  ?>>Computo</option>
+						<option value=3 <?php if($information[0]["tipo_salon"] == 3) { echo "selected"; }  ?>>Electrónico</option>
+						<option value=4 <?php if($information[0]["tipo_salon"] == 4) { echo "selected"; }  ?>>Papel</option>
 					</select>
 				</div>
 			</div>
