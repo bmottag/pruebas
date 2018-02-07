@@ -746,5 +746,22 @@ class Sitios extends CI_Controller {
 			echo json_encode($data);
     }
 	
+	/**
+	 * Caracterizacion del sitio
+	 */
+	public function caracterizacion($idSitio)
+	{		
+			$this->load->model("general_model");
+			//info de sitio
+			$arrParam = array("idSitio" => $idSitio);
+			$data['infoSitio'] = $this->general_model->get_sitios($arrParam);
+			
+			//lista de contactos
+			$data['infoContactos'] = $this->general_model->get_contactos($arrParam);
+		
+			$data["view"] ='caracterizacion';
+			$this->load->view("layout", $data);
+	}
+	
 	
 }
