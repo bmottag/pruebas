@@ -8,6 +8,7 @@ $( document ).ready( function () {
 			salon:				{ required: true, maxlength:150 },
 			estado:				{ required: true },
 			capacidad:			{ required: true },
+			computadores:		{ required: true },
 			bloque:				{ required: true },
 			piso:				{ required: true },
 			discapacitados:		{ required: true },

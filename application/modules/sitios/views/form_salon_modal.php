@@ -18,21 +18,23 @@
 		<div class="row">
 			<div class="col-sm-6">
 				<div class="form-group text-left">
+					<label class="control-label" for="bloque">Bloque : *</label>
+					<select name="bloque" id="bloque" class="form-control" >
+						<option value=''>Select...</option>
+						<?php for ($i = 0; $i < count($infoBloques); $i++) { ?>
+							<option value="<?php echo $infoBloques[$i]["id_sitio_bloque"]; ?>" <?php if($infoBloques[$i]["id_sitio_bloque"] == $information[0]["fk_id_sitio_bloque"]) { echo "selected"; }  ?>><?php echo $infoBloques[$i]["nombre_bloque"]; ?></option>	
+						<?php } ?>
+					</select>
+				</div>
+			</div>
+			
+			<div class="col-sm-6">
+				<div class="form-group text-left">
 					<label class="control-label" for="salon">Nombre : *</label>
 					<input type="text" id="salon" name="salon" class="form-control" value="<?php echo $information?$information[0]["nombre_salon"]:""; ?>" placeholder="Nombre" required >
 				</div>
 			</div>
 
-			<div class="col-sm-6">
-				<div class="form-group text-left">
-					<label class="control-label" for="estado">Estado : *</label>
-					<select name="estado" id="estado" class="form-control" required>
-						<option value=''>Select...</option>
-						<option value=1 <?php if($information[0]["estado_salon"] == 1) { echo "selected"; }  ?>>Activo</option>
-						<option value=2 <?php if($information[0]["estado_salon"] == 2) { echo "selected"; }  ?>>Inactivo</option>
-					</select>
-				</div>
-			</div>
 		</div>
 		
 		<div class="row">
@@ -53,18 +55,26 @@
 					</select>
 				</div>
 			</div>
-
+			
 			<div class="col-sm-6">
 				<div class="form-group text-left">
-					<label class="control-label" for="bloque">Bloque : *</label>
-					<select name="bloque" id="bloque" class="form-control" >
-						<option value=''>Select...</option>
-						<?php for ($i = 0; $i < count($infoBloques); $i++) { ?>
-							<option value="<?php echo $infoBloques[$i]["id_sitio_bloque"]; ?>" <?php if($infoBloques[$i]["id_sitio_bloque"] == $information[0]["fk_id_sitio_bloque"]) { echo "selected"; }  ?>><?php echo $infoBloques[$i]["nombre_bloque"]; ?></option>	
-						<?php } ?>
+					<label class="control-label" for="computadores">No. computadores : *</label>
+					<select name="computadores" id="computadores" class="form-control" required>
+						<option value='' >Select...</option>
+						<?php
+						for ($i = 0; $i < 20; $i++) {
+							?>
+							<option value='<?php echo $i; ?>' <?php
+							if ($information && $i == $information[0]["computadores"]) {
+								echo 'selected="selected"';
+							}
+							?>><?php echo $i; ?></option>
+						<?php } ?>									
 					</select>
 				</div>
 			</div>
+
+
 		</div>
 		
 		<div class="row">
@@ -99,7 +109,7 @@
 		</div>
 		
 		<div class="row">
-			<div class="col-sm-12">
+			<div class="col-sm-6">
 				<div class="form-group text-left">
 					<label class="control-label" for="tipo_salon">Tipo de salón : *</label>
 					<select name="tipo_salon" id="tipo_salon" class="form-control" required>
@@ -107,6 +117,17 @@
 						<option value=1 <?php if($information[0]["tipo_salon"] == 1) { echo "selected"; }  ?>>Arquitectura</option>
 						<option value=2 <?php if($information[0]["tipo_salon"] == 2) { echo "selected"; }  ?>>Electrónico</option>
 						<option value=3 <?php if($information[0]["tipo_salon"] == 3) { echo "selected"; }  ?>>Papel</option>
+					</select>
+				</div>
+			</div>
+			
+			<div class="col-sm-6">
+				<div class="form-group text-left">
+					<label class="control-label" for="estado">Estado : *</label>
+					<select name="estado" id="estado" class="form-control" required>
+						<option value=''>Select...</option>
+						<option value=1 <?php if($information[0]["estado_salon"] == 1) { echo "selected"; }  ?>>Activo</option>
+						<option value=2 <?php if($information[0]["estado_salon"] == 2) { echo "selected"; }  ?>>Inactivo</option>
 					</select>
 				</div>
 			</div>

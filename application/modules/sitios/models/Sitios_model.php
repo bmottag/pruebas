@@ -44,6 +44,7 @@
 					'fk_id_sitio_bloque' => $this->input->post('bloque'),
 					'nombre_salon' => $this->input->post('salon'),
 					'capacidad_salon' => $this->input->post('capacidad'),
+					'computadores' => $this->input->post('computadores'),
 					'discapacitados' => $this->input->post('discapacitados'),
 					'estado_salon' => $this->input->post('estado'),
 					'numero_piso' => $this->input->post('piso'),
