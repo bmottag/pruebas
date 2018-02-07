@@ -115,7 +115,7 @@
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="form-group text-left">
-					<label class="control-label" for="observacion">Observación : *</label>
+					<label class="control-label" for="observacion">Observación :</label>
 					<textarea id="observacion" name="observacion" class="form-control" rows="1"><?php echo $information?$information[0]["observacion_salon"]:""; ?></textarea>
 				</div>
 			</div>

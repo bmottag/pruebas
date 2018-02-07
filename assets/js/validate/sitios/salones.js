@@ -11,8 +11,7 @@ $( document ).ready( function () {
 			bloque:				{ required: true },
 			piso:				{ required: true },
 			discapacitados:		{ required: true },
-			tipo_salon:			{ required: true },
-			observacion:		{ required: true }
+			tipo_salon:			{ required: true }
 		},
 		errorElement: "em",
 		errorPlacement: function ( error, element ) {

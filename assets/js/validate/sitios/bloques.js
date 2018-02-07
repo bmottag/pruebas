@@ -6,8 +6,7 @@ $( document ).ready( function () {
 	$( "#form" ).validate( {
 		rules: {
 			bloque:				{ required: true, maxlength:150 },
-			estado:				{ required: true },
-			observacion:		{ required: true }
+			estado:				{ required: true }
 		},
 		errorElement: "em",
 		errorPlacement: function ( error, element ) {
