@@ -1247,28 +1247,51 @@ class General_model extends CI_Model {
 				}
 		}
 		
-	/**
-	 * Lista de computadores
-	 * @since 6/2/2018
-	 */
-	public function get_computadores($arrData) 
-	{		
-			$this->db->select();
+		/**
+		 * Lista de computadores
+		 * @since 6/2/2018
+		 */
+		public function get_computadores($arrData) 
+		{		
+				$this->db->select();
 
-			if (array_key_exists("idSalon", $arrData)) {
-				$this->db->where('C.fk_id_sitio_salon', $arrData["idSalon"]);
-			}
-			if (array_key_exists("idComputador", $arrData)) {
-				$this->db->where('C.id_sitio_computador', $arrData["idComputador"]);
-			}
-			$query = $this->db->get('sitios_computadores C');
+				if (array_key_exists("idSalon", $arrData)) {
+					$this->db->where('C.fk_id_sitio_salon', $arrData["idSalon"]);
+				}
+				if (array_key_exists("idComputador", $arrData)) {
+					$this->db->where('C.id_sitio_computador', $arrData["idComputador"]);
+				}
+				$query = $this->db->get('sitios_computadores C');
 
-			if ($query->num_rows() > 0) {
-				return $query->result_array();
-			} else {
-				return false;
-			}
-	}
+				if ($query->num_rows() > 0) {
+					return $query->result_array();
+				} else {
+					return false;
+				}
+		}
+		
+		/**
+		 * Info caracterozacion
+		 * @since 7/2/2018
+		 */
+		public function get_caracterizacion($arrDatos) 
+		{
+				$this->db->select('');
+				if (array_key_exists("idSitio", $arrDatos)) {
+					$this->db->where('S.fk_id_sitio', $arrDatos["idSitio"]);
+				}
+				if (array_key_exists("idContacto", $arrDatos)) {
+					$this->db->where('S.id_sitio_contacto', $arrDatos["idContacto"]);
+				}
+								
+				$query = $this->db->get('sitios_caracterizacion S');
+
+				if ($query->num_rows() > 0) {
+					return $query->row_array();
+				} else {
+					return false;
+				}
+		}
 
 
 }

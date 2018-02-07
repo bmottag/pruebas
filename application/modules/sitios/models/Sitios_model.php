@@ -309,6 +309,51 @@
 					return false;
 				}
 		}
+		
+		/**
+		 * Add/Edit CARACTERIZCION
+		 * @since 7/2/2018
+		 */
+		public function saveCaracterizacion() 
+		{
+				$idCaracterizacion = $this->input->post('hddId');
+				$idUser = $this->session->userdata("id");
+				
+				$data = array(
+					'ubicacion' => $this->input->post('ubicacion'),
+					'forma_transporte' => $this->input->post('forma_transporte'),
+					'transporte' => $this->input->post('transporte'),
+					'vias' => $this->input->post('vias'),
+					'riesgo' => $this->input->post('riesgo'),
+					'cerramientos' => $this->input->post('cerramientos'),
+					'vigilancia_privada' => $this->input->post('vigilancia_privada'),
+					'camaras' => $this->input->post('camaras'),
+					'baterias' => $this->input->post('baterias'),
+					'discapacitados' => $this->input->post('discapacitados'),
+					'baterias_discapacitados' => $this->input->post('baterias_discapacitados'),
+					'administrativa' => $this->input->post('administrativa'),
+					'fotocopiadoras' => $this->input->post('fotocopiadoras'),
+					'cafeteria_interna' => $this->input->post('cafeteria_interna'),
+					'cafeteria_externa' => $this->input->post('cafeteria_externa')
+				);
+				
+				//revisar si es para adicionar o editar
+				if ($idCaracterizacion == '') {
+					$data['fk_id_sitio'] = $this->input->post('hddIdSitio');
+					$data['fk_id_usuario'] = $idUser;
+					$data['fecha_creacion'] = date("Y-m-d");
+					$query = $this->db->insert('sitios_caracterizacion', $data);
+					$idCaracterizacion = $this->db->insert_id();				
+				} else {
+					$this->db->where('id_sitio_caracterizacion', $idCaracterizacion);
+					$query = $this->db->update('sitios_caracterizacion', $data);
+				}
+				if ($query) {
+					return $idCaracterizacion;
+				} else {
+					return false;
+				}
+		}
 
 		
 	    

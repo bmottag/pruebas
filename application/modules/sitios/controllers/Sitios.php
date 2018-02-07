@@ -757,11 +757,43 @@ class Sitios extends CI_Controller {
 			$data['infoSitio'] = $this->general_model->get_sitios($arrParam);
 			
 			//lista de contactos
-			$data['infoContactos'] = $this->general_model->get_contactos($arrParam);
+			$data['information'] = $this->general_model->get_caracterizacion($arrParam);
 		
-			$data["view"] ='caracterizacion';
+			$data["view"] ='form_caracterizacion';
 			$this->load->view("layout", $data);
 	}
+	
+	/**
+	 * Guardar caracterizacion
+     * @since 7/2/2018
+	 */
+	public function save_caracterizacion()
+	{			
+			header('Content-Type: application/json');
+			$data = array();
+
+			$data["idRecord"] = $this->input->post('hddIdSitio');
+			$idCaracterizacion = $this->input->post('hddId');
+	
+			$msj = "Se adicionó la información de caracterización del Sitio con éxito.";
+			if ($idCaracterizacion != '') {
+				$msj = "Se actualizó la información de caracterización del Sitio con éxito.";
+			}else {
+				//Verificar si el codigo dane ya existe en la base de datos
+				$this->load->model("general_model");
+			}
+
+			if ($idCaracterizacion = $this->sitios_model->saveCaracterizacion()) {
+				$data["result"] = true;
+				$this->session->set_flashdata('retornoExito', $msj);
+			} else {
+				$data["result"] = "error";
+				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador.');
+			}
+
+			echo json_encode($data);
+    }
+
 	
 	
 }

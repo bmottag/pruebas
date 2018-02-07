@@ -15,8 +15,7 @@ $( document ).ready( function () {
 			administrativa:				{ required: true },
 			fotocopiadoras:				{ required: true },
 			cafeteria_interna:			{ required: true },
-			cafeteria_externa:			{ required: true }
-			
+			cafeteria_externa:			{ required: true }			
 		},
 		errorElement: "em",
 		errorPlacement: function ( error, element ) {

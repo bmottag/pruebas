@@ -93,6 +93,10 @@ $(function(){
 									<a class='btn btn-success btn-xs' href='<?php echo base_url('sitios/contactos/' . $lista['id_sitio']) ?>'>
 										Contactos <span class="glyphicon glyphicon-edit" aria-hidden="true">
 									</a>
+									
+									<a class='btn btn-success btn-xs' href='<?php echo base_url('sitios/caracterizacion/' . $lista['id_sitio']) ?>'>
+										Caracterización <span class="glyphicon glyphicon-edit" aria-hidden="true">
+									</a>
 						<?php
 									echo "</td>";
 									
