@@ -58,7 +58,9 @@ $(function(){
 					<div class="col-lg-4">	
 						<div class="alert alert-info">
 							<strong>Bloque: </strong><?php echo $infoSalon[0]['nombre_salon']; ?><br>
-							<strong>Salón: </strong><?php echo $infoSalon[0]['nombre_bloque']; ?>
+							<strong>Salón: </strong><?php echo $infoSalon[0]['nombre_bloque']; ?><br>
+							<?php $noComputadores = $infoSalon[0]['computadores']?$infoSalon[0]['computadores']:0; ?>
+							<strong>No. computadores: </strong><?php echo $noComputadores; ?>
 						</div>
 					</div>
 									
@@ -105,10 +107,21 @@ if ($retornoError) {
 					<strong>Computadores</strong>
 				</div>
 				<div class="panel-body">
-									
+<?php
+	$cuentaActual = $information?count($information):0;
+
+	if($noComputadores > 0 && $cuentaActual < $noComputadores){
+?>									
 				<button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modal_computador" id="<?php echo $infoSalon[0]['id_sitio_salon']; ?>">
 						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Adicionar computador
 				</button>					
+<?php 
+	}elseif($noComputadores == 0){
+			echo "Indique el número de computadores en la información del salón.";
+	}
+?>
+				
+				
 					
 <?php
 	if($information){
