@@ -57,8 +57,8 @@ $(function(){
 					</div>
 					<div class="col-lg-4">	
 						<div class="alert alert-info">
-							<strong>Bloque: </strong><?php echo $inforSalon[0]['nombre_salon']; ?><br>
-							<strong>Salón: </strong><?php echo $inforSalon[0]['nombre_bloque']; ?>
+							<strong>Bloque: </strong><?php echo $infoSalon[0]['nombre_salon']; ?><br>
+							<strong>Salón: </strong><?php echo $infoSalon[0]['nombre_bloque']; ?>
 						</div>
 					</div>
 									
@@ -106,7 +106,7 @@ if ($retornoError) {
 				</div>
 				<div class="panel-body">
 									
-				<button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modal_computador" id="<?php echo $infoSitio[0]['id_sitio']; ?>">
+				<button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modal_computador" id="<?php echo $infoSalon[0]['id_sitio_salon']; ?>">
 						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Adicionar computador
 				</button>					
 					

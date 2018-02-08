@@ -675,12 +675,12 @@ class Sitios extends CI_Controller {
 
 			//info salon
 			$arrParam = array("idSalon" => $idSalon);
-			$data['inforSalon'] = $this->general_model->get_salones_by($arrParam);
+			$data['infoSalon'] = $this->general_model->get_salones_by($arrParam);
 			
 			//lista computadores
 			$data['information'] = $this->general_model->get_computadores($arrParam);
 
-			$data["idSitio"] = $data['inforSalon'][0]['fk_id_sitio'];
+			$data["idSitio"] = $data['infoSalon'][0]['fk_id_sitio'];
 
 			//info de sitio
 			$arrParam = array("idSitio" => $data["idSitio"]);
