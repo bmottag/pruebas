@@ -65,7 +65,16 @@ $(function(){
 		<div class="col-lg-12">
 			<div class="panel panel-info">
 				<div class="panel-heading">
+				
+<?php
+	$userRol = $this->session->userdata("rol");
+	if($userRol!=7){//USUARIOS QUE NO SON PISA les muestro en enlace de regresar
+?>
+
 					<a class="btn btn-info btn-xs" href=" <?php echo base_url().'sitios'; ?> "><span class="glyphicon glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Regresar </a> 
+<?php
+	}
+?>
 					<i class="fa fa-cube"></i> <strong>Gestión de Bloques y Salones</strong>
 				</div>
 				<div class="panel-body">

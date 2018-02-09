@@ -16,6 +16,12 @@ class Sitios extends CI_Controller {
 	 */
 	public function index()
 	{
+			$userRol = $this->session->userdata("rol");
+		
+			if ($userRol==7) {
+				show_error('ERROR!!! - Usted esta en el lugar equivocado.');
+			}
+		
 			$this->load->model("general_model");
 			
 			//listado de sitios
