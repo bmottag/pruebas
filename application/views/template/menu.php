@@ -39,7 +39,10 @@
 
             <ul class="nav navbar-top-links navbar-right">
                 <!-- /.dropdown -->	
-				
+
+<?php 
+if($userRol!=7){//USUARIOS QUE NO SON PISA
+?>
 				<li>
 					<a href="<?php echo $enlace; ?>"><i class="fa fa-dashboard fa-fw"></i> Dashboard <?php echo $titulo; ?></a>
 				</li>
@@ -67,6 +70,9 @@
 						
 					</ul>
 				</li>				
+<?php 
+}
+?>
 				
 				
 <?php 

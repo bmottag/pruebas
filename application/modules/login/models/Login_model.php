@@ -53,6 +53,7 @@
 		{
 			$state = $this->session->userdata("state");
 			$userRol = $this->session->userdata("rol");
+			$userId = $this->session->userdata("id");
 
 	    	switch($state){
 	    		case 0: //NEW USER, must change the password
@@ -67,6 +68,19 @@
 							redirect("/dashboard/coordinador","location",301);
 						}elseif($userRol==2){//vista para coordinadores
 							redirect("/dashboard/directivo","location",301);
+						}elseif($userRol==7){//vista para PISA
+						
+							//consultar el sitio al que esta asignado
+							$sql = "SELECT * FROM sitios WHERE fk_id_user_pisa = '$userId'";
+							$query = $this->db->query($sql);
+							
+							if ($query->num_rows() > 0){	    		
+								$info = $query->row_array();
+								redirect("/sitios/salones/" . $info['id_sitio'],"location",301);
+							}else{
+								$this->session->sess_destroy();
+								redirect("/login","location",301);								
+							}
 						}else{
 							redirect("/dashboard/admin","location",301);
 						}
