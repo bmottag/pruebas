@@ -44,7 +44,7 @@
 					<select name="capacidad" id="capacidad" class="form-control" required>
 						<option value='' >Select...</option>
 						<?php
-						for ($i = 10; $i < 101; $i++) {
+						for ($i = 1; $i < 50; $i++) {
 							?>
 							<option value='<?php echo $i; ?>' <?php
 							if ($information && $i == $information[0]["capacidad_salon"]) {
