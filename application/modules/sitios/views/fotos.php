@@ -65,10 +65,10 @@
 							<label class="control-label" for="descripcion1">Descripción</label>
 							<select name="descripcion1" id="descripcion1" class="form-control" required>
 								<option value=''>Seleccione...</option>
-								<option value=1>Acceso discapacitados</option>
-								<option value=2>Batería sanitaria</option>
-								<option value=3>Fachada</option>
-								<option value=4>Salones</option>
+								<option value=4>Baños</option>
+								<option value=1>Fachada</option>
+								<option value=2>Salones</option>
+								<option value=3>Techo</option>
 							</select>
 						</div>
 					</div>
@@ -137,10 +137,10 @@ if ($retornoError) {
 					<div class="col-sm-5">
 						<select name="descripcion" id="descripcion" class="form-control" required>
 							<option value=''>Seleccione...</option>
-							<option value=1>Acceso discapacitados</option>
-							<option value=2>Batería sanitaria</option>
-							<option value=3>Fachada</option>
-							<option value=4>Salones</option>
+								<option value=4>Baños</option>
+								<option value=1>Fachada</option>
+								<option value=2>Salones</option>
+								<option value=3>Techo</option>
 						</select>
 					</div>
 				</div>
@@ -224,27 +224,27 @@ if ($retornoError) {
 							<td><p class="text-center"><strong>Fecha</strong></p></td>
 							<td><p class="text-center"><strong>Foto</strong></p></td>
 							<td><p class="text-center"><strong>Eliminar</strong></p></td>
-						</tr>
+						</tr>						
 						<?php
 							foreach ($fotos as $data):
 								echo "<tr>";					
-								echo "<td>" . $data['fecha_foto'] . "</td>";
 								echo "<td>";
 								switch ($data['descripcion_foto']) {
 									case 1:
-											echo "Acceso discapacitados";
-											break;
-									case 2:
-											echo "Batería sanitaria";
-											break;
-									case 3:
 											echo "Fachada";
 											break;
-									case 4:
+									case 2:
 											echo "Salones";
+											break;
+									case 3:
+											echo "Techo";
+											break;
+									case 4:
+											echo "Baños";
 											break;
 								}								
 								echo "</td>";
+								echo "<td>" . $data['fecha_foto'] . "</td>";
 								echo "<td class='text-center'><center>";
 								
 						//si hay una foto la muestro
