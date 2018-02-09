@@ -818,6 +818,72 @@ class Sitios extends CI_Controller {
 
 			echo json_encode($data);
     }
+	
+	/**
+	 * Form Upload Fotos
+     * @since 9/2/2018
+     * @author BMOTTAG
+	 */
+	public function foto_computador($idSalon, $idComputador, $error = '')
+	{
+			$this->load->model("general_model");
+			$data["idSalon"] = $idSalon;
+			$data["idComputador"] = $idComputador;
+			
+			//info salon
+			$arrParam = array("idSalon" => $idSalon);
+			$data['infoSalon'] = $this->general_model->get_salones_by($arrParam);
+
+			$data["idSitio"] = $data['infoSalon'][0]['fk_id_sitio'];
+
+			//info de sitio
+			$arrParam = array("idSitio" => $data["idSitio"]);
+			$data['infoSitio'] = $this->general_model->get_sitios($arrParam);
+
+			$data['error'] = $error; //se usa para mostrar los errores al cargar la imagen 			
+
+			$data["view"] = "foto_computador";
+			$this->load->view("layout", $data);
+	}
+	
+	/**
+	 * FUNCIÓN PARA SUBIR LA IMAGEN 
+	 */
+    function do_upload_fotos_computador() 
+	{
+        $config['upload_path'] = './images/sitios/computadores/';
+        $config['overwrite'] = false;
+        $config['allowed_types'] = 'gif|jpg|png';
+        $config['max_size'] = '3000';
+        $config['max_width'] = '2024';
+        $config['max_height'] = '2008';
+        $idComputador = $this->input->post("hddIdComputador");
+		$idSalon = $this->input->post("hddIdSalon");
+
+        $this->load->library('upload', $config);
+        //SI LA IMAGEN FALLA AL SUBIR MOSTRAMOS EL ERROR EN LA VISTA 
+        if (!$this->upload->do_upload()) {
+            $error = $this->upload->display_errors();
+            $this->foto_computador($idSalon,$idComputador,$error);
+        } else {
+            $file_info = $this->upload->data();//subimos la imagen
+			
+			$data = array('upload_data' => $this->upload->data());
+			$imagen = $file_info['file_name'];
+			$path = "images/sitios/computadores/" . $imagen;
+			
+			//insertar datos
+			if($this->sitios_model->add_foto_computador($path))
+			{
+				$this->session->set_flashdata('retornoExito', 'Se subio la imagen con éxito.');
+			}else{
+				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Ask for help');
+			}
+						
+			redirect('sitios/computadores_salon/' . $idSalon);
+        }
+    }
+
 
 
 	

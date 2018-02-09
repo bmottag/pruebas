@@ -383,6 +383,28 @@
 					return false;
 				}
 		}
+		
+		/**
+		 * Add fotos
+		 * @since 9/2/2018
+		 */
+		public function add_foto_computador($path) 
+		{			
+				$idComputador = $this->input->post("hddIdComputador");
+		
+				$data = array(
+					'foto_computador' => $path
+				);
+
+				$this->db->where('id_sitio_computador', $idComputador);
+				$query = $this->db->update('sitios_computadores', $data);
+
+				if ($query) {
+					return true;
+				} else {
+					return false;
+				}
+		}
 
 		
 	    

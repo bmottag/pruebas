@@ -138,7 +138,7 @@ if ($retornoError) {
 }
 ?> 
 
-<form  name="form" id="form" class="form-horizontal" method="post"  >
+<form  name="form_disponibilidad" id="form_disponibilidad" class="form-horizontal" method="post"  >
 	<input type="hidden" id="hddIdentificador" name="hddIdentificador" value="<?php echo $infoSalon[0]['id_sitio_salon']; ?>"/>
 
 	<div class="row">
@@ -197,7 +197,7 @@ if($infoSalon)
 							<div class="form-group">
 								<div class="row" align="center">
 									<div style="width:100%;" align="center">
-										<input type="button" id="btnSubmit" name="btnSubmit" value="Guardar" class="btn btn-primary"/>
+										<input type="button" id="btnSubmitDisponibilidad" name="btnSubmitDisponibilidad" value="Guardar" class="btn btn-primary"/>
 									</div>
 								</div>
 							</div>
@@ -266,7 +266,8 @@ if($infoSalon)
 								<th class='text-center'>Virus SCAN</th>
 								<th class='text-center'>Unidad USB </th>
 								<th class='text-center'>¿El computador es adecuado? </th>
-								<th class='text-center'>Edit</th>
+								<th class='text-center'>Foto</th>
+								<th class='text-center'>Editar</th>
 							</tr>
 						</thead>
 						<tbody>							
@@ -371,6 +372,17 @@ if($infoSalon)
 											break;
 									}
 									echo "<td class='text-center'>" . $adecuado . "</td>";
+									
+									echo "<td class='text-center'>";
+																		
+						//si hay una foto la muestro
+						if($lista["foto_computador"]){ ?>
+<img src="<?php echo base_url($lista["foto_computador"]); ?>" class="img-rounded" width="42" height="42" />
+						<?php } ?>
+<a href="<?php echo base_url("sitios/foto_computador/" . $infoSalon[0]['id_sitio_salon'] . "/" . $lista['id_sitio_computador']); ?>" class="btn btn-primary btn-xs">Foto</a>						
+									
+						<?php
+									echo "</td>";
 									
 									echo "<td class='text-center'>";									
 						?>

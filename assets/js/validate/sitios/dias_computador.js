@@ -1,6 +1,6 @@
 $( document ).ready( function () {
 			
-	$( "#form" ).validate( {
+	$( "#form_disponibilidad" ).validate( {
 
 		errorElement: "em",
 		errorPlacement: function ( error, element ) {
@@ -21,12 +21,12 @@ $( document ).ready( function () {
 	});
 	
 			
-	$("#btnSubmit").click(function(){		
+	$("#btnSubmitDisponibilidad").click(function(){		
 	
-		if ($("#form").valid() == true){
+		if ($("#form_disponibilidad").valid() == true){
 		
 				//Activa icono guardando
-				$('#btnSubmit').attr('disabled','-1');
+				$('#btnSubmitDisponibilidad').attr('disabled','-1');
 				$("#div_guardado").css("display", "none");
 				$("#div_error").css("display", "none");
 				$("#div_msj").css("display", "none");
@@ -36,7 +36,7 @@ $( document ).ready( function () {
 				$.ajax({
 					type: "POST",	
 					url: base_url + "sitios/save_dias_disponibles",	
-					data: $("#form").serialize(),
+					data: $("#form_disponibilidad").serialize(),
 					dataType: "json",
 					contentType: "application/x-www-form-urlencoded;charset=UTF-8",
 					cache: false,
@@ -47,7 +47,7 @@ $( document ).ready( function () {
 						{
 							//alert(data.mensaje);
 							$("#div_cargando").css("display", "none");
-							$('#btnSubmit').removeAttr('disabled');							
+							$('#btnSubmitDisponibilidad').removeAttr('disabled');							
 							
 							$("#span_msj").html(data.mensaje);
 							$("#div_msj").css("display", "inline");
@@ -61,7 +61,7 @@ $( document ).ready( function () {
 						{	                                                        
 							$("#div_cargando").css("display", "none");
 							$("#div_guardado").css("display", "inline");
-							$('#btnSubmit').removeAttr('disabled');
+							$('#btnSubmitDisponibilidad').removeAttr('disabled');
 
 							var url = base_url + "sitios/computadores_salon/" + data.idRecord;
 							$(location).attr("href", url);
@@ -71,14 +71,14 @@ $( document ).ready( function () {
 							alert('Error. Reload the web page.');
 							$("#div_cargando").css("display", "none");
 							$("#div_error").css("display", "inline");
-							$('#btnSubmit').removeAttr('disabled');
+							$('#btnSubmitDisponibilidad').removeAttr('disabled');
 						}	
 					},
 					error: function(result) {
 						alert('Error. Reload the web page.');
 						$("#div_cargando").css("display", "none");
 						$("#div_error").css("display", "inline");
-						$('#btnSubmit').removeAttr('disabled');
+						$('#btnSubmitDisponibilidad').removeAttr('disabled');
 					}
 					
 		
