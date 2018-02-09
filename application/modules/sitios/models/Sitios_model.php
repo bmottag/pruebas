@@ -284,6 +284,7 @@
 				$idComputador = $this->input->post('hddIdComputador');
 				
 				$data = array(
+					'windows_defender' => $this->input->post('windows_defender'),
 					'cpu' => $this->input->post('cpu'),
 					'os' => $this->input->post('os'),
 					'memoria' => $this->input->post('memoria'),
