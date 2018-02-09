@@ -178,7 +178,7 @@
 			<div class="col-sm-12">
 				<div class="form-group text-left">
 					<label class="control-label" for="comentarios">Comentarios : </label>
-					<textarea id="comentarios" name="comentarios" class="form-control" rows="1"><?php echo $information?$information[0]["comentarios"]:""; ?></textarea>
+					<textarea id="comentarios" name="comentarios" class="form-control" rows="2"><?php echo $information?$information[0]["comentarios"]:""; ?></textarea>
 				</div>
 			</div>
 		</div>

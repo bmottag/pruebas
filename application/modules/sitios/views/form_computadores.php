@@ -35,6 +35,14 @@ function valid_disponibilidad()
 {
 	if(document.getElementById('lunes').checked || document.getElementById('martes').checked || document.getElementById('miercoles').checked || document.getElementById('jueves').checked || document.getElementById('viernes').checked || document.getElementById('sabado').checked || document.getElementById('domingo').checked){
 		document.getElementById('ninguno').checked = false;
+	}else{
+		document.getElementById('ninguno').checked = true;
+	}
+	
+	if(document.getElementById('lunes').checked && document.getElementById('martes').checked && document.getElementById('miercoles').checked && document.getElementById('jueves').checked && document.getElementById('viernes').checked && document.getElementById('sabado').checked && document.getElementById('domingo').checked){
+		document.getElementById('todos').checked = true;
+	}else{
+		document.getElementById('todos').checked = false;
 	}
 }
 
@@ -151,32 +159,23 @@ if ($retornoError) {
 					<div class="form-group">
 						
 						<div class="col-sm-2">
+						
 <input type="checkbox" id="lunes" name="lunes" value=1 <?php if($infoSalon && $infoSalon[0]["lunes"]){echo "checked";} ?> onclick="valid_disponibilidad()"> Lunes<br>
-<input type="checkbox" id="martes" name="martes" value=1 <?php if($infoSalon && $infoSalon[0]["martes"]){echo "checked";} ?> onclick="valid_disponibilidad()"> Martes<br>
-
-<?php 
-$disponibilidad = "";
-if($infoSalon)
-{
-	if($infoSalon[0]["lunes"] || $infoSalon[0]["martes"] || $infoSalon[0]["miercoles"] || $infoSalon[0]["jueves"] || $infoSalon[0]["viernes"] || $infoSalon[0]["sabado"] || $infoSalon[0]["domingo"])
-	{
-		$disponibilidad = 1;
-	}
-}
-?>
-<input type="hidden" id="hddDisponibilidad" name="hddDisponibilidad" value="<?php echo $disponibilidad; ?>"/>
+<input type="checkbox" id="martes" name="martes" value=1 <?php if($infoSalon && $infoSalon[0]["martes"]){echo "checked";} ?> onclick="valid_disponibilidad()"> Martes
 
 						</div>
 						
 						<div class="col-sm-2">
 
 <input type="checkbox" id="miercoles" name="miercoles" value=1 <?php if($infoSalon && $infoSalon[0]["miercoles"]){echo "checked";} ?> onclick="valid_disponibilidad()"> Miércoles<br>
-<input type="checkbox" id="jueves" name="jueves" value=1 <?php if($infoSalon && $infoSalon[0]["jueves"]){echo "checked";} ?> onclick="valid_disponibilidad()"> Jueves<br>
+<input type="checkbox" id="jueves" name="jueves" value=1 <?php if($infoSalon && $infoSalon[0]["jueves"]){echo "checked";} ?> onclick="valid_disponibilidad()"> Jueves
+
 						</div>
 						
 						<div class="col-sm-2">
+						
 <input type="checkbox" id="viernes" name="viernes" value=1 <?php if($infoSalon && $infoSalon[0]["viernes"]){echo "checked";} ?> onclick="valid_disponibilidad()"> Viernes<br>
-<input type="checkbox" id="sabado" name="sabado" value=1 <?php if($infoSalon && $infoSalon[0]["sabado"]){echo "checked";} ?> onclick="valid_disponibilidad()"> Sabado<br>
+<input type="checkbox" id="sabado" name="sabado" value=1 <?php if($infoSalon && $infoSalon[0]["sabado"]){echo "checked";} ?> onclick="valid_disponibilidad()"> Sabado
 
 						</div>
 						
@@ -188,8 +187,26 @@ if($infoSalon)
 						
 						<div class="col-sm-2">
 
-<input type="checkbox" id="todos" name="todos" value=1 onclick="valid_todos()"> Todos<br>
-<input type="checkbox" id="ninguno" name="ninguno" value=1 onclick="valid_ninguno()"> Ninguno
+<?php 
+$todos = "";
+$ninguno = 1;
+if($infoSalon)
+{
+	if($infoSalon[0]["lunes"] && $infoSalon[0]["martes"] && $infoSalon[0]["miercoles"] && $infoSalon[0]["jueves"] && $infoSalon[0]["viernes"] && $infoSalon[0]["sabado"] && $infoSalon[0]["domingo"])
+	{
+		$todos = 1;
+	}
+	
+	if($infoSalon[0]["lunes"] || $infoSalon[0]["martes"] || $infoSalon[0]["miercoles"] || $infoSalon[0]["jueves"] || $infoSalon[0]["viernes"] || $infoSalon[0]["sabado"] || $infoSalon[0]["domingo"])
+	{
+		$ninguno = "";
+	}
+}
+?>
+						
+<input type="checkbox" id="todos" name="todos" value=1 <?php if($infoSalon && $todos){echo "checked";} ?> onclick="valid_todos()"> Todos<br>
+<input type="checkbox" id="ninguno" name="ninguno" value=1 <?php if($infoSalon && $ninguno){echo "checked";} ?> onclick="valid_ninguno()"> Ninguno
+
 
 						</div>
 						
