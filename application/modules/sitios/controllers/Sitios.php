@@ -489,7 +489,7 @@ class Sitios extends CI_Controller {
 			
 			$arrParam = array(
 				"table" => "param_organizaciones",
-				"order" => "id_organizacion",
+				"order" => "nombre_organizacion",
 				"id" => "x"
 			);
 			$data['organizaciones'] = $this->general_model->get_basic_search($arrParam);//listado organizaciones

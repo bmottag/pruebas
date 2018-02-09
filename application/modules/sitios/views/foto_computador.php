@@ -34,6 +34,21 @@
 		</div>
 		<!-- /.col-lg-12 -->
 	</div>
+
+	<div class="row">
+		<div class="col-lg-12">				
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<strong>Disponibilidad computadores</strong>
+				</div>
+				<div class="panel-body">
+					
+					<input type="file" capture="camera" accept="image/*">
+						
+				</div>
+			</div>
+		</div>
+	</div>
 	
 	<!-- /.row -->
 	<div class="row">

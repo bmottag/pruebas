@@ -154,7 +154,7 @@ if ($retornoError) {
 					<select name="organizacion" id="organizacion" class="form-control" >
 						<option value=''>Select...</option>
 						<?php for ($i = 0; $i < count($organizaciones); $i++) { ?>
-							<option value="<?php echo $organizaciones[$i]["id_organizacion"]; ?>" <?php if($information[0]["fk_id_organizacion"] == $organizaciones[$i]["id_organizacion"]) { echo "selected"; }  ?>><?php echo $organizaciones[$i]["nombre_organizacion"]; ?></option>	
+							<option value="<?php echo $organizaciones[$i]["id_organizacion"]; ?>" <?php if($information[0]["fk_id_organizacion"] == $organizaciones[$i]["id_organizacion"]) { echo "selected"; }  ?>><?php echo strtoupper($organizaciones[$i]["nombre_organizacion"]); ?></option>	
 						<?php } ?>
 					</select>
 				</div>
@@ -168,7 +168,7 @@ if ($retornoError) {
 					<select name="region" id="region" class="form-control" >
 						<option value=''>Select...</option>
 						<?php for ($i = 0; $i < count($regiones); $i++) { ?>
-							<option value="<?php echo $regiones[$i]["id_region"]; ?>" <?php if($information[0]["fk_id_region"] == $regiones[$i]["id_region"]) { echo "selected"; }  ?>><?php echo $regiones[$i]["nombre_region"]; ?></option>	
+							<option value="<?php echo $regiones[$i]["id_region"]; ?>" <?php if($information[0]["fk_id_region"] == $regiones[$i]["id_region"]) { echo "selected"; }  ?>><?php echo strtoupper($regiones[$i]["nombre_region"]); ?></option>	
 						<?php } ?>
 					</select>
 				</div>
@@ -198,7 +198,7 @@ if ($retornoError) {
 					<select name="depto" id="depto" class="form-control" >
 						<option value=''>Select...</option>
 						<?php for ($i = 0; $i < count($departamentos); $i++) { ?>
-							<option value="<?php echo $departamentos[$i]["dpto_divipola"]; ?>" <?php if($information[0]["fk_dpto_divipola"] == $departamentos[$i]["dpto_divipola"]) { echo "selected"; }  ?>><?php echo $departamentos[$i]["dpto_divipola_nombre"]; ?></option>	
+							<option value="<?php echo $departamentos[$i]["dpto_divipola"]; ?>" <?php if($information[0]["fk_dpto_divipola"] == $departamentos[$i]["dpto_divipola"]) { echo "selected"; }  ?>><?php echo strtoupper($departamentos[$i]["dpto_divipola_nombre"]); ?></option>	
 						<?php } ?>
 					</select>
 				</div>
@@ -228,7 +228,7 @@ if ($retornoError) {
 					<select name="zona" id="zona" class="form-control" >
 						<option value=''>Select...</option>
 						<?php for ($i = 0; $i < count($zonas); $i++) { ?>
-							<option value="<?php echo $zonas[$i]["id_zona"]; ?>" <?php if($information[0]["fk_id_zona"] == $zonas[$i]["id_zona"]) { echo "selected"; }  ?>><?php echo $zonas[$i]["nombre_zona"]; ?></option>
+							<option value="<?php echo $zonas[$i]["id_zona"]; ?>" <?php if($information[0]["fk_id_zona"] == $zonas[$i]["id_zona"]) { echo "selected"; }  ?>><?php echo strtoupper($zonas[$i]["nombre_zona"]); ?></option>
 						<?php } ?>
 					</select>
 				</div>
