@@ -5,6 +5,7 @@ $( document ).ready( function () {
 	$("#ext_telefono").bloquearTexto().maxlength(10);
 	$("#ext_fax").bloquearTexto().maxlength(10);
 	$("#capacidad").bloquearTexto().maxlength(10);
+	$("#calificacion").bloquearTexto().maxlength(3);
 	$("#barrioSitio").convertirMayuscula();
 	$("#direccion").convertirMayuscula();
 	$("#observacion").convertirMayuscula();
@@ -28,7 +29,7 @@ $( document ).ready( function () {
 			codigoDane:			{ required: true, minlength: 2, maxlength:20 },
 			discapacitados:		{ required: true },
 			capacidad:			{ required: true, number: true, minlength: 1, maxlength:10 },
-			calificacion:		{ required: true, maxlength:10 },
+			calificacion:		{ required: true, maxlength:3 },
 			etiqueta:			{ required: true }
 			
 		},
