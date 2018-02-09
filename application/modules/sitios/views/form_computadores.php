@@ -424,9 +424,10 @@ if($infoSalon)
 </div>
 <!-- /#page-wrapper -->
 
+
 <!--INICIO Modal Computadores-->
 <div class="modal fade text-center" id="modal_computador" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">    
-	<div class="modal-dialog" role="document">
+	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content" id="tablaDatosComputador">
 
 		</div>

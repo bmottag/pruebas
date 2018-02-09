@@ -33,7 +33,7 @@
 			</div>
 		</div>
 		
-		
+		<hr>
 		<div class="row">
 			<div class="col-sm-6">
 				<div class="form-group text-left">
@@ -194,7 +194,7 @@
 				</div>
 			</div>
 		</div>
-
+		<hr>
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="form-group text-left">
@@ -203,7 +203,7 @@
 				</div>
 			</div>
 		</div>
-		
+		<hr>
 		<div class="row">
 			<div class="col-sm-6">
 				<div class="form-group text-left">
