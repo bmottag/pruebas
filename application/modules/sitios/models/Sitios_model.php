@@ -355,6 +355,34 @@
 					return false;
 				}
 		}
+		
+		/**
+		 * Actualizar datos de los salones
+		 * @since 8/2/2018
+		 */
+		public function updateDiasInfoSalon() 
+		{
+				$idSalon = $this->input->post('hddIdentificador');
+		
+				$data = array(
+					'lunes' => $this->input->post('lunes'),
+					'martes' => $this->input->post('martes'),
+					'miercoles' => $this->input->post('miercoles'),
+					'jueves' => $this->input->post('jueves'),
+					'viernes' => $this->input->post('viernes'),
+					'sabado' => $this->input->post('sabado'),
+					'domingo' => $this->input->post('domingo')
+				);
+
+				$this->db->where('id_sitio_salon', $idSalon);
+				$query = $this->db->update('sitios_salones', $data);
+
+				if ($query) {
+					return true;
+				} else {
+					return false;
+				}
+		}
 
 		
 	    

@@ -793,6 +793,32 @@ class Sitios extends CI_Controller {
 
 			echo json_encode($data);
     }
+	
+	/**
+	 * Guardar Dias disponibles 
+     * @since 8/2/2018
+	 */
+	public function save_dias_disponibles()
+	{			
+			header('Content-Type: application/json');
+			$data = array();
+		
+			$data["idRecord"] = $this->input->post('hddIdentificador');
+
+			if($this->sitios_model->updateDiasInfoSalon()) 
+			{
+				$data["result"] = true;
+				$data["mensaje"] = "Se guardó la información con éxito.";
+				$this->session->set_flashdata('retornoExito', 'Se guardó la información con éxito.');
+			} else {
+				$data["result"] = "error";
+				$data["mensaje"] = "Error!!! Contactarse con el administrador.";
+				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el administrador.');
+			}
+
+			echo json_encode($data);
+    }
+
 
 	
 	
