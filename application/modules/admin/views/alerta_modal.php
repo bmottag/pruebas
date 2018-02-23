@@ -125,7 +125,7 @@
 					<label for="type" class="control-label">Duración (en minutos): *</label>
 					<select name="duracion" id="duracion" class="form-control" required>	
 						<?php
-						for ($xxx = 1; $xxx < 60; $xxx++) {
+						for ($xxx = 1; $xxx < 61; $xxx++) {
 							
 							$xxx = $xxx<10?"0".$xxx:$xxx;
 						?>
@@ -135,6 +135,49 @@
 							}
 							?>><?php echo $xxx; ?></option>
 						<?php } ?>
+						<option value='120' <?php
+							if ($information && '120' == $information[0]["tiempo_duracion_alerta"]) {
+								echo 'selected="selected"';
+							}
+							?>>2 horas</option>
+							
+						<option value='180' <?php
+							if ($information && '180' == $information[0]["tiempo_duracion_alerta"]) {
+								echo 'selected="selected"';
+							}
+							?>>3 horas</option>
+							
+						<option value='240' <?php
+							if ($information && '240' == $information[0]["tiempo_duracion_alerta"]) {
+								echo 'selected="selected"';
+							}
+							?>>4 horas</option>
+							
+						<option value='300' <?php
+							if ($information && '300' == $information[0]["tiempo_duracion_alerta"]) {
+								echo 'selected="selected"';
+							}
+							?>>5 horas</option>
+							
+						<option value='360' <?php
+							if ($information && '360' == $information[0]["tiempo_duracion_alerta"]) {
+								echo 'selected="selected"';
+							}
+							?>>6 horas</option>
+							
+						<option value='420' <?php
+							if ($information && '420' == $information[0]["tiempo_duracion_alerta"]) {
+								echo 'selected="selected"';
+							}
+							?>>7 horas</option>
+							
+						<option value='480' <?php
+							if ($information && '480' == $information[0]["tiempo_duracion_alerta"]) {
+								echo 'selected="selected"';
+							}
+							?>>8 horas</option>
+							
+							
 					</select>
 				</div>
 			</div>
