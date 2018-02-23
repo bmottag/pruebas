@@ -704,10 +704,14 @@
 		/**
 		 * Eliminar registros de la tabla SESIONES
 		 * @since  15/8/2017
+		 * @review  23/2/2018
 		 */
 		public function eliminarExaminandos()
 		{
 				$sql = "DELETE FROM examinandos";
+				$query = $this->db->query($sql);
+				
+				$sql = "ALTER TABLE examinandos AUTO_INCREMENT=1";
 				$query = $this->db->query($sql);
 
 				if ($query) {
@@ -718,13 +722,17 @@
 		}
 		
 		/**
-		 * Eliminar registros de la tabla SESIONES
+		 * Eliminar registros de la tabla SITIOS
 		 * @since  15/8/2017
+		 * @review  23/2/2018
 		 */
 		public function eliminarSitios()
 		{
 				$sql = "DELETE FROM sitios";
 				$query = $this->db->query($sql);
+
+				$sql = "ALTER TABLE sitios AUTO_INCREMENT=1";
+				$query = $this->db->query($sql);				
 
 				if ($query) {
 					return true;
@@ -757,6 +765,9 @@
 		{	
 				$sql = "DELETE FROM snp_holguras";
 				$query = $this->db->query($sql);
+				
+				$sql = "ALTER TABLE snp_holguras AUTO_INCREMENT=1";
+				$query = $this->db->query($sql);
 
 				if ($query) {
 					return true;
@@ -768,11 +779,15 @@
 		/**
 		 * Eliminar registros de la tabla SESIONES
 		 * @since  23/5/2017
+		 * @review  23/2/2018
 		 */
 		public function eliminarSesiones()
 		{
 				$sql = "DELETE FROM sesiones";
 				$query = $this->db->query($sql);
+				
+				$sql = "ALTER TABLE sesiones AUTO_INCREMENT=1";
+				$query = $this->db->query($sql);				
 
 				if ($query) {
 					return true;
@@ -784,11 +799,15 @@
 		/**
 		 * Eliminar registros de la tabla sitio_SESION
 		 * @since  23/5/2017
+		 * @review  23/2/2018
 		 */
 		public function eliminarSitioSesion()
 		{
 				$sql = "DELETE FROM sitio_sesion";
 				$query = $this->db->query($sql);
+
+				$sql = "ALTER TABLE sitio_sesion AUTO_INCREMENT=1";
+				$query = $this->db->query($sql);				
 
 				if ($query) {
 					return true;
@@ -800,11 +819,15 @@
 		/**
 		 * Eliminar registros de la tabla grupo instrumentos
 		 * @since  23/5/2017
+		 * @review  23/2/2018
 		 */
 		public function eliminarGrupoInstrumentos()
 		{
 				$sql = "DELETE FROM param_grupo_instrumentos";
 				$query = $this->db->query($sql);
+				
+				$sql = "ALTER TABLE param_grupo_instrumentos AUTO_INCREMENT=1";
+				$query = $this->db->query($sql);				
 
 				if ($query) {
 					return true;
