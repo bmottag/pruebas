@@ -47,7 +47,7 @@ if($userRol!=7){//USUARIOS QUE NO SON PISA
 					<a href="<?php echo $enlace; ?>"><i class="fa fa-dashboard fa-fw"></i> Dashboard <?php echo $titulo; ?></a>
 				</li>
 				
-				
+<!--				
 				<li class="dropdown">
 					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 						<i class="fa fa-list-alt"></i> Gestión de Sitios <i class="fa fa-caret-down"></i>
@@ -70,6 +70,8 @@ if($userRol!=7){//USUARIOS QUE NO SON PISA
 						
 					</ul>
 				</li>				
+				
+-->
 <?php 
 }
 ?>
