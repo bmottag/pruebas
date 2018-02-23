@@ -742,16 +742,22 @@
 		}
 		
 		/**
-		 * Eliminar usuarios representantes - Y COLOCAR EN DIVIPOLA COORDINADORES Y OPERADORES EN CERO
+		 * Eliminar usuarios menos los administradores - Y COLOCAR EN DIVIPOLA COORDINADORES Y OPERADORES EN CERO
 		 * @since  19/8/2017
 		 * @review  23/2/2018
 		 */
 		public function eliminarUsuarios()
 		{	
-				$sql = "DELETE FROM usuario WHERE fk_id_rol = 4";
+				$sql = "DELETE FROM usuario WHERE fk_id_rol != 1";
 				$query = $this->db->query($sql);
 
+				$sql = "ALTER TABLE usuario AUTO_INCREMENT=100";
+				$query = $this->db->query($sql);				
+
 				$sql = "UPDATE param_divipola SET fk_id_coordinador_mcpio = 0, fk_id_operador_mcpio = 0";
+				$query = $this->db->query($sql);
+				
+				$sql = "UPDATE param_regiones SET fk_id_coordinador_region = 0, fk_id_operador_region = 0";
 				$query = $this->db->query($sql);				
 
 				if ($query) {
