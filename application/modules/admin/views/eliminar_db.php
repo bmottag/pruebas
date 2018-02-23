@@ -243,7 +243,7 @@ if ($retornoError) {
 						
 						<div class="col-lg-4">	
 							<div class="alert alert-info">
-								<strong>Borrar usuarios:</strong> <br>Al aceptar borrará los Delegados, Operadores, Coordinadores y Directivos.
+								<strong>Borrar usuarios:</strong> <br>Al aceptar borrará los Delegados, Operadores y Coordinadores.
 								
 								<br><br>
 								<button type="button" class="btn btn-info btn-xs" >
