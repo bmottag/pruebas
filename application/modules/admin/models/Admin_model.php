@@ -616,11 +616,15 @@
 		}
 		
 		/**
-		 * Eliminar registros de la tabla registros
+		 * Eliminar registros de la tabla registros y log_registro
 		 * @since  23/5/2017
+		 * @review  23/2/2018
 		 */
 		public function eliminarRegistros()
 		{
+				$sql = "TRUNCATE TABLE log_registro";
+				$query = $this->db->query($sql);
+			
 				$sql = "TRUNCATE TABLE registro";
 				$query = $this->db->query($sql);
 
@@ -648,21 +652,46 @@
 		}
 		
 		/**
-		 * Eliminar registros de la tabla SESIONES
+		 * Eliminar registros de la NOVEDADES Y LOS LOGS
 		 * @since  14/8/2017
+		 * @review  23/2/2018
 		 */
 		public function eliminarNovedades()
 		{
-				$sql = "TRUNCATE TABLE anulaciones";
+				$sql = "TRUNCATE TABLE log_anulaciones";
 				$query = $this->db->query($sql);
 				
-				$sql = "TRUNCATE TABLE novedades_cambio_cuadernillo";
+				$sql = "TRUNCATE TABLE log_novedades_cambio_cuadernillo";
 				$query = $this->db->query($sql);
 				
-				$sql = "TRUNCATE TABLE novedades_holgura";
+				$sql = "TRUNCATE TABLE log_novedades_holgura";
 				$query = $this->db->query($sql);
 				
-				$sql = "TRUNCATE TABLE novedades_otra";
+				$sql = "TRUNCATE TABLE log_novedades_otra";
+				$query = $this->db->query($sql);
+				
+				$sql = "DELETE FROM anulaciones";
+				$query = $this->db->query($sql);
+				
+				$sql = "ALTER TABLE anulaciones AUTO_INCREMENT=1";
+				$query = $this->db->query($sql);
+				
+				$sql = "DELETE FROM novedades_cambio_cuadernillo";
+				$query = $this->db->query($sql);
+				
+				$sql = "ALTER TABLE novedades_cambio_cuadernillo AUTO_INCREMENT=1";
+				$query = $this->db->query($sql);
+				
+				$sql = "DELETE FROM novedades_holgura";
+				$query = $this->db->query($sql);
+				
+				$sql = "ALTER TABLE novedades_holgura AUTO_INCREMENT=1";
+				$query = $this->db->query($sql);
+				
+				$sql = "DELETE FROM novedades_otra";
+				$query = $this->db->query($sql);
+				
+				$sql = "ALTER TABLE novedades_otra AUTO_INCREMENT=1";
 				$query = $this->db->query($sql);
 
 				if ($query) {
