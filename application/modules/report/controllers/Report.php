@@ -330,7 +330,7 @@ class Report extends CI_Controller {
 			$observacion = $this->input->post('observacion');
 
 			$error = true;
-			if($acepta && $acepta==2 && $observacion == ""){
+			if($acepta && $observacion == ""){
 				$this->session->set_flashdata('retornoErrorConsolidacion', '<strong>Error!!!</strong> Debe indicar la Observación.');
 			}elseif($acepta==""){
 				$this->session->set_flashdata('retornoErrorConsolidacion', '<strong>Error!!!</strong> Debe indicar su respuesta.');

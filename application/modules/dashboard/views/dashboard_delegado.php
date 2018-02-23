@@ -212,7 +212,7 @@ if ($retornoError) {
 						</div>
 						
 						<div class="form-group">
-							<label class="col-sm-12 control-label" for="observacion">Observación</label>
+							<label class="col-sm-12 control-label" for="observacion">Observación: *</label>
 							<div class="col-sm-12">
 								<textarea id="observacion" name="observacion" placeholder="Observación"  class="form-control" rows="2"></textarea>
 							</div>

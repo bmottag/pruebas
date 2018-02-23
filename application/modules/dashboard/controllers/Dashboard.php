@@ -94,7 +94,7 @@ class Dashboard extends MX_Controller {
 			$acepta = $this->input->post('acepta');
 			$observacion = $this->input->post('observacion');
 
-			if($acepta==2 && $observacion == ""){
+			if($observacion == ""){
 				$this->session->set_flashdata('retornoErrorNotificacion', '<strong>Error!!!</strong> Debe indicar la Observación.');
 			}elseif($acepta==""){
 				$this->session->set_flashdata('retornoErrorNotificacion', '<strong>Error!!!</strong> Debe indicar su respuesta.');
