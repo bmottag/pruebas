@@ -1,5 +1,3 @@
-<script type="text/javascript" src="<?php echo base_url("assets/js/general/say-cheese.js"); ?>"></script>
-
 <div id="page-wrapper">
 	<br>
 	<div class="row">
@@ -64,38 +62,6 @@
 						</tbody>
 					</table>
 					
-				<div class="row">
-					<div class="col-lg-4">	
-						<div id="webcam">
-						</div>
-					</div>
-					
-					<div class="col-lg-4">	
-						<div id="say-cheese-snapshot">
-						</div>					
-					</div>
-					
-					<div class="col-lg-4">	
-						<img id="fotoGuardada" src="" style="display:none" />					
-					</div>
-				</div>
-				
-				<div class="row">
-					<div class="col-lg-4">	
-						<button type="button" class="btn btn-success btn-block" id="obturador">
-							<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Tomar foto
-						</button>
-					</div>
-					
-					<div class="col-lg-4">	
-						<button type="button" class="btn btn-success btn-block" id="guardarFoto">
-							<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Guardar foto
-						</button>					
-					</div>
-
-				</div>
-
-				
 				<br><br>
 				
 				
@@ -103,9 +69,9 @@
 						<input type="hidden" id="hddId" name="hddId" value="<?php echo $information?$information[0]["id_anulacion"]:""; ?>"/>
 						<input type="hidden" id="tipo" name="tipo" value="<?php echo $tipo; ?>"/>
 						<div class="form-group">
-							<label class="col-sm-4 control-label" for="hddTask">Evidencia</label>
+							<label class="col-sm-4 control-label" for="hddTask">Evidencia: </label>
 							<div class="col-sm-5">
-								 <input type="file" name="userfile" />
+								 <input type="file" name="userfile" capture="camera" accept="image/*">
 							</div>
 						</div>
 						
@@ -128,9 +94,9 @@
                     <div class="alert alert-danger">
                             <strong>Nota :</strong><br>
                             Formato permitido: gif - jpg - png<br>
-                            Tamaño máximo: 2048 KB<br>
-                            Ancho máximo: 1024 pixels<br>
-                            Altura máxima: 1008 pixels<br>
+                            Tamaño máximo: 3048 KB<br>
+                            Ancho máximo: 2024 pixels<br>
+                            Altura máxima: 2008 pixels<br>
 
                     </div>
 						
