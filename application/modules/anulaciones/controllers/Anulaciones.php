@@ -485,6 +485,19 @@ class Anulaciones extends MX_Controller {
 
 			echo json_encode($data);
     }
+	
+	/**
+	 * Lista de anulaciones para el administrador
+     * @since 24/2/2018
+	 */
+	public function anulaciones_admin()
+	{		
+			$arrParam = array();
+			$data['info'] = $this->anulaciones_model->get_anulaciones($arrParam);//listado de anulaciones
+			
+			$data["view"] = 'anulaciones_admin';
+			$this->load->view("layout", $data);
+	}
 
 	
 	

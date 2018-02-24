@@ -96,6 +96,10 @@ if($userRol==2 || $userRol==1){ //SI es usuario ADMIN o DIRECTIVO
 					<a href="<?php echo base_url("public/reportico/run.php?execute_mode=MENU&project=ICFES"); ?>"><i class="fa fa-search fa-fw"></i> Ver Listados</a>
 				</li>
 				
+				<li>
+					<a href="<?php echo base_url("anulaciones/anulaciones_admin"); ?>"><i class="fa fa-list-alt fa-fw"></i> Lista de anulaciones</a>
+				</li>
+				
 			</ul>
 		</li>
 <?php 
