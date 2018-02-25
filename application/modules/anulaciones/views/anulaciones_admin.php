@@ -94,11 +94,18 @@
 								if($lista['evidencia'])
 								{ 
 						?>
-<img src="<?php echo base_url($lista['evidencia']); ?>" class="img-rounded" alt="Evidencia" width="50" height="50" />
+
+<a href='<?php echo base_url($lista['evidencia_grande']); ?>' target="_blanck">
+	<img src="<?php echo base_url($lista['evidencia']); ?>" class="img-rounded" alt="Evidencia" width="50" height="50" />
+</a>
 						<?php 
 								}elseif($lista['foto_evidencia']){
 						?>
-<img src="<?php echo lista['foto_evidencia']; ?>" class="img-rounded" alt="Evidencia" width="50" height="50" />
+						
+<a href='<?php echo lista['foto_evidencia']; ?>' target="_blanck">
+	<img src="<?php echo lista['foto_evidencia']; ?>" class="img-rounded" alt="Evidencia" width="50" height="50" />
+</a>
+
 						<?php 
 								} 
 						
@@ -110,11 +117,19 @@ echo "<td class='text-center'>";
 								if($lista['acta'])
 								{ 
 						?>
-<img src="<?php echo base_url($lista['acta']); ?>" class="img-rounded" alt="Acta" width="50" height="50" />
+						
+<a href='<?php echo base_url($lista['acta_grande']); ?>' target="_blanck">
+	<img src="<?php echo base_url($lista['acta']); ?>" class="img-rounded" alt="Acta" width="50" height="50" />
+</a>
+
 						<?php 
 								}elseif($lista['foto_acta']){
 						?>
-<img src="<?php echo lista['foto_acta']; ?>" class="img-rounded" alt="Acta" width="50" height="50" />
+						
+<a href='<?php echo lista['foto_acta']; ?>' target="_blanck">
+	<img src="<?php echo lista['foto_acta']; ?>" class="img-rounded" alt="Acta" width="50" height="50" />
+</a>
+						
 						<?php 
 								} 
 						
