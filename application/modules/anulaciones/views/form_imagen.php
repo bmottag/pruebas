@@ -45,11 +45,18 @@
 								if($information[0][$tipo])
 								{ 
 						?>
-<img src="<?php echo base_url($information[0][$tipo]); ?>" class="img-rounded" alt="Evidencia" width="50" height="50" />
+						
+<a href='<?php echo base_url($information[0][$tipo]); ?>' target="_blanck">
+	<img src="<?php echo base_url($information[0][$tipo]); ?>" class="img-rounded" alt="Evidencia" width="50" height="50" />
+</a>
 						<?php 
 								}elseif($information[0][$tipo2]){
 						?>
-<img src="<?php echo $information[0][$tipo2]; ?>" class="img-rounded" alt="Evidencia" width="50" height="50" />
+
+<a href='<?php echo $information[0][$tipo2]; ?>' target="_blanck">
+	<img src="<?php echo $information[0][$tipo2]; ?>" class="img-rounded" alt="Evidencia" width="50" height="50" />
+</a>
+
 						<?php 
 								} 
 
