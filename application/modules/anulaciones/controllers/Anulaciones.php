@@ -138,6 +138,15 @@ class Anulaciones extends MX_Controller {
 			$idAnulacion = $this->input->post('identificador');
 			
 			$this->load->model("general_model");
+			
+			//eliminaos registro log
+			$arrParam = array(
+				"table" => "log_anulaciones",
+				"primaryKey" => "fk_id_anulacion",
+				"id" => $idAnulacion
+			);
+			$this->general_model->deleteRecord($arrParam);
+			
 			//eliminaos registro
 			$arrParam = array(
 				"table" => "anulaciones",
