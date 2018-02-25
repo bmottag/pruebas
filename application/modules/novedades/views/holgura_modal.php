@@ -96,14 +96,14 @@
 		<div class="row">
 			<div class="col-sm-6">
 				<div class="form-group input-group">
-					<span class="input-group-addon">EK20173</span>
+					<span class="input-group-addon"><?php echo $infoSesiones[0]["sigla"]; ?></span>
 					<input type="password" id="consecutivo" name="consecutivo" class="form-control" value="" placeholder="Registro" required >
 				</div>
 			</div>
 
 			<div class="col-sm-6">
 				<div class="form-group input-group">
-					<span class="input-group-addon">EK20173</span>
+					<span class="input-group-addon"><?php echo $infoSesiones[0]["sigla"]; ?></span>
 					<input type="password" id="confirmarConsecutivo" name="confirmarConsecutivo" class="form-control" value="" placeholder="Confirmar" required >
 				</div>
 			</div>
@@ -113,14 +113,14 @@
 		<div class="row">
 			<div class="col-sm-6">
 				<div class="form-group input-group">
-					<span class="input-group-addon">EK20173</span>
+					<span class="input-group-addon"><?php echo $infoSesiones[0]["sigla"]; ?></span>
 					<input type="text" id="consecutivo" name="consecutivo" class="form-control" value="<?php echo $information?$information[0]["fk_id_examinando"]:""; ?>" placeholder="Registro" required >
 				</div>
 			</div>
 
 			<div class="col-sm-6">
 				<div class="form-group input-group">
-					<span class="input-group-addon">EK20173</span>
+					<span class="input-group-addon"><?php echo $infoSesiones[0]["sigla"]; ?></span>
 					<input type="text" id="confirmarConsecutivo" name="confirmarConsecutivo" class="form-control" value="<?php echo $information?$information[0]["fk_id_examinando"]:""; ?>" placeholder="Confirmar" required >
 				</div>
 			</div>
@@ -135,7 +135,7 @@
 			<div class="col-sm-12">
 				<div class="form-group text-left">
 					<label class="control-label" for="observacion">Observación : *</label>
-					<textarea id="observacion" name="observacion" class="form-control" rows="1"><?php echo $information?$information[0]["observacion"]:""; ?></textarea>
+					<textarea id="observacion" name="observacion" class="form-control" rows="3"><?php echo $information?$information[0]["observacion"]:""; ?></textarea>
 				</div>
 			</div>
 		</div>
