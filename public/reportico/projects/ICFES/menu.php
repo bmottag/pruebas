@@ -7,7 +7,7 @@ $menu = array (
 <?php
 $menu_title = SW_PROJECT_TITLE;
 $menu = array (
-	array ( "report" => "<p>En el menú superior encuentra los reportes que se pueden generar para verlos en pantalla, descargarlos a PDF, o CSV.</p><p><a style=\"text-decoration: underline !important\"  target=\"_self\" href=\"http://thibot.com/pruebas/dashboard\">Regresar</a></p>", "title" => "TEXT" ),
+	array ( "report" => "<p>En el menú superior encuentra los reportes que se pueden generar para verlos en pantalla, descargarlos a PDF, o CSV.</p><p><a style=\"text-decoration: underline !important\"  target=\"_self\" href=\"http://operativoicfes.com/dashboard/directivo\">Regresar</a></p>", "title" => "TEXT" ),
 	);
 
 $admin_menu = $menu;
@@ -23,6 +23,7 @@ $dropdown_menu = array(
                             array ( "reportfile" => "sitios.xml" ),
 							array ( "reportfile" => "sesiones.xml" ),
 							array ( "reportfile" => "alertas.xml" ),
+							array ( "reportfile" => "snp_holguras.xml" ),
                             )
                         ),
                     array ( 
@@ -32,6 +33,7 @@ $dropdown_menu = array(
                             array ( "reportfile" => "anulaciones.xml" ),
                             array ( "reportfile" => "cambio_cuadernillo.xml" ),
 							array ( "reportfile" => "holguras.xml" ),
+							array ( "reportfile" => "otras_novedades.xml" ),
                             )
                         ),
                     array ( 
@@ -39,6 +41,8 @@ $dropdown_menu = array(
                         "title" => "Reportes",
                         "items" => array (
                             array ( "reportfile" => "reporte_citados.xml" ),
+							array ( "reportfile" => "respuestas.xml" ),
+							array ( "reportfile" => "ausentes.xml" ),
                             )
                         ),
                 );

@@ -55,10 +55,10 @@ define('SW_DB_DATABASE', SW_FRAMEWORK_DB_DATABASE);
 else
 {
 define('SW_DB_DRIVER', SW_DB_TYPE);
-define('SW_DB_USER', 'pruebas_icfes');
+define('SW_DB_USER', 'operativo_icfes');
 define('SW_DB_PASSWORD', 'znMFI~gH!zU4');
 define('SW_DB_HOST', 'localhost');
-define('SW_DB_DATABASE', 'pruebas_icfes');
+define('SW_DB_DATABASE', 'operativo_icfes');
 }
 define('SW_DB_CONNECT_FROM_CONFIG', true);
 define('SW_DB_DATEFORMAT', 'Y-m-d');
