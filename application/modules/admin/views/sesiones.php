@@ -108,6 +108,7 @@ if ($retornoError) {
 					<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
 						<thead>
 							<tr>
+								<th class="text-center">ID Sesión</th>
 								<th class="text-center">Sesión</th>
 								<th class="text-center">Hora Inicio</th>
 								<th class="text-center">Hora Fin</th>
@@ -118,6 +119,7 @@ if ($retornoError) {
 						<?php
 							foreach ($info as $lista):
 									echo "<tr>";
+									echo "<td class='text-center' width='20'>" . $lista['id_sesion'] . "</td>";
 									echo "<td>" . $lista['sesion_prueba'] . "</td>";
 									echo "<td class='text-center'>" . $lista['hora_inicio_prueba'] . "</td>";
 									echo "<td class='text-center'>" . $lista['hora_fin_prueba'] . "</td>";
