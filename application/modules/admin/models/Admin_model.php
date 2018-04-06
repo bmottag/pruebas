@@ -925,5 +925,30 @@
 				}
 		}
 		
+		/**
+		 * Editar datos del correo
+		 * @since 6/4/2018
+		 */
+		public function saveParamEmail() 
+		{
+				$data = array('valor' => $this->input->post('asunto'));
+				$this->db->where('llave', 'asunto');
+				$query = $this->db->update('param_email', $data);
+				
+				$data = array('valor' => $this->input->post('mensaje'));
+				$this->db->where('llave', 'mensaje');
+				$query = $this->db->update('param_email', $data);
+				
+				$data = array('valor' => $this->input->post('email_bloqueado'));
+				$this->db->where('llave', 'email_bloqueado');
+				$query = $this->db->update('param_email', $data);
+
+				if ($query) {
+					return true;
+				} else {
+					return false;
+				}
+		}
+		
 	    
 	}

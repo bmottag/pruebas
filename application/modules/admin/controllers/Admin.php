@@ -1924,7 +1924,61 @@ class Admin extends MX_Controller {
 			redirect("/dashboard/admin",'refresh');
 	}
 	
+	/**
+	 * Tabla parametrica configuracion de correo a los usuarios
+     * @since 6/4/2018
+	 */
+	public function param_email()
+	{		
+			$this->load->model("general_model");
+			$arrParam = array(
+				"table" => "param_email",
+				"order" => "id_param_email",
+				"id" => "x"
+			);
+			$data['info'] = $this->general_model->get_basic_search($arrParam);//datos param email
+			
+			$data["view"] = 'param_email';
+			$this->load->view("layout", $data);
+	}
 	
+    /**
+     * Cargo modal - formulario param email
+     * @since 6/4/2018
+     */
+    public function cargarModalParamEmail() 
+	{
+			header("Content-Type: text/plain; charset=utf-8"); //Para evitar problemas de acentos
+			
+			$this->load->model("general_model");
+			$arrParam = array(
+				"table" => "param_email",
+				"order" => "id_param_email",
+				"id" => "x"
+			);
+			$data['information'] = $this->general_model->get_basic_search($arrParam);//datos param email
+			
+			$this->load->view("param_email_modal", $data);
+    }
+	
+	/**
+	 * Update email usuarios
+     * @since 6/4/2018
+	 */
+	public function save_param_email()
+	{			
+			header('Content-Type: application/json');
+
+			if ($idAlerta = $this->admin_model->saveParamEmail()) {
+				$data["result"] = true;
+				$this->session->set_flashdata('retornoExito', "Se actualizarón los datos con éxito");
+			} else {
+				$data["result"] = "error";
+				$this->session->set_flashdata('retornoError', '<strong>Error!!!</strong> Contactarse con el Administrador.');
+			}
+
+			echo json_encode($data);
+    }	
 	
 
 	

@@ -177,6 +177,12 @@ if($userRol==1){ //ADMIN
 						<li>
 							<a href="<?php echo base_url("admin/atencion_eliminar"); ?>"><i class="fa fa-ban fa-fw"></i> Eliminar Registros de la BD</a>
 						</li>
+						
+						<li class="divider"></li>
+						
+						<li>
+							<a href="<?php echo base_url("admin/param_email"); ?>"><i class="fa fa-ban fa-fw"></i> Email</a>
+						</li>
 
                     </ul>
                     <!-- /.dropdown-messages -->
