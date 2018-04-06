@@ -6,7 +6,7 @@ $( document ).ready( function () {
 	$( "#form" ).validate( {
 		rules: {
 			nombrePrueba:		{ required: true, minlength: 3, maxlength:50 },
-			sigla:				{ required: true, minlength: 3, maxlength:10 },
+			sigla:				{ required: true, minlength: 3, maxlength:15 },
 			descripcion:		{ required: true },
 			anio:				{ required: true },
 			semestre:			{ required: true }
