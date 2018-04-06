@@ -41,6 +41,7 @@ $(function(){
 					<button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#modal" id="x">
 							<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Editar datos
 					</button><br>
+<a href="<?php echo base_url("admin/envio_correo_v2"); ?>" class="btn btn-danger">Enviar correo <span class="glyphicon glyphicon-envelope" aria-hidden="true"></a><br><br>
 <?php
 $retornoExito = $this->session->flashdata('retornoExito');
 if ($retornoExito) {

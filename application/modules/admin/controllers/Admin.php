@@ -1979,7 +1979,84 @@ class Admin extends MX_Controller {
 
 			echo json_encode($data);
     }	
+
+	/**
+	 * Envio de correo con el enlace a los usuarios
+     * @since 6/4/2018
+	 */
+	public function envio_correo_v2()
+	{		
+			//buscar listado de usuarios
+			$arrParam = array();
+			$users = $this->admin_model->get_users($arrParam);
+
+			if($users)
+			{
+				
+				$this->load->model("general_model");
+				$arrParam = array(
+					"table" => "param_email",
+					"order" => "id_param_email",
+					"id" => "x"
+				);
+				$infoCorreo = $this->general_model->get_basic_search($arrParam);//datos param email
+				$asunto = $infoCorreo[0]["valor"];
+				$mensaje = $infoCorreo[1]["valor"];
+				$correoBloqueado = $infoCorreo[2]["valor"];
+
+				foreach ($users as $fila)
+				{
+					if($fila["email"]!=$correoBloqueado && $fila["email"]!="grupoasd123@grupoasd.com.co" && $fila["email"]!="sin-informacion@sin-inforamcion.com"){
+						$this->email_v2($fila["id_usuario"], $asunto, $mensaje);//envio correo al usuario
+					}
+				}
+			}
+			
+			//regresar a la pantalla inicial
+			$this->session->set_flashdata('retornoExito', 'Se enviaron los correos.');
+			redirect("/dashboard/admin",'refresh');
+	}	
 	
+	/**
+	 * Evio de correo al usuario con la contraseña
+     * @since 6/6/2018
+	 */
+	public function email_v2($idUsuario, $asunto, $mensaje)
+	{
+			$arrParam = array("idUsuario" => $idUsuario);
+			$infoUsuario = $this->admin_model->get_users($arrParam);
+
+			$subjet = $asunto;
+			$user = $infoUsuario[0]["nombres_usuario"] . " " . $infoUsuario[0]["apellidos_usuario"];
+			$to = $infoUsuario[0]["email"];
+		
+			//mensaje del correo
+			$msj = "<p>" . $mensaje . "</p>";
+			$msj .= "<br><strong>Usuario: </strong>" . $infoUsuario[0]["numero_documento"];
+			$msj .= "<br><strong>Contraseña: </strong>" . $infoUsuario[0]["clave"];
+			$msj .= "<br><br><strong><a href='" . base_url() . "'>Enlace Aplicación </a></strong><br>";
+				
+			$mensaje = "<html>
+						<head>
+						  <title> $subjet </title>
+						</head>
+						<body>
+							<p>Señor(a) $user:</p>
+							<p>$msj</p>
+							<p>Cordialmente,</p>
+							<p><strong>Administrador aplicativo de Control Operativo pruebas ICFES</strong></p>
+						</body>
+						</html>";
+						
+			$cabeceras  = 'MIME-Version: 1.0' . "\r\n";
+			$cabeceras .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+			$cabeceras .= 'To: ' . $user . '<' . $to . '>' . "\r\n";
+			$cabeceras .= 'From: ICFES APP <administrador@operativoicfes.com>' . "\r\n";
+
+			//enviar correo
+			mail($to, $subjet, $mensaje, $cabeceras);
+	}
+
 
 	
 	
