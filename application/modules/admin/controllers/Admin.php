@@ -2014,7 +2014,7 @@ class Admin extends MX_Controller {
 			
 			//regresar a la pantalla inicial
 			$this->session->set_flashdata('retornoExito', 'Se enviaron los correos.');
-			redirect("/dashboard/admin",'refresh');
+			redirect("/admin/param_email",'refresh');
 	}	
 	
 	/**
