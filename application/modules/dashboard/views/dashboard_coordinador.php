@@ -25,10 +25,12 @@
 						DASHBOARD
 <!--
 <input type="button" onclick="sonido.play()" value="play">
- Audio que se reproduce cuando se activa una alerta -->						
+ Audio que se reproduce cuando se activa una alerta 
 <audio id="sonido">
 	<source src="<?php echo base_url(); ?>images/notificacion.mp3"></source>
 </audio>
+
+-->
 					</h4>
 				</div>
 			</div>
