@@ -197,7 +197,25 @@ class Anulaciones extends MX_Controller {
 				);
 			$data['information'] = $this->anulaciones_model->get_anulaciones($arrParam);
 			$data['tipo'] = "acta";
-			$data['mensaje'] = "Guardar la foto del acta de anulación";
+			$data['mensaje'] = "Guardar la foto del acta de anulación - frente";
+						
+			$data['error'] = $error; //se usa para mostrar los errores al cargar la imagen 
+			$data["view"] = 'form_imagen';
+			$this->load->view("layout", $data);
+	}
+	
+	/**
+	 * acta reversp
+	 */
+	public function acta_reverso($idAnulacion, $error = '')
+	{		
+			//busco info de la anulacion
+			$arrParam = array(
+					"idAnulacion" => $idAnulacion
+				);
+			$data['information'] = $this->anulaciones_model->get_anulaciones($arrParam);
+			$data['tipo'] = "acta_reverso";
+			$data['mensaje'] = "Guardar la foto del acta de anulación - reverso";
 						
 			$data['error'] = $error; //se usa para mostrar los errores al cargar la imagen 
 			$data["view"] = 'form_imagen';

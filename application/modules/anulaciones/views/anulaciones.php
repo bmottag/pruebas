@@ -117,7 +117,8 @@ if ($retornoError) {
 
 									<br><br>
 <a href="<?php echo base_url("anulaciones/evidencia/" . $lista['id_anulacion']); ?>">Evidencia</a><br>
-<a href="<?php echo base_url("anulaciones/acta/" . $lista['id_anulacion']); ?>">Acta de Anulación</a><br>
+<a href="<?php echo base_url("anulaciones/acta/" . $lista['id_anulacion']); ?>">Acta de Anulación - Frente </a><br>
+<a href="<?php echo base_url("anulaciones/acta_reverso/" . $lista['id_anulacion']); ?>">Acta de Anulación - Reverso</a><br>
 									
 						<?php
 									echo "</td>";
