@@ -18,12 +18,11 @@ class Admin extends MX_Controller {
 			$arrParam = array("idUsuario" => $idUsuario);
 			$infoUsuario = $this->admin_model->get_users($arrParam);
 
-			$subjet = "Ingreso aplicativo - Control operativo ICFES Pruebas Competencias Ciudadanas SDE";
-			$user = $infoUsuario[0]["nombres_usuario"] . " " . $infoUsuario[0]["apellidos_usuario"];
+			$subjet = "Ingreso al APP de Control Operativo ICFES / Pruebas Saber 11A - Semestre II";
 			$to = $infoUsuario[0]["email"];
 		
 			//mensaje del correo
-			$msj = "<p>Los datos para ingresar al APP de Control Operativo Pruebas ICFES - Pruebas Competencias Ciudadanas SDE, son los siguientes:</p>";
+			$msj = "<p>Los datos para ingresar a la APP de Control Operativo ICFES son los siguientes:</p>";
 			$msj .= "<br><strong>Usuario: </strong>" . $infoUsuario[0]["numero_documento"];
 			$msj .= "<br><strong>Contraseña: </strong>" . $infoUsuario[0]["clave"];
 			$msj .= "<br><br><strong><a href='" . base_url() . "'>Enlace Aplicación </a></strong><br>";
@@ -33,7 +32,7 @@ class Admin extends MX_Controller {
 						  <title> $subjet </title>
 						</head>
 						<body>
-							<p>Señor(a) $user:</p>
+							<p>Señor(a):</p>
 							<p>$msj</p>
 							<p>Cordialmente,</p>
 							<p><strong>Administrador aplicativo de Control Operativo pruebas ICFES</strong></p>
@@ -43,7 +42,7 @@ class Admin extends MX_Controller {
 						
 			$cabeceras  = 'MIME-Version: 1.0' . "\r\n";
 			$cabeceras .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-			$cabeceras .= 'To: ' . $user . '<' . $to . '>' . "\r\n";
+			$cabeceras .= 'To: Usuario<' . $to . '>' . "\r\n";
 			$cabeceras .= 'From: ICFES APP <administrador@operativoicfes.com>' . "\r\n";
 
 			//enviar correo
@@ -1913,7 +1912,7 @@ class Admin extends MX_Controller {
 			{
 				foreach ($users as $fila)
 				{
-					if($fila["email"]!="grupoasd123@grupoasd.com.co" && $fila["email"]!="sin-informacion@sin-inforamcion.com"){
+					if($fila["email"]!="grupoasd123@grupoasd.com.co" && $fila["email"]!="sin-informacion@sin-inforamcion.com" && $fila["email"]!="sinemail@sinemail.com"){
 						$this->email($fila["id_usuario"]);//envio correo al usuario
 					}
 				}
