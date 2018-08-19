@@ -101,9 +101,9 @@
                     <div class="alert alert-danger">
                             <strong>Nota :</strong><br>
                             Formato permitido: gif - jpg - png<br>
-                            Tamaño máximo: 3048 KB<br>
-                            Ancho máximo: 2024 pixels<br>
-                            Altura máxima: 2008 pixels<br>
+                            Tamaño máximo: 5 MB<br>
+                            Ancho máximo: 3264 pixels<br>
+                            Altura máxima: 3008 pixels<br>
 
                     </div>
 						

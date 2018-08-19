@@ -228,9 +228,9 @@ class Anulaciones extends MX_Controller {
 			$config['upload_path'] = './images/anulaciones/';
 			$config['overwrite'] = true;
 			$config['allowed_types'] = 'gif|jpg|png';			
-			$config['max_size'] = '3000';
-			$config['max_width'] = '2024';
-			$config['max_height'] = '2008';
+			$config['max_size'] = '6000';
+			$config['max_width'] = '3264';
+			$config['max_height'] = '3008';
 			$idAnulacion = $this->input->post("hddId");
 			$tipo = $this->input->post("tipo");
 			$config['file_name'] = $idAnulacion . "_" . $tipo;
